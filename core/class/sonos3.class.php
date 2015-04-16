@@ -426,6 +426,11 @@ class sonos3 extends eqLogic {
 		$cmd_state = $this->getCmd(null, 'state');
 		if (is_object($cmd_state)) {
 			$replace['#state#'] = $cmd_state->execCmd(null, 2);
+			if ($replace['#state#'] == __('Lecture', __FILE__)) {
+				$replace['#state_nb#'] = 1;
+			} else {
+				$replace['#state_nb#'] = 0;
+			}
 		}
 
 		$cmd_volume = $this->getCmd(null, 'volume');

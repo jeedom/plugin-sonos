@@ -83,6 +83,12 @@
 			$('.sonos3[data-eqLogic_id=#id#] .cmd.shuffle').removeClass('btn-default').addClass('btn-success');
 		}
 
+		if('#state_nb#' == 1){
+			$('.sonos3[data-eqLogic_id=#id#] .cmd.play').hide();
+		}else{
+			$('.sonos3[data-eqLogic_id=#id#] .cmd.pause').hide();
+		}
+
 		$(function() {
 			$('.sonos3[data-eqLogic_id=#id#] .cmd').on('click', function() {
 				jeedom.cmd.execute({id: $(this).data('cmd_id')});
