@@ -49,9 +49,11 @@
 		</span>
 	</div>
 
+	<i class="fa fa-th-list pull-left cursor playlist" style="position:relative;top:4px;"></i>
+
 	<i class="fa fa-volume-off" style="position : relative; left:-10px;"></i> <div class="volume cmd" style="margin : 5px 10px 8px 10px;width: 80px;" value="#volume#" ></div>
 
-	<i class="fa fa-bars pull-right cursor queue"></i>
+	<i class="fa fa-bars pull-right cursor queue" style="position:relative;top:4px;"></i>
 
 	<script>
 		$(".sonos3[data-eqLogic_id=#id#] .cmd.volume").bootstrapSlider({
@@ -97,6 +99,11 @@
 		$('.sonos3[data-eqLogic_id=#id#] .queue').on('click', function() {
 			$('#md_modal2').dialog({title: "Musiques"});
 			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=queue.sonos&id=#id#').dialog('open');
+		});
+
+		$('.sonos3[data-eqLogic_id=#id#] .playlist').on('click', function() {
+			$('#md_modal2').dialog({title: "Playlist"});
+			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=playlist.sonos&id=#id#').dialog('open');
 		});
 
 	</script>

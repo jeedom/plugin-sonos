@@ -53,6 +53,24 @@ try {
 		ajax::success($sonos->removeTrack(init('position')));
 	}
 
+	if (init('action') == 'emptyQueue') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		ajax::success($sonos->emptyQueue());
+	}
+
+	if (init('action') == 'playPlaylist') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		$cmd = $sonos->getCmd(null, 'play_playlist');
+		$cmd->execCmd(array('title' => init('playlist')));
+		ajax::success();
+	}
+
 	throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {

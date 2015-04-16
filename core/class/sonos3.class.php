@@ -101,39 +101,54 @@ class sonos3 extends eqLogic {
 
 			$track = $controller->getStateDetails();
 			$cmd_track_title = $eqLogic->getCmd(null, 'track_title');
+			$title = $track->title;
+			if ($title == '') {
+				$title = __('Aucun', __FILE__);
+			}
 			if (is_object($cmd_track_title)) {
-				if ($track->title != $cmd_track_title->execCmd(null, 2)) {
+				if ($title != $cmd_track_title->execCmd(null, 2)) {
 					$cmd_track_title->setCollectDate('');
-					$cmd_track_title->event($track->title);
+					$cmd_track_title->event($title);
 					$changed = true;
 				}
 			}
 
 			$cmd_track_album = $eqLogic->getCmd(null, 'track_album');
+			$album = $track->album;
+			if ($album == '') {
+				$album = __('Aucun', __FILE__);
+			}
 			if (is_object($cmd_track_album)) {
-				if ($track->album != $cmd_track_album->execCmd(null, 2)) {
+				if ($album != $cmd_track_album->execCmd(null, 2)) {
 					$cmd_track_album->setCollectDate('');
-					$cmd_track_album->event($track->album);
+					$cmd_track_album->event($album);
 					$changed = true;
 				}
 			}
 
 			$cmd_track_artist = $eqLogic->getCmd(null, 'track_artist');
+			$artist = $track->artist;
+			if ($artist == '') {
+				$artist = __('Aucun', __FILE__);
+			}
 			if (is_object($cmd_track_artist)) {
-				if ($track->artist != $cmd_track_artist->execCmd(null, 2)) {
+				if ($artist != $cmd_track_artist->execCmd(null, 2)) {
 					$cmd_track_artist->setCollectDate('');
-					$cmd_track_artist->event($track->artist);
+					$cmd_track_artist->event($artist);
 					$changed = true;
 				}
 			}
 
 			$cmd_track_image = $eqLogic->getCmd(null, 'track_image');
-			if (is_object($cmd_track_image)) {
-				if ($track->albumArt != $cmd_track_image->execCmd(null, 2)) {
-					$cmd_track_image->setCollectDate('');
-					$cmd_track_image->event($track->albumArt);
-					file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->albumArt));
-					$changed = true;
+			if ($track->albumArt != '') {
+
+				if (is_object($cmd_track_image)) {
+					if ($track->albumArt != $cmd_track_image->execCmd(null, 2)) {
+						$cmd_track_image->setCollectDate('');
+						$cmd_track_image->event($track->albumArt);
+						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->albumArt));
+						$changed = true;
+					}
 				}
 			}
 
@@ -149,8 +164,15 @@ class sonos3 extends eqLogic {
 				return __('Lecture', __FILE__);
 			case 'PAUSED_PLAYBACK':
 				return __('Pause', __FILE__);
+			case 'STOPPED':
+				return __('Arrêté', __FILE__);
 		}
-		return '';
+		return $_state;
+	}
+
+	public static function getPlayLists() {
+		$sonos = sonos3::getSonos();
+		return $sonos->getPlaylists();
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
@@ -520,7 +542,14 @@ class sonos3 extends eqLogic {
 		$sonos = sonos3::getSonos();
 		$controller = $sonos->getControllerByIp($this->getLogicalId());
 		$queue = $controller->getQueue();
-		$queue->removeTracks(array($_position));
+		$queue->removeTrack($_position);
+	}
+
+	public function emptyQueue($_position) {
+		$sonos = sonos3::getSonos();
+		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$queue = $controller->getQueue();
+		$queue->clear();
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
@@ -568,10 +597,15 @@ class sonos3Cmd extends cmd {
 			$controller->setVolume($_options['slider']);
 		}
 		if ($this->getLogicalId() == 'play_playlist') {
-			$playlist = $sonos->getPlaylistByName(trim($_options['title'] . $_options['message']));
-			$tracks = $playlist->getTracks();
 			$queue = $controller->getQueue();
+			$playlist = $sonos->getPlaylistByName(trim($_options['title'] . $_options['message']));
+			if ($playlist == null) {
+				throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title'] . $_options['message']));
+			}
+			$tracks = $playlist->getTracks();
+			$queue->clear();
 			$queue->addTracks($tracks);
+			$controller->play();
 		}
 	}
 

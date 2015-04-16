@@ -23,7 +23,8 @@ if (!is_object($sonos)) {
 	throw new Exception("Equipement non trouvé");
 }
 ?>
-
+<a class="btn btn-danger pull-right" id="bt_emptyQueue"><i class="fa fa-trash-o"></i> {{Vider}}</a>
+<br/><br/>
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -59,7 +60,32 @@ foreach ($sonos->getQueue() as $track) {
 </table>
 
 <script>
-   $('.playTrack').on('click',function(){
+  $('#bt_emptyQueue').on('click',function(){
+    var id = $(this).attr('data-sonos_id');
+
+ $.ajax({// fonction permettant de faire de l'ajax
+            type: "POST", // methode de transmission des données au fichier php
+            url: "plugins/sonos3/core/ajax/sonos3.ajax.php", // url du fichier php
+            data: {
+                action: "emptyQueue",
+                id :id,
+            },
+            dataType: 'json',
+            error: function (request, status, error) {
+                handleAjaxError(request, status, error);
+            },
+            success: function (data) { // si l'appel a bien fonctionné
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            }
+            $('#md_modal2').dialog('close');
+        }
+    });
+});
+
+
+  $('.playTrack').on('click',function(){
     var id = $(this).attr('data-sonos_id');
     var position = $(this).attr('data-position');
  $.ajax({// fonction permettant de faire de l'ajax
@@ -85,7 +111,7 @@ foreach ($sonos->getQueue() as $track) {
 });
 
 
-   $('.removeTrack').on('click',function(){
+  $('.removeTrack').on('click',function(){
     var id = $(this).attr('data-sonos_id');
     var position = $(this).attr('data-position');
  $.ajax({// fonction permettant de faire de l'ajax

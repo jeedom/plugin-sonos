@@ -18,17 +18,39 @@
 
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
-function template_install() {
-    
+function sonos3_install() {
+	$cron = cron::byClassAndFunction('sonos3', 'pull');
+	if (!is_object($cron)) {
+		$cron = new cron();
+		$cron->setClass('sonos3');
+		$cron->setFunction('pull');
+		$cron->setEnable(1);
+		$cron->setDeamon(1);
+		$cron->setSchedule('* * * * *');
+		$cron->save();
+	}
 }
 
-function template_update() {
-    
+function sonos3_update() {
+	$cron = cron::byClassAndFunction('sonos3', 'pull');
+
+	if (!is_object($cron)) {
+		$cron = new cron();
+		$cron->setClass('sonos3');
+		$cron->setFunction('pull');
+		$cron->setEnable(1);
+		$cron->setDeamon(1);
+		$cron->setSchedule('* * * * *');
+		$cron->save();
+	}
+	$cron->stop();
 }
 
-
-function template_remove() {
-    
+function sonos3_remove() {
+	$cron = cron::byClassAndFunction('sonos3', 'pull');
+	if (is_object($cron)) {
+		$cron->remove();
+	}
 }
 
 ?>
