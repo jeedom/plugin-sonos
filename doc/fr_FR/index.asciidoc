@@ -1,0 +1,9 @@
+:icons:
+== Sonos
+
+=== Description
+Plugin servant à piloter un sonos
+
+'''
+=== FAQ
+include::faq.asciidoc[]

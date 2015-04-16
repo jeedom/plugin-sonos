@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <id>sonos3</id>
+    <name>Sonos controller</name>
+    <description>Plugin de controle de sonos</description>
+    <icon>fa fa-headphones</icon>
+    <licence>AGPL</licence>
+    <author>Loïc Gevrey</author>
+    <installation>Aucune</installation>
+    <require>1.136</require>
+    <category>multimedia</category>
+    <include type="php">sonos3.inc</include>
+</info>
+

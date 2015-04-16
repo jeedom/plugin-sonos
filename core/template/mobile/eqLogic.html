@@ -1,0 +1,57 @@
+<div class="eqLogic eqLogic-widget noResize" data-version="mobile" style="text-align:center; width: 200px; #background#" data-eqLogic_id="#id#">
+	<style  type="text/css">
+	  .kodi .cmd a {
+		width: 30px;
+		height:30px;
+		font-size: 1em;
+	  }
+	  .kodi .cmd.col2 a {
+		width: 85px;
+		height: 30px;
+		font-size: 1em;
+	  }
+@font-face {
+    font-family: liquid;
+    src:   url("/plugins/kodi/core/template/fonts/enhanced_led_board-7.ttf") format("truetype");
+    font-weight:normal;
+    font-style:normal;
+}
+span.statussp {
+    font-family: liquid;
+    font-size:10px;
+    color: #text_color#;
+    letter-spacing: 1px;
+   }
+span.titlesp {
+    font-family: liquid; 
+    font-size:14px;
+    color:  #text_color#;
+    letter-spacing: 1px;
+   }
+ .arrondie {
+-moz-border-radius:7px;
+-webkit-border-radius:7px;
+border-radius:7px;
+}
+	</style>
+	
+	<center class="widget-name">#type_media#  #name#</center>
+	<div class="kodi" style="display:inline-block; text-align: center;">
+		<div style="display: inline-block">
+			#group_status#
+			#group_pad#
+			#group_system#
+			#group_media#
+			#group_volume#
+			#group_playback#
+		</div>
+	</div>	
+    <script>
+        $(function() {
+          $('.kodi .cmd').on('click', function() {
+              jeedom.cmd.execute({id: $(this).data('cmd_id')});
+          });
+        });
+    </script>
+</div>
+
