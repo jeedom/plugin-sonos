@@ -29,6 +29,30 @@ try {
 		ajax::success();
 	}
 
+	if (init('action') == 'getQueue') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		ajax::success($sonos->getQueue());
+	}
+
+	if (init('action') == 'playTrack') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		ajax::success($sonos->playTrack(init('position')));
+	}
+
+	if (init('action') == 'removeTrack') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		ajax::success($sonos->removeTrack(init('position')));
+	}
+
 	throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {

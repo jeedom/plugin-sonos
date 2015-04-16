@@ -509,6 +509,20 @@ class sonos3 extends eqLogic {
 		return $queue->getTracks();
 	}
 
+	public function playTrack($_position) {
+		$sonos = sonos3::getSonos();
+		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$controller->selectTrack($_position);
+		$controller->play();
+	}
+
+	public function removeTrack($_position) {
+		$sonos = sonos3::getSonos();
+		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$queue = $controller->getQueue();
+		$queue->removeTracks(array($_position));
+	}
+
 	/*     * **********************Getteur Setteur*************************** */
 }
 

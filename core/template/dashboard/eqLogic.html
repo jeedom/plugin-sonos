@@ -51,6 +51,8 @@
 
 	<i class="fa fa-volume-off" style="position : relative; left:-10px;"></i> <div class="volume cmd" style="margin : 5px 10px 8px 10px;width: 80px;" value="#volume#" ></div>
 
+	<i class="fa fa-bars pull-right cursor queue"></i>
+
 	<script>
 		$(".sonos3[data-eqLogic_id=#id#] .cmd.volume").bootstrapSlider({
 			min: 0,
@@ -62,6 +64,7 @@
 		});
 	</script>
 	<br/>
+
 	<div style="margin-top : 5px;">
 		<a class="btn btn-default btn-xs cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
 		<a class="btn btn-default btn-xs cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>
@@ -87,11 +90,15 @@
 			$('.sonos3[data-eqLogic_id=#id#] .cmd.pause').hide();
 		}
 
-		$(function() {
-			$('.sonos3[data-eqLogic_id=#id#] .cmd').on('click', function() {
-				jeedom.cmd.execute({id: $(this).data('cmd_id')});
-			});
+		$('.sonos3[data-eqLogic_id=#id#] .cmd').on('click', function() {
+			jeedom.cmd.execute({id: $(this).data('cmd_id')});
 		});
+
+		$('.sonos3[data-eqLogic_id=#id#] .queue').on('click', function() {
+			$('#md_modal2').dialog({title: "Musiques"});
+			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=queue.sonos&id=#id#').dialog('open');
+		});
+
 	</script>
 </div>
 
