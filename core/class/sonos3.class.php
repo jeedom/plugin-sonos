@@ -456,7 +456,7 @@ class sonos3 extends eqLogic {
 			'#name#' => $this->getName(),
 			'#eqLink#' => $this->getLinkToConfiguration(),
 			'#text_color#' => $this->getConfiguration('text_color'),
-			'#background_color#' => $this->getBackgroundColor($version),
+			'#background_color#' => $this->getBackgroundColor($_version),
 		);
 
 		$cmd_state = $this->getCmd(null, 'state');
