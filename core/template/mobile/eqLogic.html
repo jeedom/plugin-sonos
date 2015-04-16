@@ -1,57 +1,85 @@
-<div class="eqLogic eqLogic-widget noResize" data-version="mobile" style="text-align:center; width: 200px; #background#" data-eqLogic_id="#id#">
+<div class="eqLogic eqLogic-widget sonos3" data-version="mobile" style="text-align:center;background : #background_color#" data-eqLogic_id="#id#">
 	<style  type="text/css">
-	  .kodi .cmd a {
-		width: 30px;
-		height:30px;
-		font-size: 1em;
-	  }
-	  .kodi .cmd.col2 a {
-		width: 85px;
-		height: 30px;
-		font-size: 1em;
-	  }
-@font-face {
-    font-family: liquid;
-    src:   url("/plugins/kodi/core/template/fonts/enhanced_led_board-7.ttf") format("truetype");
-    font-weight:normal;
-    font-style:normal;
-}
-span.statussp {
-    font-family: liquid;
-    font-size:10px;
-    color: #text_color#;
-    letter-spacing: 1px;
-   }
-span.titlesp {
-    font-family: liquid; 
-    font-size:14px;
-    color:  #text_color#;
-    letter-spacing: 1px;
-   }
- .arrondie {
--moz-border-radius:7px;
--webkit-border-radius:7px;
-border-radius:7px;
-}
+		@font-face {
+			font-family: liquid;
+			src:   url("plugins/sonos3/core/template/fonts/enhanced_led_board-7.ttf") format("truetype");
+			font-weight:normal;
+			font-style:normal;
+		}
+		span.statussp {
+			font-family: liquid;
+			font-size:10px;
+			color: #text_color#;
+			letter-spacing: 1px;
+		}
+		span.titlesp {
+			font-family: liquid; 
+			font-size:14px;
+			color:  #text_color#;
+			letter-spacing: 1px;
+		}
+		.arrondie {
+			-moz-border-radius:7px;
+			-webkit-border-radius:7px;
+			border-radius:7px;
+		}
 	</style>
-	
-	<center class="widget-name">#type_media#  #name#</center>
-	<div class="kodi" style="display:inline-block; text-align: center;">
-		<div style="display: inline-block">
-			#group_status#
-			#group_pad#
-			#group_system#
-			#group_media#
-			#group_volume#
-			#group_playback#
-		</div>
-	</div>	
-    <script>
-        $(function() {
-          $('.kodi .cmd').on('click', function() {
-              jeedom.cmd.execute({id: $(this).data('cmd_id')});
-          });
-        });
-    </script>
+	<div>
+		<a href="#eqLink#">#name#</a>
+	</div>
+	<div>
+		#thumbnail#
+	</div>
+	<div>
+		<span class="statussp">
+			#state#<br>
+		</span>
+		<span class="titlesp">
+			#title#
+		</span>
+	</div>
+
+	<div class="volume full-width-slider" style="width: 96%;text-align: right;min-width : 100px;">
+		<input type="range" min="0" max="100" data-theme="a" value="#volume#"/>
+	</div>
+
+	<script>
+		$("body").delegate(".sonos3[data-eqLogic_id=#id#] .volume").on('slidestop', function (event, ui) {
+			console.log(event)
+			console.log($(this).val())
+			jeedom.cmd.execute({id: '#volume_id#', value: {slider: $(".sonos3[data-eqLogic_id=#id#] .volume input").value()}});
+		});
+	</script>
+
+	<br/>
+	<div style="margin-top : 5px;">
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd play" data-cmd_id="#cmd_play_id#"><i class="fa fa-play"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd pause" data-cmd_id="#cmd_pause_id#"><i class="fa fa-pause"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd next" data-cmd_id="#cmd_next_id#"><i class="fa fa-step-forward"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd shuffle" data-cmd_id="#cmd_shuffle_id#"><i class="fa fa-random"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd repeat" data-cmd_id="#cmd_repeat_id#"><i class="fa fa-repeat"></i></a>
+	</div>
+
+	<script>
+		if('#repeat_state#' == 1){
+			$('.sonos3[data-eqLogic_id=#id#] .cmd.repeat').attr('style','background-color:#5CB85B !important');
+		}
+
+		if('#shuffle_state#' == 1){
+			$('.sonos3[data-eqLogic_id=#id#] .cmd.shuffle').attr('style','background-color:#5CB85B !important');
+		}
+
+		if('#state_nb#' == 1){
+			$('.sonos3[data-eqLogic_id=#id#] .cmd.play').hide();
+		}else{
+			$('.sonos3[data-eqLogic_id=#id#] .cmd.pause').hide();
+		}
+
+		$('.sonos3[data-eqLogic_id=#id#] .cmd').on('click', function() {
+			jeedom.cmd.execute({id: $(this).data('cmd_id')});
+		});
+	</script>
 </div>
 
