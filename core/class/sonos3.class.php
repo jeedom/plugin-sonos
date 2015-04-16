@@ -406,6 +406,18 @@ class sonos3 extends eqLogic {
 		$track_position->setEqLogic_id($this->getId());
 		$track_position->save();
 
+		$play_playlist = $this->getCmd(null, 'play_playlist');
+		if (!is_object($play_playlist)) {
+			$play_playlist = new sonos3Cmd();
+			$play_playlist->setLogicalId('play_playlist');
+			$play_playlist->setIsVisible(1);
+			$play_playlist->setName(__('Jouer playlist', __FILE__));
+		}
+		$play_playlist->setType('action');
+		$play_playlist->setSubType('message');
+		$play_playlist->setEqLogic_id($this->getId());
+		$play_playlist->save();
+
 	}
 
 	public function toHtml($_version = 'dashboard') {
@@ -490,6 +502,13 @@ class sonos3 extends eqLogic {
 		return template_replace($replace, getTemplate('core', $_version, 'eqLogic', 'sonos3'));
 	}
 
+	public function getQueue() {
+		$sonos = sonos3::getSonos();
+		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$queue = $controller->getQueue();
+		return $queue->getTracks();
+	}
+
 	/*     * **********************Getteur Setteur*************************** */
 }
 
@@ -499,13 +518,6 @@ class sonos3Cmd extends cmd {
 	/*     * ***********************Methode static*************************** */
 
 	/*     * *********************Methode d'instance************************* */
-
-	/*
-	 * Non obligatoire permet de demander de ne pas supprimer les commandes même si elles ne sont pas dans la nouvelle configuration de l'équipement envoyé en JS
-	public function dontRemoveCmd() {
-	return true;
-	}
-	 */
 
 	public function execute($_options = array()) {
 		$sonos = sonos3::getSonos();
@@ -540,6 +552,12 @@ class sonos3Cmd extends cmd {
 		}
 		if ($this->getLogicalId() == 'setVolume') {
 			$controller->setVolume($_options['slider']);
+		}
+		if ($this->getLogicalId() == 'play_playlist') {
+			$playlist = $sonos->getPlaylistByName(trim($_options['title'] . $_options['message']));
+			$tracks = $playlist->getTracks();
+			$queue = $controller->getQueue();
+			$queue->addTracks($tracks);
 		}
 	}
 

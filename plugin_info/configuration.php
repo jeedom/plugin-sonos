@@ -22,4 +22,36 @@ if (!isConnect()) {
 	die();
 }
 ?>
+<form class="form-horizontal">
+	<fieldset>
+		<div class="form-group">
+			<label class="col-lg-4 control-label">{{Découverte}}</label>
+			<div class="col-lg-2">
+				<a class="btn btn-default" id="bt_syncSonos"><i class='fa fa-refresh'></i> {{Rechercher les équipements Sonos (play1, play3 et play5 seulement)}}</a>
+			</div>
+		</div>
+	</fieldset>
+</form>
 
+<script>
+	$('#bt_syncSonos').on('click', function () {
+        $.ajax({// fonction permettant de faire de l'ajax
+            type: "POST", // methode de transmission des données au fichier php
+            url: "plugins/sonos3/core/ajax/sonos3.ajax.php", // url du fichier php
+            data: {
+            	action: "syncSonos",
+            },
+            dataType: 'json',
+            error: function (request, status, error) {
+            	handleAjaxError(request, status, error);
+            },
+            success: function (data) { // si l'appel a bien fonctionné
+            if (data.state != 'ok') {
+            	$('#div_alert').showAlert({message: data.result, level: 'danger'});
+            	return;
+            }
+            $('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
+        }
+    });
+    });
+</script>
