@@ -23,7 +23,7 @@ if (!is_object($sonos)) {
 	throw new Exception("Equipement non trouvé");
 }
 ?>
-<a class="btn btn-danger pull-right" id="bt_emptyQueue"><i class="fa fa-trash-o"></i> {{Vider}}</a>
+<a class="btn btn-danger pull-right" id="bt_emptyQueue" data-sonos_id="<?php echo init('id');?>"><i class="fa fa-trash-o"></i> {{Vider}}</a>
 <br/><br/>
 <table class="table table-condensed">
     <thead>
