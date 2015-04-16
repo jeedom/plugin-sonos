@@ -44,9 +44,8 @@
 	</div>
 
 	<script>
-		$("body").delegate(".sonos3[data-eqLogic_id=#id#] .volume").on('slidestop', function (event, ui) {
-			console.log(event)
-			console.log($(this).val())
+		$("body").undelegate(".sonos3[data-eqLogic_id=#id#] .volume",'slidestop');
+		$("body").delegate(".sonos3[data-eqLogic_id=#id#] .volume",'slidestop', function (event, ui) {
 			jeedom.cmd.execute({id: '#volume_id#', value: {slider: $(".sonos3[data-eqLogic_id=#id#] .volume input").value()}});
 		});
 	</script>
