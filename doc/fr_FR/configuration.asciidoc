@@ -38,7 +38,7 @@ En dessous vous retrouvez la liste des commandes :
 
 Comme commande vous retrouverez : 
 
-* Jouer playlist : commande de type message permettant de lancer une playlist, il suffit dans le tite ou dans le message de mettre le nom de la playlist à lancer
+* Jouer playlist : commande de type message permettant de lancer une playlist, il suffit dans le titre le nom de la playlist. Vous pouvez mettre "random" dans message pour melanger la playlist avant la lecture
 * Aléatoire status : indique si on est en mode aleatoire ou non
 * Aléatoire : inverse le status du mode aléatoire
 * Répéter status : indique si on est en mode répété ou non

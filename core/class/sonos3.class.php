@@ -612,14 +612,17 @@ class sonos3Cmd extends cmd {
 		}
 		if ($this->getLogicalId() == 'play_playlist') {
 			$queue = $controller->getQueue();
-			$playlist = $sonos->getPlaylistByName(trim($_options['title'] . $_options['message']));
+			$playlist = $sonos->getPlaylistByName(trim($_options['title']));
 			if ($playlist == null) {
-				throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title'] . $_options['message']));
+				throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title']));
 			}
 			$tracks = $playlist->getTracks();
 			$queue->clear();
 			if (count($tracks) > 1) {
-				$queue->addTracks(array($tracks[0]));
+				if ($_options['message'] == 'random') {
+					shuffle($tracks);
+				}
+				$queue->addTrack($tracks[0]);
 				$controller->play();
 				unset($tracks[0]);
 				$queue->addTracks($tracks);
