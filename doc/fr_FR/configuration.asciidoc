@@ -56,3 +56,12 @@ Comme commande vous retrouverez :
 * Volume : modifier le volume (de 0 à 100)
 * Volume status : niveau du volume
 * Status : status (pause, lecture, transition...)
+
+
+Sur le dashboard vous retrouverez le widget suivant : 
+
+image::../images/sonos5.PNG[]
+
+A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d'attente et les playlists disponible pour lancer leur lecture.
+
+
