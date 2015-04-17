@@ -28,7 +28,7 @@ if (!is_object($sonos)) {
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>Action</th>
+            <th style="width : 60px;">Action</th>
             <th>{{Artiste}}</th>
             <th>{{Album}}</th>
             <th>{{Piste}}</th>
