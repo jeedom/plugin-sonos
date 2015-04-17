@@ -498,6 +498,7 @@ class sonos3 extends eqLogic {
 		if (is_object($cmd_track_album)) {
 			$replace['#title#'] .= ' - ' . $cmd_track_album->execCmd(null, 2);
 		}
+		$replace['#title#'] = trim(trim(trim($replace['#title#']), ' - ' . __('Aucun', __FILE__)));
 
 		$cmd_track_title = $this->getCmd(null, 'track_title');
 		if (is_object($cmd_track_title)) {
