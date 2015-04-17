@@ -39,6 +39,11 @@ class sonos3 extends eqLogic {
 				$eqLogic = new self();
 				$eqLogic->setLogicalId($controller->ip);
 				$eqLogic->setName($controller->room . ' - ' . $controller->name);
+				$object = object::byName($controller->room);
+				if (is_object($object)) {
+					$eqLogic->setObject_id($object->getId());
+					$eqLogic->setName($controller->name);
+				}
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
@@ -620,8 +625,15 @@ class sonos3Cmd extends cmd {
 			}
 			$tracks = $playlist->getTracks();
 			$queue->clear();
-			$queue->addTracks($tracks);
-			$controller->play();
+			if (count($tracks) > 1) {
+				$queue->addTracks(array($tracks[0]));
+				$controller->play();
+				unset($tracks[0]);
+				$queue->addTracks($tracks);
+			} else {
+				$queue->addTracks($tracks);
+				$controller->play();
+			}
 		}
 	}
 

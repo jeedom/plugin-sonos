@@ -79,7 +79,7 @@ class Controller extends Speaker
      * This method is only here to override the method from the Speaker class.
      * A Controller instance is always the coordinator of it's group.
      *
-     * @return boolean
+     * @return bool
      */
     public function isCoordinator()
     {
@@ -148,6 +148,11 @@ class Controller extends Speaker
         $state->duration = $data["TrackDuration"];
         $state->position = $data["RelTime"];
 
+        # If we have a queue number, it'll be one-based, rather than zero-based, so convert it
+        if ($state->queueNumber > 0) {
+            $state->queueNumber--;
+        }
+
         return $state;
     }
 
@@ -169,7 +174,7 @@ class Controller extends Speaker
             case self::STATE_STOPPED;
                 return $this->pause();
         }
-        throw new \InvalidArgumentException("Unknown state (" . $state . ")");
+        throw new \InvalidArgumentException("Unknown state: {$state})");
     }
 
 
@@ -399,97 +404,113 @@ class Controller extends Speaker
 
 
     /**
+     * Get a particular PlayMode.
+     *
+     * @param string $type The play mode attribute to get
+     *
+     * @return bool
+     */
+    protected function getPlayMode($type)
+    {
+        $mode = $this->getMode();
+        return $mode[$type];
+    }
+
+
+    /**
+     * Set a particular PlayMode.
+     *
+     * @param string $type The play mode attribute to update
+     * @param bool $value The value to set the attribute to
+     *
+     * @return static
+     */
+    protected function setPlayMode($type, $value)
+    {
+        $value = (bool) $value;
+
+        $mode = $this->getMode();
+        if ($mode[$type] === $value) {
+            return $this;
+        }
+
+        $mode[$type] = $value;
+        $this->setMode($mode);
+
+        return $this;
+    }
+
+
+    /**
      * Check if repeat is currently active.
      *
-     * @return boolean
+     * @return bool
      */
     public function getRepeat()
     {
-        $mode = $this->getMode();
-        return $mode["repeat"];
+        return $this->getPlayMode("repeat");
     }
 
 
     /**
      * Turn repeat mode on or off.
      *
-     * @param boolean $repeat Whether repeat should be on or not
+     * @param bool $repeat Whether repeat should be on or not
      *
      * @return static
      */
     public function setRepeat($repeat)
     {
-        $repeat = (boolean) $repeat;
-
-        $mode = $this->getMode();
-        if ($mode["repeat"] === $repeat) {
-            return;
-        }
-
-        $mode["repeat"] = $repeat;
-        $this->setMode($mode);
-
-        return $this;
+        return $this->setPlayMode("repeat", $repeat);
     }
 
 
     /**
      * Check if shuffle is currently active.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShuffle()
     {
-        $mode = $this->getMode();
-        return $mode["shuffle"];
+        return $this->getPlayMode("shuffle");
     }
 
 
     /**
      * Turn shuffle mode on or off.
      *
-     * @param boolean $shuffle Whether shuffle should be on or not
+     * @param bool $shuffle Whether shuffle should be on or not
      *
      * @return static
      */
     public function setShuffle($shuffle)
     {
-        $shuffle = (boolean) $shuffle;
-
-        $mode = $this->getMode();
-        if ($mode["shuffle"] === $shuffle) {
-            return;
-        }
-
-        $mode["shuffle"] = $shuffle;
-        $this->setMode($mode);
-
-        return $this;
+        return $this->setPlayMode("shuffle", $shuffle);
     }
 
 
     /**
      * Check if crossfade is currently active.
      *
-     * @return boolean
+     * @return bool
      */
     public function getCrossfade()
     {
-        return (boolean) $this->soap("AVTransport", "GetCrossfadeMode");
+        return (bool) $this->soap("AVTransport", "GetCrossfadeMode");
     }
 
 
     /**
      * Turn crossfade on or off.
      *
-     * @param boolean $crossfade Whether crossfade should be on or not
+     * @param bool $crossfade Whether crossfade should be on or not
      *
      * @return static
      */
     public function setCrossfade($crossfade)
     {
-        $data = $this->soap("AVTransport", "SetCrossfadeMode", [
-            "CrossfadeMode" =>  (boolean) $crossfade,
+        $this->soap("AVTransport", "SetCrossfadeMode", [
+            "CrossfadeMode" =>  (bool) $crossfade,
         ]);
 
         return $this;
@@ -504,5 +525,65 @@ class Controller extends Speaker
     public function getQueue()
     {
         return new Queue($this);
+    }
+
+
+    /**
+     * Grab the current state of the Controller (including it's queue and playing attributes).
+     *
+     * @param bool $pause Whether to pause the controller or not
+     *
+     * @return ControllerState
+     */
+    public function exportState($pause = true)
+    {
+        if ($pause) {
+            $state = $this->getState();
+            if ($state === self::STATE_PLAYING) {
+                $this->pause();
+            }
+        }
+
+        $export = new ControllerState($this);
+
+        if ($pause) {
+            $export->state = $state;
+        }
+
+        return $export;
+    }
+
+
+    /**
+     * Restore the Controller to a previously exported state.
+     *
+     * @param ControllerState $state The state to be restored
+     *
+     * @return static
+     */
+    public function restoreState(ControllerState $state)
+    {
+        $this->getQueue()->clear()->addTracks($state->tracks);
+
+        $this->selectTrack($state->track);
+
+        list($hours, $minutes, $seconds) = explode(":", $state->position);
+        $time = ((($hours * 60) + $minutes) * 60) + $seconds;
+        $this->seek($time);
+
+        $this->setShuffle($state->shuffle);
+        $this->setRepeat($state->repeat);
+        $this->setCrossfade($state->crossfade);
+
+        # If the exported state was playing then start it playing now
+        if ($state->state === self::STATE_PLAYING) {
+            $this->play();
+
+        # If the exported state was stopped and we are playing then stop it now
+        } elseif ($this->getState() === self::STATE_PLAYING) {
+            $this->pause();
+        }
+
+        return $this;
     }
 }
