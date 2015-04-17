@@ -1,5 +1,5 @@
 [panel,primary]
 .Depuis la mise en place de ce plugin mon Jeedom est beaucoup plus lent
 --
-C'est normalement ce plugin pour avoir les informations en temps reel interroge en permanance les Sonos, cela est très consommateur (plus il y a de sonos plus c'est consommateur). Vous pouvez moduler cette consommation en allant sur Générale -> Administration -> Moteur de tâches et sur la tache sonos3, pull changer la valeur dans la colonne démon. En mettant 4 Jeedom n'interrogera qu'une fois toute les 4 secondes les Sonos. La mise à jour des informations sur le dashboard sera moins rapide mais cela consommera moins de ressources
+C'est normalement ce plugin pour avoir les informations en temps reel interroge en permanance les Sonos, cela est très consommateur (plus il y a de sonos plus c'est consommateur). Vous pouvez moduler cette consommation en allant sur Générale -> Administration -> Moteur de tâches et sur la tache sonos3, pull changer la valeur dans la colonne démon. En mettant 4 Jeedom n'interrogera qu'une fois toute les 4 secondes les Sonos. La mise à jour des informations sur le dashboard sera moins rapide mais cela consommera moins de ressources.
 --
