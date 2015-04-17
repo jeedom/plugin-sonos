@@ -51,8 +51,18 @@ class sonos3 extends eqLogic {
 	public static function pull() {
 		$sonos = self::getSonos();
 		foreach (self::byType('sonos3') as $eqLogic) {
+			if ($eqLogic->getIsEnable() == 0) {
+				continue;
+			}
+			if ($eqLogic->getLogicalId() == '') {
+				continue;
+			}
 			$changed = false;
-			$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
+			try {
+				$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
+			} catch (Exception $e) {
+				continue;
+			}
 			$cmd_state = $eqLogic->getCmd(null, 'state');
 			if (is_object($cmd_state)) {
 				$state = self::convertState($controller->getStateName());

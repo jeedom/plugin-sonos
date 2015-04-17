@@ -1,0 +1,13 @@
+{
+    "name": "jeedom/sonos",
+    "description": "Plugin sonos jeedom",
+    "require": {
+        "duncan3dc/sonos": "~1.1"
+    },
+    "authors": [
+        {
+            "name": "Loic Gevrey",
+            "email": "loic@jeedom.com"
+        }
+    ]
+}
