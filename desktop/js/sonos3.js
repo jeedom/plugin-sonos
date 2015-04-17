@@ -17,6 +17,10 @@
 
 
 
+ $('.eqLogicAttr[data-l1key=configuration][data-l2key=model]').on('change',function(){
+    $('#img_sonosModel').attr('src','plugins/sonos3/core/img/'+$(this).value()+'.jpg');
+});
+
 /*
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
  */

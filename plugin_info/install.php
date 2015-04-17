@@ -29,6 +29,7 @@ function sonos3_install() {
 		$cron->setSchedule('* * * * *');
 		$cron->save();
 	}
+	sonos3::syncSonos();
 }
 
 function sonos3_update() {
