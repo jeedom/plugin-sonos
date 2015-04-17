@@ -1,0 +1,58 @@
+Le plugin Sonos permet de piloter les Sonos Play 1,3,5 et Sonos Connect. Il va vous permetre de voir l'état du Sonos et d'effectuer des actions dessus (lecture,pause, suivant,precedent, volume, choix d'une playlist...)
+
+==== Configuration du plugin
+
+La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout. Le plugin va rechercher les Sonos sur votre reseaux et creer les équipements automatiquement. De plus si il y a une correspondance entre les objets Jeedom et les pieces du Sonos, Jeedom affectera automatiquement les Sonos dans les bonnes pieces.
+
+Si plus tard vous ajoutez un Sonos, vous pouvez soit creer un équipement Sonos en donnant l'IP à Jeedom ou en cliquant sur "Rechercher les équipements Sonos" : 
+
+image::../images/sonos1.PNG[]
+
+==== Configuration des équipements
+
+La configuration des équipements Sonos est accessible à partir du menu plugin : 
+
+image::../images/sonos2.PNG[]
+
+Voilà à quoi ressemble la page du plugin Sonos (ici avec déjà 3 équipements) : 
+
+image::../images/sonos3.PNG[]
+
+Vous retrouvez ici la liste de vos Sonos avec une image en fonction du model, une fois que vous cliquez sur une image vous obtenez : 
+
+image::../images/sonos4.PNG[]
+
+Vous retrouvez ici toute la configuration de votre équipement : 
+
+* Nom de l'équipement Sonos : nom de votre équipement Sonos
+* Objet parent : indique l'objet parent auquel appartient l'équipement
+* Activer : permet de rendre votre équipement actif
+* Visible : le rend visible sur le dashboard
+* Model : le model de votre Sonos (à ne changer que si c'est pas bon)
+* IP : l'IP de votre Sonos, peut etre utilise si votre Sonos change d'IP ou si vous le remplacez
+
+En dessous vous retrouvez la liste des commandes : 
+* Nom : nom de la commande
+* configuration avancée (petites roues crantées) : permet d'afficher la configuration avancée de la commande (méthode d'historisation, widget...)
+* Tester : permet de tester la commande
+
+Comme commande vous retrouverez : 
+
+* Jouer playlist : commande de type message permettant de lancer une playlist, il suffit dans le tite ou dans le message de mettre le nom de la playlist à lancer
+* Aléatoire status : indique si on est en mode aleatoire ou non
+* Aléatoire : inverse le status du mode aléatoire
+* Répéter status : indique si on est en mode répété ou non
+* Repeter : inverse le status du mode répété
+* Image : lien vers l'image de l'album
+* Album : nom de l'album en cours de lecture
+* Artiste : nom de l'artiste en cours de lecture
+* Piste : nom de la piste en cours de lecture
+* Muet : passe en muet
+* Precedent : piste précedente
+* Suivant : piste suivante
+* Lecture : passer en lecture
+* Pause : mettre en pause
+* Stop : arreter la lecture
+* Volume : modifier le volume (de 0 à 100)
+* Volume status : niveau du volume
+* Status : status (pause, lecture, transition...)

@@ -27,7 +27,7 @@ if (!isConnect()) {
 		<div class="form-group">
 			<label class="col-lg-4 control-label">{{Découverte}}</label>
 			<div class="col-lg-2">
-				<a class="btn btn-default" id="bt_syncSonos"><i class='fa fa-refresh'></i> {{Rechercher les équipements Sonos (play1, play3 et play5 seulement)}}</a>
+				<a class="btn btn-default" id="bt_syncSonos"><i class='fa fa-refresh'></i> {{Rechercher les équipements Sonos}}</a>
 			</div>
 		</div>
 	</fieldset>

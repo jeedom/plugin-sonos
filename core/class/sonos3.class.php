@@ -418,32 +418,6 @@ class sonos3 extends eqLogic {
 		$track_album->setEqLogic_id($this->getId());
 		$track_album->save();
 
-		$track_duration = $this->getCmd(null, 'track_duration');
-		if (!is_object($track_duration)) {
-			$track_duration = new sonos3Cmd();
-			$track_duration->setLogicalId('track_duration');
-			$track_duration->setIsVisible(1);
-			$track_duration->setName(__('Durée', __FILE__));
-		}
-		$track_duration->setType('info');
-		$track_duration->setEventOnly(1);
-		$track_duration->setSubType('string');
-		$track_duration->setEqLogic_id($this->getId());
-		$track_duration->save();
-
-		$track_position = $this->getCmd(null, 'track_position');
-		if (!is_object($track_position)) {
-			$track_position = new sonos3Cmd();
-			$track_position->setLogicalId('track_position');
-			$track_position->setIsVisible(1);
-			$track_position->setName(__('Position', __FILE__));
-		}
-		$track_position->setType('info');
-		$track_position->setEventOnly(1);
-		$track_position->setSubType('string');
-		$track_position->setEqLogic_id($this->getId());
-		$track_position->save();
-
 		$track_position = $this->getCmd(null, 'track_image');
 		if (!is_object($track_position)) {
 			$track_position = new sonos3Cmd();

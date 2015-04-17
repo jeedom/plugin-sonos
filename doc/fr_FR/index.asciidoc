@@ -5,5 +5,9 @@
 Plugin servant à piloter un sonos
 
 '''
+=== Configuration
+include::configuration.asciidoc[]
+
+'''
 === FAQ
 include::faq.asciidoc[]
