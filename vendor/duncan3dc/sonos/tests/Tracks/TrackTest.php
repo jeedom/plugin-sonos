@@ -8,7 +8,7 @@ use Mockery;
 
 class TrackTest extends \PHPUnit_Framework_TestCase
 {
-    protected $xml1 = <<<XML
+    private $xml1 = <<<XML
             <track>
                 <title>TITLE</title>
                 <creator>ARTIST</creator>
@@ -17,7 +17,7 @@ class TrackTest extends \PHPUnit_Framework_TestCase
             </track>
 XML;
 
-    protected $xml2 = <<<XML
+    private $xml2 = <<<XML
             <track>
                 <title>TITLE</title>
                 <creator>ARTIST</creator>
@@ -28,8 +28,6 @@ XML;
             </track>
 XML;
 
-    protected $track1;
-    protected $track2;
 
     public function setUp()
     {

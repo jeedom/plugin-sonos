@@ -45,16 +45,22 @@ class sonos3 extends eqLogic {
 					$eqLogic->setName($controller->name);
 				}
 				if (strpos($controller->name, 'PLAY:1') !== false) {
-					$this->setConfiguration('model', 'PLAY1');
+					$eqLogic->setConfiguration('model', 'PLAY1');
 				}
 				if (strpos($controller->name, 'PLAY:3') !== false) {
-					$this->setConfiguration('model', 'PLAY3');
+					$eqLogic->setConfiguration('model', 'PLAY3');
 				}
 				if (strpos($controller->name, 'PLAY:5') !== false) {
-					$this->setConfiguration('model', 'PLAY5');
+					$eqLogic->setConfiguration('model', 'PLAY5');
+				}
+				if (strpos($controller->name, 'PLAYBAR') !== false) {
+					$eqLogic->setConfiguration('model', 'PLAYBAR');
 				}
 				if (strpos($controller->name, 'CONNECT') !== false) {
-					$this->setConfiguration('model', 'CONNECT');
+					$eqLogic->setConfiguration('model', 'CONNECT');
+				}
+				if (strpos($controller->name, 'CONNECT:AMP') !== false) {
+					$eqLogic->setConfiguration('model', 'CONNECTAMP');
 				}
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);

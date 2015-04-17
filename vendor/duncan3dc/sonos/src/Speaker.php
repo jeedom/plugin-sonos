@@ -2,10 +2,11 @@
 
 namespace duncan3dc\Sonos;
 
+use duncan3dc\DomParser\XmlParser;
 use Psr\Log\LoggerInterface;
 
 /**
- * Represents an individual Sonos speaker, to allow volume, equalisation, and other settings to be managed.
+ * Provides an interface to individual speakers that is mostly read-only, although the volume can be set using this class.
  */
 class Speaker
 {
@@ -35,7 +36,7 @@ class Speaker
     protected $group;
 
     /**
-     * @var bool $coordinator Whether this speaker is the coordinator of it's current group.
+     * @var boolean $coordinator Whether this speaker is the coordinator of it's current group.
      */
     protected $coordinator;
 
@@ -45,7 +46,7 @@ class Speaker
     protected $uuid;
 
     /**
-     * @var bool $topology A flag to indicate whether we have gathered the topology for this speaker or not.
+     * @var boolean $topology A flag to indicate whether we have gathered the topology for this speaker or not.
      */
     protected $topology;
 
@@ -70,9 +71,10 @@ class Speaker
         $device = $parser->getTag("device");
         $this->name = (string) $device->getTag("friendlyName");
         $this->room = (string) $device->getTag("roomName");
+        $this->model = (string) $device->getTag("modelNumber");
 
         if (!$this->device->isSpeaker()) {
-            throw new \InvalidArgumentException("You cannot create a Speaker instance for this model: " . $this->device->getModel());
+            throw new \InvalidArgumentException("You cannot create a Speaker instance for this model: {$this->model}");
         }
     }
 
@@ -139,7 +141,7 @@ class Speaker
     /**
      * Check if this speaker is the coordinator of it's current group.
      *
-     * @return bool
+     * @return boolean
      */
     public function isCoordinator()
     {
@@ -214,11 +216,11 @@ class Speaker
     /**
      * Check if this speaker is currently muted.
      *
-     * @return bool
+     * @return boolean
      */
     public function isMuted()
     {
-        return (bool) $this->soap("RenderingControl", "GetMute", [
+        return $this->soap("RenderingControl", "GetMute", [
             "Channel"   =>  "Master",
         ]);
     }
@@ -227,7 +229,7 @@ class Speaker
     /**
      * Mute this speaker.
      *
-     * @param bool $mute Whether the speaker should be muted or not
+     * @param bool $value Whether the speaker should be muted or not
      *
      * @return static
      */
@@ -256,14 +258,14 @@ class Speaker
     /**
      * Turn the indicator light on or off.
      *
-     * @param bool $on Whether the indicator should be on or off
+     * @param bool $value Whether the indicator should be on or off
      *
      * @return static
      */
-    public function setIndicator($on)
+    public function setIndicator($value)
     {
         $this->soap("DeviceProperties", "SetLEDState", [
-            "DesiredLEDState"   =>  $on ? "On" : "Off",
+            "DesiredLEDState"   =>  $value ? "On" : "Off",
         ]);
 
         return $this;
@@ -273,115 +275,10 @@ class Speaker
     /**
      * Check whether the indicator light is on or not.
      *
-     * @return bool
+     * @return boolean
      */
     public function getIndicator()
     {
         return ($this->soap("DeviceProperties", "GetLEDState") === "On");
-    }
-
-
-    /**
-     * Set the treble equalisation level.
-     *
-     * @return int
-     */
-    public function getTreble()
-    {
-        return (int) $this->soap("RenderingControl", "GetTreble", [
-            "Channel"           =>  "Master",
-        ]);
-    }
-
-
-    /**
-     * Set the treble equalisation.
-     *
-     * @param int $treble The treble level (between -10 and 10)
-     *
-     * @return static
-     */
-    public function setTreble($treble)
-    {
-        if ($treble < -10) {
-            $treble = -10;
-        }
-        if ($treble > 10) {
-            $treble = 10;
-        }
-        $this->soap("RenderingControl", "SetTreble", [
-            "Channel"       =>  "Master",
-            "DesiredTreble" =>  $treble,
-        ]);
-
-        return $this;
-    }
-
-
-    /**
-     * Set the bass equalisation level.
-     *
-     * @return int
-     */
-    public function getBass()
-    {
-        return (int) $this->soap("RenderingControl", "GetBass", [
-            "Channel"           =>  "Master",
-        ]);
-    }
-
-
-    /**
-     * Set the bass equalisation.
-     *
-     * @param int $bass The bass level (between -10 and 10)
-     *
-     * @return static
-     */
-    public function setBass($bass)
-    {
-        if ($bass < -10) {
-            $bass = -10;
-        }
-        if ($bass > 10) {
-            $bass = 10;
-        }
-        $this->soap("RenderingControl", "SetBass", [
-            "Channel"       =>  "Master",
-            "DesiredBass"   =>  $bass,
-        ]);
-
-        return $this;
-    }
-
-
-    /**
-     * Check whether loudness normalisation is on or not.
-     *
-     * @return bool
-     */
-    public function getLoudness()
-    {
-        return (bool) $this->soap("RenderingControl", "GetLoudness", [
-            "Channel"       =>  "Master",
-        ]);
-    }
-
-
-    /**
-     * Set whether loudness normalisation is on or not.
-     *
-     * @param bool $on Whether loudness should be on or not
-     *
-     * @return static
-     */
-    public function setLoudness($on)
-    {
-        $this->soap("RenderingControl", "SetLoudness", [
-            "Channel"           =>  "Master",
-            "DesiredLoudness"   =>  $on ? 1 : 0,
-        ]);
-
-        return $this;
     }
 }

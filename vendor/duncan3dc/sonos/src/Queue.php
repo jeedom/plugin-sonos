@@ -36,7 +36,7 @@ class Queue implements \Countable
     public function __construct(Controller $controller)
     {
         $this->id = "Q:0";
-        $this->updateId = 0;
+        $this->updateId = false;
         $this->controller = $controller;
     }
 
@@ -107,7 +107,7 @@ class Queue implements \Countable
     public function count()
     {
         $data = $this->browse("DirectChildren");
-        return (int) $data["TotalMatches"];
+        return $data["TotalMatches"];
     }
 
 
@@ -146,50 +146,13 @@ class Queue implements \Countable
     }
 
 
-    protected function getNextPosition()
-    {
-        $data = $this->browse("DirectChildren");
-
-        $this->updateId = $data["UpdateID"];
-
-        return $data["TotalMatches"] + 1;
-    }
-
-
-    /**
-     * Add a uri to the queue.
-     *
-     * @param UriInterface $track The track to add
-     * @param int $position The position to insert the track in the queue (zero-based), by default the track will be added to the end of the queue
-     *
-     * @return bool
-     */
-    protected function addUri(UriInterface $track, $position = null)
-    {
-        if ($position === null) {
-            $position = $this->getNextPosition();
-        }
-
-        $data = $this->soap("AVTransport", "AddURIToQueue", [
-            "UpdateID"                          =>  $this->updateId,
-            "EnqueuedURI"                       =>  $track->getUri(),
-            "EnqueuedURIMetaData"               =>  $track->getMetaData(),
-            "DesiredFirstTrackNumberEnqueued"   =>  $position,
-            "EnqueueAsNext"                     =>  0,
-        ]);
-        $this->updateId++;
-
-        return ($data["NumTracksAdded"] == 1);
-    }
-
-
     /**
      * Add a track to the queue.
      *
      * @param string|UriInterface $track The URI of the track to add, or an object that implements the UriInterface
      * @param int $position The position to insert the track in the queue (zero-based), by default the track will be added to the end of the queue
      *
-     * @return bool
+     * @return boolean
      */
     public function addTrack($track, $position = null)
     {
@@ -203,12 +166,14 @@ class Queue implements \Countable
      * @param string[]|UriInterface[] $tracks An array where each element is either the URI of the tracks to add, or an object that implements the UriInterface
      * @param int $position The position to insert the tracks in the queue (zero-based), by default the tracks will be added to the end of the queue
      *
-     * @return bool
+     * @return boolean
      */
     public function addTracks(array $tracks, $position = null)
     {
         if ($position === null) {
-            $position = $this->getNextPosition();
+            $data = $this->browse("DirectChildren");
+            $this->updateId = $data["UpdateID"];
+            $position = $data["TotalMatches"] + 1;
         }
 
         # Ensure the update id is set to begin with
@@ -225,7 +190,16 @@ class Queue implements \Countable
                 throw new \InvalidArgumentException("The addTracks() array must contain either string URIs or objects that implement \duncan3dc\Sonos\Tracks\UriInterface");
             }
 
-            if (!$this->addUri($track, $position++)) {
+            $data = $this->soap("AVTransport", "AddURIToQueue", [
+                "UpdateID"                          =>  $this->updateId,
+                "EnqueuedURI"                       =>  $track->getUri(),
+                "EnqueuedURIMetaData"               =>  $track->getMetaData(),
+                "DesiredFirstTrackNumberEnqueued"   =>  $position++,
+                "EnqueueAsNext"                     =>  0,
+            ]);
+            $this->updateId++;
+
+            if ($data["NumTracksAdded"] != 1) {
                 return false;
             }
         }
@@ -238,7 +212,7 @@ class Queue implements \Countable
      *
      * @param int $position The zero-based position of the track to remove
      *
-     * @return bool
+     * @return boolean
      */
     public function removeTrack($position)
     {
@@ -251,7 +225,7 @@ class Queue implements \Countable
      *
      * @param int[] $positions The zero-based positions of the tracks to remove
      *
-     * @return bool
+     * @return boolean
      */
     public function removeTracks(array $positions)
     {

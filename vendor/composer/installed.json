@@ -325,17 +325,17 @@
     },
     {
         "name": "duncan3dc/sonos",
-        "version": "1.2.x-dev",
-        "version_normalized": "1.2.9999999.9999999-dev",
+        "version": "1.1.4",
+        "version_normalized": "1.1.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/duncan3dc/sonos.git",
-            "reference": "71249ada697d7094ad8d2229670832911cb7bab9"
+            "reference": "079160257121348c83099feef79079b6e5821cdb"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/71249ada697d7094ad8d2229670832911cb7bab9",
-            "reference": "71249ada697d7094ad8d2229670832911cb7bab9",
+            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/079160257121348c83099feef79079b6e5821cdb",
+            "reference": "079160257121348c83099feef79079b6e5821cdb",
             "shasum": ""
         },
         "require": {
@@ -349,7 +349,7 @@
         "require-dev": {
             "mockery/mockery": ">=0.9.2"
         },
-        "time": "2015-04-13 21:52:32",
+        "time": "2015-04-17 15:15:23",
         "type": "library",
         "installation-source": "source",
         "autoload": {
