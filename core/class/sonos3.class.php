@@ -174,7 +174,6 @@ class sonos3 extends eqLogic {
 
 			$cmd_track_image = $eqLogic->getCmd(null, 'track_image');
 			if ($track->albumArt != '') {
-
 				if (is_object($cmd_track_image)) {
 					if ($track->albumArt != $cmd_track_image->execCmd(null, 2)) {
 						$cmd_track_image->setCollectDate('');
@@ -183,6 +182,8 @@ class sonos3 extends eqLogic {
 						$changed = true;
 					}
 				}
+			} else {
+				unlink(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg');
 			}
 
 			if ($changed) {
@@ -504,9 +505,12 @@ class sonos3 extends eqLogic {
 
 		$cmd_track_image = $this->getCmd(null, 'track_image');
 		if (is_object($cmd_track_image)) {
-
-			$replace['#thumbnail#'] = '<img style="width : 90%;" alt=""plugins/sonos3/doc/images/sonos3_icon.png" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
-
+			$img = dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $this->getId() . '.jpg';
+			if (filesize($img) > 500) {
+				$replace['#thumbnail#'] = '<img style="width : 90%;" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
+			} else {
+				$replace['#thumbnail#'] = '<img style="width : 80%;" src="plugins/sonos3/doc/images/sonos3_icon.png" />';
+			}
 		}
 
 		$cmd_volume = $this->getCmd(null, 'volume');
