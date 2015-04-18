@@ -2,7 +2,7 @@
 == Sonos
 
 === Description
-Plugin servant à piloter un sonos
+Plugin servant à piloter un Sonos
 
 '''
 === Configuration
