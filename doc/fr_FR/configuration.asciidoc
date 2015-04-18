@@ -18,7 +18,7 @@ Voilà à quoi ressemble la page du plugin Sonos (ici avec déjà 3 équipements
 
 image::../images/sonos3.PNG[]
 
-Vous retrouvez ici la liste de vos Sonos avec une image en fonction du model, une fois que vous cliquez sur une image vous obtenez : 
+Vous retrouvez ici la liste de vos Sonos avec une image en fonction du model, une fois que vous cliquez sur un équipement vous obtenez : 
 
 image::../images/sonos4.PNG[]
 
@@ -58,6 +58,7 @@ Comme commande vous retrouverez :
 * *Volume status* : niveau du volume
 * *Status* : status (pause, lecture, transition...)
 
+==== Widget
 
 Sur le dashboard vous retrouverez le widget suivant : 
 
