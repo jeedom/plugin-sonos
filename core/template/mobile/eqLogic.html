@@ -1,4 +1,4 @@
-<div class="eqLogic eqLogic-widget sonos3" data-version="mobile" style="text-align:center;background : #background_color#" data-eqLogic_id="#id#">
+<div class="eqLogic eqLogic-widget sonos3" data-version="mobile" style="height :450px;text-align:center;background : #background_color#" data-eqLogic_id="#id#">
 	<style  type="text/css">
 		@font-face {
 			font-family: liquid;
@@ -10,13 +10,11 @@
 			font-family: liquid;
 			font-size:10px;
 			color: #text_color#;
-			letter-spacing: 1px;
 		}
 		span.titlesp {
 			font-family: liquid; 
 			font-size:14px;
 			color:  #text_color#;
-			letter-spacing: 1px;
 		}
 		.arrondie {
 			-moz-border-radius:7px;
@@ -49,8 +47,6 @@
 			jeedom.cmd.execute({id: '#volume_id#', value: {slider: $(".sonos3[data-eqLogic_id=#id#] .volume input").value()}});
 		});
 	</script>
-
-	<br/>
 	<div style="margin-top : 5px;">
 		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
 		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>

@@ -504,11 +504,9 @@ class sonos3 extends eqLogic {
 
 		$cmd_track_image = $this->getCmd(null, 'track_image');
 		if (is_object($cmd_track_image)) {
-			if ($_version == 'mobile') {
-				$replace['#thumbnail#'] = '<img style="width : 90%;" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
-			} else {
-				$replace['#thumbnail#'] = '<img style="width : 180px;" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
-			}
+
+			$replace['#thumbnail#'] = '<img style="width : 90%;" alt=""plugins/sonos3/doc/images/sonos3_icon.png" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
+
 		}
 
 		$cmd_volume = $this->getCmd(null, 'volume');
