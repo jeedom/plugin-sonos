@@ -24,44 +24,45 @@ image::../images/sonos4.PNG[]
 
 Vous retrouvez ici toute la configuration de votre équipement : 
 
-* Nom de l'équipement Sonos : nom de votre équipement Sonos
-* Objet parent : indique l'objet parent auquel appartient l'équipement
-* Activer : permet de rendre votre équipement actif
-* Visible : le rend visible sur le dashboard
-* Model : le model de votre Sonos (à ne changer que si c'est pas bon)
-* IP : l'IP de votre Sonos, peut etre utilise si votre Sonos change d'IP ou si vous le remplacez
+* *Nom de l'équipement Sonos* : nom de votre équipement Sonos
+* *Objet parent* : indique l'objet parent auquel appartient l'équipement
+* *Activer* : permet de rendre votre équipement actif
+* *Visible* : le rend visible sur le dashboard
+* *Model* : le model de votre Sonos (à ne changer que si c'est pas bon)
+* *IP* : l'IP de votre Sonos, peut etre utilise si votre Sonos change d'IP ou si vous le remplacez
 
 En dessous vous retrouvez la liste des commandes : 
-* Nom : nom de la commande
-* configuration avancée (petites roues crantées) : permet d'afficher la configuration avancée de la commande (méthode d'historisation, widget...)
-* Tester : permet de tester la commande
+
+* *Nom* : nom de la commande
+* *Configuration avancée (petites roues crantées)* : permet d'afficher la configuration avancée de la commande (méthode d'historisation, widget...)
+* *Tester* : permet de tester la commande
 
 Comme commande vous retrouverez : 
 
-* Jouer playlist : commande de type message permettant de lancer une playlist, il suffit dans le titre le nom de la playlist. Vous pouvez mettre "random" dans message pour melanger la playlist avant la lecture
-* Aléatoire status : indique si on est en mode aleatoire ou non
-* Aléatoire : inverse le status du mode aléatoire
-* Répéter status : indique si on est en mode répété ou non
-* Repeter : inverse le status du mode répété
-* Image : lien vers l'image de l'album
-* Album : nom de l'album en cours de lecture
-* Artiste : nom de l'artiste en cours de lecture
-* Piste : nom de la piste en cours de lecture
-* Muet : passe en muet
-* Precedent : piste précedente
-* Suivant : piste suivante
-* Lecture : passer en lecture
-* Pause : mettre en pause
-* Stop : arreter la lecture
-* Volume : modifier le volume (de 0 à 100)
-* Volume status : niveau du volume
-* Status : status (pause, lecture, transition...)
+* *Jouer playlist* : commande de type message permettant de lancer une playlist, il suffit dans le titre le nom de la playlist. Vous pouvez mettre "random" dans message pour melanger la playlist avant la lecture
+* *Aléatoire status* : indique si on est en mode aleatoire ou non
+* *Aléatoire* : inverse le status du mode aléatoire
+* *Répéter status* : indique si on est en mode répété ou non
+* *Repeter* : inverse le status du mode répété
+* *Image* : lien vers l'image de l'album
+* *Album* : nom de l'album en cours de lecture
+* *Artiste* : nom de l'artiste en cours de lecture
+* *Piste* : nom de la piste en cours de lecture
+* *Muet* : passe en muet
+* *Precedent* : piste précedente
+* *Suivant* : piste suivante
+* *Lecture* : passer en lecture
+* *Pause* : mettre en pause
+* *Stop* : arreter la lecture
+* *Volume* : modifier le volume (de 0 à 100)
+* *Volume status* : niveau du volume
+* *Status* : status (pause, lecture, transition...)
 
 
 Sur le dashboard vous retrouverez le widget suivant : 
 
 image::../images/sonos5.PNG[]
 
-A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d'attente et les playlists disponible pour lancer leur lecture.
+A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d'attente et les playlists disponiblent pour lancer leur lecture.
 
 

@@ -7,7 +7,7 @@
     <licence>AGPL</licence>
     <author>Loïc Gevrey</author>
     <installation>Aucune</installation>
-    <require>1.136</require>
+    <require>1.180</require>
     <category>multimedia</category>
     <include type="php">sonos3.inc</include>
 </info>
