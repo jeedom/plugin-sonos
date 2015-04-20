@@ -47,6 +47,9 @@ function sonos3_update() {
 		$cron->save();
 	}
 	$cron->stop();
+	foreach (sonos3::byType('sonos3') as $sonos) {
+		$sonos->save();
+	}
 }
 
 function sonos3_remove() {

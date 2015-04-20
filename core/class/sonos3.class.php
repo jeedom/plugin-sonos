@@ -65,7 +65,6 @@ class sonos3 extends eqLogic {
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
-				$eqLogic->setCategory('multimedia', 1);
 				$eqLogic->save();
 			}
 		}
@@ -212,6 +211,10 @@ class sonos3 extends eqLogic {
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
+
+	public function preSave() {
+		$this->setCategory('multimedia', 1);
+	}
 
 	public function postSave() {
 		$state = $this->getCmd(null, 'state');
