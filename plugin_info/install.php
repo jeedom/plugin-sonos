@@ -28,6 +28,7 @@ function sonos3_install() {
 		$cron->setDeamon(1);
 		$cron->setDeamonSleepTime(3);
 		$cron->setSchedule('* * * * *');
+		$cron->setTimeout(1440);
 		$cron->save();
 	}
 	sonos3::syncSonos();
@@ -38,14 +39,15 @@ function sonos3_update() {
 
 	if (!is_object($cron)) {
 		$cron = new cron();
-		$cron->setClass('sonos3');
-		$cron->setFunction('pull');
-		$cron->setEnable(1);
-		$cron->setDeamon(1);
-		$cron->setDeamonSleepTime(3);
-		$cron->setSchedule('* * * * *');
-		$cron->save();
 	}
+	$cron->setClass('sonos3');
+	$cron->setFunction('pull');
+	$cron->setEnable(1);
+	$cron->setDeamon(1);
+	$cron->setDeamonSleepTime(3);
+	$cron->setTimeout(1440);
+	$cron->setSchedule('* * * * *');
+	$cron->save();
 	$cron->stop();
 	foreach (sonos3::byType('sonos3') as $sonos) {
 		$sonos->save();
