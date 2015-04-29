@@ -25,13 +25,16 @@ class sonos3 extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
-	public static function getSonos() {
+	public static function getSonos($_emptyCache = false) {
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
+		if ($_emptyCache) {
+			$cache->deleteAll();
+		}
 		return new Network($cache);
 	}
 
 	public static function syncSonos() {
-		$sonos = self::getSonos();
+		$sonos = self::getSonos(true);
 		$controllers = $sonos->getControllers();
 		foreach ($controllers as $controller) {
 			$eqLogic = sonos3::byLogicalId($controller->ip, 'sonos3');
