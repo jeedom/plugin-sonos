@@ -37,7 +37,7 @@
 	<div>
 		<a href="#eqLink#">#name#</a>
 	</div>
-	<div>
+	<div class="thumbnailAlbumArt">
 		#thumbnail#
 	</div>
 	<div>
@@ -78,6 +78,12 @@
 	</div>
 
 	<script>
+
+		if('#hideThumbnail#' == 1){
+			$('.sonos3[data-eqLogic_id=#id#] .thumbnailAlbumArt').hide();
+			$('.sonos3[data-eqLogic_id=#id#]').height(135);
+		}
+
 		if('#repeat_state#' == 1){
 			$('.sonos3[data-eqLogic_id=#id#] .cmd.repeat').removeClass('btn-default').addClass('btn-success');
 		}

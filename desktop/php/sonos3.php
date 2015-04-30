@@ -105,6 +105,12 @@ foreach (object::all() as $object) {
                     <input type="text" class="eqLogicAttr configuration form-control" data-l1key="logicalId" placeholder="IP"/>
                 </div>
             </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Masquer la jaquette}}</label>
+                <div class="col-sm-5">
+                    <input type="checkbox" class="eqLogicAttr configuration" data-l1key="configuration" data-l2key="hideAlbumart" placeholder="IP"/>
+                </div>
+            </div>
         </fieldset>
     </form>
 </div>

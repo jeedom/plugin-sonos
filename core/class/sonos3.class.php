@@ -471,7 +471,12 @@ class sonos3 extends eqLogic {
 			'#eqLink#' => $this->getLinkToConfiguration(),
 			'#text_color#' => $this->getConfiguration('text_color'),
 			'#background_color#' => $this->getBackgroundColor($_version),
+			'#hideThumbnail#' => 0,
 		);
+
+		if ($this->getConfiguration('hideAlbumart') == 1) {
+			$replace['#hideThumbnail#'] = 1;
+		}
 
 		$cmd_state = $this->getCmd(null, 'state');
 		if (is_object($cmd_state)) {
