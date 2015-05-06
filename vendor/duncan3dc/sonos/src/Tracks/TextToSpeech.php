@@ -2,9 +2,10 @@
 
 namespace duncan3dc\Sonos\Tracks;
 
-use duncan3dc\Helpers\File;
-use duncan3dc\Sonos\Directory;
 use duncan3dc\DomParser\XmlWriter;
+use duncan3dc\Helpers\File;
+use duncan3dc\Helpers\Helper;
+use duncan3dc\Sonos\Directory;
 
 /**
  * Convert a string of a text to a spoken word mp3.
@@ -30,11 +31,6 @@ class TextToSpeech implements UriInterface
      * @var string $language The language to use in the google text-to-speech call.
      */
     protected $language = "en";
-
-    /**
-     * @var string $tld The top level domain to use for the google text-to-speech call.
-     */
-    protected $tld = "com";
 
     /**
      * Create a TextToSpeech object.
@@ -78,32 +74,22 @@ class TextToSpeech implements UriInterface
 
 
     /**
-     * Set the top level domain to use in the google text-to-speech call.
+     * Get the URI for this message.
      *
-     * @param string $tld The top level domain to use (eg 'com', 'co.uk')
-     *
-     * @return static
-     */
-    public function setTopLevelDomain($tld)
-    {
-        $tld = trim($tld, ".");
-
-        $this->tld = $tld;
-
-        return $this;
-    }
-
-
-    /**
-     * Get the URI for this track.
+     * If it doesn't already exist on the filesystem then the google api will be called.
      *
      * @return string
      */
     public function getUri()
     {
         $path = $this->directory->getFilesystemPath() . "/{$this->filename}";
+
         if (!file_exists($path)) {
-            $mp3 = File::getContents("http://translate.google.{$this->tld}/translate_tts?q=" . urlencode($this->text) . "&tl={$this->language}");
+            $url = Helper::url("http://translate.google.com/translate_tts", [
+                "q"     =>  $this->text,
+                "tl"    =>  $this->language,
+            ]);
+            $mp3 = File::getContents($url);
             File::putContents($path, $mp3);
         }
 
@@ -112,7 +98,7 @@ class TextToSpeech implements UriInterface
 
 
     /**
-     * Get the metadata xml for this track.
+     * Get the metadata xml for this message.
      *
      * @return string
      */
