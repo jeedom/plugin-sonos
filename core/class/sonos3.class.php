@@ -18,7 +18,9 @@
 
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Network;
+use duncan3dc\Sonos\Tracks\TextToSpeech;
 
 class sonos3 extends eqLogic {
 	/*     * *************************Attributs****************************** */
@@ -480,6 +482,18 @@ class sonos3 extends eqLogic {
 		$remove_speaker->setEqLogic_id($this->getId());
 		$remove_speaker->save();
 
+		$tts = $this->getCmd(null, 'tts');
+		if (!is_object($tts)) {
+			$tts = new sonos3Cmd();
+			$tts->setLogicalId('tts');
+			$tts->setIsVisible(1);
+			$tts->setName(__('Dire', __FILE__));
+		}
+		$tts->setType('action');
+		$tts->setSubType('message');
+		$tts->setEqLogic_id($this->getId());
+		$tts->save();
+
 	}
 
 	public function toHtml($_version = 'dashboard') {
@@ -703,6 +717,16 @@ class sonos3Cmd extends cmd {
 		if ($this->getLogicalId() == 'remove_speaker') {
 			$speaker = $sonos->getSpeakerByRoom($_options['title']);
 			$controller->removeSpeaker($speaker);
+		}
+
+		if ($this->getLogicalId() == 'tts') {
+			if (!file_exists('/tmp/tts')) {
+				mkdir('/tmp/tts');
+			}
+			$directory = new Directory("/mnt/synology", config::byKey('pathToSmb', 'sonos3'), "");
+			$track = new TextToSpeech(trim($_options['title'] . ' ' . $_options['message']), $directory);
+			$track->setLanguage("fr");
+			$controller->interrupt($track);
 		}
 	}
 
