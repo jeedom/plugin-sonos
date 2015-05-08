@@ -27,7 +27,7 @@ if (!isConnect()) {
       <div class="form-group">
         <label class="col-lg-4 control-label">{{[TTS] Chemin local du répertoire partagé}}</label>
         <div class="col-lg-2">
-            <input class="configKey tooltips form-control" data-l1key="localpath" placeholder="hostname/path/to/smb" />
+            <input class="configKey tooltips form-control" data-l1key="localpath" placeholder="/local/path" />
         </div>
     </div>
         <div class="form-group">
