@@ -720,9 +720,6 @@ class sonos3Cmd extends cmd {
 		}
 
 		if ($this->getLogicalId() == 'tts') {
-			if (!file_exists('/tmp/tts')) {
-				mkdir('/tmp/tts');
-			}
 			$directory = new Directory("/mnt/synology", config::byKey('pathToSmb', 'sonos3'), "");
 			$track = new TextToSpeech(trim($_options['title'] . ' ' . $_options['message']), $directory);
 			$track->setLanguage("fr");

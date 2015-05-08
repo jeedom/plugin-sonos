@@ -80,7 +80,7 @@ Ensuite il faut sur vos Sonos ajouter le repertoire //NOMDUNAS/CHEMIN/DU/PARTAGE
 
 image::../images/sonos6.PNG[]
 
-Ensuite il vous faut remplir les parametres du plugin : 
+Ensuite il vous faut remplir les paramètres du plugin : 
 
 image::../images/sonos1.PNG[]
 
