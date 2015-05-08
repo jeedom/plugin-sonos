@@ -40,6 +40,8 @@ En dessous vous retrouvez la liste des commandes :
 Comme commande vous retrouverez : 
 
 * *Jouer playlist* : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Vous pouvez mettre "random" dans message pour mélanger la playlist avant la lecture.
+* *Ajout un haut parleur* : permet d'ajouter à haut parleur (un sonos) au haut parleur courant (pour associer 2 sonos par exemple). Il faut mettre le nom de la piece du sonos à ajouter dans le titre (le champs message n'est pas utilisé ici).
+* *Supprimer un haut parleur* : permet de supprimer un haut parleur (un sonos) au haut parleur courant (pour associer 2 sonos par exemple). Il faut mettre le nom de la piece du sonos à supprimer dans le titre (le champs message n'est pas utilisé ici).
 * *Aléatoire statut* : indique si on est en mode aléatoire ou non
 * *Aléatoire* : inverse le statut du mode aléatoire
 * *Répéter statut* : indique si on est en mode répété ou non

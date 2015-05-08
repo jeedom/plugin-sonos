@@ -456,6 +456,30 @@ class sonos3 extends eqLogic {
 		$play_playlist->setEqLogic_id($this->getId());
 		$play_playlist->save();
 
+		$add_speaker = $this->getCmd(null, 'add_speaker');
+		if (!is_object($add_speaker)) {
+			$add_speaker = new sonos3Cmd();
+			$add_speaker->setLogicalId('add_speaker');
+			$add_speaker->setIsVisible(1);
+			$add_speaker->setName(__('Ajout un haut parleur', __FILE__));
+		}
+		$add_speaker->setType('action');
+		$add_speaker->setSubType('message');
+		$add_speaker->setEqLogic_id($this->getId());
+		$add_speaker->save();
+
+		$remove_speaker = $this->getCmd(null, 'remove_speaker');
+		if (!is_object($remove_speaker)) {
+			$remove_speaker = new sonos3Cmd();
+			$remove_speaker->setLogicalId('remove_speaker');
+			$remove_speaker->setIsVisible(1);
+			$remove_speaker->setName(__('Supprimer un haut parleur', __FILE__));
+		}
+		$remove_speaker->setType('action');
+		$remove_speaker->setSubType('message');
+		$remove_speaker->setEqLogic_id($this->getId());
+		$remove_speaker->save();
+
 	}
 
 	public function toHtml($_version = 'dashboard') {
@@ -670,6 +694,15 @@ class sonos3Cmd extends cmd {
 				$queue->addTracks($tracks);
 				$controller->play();
 			}
+		}
+		if ($this->getLogicalId() == 'add_speaker') {
+			$speaker = $sonos->getSpeakerByRoom($_options['title']);
+			$controller->addSpeaker($speaker);
+		}
+
+		if ($this->getLogicalId() == 'remove_speaker') {
+			$speaker = $sonos->getSpeakerByRoom($_options['title']);
+			$controller->removeSpeaker($speaker);
 		}
 	}
 
