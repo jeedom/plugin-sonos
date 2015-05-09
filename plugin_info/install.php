@@ -31,7 +31,11 @@ function sonos3_install() {
 		$cron->setTimeout(1440);
 		$cron->save();
 	}
-	sonos3::syncSonos();
+	try {
+		sonos3::syncSonos();
+	} catch (Exception $e) {
+
+	}
 }
 
 function sonos3_update() {
