@@ -71,7 +71,7 @@ Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samb
 sudo su -
 apt-get install cifs
 mkdir -p /mnt/synology
-mount -t cifs -o username=\#username#,password=\#password# //NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology
+mount -t cifs -o username=#username#,password=#password# //NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology
 ----
 
 N'oubliez pas de bien remplacer \#username#, \#password# et //NOMDUNAS/CHEMIN/DU/PARTAGE en fonction de votre configuration.
