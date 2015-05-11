@@ -31,7 +31,7 @@ if (!isConnect()) {
         </div>
     </div>
         <div class="form-group">
-        <label class="col-lg-4 control-label">{{[TTS] Chemin Sonos du répertoire paratagé}}</label>
+        <label class="col-lg-4 control-label">{{[TTS] Chemin Sonos du répertoire partagé}}</label>
         <div class="col-lg-2">
             <input class="configKey tooltips form-control" data-l1key="pathToSmb" placeholder="hostname/path/to/smb" />
         </div>
