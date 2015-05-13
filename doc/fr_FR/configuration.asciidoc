@@ -62,6 +62,7 @@ Comme commande vous retrouverez :
 * *Volume* : modifier le volume (de 0 à 100)
 * *Volume statut* : niveau du volume
 * *Statut* : statut (pause, lecture, transition...)
+* *Dire* : permet de lire un texte sur le sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire
 
 ==== TTS
 
