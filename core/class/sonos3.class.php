@@ -555,7 +555,7 @@ class sonos3 extends eqLogic {
 		$cmd_track_image = $this->getCmd(null, 'track_image');
 		if (is_object($cmd_track_image)) {
 			$img = dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $this->getId() . '.jpg';
-			if (filesize($img) > 500) {
+			if (file_exist($img) && filesize($img) > 500) {
 				$replace['#thumbnail#'] = '<img style="width : 90%;" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
 			} else {
 				$replace['#thumbnail#'] = '<img style="width : 80%;" src="plugins/sonos3/doc/images/sonos3_icon.png" />';
@@ -731,7 +731,7 @@ class sonos3Cmd extends cmd {
 				$volume = $controller->setVolume($_options['title']);
 			}
 			$controller->interrupt($track);
-			$volume = $controller->getVolume($volume);
+			$volume = $controller->setVolume($volume);
 		}
 	}
 
