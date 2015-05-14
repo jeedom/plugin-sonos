@@ -500,6 +500,9 @@ class sonos3 extends eqLogic {
 		if ($this->getIsEnable() != 1) {
 			return '';
 		}
+		if (!$this->hasRight('r')) {
+			return '';
+		}
 		$_version = jeedom::versionAlias($_version);
 
 		$replace = array(
