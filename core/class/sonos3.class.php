@@ -721,7 +721,7 @@ class sonos3Cmd extends cmd {
 
 		if ($this->getLogicalId() == 'tts') {
 			$volume = $controller->getVolume($_options['slider']);
-			$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), "");
+			$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), 'tts');
 			$track = new TextToSpeech(trim($_options['message']), $directory);
 			$track->setLanguage("fr");
 			if ($_options['title'] != '' && is_numeric($_options['title'])) {
