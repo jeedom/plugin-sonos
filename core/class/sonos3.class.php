@@ -78,120 +78,120 @@ class sonos3 extends eqLogic {
 	public static function pull() {
 		$sonos = self::getSonos();
 		foreach (self::byType('sonos3') as $eqLogic) {
-			if ($eqLogic->getIsEnable() == 0) {
-				continue;
-			}
-			if ($eqLogic->getLogicalId() == '') {
-				continue;
-			}
-			$changed = false;
 			try {
+				if ($eqLogic->getIsEnable() == 0) {
+					continue;
+				}
+				if ($eqLogic->getLogicalId() == '') {
+					continue;
+				}
+				$changed = false;
 				$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
-			} catch (Exception $e) {
-				continue;
-			}
-			$cmd_state = $eqLogic->getCmd(null, 'state');
-			if (is_object($cmd_state)) {
-				$state = self::convertState($controller->getStateName());
-				if ($state != $cmd_state->execCmd(null, 2)) {
-					$cmd_state->setCollectDate('');
-					$cmd_state->event($state);
-					$changed = true;
-				}
-			}
 
-			$cmd_volume = $eqLogic->getCmd(null, 'volume');
-			if (is_object($cmd_volume)) {
-				$volume = $controller->getVolume();
-				if ($volume != $cmd_volume->execCmd(null, 2)) {
-					$cmd_volume->setCollectDate('');
-					$cmd_volume->event($volume);
-					$changed = true;
-				}
-			}
-
-			$cmd_suffle = $eqLogic->getCmd(null, 'shuffle_state');
-			if (is_object($cmd_suffle)) {
-				$shuffle = $controller->getShuffle();
-				if ($shuffle == '') {
-					$shuffle = 0;
-				}
-				if ($shuffle != $cmd_suffle->execCmd(null, 2)) {
-					$cmd_suffle->setCollectDate('');
-					$cmd_suffle->event($shuffle);
-					$changed = true;
-				}
-			}
-
-			$cmd_repeat = $eqLogic->getCmd(null, 'repeat_state');
-			if (is_object($cmd_repeat)) {
-				$repeat = $controller->getRepeat();
-				if ($repeat == '') {
-					$repeat = 0;
-				}
-				if ($repeat != $cmd_repeat->execCmd(null, 2)) {
-					$cmd_repeat->setCollectDate('');
-					$cmd_repeat->event($repeat);
-					$changed = true;
-				}
-			}
-
-			$track = $controller->getStateDetails();
-			$cmd_track_title = $eqLogic->getCmd(null, 'track_title');
-			$title = $track->title;
-			if ($title == '') {
-				$title = __('Aucun', __FILE__);
-			}
-			if (is_object($cmd_track_title)) {
-				if ($title != $cmd_track_title->execCmd(null, 2)) {
-					$cmd_track_title->setCollectDate('');
-					$cmd_track_title->event($title);
-					$changed = true;
-				}
-			}
-
-			$cmd_track_album = $eqLogic->getCmd(null, 'track_album');
-			$album = $track->album;
-			if ($album == '') {
-				$album = __('Aucun', __FILE__);
-			}
-			if (is_object($cmd_track_album)) {
-				if ($album != $cmd_track_album->execCmd(null, 2)) {
-					$cmd_track_album->setCollectDate('');
-					$cmd_track_album->event($album);
-					$changed = true;
-				}
-			}
-
-			$cmd_track_artist = $eqLogic->getCmd(null, 'track_artist');
-			$artist = $track->artist;
-			if ($artist == '') {
-				$artist = __('Aucun', __FILE__);
-			}
-			if (is_object($cmd_track_artist)) {
-				if ($artist != $cmd_track_artist->execCmd(null, 2)) {
-					$cmd_track_artist->setCollectDate('');
-					$cmd_track_artist->event($artist);
-					$changed = true;
-				}
-			}
-
-			$cmd_track_image = $eqLogic->getCmd(null, 'track_image');
-			if ($track->albumArt != '') {
-				if (is_object($cmd_track_image)) {
-					if ($track->albumArt != $cmd_track_image->execCmd(null, 2)) {
-						$cmd_track_image->setCollectDate('');
-						$cmd_track_image->event($track->albumArt);
-						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->albumArt));
+				$cmd_state = $eqLogic->getCmd(null, 'state');
+				if (is_object($cmd_state)) {
+					$state = self::convertState($controller->getStateName());
+					if ($state != $cmd_state->execCmd(null, 2)) {
+						$cmd_state->setCollectDate('');
+						$cmd_state->event($state);
 						$changed = true;
 					}
 				}
-			} else {
-				unlink(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg');
-			}
 
-			if ($changed) {
-				$eqLogic->refreshWidget();
+				$cmd_volume = $eqLogic->getCmd(null, 'volume');
+				if (is_object($cmd_volume)) {
+					$volume = $controller->getVolume();
+					if ($volume != $cmd_volume->execCmd(null, 2)) {
+						$cmd_volume->setCollectDate('');
+						$cmd_volume->event($volume);
+						$changed = true;
+					}
+				}
+
+				$cmd_suffle = $eqLogic->getCmd(null, 'shuffle_state');
+				if (is_object($cmd_suffle)) {
+					$shuffle = $controller->getShuffle();
+					if ($shuffle == '') {
+						$shuffle = 0;
+					}
+					if ($shuffle != $cmd_suffle->execCmd(null, 2)) {
+						$cmd_suffle->setCollectDate('');
+						$cmd_suffle->event($shuffle);
+						$changed = true;
+					}
+				}
+
+				$cmd_repeat = $eqLogic->getCmd(null, 'repeat_state');
+				if (is_object($cmd_repeat)) {
+					$repeat = $controller->getRepeat();
+					if ($repeat == '') {
+						$repeat = 0;
+					}
+					if ($repeat != $cmd_repeat->execCmd(null, 2)) {
+						$cmd_repeat->setCollectDate('');
+						$cmd_repeat->event($repeat);
+						$changed = true;
+					}
+				}
+
+				$track = $controller->getStateDetails();
+				$cmd_track_title = $eqLogic->getCmd(null, 'track_title');
+				$title = $track->title;
+				if ($title == '') {
+					$title = __('Aucun', __FILE__);
+				}
+				if (is_object($cmd_track_title)) {
+					if ($title != $cmd_track_title->execCmd(null, 2)) {
+						$cmd_track_title->setCollectDate('');
+						$cmd_track_title->event($title);
+						$changed = true;
+					}
+				}
+
+				$cmd_track_album = $eqLogic->getCmd(null, 'track_album');
+				$album = $track->album;
+				if ($album == '') {
+					$album = __('Aucun', __FILE__);
+				}
+				if (is_object($cmd_track_album)) {
+					if ($album != $cmd_track_album->execCmd(null, 2)) {
+						$cmd_track_album->setCollectDate('');
+						$cmd_track_album->event($album);
+						$changed = true;
+					}
+				}
+
+				$cmd_track_artist = $eqLogic->getCmd(null, 'track_artist');
+				$artist = $track->artist;
+				if ($artist == '') {
+					$artist = __('Aucun', __FILE__);
+				}
+				if (is_object($cmd_track_artist)) {
+					if ($artist != $cmd_track_artist->execCmd(null, 2)) {
+						$cmd_track_artist->setCollectDate('');
+						$cmd_track_artist->event($artist);
+						$changed = true;
+					}
+				}
+
+				$cmd_track_image = $eqLogic->getCmd(null, 'track_image');
+				if ($track->albumArt != '') {
+					if (is_object($cmd_track_image)) {
+						if ($track->albumArt != $cmd_track_image->execCmd(null, 2)) {
+							$cmd_track_image->setCollectDate('');
+							$cmd_track_image->event($track->albumArt);
+							file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->albumArt));
+							$changed = true;
+						}
+					}
+				} else {
+					unlink(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg');
+				}
+				if ($changed) {
+					$eqLogic->refreshWidget();
+				}
+			} catch (Exception $e) {
+				continue;
 			}
 		}
 	}
