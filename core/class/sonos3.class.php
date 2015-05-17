@@ -695,7 +695,7 @@ class sonos3Cmd extends cmd {
 			if ($_options['slider'] < 0) {
 				$_options['slider'] = 0;
 			}
-			if ($_options['slider'] < 100) {
+			if ($_options['slider'] > 100) {
 				$_options['slider'] = 100;
 			}
 			$controller->setVolume($_options['slider']);
