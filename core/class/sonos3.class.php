@@ -75,16 +75,19 @@ class sonos3 extends eqLogic {
 		}
 	}
 
-	public static function pull() {
+	public static function pull($_eqLogic_id = null) {
 		$sonos = self::getSonos();
 		foreach (self::byType('sonos3') as $eqLogic) {
+			if ($_eqLogic_id != null && $_eqLogic_id != $this->getId()) {
+				continue;
+			}
+			if ($eqLogic->getIsEnable() == 0) {
+				continue;
+			}
+			if ($eqLogic->getLogicalId() == '') {
+				continue;
+			}
 			try {
-				if ($eqLogic->getIsEnable() == 0) {
-					continue;
-				}
-				if ($eqLogic->getLogicalId() == '') {
-					continue;
-				}
 				$changed = false;
 				$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
 
@@ -736,6 +739,7 @@ class sonos3Cmd extends cmd {
 			$controller->interrupt($track);
 			$volume = $controller->setVolume($volume);
 		}
+		sonos3::pull($eqLogic->getId());
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
