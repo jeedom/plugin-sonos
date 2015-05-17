@@ -692,6 +692,12 @@ class sonos3Cmd extends cmd {
 			$controller->setShuffle(!$controller->getShuffle());
 		}
 		if ($this->getLogicalId() == 'setVolume') {
+			if ($_options['slider'] < 0) {
+				$_options['slider'] = 0;
+			}
+			if ($_options['slider'] < 100) {
+				$_options['slider'] = 100;
+			}
 			$controller->setVolume($_options['slider']);
 		}
 		if ($this->getLogicalId() == 'play_playlist') {
