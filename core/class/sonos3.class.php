@@ -188,7 +188,9 @@ class sonos3 extends eqLogic {
 						}
 					}
 				} else {
-					unlink(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg');
+					if (file_exists(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg')) {
+						unlink(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg');
+					}
 				}
 				if ($changed) {
 					$eqLogic->refreshWidget();
