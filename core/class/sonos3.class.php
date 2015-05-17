@@ -78,7 +78,7 @@ class sonos3 extends eqLogic {
 	public static function pull($_eqLogic_id = null) {
 		$sonos = self::getSonos();
 		foreach (self::byType('sonos3') as $eqLogic) {
-			if ($_eqLogic_id != null && $_eqLogic_id != $this->getId()) {
+			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
 			if ($eqLogic->getIsEnable() == 0) {
