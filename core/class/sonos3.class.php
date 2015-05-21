@@ -195,8 +195,21 @@ class sonos3 extends eqLogic {
 				if ($changed) {
 					$eqLogic->refreshWidget();
 				}
+				if ($withings->getConfiguration('sonosNumberFailed', 0) > 0) {
+					$eqLogic->setConfiguration('sonosNumberFailed', 0);
+					$eqLogic->save();
+				}
 			} catch (Exception $e) {
-				continue;
+				if ($_eqLogic_id != null) {
+					log::add('sonos', 'error', $e->getMessage());
+				} else {
+					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) > 150) {
+						log::add('sonos', 'error', $e->getMessage());
+					} else {
+						$eqLogic->setConfiguration('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
+						$eqLogic->save();
+					}
+				}
 			}
 		}
 	}

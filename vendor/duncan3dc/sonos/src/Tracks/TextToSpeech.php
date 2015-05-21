@@ -79,10 +79,9 @@ class TextToSpeech implements UriInterface {
 		$path = $this->directory->getFilesystemPath() . "/{$this->filename}";
 
 		if (!file_exists($path)) {
-			$url = Helper::url("http://www.voxygen.fr/sites/all/modules/voxygen_voices/assets/proxy/index.php", [
-				"method" => $this->method,
-				"voice" => $this->voice,
-				"text" => $this->text,
+			$url = Helper::url("http://translate.google.com/translate_tts", [
+				"q" => $this->text,
+				"tl" => $this->language,
 			]);
 			$mp3 = File::getContents($url);
 			File::putContents($path, $mp3);
