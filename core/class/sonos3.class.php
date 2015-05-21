@@ -760,7 +760,7 @@ class sonos3Cmd extends cmd {
 					$volume = $controller->setVolume($_options['title']);
 				}
 				$controller->interrupt($track);
-				$volume = $controller->setVolume($volume);
+				$controller->setVolume($volume);
 			}
 			sonos3::pull($eqLogic->getId());
 		} catch (Exception $e) {
