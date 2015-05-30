@@ -735,14 +735,22 @@ class sonos3Cmd extends cmd {
 			}
 			if ($this->getLogicalId() == 'play_playlist') {
 				$queue = $controller->getQueue();
-				$playlist = $sonos->getPlaylistByName(trim($_options['title']));
+				$playlist = $sonos->getPlaylistByName(trim(trim($_options['title']), '"'));
+				if ($playlist == null) {
+					foreach ($sonos->getPlaylists() as $playlist_search) {
+						if (str_replace('  ', ' ', $playlist_search->getName()) == $_options['title']) {
+							$playlist = $playlist_search;
+							break;
+						}
+					}
+				}
 				if ($playlist == null) {
 					throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title']));
 				}
 				$tracks = $playlist->getTracks();
 				$queue->clear();
 				if (count($tracks) > 1) {
-					if ($_options['message'] == 'random') {
+					if (isset($_options['message']) && $_options['message'] == 'random') {
 						shuffle($tracks);
 					}
 					$queue->addTrack($tracks[0]);
@@ -753,6 +761,7 @@ class sonos3Cmd extends cmd {
 					$queue->addTracks($tracks);
 					$controller->play();
 				}
+				log::add('sonos3', 'debug', 'Je passe 3 ');
 			}
 			if ($this->getLogicalId() == 'play_radio') {
 				$stations = $sonos->getRadioStations();
