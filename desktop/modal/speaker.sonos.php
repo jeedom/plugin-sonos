@@ -22,52 +22,43 @@ if (!is_object($sonos)) {
 	throw new Exception("Equipement non trouvé");
 }
 ?>
-<a class="btn btn-danger pull-right" id="bt_emptyQueue" data-sonos_id="<?php echo init('id');?>"><i class="fa fa-trash-o"></i> {{Vider}}</a>
-<br/><br/>
 <table class="table table-condensed">
     <thead>
         <tr>
             <th style="width : 60px;">{{Action}}</th>
-            <th>{{Artiste}}</th>
-            <th>{{Album}}</th>
-            <th>{{Piste}}</th>
+            <th>{{Radio}}</th>
         </tr>
     </thead>
     <tbody>
         <?php
-$i = 0;
-foreach ($sonos->getQueue() as $track) {
+foreach (sonos3::getSpeaker() as $speaker) {
 	echo '<tr>';
 	echo '<td>';
-	echo '<a class="removeTrack btn btn-xs btn-danger" data-position="' . $i . '" data-sonos_id="' . init('id') . '"><i class="fa fa-trash-o"></i></a> ';
-	echo '<a class="playTrack btn btn-xs btn-primary" data-position="' . $i . '" data-sonos_id="' . init('id') . '"><i class="fa fa-play"></i></a>';
+	echo '<a class="removeSpeaker btn btn-xs btn-danger" data-sonos_id="' . init('id') . '" data-name="' . $speaker->room . '"><i class="fa fa-minus-circle"></i></a> ';
+	if ($speaker->ip != $sonos->getLogicalId()) {
+		echo '<a class="addSpeaker btn btn-xs btn-success" data-sonos_id="' . init('id') . '" data-name="' . $speaker->room . '"><i class="fa fa-plus-circle"></i></a>';
+	}
 	echo '</td>';
 	echo '<td>';
-	echo $track->artist;
-	echo '</td>';
-	echo '<td>';
-	echo $track->album;
-	echo '</td>';
-	echo '<td>';
-	echo $track->title;
+	echo $speaker->room;
 	echo '</td>';
 	echo '</tr>';
-	$i++;
 }
 ?>
    </tbody>
 </table>
 
 <script>
-  $('#bt_emptyQueue').on('click',function(){
+ $('.addSpeaker').on('click',function(){
     var id = $(this).attr('data-sonos_id');
-
+    var name = $(this).attr('data-name');
  $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
             url: "plugins/sonos3/core/ajax/sonos3.ajax.php", // url du fichier php
             data: {
-                action: "emptyQueue",
+                action: "addSpeaker",
                 id :id,
+                speaker : name
             },
             dataType: 'json',
             error: function (request, status, error) {
@@ -78,22 +69,20 @@ foreach ($sonos->getQueue() as $track) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            $('#md_modal2').dialog('close');
         }
     });
 });
 
-
-  $('.playTrack').on('click',function(){
+ $('.removeSpeaker').on('click',function(){
     var id = $(this).attr('data-sonos_id');
-    var position = $(this).attr('data-position');
+    var name = $(this).attr('data-name');
  $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
             url: "plugins/sonos3/core/ajax/sonos3.ajax.php", // url du fichier php
             data: {
-                action: "playTrack",
+                action: "removeSpeaker",
                 id :id,
-                position : position
+                speaker : name
             },
             dataType: 'json',
             error: function (request, status, error) {
@@ -104,33 +93,6 @@ foreach ($sonos->getQueue() as $track) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            $('#md_modal2').dialog('close');
-        }
-    });
-});
-
-
-  $('.removeTrack').on('click',function(){
-    var id = $(this).attr('data-sonos_id');
-    var position = $(this).attr('data-position');
- $.ajax({// fonction permettant de faire de l'ajax
-            type: "POST", // methode de transmission des données au fichier php
-            url: "plugins/sonos3/core/ajax/sonos3.ajax.php", // url du fichier php
-            data: {
-                action: "removeTrack",
-                id :id,
-                position : position
-            },
-            dataType: 'json',
-            error: function (request, status, error) {
-                handleAjaxError(request, status, error);
-            },
-            success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                return;
-            }
-            $('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=queue.sonos&id=' + id).dialog('open');
         }
     });
 });

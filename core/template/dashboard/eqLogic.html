@@ -54,7 +54,8 @@
 
 	<i class="fa fa-volume-off" style="position : relative; left:-10px;"></i> <div class="volume" style="margin : 5px 10px 8px 10px;width: 80px;" value="#volume#" ></div>
 
-	<i class="fa fa-bars pull-right cursor queue tooltips" title="Liste de lecture" style="position:relative;top:4px;"></i><br/>
+	<i class="fa fa-bars pull-right cursor queue tooltips" title="Liste de lecture" style="position:relative;top:4px;left : -18px;"></i><br/>
+	<i class="fa fa-volume-off pull-right cursor speaker tooltips" title="Liste de lecture" style="position:relative;top:-17px;left : -2px;"></i><br/>
 
 	<script>
 		$(".sonos3[data-eqLogic_id=#id#] .volume").bootstrapSlider({
@@ -68,7 +69,7 @@
 	</script>
 	<br/>
 
-	<div style="margin-top : -7px;">
+	<div style="margin-top : -27px;margin-left : 3px;">
 		<a class="btn btn-default btn-circle btn-xs cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
 		<a class="btn btn-default btn-circle btn-xs cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>
 		<a class="btn btn-default btn-circle btn-xs cmd play" data-cmd_id="#cmd_play_id#"><i class="fa fa-play"></i></a>
@@ -116,6 +117,11 @@
 		$('.sonos3[data-eqLogic_id=#id#] .radio').on('click', function() {
 			$('#md_modal2').dialog({title: "Radios"});
 			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=radio.sonos&id=#id#').dialog('open');
+		});
+
+		$('.sonos3[data-eqLogic_id=#id#] .speaker').on('click', function() {
+			$('#md_modal2').dialog({title: "Haut parleur"});
+			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=speaker.sonos&id=#id#').dialog('open');
 		});
 
 	</script>
