@@ -14,10 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
-
-if (!isConnect('admin')) {
-	throw new Exception('401 Unauthorized');
-}
 $sonos = sonos3::byId(init('id'));
 if (!is_object($sonos)) {
 	throw new Exception("Equipement non trouvé");
@@ -28,7 +24,7 @@ if (!is_object($sonos)) {
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th style="width : 60px;">Action</th>
+            <th style="width : 60px;">{{Action}}</th>
             <th>{{Artiste}}</th>
             <th>{{Album}}</th>
             <th>{{Piste}}</th>

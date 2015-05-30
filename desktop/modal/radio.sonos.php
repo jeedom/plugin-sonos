@@ -15,23 +15,22 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>{{Action}}</th>
-            <th>{{Playlist}}</th>
+            <th style="width : 60px;">{{Action}}</th>
+            <th>{{Radio}}</th>
         </tr>
     </thead>
     <tbody>
         <?php
-foreach (sonos3::getPlayLists() as $playlist) {
+foreach (sonos3::getRadioStations() as $radio) {
 	echo '<tr>';
 	echo '<td>';
-	echo '<a class="playPlaylist btn btn-xs btn-primary" data-sonos_id="' . init('id') . '" data-name="' . $playlist->getName() . '"><i class="fa fa-play"></i></a>';
+	echo '<a class="playRadio btn btn-xs btn-primary" data-sonos_id="' . init('id') . '" data-name="' . $radio->getTitle() . '"><i class="fa fa-play"></i></a>';
 	echo '</td>';
 	echo '<td>';
-	echo $playlist->getName();
+	echo $radio->getTitle();
 	echo '</td>';
 	echo '</tr>';
 }
@@ -40,16 +39,16 @@ foreach (sonos3::getPlayLists() as $playlist) {
 </table>
 
 <script>
-   $('.playPlaylist').on('click',function(){
+ $('.playRadio').on('click',function(){
     var id = $(this).attr('data-sonos_id');
     var name = $(this).attr('data-name');
  $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
             url: "plugins/sonos3/core/ajax/sonos3.ajax.php", // url du fichier php
             data: {
-                action: "playPlaylist",
+                action: "playRadio",
                 id :id,
-                playlist : name
+                radio : name
             },
             dataType: 'json',
             error: function (request, status, error) {
@@ -64,7 +63,6 @@ foreach (sonos3::getPlayLists() as $playlist) {
         }
     });
 });
-
 </script>
 
 

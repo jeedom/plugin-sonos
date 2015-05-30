@@ -71,6 +71,16 @@ try {
 		ajax::success();
 	}
 
+	if (init('action') == 'playRadio') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		$cmd = $sonos->getCmd(null, 'play_radio');
+		$cmd->execCmd(array('title' => init('radio')));
+		ajax::success();
+	}
+
 	throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {

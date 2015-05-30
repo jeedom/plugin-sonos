@@ -234,6 +234,11 @@ class sonos3 extends eqLogic {
 		return $sonos->getPlaylists();
 	}
 
+	public function getRadioStations() {
+		$sonos = sonos3::getSonos();
+		return $sonos->getRadioStations();
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preSave() {
@@ -477,6 +482,18 @@ class sonos3 extends eqLogic {
 		$play_playlist->setEqLogic_id($this->getId());
 		$play_playlist->save();
 
+		$play_radio = $this->getCmd(null, 'play_radio');
+		if (!is_object($play_radio)) {
+			$play_radio = new sonos3Cmd();
+			$play_radio->setLogicalId('play_radio');
+			$play_radio->setIsVisible(1);
+			$play_radio->setName(__('Jouer une radio', __FILE__));
+		}
+		$play_radio->setType('action');
+		$play_radio->setSubType('message');
+		$play_radio->setEqLogic_id($this->getId());
+		$play_radio->save();
+
 		$add_speaker = $this->getCmd(null, 'add_speaker');
 		if (!is_object($add_speaker)) {
 			$add_speaker = new sonos3Cmd();
@@ -638,15 +655,6 @@ class sonos3 extends eqLogic {
 		$queue = $controller->getQueue();
 		$queue->clear();
 	}
-
-	public function getRadioStations() {
-		$sonos = sonos3::getSonos();
-		$stations = $sonos->getRadioStations();
-		foreach ($stations as $station) {
-			print_r($station->getMetaData());
-		}
-	}
-
 	/*     * **********************Getteur Setteur*************************** */
 }
 
@@ -659,7 +667,6 @@ class sonos3Cmd extends cmd {
 
 	public function execute($_options = array()) {
 		try {
-
 			$sonos = sonos3::getSonos();
 			$eqLogic = $this->getEqLogic();
 			$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
@@ -745,6 +752,15 @@ class sonos3Cmd extends cmd {
 				} else {
 					$queue->addTracks($tracks);
 					$controller->play();
+				}
+			}
+			if ($this->getLogicalId() == 'play_radio') {
+				$stations = $sonos->getRadioStations();
+				foreach ($stations as $station) {
+					if ($station->getTitle() == $_options['title']) {
+						$controller->useStream($station)->play();
+						break;
+					}
 				}
 			}
 			if ($this->getLogicalId() == 'add_speaker') {
