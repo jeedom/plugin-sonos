@@ -21,6 +21,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Network;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
+use duncan3dc\Speaker\Providers\VoxygenProvider;
 
 class sonos3 extends eqLogic {
 	/*     * *************************Attributs****************************** */
@@ -754,8 +755,11 @@ class sonos3Cmd extends cmd {
 					mkdir(config::byKey('localpath', 'sonos3') . '/tts');
 				}
 				$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), 'tts');
-				$track = new TextToSpeech(trim($_options['message']), $directory);
+				$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
 				$track->setLanguage("fr");
+				if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
+					$track->setProvider(new VoxygenProvider);
+				}
 				if ($_options['title'] != '' && is_numeric($_options['title'])) {
 					$volume = $controller->setVolume($_options['title']);
 				}

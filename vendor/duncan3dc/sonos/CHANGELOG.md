@@ -5,6 +5,50 @@ Changelog
 
 --------
 
+## 1.3.1 - 2015-05-30
+
+### Added
+
+* [Network] Add methods for getting radio station/show information.
+
+--------
+
+## 1.3.0 - 2015-05-29
+
+### Added
+
+* [Tracks] Created a Radio class.
+
+### Changed
+
+* [Tracks] Use duncan3dc/speaker for text-to-speech handling
+
+### Fixed
+
+* [Tracks] Correct the handling of queueid to avoid metadata loss.
+* [Controllers] Only seek if we have some tracks in the queue.
+
+--------
+
+## 1.2.0 - 2015-04-29
+
+### Added
+
+* [Network] Added support for the PLAYBAR and CONNECT devices (treated as the same as PLAY:1, PLAY:3, etc).
+* [Tracks] Created a Directory class to handle SMB music library shares.
+* [Tracks] Created a TextToSpeech class.
+* [Controllers] Added a method to interrupt playback with a single track.
+* [Controllers] Created selectTrack() and seek() methods.
+* [Controllers] Allowed state to be exported and restored.
+* [Controllers] Added methods to check if a controller is streaming or using a queue.
+* [Speakers] Added speaker LED functionality to turn on and off, and check status.
+* [Speakers] Added equaliser functionality (treble, bass, loudness).
+
+### Fixed
+* [Queues] Detect and throw an understandable error when an empty queue is attempted to be played.
+
+--------
+
 ## 1.1.0 - 2015-02-27
 
 ### Added
