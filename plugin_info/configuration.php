@@ -35,21 +35,22 @@ if (!isConnect()) {
         <div class="col-lg-2">
             <input class="configKey tooltips form-control" data-l1key="pathToSmb" placeholder="hostname/path/to/smb" />
         </div>
-        <div class="form-group">
-            <label class="col-lg-4 control-label">{{Fournisseur TTS}}</label>
-            <div class="col-lg-2">
-                <select class="configKey tooltips form-control" data-l1key="ttsProvider">
-                    <option value="google">Google</option>
-                    <option value="voxygen">Voxygen</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-           <label class="col-lg-4 control-label">{{Découverte}}</label>
-           <div class="col-lg-2">
-            <a class="btn btn-default" id="bt_syncSonos"><i class='fa fa-refresh'></i> {{Rechercher les équipements Sonos}}</a>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">{{Fournisseur TTS}}</label>
+        <div class="col-lg-2">
+            <select class="configKey tooltips form-control" data-l1key="ttsProvider">
+                <option value="google">Google</option>
+                <option value="voxygen">Voxygen</option>
+            </select>
         </div>
     </div>
+    <div class="form-group">
+     <label class="col-lg-4 control-label">{{Découverte}}</label>
+     <div class="col-lg-2">
+        <a class="btn btn-default" id="bt_syncSonos"><i class='fa fa-refresh'></i> {{Rechercher les équipements Sonos}}</a>
+    </div>
+</div>
 </fieldset>
 </form>
 

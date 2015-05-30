@@ -639,6 +639,14 @@ class sonos3 extends eqLogic {
 		$queue->clear();
 	}
 
+	public function getRadioStations() {
+		$sonos = sonos3::getSonos();
+		$stations = $sonos->getRadioStations();
+		foreach ($stations as $station) {
+			print_r($station->getMetaData());
+		}
+	}
+
 	/*     * **********************Getteur Setteur*************************** */
 }
 
