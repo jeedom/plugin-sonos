@@ -236,7 +236,12 @@ class sonos3 extends eqLogic {
 
 	public function getRadioStations() {
 		$sonos = sonos3::getSonos();
-		return $sonos->getRadioStations();
+		return $sonos->getRadio()->getFavouriteStations();
+	}
+
+	public function getSpeaker() {
+		$sonos = sonos3::getSonos();
+		return $sonos->getSpeakers();
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
@@ -769,9 +774,9 @@ class sonos3Cmd extends cmd {
 				}
 			}
 			if ($this->getLogicalId() == 'play_radio') {
-				$stations = $sonos->getRadioStations();
+				$stations = $sonos->getRadio()->getFavouriteStations();
 				foreach ($stations as $station) {
-					if ($station->getTitle() == $_options['title']) {
+					if ($station->getName() == $_options['title']) {
 						$controller->useStream($station)->play();
 						break;
 					}

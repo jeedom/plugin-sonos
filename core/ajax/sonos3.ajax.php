@@ -81,6 +81,26 @@ try {
 		ajax::success();
 	}
 
+	if (init('action') == 'addSpeaker') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		$cmd = $sonos->getCmd(null, 'add_speaker');
+		$cmd->execCmd(array('title' => init('speaker')));
+		ajax::success();
+	}
+
+	if (init('action') == 'removeSpeaker') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		$cmd = $sonos->getCmd(null, 'remove_speaker');
+		$cmd->execCmd(array('title' => init('speaker')));
+		ajax::success();
+	}
+
 	throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {

@@ -30,10 +30,10 @@ if (!isConnect()) {
 foreach (sonos3::getRadioStations() as $radio) {
 	echo '<tr>';
 	echo '<td>';
-	echo '<a class="playRadio btn btn-xs btn-primary" data-sonos_id="' . init('id') . '" data-name="' . $radio->getTitle() . '"><i class="fa fa-play"></i></a>';
+	echo '<a class="playRadio btn btn-xs btn-primary" data-sonos_id="' . init('id') . '" data-name="' . $radio->getName() . '"><i class="fa fa-play"></i></a>';
 	echo '</td>';
 	echo '<td>';
-	echo $radio->getTitle();
+	echo $radio->getName();
 	echo '</td>';
 	echo '</tr>';
 }
