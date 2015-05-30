@@ -638,6 +638,9 @@ class sonos3 extends eqLogic {
 	public function playTrack($_position) {
 		$sonos = sonos3::getSonos();
 		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		if (!$controller->isUsingQueue()) {
+			$controller->useQueue();
+		}
 		$controller->selectTrack($_position);
 		$controller->play();
 	}
@@ -734,6 +737,9 @@ class sonos3Cmd extends cmd {
 				$controller->setVolume($_options['slider']);
 			}
 			if ($this->getLogicalId() == 'play_playlist') {
+				if (!$controller->isUsingQueue()) {
+					$controller->useQueue();
+				}
 				$queue = $controller->getQueue();
 				$playlist = $sonos->getPlaylistByName(trim(trim($_options['title']), '"'));
 				if ($playlist == null) {
@@ -761,7 +767,6 @@ class sonos3Cmd extends cmd {
 					$queue->addTracks($tracks);
 					$controller->play();
 				}
-				log::add('sonos3', 'debug', 'Je passe 3 ');
 			}
 			if ($this->getLogicalId() == 'play_radio') {
 				$stations = $sonos->getRadioStations();
