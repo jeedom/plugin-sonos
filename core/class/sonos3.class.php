@@ -774,12 +774,9 @@ class sonos3Cmd extends cmd {
 				}
 			}
 			if ($this->getLogicalId() == 'play_radio') {
-				$stations = $sonos->getRadio()->getFavouriteStations();
-				foreach ($stations as $station) {
-					if ($station->getName() == $_options['title']) {
-						$controller->useStream($station)->play();
-						break;
-					}
+				$radio = $sonos->getRadio();
+				if ($show = $radio->getFavouriteStation($_options['title'])) {
+					$controller->useStream($show)->play();
 				}
 			}
 			if ($this->getLogicalId() == 'add_speaker') {

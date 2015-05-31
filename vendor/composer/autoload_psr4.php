@@ -13,6 +13,7 @@ return array(
     'duncan3dc\\Serial\\' => array($vendorDir . '/duncan3dc/serial/src'),
     'duncan3dc\\Helpers\\' => array($vendorDir . '/duncan3dc/helpers/src'),
     'duncan3dc\\DomParser\\' => array($vendorDir . '/duncan3dc/domparser/src'),
+    'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
     'GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),
     'GuzzleHttp\\Ring\\' => array($vendorDir . '/guzzlehttp/ringphp/src'),
