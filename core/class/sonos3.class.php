@@ -789,7 +789,6 @@ class sonos3Cmd extends cmd {
 				$speaker = $sonos->getSpeakerByRoom($_options['title']);
 				$controller->removeSpeaker($speaker);
 			}
-
 			if ($this->getLogicalId() == 'tts') {
 				$volume = $controller->getVolume();
 				if (!is_dir(config::byKey('localpath', 'sonos3') . '/tts')) {
@@ -806,8 +805,9 @@ class sonos3Cmd extends cmd {
 				}
 				$controller->interrupt($track);
 				//$controller->setVolume($volume);
+			} else {
+				sonos3::pull($eqLogic->getId());
 			}
-			sonos3::pull($eqLogic->getId());
 		} catch (Exception $e) {
 			log::add('info', 'sonos', $e->getMessage());
 		}
