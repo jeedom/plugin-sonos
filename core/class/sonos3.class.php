@@ -21,6 +21,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Network;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
+use duncan3dc\Speaker\Providers\GoogleProvider;
 use duncan3dc\Speaker\Providers\VoxygenProvider;
 
 class sonos3 extends eqLogic {
@@ -804,7 +805,7 @@ class sonos3Cmd extends cmd {
 					$volume = $controller->setVolume($_options['title']);
 				}
 				$controller->interrupt($track);
-				$controller->setVolume($volume);
+				//$controller->setVolume($volume);
 			}
 			sonos3::pull($eqLogic->getId());
 		} catch (Exception $e) {
