@@ -555,7 +555,19 @@ class sonos3 extends eqLogic {
 			'#text_color#' => $this->getConfiguration('text_color'),
 			'#background_color#' => $this->getBackgroundColor($_version),
 			'#hideThumbnail#' => 0,
+			'#object_name#' => '',
 		);
+
+		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowObjectNameOnView', 0) == 0) {
+			$object = $this->getObject();
+			$replace['#object_name#'] = (is_object($object)) ? '(' . $object->getName() . ')' : '';
+		}
+		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
+			$replace['#name#'] = '';
+		}
+		if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
+			$replace['#name#'] = '';
+		}
 
 		if ($this->getConfiguration('hideAlbumart') == 1) {
 			$replace['#hideThumbnail#'] = 1;
