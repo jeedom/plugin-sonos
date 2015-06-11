@@ -77,13 +77,10 @@ foreach (object::all() as $object) {
                    </div>
                </div>
                <div class="form-group">
-                <label class="col-sm-3 control-label" >{{Activer}}</label>
-                <div class="col-sm-1">
-                    <input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" size="16" checked/>
-                </div>
-                <label class="col-sm-2 control-label" >{{Visible}}</label>
-                <div class="col-sm-1">
-                    <input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>
+                <label class="col-sm-3 control-label" ></label>
+                <div class="col-sm-9">
+                 <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
+                        <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
                 </div>
             </div>
             <div class="form-group">
@@ -108,7 +105,7 @@ foreach (object::all() as $object) {
               <div class="form-group">
                 <label class="col-sm-3 control-label">{{Masquer la jaquette}}</label>
                 <div class="col-sm-5">
-                    <input type="checkbox" class="eqLogicAttr configuration" data-l1key="configuration" data-l2key="hideAlbumart" placeholder="IP"/>
+                    <input type="checkbox" class="eqLogicAttr configuration bootstrapSwitch" data-l1key="configuration" data-l2key="hideAlbumart" placeholder="IP"/>
                 </div>
             </div>
         </fieldset>
