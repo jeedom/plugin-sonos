@@ -557,7 +557,9 @@ class sonos3 extends eqLogic {
 			'#hideThumbnail#' => 0,
 			'#object_name#' => '',
 		);
-
+		if (!$this->hasRight('w')) {
+			$replace['#eqLink#'] = '#';
+		}
 		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowObjectNameOnView', 0) == 0) {
 			$object = $this->getObject();
 			$replace['#object_name#'] = (is_object($object)) ? '(' . $object->getName() . ')' : '';
