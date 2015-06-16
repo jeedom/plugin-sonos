@@ -695,7 +695,7 @@ class sonos3Cmd extends cmd {
 					$state = $eqLogic->getCmd(null, 'state');
 					$track_title = $eqLogic->getCmd(null, 'track_title');
 					if (is_object($state) && is_object($track_title)) {
-						if ($cmd_track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+						if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
 							return $controller->unmute();
 						}
 					}
@@ -707,7 +707,7 @@ class sonos3Cmd extends cmd {
 					$state = $eqLogic->getCmd(null, 'state');
 					$track_title = $eqLogic->getCmd(null, 'track_title');
 					if (is_object($state) && is_object($track_title)) {
-						if ($cmd_track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+						if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
 							return $controller->mute();
 						}
 					}
