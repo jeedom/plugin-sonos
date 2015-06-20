@@ -598,10 +598,8 @@ class Helper {
 			$curlopts[CURLOPT_FOLLOWLOCATION] = true;
 		}
 
-		if (!$options["verifyssl"]) {
-			$curlopts[CURLOPT_SSL_VERIFYPEER] = false;
-		}
-
+		$curlopts[CURLOPT_SSL_VERIFYPEER] = false;
+		$curlopts[CURLOPT_SSL_VERIFYHOST] = false;
 		if ($cookies = $options["cookies"]) {
 			$curlopts[CURLOPT_COOKIEFILE] = $cookies;
 			$curlopts[CURLOPT_COOKIEJAR] = $cookies;

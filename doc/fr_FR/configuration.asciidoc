@@ -78,7 +78,7 @@ Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samb
 sudo su -
 apt-get install cifs-utils
 mkdir -p /mnt/synology
-mount -t cifs -o username=#username#,password=#password# //NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology
+mount -t cifs -o username=#username#,password=#password#,uid=www-data,gid=www-data //NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology
 ----
 
 N'oubliez pas de bien remplacer \#username#, \#password# et //NOMDUNAS/CHEMIN/DU/PARTAGE en fonction de votre configuration.
@@ -90,6 +90,10 @@ image::../images/sonos6.PNG[]
 Ensuite il vous faut remplir les paramètres du plugin : 
 
 image::../images/sonos1.PNG[]
+
+[icon="../images/plugin/tip.png"]
+[TIP]
+Attention dans "[TTS] Chemin Sonos du répertoire partagé" il ne faut surtout pas mettre // au début du chemin
 
 === Widget
 
