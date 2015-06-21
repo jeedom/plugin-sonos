@@ -810,6 +810,7 @@ class sonos3Cmd extends cmd {
 				$track->setLanguage("fr");
 				if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
 					$track->setProvider(new VoxygenProvider);
+					$track->getProvider()->setVoice('Helene'); //Ajoute pour voix francaise
 				}
 				if ($_options['title'] != '' && is_numeric($_options['title'])) {
 					$volume = $controller->setVolume($_options['title']);
