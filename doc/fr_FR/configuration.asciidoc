@@ -14,7 +14,7 @@ image::../images/sonos1.PNG[]
 
 * [TTS] Chemin local du répertoire partagé : le chemin tel que vu par Jeedom vers le repertoire partagé (voir chapitre sur le TTS)
 * [TTS] Chemin Sonos du répertoire paratagé : chemin tel que vu par le Sonos vers le repertoire partagé (voir chapitre sur le TTS)
-* Fournisseur TTS : permet de choisir le service qui fait la transformation du texte à lire (voxygen est moins limité que google)
+* Fournisseur TTS : permet de choisir le service qui fait la transformation du texte à lire (voxygen est moins limité que google), si vous choissiez voxygen vous pouvez aussi choisir le type de voix
 
 === Configuration des équipements
 
