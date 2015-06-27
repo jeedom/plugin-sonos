@@ -52,7 +52,7 @@
 	<i class="fa fa-th-list pull-left cursor playlist tooltips" title="Playlists" style="position:relative;top:4px;"></i>
 	<i class="fa fa-rss pull-left cursor radio tooltips" title="Radio" style="position:relative;top:-6px;"></i>
 
-	<i class="fa fa-volume-off" style="position : relative; left:-10px;"></i> <div class="volume" style="margin : 5px 10px 8px 10px;width: 80px;" value="#volume#" ></div>
+	<i class="fa fa-volume-off" style="position : relative; left:-10px;"></i> <div class="volume" style="margin : 5px 10px 8px 10px;width: 80px;z-index:1" value="#volume#" ></div>
 
 	<i class="fa fa-bars pull-right cursor queue tooltips" title="Liste de lecture" style="position:relative;top:4px;left : -18px;"></i><br/>
 	<i class="fa fa-volume-off pull-right cursor speaker tooltips" title="Lire sur" style="position:relative;top:-17px;left : -2px;"></i><br/>
@@ -63,6 +63,7 @@
 			max: 100,
 			value: ('#volume#' == '') ? 0 : parseInt('#volume#')
 		});
+		$(".sonos3[data-eqLogic_id=#id#] .slider.slider-horizontal").css('z-index',1);
 		$(".sonos3[data-eqLogic_id=#id#] .volume").on('slideStop', function (ev) {
 			jeedom.cmd.execute({id: '#volume_id#', value: {slider: ev.value}});
 		});
