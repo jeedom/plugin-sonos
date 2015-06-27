@@ -1,12 +1,11 @@
-:icons:
-== Sonos
+= Sonos
 
-=== Description
+== Description
 Plugin servant à piloter un Sonos
 
 '''
 include::configuration.asciidoc[]
 
 '''
-=== FAQ
+== FAQ
 include::faq.asciidoc[]

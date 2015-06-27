@@ -1,10 +1,9 @@
 Le plugin Sonos permet de piloter les Sonos Play 1,3,5, Sonos Connect, Sonos Connect AMP et Sonos Playbar. Il va vous permettre de voir l'état du Sonos et d'effectuer des actions dessus (lecture, pause, suivant, précédent, volume, choix d'une playlist...)
 
-=== Configuration du plugin
+== Configuration du plugin
 
 La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout. Le plugin va rechercher les Sonos sur votre réseau et créer les équipements automatiquement. De plus, si il y a une correspondance entre les objets Jeedom et les pièces du Sonos, Jeedom affectera automatiquement les Sonos dans les bonnes pièces.
 
-[icon="../images/plugin/tip.png"]
 [TIP]
 Ce plugin nécessite que les Sonos soit alimentés (même en mode veille) pour ne pas provoquer d'erreur. 
 
@@ -16,7 +15,7 @@ image::../images/sonos1.PNG[]
 * [TTS] Chemin Sonos du répertoire paratagé : chemin tel que vu par le Sonos vers le repertoire partagé (voir chapitre sur le TTS)
 * Fournisseur TTS : permet de choisir le service qui fait la transformation du texte à lire (voxygen est moins limité que google), si vous choissiez voxygen vous pouvez aussi choisir le type de voix
 
-=== Configuration des équipements
+== Configuration des équipements
 
 La configuration des équipements Sonos est accessible à partir du menu plugin : 
 
@@ -70,7 +69,7 @@ Comme commande vous retrouverez :
 * *Statut* : statut (pause, lecture, transition...)
 * *Dire* : permet de lire un texte sur le sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire
 
-=== TTS
+== TTS
 
 Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. De plus il faut que monter le repertoire partagé sur Jeedom. Pour cela connecté vous en SSH (le identifiants en fonction de votre type d'installation peuvent se trouver sur la doc d'installation) : 
 
@@ -91,11 +90,10 @@ Ensuite il vous faut remplir les paramètres du plugin :
 
 image::../images/sonos1.PNG[]
 
-[icon="../images/plugin/tip.png"]
 [TIP]
 Attention dans "[TTS] Chemin Sonos du répertoire partagé" il ne faut surtout pas mettre // au début du chemin
 
-=== Widget
+== Widget
 
 Sur le dashboard vous retrouverez le widget suivant : 
 
@@ -103,4 +101,12 @@ image::../images/sonos5.PNG[]
 
 A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d'attente et les playlists disponibles pour lancer leur lecture, gerer la sortie sur different sonos et les radios favorites.
 
+== Le panel
 
+Le plugin Sonos met aussi à disposition un panel qui rassemble tout vos Sonos. Disponible a partir du menu Accueil -> Sonos Controller : 
+
+image::../images/sonos7.PNG[]
+
+Cela permet d'avoir ce genre de vue synthétique :
+
+image::../images/sonos8.PNG[]
