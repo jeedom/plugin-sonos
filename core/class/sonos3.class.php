@@ -545,7 +545,6 @@ class sonos3 extends eqLogic {
 		if (!$this->hasRight('r')) {
 			return '';
 		}
-		$_version = jeedom::versionAlias($_version);
 
 		$replace = array(
 			'#id#' => $this->getId(),
@@ -583,9 +582,6 @@ class sonos3 extends eqLogic {
 		}
 
 		$cmd_volume = $this->getCmd(null, 'volume');
-		if (is_object($cmd_volume)) {
-
-		}
 
 		$cmd_track_artist = $this->getCmd(null, 'track_artist');
 		if (is_object($cmd_track_artist)) {
@@ -641,7 +637,7 @@ class sonos3 extends eqLogic {
 		foreach ($this->getCmd('action') as $cmd) {
 			$replace['#cmd_' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 		}
-
+		$_version = jeedom::versionAlias($_version);
 		return template_replace($replace, getTemplate('core', $_version, 'eqLogic', 'sonos3'));
 	}
 

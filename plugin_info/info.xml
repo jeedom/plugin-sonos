@@ -10,5 +10,6 @@
     <require>1.180</require>
     <category>multimedia</category>
     <include type="php">sonos3.inc</include>
+    <display>panel</display>
 </info>
 
