@@ -20,6 +20,7 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Network;
+use duncan3dc\Sonos\Tracks\Stream;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use duncan3dc\Speaker\Providers\VoxygenProvider;
@@ -671,6 +672,18 @@ class sonos3 extends eqLogic {
 		$queue = $controller->getQueue();
 		$queue->clear();
 	}
+	public function googleTranslateTTS($_text) {
+		$sonos = sonos3::getSonos();
+		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$state = $controller->exportState();
+		$stream = new Stream('x-rincon-mp3radio://translate.google.com/translate_tts?tl=fr&q=' . urlencode($_text));
+		$controller->useStream($stream)->play();
+		$controller->restoreState($state);
+		if (!$controller->isUsingQueue()) {
+			$controller->useQueue();
+		}
+	}
+
 	/*     * **********************Getteur Setteur*************************** */
 }
 
@@ -809,10 +822,11 @@ class sonos3Cmd extends cmd {
 					$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
 				}
 				if ($_options['title'] != '' && is_numeric($_options['title'])) {
-					$volume = $controller->setVolume($_options['title']);
+					$controller->interrupt($track, $_options['title']);
+				} else {
+					$controller->interrupt($track);
 				}
-				$controller->interrupt($track);
-				//$controller->setVolume($volume);
+
 			} else {
 				sonos3::pull($eqLogic->getId());
 			}
