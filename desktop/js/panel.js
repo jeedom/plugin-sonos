@@ -15,13 +15,18 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-positionEqLogic();
-setTimeout(function () {
-    $('.div_displayEquipement').packery();
+ positionEqLogic();
+ setTimeout(function () {
+    $('.div_displayEquipement').packery({
+        itemSelector: ".eqLogic-widget",
+        columnWidth: parseInt(eqLogic_width_step),
+        rowHeight: parseInt(eqLogic_height_step),
+        gutter : 1,
+    });
 }, 2);
 
 
-$('#bt_displayObject').on('click', function () {
+ $('#bt_displayObject').on('click', function () {
     if ($(this).attr('data-display') == 1) {
         $('#div_displayObjectList').hide();
         $('#div_displayObject').removeClass('col-lg-8 col-lg-10 col-lg-12 col-lg-8 col-lg-10 col-lg-12 col-md-8 col-md-10 col-md-12 col-sm-8 col-sm-10 col-sm-12').addClass('col-lg-12 col-md-12 col-sm-12');
