@@ -672,16 +672,8 @@ class sonos3 extends eqLogic {
 		$queue = $controller->getQueue();
 		$queue->clear();
 	}
-	public function googleTranslateTTS($_text) {
-		$sonos = sonos3::getSonos();
-		$controller = $sonos->getControllerByIp($this->getLogicalId());
-		$state = $controller->exportState();
-		$stream = new Stream('x-rincon-mp3radio://translate.google.com/translate_tts?tl=fr&q=' . urlencode($_text));
-		$controller->useStream($stream)->play();
-		$controller->restoreState($state);
-		if (!$controller->isUsingQueue()) {
-			$controller->useQueue();
-		}
+	public function googleTranslateTTS($_text, $_volume = null) {
+
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
@@ -810,23 +802,36 @@ class sonos3Cmd extends cmd {
 				$controller->removeSpeaker($speaker);
 			}
 			if ($this->getLogicalId() == 'tts') {
-				$volume = $controller->getVolume();
-				if (!is_dir(config::byKey('localpath', 'sonos3') . '/tts')) {
-					mkdir(config::byKey('localpath', 'sonos3') . '/tts');
-				}
-				$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), 'tts');
-				$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
-				$track->setLanguage("fr");
-				if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
-					$track->setProvider(new VoxygenProvider);
-					$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
-				}
-				if ($_options['title'] != '' && is_numeric($_options['title'])) {
-					$controller->interrupt($track, $_options['title']);
+				if (config::byKey('ttsProvider', 'sonos3', 'google_translate') == 'google_translate') {
+					$queue = $controller->isUsingQueue();
+					$state = $controller->exportState();
+					$stream = new Stream('x-rincon-mp3radio://translate.google.com/translate_tts?tl=fr&q=' . urlencode(trim($_options['message'])));
+					if ($_options['title'] != '' && is_numeric($_options['title'])) {
+						$controller->setVolume($_options['title']);
+					}
+					$controller->useStream($stream)->play();
+					sleep(str_word_count($_options['message']) * 0.75 + 3);
+					if ($queue) {
+						$controller->useQueue();
+					}
+					$controller->restoreState($state);
 				} else {
-					$controller->interrupt($track);
+					if (!is_dir(config::byKey('localpath', 'sonos3') . '/tts')) {
+						mkdir(config::byKey('localpath', 'sonos3') . '/tts');
+					}
+					$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), 'tts');
+					$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
+					$track->setLanguage("fr");
+					if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
+						$track->setProvider(new VoxygenProvider);
+						$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
+					}
+					if ($_options['title'] != '' && is_numeric($_options['title'])) {
+						$controller->interrupt($track, $_options['title']);
+					} else {
+						$controller->interrupt($track);
+					}
 				}
-
 			} else {
 				sonos3::pull($eqLogic->getId());
 			}
