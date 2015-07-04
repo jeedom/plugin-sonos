@@ -810,7 +810,7 @@ class sonos3Cmd extends cmd {
 						$controller->setVolume($_options['title']);
 					}
 					$controller->useStream($stream)->play();
-					sleep(str_word_count($_options['message']) * 0.75 + 3);
+					sleep(str_word_count($_options['message']) + 5);
 					if ($queue) {
 						$controller->useQueue();
 					}
