@@ -56,6 +56,14 @@ function sonos3_update() {
 	foreach (sonos3::byType('sonos3') as $sonos) {
 		$sonos->save();
 	}
+
+	$files = array('24 LED Bright.ttf', '24 LED Grid.ttf', '24 LED Modul.ttf', '24 LED.ttf', 'advanced_dot_digital-7.ttf', 'AHDN.ttf', 'alpha04.ttf', 'CUBS LED TFB.ttf', 'enhanced_led_board-7.ttf', 'led_counter-7.ttf', 'liquid_crystal_display.ttf', 'liquid.ttf');
+	foreach ($files as $file) {
+		$path = dirname(__FILE__) . '/../core/template/fonts/' . $file;
+		if (file_exists($path)) {
+			unlink($path);
+		}
+	}
 }
 
 function sonos3_remove() {
