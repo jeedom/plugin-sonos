@@ -1,5 +1,5 @@
-<div class="eqLogic eqLogic-widget noResize sonos3" data-version="dashboard" style="text-align:center; width: 240px;height :400px;background : #background_color#" data-eqLogic_id="#id#">
-	<style  type="text/css">
+<div class="eqLogic eqLogic-widget noResize sonos3" data-version="#version#" style="text-align:center; width: 240px;background : #background_color#;height:320px;" data-eqLogic_id="#id#">
+	<style type="text/css">
 		.sonos3 .cmd a {
 			width: 30px;
 			height:30px;
@@ -12,7 +12,7 @@
 		}
 		@font-face {
 			font-family: liquid;
-			src:   url("plugins/sonos3/core/template/fonts/enhanced_led_board-7.ttf") format("truetype");
+			src:   url("plugins/sonos3/core/template/fonts/led_board-7.ttf") format("truetype");
 			font-weight:normal;
 			font-style:normal;
 		}
@@ -35,29 +35,37 @@
 		}
 	</style>
 	<div>
-		<a href="#eqLink#">#name#</a> <span style="font-size: 0.85em;position: relative;">#object_name#</span>
+		<a href="#eqLink#" style="font-size:1.5em;">#name#</a> <span style="font-size: 1.5em;position: relative;">#object_name#</span>
 	</div>
 	<div class="thumbnailAlbumArt">
-		#thumbnail#
+		#thumbnail#</br>
 	</div>
 	<div>
-		<span class="statusspSonos">
-			#state#<br>
-		</span>
 		<span class="titlespSonos">
 			#title#
 		</span>
 	</div>
+	
+    <i class="fa fa-volume-off btn-xs"></i><div class="volume" style="z-index:1" value="#volume#" ></div>
 
-	<i class="fa fa-volume-off" style="position : relative; left:-2px;"></i> <div class="volume" style="margin : 5px 10px 8px 10px;z-index:1" value="#volume#" ></div><br/>
-
-	<div style="margin-top : 10px;margin-left : 3px;">
-		<a class="btn btn-default btn-circle btn-xs playlist tooltips" title="Playlists"><i class="fa fa-th-list"></i></a>
-		<a class="btn btn-default btn-circle btn-xs radioDisplay tooltips" title="Radio" style=""><i class="fa fa-rss"></i></a>
-		<a class="btn btn-default btn-circle btn-xs queue tooltips" title="Liste de lecture"><i class="fa fa-bars" title=""></i></a>
-		<a class="btn btn-default btn-circle btn-xs speaker tooltips" title="Lire sur"><i class="fa fa-volume-off" title=""></i></a>
+	<div>        
+		<a class="btn btn-default btn-circle btn-xs cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
+		<a class="btn btn-default btn-circle btn-xs cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>
+		<a class="btn btn-default btn-circle btn-xs cmd play" data-cmd_id="#cmd_play_id#"><i class="fa fa-play"></i></a>
+		<a class="btn btn-default btn-circle btn-xs cmd pause" data-cmd_id="#cmd_pause_id#"><i class="fa fa-pause"></i></a>
+		<a class="btn btn-default btn-circle btn-xs cmd next" data-cmd_id="#cmd_next_id#"><i class="fa fa-step-forward"></i></a>
 	</div>
-
+    
+    <div>
+    	<a class="btn btn-default btn-circle btn-xs cmd shuffle" data-cmd_id="#cmd_shuffle_id#"><i class="fa fa-random"></i></a>&nbsp;
+		<i class="fa fa-th-list cursor playlist tooltips" title="Playlists"></i>
+		<i class="fa fa-rss cursor radio tooltips" title="Radio"></i>
+        &nbsp;<span class="statusspSonos">#state#</span>&nbsp;
+		<i class="fa fa-bars cursor queue tooltips" title="Liste de lecture"></i>
+		<i class="fa fa-check-square-o cursor speaker tooltips" title="Grouper"></i>&nbsp;
+		<a class="btn btn-default btn-circle btn-xs cmd repeat" data-cmd_id="#cmd_repeat_id#"><i class="fa fa-repeat"></i></a>
+    </div>
+    
 	<script>
 		$(".sonos3[data-eqLogic_id=#id#] .volume").bootstrapSlider({
 			min: 0,
@@ -69,23 +77,12 @@
 			jeedom.cmd.execute({id: '#volume_id#', value: {slider: ev.value}});
 		});
 	</script>
-	<br/>
-
-	<div style="margin-top : -10px;margin-left : 3px;">
-		<a class="btn btn-default btn-circle btn-xs cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd play" data-cmd_id="#cmd_play_id#"><i class="fa fa-play"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd pause" data-cmd_id="#cmd_pause_id#"><i class="fa fa-pause"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd next" data-cmd_id="#cmd_next_id#"><i class="fa fa-step-forward"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd shuffle" data-cmd_id="#cmd_shuffle_id#"><i class="fa fa-random"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd repeat" data-cmd_id="#cmd_repeat_id#"><i class="fa fa-repeat"></i></a>
-	</div>
 
 	<script>
 
 		if('#hideThumbnail#' == 1){
 			$('.sonos3[data-eqLogic_id=#id#] .thumbnailAlbumArt').hide();
-			$('.sonos3[data-eqLogic_id=#id#]').height(200);
+			$('.sonos3[data-eqLogic_id=#id#]').height(160);
 		}
 
 		if('#repeat_state#' == 1){

@@ -556,6 +556,7 @@ class sonos3 extends eqLogic {
 			'#background_color#' => $this->getBackgroundColor($_version),
 			'#hideThumbnail#' => 0,
 			'#object_name#' => '',
+			'#version#' => $_version,
 		);
 		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowObjectNameOnView', 0) == 0) {
 			$object = $this->getObject();
@@ -609,9 +610,9 @@ class sonos3 extends eqLogic {
 		if (is_object($cmd_track_image)) {
 			$img = dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $this->getId() . '.jpg';
 			if (file_exists($img) && filesize($img) > 500) {
-				$replace['#thumbnail#'] = '<img style="width : 90%;" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
+				$replace['#thumbnail#'] = '<img style="width : 70%;" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
 			} else {
-				$replace['#thumbnail#'] = '<img style="width : 80%;" src="plugins/sonos3/doc/images/sonos3_icon.png" />';
+				$replace['#thumbnail#'] = '<img style="width : 70%;" src="plugins/sonos3/doc/images/sonos3_alt_icon.png" />';
 			}
 		}
 
