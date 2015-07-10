@@ -19,8 +19,8 @@
  setTimeout(function () {
     $('.div_displayEquipement').packery({
         itemSelector: ".eqLogic-widget",
-        columnWidth: parseInt(eqLogic_width_step),
-        rowHeight: parseInt(eqLogic_height_step),
+        columnWidth: 40,
+        rowHeight: 80,
         gutter : 1,
     });
 }, 2);
