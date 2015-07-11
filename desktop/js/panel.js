@@ -21,7 +21,7 @@
         itemSelector: ".eqLogic-widget",
         columnWidth: 40,
         rowHeight: 80,
-        gutter : 1,
+        gutter : 2,
     });
 }, 2);
 
