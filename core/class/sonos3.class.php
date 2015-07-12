@@ -226,7 +226,7 @@ class sonos3 extends eqLogic {
 			case 'STOPPED':
 				return __('Arrêté', __FILE__);
 			case 'TRANSITIONNING':
-				return __('Transition', __FILE__);
+				return __('', __FILE__);
 		}
 		return $_state;
 	}
