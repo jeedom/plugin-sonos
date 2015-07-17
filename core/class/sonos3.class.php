@@ -486,6 +486,8 @@ class sonos3 extends eqLogic {
 		}
 		$play_playlist->setType('action');
 		$play_playlist->setSubType('message');
+		$play_playlist->setDisplay('message_placeholder', __('Options', __FILE__));
+		$play_playlist->setDisplay('title_placeholder', __('Titre de la playlist', __FILE__));
 		$play_playlist->setEqLogic_id($this->getId());
 		$play_playlist->save();
 
@@ -498,6 +500,8 @@ class sonos3 extends eqLogic {
 		}
 		$play_radio->setType('action');
 		$play_radio->setSubType('message');
+		$play_radio->setDisplay('message_disable', 1);
+		$play_radio->setDisplay('title_placeholder', __('Titre de la radio', __FILE__));
 		$play_radio->setEqLogic_id($this->getId());
 		$play_radio->save();
 
@@ -510,6 +514,8 @@ class sonos3 extends eqLogic {
 		}
 		$add_speaker->setType('action');
 		$add_speaker->setSubType('message');
+		$add_speaker->setDisplay('message_disable', 1);
+		$add_speaker->setDisplay('title_placeholder', __('Nom de la piece', __FILE__));
 		$add_speaker->setEqLogic_id($this->getId());
 		$add_speaker->save();
 
@@ -522,6 +528,8 @@ class sonos3 extends eqLogic {
 		}
 		$remove_speaker->setType('action');
 		$remove_speaker->setSubType('message');
+		$remove_speaker->setDisplay('message_disable', 1);
+		$remove_speaker->setDisplay('title_placeholder', __('Nom de la piece', __FILE__));
 		$remove_speaker->setEqLogic_id($this->getId());
 		$remove_speaker->save();
 
@@ -534,6 +542,8 @@ class sonos3 extends eqLogic {
 		}
 		$tts->setType('action');
 		$tts->setSubType('message');
+		$remove_speaker->setDisplay('title_disable', 1);
+		$remove_speaker->setDisplay('message_placeholder', __('Message', __FILE__));
 		$tts->setEqLogic_id($this->getId());
 		$tts->save();
 
