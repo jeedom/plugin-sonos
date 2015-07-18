@@ -94,6 +94,56 @@ image::../images/sonos1.PNG[]
 [TIP]
 Attention dans "[TTS] Chemin Sonos du répertoire partagé" il ne faut surtout pas mettre // au début du chemin
 
+===Automatiser la création du partage
+
+.Si vous n'avez pas de mot de passe
+
+Dans /etc/fstab ajouter : 
+
+----
+//NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology  cifs  guest,uid=1000,iocharset=utf8  0  0
+----
+
+Puis faites : 
+
+----
+sudo mount -a
+----
+
+.Si vous avez un mot de passe
+
+Faites : 
+
+----
+gedit ~/.smbcredentials
+----
+
+Et ajoutez : 
+
+----
+username=msusername
+password=mspassword
+----
+
+Puis changer les permissions : 
+
+----
+chmod 600 ~/.smbcredentials
+----
+
+Puis dans /etc/fstab (bien passer en sudo su - pour avoir les droits root)
+
+----
+//NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology  cifs uid=www-data,gid=www-data,credentials=/home/jeedom/.smbcredentials,iocharset=utf8,sec=ntlm 0 0
+----
+
+Puis faites : 
+
+----
+sudo mount -a
+----
+
+
 == Widget
 
 Sur le dashboard vous retrouverez le widget suivant : 

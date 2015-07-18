@@ -233,12 +233,33 @@ class sonos3 extends eqLogic {
 
 	public static function getPlayLists() {
 		$sonos = sonos3::getSonos();
-		return $sonos->getPlaylists();
+		$playlists = $sonos->getPlaylists();
+		$array = array();
+		foreach ($playlists as $playlist) {
+			$array[] = $playlist->getName();
+		}
+		foreach (sonos3::byType('sonos3') as $sonos3) {
+			$cmd = $sonos3->getCmd('action', 'play_playlist');
+			$cmd->setDisplay('title_possibility_list', json_encode($array));
+			$cmd->save();
+		}
+		return $playlists;
 	}
 
 	public function getRadioStations() {
 		$sonos = sonos3::getSonos();
-		return $sonos->getRadio()->getFavouriteStations();
+		$radios = $sonos->getRadio()->getFavouriteStations();
+		$playlists = $sonos->getPlaylists();
+		$array = array();
+		foreach ($radios as $radio) {
+			$array[] = $radio->getName();
+		}
+		foreach (sonos3::byType('sonos3') as $sonos3) {
+			$cmd = $sonos3->getCmd('action', 'play_radio');
+			$cmd->setDisplay('title_possibility_list', json_encode($array));
+			$cmd->save();
+		}
+		return $radios;
 	}
 
 	public function getSpeaker() {
@@ -546,6 +567,9 @@ class sonos3 extends eqLogic {
 		$remove_speaker->setDisplay('message_placeholder', __('Message', __FILE__));
 		$tts->setEqLogic_id($this->getId());
 		$tts->save();
+
+		self::getRadioStations();
+		self::getPlayLists();
 
 	}
 
