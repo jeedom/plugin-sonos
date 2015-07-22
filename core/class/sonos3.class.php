@@ -30,6 +30,22 @@ class sonos3 extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function health() {
+		$return = array();
+		$cron = cron::byClassAndFunction('sonos3', 'pull');
+		$running = false;
+		if (is_object($cron)) {
+			$running = $cron->running();
+		}
+		$return[] = array(
+			'test' => __('Tâche de synchronisation', __FILE__),
+			'result' => ($running) ? __('OK', __FILE__) : __('NOK', __FILE__),
+			'advice' => ($running) ? '' : __('Allez sur la page du moteur des tâches et vérifiez lancer la tache openzwave::pull', __FILE__),
+			'state' => $running,
+		);
+		return $return;
+	}
+
 	public static function getSonos($_emptyCache = false) {
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
 		if ($_emptyCache) {
