@@ -40,7 +40,7 @@ class sonos3 extends eqLogic {
 		$return[] = array(
 			'test' => __('Tâche de synchronisation', __FILE__),
 			'result' => ($running) ? __('OK', __FILE__) : __('NOK', __FILE__),
-			'advice' => ($running) ? '' : __('Allez sur la page du moteur des tâches et vérifiez lancer la tache openzwave::pull', __FILE__),
+			'advice' => ($running) ? '' : __('Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull', __FILE__),
 			'state' => $running,
 		);
 		return $return;
