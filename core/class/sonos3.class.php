@@ -579,8 +579,8 @@ class sonos3 extends eqLogic {
 		}
 		$tts->setType('action');
 		$tts->setSubType('message');
-		$remove_speaker->setDisplay('title_disable', 1);
-		$remove_speaker->setDisplay('message_placeholder', __('Message', __FILE__));
+		$tts->setDisplay('title_disable', 1);
+		$tts->setDisplay('message_placeholder', __('Message', __FILE__));
 		$tts->setEqLogic_id($this->getId());
 		$tts->save();
 
@@ -871,6 +871,13 @@ class sonos3Cmd extends cmd {
 						mkdir(config::byKey('localpath', 'sonos3') . '/tts');
 					}
 					$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), 'tts');
+					if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
+
+					} else {
+						if (strlen($_options['message']) > 100) {
+							$_options['message'] = substr($_options['message'], 0, 100);
+						}
+					}
 					$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
 					$track->setLanguage("fr");
 					if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {

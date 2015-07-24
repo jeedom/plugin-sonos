@@ -13,6 +13,8 @@ image::../images/sonos1.PNG[]
 * [TTS] Chemin local du répertoire partagé : le chemin tel que vu par Jeedom vers le repertoire partagé (voir chapitre sur le TTS)
 * [TTS] Chemin Sonos du répertoire paratagé : chemin tel que vu par le Sonos vers le repertoire partagé (voir chapitre sur le TTS)
 
+[IMPORTANT]
+Les messages trop long ne peuvent etre transmis en TTS (la limite depend du fournisseurs de TTS, en général environ 100 caractères)
 
 == Configuration des équipements
 
