@@ -25,14 +25,7 @@ if (!isConnect()) {
 <form class="form-horizontal">
 	<fieldset>
     <div class="form-group">
-      <label class="col-lg-4 control-label">{{Fournisseur TTS}}</label>
-      <div class="col-lg-2">
-        <select class="configKey tooltips form-control" data-l1key="ttsProvider">
-          <option value="google_translate">Google Translate</option>
-          <option value="google">Google</option>
-          <option value="voxygen">Voxygen</option>
-        </select>
-      </div>
+      <label class="col-lg-4 control-label">{{Voix}}</label>
       <div class="col-lg-2">
        <select class="configKey tooltips form-control" data-l1key="ttsVoxygenVoice">
          <optgroup label="Arabic">
@@ -106,15 +99,6 @@ if (!isConnect()) {
 </form>
 
 <script>
-  $('.configKey[data-l1key="ttsProvider"]').on('change', function () {
-   $('.configKey[data-l1key="ttsVoxygenVoice"]').toggle( this.value == 'voxygen');
-   if( this.value == 'google_translate'){
-    $('.useShare').hide();
-  }else{
-    $('.useShare').show();
-  }
-});
-
   $('#bt_syncSonos').on('click', function () {
         $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php

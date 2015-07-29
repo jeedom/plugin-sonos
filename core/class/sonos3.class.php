@@ -20,7 +20,6 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Network;
-use duncan3dc\Sonos\Tracks\Stream;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use duncan3dc\Speaker\Providers\VoxygenProvider;
@@ -853,43 +852,27 @@ class sonos3Cmd extends cmd {
 				$controller->removeSpeaker($speaker);
 			}
 			if ($this->getLogicalId() == 'tts') {
-				if (config::byKey('ttsProvider', 'sonos3', 'google_translate') == 'google_translate') {
-					$queue = $controller->isUsingQueue();
-					$state = $controller->exportState();
-					$stream = new Stream('x-rincon-mp3radio://translate.google.com/translate_tts?tl=fr&q=' . urlencode(trim($_options['message'])));
-					if ($_options['title'] != '' && is_numeric($_options['title'])) {
-						$controller->setVolume($_options['title']);
-					}
-					$controller->useStream($stream)->play();
-					sleep(str_word_count($_options['message']) + 5);
-					if ($queue) {
-						$controller->useQueue();
-					}
-					$controller->restoreState($state);
-				} else {
-					if (!is_dir(config::byKey('localpath', 'sonos3') . '/tts')) {
-						mkdir(config::byKey('localpath', 'sonos3') . '/tts');
-					}
-					$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), 'tts');
-					if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
+				if (!is_dir(config::byKey('localpath', 'sonos3') . '/tts')) {
+					mkdir(config::byKey('localpath', 'sonos3') . '/tts');
+				}
+				$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), 'tts');
+				if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
 
-					} else {
-						if (strlen($_options['message']) > 100) {
-							$_options['message'] = substr($_options['message'], 0, 100);
-						}
-					}
-					$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
-					$track->setLanguage("fr");
-					if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
-						$track->setProvider(new VoxygenProvider);
-						$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
-					}
-					if ($_options['title'] != '' && is_numeric($_options['title'])) {
-						$controller->interrupt($track, $_options['title']);
-					} else {
-						$controller->interrupt($track);
+				} else {
+					if (strlen($_options['message']) > 100) {
+						$_options['message'] = substr($_options['message'], 0, 100);
 					}
 				}
+				$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
+				$track->setLanguage("fr");
+				$track->setProvider(new VoxygenProvider);
+				$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
+				if ($_options['title'] != '' && is_numeric($_options['title'])) {
+					$controller->interrupt($track, $_options['title']);
+				} else {
+					$controller->interrupt($track);
+				}
+
 			} else {
 				sonos3::pull($eqLogic->getId());
 			}
