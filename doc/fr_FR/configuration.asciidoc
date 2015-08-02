@@ -165,3 +165,7 @@ image::../images/sonos8.PNG[]
 Il existe aussi une version mobile du panel, accessible à partir de Plugins -> Sonos controller : 
 
 image::../images/sonos9.PNG[]
+
+Il vous permet comme en version bureau d'avoir une vue synthetique de vos Sonos : 
+
+image::../images/sonos10.PNG[]
