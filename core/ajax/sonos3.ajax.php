@@ -101,6 +101,39 @@ try {
 		ajax::success();
 	}
 
+	if (init('action') == 'getSonos') {
+		if (init('object_id') == '') {
+			$object = object::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
+		} else {
+			$object = object::byId(init('object_id'));
+		}
+		if (!is_object($object)) {
+			$object = object::rootObject();
+		}
+		$return = array();
+		$return['eqLogics'] = array();
+		if (init('object_id') == '') {
+			foreach (object::all() as $object) {
+				foreach ($object->getEqLogic(true, false, 'sonos3') as $sonos) {
+					$return['eqLogics'][] = $sonos->toHtml(init('version'));
+				}
+			}
+		} else {
+			foreach ($object->getEqLogic(true, false, 'sonos3') as $sonos) {
+				$return['eqLogics'][] = $sonos->toHtml(init('version'));
+			}
+			foreach (object::buildTree($object) as $child) {
+				$cameras = $child->getEqLogic(true, false, 'sonos3');
+				if (count($cameras) > 0) {
+					foreach ($cameras as $sonos) {
+						$return['eqLogics'][] = $sonos->toHtml(init('version'));
+					}
+				}
+			}
+		}
+		ajax::success($return);
+	}
+
 	throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {
