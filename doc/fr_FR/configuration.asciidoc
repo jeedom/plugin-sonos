@@ -161,3 +161,7 @@ image::../images/sonos7.PNG[]
 Cela permet d'avoir ce genre de vue synthétique :
 
 image::../images/sonos8.PNG[]
+
+Il existe aussi une version mobile du panel, accessible à partir de Plugins -> Sonos controller : 
+
+image::../images/sonos9.PNG[]
