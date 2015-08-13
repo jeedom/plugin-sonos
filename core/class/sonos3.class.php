@@ -722,9 +722,6 @@ class sonos3 extends eqLogic {
 		$queue = $controller->getQueue();
 		$queue->clear();
 	}
-	public function googleTranslateTTS($_text, $_volume = null) {
-
-	}
 
 	/*     * **********************Getteur Setteur*************************** */
 }
