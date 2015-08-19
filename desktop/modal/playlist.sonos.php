@@ -18,7 +18,7 @@ if (!isConnect()) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
 ?>
-
+<div id='div_playListSonosAlert' style="display: none;"></div>
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -56,11 +56,11 @@ foreach (sonos3::getPlayLists() as $playlist) {
             },
             dataType: 'json',
             error: function (request, status, error) {
-                handleAjaxError(request, status, error);
+                handleAjaxError(request, status, error,$('#div_playListSonosAlert'));
             },
             success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                $('#div_playListSonosAlert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             $('#md_modal2').dialog('close');

@@ -22,6 +22,7 @@ if (!is_object($sonos)) {
 	throw new Exception("Equipement non trouvé");
 }
 ?>
+<div id='div_queueSonosAlert' style="display: none;"></div>
 <a class="btn btn-danger pull-right" id="bt_emptyQueue" data-sonos_id="<?php echo init('id');?>"><i class="fa fa-trash-o"></i> {{Vider}}</a>
 <br/><br/>
 <table class="table table-condensed">
@@ -71,11 +72,11 @@ foreach ($sonos->getQueue() as $track) {
             },
             dataType: 'json',
             error: function (request, status, error) {
-                handleAjaxError(request, status, error);
+                handleAjaxError(request, status, error,$('#div_queueSonosAlert'));
             },
             success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                $('#div_queueSonosAlert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             $('#md_modal2').dialog('close');
@@ -97,11 +98,11 @@ foreach ($sonos->getQueue() as $track) {
             },
             dataType: 'json',
             error: function (request, status, error) {
-                handleAjaxError(request, status, error);
+                handleAjaxError(request, status, error,$('#div_queueSonosAlert'));
             },
             success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                $('#div_queueSonosAlert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             $('#md_modal2').dialog('close');
@@ -123,11 +124,11 @@ foreach ($sonos->getQueue() as $track) {
             },
             dataType: 'json',
             error: function (request, status, error) {
-                handleAjaxError(request, status, error);
+                handleAjaxError(request, status, error,$('#div_queueSonosAlert'));
             },
             success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                $('#div_queueSonosAlert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             $('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=queue.sonos&id=' + id).dialog('open');

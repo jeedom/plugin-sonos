@@ -22,6 +22,7 @@ if (!is_object($sonos)) {
 	throw new Exception("Equipement non trouvé");
 }
 ?>
+<div id='div_speakerSonosAlert' style="display: none;"></div>
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -62,11 +63,11 @@ foreach (sonos3::getSpeaker() as $speaker) {
             },
             dataType: 'json',
             error: function (request, status, error) {
-                handleAjaxError(request, status, error);
+                handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
             },
             success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                $('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
         }
@@ -86,11 +87,11 @@ foreach (sonos3::getSpeaker() as $speaker) {
             },
             dataType: 'json',
             error: function (request, status, error) {
-                handleAjaxError(request, status, error);
+                handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
             },
             success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                $('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
         }

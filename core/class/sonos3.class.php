@@ -688,6 +688,14 @@ class sonos3 extends eqLogic {
 		foreach ($this->getCmd('action') as $cmd) {
 			$replace['#cmd_' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 		}
+
+		$parameters = $this->getDisplay('parameters');
+		if (is_array($parameters)) {
+			foreach ($parameters as $key => $value) {
+				$replace_eqLogic['#' . $key . '#'] = $value;
+			}
+		}
+
 		$_version = jeedom::versionAlias($_version);
 		return template_replace($replace, getTemplate('core', $_version, 'eqLogic', 'sonos3'));
 	}
