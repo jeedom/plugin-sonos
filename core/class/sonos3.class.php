@@ -692,7 +692,7 @@ class sonos3 extends eqLogic {
 		$parameters = $this->getDisplay('parameters');
 		if (is_array($parameters)) {
 			foreach ($parameters as $key => $value) {
-				$replace_eqLogic['#' . $key . '#'] = $value;
+				$replace['#' . $key . '#'] = $value;
 			}
 		}
 
