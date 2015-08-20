@@ -578,7 +578,8 @@ class sonos3 extends eqLogic {
 		}
 		$tts->setType('action');
 		$tts->setSubType('message');
-		$tts->setDisplay('title_disable', 1);
+		$tts->setDisplay('title_disable', 0);
+		$tts->setDisplay('title_placeholder', __('Volume', __FILE__));
 		$tts->setDisplay('message_placeholder', __('Message', __FILE__));
 		$tts->setEqLogic_id($this->getId());
 		$tts->save();
