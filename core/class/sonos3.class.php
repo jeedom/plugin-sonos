@@ -355,7 +355,7 @@ class sonos3 extends eqLogic {
 			$previous = new sonos3Cmd();
 			$previous->setLogicalId('previous');
 			$previous->setIsVisible(1);
-			$previous->setName(__('Precedent', __FILE__));
+			$previous->setName(__('Précédent', __FILE__));
 		}
 		$previous->setType('action');
 		$previous->setSubType('other');
