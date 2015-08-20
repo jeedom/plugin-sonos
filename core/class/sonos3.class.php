@@ -606,6 +606,7 @@ class sonos3 extends eqLogic {
 			'#hideThumbnail#' => 0,
 			'#object_name#' => '',
 			'#version#' => $_version,
+			'#style#' => '',
 		);
 		if ($_version == 'dview' || $_version == 'mview') {
 			$object = $this->getObject();
