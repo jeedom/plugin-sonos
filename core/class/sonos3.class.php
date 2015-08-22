@@ -271,8 +271,10 @@ class sonos3 extends eqLogic {
 		}
 		foreach (sonos3::byType('sonos3') as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_radio');
-			$cmd->setDisplay('title_possibility_list', json_encode($array));
-			$cmd->save();
+			if (is_object($cmd)) {
+				$cmd->setDisplay('title_possibility_list', json_encode($array));
+				$cmd->save();
+			}
 		}
 		return $radios;
 	}
