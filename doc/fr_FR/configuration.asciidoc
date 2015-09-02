@@ -94,6 +94,9 @@ image::../images/sonos1.PNG[]
 [TIP]
 Attention dans "[TTS] Chemin Sonos du répertoire partagé" il ne faut surtout pas mettre // au début du chemin
 
+[IMPORTANT]
+Il faut absolument mettre un mot de passe pour que cela marche
+
 ===Automatiser la création du partage
 
 .Si vous n'avez pas de mot de passe
