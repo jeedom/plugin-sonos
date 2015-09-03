@@ -123,9 +123,9 @@ try {
 				$return['eqLogics'][] = $sonos->toHtml(init('version'));
 			}
 			foreach (object::buildTree($object) as $child) {
-				$cameras = $child->getEqLogic(true, false, 'sonos3');
-				if (count($cameras) > 0) {
-					foreach ($cameras as $sonos) {
+				$sonoss = $child->getEqLogic(true, false, 'sonos3');
+				if (count($sonoss) > 0) {
+					foreach ($sonoss as $sonos) {
 						$return['eqLogics'][] = $sonos->toHtml(init('version'));
 					}
 				}
