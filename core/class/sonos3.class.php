@@ -603,7 +603,10 @@ class sonos3 extends eqLogic {
 		if (!$this->hasRight('r')) {
 			return '';
 		}
-
+		$version = jeedom::versionAlias($_version);
+		if ($this->getDisplay('hideOn' . $version) == 1) {
+			return '';
+		}
 		$replace = array(
 			'#id#' => $this->getId(),
 			'#info#' => (isset($info)) ? $info : '',
