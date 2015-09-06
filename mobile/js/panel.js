@@ -61,12 +61,12 @@ function displaySonos(_object_id) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            $('#div_displayEquipement').empty();
+            $('#div_displayEquipementSonos').empty();
             for (var i in data.result.eqLogics) {
-                $('#div_displayEquipement').append(data.result.eqLogics[i]).trigger('create');
+                $('#div_displayEquipementSonos').append(data.result.eqLogics[i]).trigger('create');
             }
             setTileSize('.eqLogic');
-            $('#div_displayEquipement').packery({gutter : 4});
+            $('#div_displayEquipementSonos').packery({gutter : 4});
             $.hideLoading();
         }
     });
