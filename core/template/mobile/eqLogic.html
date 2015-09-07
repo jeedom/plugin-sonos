@@ -48,25 +48,25 @@
 		});
 	</script>
 	<div style="margin-top : 5px;">
-		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
-		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>
-		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd play" data-cmd_id="#cmd_play_id#"><i class="fa fa-play"></i></a>
-		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd pause" data-cmd_id="#cmd_pause_id#"><i class="fa fa-pause"></i></a>
-		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd next" data-cmd_id="#cmd_next_id#"><i class="fa fa-step-forward"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary cmd play" data-cmd_id="#cmd_play_id#"><i class="fa fa-play"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary cmd pause" data-cmd_id="#cmd_pause_id#"><i class="fa fa-pause"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary cmd next" data-cmd_id="#cmd_next_id#"><i class="fa fa-step-forward"></i></a>
 		
 	</div>
 	<div style="margin-top : 5px;">
-		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd shuffle" data-cmd_id="#cmd_shuffle_id#"><i class="fa fa-random"></i></a>
-		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd repeat" data-cmd_id="#cmd_repeat_id#"><i class="fa fa-repeat"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary cmd shuffle" data-cmd_id="#cmd_shuffle_id#"><i class="fa fa-random"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary cmd repeat" data-cmd_id="#cmd_repeat_id#"><i class="fa fa-repeat"></i></a>
 	</div>
 
 	<script>
 		if('#repeat_state#' == 1){
-			$('.sonos3[data-eqLogic_id=#id#] .cmd.repeat').attr('style','background-color:#5CB85B !important');
+			$('.sonos3[data-eqLogic_id=#id#] .cmd.repeat').removeClass('clr-primary').addClass('clr-warning');
 		}
 
 		if('#shuffle_state#' == 1){
-			$('.sonos3[data-eqLogic_id=#id#] .cmd.shuffle').attr('style','background-color:#5CB85B !important');
+			$('.sonos3[data-eqLogic_id=#id#] .cmd.shuffle').removeClass('clr-primary').addClass('clr-warning');
 		}
 
 		if('#state_nb#' == 1){
