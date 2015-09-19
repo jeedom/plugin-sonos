@@ -590,10 +590,12 @@ class sonos3 extends eqLogic {
 		$tts->setDisplay('message_placeholder', __('Message', __FILE__));
 		$tts->setEqLogic_id($this->getId());
 		$tts->save();
+		try {
+			self::getRadioStations();
+			self::getPlayLists();
+		} catch (Exception $e) {
 
-		self::getRadioStations();
-		self::getPlayLists();
-
+		}
 	}
 
 	public function toHtml($_version = 'dashboard') {
