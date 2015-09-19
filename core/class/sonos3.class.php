@@ -30,6 +30,8 @@ use RobGridley\Flysystem\Smb\SmbAdapter;
 class sonos3 extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
+	private static $_sonos = null;
+
 	/*     * ***********************Methode static*************************** */
 
 	public static function mobileManifest() {
@@ -54,11 +56,15 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getSonos($_emptyCache = false) {
+		if (!$_emptyCache && self::$_sonos != null) {
+			return self::$_sonos;
+		}
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
 		if ($_emptyCache) {
 			$cache->deleteAll();
 		}
-		return new Network($cache);
+		self::$_sonos = new Network($cache);
+		return self::$_sonos;
 	}
 
 	public static function syncSonos() {
@@ -102,7 +108,6 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function pull($_eqLogic_id = null) {
-		$sonos = self::getSonos();
 		foreach (self::byType('sonos3') as $eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
@@ -115,11 +120,10 @@ class sonos3 extends eqLogic {
 			}
 			try {
 				$changed = false;
-				$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
+				$controller = self::getControllerByIp($eqLogic->getLogicalId());
 				if ($controller == null) {
 					continue;
 				}
-
 				$cmd_state = $eqLogic->getCmd(null, 'state');
 				if (is_object($cmd_state)) {
 					$state = self::convertState($controller->getStateName());
@@ -293,6 +297,16 @@ class sonos3 extends eqLogic {
 	public function getSpeaker() {
 		$sonos = sonos3::getSonos();
 		return $sonos->getSpeakers();
+	}
+
+	public function getControllerByIp($_ip) {
+		$sonos = sonos3::getSonos(true);
+		$controller = $sonos->getControllerByIp($_ip);
+		if ($controller == null) {
+			$sonos = sonos3::getSonos(true);
+			$controller = $sonos->getControllerByIp($_ip);
+		}
+		return $controller;
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
@@ -728,8 +742,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public function playTrack($_position) {
-		$sonos = sonos3::getSonos();
-		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$controller = self::getControllerByIp($this->getLogicalId());
 		if (!$controller->isUsingQueue()) {
 			$controller->useQueue();
 		}
@@ -738,15 +751,13 @@ class sonos3 extends eqLogic {
 	}
 
 	public function removeTrack($_position) {
-		$sonos = sonos3::getSonos();
-		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$controller = self::getControllerByIp($this->getLogicalId());
 		$queue = $controller->getQueue();
 		$queue->removeTrack($_position);
 	}
 
 	public function emptyQueue($_position) {
-		$sonos = sonos3::getSonos();
-		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$controller = self::getControllerByIp($this->getLogicalId());
 		$queue = $controller->getQueue();
 		$queue->clear();
 	}
@@ -763,9 +774,13 @@ class sonos3Cmd extends cmd {
 
 	public function execute($_options = array()) {
 		try {
-			$sonos = sonos3::getSonos(true);
 			$eqLogic = $this->getEqLogic();
+			$sonos = sonos3::getSonos();
 			$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
+			if ($controller == null) {
+				$sonos = sonos3::getSonos(true);
+				$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
+			}
 			if ($this->getLogicalId() == 'play') {
 				if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
 					$state = $eqLogic->getCmd(null, 'state');

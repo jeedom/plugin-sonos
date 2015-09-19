@@ -532,65 +532,6 @@
         ]
     },
     {
-        "name": "duncan3dc/sonos",
-        "version": "1.6.1",
-        "version_normalized": "1.6.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/duncan3dc/sonos.git",
-            "reference": "9845dad3ffcfec75d6c3f81a1948a61cf5270657"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/9845dad3ffcfec75d6c3f81a1948a61cf5270657",
-            "reference": "9845dad3ffcfec75d6c3f81a1948a61cf5270657",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/cache": "^1.4",
-            "duncan3dc/domparser": "^1.4.1",
-            "duncan3dc/speaker": "^0.6.0",
-            "ext-soap": "*",
-            "ext-sockets": "*",
-            "guzzlehttp/guzzle": "^6.0",
-            "league/flysystem": "^1.0",
-            "php": ">=5.5.0",
-            "psr/log": "1.0.0"
-        },
-        "require-dev": {
-            "mockery/mockery": "^0.9.4",
-            "phpunit/phpunit": "^4.8"
-        },
-        "time": "2015-09-16 11:04:41",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "duncan3dc\\Sonos\\": "src/",
-                "duncan3dc\\SonosTests\\": "tests/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Craig Duncan",
-                "email": "git@duncanc.co.uk",
-                "homepage": "https://github.com/duncan3dc",
-                "role": "Developer"
-            }
-        ],
-        "description": "Control Sonos speakers using a simple API",
-        "homepage": "https://github.com/duncan3dc/sonos",
-        "keywords": [
-            "sonos",
-            "streaming",
-            "upnp"
-        ]
-    },
-    {
         "name": "icewind/streams",
         "version": "0.2",
         "version_normalized": "0.2.0.0",
@@ -714,5 +655,64 @@
             }
         ],
         "description": "Flysystem adapter for Icewind SMB."
+    },
+    {
+        "name": "duncan3dc/sonos",
+        "version": "1.7.0",
+        "version_normalized": "1.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/sonos.git",
+            "reference": "9ce7741ee204e9e4f7d2f1c6e4d2344340551044"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/9ce7741ee204e9e4f7d2f1c6e4d2344340551044",
+            "reference": "9ce7741ee204e9e4f7d2f1c6e4d2344340551044",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/cache": "^1.4",
+            "duncan3dc/domparser": "^1.4.1",
+            "duncan3dc/speaker": "^0.6.0",
+            "ext-soap": "*",
+            "ext-sockets": "*",
+            "guzzlehttp/guzzle": "^6.0",
+            "league/flysystem": "^1.0",
+            "php": ">=5.6.0",
+            "psr/log": "1.0.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "^0.9.4",
+            "phpunit/phpunit": "^4.8"
+        },
+        "time": "2015-09-19 18:21:18",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "duncan3dc\\Sonos\\": "src/",
+                "duncan3dc\\SonosTests\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Craig Duncan",
+                "email": "git@duncanc.co.uk",
+                "homepage": "https://github.com/duncan3dc",
+                "role": "Developer"
+            }
+        ],
+        "description": "Control Sonos speakers using a simple API",
+        "homepage": "https://github.com/duncan3dc/sonos",
+        "keywords": [
+            "sonos",
+            "streaming",
+            "upnp"
+        ]
     }
 ]
