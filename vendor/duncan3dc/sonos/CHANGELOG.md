@@ -5,6 +5,72 @@ Changelog
 
 --------
 
+## 1.6.1 - 2015-09-16
+
+### Fixed
+
+* [Playlist] Ensure the TrackFactory is available when working with playlists.
+
+--------
+
+## 1.6.0 - 2015-09-09
+
+### Added
+
+* [Tracks] Created Spotify/Deezer tracks to handle their specific metadata.
+
+### Fixed
+
+* [Tracks] The album art now only prepends a host if it is missing one
+
+### Removed
+
+* [Tracks] The QueueTrack has been merged with the Track class.
+
+--------
+
+## 1.5.1 - 2015-09-08
+
+### Added
+
+* [Network] Add support for the ZP80 ZonePlayer device.
+
+--------
+
+## 1.5.0 - 2015-08-29
+
+### Changed
+
+* [Tracks] Use league/flysystem to allow access to SMB shares from other machines.
+* [Queues] Improve efficiency of adding tracks by adding up to 16 tracks at once.
+
+--------
+
+## 1.4.2 - 2015-08-16
+
+### Changed
+
+* [Network] Improve the topology caching as these change fairly frequently.
+
+--------
+
+## 1.4.0 - 2015-06-15
+
+### Added
+
+* [Streams] Allow the name/title of a stream to be retrieved.
+
+### Fixed
+
+* [Spotify] Enable metadata (artist, album, etc) to display correctly in some cases.
+
+### Changed
+
+* [Network] Cache the device descriptions and topology (these rarely change so the performance improvement is preferable).
+* [Support] Drop support for PHP 5.4, as it nears end-of-life and Guzzle 6 requires 5.5
+
+--------
+
 ## 1.3.1 - 2015-05-30
 
 ### Added

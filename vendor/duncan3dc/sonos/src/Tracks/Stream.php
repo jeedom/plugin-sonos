@@ -2,7 +2,9 @@
 
 namespace duncan3dc\Sonos\Tracks;
 
-use duncan3dc\DomParser\XmlWriter;
+use duncan3dc\DomParser\XmlElement;
+use duncan3dc\Sonos\Controller;
+use duncan3dc\Sonos\Helper;
 
 /**
  * Representation of a stream.
@@ -73,36 +75,30 @@ class Stream implements UriInterface
      */
     public function getMetaData()
     {
-        $xml = XmlWriter::createXml([
-            "DIDL-Lite" =>  [
-                "_attributes"   =>  [
-                    "xmlns:dc"      =>  "http://purl.org/dc/elements/1.1/",
-                    "xmlns:upnp"    =>  "urn:schemas-upnp-org:metadata-1-0/upnp/",
-                    "xmlns:r"       =>  "urn:schemas-rinconnetworks-com:metadata-1-0/",
-                    "xmlns"         =>  "urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/",
+        return Helper::createMetaDataXml("-1", "-1", [
+            "dc:title"          =>  $this->getName() ?: "Stream",
+            "upnp:class"        =>  "object.item.audioItem.audioBroadcast",
+            "desc"              =>  [
+                "_attributes"       =>  [
+                    "id"        =>  "cdudn",
+                    "nameSpace" =>  "urn:schemas-rinconnetworks-com:metadata-1-0/",
                 ],
-                "item"  =>  [
-                    "_attributes"   =>  [
-                        "id"            =>  "-1",
-                        "parentID"      =>  "-1",
-                        "restricted"    =>  "true",
-                    ],
-                    "dc:title"          =>  $this->getName() ?: "Stream",
-                    "upnp:class"        =>  "object.item.audioItem.audioBroadcast",
-                    "desc"              =>  [
-                        "_attributes"       =>  [
-                            "id"        =>  "cdudn",
-                            "nameSpace" =>  "urn:schemas-rinconnetworks-com:metadata-1-0/",
-                        ],
-                        "_value"            =>  "SA_RINCON65031_",
-                    ],
-                ],
-            ]
+                "_value"            =>  "SA_RINCON65031_",
+            ],
         ]);
+    }
 
-        # Get rid of the xml header as only the DIDL-Lite element is required
-        $meta = explode("\n", $xml)[1];
 
-        return $meta;
+    /**
+     * Create a stream from an xml element.
+     *
+     * @param XmlElement $xml The xml element representing the track meta data
+     * @param Controller $controller A controller instance to communicate with
+     *
+     * @return static
+     */
+    public static function createFromXml(XmlElement $xml, Controller $controller)
+    {
+        return new static($xml->getTag("res"));
     }
 }

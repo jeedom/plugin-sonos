@@ -2,9 +2,9 @@
 
 namespace duncan3dc\Sonos\Tracks;
 
-use duncan3dc\DomParser\XmlBase;
-use duncan3dc\DomParser\XmlWriter;
+use duncan3dc\DomParser\XmlElement;
 use duncan3dc\Sonos\Controller;
+use duncan3dc\Sonos\Helper;
 
 /**
  * Representation of a track.
@@ -41,6 +41,11 @@ class Track implements UriInterface
      */
     public $albumArt = "";
 
+    /**
+     * @var string $queueId The id of the track in the queue.
+     */
+    protected $queueId = "-1";
+
 
     /**
      * Create a Track object.
@@ -69,9 +74,9 @@ class Track implements UriInterface
      *
      * @return string
      */
-    protected function getId()
+    public function getId()
     {
-        return "-1";
+        return $this->queueId;
     }
 
 
@@ -82,46 +87,26 @@ class Track implements UriInterface
      */
     public function getMetaData()
     {
-        $xml = XmlWriter::createXml([
-            "DIDL-Lite" =>  [
-                "_attributes"   =>  [
-                    "xmlns:dc"      =>  "http://purl.org/dc/elements/1.1/",
-                    "xmlns:upnp"    =>  "urn:schemas-upnp-org:metadata-1-0/upnp/",
-                    "xmlns:r"       =>  "urn:schemas-rinconnetworks-com:metadata-1-0/",
-                    "xmlns"         =>  "urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/",
-                ],
-                "item"  =>  [
-                    "_attributes"   =>  [
-                        "id"            =>  $this->getId(),
-                        "parentID"      =>  "-1",
-                        "restricted"    =>  "true",
-                    ],
-                    "res"               =>  $this->uri,
-                    "upnp:albumArtURI"  =>  $this->albumArt,
-                    "dc:title"          =>  $this->title,
-                    "upnp:class"        =>  "object.item.audioItem.musicTrack",
-                    "dc:creator"        =>  $this->artist,
-                    "upnp:album"        =>  $this->album,
-                ],
-            ]
+        return Helper::createMetaDataXml($this->getId(), "-1", [
+            "res"               =>  $this->uri,
+            "upnp:albumArtURI"  =>  $this->albumArt,
+            "dc:title"          =>  $this->title,
+            "upnp:class"        =>  "object.item.audioItem.musicTrack",
+            "dc:creator"        =>  $this->artist,
+            "upnp:album"        =>  $this->album,
         ]);
-
-        # Get rid of the xml header as only the DIDL-Lite element is required
-        $meta = explode("\n", $xml)[1];
-
-        return $meta;
     }
 
 
     /**
      * Update the track properties using an xml element.
      *
-     * @param XmlBase $xml The xml element representing the track meta data.
-     * @param Controller $controller A controller instance on the playlist's network
+     * @param XmlElement $xml The xml element representing the track meta data
+     * @param Controller $controller A controller instance to communicate with
      *
      * @return static
      */
-    public static function createFromXml(XmlBase $xml, Controller $controller)
+    public static function createFromXml(XmlElement $xml, Controller $controller)
     {
         $track = new static($xml->getTag("res"));
 
@@ -144,7 +129,15 @@ class Track implements UriInterface
         $track->number = (int) $number;
 
         if ($art = (string) $xml->getTag("albumArtURI")) {
-            $track->albumArt = sprintf("http://%s:1400%s", $controller->ip, $art);
+            if (substr($art, 0, 4) !== "http") {
+                $art = ltrim($art, "/");
+                $art = sprintf("http://%s:1400/%s", $controller->ip, $art);
+            }
+            $track->albumArt = $art;
+        }
+
+        if ($xml->hasAttribute("id")) {
+            $track->queueId = $xml->getAttribute("id");
         }
 
         return $track;

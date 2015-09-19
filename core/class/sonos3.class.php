@@ -113,6 +113,9 @@ class sonos3 extends eqLogic {
 			try {
 				$changed = false;
 				$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
+				if ($controller == null) {
+					continue;
+				}
 
 				$cmd_state = $eqLogic->getCmd(null, 'state');
 				if (is_object($cmd_state)) {
