@@ -760,7 +760,7 @@ class sonos3Cmd extends cmd {
 
 	public function execute($_options = array()) {
 		try {
-			$sonos = sonos3::getSonos();
+			$sonos = sonos3::getSonos(true);
 			$eqLogic = $this->getEqLogic();
 			$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
 			if ($this->getLogicalId() == 'play') {
@@ -899,7 +899,7 @@ class sonos3Cmd extends cmd {
 				sonos3::pull($eqLogic->getId());
 			}
 		} catch (Exception $e) {
-			log::add('info', 'sonos', $e->getMessage());
+			log::add('sonos', 'info', $e->getMessage());
 		}
 	}
 
