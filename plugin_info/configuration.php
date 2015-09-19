@@ -77,15 +77,27 @@ if (!isConnect()) {
      </div>
    </div>
    <div class="form-group useShare">
-    <label class="col-lg-4 control-label">{{[TTS] Chemin local du répertoire partagé}}</label>
+    <label class="col-lg-4 control-label">{{Nom ou IP du partage}}</label>
     <div class="col-lg-2">
-      <input class="configKey tooltips form-control" data-l1key="localpath" placeholder="/local/path" />
+      <input class="configKey tooltips form-control" data-l1key="tts_host" />
     </div>
   </div>
   <div class="form-group useShare">
-    <label class="col-lg-4 control-label">{{[TTS] Chemin Sonos du répertoire partagé}}</label>
+    <label class="col-lg-4 control-label">{{Nom d'utilisateur pour le partage}}</label>
     <div class="col-lg-2">
-      <input class="configKey tooltips form-control" data-l1key="pathToSmb" placeholder="hostname/path/to/smb" />
+      <input class="configKey tooltips form-control" data-l1key="tts_username" />
+    </div>
+  </div>
+  <div class="form-group useShare">
+    <label class="col-lg-4 control-label">{{Mot de passe du partage}}</label>
+    <div class="col-lg-2">
+      <input type="password" class="configKey tooltips form-control" data-l1key="tts_password" />
+    </div>
+  </div>
+  <div class="form-group useShare">
+    <label class="col-lg-4 control-label">{{Chemin sur le nas}}</label>
+    <div class="col-lg-2">
+      <input class="configKey tooltips form-control" data-l1key="tts_path" />
     </div>
   </div>
 </div>

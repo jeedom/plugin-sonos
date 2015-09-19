@@ -72,80 +72,10 @@ Comme commande vous retrouverez :
 
 == TTS
 
-Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. De plus il faut que monter le repertoire partagé sur Jeedom. Pour cela connecté vous en SSH (le identifiants en fonction de votre type d'installation peuvent se trouver sur la doc d'installation) : 
-
-----
-sudo su -
-apt-get install cifs-utils
-mkdir -p /mnt/synology
-mount -t cifs -o username=#username#,password=#password#,uid=www-data,gid=www-data //NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology
-----
-
-N'oubliez pas de bien remplacer \#username#, \#password# et //NOMDUNAS/CHEMIN/DU/PARTAGE en fonction de votre configuration.
-
-Ensuite il faut sur vos Sonos ajouter le repertoire //NOMDUNAS/CHEMIN/DU/PARTAGE : 
-
-image::../images/sonos6.PNG[]
-
-Ensuite il vous faut remplir les paramètres du plugin : 
-
-image::../images/sonos1.PNG[]
-
-[TIP]
-Attention dans "[TTS] Chemin Sonos du répertoire partagé" il ne faut surtout pas mettre // au début du chemin
+Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. La configuration est assez simple il faut mettre le nom ou l'ip du nas (attention à bien mettre la même chose que ce qui est déclaré sur sonos), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture) et le chemin (il est conseillé de faire un sous dossier tts)
 
 [IMPORTANT]
 Il faut absolument mettre un mot de passe pour que cela marche
-
-===Automatiser la création du partage
-
-.Si vous n'avez pas de mot de passe
-
-Dans /etc/fstab ajouter : 
-
-----
-//NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology  cifs  guest,uid=1000,iocharset=utf8  0  0
-----
-
-Puis faites : 
-
-----
-sudo mount -a
-----
-
-.Si vous avez un mot de passe
-
-Faites : 
-
-----
-gedit ~/.smbcredentials
-----
-
-Et ajoutez : 
-
-----
-username=msusername
-password=mspassword
-----
-
-Puis changer les permissions : 
-
-----
-chmod 600 ~/.smbcredentials
-----
-
-Puis dans /etc/fstab (bien passer en sudo su - pour avoir les droits root)
-
-----
-//NOMDUNAS/CHEMIN/DU/PARTAGE /mnt/synology  cifs uid=www-data,gid=www-data,credentials=/home/jeedom/.smbcredentials,iocharset=utf8,sec=ntlm 0 0
-----
-
-Puis faites : 
-
-----
-sudo mount -a
-----
-
 
 == Widget
 

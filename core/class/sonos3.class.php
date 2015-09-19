@@ -23,6 +23,9 @@ use duncan3dc\Sonos\Network;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use duncan3dc\Speaker\Providers\VoxygenProvider;
+use Icewind\SMB\Server;
+use League\Flysystem\Filesystem;
+use RobGridley\Flysystem\Smb\SmbAdapter;
 
 class sonos3 extends eqLogic {
 	/*     * *************************Attributs****************************** */
@@ -874,16 +877,15 @@ class sonos3Cmd extends cmd {
 				$controller->removeSpeaker($speaker);
 			}
 			if ($this->getLogicalId() == 'tts') {
-				if (!is_dir(config::byKey('localpath', 'sonos3') . '/tts')) {
-					mkdir(config::byKey('localpath', 'sonos3') . '/tts');
-				}
-				$directory = new Directory(config::byKey('localpath', 'sonos3'), config::byKey('pathToSmb', 'sonos3'), 'tts');
-				if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
-
-				} else {
-					if (strlen($_options['message']) > 100) {
-						$_options['message'] = substr($_options['message'], 0, 100);
-					}
+				$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
+				$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
+				$share = $server->getShare($path[0]);
+				$adapter = new SmbAdapter($share);
+				$filesystem = new Filesystem($adapter);
+				$folder = array_pop($path);
+				$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
+				if (config::byKey('ttsProvider', 'sonos3') != 'voxygen' && strlen($_options['message']) > 100) {
+					$_options['message'] = substr($_options['message'], 0, 100);
 				}
 				$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
 				$track->setLanguage("fr");
