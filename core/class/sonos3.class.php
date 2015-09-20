@@ -684,7 +684,7 @@ class sonos3 extends eqLogic {
 		}
 		$mc = cache::byKey('sonosWidget' . $_version . $this->getId());
 		if ($mc->getValue() != '') {
-			return $mc->getValue();
+			return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
 		}
 		$replace = array(
 			'#id#' => $this->getId(),
@@ -697,7 +697,7 @@ class sonos3 extends eqLogic {
 			'#object_name#' => '',
 			'#version#' => $_version,
 			'#style#' => '',
-			'#uid#' => 'sonos' . $this->getId() . mt_rand(),
+			'#uid#' => 'sonos' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
 		);
 		if ($_version == 'dview' || $_version == 'mview') {
 			$object = $this->getObject();
