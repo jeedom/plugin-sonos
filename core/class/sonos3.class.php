@@ -249,6 +249,10 @@ class sonos3 extends eqLogic {
 				}
 
 				if ($changed) {
+					$mc = cache::byKey('sonosWidgetmobile' . $eqLogic->getId());
+					$mc->remove();
+					$mc = cache::byKey('sonosWidgetdashboard' . $eqLogic->getId());
+					$mc->remove();
 					$eqLogic->refreshWidget();
 				}
 				if ($eqLogic->getConfiguration('sonosNumberFailed', 0) > 0) {
@@ -666,7 +670,7 @@ class sonos3 extends eqLogic {
 		}
 		$mc = cache::byKey('sonosWidget' . $_version . $this->getId());
 		if ($mc->getValue() != '') {
-			//return $mc->getValue();
+			return $mc->getValue();
 		}
 		$replace = array(
 			'#id#' => $this->getId(),

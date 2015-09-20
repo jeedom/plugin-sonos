@@ -1,5 +1,6 @@
 <div class="eqLogic eqLogic-widget noResize sonos_widget sonos3" data-version="#version#" style="text-align:center; width: 240px;background-color : #background_color#;height:320px;#style#" data-eqLogic_id="#id#">
 	<link rel="stylesheet" href="plugins/sonos3/core/template/dashboard/css/style.css" />
+	<span class="statusCmd" style="position : absolute;left : 0px;width : 30px;z-index: 1030;"></span>
 	<div class="leftpanel">
 		<div style="margin-left : 24px;overflow: auto;height: 327px;">
 			<legend style="color : white;margin-bottom:2px;">Playlist</legend>
@@ -39,26 +40,25 @@
 	</div>
 	<div class="downpart" style="display:block;">
 		<img src="plugins/sonos3/core/template/dashboard/images/sound.png" height="15px" width="15px" class="bouton_sup_volume" onclick="volume_sonos#id#('bouton')" />
-		<a class="shuffle" onclick="jeedom.cmd.execute({id: #shuffle_id#});"><i class="fa fa-random"></i></a>
-		<a class="repeat" onclick="jeedom.cmd.execute({id: #repeat_id#});"><i class="fa fa-repeat"></i></a>
-		<img class="previous" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #previous_id#});" title="Précédent" />
+		<a class="shuffle cmd" data-cmd_id="#shuffle_id#" onclick="jeedom.cmd.execute({id: #shuffle_id#});"><i class="fa fa-random"></i></a>
+		<a class="repeat cmd" data-cmd_id="#repeat_id#" onclick="jeedom.cmd.execute({id: #repeat_id#});"><i class="fa fa-repeat"></i></a>
+		<img class="previous cmd" data-cmd_id="#previous_id#" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #previous_id#});" title="Précédent" />
 		<div class="cercle_downpart">
-			<img class="play_in_cercle" src="plugins/sonos3/core/template/dashboard/images/play1.png" onclick="jeedom.cmd.execute({id: #play_id#});" title="Lecture"/>
-			<img class="pause_in_cercle" src="plugins/sonos3/core/template/dashboard/images/pause.png" onclick="jeedom.cmd.execute({id: #pause_id#});" title="Pause" />
+			<img class="play_in_cercle cmd" data-cmd_id="#play_id#" src="plugins/sonos3/core/template/dashboard/images/play1.png" onclick="jeedom.cmd.execute({id: #play_id#});" title="Lecture"/>
+			<img class="pause_in_cercle cmd" data-cmd_id="#pause_id#" src="plugins/sonos3/core/template/dashboard/images/pause.png" onclick="jeedom.cmd.execute({id: #pause_id#});" title="Pause" />
 		</div>
-		<div class="stop_sonos_widget" onclick="jeedom.cmd.execute({id: #stop_id#});" title="Stop"></div>
-		<a class="mute" onclick="jeedom.cmd.execute({id: #mute_id#});"><i class="fa fa-volume-off"></i></a>
-		<img class="next" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #next_id#});" title="Suivant" />
+		<div class="stop_sonos_widget cmd" data-cmd_id="#stop_id#" onclick="jeedom.cmd.execute({id: #stop_id#});" title="Stop"></div>
+		<a class="mute cmd" data-cmd_id="#mute_id#" onclick="jeedom.cmd.execute({id: #mute_id#});"><i class="fa fa-volume-off"></i></a>
+		<img class="next cmd" data-cmd_id="#next_id#" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #next_id#});" title="Suivant" />
 	</div>
 	<div class="volumeDownpart" style="display:none;">
 		<img src="plugins/sonos3/core/template/dashboard/images/working.png" height="15px" width="15px" class="bouton_sup_volume" onclick="volume_sonos#id#('volume')"/>
 		<div class="volume_sonos_widget" style="margin-top : 5px;">
-			<div class="volume" style="width: 180px;" value="#volume#" ></div>
+			<div class="volume cmd" data-cmd_id="#setVolume_id#" style="width: 180px;" value="#volume#" ></div>
 		</div>
 	</div>
 
 	<script>
-
 		function panelRight#id#(){
 			$(".sonos3[data-eqLogic_id=#id#] .rightpanel").animate({right:"0px"});
 			$(".sonos3[data-eqLogic_id=#id#] .rightpanel .rightRafter").show();
@@ -126,6 +126,7 @@
 		}
 
 		$('.sonos3[data-eqLogic_id=#id#]  .playPlaylist').on('click',function(){
+			$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
 			var name = $(this).attr('data-name');
 			$.ajax({
 				type: "POST", 
@@ -136,140 +137,178 @@
 					playlist : name
 				},
 				dataType: 'json',
+				global:false,
 				error: function (request, status, error) {
 					handleAjaxError(request, status, error,$('#div_playListSonosAlert'));
 				},
 				success: function (data) { 
 					if (data.state != 'ok') {
 						$('#div_playListSonosAlert').showAlert({message: data.result, level: 'danger'});
+						$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						setTimeout(function() {
+							$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+						}, 3000);
 						return;
 					}
-					$('#md_modal2').dialog('close');
+					$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+					setTimeout(function() {
+						$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+					}, 3000);
 				}
 			});
 		});
 
-		if('#radio#' != ''){
-			radio#id# = json_decode('#radio#');
-			radioList#id# = '';
-			for(var i in radio#id#){
-				radioList#id# += '<span class="cursor playRadio" style="white-space: nowrap;margin-left:5px;text-align:left;" data-name="'+radio#id#[i]+'" title="'+radio#id#[i]+'"><i class="fa fa-play"></i> '+radio#id#[i]+'</span><br/>';
+if('#radio#' != ''){
+	radio#id# = json_decode('#radio#');
+	radioList#id# = '';
+	for(var i in radio#id#){
+		radioList#id# += '<span class="cursor playRadio" style="white-space: nowrap;margin-left:5px;text-align:left;" data-name="'+radio#id#[i]+'" title="'+radio#id#[i]+'"><i class="fa fa-play"></i> '+radio#id#[i]+'</span><br/>';
+	}
+	$(".sonos3[data-eqLogic_id=#id#] .radioList").append(radioList#id#);
+}
+
+$('.sonos3[data-eqLogic_id=#id#] .playRadio').on('click',function(){
+	$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+	var name = $(this).attr('data-name');
+	$.ajax({
+		type: "POST", 
+		url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+		data: {
+			action: "playRadio",
+			id :'#id#',
+			radio : name
+		},
+		dataType: 'json',
+		error: function (request, status, error) {
+			handleAjaxError(request, status, error,$('#div_radioSonosAlert'));
+		},
+		success: function (data) { 
+			if (data.state != 'ok') {
+				$('#div_radioSonosAlert').showAlert({message: data.result, level: 'danger'});
+				$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+				setTimeout(function() {
+					$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+				}, 3000);
+				return;
 			}
-			$(".sonos3[data-eqLogic_id=#id#] .radioList").append(radioList#id#);
+			$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+			setTimeout(function() {
+				$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+			}, 3000);
 		}
+	});
+});
 
-		$('.sonos3[data-eqLogic_id=#id#] .playRadio').on('click',function(){
-			var name = $(this).attr('data-name');
-			$.ajax({
-				type: "POST", 
-				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
-				data: {
-					action: "playRadio",
-					id :'#id#',
-					radio : name
-				},
-				dataType: 'json',
-				error: function (request, status, error) {
-					handleAjaxError(request, status, error,$('#div_radioSonosAlert'));
-				},
-				success: function (data) { 
-					if (data.state != 'ok') {
-						$('#div_radioSonosAlert').showAlert({message: data.result, level: 'danger'});
-						return;
-					}
-					$('#md_modal2').dialog('close');
-				}
-			});
-		});
+if('#queue#' != ''){
+	queue#id# = json_decode('#queue#');
+	queueList#id# = '';
+	for(var i in queue#id#){
+		queueList#id# += '<span class="cursor playTrack" style="white-space: nowrap;margin-left:5px;" data-position="'+i+'" title="'+queue#id#[i]+'"><i class="fa fa-play"></i> '+queue#id#[i]+'</span><br/>';
+	}
+	$(".sonos3[data-eqLogic_id=#id#] .queueList").append(queueList#id#);
+}
 
-		if('#queue#' != ''){
-			queue#id# = json_decode('#queue#');
-			queueList#id# = '';
-			for(var i in queue#id#){
-				queueList#id# += '<span class="cursor playTrack" style="white-space: nowrap;margin-left:5px;" data-position="'+i+'" title="'+queue#id#[i]+'"><i class="fa fa-play"></i> '+queue#id#[i]+'</span><br/>';
+$('.sonos3[data-eqLogic_id=#id#] .playTrack').on('click',function(){
+	$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+	var position = $(this).attr('data-position');
+	$.ajax({
+		type: "POST",
+		url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+		data: {
+			action: "playTrack",
+			id :'#id#',
+			position : position
+		},
+		dataType: 'json',
+		error: function (request, status, error) {
+			handleAjaxError(request, status, error,$('#div_queueSonosAlert'));
+		},
+		success: function (data) { 
+			if (data.state != 'ok') {
+				$('#div_queueSonosAlert').showAlert({message: data.result, level: 'danger'});
+				$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+				setTimeout(function() {
+					$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+				}, 3000);
+				return;
 			}
-			$(".sonos3[data-eqLogic_id=#id#] .queueList").append(queueList#id#);
+			$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+			setTimeout(function() {
+				$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+			}, 3000);
 		}
+	});
+});
 
-		$('.sonos3[data-eqLogic_id=#id#] .playTrack').on('click',function(){
-			var position = $(this).attr('data-position');
-			$.ajax({
-				type: "POST",
-				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
-				data: {
-					action: "playTrack",
-					id :'#id#',
-					position : position
-				},
-				dataType: 'json',
-				error: function (request, status, error) {
-					handleAjaxError(request, status, error,$('#div_queueSonosAlert'));
-				},
-				success: function (data) { 
-					if (data.state != 'ok') {
-						$('#div_queueSonosAlert').showAlert({message: data.result, level: 'danger'});
-						return;
-					}
-					$('#md_modal2').dialog('close');
-				}
-			});
-		});
+if('#speakers#' != ''){
+	speakers#id# = json_decode('#speakers#');
+	speakersList#id# = '';
+	for(var i in speakers#id#){
+		speakersList#id# += '<span class="cursor" style="white-space: nowrap;margin-left:5px;" title="'+speakers#id#[i]+'"><i class="addSpeaker fa fa-plus" data-name="'+speakers#id#[i]+'"></i> <i class=" removeSpeaker fa fa-minus" data-name="'+speakers#id#[i]+'"></i> '+speakers#id#[i]+'</span><br/>';
+	}
+	$(".sonos3[data-eqLogic_id=#id#] .speakersList").append(speakersList#id#);
+}
 
-		if('#speakers#' != ''){
-			speakers#id# = json_decode('#speakers#');
-			speakersList#id# = '';
-			for(var i in speakers#id#){
-				speakersList#id# += '<span class="cursor" style="white-space: nowrap;margin-left:5px;" title="'+speakers#id#[i]+'"><i class="addSpeaker fa fa-plus" data-name="'+speakers#id#[i]+'"></i> <i class=" removeSpeaker fa fa-minus" data-name="'+speakers#id#[i]+'"></i> '+speakers#id#[i]+'</span><br/>';
+
+$('.sonos3[data-eqLogic_id=#id#] .addSpeaker').on('click',function(){
+	$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+	var name = $(this).attr('data-name');
+	$.ajax({
+		type: "POST", 
+		url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+		data: {
+			action: "addSpeaker",
+			id :'#id#',
+			speaker : name
+		},
+		dataType: 'json',
+		error: function (request, status, error) {
+			handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
+		},
+		success: function (data) {
+			if (data.state != 'ok') {
+				$('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
+				$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+				setTimeout(function() {
+					$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+				}, 3000);
+				return;
 			}
-			$(".sonos3[data-eqLogic_id=#id#] .speakersList").append(speakersList#id#);
+			$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+			setTimeout(function() {
+				$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+			}, 3000);
 		}
+	});
+});
 
-
-		$('.sonos3[data-eqLogic_id=#id#] .addSpeaker').on('click',function(){
-			var name = $(this).attr('data-name');
-			$.ajax({
-				type: "POST", 
-				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
-				data: {
-					action: "addSpeaker",
-					id :'#id#',
-					speaker : name
-				},
-				dataType: 'json',
-				error: function (request, status, error) {
-					handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
-				},
-				success: function (data) {
-					if (data.state != 'ok') {
-						$('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
-						return;
-					}
-				}
-			});
-		});
-
-		$('.sonos3[data-eqLogic_id=#id#] .removeSpeaker').on('click',function(){
-			var name = $(this).attr('data-name');
-			$.ajax({
-				type: "POST", 
-				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
-				data: {
-					action: "removeSpeaker",
-					id :'#id#',
-					speaker : name
-				},
-				dataType: 'json',
-				error: function (request, status, error) {
-					handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
-				},
-				success: function (data) {
-					if (data.state != 'ok') {
-						$('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
-						return;
-					}
-				}
-			});
-		});
-	</script>
+$('.sonos3[data-eqLogic_id=#id#] .removeSpeaker').on('click',function(){
+	$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+	var name = $(this).attr('data-name');
+	$.ajax({
+		type: "POST", 
+		url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+		data: {
+			action: "removeSpeaker",
+			id :'#id#',
+			speaker : name
+		},
+		dataType: 'json',
+		error: function (request, status, error) {
+			handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
+		},
+		success: function (data) {
+			if (data.state != 'ok') {
+				$('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
+				return;
+			}
+			$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+			setTimeout(function() {
+				$(".sonos3[data-eqLogic_id=#id#] .statusCmd").empty();
+			}, 3000);
+		}
+	});
+});
+</script>
 </div>
 
