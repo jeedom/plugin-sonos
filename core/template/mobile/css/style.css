@@ -1,0 +1,33 @@
+.sonos3 .card_front {
+  background-color:#4a89dc;
+}
+
+.sonos3 .card_back {
+  background-color: #1e1e1e;
+}
+.sonos3 .previous{
+	margin-top: 7%;
+	height: 50%;
+	-ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.sonos3 .bouton_bas{
+	height: 50%;
+	margin-left: 0.1em;
+    margin-right: 0.1em;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.sonos3 .bouton_bas_aa{
+	margin-top: 7%;
+	height: 50%;
+	margin-left: 0.1em;
+    margin-right: 0.1em;
+    cursor: pointer;
+    opacity: 0.5;
+}

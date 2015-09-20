@@ -103,7 +103,7 @@
 		});
 		$(".sonos3[data-eqLogic_id=#id#] .slider.slider-horizontal").css('z-index',1);
 		$(".sonos3[data-eqLogic_id=#id#] .volume").on('slideStop', function (ev) {
-			jeedom.cmd.execute({id: '#volume_id#', value: {slider: ev.value}});
+			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: ev.value}});
 		});
 		pause_and_play#id#(#state_nb#);
 

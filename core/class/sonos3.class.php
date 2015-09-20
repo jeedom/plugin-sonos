@@ -666,7 +666,7 @@ class sonos3 extends eqLogic {
 		}
 		$mc = cache::byKey('sonosWidget' . $_version . $this->getId());
 		if ($mc->getValue() != '') {
-			return $mc->getValue();
+			//return $mc->getValue();
 		}
 		$replace = array(
 			'#id#' => $this->getId(),
