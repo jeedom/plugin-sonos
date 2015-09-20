@@ -1,72 +1,101 @@
-<div class="eqLogic eqLogic-widget noResize sonos3" data-version="#version#" style="text-align:center; width: 240px;background-color : #background_color#;height:320px;#style#" data-eqLogic_id="#id#">
-	<style type="text/css">
-		.sonos3 .cmd a {
-			width: 30px;
-			height:30px;
-			font-size: 1em;
-		}
-		.sonos3 .cmd.col2 a {
-			width: 85px;
-			height: 30px;
-			font-size: 1em;
-		}
-		@font-face {
-			font-family: liquid;
-			src:   url("plugins/sonos3/core/template/fonts/led_board-7.ttf") format("truetype");
-			font-weight:normal;
-			font-style:normal;
-		}
-		span.statusspSonos {
-			font-family: liquid;
-			font-size:10px;
-			color: #text_color#;
-			letter-spacing: 1px;
-		}
-		span.titlespSonos {
-			font-family: liquid; 
-			font-size:14px;
-			color:  #text_color#;
-			letter-spacing: 1px;
-		}
-		.arrondie {
-			-moz-border-radius:7px;
-			-webkit-border-radius:7px;
-			border-radius:7px;
-		}
-	</style>
-	<div>
-		<a href="#eqLink#" style="font-size:1.5em;">#name#</a> <span style="font-size: 1.5em;position: relative;">#object_name#</span>
-	</div>
-	<div class="thumbnailAlbumArt">
-		#thumbnail#</br>
-	</div>
-	<div style="position:relative;top:4px">
-		<span class="titlespSonos">
-			#title#
-		</span>
-	</div>
-	
-    <i class="fa fa-volume-off btn-xs"></i><div class="volume" style="z-index:1" value="#volume#" ></div>
+<div class="eqLogic eqLogic-widget noResize sonos_widget sonos3" data-version="#version#" style="text-align:center; width: 240px;background-color : #background_color#;height:320px;#style#" data-eqLogic_id="#id#">
+	<link rel="stylesheet" href="plugins/sonos3/core/template/dashboard/css/style.css" />
+	<div class="leftpanel">
+		<div style="margin-left : 24px;overflow: auto;height: 327px;">
+			<legend style="color : white;margin-bottom:2px;">Playlist</legend>
+			<div class="playlistList" style="text-align:left;"></div>
 
-	<div style="position:relative;top:4px">        
-		<a class="btn btn-default btn-circle btn-xs cmd stop" data-cmd_id="#cmd_stop_id#"><i class="fa fa-stop"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd previous" data-cmd_id="#cmd_previous_id#"><i class="fa fa-step-backward"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd play" data-cmd_id="#cmd_play_id#"><i class="fa fa-play"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd pause" data-cmd_id="#cmd_pause_id#"><i class="fa fa-pause"></i></a>
-		<a class="btn btn-default btn-circle btn-xs cmd next" data-cmd_id="#cmd_next_id#"><i class="fa fa-step-forward"></i></a>
+			<legend style="color : white;margin-bottom:2px;">Radio</legend>
+			<div class="radioList" style="text-align:left;"></div>
+
+		</div>
+		<img class="leftRafter" style="display:none;" src="plugins/kodi/core/template/dashboard/images/chevron.png" title="Listes" onClick="panelLeftClose#id#()"/>
 	</div>
-    
-    <div style="position:relative;top:8px">
-    	<a class="btn btn-default btn-circle btn-xs cmd shuffle" data-cmd_id="#cmd_shuffle_id#"><i class="fa fa-random"></i></a>&nbsp;
-		<i class="fa fa-th-list cursor playlist tooltips" title="Playlists"></i>
-		<i class="fa fa-rss cursor radioDisplay tooltips" title="Radio"></i>
-        &nbsp;<span class="statusspSonos">#state#</span>&nbsp;
-		<i class="fa fa-bars cursor queue tooltips" title="Liste de lecture"></i>
-		<i class="fa fa-check-square-o cursor speaker tooltips" title="Grouper"></i>&nbsp;
-		<a class="btn btn-default btn-circle btn-xs cmd repeat" data-cmd_id="#cmd_repeat_id#"><i class="fa fa-repeat"></i></a>
-    </div>
-    
+	<div class="rightpanel">
+		<div style="margin-right : 24px;overflow: auto;height: 327px;">
+			<legend style="color : white;margin-bottom:2px;">Enceintes</legend>
+			<div class="speakersList" style="text-align:left;"></div>
+
+			<legend style="color : white;margin-bottom:2px;">En cours</legend>
+			<div class="queueList" style="text-align:left;"></div>
+
+		</div>
+		<img class="rightRafter" style="display:none;" src="plugins/kodi/core/template/dashboard/images/chevron.png" onClick="panelRightClose#id#()"/>
+	</div>
+	<div class="uppart">
+		<a href="#eqLink#" class="title_uppart"> #name# </a>
+		<img class="rightRafter" src="plugins/sonos3/core/template/dashboard/images/chevron.png" onClick="panelRight#id#()"/>
+		<img class="leftRafter" src="plugins/sonos3/core/template/dashboard/images/chevron.png" onclick="panelLeft#id#()"/>
+		<div class="jaquette_sonos">
+			<img src="#thumbnail#" class="affiche_premiere_sonos"/>
+			<img src="#thumbnail#" class="affiche_deuxieme_sonos" />
+			<img src="#thumbnail#" class="affiche_troisieme_sonos" />
+		</div>
+		<div class="title_downpart">
+			<a class="title" style="text-decoration: none; cursor:default;">#title#</a>
+			<br/>
+			<a class="subtitle" style="text-decoration: none; cursor:default;">#state#</a>
+		</div>
+	</div>
+	<div class="downpart" style="display:block;">
+		<img src="plugins/sonos3/core/template/dashboard/images/sound.png" height="15px" width="15px" class="bouton_sup_volume" onclick="volume_sonos#id#('bouton')" />
+		<a class="shuffle" onclick="jeedom.cmd.execute({id: #shuffle_id#});"><i class="fa fa-random"></i></a>
+		<a class="repeat" onclick="jeedom.cmd.execute({id: #repeat_id#});"><i class="fa fa-repeat"></i></a>
+		<img class="previous" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #previous_id#});" title="Précédent" />
+		<div class="cercle_downpart">
+			<img class="play_in_cercle" src="plugins/sonos3/core/template/dashboard/images/play1.png" onclick="jeedom.cmd.execute({id: #play_id#});" title="Lecture"/>
+			<img class="pause_in_cercle" src="plugins/sonos3/core/template/dashboard/images/pause.png" onclick="jeedom.cmd.execute({id: #pause_id#});" title="Pause" />
+		</div>
+		<div class="stop_sonos_widget" onclick="jeedom.cmd.execute({id: #stop_id#});" title="Stop"></div>
+		<a class="mute" onclick="jeedom.cmd.execute({id: #mute_id#});"><i class="fa fa-volume-off"></i></a>
+		<img class="next" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #next_id#});" title="Suivant" />
+	</div>
+	<div class="volumeDownpart" style="display:none;">
+		<img src="plugins/sonos3/core/template/dashboard/images/working.png" height="15px" width="15px" class="bouton_sup_volume" onclick="volume_sonos#id#('volume')"/>
+		<div class="volume_sonos_widget" style="margin-top : 5px;">
+			<div class="volume" style="width: 180px;" value="#volume#" ></div>
+		</div>
+	</div>
+
 	<script>
+
+		function panelRight#id#(){
+			$(".sonos3[data-eqLogic_id=#id#] .rightpanel").animate({right:"0px"});
+			$(".sonos3[data-eqLogic_id=#id#] .rightpanel .rightRafter").show();
+			panelLeftClose#id#();
+		}
+		function panelRightClose#id#(){
+			$(".sonos3[data-eqLogic_id=#id#] .rightpanel").animate({right:"-200px"});
+			$(".sonos3[data-eqLogic_id=#id#] .rightpanel .rightRafter").hide();
+		}
+		function panelLeft#id#(){
+			$(".sonos3[data-eqLogic_id=#id#] .leftpanel").animate({left:"0px"});
+			$(".sonos3[data-eqLogic_id=#id#] .leftpanel .leftRafter").show();
+			panelRightClose#id#();
+		}
+		function panelLeftClose#id#(){
+			$(".sonos3[data-eqLogic_id=#id#] .leftpanel").animate({left:"-200px"});
+			$(".sonos3[data-eqLogic_id=#id#] .leftpanel .leftRafter").hide();
+		}
+
+		function pause_and_play#id#(ppk){
+			if(ppk == 0){
+				$(".sonos3[data-eqLogic_id=#id#] .pause_in_cercle").remove();
+			} else if(ppk == 1){
+				$(".sonos3[data-eqLogic_id=#id#] .play_in_cercle").remove();
+			}
+		}
+
+		function volume_sonos#id#(bouton){
+			if(bouton == 'bouton'){
+				$('.sonos3[data-eqLogic_id=#id#] .volumeDownpart').css('display','block');
+				$('.sonos3[data-eqLogic_id=#id#] .downpart').css('display','none');
+			}else if(bouton == 'volume'){
+				$('.sonos3[data-eqLogic_id=#id#] .volumeDownpart').css('display','none');
+				$('.sonos3[data-eqLogic_id=#id#] .downpart').css('display','block');
+			}
+		}
+
 		$(".sonos3[data-eqLogic_id=#id#] .volume").bootstrapSlider({
 			min: 0,
 			max: 100,
@@ -76,53 +105,171 @@
 		$(".sonos3[data-eqLogic_id=#id#] .volume").on('slideStop', function (ev) {
 			jeedom.cmd.execute({id: '#volume_id#', value: {slider: ev.value}});
 		});
-	</script>
-
-	<script>
-
-		if('#hideThumbnail#' == 1){
-			$('.sonos3[data-eqLogic_id=#id#] .thumbnailAlbumArt').hide();
-			$('.sonos3[data-eqLogic_id=#id#]').height(160);
-		}
+		pause_and_play#id#(#state_nb#);
 
 		if('#repeat_state#' == 1){
-			$('.sonos3[data-eqLogic_id=#id#] .cmd.repeat').removeClass('btn-default').addClass('btn-success');
+			$(".sonos3[data-eqLogic_id=#id#] .repeat").css('color','red');
 		}
-
 		if('#shuffle_state#' == 1){
-			$('.sonos3[data-eqLogic_id=#id#] .cmd.shuffle').removeClass('btn-default').addClass('btn-success');
+			$(".sonos3[data-eqLogic_id=#id#] .shuffle").css('color','red');
+		}
+		if('#mute_state#' == 1){
+			$(".sonos3[data-eqLogic_id=#id#] .mute").css('color','red');
+		}
+		if('#playlist#' != ''){
+			playlist#id# = json_decode('#playlist#');
+			playlistList#id# = '';
+			for(var i in playlist#id#){
+				playlistList#id# += '<span class="cursor playPlaylist" style="white-space: nowrap;margin-left:5px;text-align:left;" title="'+playlist#id#[i]+'"  data-name="'+playlist#id#[i]+'"><i class="fa fa-play"></i> '+playlist#id#[i]+'</span><br/>';
+			}
+			$(".sonos3[data-eqLogic_id=#id#] .playlistList").append(playlistList#id#);
 		}
 
-		if('#state_nb#' == 1){
-			$('.sonos3[data-eqLogic_id=#id#] .cmd.play').hide();
-		}else{
-			$('.sonos3[data-eqLogic_id=#id#] .cmd.pause').hide();
+		$('.sonos3[data-eqLogic_id=#id#]  .playPlaylist').on('click',function(){
+			var name = $(this).attr('data-name');
+			$.ajax({
+				type: "POST", 
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "playPlaylist",
+					id :'#id#',
+					playlist : name
+				},
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error,$('#div_playListSonosAlert'));
+				},
+				success: function (data) { 
+					if (data.state != 'ok') {
+						$('#div_playListSonosAlert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+					$('#md_modal2').dialog('close');
+				}
+			});
+		});
+
+		if('#radio#' != ''){
+			radio#id# = json_decode('#radio#');
+			radioList#id# = '';
+			for(var i in radio#id#){
+				radioList#id# += '<span class="cursor playRadio" style="white-space: nowrap;margin-left:5px;text-align:left;" data-name="'+radio#id#[i]+'" title="'+radio#id#[i]+'"><i class="fa fa-play"></i> '+radio#id#[i]+'</span><br/>';
+			}
+			$(".sonos3[data-eqLogic_id=#id#] .radioList").append(radioList#id#);
 		}
 
-		$('.sonos3[data-eqLogic_id=#id#] .cmd').on('click', function() {
-			jeedom.cmd.execute({id: $(this).data('cmd_id')});
+		$('.sonos3[data-eqLogic_id=#id#] .playRadio').on('click',function(){
+			var name = $(this).attr('data-name');
+			$.ajax({
+				type: "POST", 
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "playRadio",
+					id :'#id#',
+					radio : name
+				},
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error,$('#div_radioSonosAlert'));
+				},
+				success: function (data) { 
+					if (data.state != 'ok') {
+						$('#div_radioSonosAlert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+					$('#md_modal2').dialog('close');
+				}
+			});
 		});
 
-		$('.sonos3[data-eqLogic_id=#id#] .queue').on('click', function() {
-			$('#md_modal2').dialog({title: "Musiques"});
-			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=queue.sonos&id=#id#').dialog('open');
+		if('#queue#' != ''){
+			queue#id# = json_decode('#queue#');
+			queueList#id# = '';
+			for(var i in queue#id#){
+				queueList#id# += '<span class="cursor playTrack" style="white-space: nowrap;margin-left:5px;" data-position="'+i+'" title="'+queue#id#[i]+'"><i class="fa fa-play"></i> '+queue#id#[i]+'</span><br/>';
+			}
+			$(".sonos3[data-eqLogic_id=#id#] .queueList").append(queueList#id#);
+		}
+
+		$('.sonos3[data-eqLogic_id=#id#] .playTrack').on('click',function(){
+			var position = $(this).attr('data-position');
+			$.ajax({
+				type: "POST",
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "playTrack",
+					id :'#id#',
+					position : position
+				},
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error,$('#div_queueSonosAlert'));
+				},
+				success: function (data) { 
+					if (data.state != 'ok') {
+						$('#div_queueSonosAlert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+					$('#md_modal2').dialog('close');
+				}
+			});
 		});
 
-		$('.sonos3[data-eqLogic_id=#id#] .playlist').on('click', function() {
-			$('#md_modal2').dialog({title: "Playlist"});
-			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=playlist.sonos&id=#id#').dialog('open');
+		if('#speakers#' != ''){
+			speakers#id# = json_decode('#speakers#');
+			speakersList#id# = '';
+			for(var i in speakers#id#){
+				speakersList#id# += '<span class="cursor" style="white-space: nowrap;margin-left:5px;" title="'+speakers#id#[i]+'"><i class="addSpeaker fa fa-plus" data-name="'+speakers#id#[i]+'"></i> <i class=" removeSpeaker fa fa-minus" data-name="'+speakers#id#[i]+'"></i> '+speakers#id#[i]+'</span><br/>';
+			}
+			$(".sonos3[data-eqLogic_id=#id#] .speakersList").append(speakersList#id#);
+		}
+
+
+		$('.sonos3[data-eqLogic_id=#id#] .addSpeaker').on('click',function(){
+			var name = $(this).attr('data-name');
+			$.ajax({
+				type: "POST", 
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "addSpeaker",
+					id :'#id#',
+					speaker : name
+				},
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
+				},
+				success: function (data) {
+					if (data.state != 'ok') {
+						$('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+				}
+			});
 		});
 
-		$('.sonos3[data-eqLogic_id=#id#] .radioDisplay').on('click', function() {
-			$('#md_modal2').dialog({title: "Radios"});
-			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=radio.sonos&id=#id#').dialog('open');
+		$('.sonos3[data-eqLogic_id=#id#] .removeSpeaker').on('click',function(){
+			var name = $(this).attr('data-name');
+			$.ajax({
+				type: "POST", 
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "removeSpeaker",
+					id :'#id#',
+					speaker : name
+				},
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
+				},
+				success: function (data) {
+					if (data.state != 'ok') {
+						$('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+				}
+			});
 		});
-
-		$('.sonos3[data-eqLogic_id=#id#] .speaker').on('click', function() {
-			$('#md_modal2').dialog({title: "Haut parleur"});
-			$('#md_modal2').load('index.php?v=d&plugin=sonos3&modal=speaker.sonos&id=#id#').dialog('open');
-		});
-
 	</script>
 </div>
 

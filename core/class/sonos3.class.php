@@ -56,24 +56,13 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getSonos($_emptyCache = false) {
-		/*if (!$_emptyCache && self::$_sonos != null) {
-		return self::$_sonos;
-		}
-		/*if ($_emptyCache) {
-		shell_exec('sudo rm -rf /tmp/sonos-cache');
-		}
-		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
-		if ($_emptyCache) {
-		$cache->deleteAll();
-		}
-		self::$_sonos = new Network($cache);*/
 		return new Network(new \Doctrine\Common\Cache\ArrayCache);
-		//return self::$_sonos;
 	}
 
 	public static function syncSonos() {
 		$sonos = self::getSonos(true);
 		$controllers = $sonos->getControllers();
+		$speakers = sonos3::getSpeaker();
 		foreach ($controllers as $controller) {
 			$eqLogic = sonos3::byLogicalId($controller->ip, 'sonos3');
 			if (!is_object($eqLogic)) {
@@ -106,8 +95,13 @@ class sonos3 extends eqLogic {
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
-				$eqLogic->save();
 			}
+			$speakers_array = array();
+			foreach ($speakers as $speaker) {
+				$speakers_array[$speaker->ip] = $speaker->room;
+			}
+			$eqLogic->setConfiguration('speakers', json_encode($speakers_array));
+			$eqLogic->save();
 		}
 	}
 
@@ -157,6 +151,19 @@ class sonos3 extends eqLogic {
 					if ($shuffle != $cmd_suffle->execCmd(null, 2)) {
 						$cmd_suffle->setCollectDate('');
 						$cmd_suffle->event($shuffle);
+						$changed = true;
+					}
+				}
+
+				$cmd_mute = $eqLogic->getCmd(null, 'mute_state');
+				if (is_object($cmd_mute)) {
+					$mute = $controller->isMuted();
+					if ($mute == '') {
+						$mute = 0;
+					}
+					if ($mute != $cmd_mute->execCmd(null, 2)) {
+						$cmd_mute->setCollectDate('');
+						$cmd_mute->event($mute);
 						$changed = true;
 					}
 				}
@@ -229,6 +236,18 @@ class sonos3 extends eqLogic {
 						unlink(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg');
 					}
 				}
+
+				$queue = array();
+				foreach ($eqLogic->getQueue() as $track) {
+					$queue[] = $track->title . ' - ' . $track->artist;
+				}
+				$jQueue = json_encode($queue);
+				if ($eqLogic->getConfiguration('queue') != $jQueue) {
+					$eqLogic->setConfiguration('queue', $jQueue);
+					$eqLogic->save();
+					$changed = true;
+				}
+
 				if ($changed) {
 					$eqLogic->refreshWidget();
 				}
@@ -416,6 +435,18 @@ class sonos3 extends eqLogic {
 		$unmute->setSubType('other');
 		$unmute->setEqLogic_id($this->getId());
 		$unmute->save();
+
+		$mute_state = $this->getCmd(null, 'mute_state');
+		if (!is_object($mute_state)) {
+			$mute_state = new sonos3Cmd();
+			$mute_state->setLogicalId('mute_state');
+			$mute_state->setIsVisible(1);
+			$mute_state->setName(__('Muet status', __FILE__));
+		}
+		$mute_state->setType('info');
+		$mute_state->setSubType('binary');
+		$mute_state->setEqLogic_id($this->getId());
+		$mute_state->save();
 
 		$repeat = $this->getCmd(null, 'repeat');
 		if (!is_object($repeat)) {
@@ -633,13 +664,17 @@ class sonos3 extends eqLogic {
 		if ($this->getDisplay('hideOn' . $version) == 1) {
 			return '';
 		}
+		$mc = cache::byKey('sonosWidget' . $_version . $this->getId());
+		if ($mc->getValue() != '') {
+			return $mc->getValue();
+		}
 		$replace = array(
 			'#id#' => $this->getId(),
 			'#info#' => (isset($info)) ? $info : '',
 			'#name#' => $this->getName(),
 			'#eqLink#' => ($this->hasRight('w')) ? $this->getLinkToConfiguration() : '#',
 			'#text_color#' => $this->getConfiguration('text_color'),
-			'#background_color#' => $this->getBackgroundColor($_version),
+			'#background_color#' => '#5d9cec',
 			'#hideThumbnail#' => 0,
 			'#object_name#' => '',
 			'#version#' => $_version,
@@ -670,7 +705,23 @@ class sonos3 extends eqLogic {
 			}
 		}
 
-		$cmd_volume = $this->getCmd(null, 'volume');
+		foreach ($this->getCmd('action') as $cmd) {
+			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+			if ($cmd->getLogicalId() == 'play_playlist') {
+				$replace['#playlist#'] = $cmd->getDisplay('title_possibility_list');
+			}
+			if ($cmd->getLogicalId() == 'play_radio') {
+				$replace['#radio#'] = $cmd->getDisplay('title_possibility_list');
+			}
+		}
+
+		foreach ($this->getCmd('info') as $cmd) {
+			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+			$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd(null, 2);
+		}
+		if ($replace['#mute_state#'] == 1) {
+			$replace['#mute_id#'] = $replace['#unmute_id#'];
+		}
 
 		$cmd_track_artist = $this->getCmd(null, 'track_artist');
 		if (is_object($cmd_track_artist)) {
@@ -692,39 +743,17 @@ class sonos3 extends eqLogic {
 		if (strlen($replace['#title#']) > 12) {
 			$replace['#title#'] = '<marquee behavior="scroll" direction="left" scrollamount="2">' . $replace['#title#'] . '</marquee>';
 		}
+		$replace['#queue#'] = str_replace("'", "\'", $this->getConfiguration('queue'));
+		$replace['#speakers#'] = str_replace("'", "\'", $this->getConfiguration('speakers'));
 
 		$cmd_track_image = $this->getCmd(null, 'track_image');
 		if (is_object($cmd_track_image)) {
 			$img = dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $this->getId() . '.jpg';
 			if (file_exists($img) && filesize($img) > 500) {
-				$replace['#thumbnail#'] = '<img style="width : 70%;" src="plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2)) . '" />';
+				$replace['#thumbnail#'] = 'plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2));
 			} else {
-				$replace['#thumbnail#'] = '<img style="width : 70%;" src="plugins/sonos3/doc/images/sonos3_alt_icon.png" />';
+				$replace['#thumbnail#'] = 'plugins/sonos3/doc/images/sonos3_alt_icon.png';
 			}
-		}
-
-		$cmd_volume = $this->getCmd(null, 'volume');
-		if (is_object($cmd_volume)) {
-			$replace['#volume#'] = $cmd_volume->execCmd(null, 2);
-		}
-
-		$cmd_setVolume = $this->getCmd(null, 'setVolume');
-		if (is_object($cmd_setVolume)) {
-			$replace['#volume_id#'] = $cmd_setVolume->getId();
-		}
-
-		$cmd_repeate = $this->getCmd(null, 'repeat_state');
-		if (is_object($cmd_repeate)) {
-			$replace['#repeat_state#'] = $cmd_repeate->execCmd(null, 2);
-		}
-
-		$cmd_shuffle = $this->getCmd(null, 'shuffle_state');
-		if (is_object($cmd_shuffle)) {
-			$replace['#shuffle_state#'] = $cmd_shuffle->execCmd(null, 2);
-		}
-
-		foreach ($this->getCmd('action') as $cmd) {
-			$replace['#cmd_' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 		}
 
 		$parameters = $this->getDisplay('parameters');
@@ -735,7 +764,9 @@ class sonos3 extends eqLogic {
 		}
 
 		$_version = jeedom::versionAlias($_version);
-		return template_replace($replace, getTemplate('core', $_version, 'eqLogic', 'sonos3'));
+		$html = template_replace($replace, getTemplate('core', $_version, 'eqLogic', 'sonos3'));
+		cache::set('sonosWidget' . $_version . $this->getId(), $html, 0);
+		return $html;
 	}
 
 	public function getQueue() {
@@ -882,7 +913,8 @@ class sonos3Cmd extends cmd {
 			}
 			if ($this->getLogicalId() == 'play_radio') {
 				$radio = $sonos->getRadio();
-				if ($show = $radio->getFavouriteStation($_options['title'])) {
+				$stations = $radio->getFavouriteStations();
+				if ($stations->getName() == $_options['title']) {
 					$controller->useStream($show)->play();
 				}
 			}
@@ -915,7 +947,6 @@ class sonos3Cmd extends cmd {
 				} else {
 					$controller->interrupt($track);
 				}
-
 			} else {
 				sonos3::pull($eqLogic->getId());
 			}
