@@ -709,10 +709,6 @@ class sonos3 extends eqLogic {
 			$replace['#name#'] = '';
 		}
 
-		if ($this->getConfiguration('hideAlbumart') == 1) {
-			$replace['#hideThumbnail#'] = 1;
-		}
-
 		$cmd_state = $this->getCmd(null, 'state');
 		if (is_object($cmd_state)) {
 			$replace['#state#'] = $cmd_state->execCmd(null, 2);
