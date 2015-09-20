@@ -56,7 +56,21 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getSonos($_emptyCache = false) {
-		return new Network(new \Doctrine\Common\Cache\ArrayCache);
+		if ($_emptyCache) {
+			shell_exec('rm -rf /tmp/sonos-cache');
+			shell_exec('sudo rm -rf /tmp/sonos-cache');
+		} else if (self::$_sonos !== null) {
+			return self::$_sonos;
+		}
+		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
+		self::$_sonos = new Network($cache);
+		return self::$_sonos;
+	}
+
+	public static function cronHourly() {
+		shell_exec('rm -rf /tmp/sonos-cache');
+		shell_exec('sudo rm -rf /tmp/sonos-cache');
+		self::getSonos(true);
 	}
 
 	public static function syncSonos() {
