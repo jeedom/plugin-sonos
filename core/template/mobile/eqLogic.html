@@ -1,4 +1,4 @@
-<div class="eqLogic eqLogic-widget sonos3" data-version="mobile" style="overflow:hidden;text-align:center; width: 420px; height:19.34em; padding-bottom:0px;" data-eqLogic_id="#id#">
+<div class="eqLogic eqLogic-widget sonos3" data-version="mobile" style="overflow:hidden;text-align:center; width: 420px; height:19.34em; padding-bottom:0px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#">
 	<link rel="stylesheet" href="plugins/sonos3/core/template/mobile/css/style.css" />
 	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
 	<div class="card">
@@ -41,33 +41,33 @@
 
 	<script>
 		function soundMenu#id#(){
-			if(!$('.sonos3[data-eqLogic_id=#id#] .soundMenu').is(':visible')){
-				$('.sonos3[data-eqLogic_id=#id#] .soundMenu').show();
-				$('.sonos3[data-eqLogic_id=#id#] .primarySubMenu').hide();
+			if(!$('.sonos3[data-eqLogic_uid=#uid#] .soundMenu').is(':visible')){
+				$('.sonos3[data-eqLogic_uid=#uid#] .soundMenu').show();
+				$('.sonos3[data-eqLogic_uid=#uid#] .primarySubMenu').hide();
 			}else{
-				$('.sonos3[data-eqLogic_id=#id#] .soundMenu').hide();
-				$('.sonos3[data-eqLogic_id=#id#] .primarySubMenu').show();
+				$('.sonos3[data-eqLogic_uid=#uid#] .soundMenu').hide();
+				$('.sonos3[data-eqLogic_uid=#uid#] .primarySubMenu').show();
 			}
 		}
 
-		$("body").undelegate(".sonos3[data-eqLogic_id=#id#] .volume",'slidestop');
-		$("body").delegate(".sonos3[data-eqLogic_id=#id#] .volume",'slidestop', function (event, ui) {
-			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: $(".sonos3[data-eqLogic_id=#id#] .volume input").value()}});
+		$("body").undelegate(".sonos3[data-eqLogic_uid=#uid#] .volume",'slidestop');
+		$("body").delegate(".sonos3[data-eqLogic_uid=#uid#] .volume",'slidestop', function (event, ui) {
+			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: $(".sonos3[data-eqLogic_uid=#uid#] .volume input").value()}});
 		});
 		if('#repeat_state#' == 1){
-			$(".sonos3[data-eqLogic_id=#id#] .repeat").css('color','red');
+			$(".sonos3[data-eqLogic_uid=#uid#] .repeat").css('color','red');
 		}
 		if('#shuffle_state#' == 1){
-			$(".sonos3[data-eqLogic_id=#id#] .shuffle").css('color','red');
+			$(".sonos3[data-eqLogic_uid=#uid#] .shuffle").css('color','red');
 		}
 		if('#mute_state#' == 1){
-			$(".sonos3[data-eqLogic_id=#id#] .mute").css('color','red');
+			$(".sonos3[data-eqLogic_uid=#uid#] .mute").css('color','red');
 		}
 
 		if('#state_nb#' == 1){
-			$('.sonos3[data-eqLogic_id=#id#] .play').hide();
+			$('.sonos3[data-eqLogic_uid=#uid#] .play').remove();
 		}else{
-			$('.sonos3[data-eqLogic_id=#id#] .pause').hide();
+			$('.sonos3[data-eqLogic_uid=#uid#] .pause').remove();
 		}
 	</script>
 </div>

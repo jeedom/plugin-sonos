@@ -697,6 +697,7 @@ class sonos3 extends eqLogic {
 			'#object_name#' => '',
 			'#version#' => $_version,
 			'#style#' => '',
+			'#uid#' => 'sonos' . $this->getId() . mt_rand(),
 		);
 		if ($_version == 'dview' || $_version == 'mview') {
 			$object = $this->getObject();
