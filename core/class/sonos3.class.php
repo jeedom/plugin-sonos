@@ -341,8 +341,13 @@ class sonos3 extends eqLogic {
 	}
 
 	public function getControllerByIp($_ip) {
-		$sonos = sonos3::getSonos(true);
-		$controller = $sonos->getControllerByIp($_ip);
+		$controller = null;
+		$sonos = sonos3::getSonos();
+		try {
+			$controller = $sonos->getControllerByIp($_ip);
+		} catch (Exception $e) {
+
+		}
 		if ($controller == null) {
 			$sonos = sonos3::getSonos(true);
 			$controller = $sonos->getControllerByIp($_ip);
