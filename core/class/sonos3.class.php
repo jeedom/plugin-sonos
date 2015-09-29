@@ -67,7 +67,7 @@ class sonos3 extends eqLogic {
 		return self::$_sonos;
 	}
 
-	public static function cronHourly() {
+	public static function cronDaily() {
 		shell_exec('rm -rf /tmp/sonos-cache');
 		shell_exec('sudo rm -rf /tmp/sonos-cache');
 		self::getSonos(true);
