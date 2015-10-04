@@ -34,11 +34,6 @@ class sonos3 extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
-	public static function mobileManifest() {
-		echo "plugins/sonos3/doc/images/sonos3_alt_icon.png\n";
-		echo "plugins/sonos3/core/template/fonts/led_board-7.ttf\n";
-	}
-
 	public static function health() {
 		$return = array();
 		$cron = cron::byClassAndFunction('sonos3', 'pull');
@@ -828,6 +823,9 @@ class sonos3Cmd extends cmd {
 	/*     * *********************Methode d'instance************************* */
 
 	public function execute($_options = array()) {
+		if ($this->getType() == 'info') {
+			return;
+		}
 		try {
 			$eqLogic = $this->getEqLogic();
 			$sonos = sonos3::getSonos();
