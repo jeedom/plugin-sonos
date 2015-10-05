@@ -463,6 +463,7 @@ class sonos3 extends eqLogic {
 		}
 		$mute_state->setType('info');
 		$mute_state->setSubType('binary');
+		$mute_state->setEventOnly(1);
 		$mute_state->setEqLogic_id($this->getId());
 		$mute_state->save();
 
@@ -487,6 +488,7 @@ class sonos3 extends eqLogic {
 		}
 		$repeat_state->setType('info');
 		$repeat_state->setSubType('binary');
+		$repeat_state->setEventOnly(1);
 		$repeat_state->setEqLogic_id($this->getId());
 		$repeat_state->save();
 
@@ -511,6 +513,7 @@ class sonos3 extends eqLogic {
 		}
 		$shuffle_state->setType('info');
 		$shuffle_state->setSubType('binary');
+		$shuffle_state->setEventOnly(1);
 		$shuffle_state->setEqLogic_id($this->getId());
 		$shuffle_state->save();
 
