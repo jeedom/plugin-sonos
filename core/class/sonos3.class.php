@@ -32,6 +32,7 @@ class sonos3 extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
 	private static $_sonos = null;
+	private static $_sonosAddOK = false;
 
 	/*     * ***********************Methode static*************************** */
 
@@ -339,8 +340,9 @@ class sonos3 extends eqLogic {
 	public function getControllerByIp($_ip) {
 		$controller = null;
 		$sonos = sonos3::getSonos();
+
 		try {
-			if ($controller == null) {
+			if (!self::$_sonosAddOK) {
 				$speakers = array();
 				foreach (self::byType('sonos3') as $eqLogic) {
 					if ($eqLogic->getIsEnable() == 0) {
@@ -352,8 +354,9 @@ class sonos3 extends eqLogic {
 					$speakers[$eqLogic->getLogicalId()] = new Speaker($eqLogic->getLogicalId());
 				}
 				$sonos->setSpeakers($speakers);
-				$controller = $sonos->getControllerByIp($_ip);
+				self::$_sonosAddOK = true;
 			}
+			$controller = $sonos->getControllerByIp($_ip);
 		} catch (Exception $e) {
 
 		}
