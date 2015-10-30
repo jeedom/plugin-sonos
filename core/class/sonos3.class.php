@@ -20,6 +20,7 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Network;
+use duncan3dc\Sonos\Speaker;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use duncan3dc\Speaker\Providers\VoxygenProvider;
@@ -31,6 +32,7 @@ class sonos3 extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
 	private static $_sonos = null;
+	private static $_sonosAddOK = false;
 
 	/*     * ***********************Methode static*************************** */
 
@@ -338,15 +340,42 @@ class sonos3 extends eqLogic {
 	public function getControllerByIp($_ip) {
 		$controller = null;
 		$sonos = sonos3::getSonos();
+
 		try {
+			if (!self::$_sonosAddOK) {
+				$speakers = array();
+				foreach (self::byType('sonos3') as $eqLogic) {
+					if ($eqLogic->getIsEnable() == 0) {
+						continue;
+					}
+					if ($eqLogic->getLogicalId() == '') {
+						continue;
+					}
+					$speakers[$eqLogic->getLogicalId()] = new Speaker($eqLogic->getLogicalId());
+				}
+				$sonos->setSpeakers($speakers);
+				self::$_sonosAddOK = true;
+			}
 			$controller = $sonos->getControllerByIp($_ip);
 		} catch (Exception $e) {
 
 		}
 		if ($controller == null) {
-			$sonos = sonos3::getSonos(true);
-			$controller = $sonos->getControllerByIp($_ip);
+			try {
+				$controller = $sonos->getControllerByIp($_ip);
+			} catch (Exception $e) {
+
+			}
 		}
+		try {
+			if ($controller == null) {
+				$sonos = sonos3::getSonos(true);
+				$controller = $sonos->getControllerByIp($_ip);
+			}
+		} catch (Exception $e) {
+
+		}
+
 		return $controller;
 	}
 
@@ -789,7 +818,7 @@ class sonos3 extends eqLogic {
 
 	public function getQueue() {
 		$sonos = sonos3::getSonos();
-		$controller = $sonos->getControllerByIp($this->getLogicalId());
+		$controller = self::getControllerByIp($this->getLogicalId());
 		$queue = $controller->getQueue();
 		return $queue->getTracks();
 	}
@@ -832,11 +861,7 @@ class sonos3Cmd extends cmd {
 		try {
 			$eqLogic = $this->getEqLogic();
 			$sonos = sonos3::getSonos();
-			$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
-			if ($controller == null) {
-				$sonos = sonos3::getSonos(true);
-				$controller = $sonos->getControllerByIp($eqLogic->getLogicalId());
-			}
+			$controller = sonos3::getControllerByIp($eqLogic->getLogicalId());
 			if ($this->getLogicalId() == 'play') {
 				if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
 					$state = $eqLogic->getCmd(null, 'state');
