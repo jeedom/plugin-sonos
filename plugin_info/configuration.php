@@ -24,6 +24,11 @@ if (!isConnect()) {
 ?>
 <form class="form-horizontal">
 	<fieldset>
+<?php
+if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+	echo '<div class="alert alert-danger">{{Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 5.6}}</div>';
+}
+?>
     <div class="form-group">
       <label class="col-lg-4 control-label">{{Voix}}</label>
       <div class="col-lg-2">
