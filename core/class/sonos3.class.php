@@ -36,6 +36,13 @@ class sonos3 extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function updateSonos() {
+		log::remove('sonos_update');
+		$cmd = 'sudo /bin/bash ' . dirname(__FILE__) . '/../../ressources/install.sh';
+		$cmd .= ' >> ' . log::getPathToLog('sonos_update') . ' 2>&1 &';
+		exec($cmd);
+	}
+
 	public static function health() {
 		$return = array();
 		$cron = cron::byClassAndFunction('sonos3', 'pull');

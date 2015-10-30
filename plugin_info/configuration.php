@@ -24,87 +24,87 @@ if (!isConnect()) {
 ?>
 <form class="form-horizontal">
 	<fieldset>
-<?php
+    <?php
 if (version_compare(PHP_VERSION, '5.6.0') < 0) {
 	echo '<div class="alert alert-danger">{{Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 5.6}}</div>';
 }
 ?>
-    <div class="form-group">
-      <label class="col-lg-4 control-label">{{Voix}}</label>
-      <div class="col-lg-2">
-       <select class="configKey tooltips form-control" data-l1key="ttsVoxygenVoice">
-         <optgroup label="Arabic">
-           <option value="Adel">Adel</option>
-         </optgroup>
-         <optgroup label="Deutch">
-           <option value="Matthias">Matthias</option>
-           <option value="Sylvia">Sylvia</option>
-         </optgroup>
-         <optgroup label="English U.K.">
-           <option value="Bibi">Bibi</option>
-           <option value="Bronwen">Bronwen</option>
-           <option value="Elizabeth">Elizabeth</option>
-           <option value="Paul">Paul</option>
-         </optgroup>
-         <optgroup label="English U.S.">
-           <option value="Amanda">Amanda</option>
-           <option value="Phil">Phil</option>
-         </optgroup>
-         <optgroup label="Español">
-           <option value="Marta">Marta</option>
-         </optgroup>
-         <optgroup label="Français">
-           <option value="Loic">Loic</option>
-           <option value="Agnes">Agnes</option>
-           <option value="Melodine">Melodine</option>
-           <option value="Chut">Chut</option>
-           <option value="Bicool">Bicool</option>
-           <option value="Philippe">Philippe</option>
-           <option value="Electra">Electra</option>
-           <option value="Damien">Damien</option>
-           <option value="DarkVadoor">DarkVadoor</option>
-           <option value="Ramboo">Ramboo</option>
-           <option value="John">John</option>
-           <option value="Helene" selected>Helene</option>
-           <option value="Eva">Eva</option>
-           <option value="JeanJean">JeanJean</option>
-           <option value="Papi">Papi</option>
-           <option value="Robot">Robot</option>
-           <option value="Sidoo">Sidoo</option>
-           <option value="Sorciere">Sorciere</option>
-           <option value="Yeti">Yeti</option>
-           <option value="Zozo">Zozo</option>
-         </optgroup>
-         <optgroup label="Italiano">
-           <option value="Sonia">Sonia</option>
-         </optgroup>
-       </select>
-     </div>
+   <div class="form-group">
+    <label class="col-lg-4 control-label">{{Voix}}</label>
+    <div class="col-lg-2">
+     <select class="configKey tooltips form-control" data-l1key="ttsVoxygenVoice">
+       <optgroup label="Arabic">
+         <option value="Adel">Adel</option>
+       </optgroup>
+       <optgroup label="Deutch">
+         <option value="Matthias">Matthias</option>
+         <option value="Sylvia">Sylvia</option>
+       </optgroup>
+       <optgroup label="English U.K.">
+         <option value="Bibi">Bibi</option>
+         <option value="Bronwen">Bronwen</option>
+         <option value="Elizabeth">Elizabeth</option>
+         <option value="Paul">Paul</option>
+       </optgroup>
+       <optgroup label="English U.S.">
+         <option value="Amanda">Amanda</option>
+         <option value="Phil">Phil</option>
+       </optgroup>
+       <optgroup label="Español">
+         <option value="Marta">Marta</option>
+       </optgroup>
+       <optgroup label="Français">
+         <option value="Loic">Loic</option>
+         <option value="Agnes">Agnes</option>
+         <option value="Melodine">Melodine</option>
+         <option value="Chut">Chut</option>
+         <option value="Bicool">Bicool</option>
+         <option value="Philippe">Philippe</option>
+         <option value="Electra">Electra</option>
+         <option value="Damien">Damien</option>
+         <option value="DarkVadoor">DarkVadoor</option>
+         <option value="Ramboo">Ramboo</option>
+         <option value="John">John</option>
+         <option value="Helene" selected>Helene</option>
+         <option value="Eva">Eva</option>
+         <option value="JeanJean">JeanJean</option>
+         <option value="Papi">Papi</option>
+         <option value="Robot">Robot</option>
+         <option value="Sidoo">Sidoo</option>
+         <option value="Sorciere">Sorciere</option>
+         <option value="Yeti">Yeti</option>
+         <option value="Zozo">Zozo</option>
+       </optgroup>
+       <optgroup label="Italiano">
+         <option value="Sonia">Sonia</option>
+       </optgroup>
+     </select>
    </div>
-   <div class="form-group useShare">
-    <label class="col-lg-4 control-label">{{Nom ou IP du partage}}</label>
-    <div class="col-lg-2">
-      <input class="configKey tooltips form-control" data-l1key="tts_host" />
-    </div>
+ </div>
+ <div class="form-group useShare">
+  <label class="col-lg-4 control-label">{{Nom ou IP du partage}}</label>
+  <div class="col-lg-2">
+    <input class="configKey tooltips form-control" data-l1key="tts_host" />
   </div>
-  <div class="form-group useShare">
-    <label class="col-lg-4 control-label">{{Nom d'utilisateur pour le partage}}</label>
-    <div class="col-lg-2">
-      <input class="configKey tooltips form-control" data-l1key="tts_username" />
-    </div>
+</div>
+<div class="form-group useShare">
+  <label class="col-lg-4 control-label">{{Nom d'utilisateur pour le partage}}</label>
+  <div class="col-lg-2">
+    <input class="configKey tooltips form-control" data-l1key="tts_username" />
   </div>
-  <div class="form-group useShare">
-    <label class="col-lg-4 control-label">{{Mot de passe du partage}}</label>
-    <div class="col-lg-2">
-      <input type="password" class="configKey tooltips form-control" data-l1key="tts_password" />
-    </div>
+</div>
+<div class="form-group useShare">
+  <label class="col-lg-4 control-label">{{Mot de passe du partage}}</label>
+  <div class="col-lg-2">
+    <input type="password" class="configKey tooltips form-control" data-l1key="tts_password" />
   </div>
-  <div class="form-group useShare">
-    <label class="col-lg-4 control-label">{{Chemin sur le nas}}</label>
-    <div class="col-lg-2">
-      <input class="configKey tooltips form-control" data-l1key="tts_path" />
-    </div>
+</div>
+<div class="form-group useShare">
+  <label class="col-lg-4 control-label">{{Chemin sur le nas}}</label>
+  <div class="col-lg-2">
+    <input class="configKey tooltips form-control" data-l1key="tts_path" />
   </div>
+</div>
 </div>
 <div class="form-group">
  <label class="col-lg-4 control-label">{{Découverte}}</label>
@@ -112,6 +112,18 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
   <a class="btn btn-default" id="bt_syncSonos"><i class='fa fa-refresh'></i> {{Rechercher les équipements Sonos}}</a>
 </div>
 </div>
+<?php
+if (jeedom::isCapable('sudo')) {
+	echo '<div class="form-group">
+  <label class="col-lg-4 control-label">{{Dépendance Sonos}}</label>
+  <div class="col-lg-3">
+    <a class="btn btn-warning bt_installDeps"><i class="fa fa-check"></i> {{Installer/Mettre à jour}}</a>
+  </div>
+</div>';
+} else {
+	echo '<div class="alert alert danger">{{Jeedom n\'a pas les droits sudo sur votre système, il faut lui ajouter pour qu\'il puisse installer le démon openzwave, voir <a target="_blank" href="https://jeedom.fr/doc/documentation/installation/fr_FR/doc-installation.html#autre">ici</a> partie 1.7.4}}</div>';
+}
+?>
 </fieldset>
 </form>
 
@@ -136,4 +148,13 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
           }
         });
       });
-    </script>
+
+  $('.bt_installDeps').on('click',function(){
+    bootbox.confirm('{{Etes-vous sûr de vouloir installer/mettre à jour Sonos ? }}', function (result) {
+      if (result) {
+        $('#md_modal').dialog({title: "{{Installation / Mise à jour}}"});
+        $('#md_modal').load('index.php?v=d&plugin=sonos3&modal=update.sonos').dialog('open');
+      }
+    });
+  });
+</script>
