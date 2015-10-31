@@ -9,9 +9,12 @@ Si plus tard vous ajoutez un Sonos, vous pouvez soit créer un équipement Sonos
 
 image::../images/sonos1.PNG[]
 
-* Fournisseur TTS : permet de choisir le service qui fait la transformation du texte à lire (voxygen est moins limité que google mais le deux nécessite d'avoir un partage alors que Google Translate pas besoin), si vous choissiez voxygen vous pouvez aussi choisir le type de voix.
-* [TTS] Chemin local du répertoire partagé : le chemin tel que vu par Jeedom vers le repertoire partagé (voir chapitre sur le TTS)
-* [TTS] Chemin Sonos du répertoire paratagé : chemin tel que vu par le Sonos vers le repertoire partagé (voir chapitre sur le TTS)
+* *Voix* : choix de la voix lors du TTS
+* *Partage* : nom du partage ainsi que le chemin du dossier
+* *Nom d'utilisateur pour le partage* : nom d'utilisateur pour acceder au partage
+* *Mot de passe du partage* : mot de passe du partage
+* *Découverte* : decouvre automatiquement les sonos (ne marche pas sur une installation de type docker ou il faut creer à la main chaque sonos)
+* *Dépendance Sonos* : installer les dépendances sonos pour le TTS
 
 [IMPORTANT]
 Les messages trop long ne peuvent etre transmis en TTS (la limite depend du fournisseurs de TTS, en général environ 100 caractères)
@@ -72,7 +75,7 @@ Comme commande vous retrouverez :
 
 == TTS
 
-Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. La configuration est assez simple il faut mettre le nom ou l'ip du nas (attention à bien mettre la même chose que ce qui est déclaré sur sonos), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture) et le chemin (il est conseillé de faire un sous dossier tts)
+Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. La configuration est assez simple il faut mettre le nom ou l'ip du nas (attention à bien mettre la même chose que ce qui est déclaré sur sonos) et le chemain (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture)
 
 [IMPORTANT]
 Il faut absolument mettre un mot de passe pour que cela marche

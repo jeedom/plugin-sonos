@@ -82,7 +82,7 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
    </div>
  </div>
  <div class="form-group useShare">
-  <label class="col-lg-4 control-label">{{Nom ou IP du partage}}</label>
+  <label class="col-lg-4 control-label">{{Partage}}</label>
   <div class="col-lg-2">
    <div class="input-group">
      <input class="configKey tooltips form-control" data-l1key="tts_host" />
