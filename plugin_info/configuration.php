@@ -84,8 +84,12 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
  <div class="form-group useShare">
   <label class="col-lg-4 control-label">{{Nom ou IP du partage}}</label>
   <div class="col-lg-2">
-    <input class="configKey tooltips form-control" data-l1key="tts_host" />
-  </div>
+   <div class="input-group">
+     <input class="configKey tooltips form-control" data-l1key="tts_host" />
+     <div class="input-group-addon">/</div>
+     <input class="configKey tooltips form-control" data-l1key="tts_path" />
+   </div>
+ </div>
 </div>
 <div class="form-group useShare">
   <label class="col-lg-4 control-label">{{Nom d'utilisateur pour le partage}}</label>
@@ -97,12 +101,6 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
   <label class="col-lg-4 control-label">{{Mot de passe du partage}}</label>
   <div class="col-lg-2">
     <input type="password" class="configKey tooltips form-control" data-l1key="tts_password" />
-  </div>
-</div>
-<div class="form-group useShare">
-  <label class="col-lg-4 control-label">{{Chemin sur le nas}}</label>
-  <div class="col-lg-2">
-    <input class="configKey tooltips form-control" data-l1key="tts_path" />
   </div>
 </div>
 </div>
