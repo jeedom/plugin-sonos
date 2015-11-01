@@ -139,6 +139,7 @@ class Network implements LoggerAwareInterface {
 			socket_recvfrom($sock, $tmp, 2048, null, $name, $port);
 			$response .= $tmp;
 		}
+
 		$this->logger->debug($response);
 
 		$devices = [];

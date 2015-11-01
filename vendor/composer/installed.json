@@ -1,77 +1,5 @@
 [
     {
-        "name": "doctrine/cache",
-        "version": "v1.4.2",
-        "version_normalized": "1.4.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/cache.git",
-            "reference": "8c434000f420ade76a07c64cbe08ca47e5c101ca"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/cache/zipball/8c434000f420ade76a07c64cbe08ca47e5c101ca",
-            "reference": "8c434000f420ade76a07c64cbe08ca47e5c101ca",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2"
-        },
-        "conflict": {
-            "doctrine/common": ">2.2,<2.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": ">=3.7",
-            "predis/predis": "~1.0",
-            "satooshi/php-coveralls": "~0.6"
-        },
-        "time": "2015-08-31 12:36:41",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.5.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Doctrine\\Common\\Cache\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
-            },
-            {
-                "name": "Johannes Schmitt",
-                "email": "schmittjoh@gmail.com"
-            }
-        ],
-        "description": "Caching library offering an object-oriented API for many cache backends",
-        "homepage": "http://www.doctrine-project.org",
-        "keywords": [
-            "cache",
-            "caching"
-        ]
-    },
-    {
         "name": "duncan3dc/domparser",
         "version": "1.4.1",
         "version_normalized": "1.4.1.0",
@@ -356,131 +284,6 @@
         ]
     },
     {
-        "name": "icewind/streams",
-        "version": "0.2",
-        "version_normalized": "0.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/icewind1991/Streams.git",
-            "reference": "5aae45f2ddd3d1a6e2a496dd5d1e7857bfeb605a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/icewind1991/Streams/zipball/5aae45f2ddd3d1a6e2a496dd5d1e7857bfeb605a",
-            "reference": "5aae45f2ddd3d1a6e2a496dd5d1e7857bfeb605a",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3"
-        },
-        "require-dev": {
-            "satooshi/php-coveralls": "dev-master"
-        },
-        "time": "2014-07-30 23:46:15",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Icewind\\Streams\\Tests\\": "tests/",
-                "Icewind\\Streams\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Robin Appelman",
-                "email": "icewind@owncloud.com"
-            }
-        ],
-        "description": "A set of generic stream wrappers"
-    },
-    {
-        "name": "icewind/smb",
-        "version": "v1.0.4",
-        "version_normalized": "1.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/icewind1991/SMB.git",
-            "reference": "9277bd20262a01b38a33cc7356e98055f2262d32"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/icewind1991/SMB/zipball/9277bd20262a01b38a33cc7356e98055f2262d32",
-            "reference": "9277bd20262a01b38a33cc7356e98055f2262d32",
-            "shasum": ""
-        },
-        "require": {
-            "icewind/streams": "0.2.*",
-            "php": ">=5.3"
-        },
-        "require-dev": {
-            "satooshi/php-coveralls": "dev-master"
-        },
-        "time": "2015-08-17 14:20:38",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Icewind\\SMB\\": "src/",
-                "Icewind\\SMB\\Test\\": "tests/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Robin Appelman",
-                "email": "icewind@owncloud.com"
-            }
-        ],
-        "description": "php wrapper for smbclient and libsmbclient-php"
-    },
-    {
-        "name": "robgridley/flysystem-smb",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/robgridley/flysystem-smb.git",
-            "reference": "e2f77bd8bc189c964e1d207f181f3665748647ba"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/robgridley/flysystem-smb/zipball/e2f77bd8bc189c964e1d207f181f3665748647ba",
-            "reference": "e2f77bd8bc189c964e1d207f181f3665748647ba",
-            "shasum": ""
-        },
-        "require": {
-            "icewind/smb": "~1.0",
-            "league/flysystem": "~1.0",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "phpspec/phpspec": "~2.2"
-        },
-        "time": "2015-06-18 14:52:15",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "RobGridley\\Flysystem\\Smb\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "authors": [
-            {
-                "name": "Rob Gridley",
-                "email": "me@robgridley.com"
-            }
-        ],
-        "description": "Flysystem adapter for Icewind SMB."
-    },
-    {
         "name": "psr/log",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -660,18 +463,90 @@
         ]
     },
     {
-        "name": "duncan3dc/sonos",
-        "version": "1.7.1",
-        "version_normalized": "1.7.1.0",
+        "name": "doctrine/cache",
+        "version": "v1.5.0",
+        "version_normalized": "1.5.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/duncan3dc/sonos.git",
-            "reference": "3dd54309b236713c7f3af4741d730cd5df9071b3"
+            "url": "https://github.com/doctrine/cache.git",
+            "reference": "eb8a73619af4f1c8711e2ce482f5de3643258a1f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/3dd54309b236713c7f3af4741d730cd5df9071b3",
-            "reference": "3dd54309b236713c7f3af4741d730cd5df9071b3",
+            "url": "https://api.github.com/repos/doctrine/cache/zipball/eb8a73619af4f1c8711e2ce482f5de3643258a1f",
+            "reference": "eb8a73619af4f1c8711e2ce482f5de3643258a1f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "conflict": {
+            "doctrine/common": ">2.2,<2.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": ">=3.7",
+            "predis/predis": "~1.0",
+            "satooshi/php-coveralls": "~0.6"
+        },
+        "time": "2015-10-28 11:27:45",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Caching library offering an object-oriented API for many cache backends",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "cache",
+            "caching"
+        ]
+    },
+    {
+        "name": "duncan3dc/sonos",
+        "version": "1.7.2",
+        "version_normalized": "1.7.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/sonos.git",
+            "reference": "3f90ee89b371669b3c13d8ad01c73986a84e8265"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/3f90ee89b371669b3c13d8ad01c73986a84e8265",
+            "reference": "3f90ee89b371669b3c13d8ad01c73986a84e8265",
             "shasum": ""
         },
         "require": {
@@ -689,7 +564,7 @@
             "mockery/mockery": "^0.9.4",
             "phpunit/phpunit": "^4.8"
         },
-        "time": "2015-10-16 18:24:32",
+        "time": "2015-10-18 15:36:55",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
