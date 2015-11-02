@@ -125,7 +125,7 @@ class Controller extends Speaker {
 		}
 
 		$parser = new XmlParser($data["TrackMetaData"]);
-		if (!is_object($parser)) {
+		if (!is_object($parser) || !is_object($parser->getTag("item"))) {
 			return new State;
 		}
 		$state = State::createFromXml($parser->getTag("item"), $this);
