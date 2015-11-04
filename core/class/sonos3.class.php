@@ -66,8 +66,10 @@ class sonos3 extends eqLogic {
 		} else if (self::$_sonos !== null) {
 			return self::$_sonos;
 		}
+		$logger = log::getLogger('sonos_debug');
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
 		self::$_sonos = new Network($cache);
+		self::$_sonos->setLogger($logger);
 		return self::$_sonos;
 	}
 
@@ -140,6 +142,7 @@ class sonos3 extends eqLogic {
 				if ($controller == null) {
 					continue;
 				}
+				print_r($controller);
 				$cmd_state = $eqLogic->getCmd(null, 'state');
 				if (is_object($cmd_state)) {
 					$state = self::convertState($controller->getStateName());
@@ -347,42 +350,42 @@ class sonos3 extends eqLogic {
 	public function getControllerByIp($_ip) {
 		$controller = null;
 		$sonos = sonos3::getSonos();
-
 		try {
-			if (!self::$_sonosAddOK) {
-				$speakers = array();
-				foreach (self::byType('sonos3') as $eqLogic) {
-					if ($eqLogic->getIsEnable() == 0) {
-						continue;
-					}
-					if ($eqLogic->getLogicalId() == '') {
-						continue;
-					}
-					$speakers[$eqLogic->getLogicalId()] = new Speaker($eqLogic->getLogicalId());
-				}
-				$sonos->setSpeakers($speakers);
-				self::$_sonosAddOK = true;
-			}
 			$controller = $sonos->getControllerByIp($_ip);
 		} catch (Exception $e) {
 
 		}
 		if ($controller == null) {
 			try {
+
+				$sonos = sonos3::getSonos(true);
+				$controller = $sonos->getControllerByIp($_ip);
+
+			} catch (Exception $e) {
+
+			}
+		}
+		if ($controller == null) {
+			try {
+				if (!self::$_sonosAddOK) {
+					$speakers = array();
+					foreach (self::byType('sonos3') as $eqLogic) {
+						if ($eqLogic->getIsEnable() == 0) {
+							continue;
+						}
+						if ($eqLogic->getLogicalId() == '') {
+							continue;
+						}
+						$speakers[$eqLogic->getLogicalId()] = new Speaker($eqLogic->getLogicalId());
+					}
+					$sonos->setSpeakers($speakers);
+					self::$_sonosAddOK = true;
+				}
 				$controller = $sonos->getControllerByIp($_ip);
 			} catch (Exception $e) {
 
 			}
 		}
-		try {
-			if ($controller == null) {
-				$sonos = sonos3::getSonos(true);
-				$controller = $sonos->getControllerByIp($_ip);
-			}
-		} catch (Exception $e) {
-
-		}
-
 		return $controller;
 	}
 

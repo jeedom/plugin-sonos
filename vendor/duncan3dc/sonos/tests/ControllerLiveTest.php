@@ -1,9 +1,10 @@
 <?php
 
-namespace duncan3dc\Sonos\Test;
+namespace duncan3dc\SonosTests;
 
 use duncan3dc\Sonos\Controller;
-use duncan3dc\Sonos\Network;
+use duncan3dc\Sonos\Queue;
+use duncan3dc\Sonos\Speaker;
 
 class ControllerLiveTest extends LiveTest
 {
@@ -97,7 +98,7 @@ class ControllerLiveTest extends LiveTest
     public function testGetSpeakers()
     {
         $speakers = $this->network->getController()->getSpeakers();
-        $this->assertContainsOnlyInstancesOf("duncan3dc\\Sonos\\Speaker", $speakers);
+        $this->assertContainsOnlyInstancesOf(Speaker::class, $speakers);
     }
 
 
@@ -224,6 +225,6 @@ class ControllerLiveTest extends LiveTest
 
     public function testGetQueue()
     {
-        $this->assertInstanceOf("duncan3dc\\Sonos\\Queue", $this->network->getController()->getQueue());
+        $this->assertInstanceOf(Queue::class, $this->network->getController()->getQueue());
     }
 }
