@@ -761,10 +761,10 @@ class sonos3 extends eqLogic {
 
 		foreach ($this->getCmd('action') as $cmd) {
 			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-			if ($cmd->getLogicalId() == 'play_playlist') {
+			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_playlist') {
 				$replace['#playlist#'] = $cmd->getDisplay('title_possibility_list');
 			}
-			if ($cmd->getLogicalId() == 'play_radio') {
+			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_radio') {
 				$replace['#radio#'] = $cmd->getDisplay('title_possibility_list');
 			}
 		}
@@ -797,8 +797,10 @@ class sonos3 extends eqLogic {
 		if (strlen($replace['#title#']) > 12) {
 			$replace['#title#'] = '<marquee behavior="scroll" direction="left" scrollamount="2">' . $replace['#title#'] . '</marquee>';
 		}
-		$replace['#queue#'] = str_replace("'", "\'", $this->getConfiguration('queue'));
-		$replace['#speakers#'] = str_replace("'", "\'", $this->getConfiguration('speakers'));
+		if ($_version != 'mobile' && $_version != 'mview') {
+			$replace['#queue#'] = str_replace("'", "\'", $this->getConfiguration('queue'));
+			$replace['#speakers#'] = str_replace("'", "\'", $this->getConfiguration('speakers'));
+		}
 
 		$cmd_track_image = $this->getCmd(null, 'track_image');
 		if (is_object($cmd_track_image)) {
