@@ -801,8 +801,8 @@ class sonos3 extends eqLogic {
 			$replace['#title#'] = '<marquee behavior="scroll" direction="left" scrollamount="2">' . $replace['#title#'] . '</marquee>';
 		}
 		if ($_version != 'mobile' && $_version != 'mview') {
-			$replace['#queue#'] = str_replace("'", "\'", $this->getConfiguration('queue'));
-			$replace['#speakers#'] = str_replace("'", "\'", $this->getConfiguration('speakers'));
+			$replace['#queue#'] = str_replace(array("'", '+'), array("\'", '\+'), $this->getConfiguration('queue'));
+			$replace['#speakers#'] = str_replace(array("'", '+'), array("\'", '\+'), $this->getConfiguration('speakers'));
 		}
 
 		$cmd_track_image = $this->getCmd(null, 'track_image');
