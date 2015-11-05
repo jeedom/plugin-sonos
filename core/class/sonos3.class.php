@@ -357,10 +357,8 @@ class sonos3 extends eqLogic {
 		}
 		if ($controller == null) {
 			try {
-
 				$sonos = sonos3::getSonos(true);
 				$controller = $sonos->getControllerByIp($_ip);
-
 			} catch (Exception $e) {
 
 			}
