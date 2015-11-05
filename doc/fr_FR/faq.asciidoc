@@ -3,5 +3,5 @@ C'est normal ! Ce plugin, pour avoir les informations en temps réel, interroge 
 
 ''''
 
-Puis je lancer une liste de lecture Spotify, Google Music...?::
-Non ce n'est pas possible, il n'est possible de lancer que les listes de lecture Sonos (par contre vous pouvez mettre vos musique Spotify, Google Music et autre dans une liste de lecture Sonos)
+Puis-je lancer une liste de lecture Spotify, Google Music... ?::
+Non ce n'est pas possible, il n'est possible de lancer que les listes de lecture Sonos (par contre vous pouvez mettre vos musiques Spotify, Google Music et autres dans une liste de lecture Sonos).
