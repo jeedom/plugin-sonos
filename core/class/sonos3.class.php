@@ -327,7 +327,6 @@ class sonos3 extends eqLogic {
 	public function getRadioStations() {
 		$sonos = sonos3::getSonos();
 		$radios = $sonos->getRadio()->getFavouriteStations();
-		$playlists = $sonos->getPlaylists();
 		$array = array();
 		foreach ($radios as $radio) {
 			$array[] = $radio->getName();
@@ -868,146 +867,145 @@ class sonos3Cmd extends cmd {
 		if ($this->getType() == 'info') {
 			return;
 		}
-		try {
-			$eqLogic = $this->getEqLogic();
-			$sonos = sonos3::getSonos();
-			$controller = sonos3::getControllerByIp($eqLogic->getLogicalId());
-			if ($this->getLogicalId() == 'play') {
-				if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
-					$state = $eqLogic->getCmd(null, 'state');
-					$track_title = $eqLogic->getCmd(null, 'track_title');
-					if (is_object($state) && is_object($track_title)) {
-						if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
-							return $controller->unmute();
-						}
+		$eqLogic = $this->getEqLogic();
+		$sonos = sonos3::getSonos();
+		$controller = sonos3::getControllerByIp($eqLogic->getLogicalId());
+		if ($this->getLogicalId() == 'play') {
+			if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
+				$state = $eqLogic->getCmd(null, 'state');
+				$track_title = $eqLogic->getCmd(null, 'track_title');
+				if (is_object($state) && is_object($track_title)) {
+					if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+						return $controller->unmute();
 					}
 				}
+			}
+			$controller->play();
+		}
+		if ($this->getLogicalId() == 'stop') {
+			if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
+				$state = $eqLogic->getCmd(null, 'state');
+				$track_title = $eqLogic->getCmd(null, 'track_title');
+				if (is_object($state) && is_object($track_title)) {
+					if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+						return $controller->mute();
+					}
+				}
+			}
+			$controller->pause();
+		}
+		if ($this->getLogicalId() == 'pause') {
+			if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
+				$state = $eqLogic->getCmd(null, 'state');
+				$track_title = $eqLogic->getCmd(null, 'track_title');
+				if (is_object($state) && is_object($track_title)) {
+					if ($cmd_track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+						return $controller->mute();
+					}
+				}
+			}
+			$controller->pause();
+		}
+		if ($this->getLogicalId() == 'previous') {
+			$controller->previous();
+		}
+		if ($this->getLogicalId() == 'next') {
+			$controller->next();
+		}
+		if ($this->getLogicalId() == 'mute') {
+			$controller->mute();
+		}
+		if ($this->getLogicalId() == 'unmute') {
+			$controller->unmute();
+		}
+		if ($this->getLogicalId() == 'repeat') {
+			$controller->setRepeat(!$controller->getRepeat());
+		}
+		if ($this->getLogicalId() == 'shuffle') {
+			$controller->setShuffle(!$controller->getShuffle());
+		}
+		if ($this->getLogicalId() == 'setVolume') {
+			if ($_options['slider'] < 0) {
+				$_options['slider'] = 0;
+			}
+			if ($_options['slider'] > 100) {
+				$_options['slider'] = 100;
+			}
+			$controller->setVolume($_options['slider']);
+		}
+		if ($this->getLogicalId() == 'play_playlist') {
+			if (!$controller->isUsingQueue()) {
+				$controller->useQueue();
+			}
+			$queue = $controller->getQueue();
+			$playlist = $sonos->getPlaylistByName(trim(trim($_options['title']), '"'));
+			if ($playlist == null) {
+				foreach ($sonos->getPlaylists() as $playlist_search) {
+					if (str_replace('  ', ' ', $playlist_search->getName()) == $_options['title']) {
+						$playlist = $playlist_search;
+						break;
+					}
+				}
+			}
+			if ($playlist == null) {
+				throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title']));
+			}
+			$tracks = $playlist->getTracks();
+			$queue->clear();
+			if (count($tracks) > 1) {
+				if (isset($_options['message']) && $_options['message'] == 'random') {
+					shuffle($tracks);
+				}
+				$queue->addTrack($tracks[0]);
+				$controller->play();
+				unset($tracks[0]);
+				$queue->addTracks($tracks);
+			} else {
+				$queue->addTracks($tracks);
 				$controller->play();
 			}
-			if ($this->getLogicalId() == 'stop') {
-				if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
-					$state = $eqLogic->getCmd(null, 'state');
-					$track_title = $eqLogic->getCmd(null, 'track_title');
-					if (is_object($state) && is_object($track_title)) {
-						if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
-							return $controller->mute();
-						}
-					}
-				}
-				$controller->pause();
-			}
-			if ($this->getLogicalId() == 'pause') {
-				if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
-					$state = $eqLogic->getCmd(null, 'state');
-					$track_title = $eqLogic->getCmd(null, 'track_title');
-					if (is_object($state) && is_object($track_title)) {
-						if ($cmd_track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
-							return $controller->mute();
-						}
-					}
-				}
-				$controller->pause();
-			}
-			if ($this->getLogicalId() == 'previous') {
-				$controller->previous();
-			}
-			if ($this->getLogicalId() == 'next') {
-				$controller->next();
-			}
-			if ($this->getLogicalId() == 'mute') {
-				$controller->mute();
-			}
-			if ($this->getLogicalId() == 'unmute') {
-				$controller->unmute();
-			}
-			if ($this->getLogicalId() == 'repeat') {
-				$controller->setRepeat(!$controller->getRepeat());
-			}
-			if ($this->getLogicalId() == 'shuffle') {
-				$controller->setShuffle(!$controller->getShuffle());
-			}
-			if ($this->getLogicalId() == 'setVolume') {
-				if ($_options['slider'] < 0) {
-					$_options['slider'] = 0;
-				}
-				if ($_options['slider'] > 100) {
-					$_options['slider'] = 100;
-				}
-				$controller->setVolume($_options['slider']);
-			}
-			if ($this->getLogicalId() == 'play_playlist') {
-				if (!$controller->isUsingQueue()) {
-					$controller->useQueue();
-				}
-				$queue = $controller->getQueue();
-				$playlist = $sonos->getPlaylistByName(trim(trim($_options['title']), '"'));
-				if ($playlist == null) {
-					foreach ($sonos->getPlaylists() as $playlist_search) {
-						if (str_replace('  ', ' ', $playlist_search->getName()) == $_options['title']) {
-							$playlist = $playlist_search;
-							break;
-						}
-					}
-				}
-				if ($playlist == null) {
-					throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title']));
-				}
-				$tracks = $playlist->getTracks();
-				$queue->clear();
-				if (count($tracks) > 1) {
-					if (isset($_options['message']) && $_options['message'] == 'random') {
-						shuffle($tracks);
-					}
-					$queue->addTrack($tracks[0]);
-					$controller->play();
-					unset($tracks[0]);
-					$queue->addTracks($tracks);
-				} else {
-					$queue->addTracks($tracks);
-					$controller->play();
-				}
-			}
-			if ($this->getLogicalId() == 'play_radio') {
-				$radio = $sonos->getRadio();
-				$stations = $radio->getFavouriteStations();
+		}
+		if ($this->getLogicalId() == 'play_radio') {
+			$radio = $sonos->getRadio();
+			$stations = $radio->getFavouriteStations();
+			foreach ($stations as $station) {
 				if ($stations->getName() == $_options['title']) {
 					$controller->useStream($show)->play();
+					break;
 				}
 			}
-			if ($this->getLogicalId() == 'add_speaker') {
-				$speaker = $sonos->getSpeakerByRoom($_options['title']);
-				$controller->addSpeaker($speaker);
-			}
+		}
+		if ($this->getLogicalId() == 'add_speaker') {
+			$speaker = $sonos->getSpeakerByRoom($_options['title']);
+			$controller->addSpeaker($speaker);
+		}
 
-			if ($this->getLogicalId() == 'remove_speaker') {
-				$speaker = $sonos->getSpeakerByRoom($_options['title']);
-				$controller->removeSpeaker($speaker);
+		if ($this->getLogicalId() == 'remove_speaker') {
+			$speaker = $sonos->getSpeakerByRoom($_options['title']);
+			$controller->removeSpeaker($speaker);
+		}
+		if ($this->getLogicalId() == 'tts') {
+			$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
+			$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
+			$share = $server->getShare($path[0]);
+			$adapter = new SmbAdapter($share);
+			$filesystem = new Filesystem($adapter);
+			$folder = array_pop($path);
+			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
+			if (config::byKey('ttsProvider', 'sonos3') != 'voxygen' && strlen($_options['message']) > 100) {
+				$_options['message'] = substr($_options['message'], 0, 100);
 			}
-			if ($this->getLogicalId() == 'tts') {
-				$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
-				$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
-				$share = $server->getShare($path[0]);
-				$adapter = new SmbAdapter($share);
-				$filesystem = new Filesystem($adapter);
-				$folder = array_pop($path);
-				$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
-				if (config::byKey('ttsProvider', 'sonos3') != 'voxygen' && strlen($_options['message']) > 100) {
-					$_options['message'] = substr($_options['message'], 0, 100);
-				}
-				$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
-				$track->setLanguage("fr");
-				$track->setProvider(new VoxygenProvider);
-				$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
-				if ($_options['title'] != '' && is_numeric($_options['title'])) {
-					$controller->interrupt($track, $_options['title']);
-				} else {
-					$controller->interrupt($track);
-				}
+			$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
+			$track->setLanguage("fr");
+			$track->setProvider(new VoxygenProvider);
+			$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
+			if ($_options['title'] != '' && is_numeric($_options['title'])) {
+				$controller->interrupt($track, $_options['title']);
 			} else {
-				sonos3::pull($eqLogic->getId());
+				$controller->interrupt($track);
 			}
-		} catch (Exception $e) {
-			log::add('sonos', 'info', $e->getMessage());
+		} else {
+			sonos3::pull($eqLogic->getId());
 		}
 	}
 

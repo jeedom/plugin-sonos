@@ -139,11 +139,11 @@
 				dataType: 'json',
 				global:false,
 				error: function (request, status, error) {
-					handleAjaxError(request, status, error,$('#div_playListSonosAlert'));
+					handleAjaxError(request, status, error);
 				},
 				success: function (data) { 
 					if (data.state != 'ok') {
-						$('#div_playListSonosAlert').showAlert({message: data.result, level: 'danger'});
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
 						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
 						setTimeout(function() {
 							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
@@ -180,11 +180,11 @@ $('.sonos3[data-eqLogic_uid=#uid#] .playRadio').on('click',function(){
 		},
 		dataType: 'json',
 		error: function (request, status, error) {
-			handleAjaxError(request, status, error,$('#div_radioSonosAlert'));
+			handleAjaxError(request, status, error);
 		},
 		success: function (data) { 
 			if (data.state != 'ok') {
-				$('#div_radioSonosAlert').showAlert({message: data.result, level: 'danger'});
+				$('#div_alert').showAlert({message: data.result, level: 'danger'});
 				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
 				setTimeout(function() {
 					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
@@ -221,11 +221,11 @@ $('.sonos3[data-eqLogic_uid=#uid#] .playTrack').on('click',function(){
 		},
 		dataType: 'json',
 		error: function (request, status, error) {
-			handleAjaxError(request, status, error,$('#div_queueSonosAlert'));
+			handleAjaxError(request, status, error);
 		},
 		success: function (data) { 
 			if (data.state != 'ok') {
-				$('#div_queueSonosAlert').showAlert({message: data.result, level: 'danger'});
+				$('#div_alert').showAlert({message: data.result, level: 'danger'});
 				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
 				setTimeout(function() {
 					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
@@ -263,11 +263,11 @@ $('.sonos3[data-eqLogic_uid=#uid#] .addSpeaker').on('click',function(){
 		},
 		dataType: 'json',
 		error: function (request, status, error) {
-			handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
+			handleAjaxError(request, status, error);
 		},
 		success: function (data) {
 			if (data.state != 'ok') {
-				$('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
+				$('#div_alert').showAlert({message: data.result, level: 'danger'});
 				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
 				setTimeout(function() {
 					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
@@ -295,11 +295,11 @@ $('.sonos3[data-eqLogic_uid=#uid#] .removeSpeaker').on('click',function(){
 		},
 		dataType: 'json',
 		error: function (request, status, error) {
-			handleAjaxError(request, status, error,$('#div_speakerSonosAlert'));
+			handleAjaxError(request, status, error);
 		},
 		success: function (data) {
 			if (data.state != 'ok') {
-				$('#div_speakerSonosAlert').showAlert({message: data.result, level: 'danger'});
+				$('#div_alert').showAlert({message: data.result, level: 'danger'});
 				return;
 			}
 			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
