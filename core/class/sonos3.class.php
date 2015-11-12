@@ -36,6 +36,26 @@ class sonos3 extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function restore() {
+		$cron = cron::byClassAndFunction('sonos3', 'pull');
+		if (!is_object($cron)) {
+			$cron = new cron();
+			$cron->setClass('sonos3');
+			$cron->setFunction('pull');
+			$cron->setEnable(1);
+			$cron->setDeamon(1);
+			$cron->setDeamonSleepTime(3);
+			$cron->setSchedule('* * * * *');
+			$cron->setTimeout(1440);
+			$cron->save();
+		}
+		try {
+			sonos3::syncSonos();
+		} catch (Exception $e) {
+
+		}
+	}
+
 	public static function updateSonos() {
 		log::remove('sonos_update');
 		$cmd = 'sudo /bin/bash ' . dirname(__FILE__) . '/../../ressources/install.sh';
