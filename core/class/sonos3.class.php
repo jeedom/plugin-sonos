@@ -37,18 +37,6 @@ class sonos3 extends eqLogic {
 	/*     * ***********************Methode static*************************** */
 
 	public static function restore() {
-		$cron = cron::byClassAndFunction('sonos3', 'pull');
-		if (!is_object($cron)) {
-			$cron = new cron();
-			$cron->setClass('sonos3');
-			$cron->setFunction('pull');
-			$cron->setEnable(1);
-			$cron->setDeamon(1);
-			$cron->setDeamonSleepTime(3);
-			$cron->setSchedule('* * * * *');
-			$cron->setTimeout(1440);
-			$cron->save();
-		}
 		try {
 			sonos3::syncSonos();
 		} catch (Exception $e) {
@@ -86,10 +74,10 @@ class sonos3 extends eqLogic {
 		} else if (self::$_sonos !== null) {
 			return self::$_sonos;
 		}
-		$logger = log::getLogger('sonos_debug');
+		//$logger = log::getLogger('sonos_debug');
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
 		self::$_sonos = new Network($cache);
-		self::$_sonos->setLogger($logger);
+		//self::$_sonos->setLogger($logger);
 		return self::$_sonos;
 	}
 
