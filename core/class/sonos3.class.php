@@ -150,10 +150,12 @@ class sonos3 extends eqLogic {
 				if ($controller == null) {
 					continue;
 				}
-				print_r($controller);
 				$cmd_state = $eqLogic->getCmd(null, 'state');
 				if (is_object($cmd_state)) {
 					$state = self::convertState($controller->getStateName());
+					if ($state == __('Transition', __FILE__)) {
+						continue;
+					}
 					if ($state != $cmd_state->execCmd(null, 2)) {
 						$cmd_state->setCollectDate('');
 						$cmd_state->event($state);
