@@ -2,8 +2,9 @@
     "name": "jeedom/sonos",
     "description": "Plugin sonos jeedom",
     "require": {
-        "duncan3dc/sonos": "~1.1"
+        "duncan3dc/sonos": "^1.7"
     },
+    "minimum-stability" : "dev",
     "authors": [
         {
             "name": "Loic Gevrey",
