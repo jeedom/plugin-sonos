@@ -1,11 +1,10 @@
 <?php
-
 namespace GuzzleHttp\Tests\CookieJar;
 
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Cookie\SetCookie;
-use GuzzleHttp\Message\Request;
-use GuzzleHttp\Message\Response;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @covers GuzzleHttp\Cookie\CookieJar
@@ -33,6 +32,8 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('foo', CookieJar::getCookieValue('foo'));
         $this->assertEquals('"foo,bar"', CookieJar::getCookieValue('foo,bar'));
+        $this->assertEquals('"foobar="', CookieJar::getCookieValue('foobar='));
+        $this->assertEquals('"foo;bar"', CookieJar::getCookieValue('foo;bar'));
     }
 
     public function testCreatesFromArray()
@@ -128,8 +129,22 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         ))));
     }
 
+    public function testDoesNotAddEmptyCookies()
+    {
+        $this->assertFalse($this->jar->setCookie(new SetCookie(array(
+            'Name'   => '',
+            'Domain' => 'foo.com',
+            'Value'  => 0
+        ))));
+    }
+
     public function testDoesAddValidCookies()
     {
+        $this->assertTrue($this->jar->setCookie(new SetCookie(array(
+            'Name'   => '0',
+            'Domain' => 'foo.com',
+            'Value'  => 0
+        ))));
         $this->assertTrue($this->jar->setCookie(new SetCookie(array(
             'Name'   => 'foo',
             'Domain' => 'foo.com',
@@ -286,13 +301,13 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         }
 
         $request = new Request('GET', $url);
-        $this->jar->addCookieHeader($request);
-        $this->assertEquals($cookies, $request->getHeader('Cookie'));
+        $request = $this->jar->withCookieHeader($request);
+        $this->assertEquals($cookies, $request->getHeaderLine('Cookie'));
     }
 
     /**
      * @expectedException \RuntimeException
-     * @expectedExceptionMessage Invalid cookie: Cookie name must not cannot invalid characters:
+     * @expectedExceptionMessage Invalid cookie: Cookie name must not contain invalid characters: ASCII Control characters (0-31;127), space, tab and the following characters: ()<>@,;:\"/?={}
      */
     public function testThrowsExceptionWithStrictMode()
     {
