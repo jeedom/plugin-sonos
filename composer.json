@@ -2,7 +2,9 @@
     "name": "jeedom/sonos",
     "description": "Plugin sonos jeedom",
     "require": {
-        "duncan3dc/sonos": "^1.7"
+        "duncan3dc/sonos": "^1.7",
+        "doctrine/cache": "^1.4.0",
+        "robgridley/flysystem-smb": "dev-master"
     },
     "minimum-stability" : "dev",
     "authors": [
