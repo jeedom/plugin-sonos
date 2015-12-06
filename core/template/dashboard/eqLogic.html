@@ -178,6 +178,7 @@ $('.sonos3[data-eqLogic_uid=#uid#] .playRadio').on('click',function(){
 			id :'#id#',
 			radio : name
 		},
+		global:false,
 		dataType: 'json',
 		error: function (request, status, error) {
 			handleAjaxError(request, status, error);
@@ -219,6 +220,7 @@ $('.sonos3[data-eqLogic_uid=#uid#] .playTrack').on('click',function(){
 			id :'#id#',
 			position : position
 		},
+		global:false,
 		dataType: 'json',
 		error: function (request, status, error) {
 			handleAjaxError(request, status, error);
@@ -261,6 +263,7 @@ $('.sonos3[data-eqLogic_uid=#uid#] .addSpeaker').on('click',function(){
 			id :'#id#',
 			speaker : name
 		},
+		global:false,
 		dataType: 'json',
 		error: function (request, status, error) {
 			handleAjaxError(request, status, error);
@@ -293,6 +296,7 @@ $('.sonos3[data-eqLogic_uid=#uid#] .removeSpeaker').on('click',function(){
 			id :'#id#',
 			speaker : name
 		},
+		global:false,
 		dataType: 'json',
 		error: function (request, status, error) {
 			handleAjaxError(request, status, error);
