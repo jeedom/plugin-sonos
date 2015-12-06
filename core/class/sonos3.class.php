@@ -777,10 +777,10 @@ class sonos3 extends eqLogic {
 		foreach ($this->getCmd('action') as $cmd) {
 			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_playlist') {
-				$replace['#playlist#'] = $cmd->getDisplay('title_possibility_list');
+				$replace['#playlist#'] = str_replace(array("'", '+'), array("\'", '\+'), $cmd->getDisplay('title_possibility_list'));
 			}
 			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_radio') {
-				$replace['#radio#'] = $cmd->getDisplay('title_possibility_list');
+				$replace['#radio#'] = str_replace(array("'", '+'), array("\'", '\+'), $cmd->getDisplay('title_possibility_list'));
 			}
 		}
 
