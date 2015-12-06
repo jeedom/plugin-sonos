@@ -144,7 +144,6 @@ class sonos3 extends eqLogic {
 			if ($eqLogic->getLogicalId() == '') {
 				continue;
 			}
-
 			try {
 				$changed = false;
 				$controller = self::getControllerByIp($eqLogic->getLogicalId());
@@ -216,7 +215,11 @@ class sonos3 extends eqLogic {
 
 				$track = $controller->getStateDetails();
 				$cmd_track_title = $eqLogic->getCmd(null, 'track_title');
-				$title = $track->title;
+				if ($track->stream == 'Line-In') {
+					$title = __('Entrée de ligne', __FILE__);
+				} else {
+					$title = $track->title;
+				}
 				if ($title == '') {
 					$title = __('Aucun', __FILE__);
 				}
@@ -981,8 +984,8 @@ class sonos3Cmd extends cmd {
 			$radio = $sonos->getRadio();
 			$stations = $radio->getFavouriteStations();
 			foreach ($stations as $station) {
-				if ($stations->getName() == $_options['title']) {
-					$controller->useStream($show)->play();
+				if ($station->getName() == $_options['title']) {
+					$controller->useStream($station)->play();
 					break;
 				}
 			}
