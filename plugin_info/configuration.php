@@ -62,7 +62,6 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
          <option value="Philippe">Philippe</option>
          <option value="Electra">Electra</option>
          <option value="Damien">Damien</option>
-         <option value="DarkVadoor">DarkVadoor</option>
          <option value="Ramboo">Ramboo</option>
          <option value="John">John</option>
          <option value="Helene" selected>Helene</option>
@@ -72,7 +71,6 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
          <option value="Robot">Robot</option>
          <option value="Sidoo">Sidoo</option>
          <option value="Sorciere">Sorciere</option>
-         <option value="Yeti">Yeti</option>
          <option value="Zozo">Zozo</option>
        </optgroup>
        <optgroup label="Italiano">
