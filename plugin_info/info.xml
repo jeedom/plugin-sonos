@@ -12,5 +12,6 @@
     <include type="php">sonos3.inc</include>
     <display>panel</display>
     <mobile>panel</mobile>
+    <hasDependency>1</hasDependency>
 </info>
 

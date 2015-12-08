@@ -65,7 +65,6 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
          <option value="Ramboo">Ramboo</option>
          <option value="John">John</option>
          <option value="Helene" selected>Helene</option>
-         <option value="Eva">Eva</option>
          <option value="JeanJean">JeanJean</option>
          <option value="Papi">Papi</option>
          <option value="Robot">Robot</option>
@@ -108,18 +107,6 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
   <a class="btn btn-default" id="bt_syncSonos"><i class='fa fa-refresh'></i> {{Rechercher les équipements Sonos}}</a>
 </div>
 </div>
-<?php
-if (jeedom::isCapable('sudo')) {
-	echo '<div class="form-group">
-  <label class="col-lg-4 control-label">{{Dépendance Sonos}}</label>
-  <div class="col-lg-3">
-    <a class="btn btn-warning bt_installDeps"><i class="fa fa-check"></i> {{Installer/Mettre à jour}}</a>
-  </div>
-</div>';
-} else {
-	echo '<div class="alert alert danger">{{Jeedom n\'a pas les droits sudo sur votre système, il faut lui ajouter pour qu\'il puisse installer le démon openzwave, voir <a target="_blank" href="https://jeedom.fr/doc/documentation/installation/fr_FR/doc-installation.html#autre">ici</a> partie 1.7.4}}</div>';
-}
-?>
 </fieldset>
 </form>
 
@@ -144,13 +131,4 @@ if (jeedom::isCapable('sudo')) {
           }
         });
       });
-
-  $('.bt_installDeps').on('click',function(){
-    bootbox.confirm('{{Etes-vous sûr de vouloir installer/mettre à jour Sonos ? }}', function (result) {
-      if (result) {
-        $('#md_modal').dialog({title: "{{Installation / Mise à jour}}"});
-        $('#md_modal').load('index.php?v=d&plugin=sonos3&modal=update.sonos').dialog('open');
-      }
-    });
-  });
-</script>
+    </script>

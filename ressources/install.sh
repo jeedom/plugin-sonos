@@ -1,3 +1,4 @@
+touch /tmp/dependancy_sonos_in_progress
 echo "Lancement de l'installation/mise à jour des dépendances sonos"
 
 sudo apt-get clean
@@ -10,3 +11,4 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Everything is successfully installed!"
+rm /tmp/dependancy_sonos_in_progress

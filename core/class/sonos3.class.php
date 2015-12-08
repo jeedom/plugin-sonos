@@ -44,11 +44,30 @@ class sonos3 extends eqLogic {
 		}
 	}
 
-	public static function updateSonos() {
+	public static function dependancy_info() {
+		$return = array();
+		$return['log'] = 'sonos_update';
+		if (file_exists('/tmp/dependancy_sonos_in_progress')) {
+			$return['state'] = 'in_progress';
+		} else {
+			if (exec('which smbclient | wc -l') != 0) {
+				$return['state'] = 'ok';
+			} else {
+				$return['state'] = 'nok';
+			}
+		}
+		return $return;
+	}
+
+	public static function dependancy_install() {
 		log::remove('sonos_update');
 		$cmd = 'sudo /bin/bash ' . dirname(__FILE__) . '/../../ressources/install.sh';
 		$cmd .= ' >> ' . log::getPathToLog('sonos_update') . ' 2>&1 &';
 		exec($cmd);
+	}
+
+	public static function updateSonos() {
+
 	}
 
 	public static function health() {
