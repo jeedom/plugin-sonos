@@ -80,6 +80,9 @@ Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samb
 [IMPORTANT]
 Il faut absolument mettre un mot de passe pour que cela marche
 
+[IMPORTANT]
+Il faut aussi absolument un sous repertoire pour que le fichier vocal soit correctement créé.
+
 == Widget
 
 Sur le dashboard vous retrouverez le widget suivant : 
