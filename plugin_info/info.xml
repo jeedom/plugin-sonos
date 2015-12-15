@@ -13,5 +13,6 @@
     <display>panel</display>
     <mobile>panel</mobile>
     <hasDependency>1</hasDependency>
+    <hasOwnDeamon>1</hasOwnDeamon>
 </info>
 
