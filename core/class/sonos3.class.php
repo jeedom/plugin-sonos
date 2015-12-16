@@ -88,8 +88,6 @@ class sonos3 extends eqLogic {
 		if (!is_object($cron)) {
 			throw new Exception(__('Tache cron introuvable', __FILE__));
 		}
-		$cron->setEnable(1);
-		$cron->save();
 		$cron->run();
 	}
 
@@ -98,25 +96,16 @@ class sonos3 extends eqLogic {
 		if (!is_object($cron)) {
 			throw new Exception(__('Tache cron introuvable', __FILE__));
 		}
-		$cron->setEnable(0);
-		$cron->save();
 		$cron->halt();
 	}
 
-	public static function health() {
-		$return = array();
+	public static function deamon_changeAutoMode($_mode) {
 		$cron = cron::byClassAndFunction('sonos3', 'pull');
-		$running = false;
-		if (is_object($cron)) {
-			$running = $cron->running();
+		if (!is_object($cron)) {
+			throw new Exception(__('Tache cron introuvable', __FILE__));
 		}
-		$return[] = array(
-			'test' => __('Tâche de synchronisation', __FILE__),
-			'result' => ($running) ? __('OK', __FILE__) : __('NOK', __FILE__),
-			'advice' => ($running) ? '' : __('Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull', __FILE__),
-			'state' => $running,
-		);
-		return $return;
+		$cron->setEnable($_mode);
+		$cron->save();
 	}
 
 	public static function getSonos($_emptyCache = false) {
@@ -126,10 +115,10 @@ class sonos3 extends eqLogic {
 		} else if (self::$_sonos !== null) {
 			return self::$_sonos;
 		}
-		//$logger = log::getLogger('sonos_debug');
+		$logger = log::getLogger('sonos_debug');
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
 		self::$_sonos = new Network($cache);
-		//self::$_sonos->setLogger($logger);
+		self::$_sonos->setLogger($logger);
 		return self::$_sonos;
 	}
 
