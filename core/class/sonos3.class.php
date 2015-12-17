@@ -47,14 +47,11 @@ class sonos3 extends eqLogic {
 	public static function dependancy_info() {
 		$return = array();
 		$return['log'] = 'sonos_update';
-		if (file_exists('/tmp/dependancy_sonos_in_progress')) {
-			$return['state'] = 'in_progress';
+		$return['progress_file'] = '/tmp/dependancy_sonos_in_progress';
+		if (exec('which smbclient | wc -l') != 0) {
+			$return['state'] = 'ok';
 		} else {
-			if (exec('which smbclient | wc -l') != 0) {
-				$return['state'] = 'ok';
-			} else {
-				$return['state'] = 'nok';
-			}
+			$return['state'] = 'nok';
 		}
 		return $return;
 	}
