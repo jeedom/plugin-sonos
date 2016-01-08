@@ -330,6 +330,9 @@ class sonos3 extends eqLogic {
 					$eqLogic->refreshWidget();
 				}
 				if ($eqLogic->getConfiguration('sonosNumberFailed', 0) > 0) {
+					foreach (message::byPluginLogicalId('sonos', 'sonosLost' . $eqLogic->getId()) as $message) {
+						$message->remove();
+					}
 					$eqLogic->setConfiguration('sonosNumberFailed', 0);
 					$eqLogic->save();
 				}
@@ -338,7 +341,7 @@ class sonos3 extends eqLogic {
 					log::add('sonos', 'error', $e->getMessage());
 				} else {
 					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) == 150) {
-						log::add('sonos', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage());
+						log::add('sonos', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage(), 'sonosLost' . $eqLogic->getId());
 					} else {
 						$eqLogic->setConfiguration('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
 						$eqLogic->save();
