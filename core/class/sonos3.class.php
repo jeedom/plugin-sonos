@@ -337,7 +337,7 @@ class sonos3 extends eqLogic {
 				if ($_eqLogic_id != null) {
 					log::add('sonos', 'error', $e->getMessage());
 				} else {
-					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) > 150) {
+					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) == 150) {
 						log::add('sonos', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage());
 					} else {
 						$eqLogic->setConfiguration('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
