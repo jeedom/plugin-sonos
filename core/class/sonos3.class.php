@@ -927,38 +927,32 @@ class sonos3Cmd extends cmd {
 		$sonos = sonos3::getSonos();
 		$controller = sonos3::getControllerByIp($eqLogic->getLogicalId());
 		if ($this->getLogicalId() == 'play') {
-			if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
-				$state = $eqLogic->getCmd(null, 'state');
-				$track_title = $eqLogic->getCmd(null, 'track_title');
-				if (is_object($state) && is_object($track_title)) {
-					if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
-						return $controller->unmute();
-					}
-				}
+			$state = $eqLogic->getCmd(null, 'state');
+			$track_title = $eqLogic->getCmd(null, 'track_title');
+			if (is_object($state) && is_object($track_title) && $track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+				return $controller->unmute();
 			}
 			$controller->play();
 		}
 		if ($this->getLogicalId() == 'stop') {
-			if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
-				$state = $eqLogic->getCmd(null, 'state');
-				$track_title = $eqLogic->getCmd(null, 'track_title');
-				if (is_object($state) && is_object($track_title)) {
-					if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
-						return $controller->mute();
-					}
-				}
+			$state = $eqLogic->getCmd(null, 'state');
+			$track_title = $eqLogic->getCmd(null, 'track_title');
+			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Arrêté', __FILE__)) {
+				return;
+			}
+			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+				return $controller->mute();
 			}
 			$controller->pause();
 		}
 		if ($this->getLogicalId() == 'pause') {
-			if ($eqLogic->getConfiguration('model') == 'PLAYBAR') {
-				$state = $eqLogic->getCmd(null, 'state');
-				$track_title = $eqLogic->getCmd(null, 'track_title');
-				if (is_object($state) && is_object($track_title)) {
-					if ($cmd_track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
-						return $controller->mute();
-					}
-				}
+			$state = $eqLogic->getCmd(null, 'state');
+			$track_title = $eqLogic->getCmd(null, 'track_title');
+			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Arrêté', __FILE__)) {
+				return;
+			}
+			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+				return $controller->mute();
 			}
 			$controller->pause();
 		}
