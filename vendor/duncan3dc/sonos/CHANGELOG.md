@@ -5,6 +5,18 @@ Changelog
 
 --------
 
+## 1.8.0 - 2016-01-10
+
+### Added
+
+* [Network] Allow the network interface to be specified using Network::setNetworkInterface().
+
+### Changed
+
+* [Network] Correct the cache lookup to only use cache from the same network interface and multicast address.
+
+--------
+
 ## 1.7.4 - 2015-12-03
 
 ### Fixed

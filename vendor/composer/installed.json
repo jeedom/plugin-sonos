@@ -215,12 +215,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "5e77b62a894b4c8f1b3bd550447292482ed8b50f"
+            "reference": "3130ff9232cef15883516a8d382af7f149677e0d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5e77b62a894b4c8f1b3bd550447292482ed8b50f",
-            "reference": "5e77b62a894b4c8f1b3bd550447292482ed8b50f",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3130ff9232cef15883516a8d382af7f149677e0d",
+            "reference": "3130ff9232cef15883516a8d382af7f149677e0d",
             "shasum": ""
         },
         "require": {
@@ -234,7 +234,7 @@
             "mockery/mockery": "~0.9",
             "phpspec/phpspec": "^2.2",
             "phpspec/prophecy-phpunit": "~1.0",
-            "phpunit/phpunit": "~4.1"
+            "phpunit/phpunit": "~4.8"
         },
         "suggest": {
             "ext-fileinfo": "Required for MimeType",
@@ -250,7 +250,7 @@
             "league/flysystem-webdav": "Allows you to use WebDAV storage",
             "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
         },
-        "time": "2015-10-30 22:12:12",
+        "time": "2016-01-02 01:11:39",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -405,12 +405,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "2e5c595512de4885435eaff24b67066769b64b34"
+            "reference": "74fc3909170d66f3e93719ae025b79faea1f49f5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/2e5c595512de4885435eaff24b67066769b64b34",
-            "reference": "2e5c595512de4885435eaff24b67066769b64b34",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/74fc3909170d66f3e93719ae025b79faea1f49f5",
+            "reference": "74fc3909170d66f3e93719ae025b79faea1f49f5",
             "shasum": ""
         },
         "require": {
@@ -423,7 +423,7 @@
             "phpunit/phpunit": "~4.0",
             "psr/log": "~1.0"
         },
-        "time": "2015-12-01 02:41:23",
+        "time": "2015-12-29 21:28:50",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -463,36 +463,160 @@
         ]
     },
     {
+        "name": "icewind/streams",
+        "version": "0.2",
+        "version_normalized": "0.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/icewind1991/Streams.git",
+            "reference": "5aae45f2ddd3d1a6e2a496dd5d1e7857bfeb605a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/icewind1991/Streams/zipball/5aae45f2ddd3d1a6e2a496dd5d1e7857bfeb605a",
+            "reference": "5aae45f2ddd3d1a6e2a496dd5d1e7857bfeb605a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2014-07-30 23:46:15",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Icewind\\Streams\\Tests\\": "tests/",
+                "Icewind\\Streams\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Robin Appelman",
+                "email": "icewind@owncloud.com"
+            }
+        ],
+        "description": "A set of generic stream wrappers"
+    },
+    {
+        "name": "icewind/smb",
+        "version": "v1.0.4",
+        "version_normalized": "1.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/icewind1991/SMB.git",
+            "reference": "9277bd20262a01b38a33cc7356e98055f2262d32"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/icewind1991/SMB/zipball/9277bd20262a01b38a33cc7356e98055f2262d32",
+            "reference": "9277bd20262a01b38a33cc7356e98055f2262d32",
+            "shasum": ""
+        },
+        "require": {
+            "icewind/streams": "0.2.*",
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2015-08-17 14:20:38",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Icewind\\SMB\\": "src/",
+                "Icewind\\SMB\\Test\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Robin Appelman",
+                "email": "icewind@owncloud.com"
+            }
+        ],
+        "description": "php wrapper for smbclient and libsmbclient-php"
+    },
+    {
+        "name": "robgridley/flysystem-smb",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/robgridley/flysystem-smb.git",
+            "reference": "e2f77bd8bc189c964e1d207f181f3665748647ba"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/robgridley/flysystem-smb/zipball/e2f77bd8bc189c964e1d207f181f3665748647ba",
+            "reference": "e2f77bd8bc189c964e1d207f181f3665748647ba",
+            "shasum": ""
+        },
+        "require": {
+            "icewind/smb": "~1.0",
+            "league/flysystem": "~1.0",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpspec/phpspec": "~2.2"
+        },
+        "time": "2015-06-18 14:52:15",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "RobGridley\\Flysystem\\Smb\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Rob Gridley",
+                "email": "me@robgridley.com"
+            }
+        ],
+        "description": "Flysystem adapter for Icewind SMB."
+    },
+    {
         "name": "doctrine/cache",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/cache.git",
-            "reference": "da201c5a23b9c19e275d27937f8db221dc608bf1"
+            "reference": "e0ef9e9833ca024d251e77e8d82a00ca92b0aa71"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/cache/zipball/da201c5a23b9c19e275d27937f8db221dc608bf1",
-            "reference": "da201c5a23b9c19e275d27937f8db221dc608bf1",
+            "url": "https://api.github.com/repos/doctrine/cache/zipball/e0ef9e9833ca024d251e77e8d82a00ca92b0aa71",
+            "reference": "e0ef9e9833ca024d251e77e8d82a00ca92b0aa71",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.2"
+            "php": "~5.5|~7.0"
         },
         "conflict": {
             "doctrine/common": ">2.2,<2.4"
         },
         "require-dev": {
-            "phpunit/phpunit": ">=3.7",
-            "predis/predis": "~1.0",
-            "satooshi/php-coveralls": "~0.6"
+            "phpunit/phpunit": "~4.8|~5.0",
+            "predis/predis": "~1.0"
         },
-        "time": "2015-12-03 10:46:43",
+        "time": "2016-01-07 23:41:52",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.6.x-dev"
+                "dev-master": "1.7.x-dev"
             }
         },
         "installation-source": "source",
@@ -536,17 +660,17 @@
     },
     {
         "name": "duncan3dc/sonos",
-        "version": "1.7.4",
-        "version_normalized": "1.7.4.0",
+        "version": "1.8.0",
+        "version_normalized": "1.8.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/duncan3dc/sonos.git",
-            "reference": "57a02f047a766953e1cb5339ef4e640a0fbd3c10"
+            "reference": "9cabc945665d7dc979019013531aa55cb32fcebd"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/57a02f047a766953e1cb5339ef4e640a0fbd3c10",
-            "reference": "57a02f047a766953e1cb5339ef4e640a0fbd3c10",
+            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/9cabc945665d7dc979019013531aa55cb32fcebd",
+            "reference": "9cabc945665d7dc979019013531aa55cb32fcebd",
             "shasum": ""
         },
         "require": {
@@ -564,7 +688,7 @@
             "mockery/mockery": "^0.9.4",
             "phpunit/phpunit": "^4.8"
         },
-        "time": "2015-11-28 11:06:38",
+        "time": "2016-01-10 14:12:18",
         "type": "library",
         "installation-source": "source",
         "autoload": {

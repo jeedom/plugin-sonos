@@ -28,6 +28,10 @@ function ftp_ssl_connect($host)
         return false;
     }
 
+    if ($host === 'disconnect.check') {
+        return tmpfile();
+    }
+
     return $host;
 }
 
@@ -68,8 +72,12 @@ function ftp_rename()
     return true;
 }
 
-function ftp_close()
+function ftp_close($connection)
 {
+    if (is_resource($connection)) {
+        return fclose($connection);
+    }
+
     return true;
 }
 
@@ -246,6 +254,7 @@ function ftp_mdtm($connection, $path)
             break;
     }
 }
+
 function ftp_mkdir($connection, $dirname)
 {
     if (strpos($dirname, 'mkdir.fail') !== false) {
@@ -290,6 +299,13 @@ function ftp_chmod($connection, $mode, $path)
     return true;
 }
 
+function ftp_set_option($connection, $option, $value)
+{
+    putenv('USE_PASSV_ADDREESS' . $option . '=' . ($value ? 'YES' : 'NO'));
+
+    return true;
+}
+
 class FtpTests extends \PHPUnit_Framework_TestCase
 {
     protected $options = [
@@ -307,7 +323,7 @@ class FtpTests extends \PHPUnit_Framework_TestCase
 
     public function testInstantiable()
     {
-        if (!defined('FTP_BINARY')) {
+        if ( ! defined('FTP_BINARY')) {
             $this->markTestSkipped('The FTP_BINARY constant is not defined');
         }
 
@@ -330,6 +346,33 @@ class FtpTests extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $adapter->writeStream('unknowndir/file.txt', tmpfile(), new Config(['visibility' => 'public'])));
         $this->assertInternalType('array', $adapter->updateStream('unknowndir/file.txt', tmpfile(), new Config()));
         $this->assertInternalType('array', $adapter->getTimestamp('some/file.ext'));
+    }
+
+    /**
+     * @depends testInstantiable
+     */
+    public function testDisconnect()
+    {
+        $adapter = new Ftp(array_merge($this->options, ['host' => 'disconnect.check']));
+        $adapter->connect();
+        $this->assertTrue($adapter->isConnected());
+        $adapter->disconnect();
+        $this->assertFalse($adapter->isConnected());
+    }
+
+    /**
+     * @depends testInstantiable
+     */
+    public function testIgnorePassiveAddress()
+    {
+        if ( ! defined('FTP_USEPASVADDRESS')) {
+            define('FTP_USEPASVADDRESS', 2);
+        }
+
+        $this->assertFalse(getenv('USE_PASSV_ADDREESS' . FTP_USEPASVADDRESS));
+        $adapter = new Ftp(array_merge($this->options, ['ignorePassiveAddress' => true]));
+        $adapter->connect();
+        $this->assertEquals('NO', getenv('USE_PASSV_ADDREESS' . FTP_USEPASVADDRESS));
     }
 
     /**
@@ -531,7 +574,6 @@ class FtpTests extends \PHPUnit_Framework_TestCase
         $adapter = new Ftp(['host' => 'reconnect.me', 'ssl' => true, 'root' => 'somewhere']);
         $this->assertFalse($adapter->isConnected());
         $this->assertNotNull($adapter->getConnection());
-
     }
 
     /**
