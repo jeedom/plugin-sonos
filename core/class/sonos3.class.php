@@ -932,7 +932,12 @@ class sonos3Cmd extends cmd {
 			if (is_object($state) && is_object($track_title) && $track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
 				return $controller->unmute();
 			}
-			$controller->play();
+			try {
+				$controller->play();
+			} catch (Exception $e) {
+
+			}
+
 		}
 		if ($this->getLogicalId() == 'stop') {
 			$state = $eqLogic->getCmd(null, 'state');
@@ -943,7 +948,11 @@ class sonos3Cmd extends cmd {
 			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
 				return $controller->mute();
 			}
-			$controller->pause();
+			try {
+				$controller->pause();
+			} catch (Exception $e) {
+
+			}
 		}
 		if ($this->getLogicalId() == 'pause') {
 			$state = $eqLogic->getCmd(null, 'state');
@@ -954,7 +963,11 @@ class sonos3Cmd extends cmd {
 			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
 				return $controller->mute();
 			}
-			$controller->pause();
+			try {
+				$controller->pause();
+			} catch (Exception $e) {
+
+			}
 		}
 		if ($this->getLogicalId() == 'previous') {
 			$controller->previous();
