@@ -83,6 +83,25 @@ Il faut absolument mettre un mot de passe pour que cela marche
 [IMPORTANT]
 Il faut aussi absolument un sous repertoire pour que le fichier vocal soit correctement créé.
 
+.Voici un exemple de configuration (merci @masterfion) :
+
+Côté NAS, voici ma config :
+
+* le dossier Jeedom est partagé
+* l'utilisateur Sonos a un accès Lecture/Ecriture (nécessaire pour Jeedom)
+* l'utilisateur guest a un accès en Lecture seule (nécessaire pour les Sonos)
+
+Côté Plugin Sono, voici ma config :
+
+* Partage :
+** Champ 1 : 192.168.xxx.yyy
+** Champ 2 : Jeedom/TTS
+* Nom d'utilisateur : Sonos et son mot de passe...
+
+Côté Bibliothèque Sonos (appli PC)
+
+* le chemin est : //192.168.xxx.yyy/Jeedom/TTS
+
 == Widget
 
 Sur le dashboard vous retrouverez le widget suivant : 
