@@ -458,7 +458,6 @@ class sonos3 extends eqLogic {
 		}
 		$state->setType('info');
 		$state->setSubType('string');
-		$state->setEventOnly(1);
 		$state->setEqLogic_id($this->getId());
 		$state->save();
 
@@ -555,7 +554,6 @@ class sonos3 extends eqLogic {
 		}
 		$mute_state->setType('info');
 		$mute_state->setSubType('binary');
-		$mute_state->setEventOnly(1);
 		$mute_state->setEqLogic_id($this->getId());
 		$mute_state->save();
 
@@ -580,7 +578,6 @@ class sonos3 extends eqLogic {
 		}
 		$repeat_state->setType('info');
 		$repeat_state->setSubType('binary');
-		$repeat_state->setEventOnly(1);
 		$repeat_state->setEqLogic_id($this->getId());
 		$repeat_state->save();
 
@@ -605,7 +602,6 @@ class sonos3 extends eqLogic {
 		}
 		$shuffle_state->setType('info');
 		$shuffle_state->setSubType('binary');
-		$shuffle_state->setEventOnly(1);
 		$shuffle_state->setEqLogic_id($this->getId());
 		$shuffle_state->save();
 
@@ -618,7 +614,6 @@ class sonos3 extends eqLogic {
 		}
 		$volume->setUnite('%');
 		$volume->setType('info');
-		$volume->setEventOnly(1);
 		$volume->setSubType('numeric');
 		$volume->setEqLogic_id($this->getId());
 		$volume->save();
@@ -644,7 +639,6 @@ class sonos3 extends eqLogic {
 			$track_title->setName(__('Piste', __FILE__));
 		}
 		$track_title->setType('info');
-		$track_title->setEventOnly(1);
 		$track_title->setSubType('string');
 		$track_title->setEqLogic_id($this->getId());
 		$track_title->save();
@@ -657,7 +651,6 @@ class sonos3 extends eqLogic {
 			$track_artist->setName(__('Artiste', __FILE__));
 		}
 		$track_artist->setType('info');
-		$track_artist->setEventOnly(1);
 		$track_artist->setSubType('string');
 		$track_artist->setEqLogic_id($this->getId());
 		$track_artist->save();
@@ -670,7 +663,6 @@ class sonos3 extends eqLogic {
 			$track_album->setName(__('Album', __FILE__));
 		}
 		$track_album->setType('info');
-		$track_album->setEventOnly(1);
 		$track_album->setSubType('string');
 		$track_album->setEqLogic_id($this->getId());
 		$track_album->save();
@@ -683,7 +675,6 @@ class sonos3 extends eqLogic {
 			$track_position->setName(__('Image', __FILE__));
 		}
 		$track_position->setType('info');
-		$track_position->setEventOnly(1);
 		$track_position->setSubType('string');
 		$track_position->setEqLogic_id($this->getId());
 		$track_position->save();
