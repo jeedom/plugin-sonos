@@ -195,7 +195,7 @@ class sonos3 extends eqLogic {
 					if ($state == __('Transition', __FILE__)) {
 						continue;
 					}
-					if ($state != $cmd_state->execCmd(null, 2)) {
+					if ($state != $cmd_state->execCmd()) {
 						$cmd_state->setCollectDate('');
 						$cmd_state->event($state);
 						$changed = true;
@@ -205,7 +205,7 @@ class sonos3 extends eqLogic {
 				$cmd_volume = $eqLogic->getCmd(null, 'volume');
 				if (is_object($cmd_volume)) {
 					$volume = $controller->getVolume();
-					if ($volume != $cmd_volume->execCmd(null, 2)) {
+					if ($volume != $cmd_volume->execCmd()) {
 						$cmd_volume->setCollectDate('');
 						$cmd_volume->event($volume);
 						$changed = true;
@@ -218,7 +218,7 @@ class sonos3 extends eqLogic {
 					if ($shuffle == '') {
 						$shuffle = 0;
 					}
-					if ($shuffle != $cmd_suffle->execCmd(null, 2)) {
+					if ($shuffle != $cmd_suffle->execCmd()) {
 						$cmd_suffle->setCollectDate('');
 						$cmd_suffle->event($shuffle);
 						$changed = true;
@@ -231,7 +231,7 @@ class sonos3 extends eqLogic {
 					if ($mute == '') {
 						$mute = 0;
 					}
-					if ($mute != $cmd_mute->execCmd(null, 2)) {
+					if ($mute != $cmd_mute->execCmd()) {
 						$cmd_mute->setCollectDate('');
 						$cmd_mute->event($mute);
 						$changed = true;
@@ -244,7 +244,7 @@ class sonos3 extends eqLogic {
 					if ($repeat == '') {
 						$repeat = 0;
 					}
-					if ($repeat != $cmd_repeat->execCmd(null, 2)) {
+					if ($repeat != $cmd_repeat->execCmd()) {
 						$cmd_repeat->setCollectDate('');
 						$cmd_repeat->event($repeat);
 						$changed = true;
@@ -262,7 +262,7 @@ class sonos3 extends eqLogic {
 					$title = __('Aucun', __FILE__);
 				}
 				if (is_object($cmd_track_title)) {
-					if ($title != $cmd_track_title->execCmd(null, 2)) {
+					if ($title != $cmd_track_title->execCmd()) {
 						$cmd_track_title->setCollectDate('');
 						$cmd_track_title->event($title);
 						$changed = true;
@@ -275,7 +275,7 @@ class sonos3 extends eqLogic {
 					$album = __('Aucun', __FILE__);
 				}
 				if (is_object($cmd_track_album)) {
-					if ($album != $cmd_track_album->execCmd(null, 2)) {
+					if ($album != $cmd_track_album->execCmd()) {
 						$cmd_track_album->setCollectDate('');
 						$cmd_track_album->event($album);
 						$changed = true;
@@ -288,7 +288,7 @@ class sonos3 extends eqLogic {
 					$artist = __('Aucun', __FILE__);
 				}
 				if (is_object($cmd_track_artist)) {
-					if ($artist != $cmd_track_artist->execCmd(null, 2)) {
+					if ($artist != $cmd_track_artist->execCmd()) {
 						$cmd_track_artist->setCollectDate('');
 						$cmd_track_artist->event($artist);
 						$changed = true;
@@ -298,7 +298,7 @@ class sonos3 extends eqLogic {
 				$cmd_track_image = $eqLogic->getCmd(null, 'track_image');
 				if ($track->albumArt != '') {
 					if (is_object($cmd_track_image)) {
-						if ($track->albumArt != $cmd_track_image->execCmd(null, 2)) {
+						if ($track->albumArt != $cmd_track_image->execCmd()) {
 							$cmd_track_image->setCollectDate('');
 							$cmd_track_image->event($track->albumArt);
 							file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->albumArt));
@@ -807,7 +807,7 @@ class sonos3 extends eqLogic {
 
 		$cmd_state = $this->getCmd(null, 'state');
 		if (is_object($cmd_state)) {
-			$replace['#state#'] = $cmd_state->execCmd(null, 2);
+			$replace['#state#'] = $cmd_state->execCmd();
 			if ($replace['#state#'] == __('Lecture', __FILE__)) {
 				$replace['#state_nb#'] = 1;
 			} else {
@@ -827,7 +827,7 @@ class sonos3 extends eqLogic {
 
 		foreach ($this->getCmd('info') as $cmd) {
 			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-			$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd(null, 2);
+			$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
 		}
 		if ($replace['#mute_state#'] == 1) {
 			$replace['#mute_id#'] = $replace['#unmute_id#'];
@@ -835,18 +835,18 @@ class sonos3 extends eqLogic {
 
 		$cmd_track_artist = $this->getCmd(null, 'track_artist');
 		if (is_object($cmd_track_artist)) {
-			$replace['#title#'] = $cmd_track_artist->execCmd(null, 2);
+			$replace['#title#'] = $cmd_track_artist->execCmd();
 		}
 
 		$cmd_track_album = $this->getCmd(null, 'track_album');
 		if (is_object($cmd_track_album)) {
-			$replace['#title#'] .= ' - ' . $cmd_track_album->execCmd(null, 2);
+			$replace['#title#'] .= ' - ' . $cmd_track_album->execCmd();
 		}
 		$replace['#title#'] = trim(trim(trim($replace['#title#']), ' - ' . __('Aucun', __FILE__)));
 
 		$cmd_track_title = $this->getCmd(null, 'track_title');
 		if (is_object($cmd_track_title)) {
-			$replace['#title#'] .= ' - ' . $cmd_track_title->execCmd(null, 2);
+			$replace['#title#'] .= ' - ' . $cmd_track_title->execCmd();
 		}
 		$replace['#title#'] = trim(trim(trim($replace['#title#']), '-'));
 
@@ -862,7 +862,7 @@ class sonos3 extends eqLogic {
 		if (is_object($cmd_track_image)) {
 			$img = dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $this->getId() . '.jpg';
 			if (file_exists($img) && filesize($img) > 500) {
-				$replace['#thumbnail#'] = 'plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd(null, 2));
+				$replace['#thumbnail#'] = 'plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd());
 			} else {
 				$replace['#thumbnail#'] = 'plugins/sonos3/doc/images/sonos3_alt_icon.png';
 			}
@@ -929,7 +929,7 @@ class sonos3Cmd extends cmd {
 		if ($this->getLogicalId() == 'play') {
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
-			if (is_object($state) && is_object($track_title) && $track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+			if (is_object($state) && is_object($track_title) && $track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Lecture', __FILE__)) {
 				return $controller->unmute();
 			}
 			try {
@@ -942,10 +942,10 @@ class sonos3Cmd extends cmd {
 		if ($this->getLogicalId() == 'stop') {
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
-			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Arrêté', __FILE__)) {
+			if ($track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Arrêté', __FILE__)) {
 				return;
 			}
-			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+			if ($track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Lecture', __FILE__)) {
 				return $controller->mute();
 			}
 			try {
@@ -957,10 +957,10 @@ class sonos3Cmd extends cmd {
 		if ($this->getLogicalId() == 'pause') {
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
-			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Arrêté', __FILE__)) {
+			if ($track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Arrêté', __FILE__)) {
 				return;
 			}
-			if ($track_title->execCmd(null, 2) == __('Aucun', __FILE__) && $state->execCmd(null, 2) == __('Lecture', __FILE__)) {
+			if ($track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Lecture', __FILE__)) {
 				return $controller->mute();
 			}
 			try {
