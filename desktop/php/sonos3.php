@@ -23,17 +23,24 @@ foreach ($eqLogics as $eqLogic) {
    </div>
 
    <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-    <legend>{{Mes Sonos}}
-    </legend>
-
+    <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
     <div class="eqLogicThumbnailContainer">
-      <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
+      <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
          <center>
-            <i class="fa fa-plus-circle" style="font-size : 7em;color:#94ca02;"></i>
+         <i class="fa fa-plus-circle" style="font-size : 5em;color:#94ca02;"></i>
         </center>
-        <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>Ajouter</center></span>
+        <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>Ajouter</center></span>
     </div>
-    <?php
+    <div class="cursor eqLogicAction" data-action="gotoPluginConf" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
+        <center>
+          <i class="fa fa-wrench" style="font-size : 5em;color:#767676;"></i>
+      </center>
+      <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Configuration}}</center></span>
+  </div>
+</div>
+<div class="eqLogicThumbnailContainer">
+ <legend><i class="fa fa-table"></i> {{Mes Sonos}}</legend>
+ <?php
 foreach ($eqLogics as $eqLogic) {
 	$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
 	echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
@@ -82,30 +89,30 @@ foreach (object::all() as $object) {
                 <label class="col-sm-3 control-label" ></label>
                 <div class="col-sm-9">
                  <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
-                        <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
-                </div>
+                 <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
+             </div>
+         </div>
+         <div class="form-group">
+            <label class="col-sm-3 control-label">{{Model}}</label>
+            <div class="col-sm-5">
+                <select type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="model" >
+                    <option value="PLAY1">Sonos Play 1</option>
+                    <option value="PLAY3">Sonos Play 3</option>
+                    <option value="PLAY5">Sonos Play 5</option>
+                    <option value="CONNECT">Sonos Connect</option>
+                    <option value="CONNECT:AMP">Sonos Connect AMP</option>
+                    <option value="PLAYBAR">Sonos Playbar</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">{{Model}}</label>
-                <div class="col-sm-5">
-                    <select type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="model" >
-                        <option value="PLAY1">Sonos Play 1</option>
-                        <option value="PLAY3">Sonos Play 3</option>
-                        <option value="PLAY5">Sonos Play 5</option>
-                        <option value="CONNECT">Sonos Connect</option>
-                        <option value="CONNECT:AMP">Sonos Connect AMP</option>
-                        <option value="PLAYBAR">Sonos Playbar</option>
-                    </select>
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">{{IP}}</label>
+            <div class="col-sm-5">
+                <input type="text" class="eqLogicAttr configuration form-control" data-l1key="logicalId" placeholder="IP"/>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">{{IP}}</label>
-                <div class="col-sm-5">
-                    <input type="text" class="eqLogicAttr configuration form-control" data-l1key="logicalId" placeholder="IP"/>
-                </div>
-            </div>
-        </fieldset>
-    </form>
+        </div>
+    </fieldset>
+</form>
 </div>
 <div class="col-xs-6">
     <center>
