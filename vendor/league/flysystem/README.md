@@ -71,6 +71,7 @@ Want to get started quickly? Check out some of these integrations:
 * Amazon Web Services - S3 V3: https://github.com/thephpleague/flysystem-aws-s3-v3
 * Rackspace Cloud Files: https://github.com/thephpleague/flysystem-rackspace
 * Dropbox: https://github.com/thephpleague/flysystem-dropbox
+* OneDrive: https://github.com/jacekbarecki/flysystem-onedrive
 * Copy: https://github.com/thephpleague/flysystem-copy
 * Ftp
 * Sftp (through phpseclib): https://github.com/thephpleague/flysystem-sftp
@@ -82,6 +83,8 @@ Want to get started quickly? Check out some of these integrations:
 * Redis (through Predis): https://github.com/danhunsaker/flysystem-redis
 * Fallback: https://github.com/Litipk/flysystem-fallback-adapter
 * Memory: https://github.com/thephpleague/flysystem-memory
+* Google Cloud Storage: https://github.com/Superbalist/flysystem-google-storage
+* SinaAppEngine Storage: https://github.com/litp/flysystem-sae-storage
 
 ## Caching
 
