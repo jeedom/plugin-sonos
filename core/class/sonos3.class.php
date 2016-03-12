@@ -33,6 +33,7 @@ class sonos3 extends eqLogic {
 
 	private static $_sonos = null;
 	private static $_sonosAddOK = false;
+	public static $_widgetPossibility = array('custom' => true);
 
 	/*     * ***********************Methode static*************************** */
 
@@ -758,43 +759,14 @@ class sonos3 extends eqLogic {
 	}
 
 	public function toHtml($_version = 'dashboard') {
-		if ($this->getIsEnable() != 1) {
-			return '';
-		}
-		if (!$this->hasRight('r')) {
-			return '';
+		$replace = $this->preToHtml($_version, array('#background-color#' => '#5d9cec'));
+		if (!is_array($replace)) {
+			return $replace;
 		}
 		$version = jeedom::versionAlias($_version);
-		if ($this->getDisplay('hideOn' . $version) == 1) {
-			return '';
-		}
-		$mc = cache::byKey('sonosWidget' . $_version . $this->getId());
-		if ($mc->getValue() != '') {
-			return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
-		}
-		$replace = array(
-			'#id#' => $this->getId(),
-			'#info#' => (isset($info)) ? $info : '',
-			'#name#' => $this->getName(),
-			'#eqLink#' => ($this->hasRight('w')) ? $this->getLinkToConfiguration() : '#',
-			'#text_color#' => $this->getConfiguration('text_color'),
-			'#background_color#' => '#5d9cec',
-			'#hideThumbnail#' => 0,
-			'#object_name#' => '',
-			'#version#' => $_version,
-			'#style#' => '',
-			'#uid#' => 'sonos' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
-		);
-		if ($_version == 'dview' || $_version == 'mview') {
-			$object = $this->getObject();
-			$replace['#name#'] = (is_object($object)) ? $object->getName() . ' - ' . $replace['#name#'] : $replace['#name#'];
-		}
-		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
-			$replace['#name#'] = '';
-		}
-		if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
-			$replace['#name#'] = '';
-		}
+		$replace['#text_color#'] = $this->getConfiguration('text_color');
+		$replace['#hideThumbnail#'] = 0;
+		$replace['#version#'] = $_version;
 
 		$cmd_state = $this->getCmd(null, 'state');
 		if (is_object($cmd_state)) {
@@ -858,17 +830,8 @@ class sonos3 extends eqLogic {
 				$replace['#thumbnail#'] = 'plugins/sonos3/doc/images/sonos3_alt_icon.png';
 			}
 		}
-
-		$parameters = $this->getDisplay('parameters');
-		if (is_array($parameters)) {
-			foreach ($parameters as $key => $value) {
-				$replace['#' . $key . '#'] = $value;
-			}
-		}
-
-		$_version = jeedom::versionAlias($_version);
-		$html = template_replace($replace, getTemplate('core', $_version, 'eqLogic', 'sonos3'));
-		cache::set('sonosWidget' . $_version . $this->getId(), $html, 0);
+		$html = template_replace($replace, getTemplate('core', $version, 'eqLogic', 'sonos3'));
+		cache::set('widgetHtml' . $version . $this->getId(), $html, 0);
 		return $html;
 	}
 
