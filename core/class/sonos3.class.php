@@ -831,7 +831,7 @@ class sonos3 extends eqLogic {
 			}
 		}
 		$html = template_replace($replace, getTemplate('core', $version, 'eqLogic', 'sonos3'));
-		cache::set('widgetHtml' . $version . $this->getId(), $html, 0);
+		cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
 		return $html;
 	}
 
