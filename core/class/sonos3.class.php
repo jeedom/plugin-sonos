@@ -759,7 +759,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public function toHtml($_version = 'dashboard') {
-		$replace = $this->preToHtml($_version, array('#background-color#' => '#5d9cec'));
+		$replace = $this->preToHtml($_version, array('#background-color#' => '#4a89dc'));
 		if (!is_array($replace)) {
 			return $replace;
 		}
