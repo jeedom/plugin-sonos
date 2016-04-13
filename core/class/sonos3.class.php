@@ -765,7 +765,6 @@ class sonos3 extends eqLogic {
 		}
 		$version = jeedom::versionAlias($_version);
 		$replace['#text_color#'] = $this->getConfiguration('text_color');
-		$replace['#hideThumbnail#'] = 0;
 		$replace['#version#'] = $_version;
 
 		$cmd_state = $this->getCmd(null, 'state');
