@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.20 - 2016-03-14
+
+### Improved
+
+* MimeType detection now falls back on extension guessing when the contents is a resource.
+
+## 1.0.19 - 2016-03-12
+
+### Fixed
+
+* [Util::normalizeRelativePath] `'.'` didn't normalize to `''`, this is now fixed.
+
+## 1.0.18 - 2016-03-07
+
+### Fixed
+
+* Reverted "Simplified Util::pathinfo, dirname key always exists." which had unexpected side-effects.
+
 ## 1.0.17 - 2016-02-19
 
 ### Fixed
