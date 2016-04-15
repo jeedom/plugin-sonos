@@ -20,7 +20,6 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Network;
-use duncan3dc\Sonos\Speaker;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use duncan3dc\Speaker\Providers\VoxygenProvider;
@@ -414,27 +413,6 @@ class sonos3 extends eqLogic {
 		if ($controller == null) {
 			try {
 				$sonos = sonos3::getSonos(true);
-				$controller = $sonos->getControllerByIp($_ip);
-			} catch (Exception $e) {
-
-			}
-		}
-		if ($controller == null) {
-			try {
-				if (!self::$_sonosAddOK) {
-					$speakers = array();
-					foreach (self::byType('sonos3') as $eqLogic) {
-						if ($eqLogic->getIsEnable() == 0) {
-							continue;
-						}
-						if ($eqLogic->getLogicalId() == '') {
-							continue;
-						}
-						$speakers[$eqLogic->getLogicalId()] = new Speaker($eqLogic->getLogicalId());
-					}
-					$sonos->setSpeakers($speakers);
-					self::$_sonosAddOK = true;
-				}
 				$controller = $sonos->getControllerByIp($_ip);
 			} catch (Exception $e) {
 
