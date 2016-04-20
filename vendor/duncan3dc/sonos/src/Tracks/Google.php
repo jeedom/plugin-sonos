@@ -10,7 +10,6 @@ use duncan3dc\Sonos\Helper;
 class Google extends Track {
 	const UNIQUE = "A0DvPDnows";
 	const PREFIX = "x-sonos-http:" . self::UNIQUE;
-	const PREFIX_RADIO = "x-sonosprog-http:" . self::UNIQUE;
 
 	/**
 	 * Create a Google track object.
@@ -19,7 +18,7 @@ class Google extends Track {
 	 */
 	public function __construct($uri) {
 		# If this is a Google track ID and not a URI then convert it to a URI now
-		if (substr($uri, 0, strlen(self::PREFIX)) !== self::PREFIX && substr($uri, 0, strlen(self::PREFIX_RADIO)) !== self::PREFIX_RADIO) {
+		if (substr($uri, 0, strlen(self::PREFIX)) !== self::PREFIX) {
 			$uri = self::PREFIX . urlencode(":{$uri}.mp3");
 		}
 
