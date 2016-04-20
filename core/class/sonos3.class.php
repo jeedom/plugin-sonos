@@ -20,6 +20,7 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Network;
+use duncan3dc\Sonos\Tracks\Google;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use duncan3dc\Speaker\Providers\VoxygenProvider;
@@ -838,6 +839,12 @@ class sonos3 extends eqLogic {
 		$controller = self::getControllerByIp($this->getLogicalId());
 		$queue = $controller->getQueue();
 		$queue->clear();
+	}
+
+	public function playGoogleMusic($_id) {
+		$controller = self::getControllerByIp($this->getLogicalId());
+		$track = new Google($_id);
+		$controller->getQueue()->addTrack($track);
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
