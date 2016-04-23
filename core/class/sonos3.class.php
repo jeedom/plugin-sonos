@@ -33,7 +33,18 @@ class sonos3 extends eqLogic {
 
 	private static $_sonos = null;
 	private static $_sonosAddOK = false;
-	public static $_widgetPossibility = array('custom' => true);
+	public static $_widgetPossibility = array(
+		'custom' => true,
+		'parameters' => array(
+			'sub-background-color' => array(
+				'name' => 'Couleur de la barre de controle',
+				'type' => 'color',
+				'default' => '#5d9cec',
+				'allow_transparent' => true,
+				'allow_displayType' => true,
+			),
+		),
+	);
 
 	/*     * ***********************Methode static*************************** */
 
@@ -808,7 +819,6 @@ class sonos3 extends eqLogic {
 				$replace['#thumbnail#'] = 'plugins/sonos3/doc/images/sonos3_alt_icon.png';
 			}
 		}
-		$replace['#sub-background-color#'] = ($replace['#background-color#'] == 'transparent') ? 'transparent' : '#5d9cec';
 		$html = template_replace($replace, getTemplate('core', $version, 'eqLogic', 'sonos3'));
 		cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
 		return $html;
