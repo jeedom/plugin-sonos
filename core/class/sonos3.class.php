@@ -37,7 +37,7 @@ class sonos3 extends eqLogic {
 		'custom' => true,
 		'parameters' => array(
 			'sub-background-color' => array(
-				'name' => 'Couleur de la barre de controle',
+				'name' => 'Couleur de la barre de contrôle',
 				'type' => 'color',
 				'default' => '#5d9cec',
 				'allow_transparent' => true,
