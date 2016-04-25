@@ -124,10 +124,15 @@ class sonos3 extends eqLogic {
 		} else if (self::$_sonos !== null) {
 			return self::$_sonos;
 		}
-		$logger = log::getLogger('sonos_debug');
+		if (log::allowLog('sonos', 'debug')) {
+			$logger = log::getLogger('sonos_debug');
+		}
+
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
 		self::$_sonos = new Network($cache);
-		self::$_sonos->setLogger($logger);
+		if (log::allowLog('sonos', 'debug')) {
+			self::$_sonos->setLogger($logger);
+		}
 		return self::$_sonos;
 	}
 
@@ -970,8 +975,12 @@ class sonos3Cmd extends cmd {
 				if (isset($_options['message']) && $_options['message'] == 'random') {
 					shuffle($tracks);
 				}
-				$queue->addTrack($tracks[0]);
-				$controller->play();
+				try {
+					$queue->addTrack($tracks[0]);
+					$controller->play();
+				} catch (Exception $e) {
+
+				}
 				unset($tracks[0]);
 				$queue->addTracks($tracks);
 			} else {
