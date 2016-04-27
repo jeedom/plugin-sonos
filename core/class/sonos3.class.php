@@ -124,7 +124,7 @@ class sonos3 extends eqLogic {
 		} else if (self::$_sonos !== null) {
 			return self::$_sonos;
 		}
-		$logger = log::getLogger('sonos');
+		$logger = log::getLogger('sonos3');
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
 		self::$_sonos = new Network($cache);
 		self::$_sonos->setLogger($logger);
