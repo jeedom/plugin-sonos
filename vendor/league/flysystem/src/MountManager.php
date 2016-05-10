@@ -128,6 +128,7 @@ class MountManager
             throw new LogicException('At least one argument needed');
         }
 
+        // The prefix depends on the first argument.
         $path = array_shift($arguments);
 
         if ( ! is_string($path)) {
@@ -139,6 +140,15 @@ class MountManager
         }
 
         list($prefix, $path) = explode('://', $path, 2);
+
+        // If there are more paths in the arguments, we'll fix them as well.
+        foreach ($arguments as $key => $argument) {
+            $parts = explode('://', $argument, 2);
+            if (count($parts) == 2) {
+                $arguments[$key] = $parts[1];
+            }
+        }
+
         array_unshift($arguments, $path);
 
         return [$prefix, $arguments];
@@ -182,10 +192,11 @@ class MountManager
     /**
      * @param $from
      * @param $to
+     * @param array $config
      *
      * @return bool
      */
-    public function copy($from, $to)
+    public function copy($from, $to, array $config = [])
     {
         list($prefixFrom, $arguments) = $this->filterPrefix([$from]);
 
@@ -199,7 +210,7 @@ class MountManager
         list($prefixTo, $arguments) = $this->filterPrefix([$to]);
 
         $fsTo = $this->getFilesystem($prefixTo);
-        $result =  call_user_func_array([$fsTo, 'writeStream'], array_merge($arguments, [$buffer]));
+        $result =  call_user_func_array([$fsTo, 'writeStream'], array_merge($arguments, [$buffer, $config]));
 
         if (is_resource($buffer)) {
             fclose($buffer);
@@ -229,12 +240,13 @@ class MountManager
      *
      * @param $from
      * @param $to
+     * @param array $config
      *
      * @return bool
      */
-    public function move($from, $to)
+    public function move($from, $to, array $config = [])
     {
-        $copied = $this->copy($from, $to);
+        $copied = $this->copy($from, $to, $config);
 
         if ($copied) {
             return $this->delete($from);

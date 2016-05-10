@@ -28,6 +28,8 @@ Creating a Client
         'timeout'  => 2.0,
     ]);
 
+Clients are immutable in Guzzle 6, which means that you cannot change the defaults used by a client after it's created.
+
 The client constructor accepts an associative array of options:
 
 ``base_uri``
@@ -490,14 +492,15 @@ Guzzle throws exceptions for errors that occur during a transfer.
 
   .. code-block:: php
 
+      use GuzzleHttp\Psr7;
       use GuzzleHttp\Exception\RequestException;
 
       try {
           $client->request('GET', 'https://github.com/_abc_123_404');
       } catch (RequestException $e) {
-          echo $e->getRequest();
+          echo Psr7\str($e->getRequest());
           if ($e->hasResponse()) {
-              echo $e->getResponse();
+              echo Psr7\str($e->getResponse());
           }
       }
 
@@ -518,8 +521,8 @@ Guzzle throws exceptions for errors that occur during a transfer.
       try {
           $client->request('GET', 'https://github.com/_abc_123_404');
       } catch (ClientException $e) {
-          echo $e->getRequest();
-          echo $e->getResponse();
+          echo Psr7\str($e->getRequest());
+          echo Psr7\str($e->getResponse());
       }
 
 - A ``GuzzleHttp\Exception\ServerException`` is thrown for 500 level

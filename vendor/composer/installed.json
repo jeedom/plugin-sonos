@@ -155,12 +155,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "a8294fb7d939433abfaeb0fc1a34a278acfa5b39"
+            "reference": "f9523f5cdb0d61953cf2cc968f973d40bf760088"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a8294fb7d939433abfaeb0fc1a34a278acfa5b39",
-            "reference": "a8294fb7d939433abfaeb0fc1a34a278acfa5b39",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f9523f5cdb0d61953cf2cc968f973d40bf760088",
+            "reference": "f9523f5cdb0d61953cf2cc968f973d40bf760088",
             "shasum": ""
         },
         "require": {
@@ -189,7 +189,7 @@
             "league/flysystem-webdav": "Allows you to use WebDAV storage",
             "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
         },
-        "time": "2016-04-04 14:52:20",
+        "time": "2016-05-06 23:17:05",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -402,12 +402,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "85cb758d7367f3aaaa8ffc9269e777919c5f68bb"
+            "reference": "b1a96f6134f69cb41f8538d3a6491f4bb1dbab78"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/85cb758d7367f3aaaa8ffc9269e777919c5f68bb",
-            "reference": "85cb758d7367f3aaaa8ffc9269e777919c5f68bb",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b1a96f6134f69cb41f8538d3a6491f4bb1dbab78",
+            "reference": "b1a96f6134f69cb41f8538d3a6491f4bb1dbab78",
             "shasum": ""
         },
         "require": {
@@ -420,7 +420,7 @@
             "phpunit/phpunit": "~4.0",
             "psr/log": "~1.0"
         },
-        "time": "2016-04-06 17:59:33",
+        "time": "2016-05-08 19:39:56",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -676,17 +676,17 @@
     },
     {
         "name": "icewind/smb",
-        "version": "v1.0.8",
-        "version_normalized": "1.0.8.0",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/icewind1991/SMB.git",
-            "reference": "764f3fc793a904eb937d619ad097fb076ff199cd"
+            "reference": "822f924967c68228555cea84ea44765f8e85c601"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/icewind1991/SMB/zipball/764f3fc793a904eb937d619ad097fb076ff199cd",
-            "reference": "764f3fc793a904eb937d619ad097fb076ff199cd",
+            "url": "https://api.github.com/repos/icewind1991/SMB/zipball/822f924967c68228555cea84ea44765f8e85c601",
+            "reference": "822f924967c68228555cea84ea44765f8e85c601",
             "shasum": ""
         },
         "require": {
@@ -697,7 +697,7 @@
             "phpunit/phpunit": "^4.8",
             "satooshi/php-coveralls": "v1.0.0"
         },
-        "time": "2016-03-17 13:29:58",
+        "time": "2016-04-26 13:26:39",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
