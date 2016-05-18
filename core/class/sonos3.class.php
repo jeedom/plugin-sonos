@@ -19,7 +19,6 @@
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
-use duncan3dc\Sonos\Network;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Sonos\Tracks\Track;
 use duncan3dc\Speaker\Providers\GoogleProvider;
@@ -126,7 +125,7 @@ class sonos3 extends eqLogic {
 		}
 		$logger = log::getLogger('sonos3');
 		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
-		self::$_sonos = new Network($cache);
+		self::$_sonos = new duncan3dc\Sonos\Network($cache);
 		self::$_sonos->setLogger($logger);
 		return self::$_sonos;
 	}
@@ -869,6 +868,66 @@ class sonos3Cmd extends cmd {
 	/*     * ***********************Methode static*************************** */
 
 	/*     * *********************Methode d'instance************************* */
+
+	public function imperihomeGenerate($ISSStructure) {
+		$eqLogic = $this->getEqLogic();
+		$object = $eqLogic->getObject();
+		$type = 'DevPlayer';
+		$info_device = array(
+			'id' => $this->getId(),
+			'name' => $eqLogic->getName(),
+			'room' => (is_object($object)) ? $object->getId() : 99999,
+			'type' => $type,
+			'params' => array(),
+		);
+		$info_device['params'] = $ISSStructure[$info_device['type']]['params'];
+		$info_device['params'][0]['value'] = '#' . $eqLogic->getCmd('info', 'state')->getId() . '#';
+		$info_device['params'][1]['value'] = '#' . $eqLogic->getCmd('info', 'volume')->getId() . '#';
+		$info_device['params'][2]['value'] = '#' . $eqLogic->getCmd('info', 'mute_state')->getId() . '#';
+		$info_device['params'][3]['value'] = '';
+		$info_device['params'][4]['value'] = '';
+		$info_device['params'][5]['value'] = '#' . $eqLogic->getCmd('info', 'track_title')->getId() . '#';
+		$info_device['params'][6]['value'] = '#' . $eqLogic->getCmd('info', 'track_album')->getId() . '#';
+		$info_device['params'][7]['value'] = '#' . $eqLogic->getCmd('info', 'track_artist')->getId() . '#';
+		$info_device['params'][8]['value'] = network::getNetworkAccess('external') . '/plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg';
+		return $info_device;
+	}
+
+	public function imperihomeAction($_action, $_value) {
+		$eqLogic = $this->getEqLogic();
+		switch ($_action) {
+			case 'setvolume':
+				$eqLogic->getCmd('action', 'setVolume')->execCmd(array('slider' => $_value));
+				break;
+			case 'play':
+				$eqLogic->getCmd('action', 'play')->execCmd();
+				break;
+			case 'pause':
+				$eqLogic->getCmd('action', 'pause')->execCmd();
+				break;
+			case 'next':
+				$eqLogic->getCmd('action', 'next')->execCmd();
+				break;
+			case 'previous':
+				$eqLogic->getCmd('action', 'previous')->execCmd();
+				break;
+			case 'stop':
+				$eqLogic->getCmd('action', 'stop')->execCmd();
+				break;
+			case 'mute':
+				if ($eqLogic->getCmd('info', 'mute_state')->execCmd() == 1) {
+					$eqLogic->getCmd('action', 'unmute')->execCmd();
+				} else {
+					$eqLogic->getCmd('action', 'mute')->execCmd();
+				}
+				break;
+		}
+		return;
+	}
+
+	public function imperihomeCmd() {
+		return ($this->getLogicalId() == 'state');
+	}
 
 	public function execute($_options = array()) {
 		if ($this->getType() == 'info') {
