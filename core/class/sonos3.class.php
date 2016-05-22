@@ -936,6 +936,10 @@ class sonos3Cmd extends cmd {
 		$eqLogic = $this->getEqLogic();
 		$sonos = sonos3::getSonos();
 		$controller = sonos3::getControllerByIp($eqLogic->getLogicalId());
+		if (!is_object($controller)) {
+			throw new Exception(__('Impossible de récuperer le sonos : ', __FILE__) . $eqLogic->getHumanName());
+			return;
+		}
 		if ($this->getLogicalId() == 'play') {
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
