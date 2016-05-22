@@ -951,7 +951,6 @@ class sonos3Cmd extends cmd {
 			} catch (Exception $e) {
 
 			}
-
 		}
 		if ($this->getLogicalId() == 'stop') {
 			$state = $eqLogic->getCmd(null, 'state');
