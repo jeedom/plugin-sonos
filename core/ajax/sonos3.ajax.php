@@ -16,7 +16,6 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-header('Content-Type: application/json');
 try {
 	require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 	include_file('core', 'authentification', 'php');
@@ -24,6 +23,8 @@ try {
 	if (!isConnect()) {
 		throw new Exception(__('401 - Accès non autorisé', __FILE__));
 	}
+
+	ajax::init();
 
 	if (init('action') == 'syncSonos') {
 		sonos3::syncSonos();
