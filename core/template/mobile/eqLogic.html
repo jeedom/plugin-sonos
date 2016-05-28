@@ -1,38 +1,34 @@
 <div class="eqLogic eqLogic-widget sonos3" data-version="mobile" style="overflow:hidden;text-align:center; width: 420px; height:19.34em; padding-bottom:0px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#">
 	<link rel="stylesheet" href="plugins/sonos3/core/template/mobile/css/style.css" />
 	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
-	<div class="card">
-		<div class="card_front">
-			<div class="front_sonos">
-				<strong style="margin-left:auto;margin-right:auto;#hideEqLogicName#">#name_display# <span style="font-size: 0.85em;position: relative;top:-2px;">#object_name#</span></strong>
-				<div style="margin-top : 5px; height:12em;">
-					<div style="height:8em;">
-						<img src="#thumbnail#" style="margin-left:auto;margin-right:auto;height:100%;border-radius:5%;"/>
-					</div>
-					<div style="height:3.23em;">
-						<span style="font-size:1em;">#title#</span>
-						<br />
-						<span style="font-size:0.7em;">#state#</span>
-					</div>
-					<div style="background-color:#sub-background-color#;height:6em;margin-top:0.5em;display:block;">
-						<div style="height:3em;">
-							<img class="bouton_bas" style="margin-right:0.2em;opacity: 0.5;" src="plugins/sonos3/core/template/dashboard/images/sound63.png" onclick="soundMenu#id#();"/>
-							<img class="previous cmd" data-cmd_id="#previous_id#"  src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #previous_id#});"/>
-							<img class="bouton_bas play cmd" data-cmd_id="#play_id#" src="plugins/sonos3/core/template/dashboard/images/play1.png" onclick="jeedom.cmd.execute({id: #play_id#});" style="margin-left:0.32em;" />
-							<img class="bouton_bas pause cmd" data-cmd_id="#pause_id#" src="plugins/sonos3/core/template/dashboard/images/pause.png" onclick="jeedom.cmd.execute({id: #pause_id#});" />
-							<img class="bouton_bas cmd" data-cmd_id="#next_id#" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #next_id#});"/>
-						</div>
-						<div style="height:3em;" class="primarySubMenu">
-							<img class="bouton_bas cmd" data-cmd_id="#stop_id#" src="plugins/sonos3/core/template/dashboard/images/stop.png" style="position:relative;top:-3px;" onclick="jeedom.cmd.execute({id: #stop_id#});"/>
-							<a class="bouton_bas mute cmd" data-cmd_id="#mute_id#" onclick="jeedom.cmd.execute({id: #mute_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-volume-off"></i></a>
-							<a class="bouton_bas shuffle cmd" data-cmd_id="#shuffle_id#" onclick="jeedom.cmd.execute({id: #shuffle_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-random"></i></a>
-							<a class="bouton_bas shuffle cmd" data-cmd_id="#repeat_id#" onclick="jeedom.cmd.execute({id: #repeat_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-repeat"></i></a>
-						</div>
-						<div style="height:3em;display:none;margin-top:17px;" class="soundMenu">
-							<div class="volume full-width-slider cmd" data-cmd_id="#setVolume_id#" style="width: 96%;text-align: right;min-width : 100px;">
-								<input type="range" min="0" max="100" data-theme="a" value="#volume#"/>
-							</div>
-						</div>
+	<div>
+		<strong style="margin-left:auto;margin-right:auto;#hideEqLogicName#">#name_display# <span style="font-size: 0.85em;position: relative;top:-2px;">#object_name#</span></strong>
+		<div style="margin-top : 5px; height:12em;">
+			<div style="height:8em;">
+				<img src="#thumbnail#" style="margin-left:auto;margin-right:auto;height:100%;border-radius:5%;"/>
+			</div>
+			<div style="height:3.23em;">
+				<span style="font-size:1em;">#title#</span>
+				<br />
+				<span style="font-size:0.7em;">#state#</span>
+			</div>
+			<div style="background-color:#sub-background-color#;height:6em;margin-top:0.5em;display:block;">
+				<div style="height:3em;">
+					<img class="bouton_bas" style="margin-right:0.2em;opacity: 0.5;" src="plugins/sonos3/core/template/dashboard/images/sound63.png" onclick="soundMenu#id#();"/>
+					<img class="previous cmd" data-cmd_id="#previous_id#"  src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #previous_id#});"/>
+					<img class="bouton_bas play cmd" data-cmd_id="#play_id#" src="plugins/sonos3/core/template/dashboard/images/play1.png" onclick="jeedom.cmd.execute({id: #play_id#});" style="margin-left:0.32em;" />
+					<img class="bouton_bas pause cmd" data-cmd_id="#pause_id#" src="plugins/sonos3/core/template/dashboard/images/pause.png" onclick="jeedom.cmd.execute({id: #pause_id#});" />
+					<img class="bouton_bas cmd" data-cmd_id="#next_id#" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #next_id#});"/>
+				</div>
+				<div style="height:3em;" class="primarySubMenu">
+					<img class="bouton_bas cmd" data-cmd_id="#stop_id#" src="plugins/sonos3/core/template/dashboard/images/stop.png" style="position:relative;top:-3px;" onclick="jeedom.cmd.execute({id: #stop_id#});"/>
+					<a class="bouton_bas mute cmd" data-cmd_id="#mute_id#" onclick="jeedom.cmd.execute({id: #mute_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-volume-off"></i></a>
+					<a class="bouton_bas shuffle cmd" data-cmd_id="#shuffle_id#" onclick="jeedom.cmd.execute({id: #shuffle_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-random"></i></a>
+					<a class="bouton_bas shuffle cmd" data-cmd_id="#repeat_id#" onclick="jeedom.cmd.execute({id: #repeat_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-repeat"></i></a>
+				</div>
+				<div style="height:3em;display:none;margin-top:17px;" class="soundMenu">
+					<div class="volume full-width-slider cmd" data-cmd_id="#setVolume_id#" style="width: 96%;text-align: right;min-width : 100px;">
+						<input type="range" min="0" max="100" data-theme="a" value="#volume#"/>
 					</div>
 				</div>
 			</div>
