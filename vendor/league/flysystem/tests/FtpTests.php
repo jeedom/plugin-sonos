@@ -107,7 +107,7 @@ function ftp_chdir($connection, $directory)
         return false;
     }
 
-    if (in_array($directory, ['file1.txt', 'file2.txt', 'dir1', 'file1.with-total-line.txt', 'file1.with-invalid-line.txt'])) {
+    if (in_array($directory, ['file1.txt', 'file2.txt', 'file3.txt', 'file4.txt', 'dir1', 'file1.with-total-line.txt', 'file1.with-invalid-line.txt'])) {
         return false;
     }
 
@@ -158,6 +158,18 @@ function ftp_rawlist($connection, $directory)
         }
     }
 
+    if (strpos($directory, 'recurse.manually') !== false) {
+        return [
+            'drwxr-xr-x   2 ftp      ftp          4096 Nov 24 13:59 recurse.folder',
+        ];
+    }
+
+    if (strpos($directory, 'recurse.folder') !== false) {
+        return [
+            '-rw-r--r--   1 ftp      ftp           409 Aug 19 09:01 file1.txt',
+        ];
+    }
+
     if (strpos($directory, 'fail.rawlist') !== false) {
         return false;
     }
@@ -188,6 +200,18 @@ function ftp_rawlist($connection, $directory)
         ];
     }
 
+    if (strpos($directory, 'file3.txt') !== false) {
+        return [
+            '06-09-2016  12:09PM                  684 file3.txt',
+        ];
+    }
+    
+    if (strpos($directory, 'file4.txt') !== false) {
+        return [
+            '2016-05-23  12:09PM                  684 file4.txt',
+        ];
+    }
+    
     if (strpos($directory, 'dir1') !== false) {
         return [
             '2015-05-23  12:09       <DIR>          dir1',
@@ -346,6 +370,7 @@ class FtpTests extends \PHPUnit_Framework_TestCase
         'passive' => false,
         'username' => 'user',
         'password' => 'password',
+        'recurseManually' => false,
     ];
 
     public function setUp()
@@ -378,6 +403,17 @@ class FtpTests extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $adapter->writeStream('unknowndir/file.txt', tmpfile(), new Config(['visibility' => 'public'])));
         $this->assertInternalType('array', $adapter->updateStream('unknowndir/file.txt', tmpfile(), new Config()));
         $this->assertInternalType('array', $adapter->getTimestamp('some/file.ext'));
+    }
+
+    /**
+     * @depends testInstantiable
+     */
+    public function testManualRecursion()
+    {
+        $adapter = new Ftp($this->options);
+        $adapter->setRecurseManually(true);
+        $result = $adapter->listContents('recurse.manually', true);
+        $this->assertCount(2, $result);
     }
 
     /**
@@ -491,6 +527,22 @@ class FtpTests extends \PHPUnit_Framework_TestCase
         $this->assertEquals('public', $metadata['visibility']);
         $this->assertEquals(684, $metadata['size']);
 
+        $metadata = $adapter->getMetadata('file3.txt');
+        $this->assertInternalType('array', $metadata);
+        $this->assertEquals('file', $metadata['type']);
+        $this->assertEquals('file3.txt', $metadata['path']);
+        $this->assertEquals(1473163740, $metadata['timestamp']);
+        $this->assertEquals('public', $metadata['visibility']);
+        $this->assertEquals(684, $metadata['size']);
+        
+        $metadata = $adapter->getMetadata('file4.txt');
+        $this->assertInternalType('array', $metadata);
+        $this->assertEquals('file', $metadata['type']);
+        $this->assertEquals('file4.txt', $metadata['path']);
+        $this->assertEquals(1464005340, $metadata['timestamp']);
+        $this->assertEquals('public', $metadata['visibility']);
+        $this->assertEquals(684, $metadata['size']);
+        
         $metadata = $adapter->getMetadata('dir1');
         $this->assertEquals('dir', $metadata['type']);
         $this->assertEquals('dir1', $metadata['path']);

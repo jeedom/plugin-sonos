@@ -166,7 +166,7 @@ class LocalAdapterTests extends \PHPUnit_Framework_TestCase
     public function testNullPrefix()
     {
         $this->adapter->setPathPrefix('');
-        $path = 'some/path.ext';
+        $path = 'some'.DIRECTORY_SEPARATOR.'path.ext';
         $this->assertEquals($path, $this->adapter->applyPathPrefix($path));
         $this->assertEquals($path, $this->adapter->removePathPrefix($path));
     }
@@ -341,8 +341,12 @@ class LocalAdapterTests extends \PHPUnit_Framework_TestCase
 
     public function testConstructorWithLink()
     {
-        $target = __DIR__ . '/files/';
-        $link = __DIR__ . '/link_to_files';
+        if (IS_WINDOWS) {
+            $this->markTestSkipped("File permissions not supported on Windows.");
+        }
+
+        $target = __DIR__ . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
+        $link = __DIR__ . DIRECTORY_SEPARATOR .'link_to_files';
         symlink($target, $link);
 
         $adapter = new Local($link);
