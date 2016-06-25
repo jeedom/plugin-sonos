@@ -73,6 +73,9 @@ Comme commande vous retrouverez :
 * *Statut* : statut (pause, lecture, transition...)
 * *Dire* : permet de lire un texte sur le sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire
 
+[NOTE]
+Pour la lecture des playlists vous pouvez mettre des options (dans la case option). Pour lancer la playlist en lecture aléatoire il faut mettre dedans "random"
+
 == TTS
 
 Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. La configuration est assez simple il faut mettre le nom ou l'ip du nas (attention à bien mettre la même chose que ce qui est déclaré sur sonos) et le chemain (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture)
