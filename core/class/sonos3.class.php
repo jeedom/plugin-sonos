@@ -31,7 +31,7 @@ class sonos3 extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
 	private static $_sonos = null;
-	private static $_sonosAddOK = false;
+	private static $_eqLogics = null;
 	public static $_widgetPossibility = array(
 		'custom' => true,
 		'parameters' => array(
@@ -183,7 +183,10 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function pull($_eqLogic_id = null) {
-		foreach (self::byType('sonos3') as $eqLogic) {
+		if (self::$_eqLogics == null) {
+			self::$_eqLogics = self::byType('sonos3');
+		}
+		foreach (self::$_eqLogics as $eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
