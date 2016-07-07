@@ -64,6 +64,11 @@ function sonos3_update() {
 			unlink($path);
 		}
 	}
+	try {
+		sonos3::syncSonos();
+	} catch (Exception $e) {
+
+	}
 }
 
 function sonos3_remove() {
