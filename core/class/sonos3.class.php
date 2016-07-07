@@ -180,6 +180,7 @@ class sonos3 extends eqLogic {
 			$eqLogic->setConfiguration('speakers', json_encode($speakers_array));
 			$eqLogic->save();
 		}
+		self::deamon_start();
 	}
 
 	public static function pull($_eqLogic_id = null) {
