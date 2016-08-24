@@ -1,0 +1,14 @@
+{
+	"id" : "sonos3",
+	"name" : "Sonos controller",
+	"description" : "Plugin de controle de sonos",
+	"licence" : "AGPL",
+	"author" : "Loïc",
+	"require" : "2.3",
+	"category" : "multimedia",
+	"hasDependency" : true,
+	"hasOwnDeamon" : true,
+	"display" : "panel",
+	"mobile" : "panel",
+	"include" : {"type" : "php" , "file" : "sonos3.inc" }
+}
