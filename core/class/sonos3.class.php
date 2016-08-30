@@ -134,7 +134,7 @@ class sonos3 extends eqLogic {
 		shell_exec('rm -rf /tmp/sonos-cache');
 		shell_exec('sudo rm -rf /tmp/sonos-cache');
 		self::getSonos(true);
-		sefl::deamon_start();
+		self::deamon_start();
 	}
 
 	public static function syncSonos() {
