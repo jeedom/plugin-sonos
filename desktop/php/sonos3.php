@@ -2,8 +2,9 @@
 if (!isConnect('admin')) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
-sendVarToJS('eqType', 'sonos3');
-$eqLogics = eqLogic::byType('sonos3');
+$plugin = plugin::byId('sonos3');
+sendVarToJS('eqType', $plugin->getId());
+$eqLogics = eqLogic::byType($plugin->getId());
 ?>
 
 <div class="row row-overflow">
@@ -48,7 +49,7 @@ foreach ($eqLogics as $eqLogic) {
 	if ($eqLogic->getConfiguration('model', '') != '') {
 		echo '<img src="plugins/sonos3/core/img/' . $eqLogic->getConfiguration('model', '') . '.jpg" height="105" width="95" />';
 	} else {
-		echo '<img src="plugins/sonos3/doc/images/sonos3_icon.png" height="105" width="95" />';
+		echo '<img src="' . $plugin->getPathImgIcon() . '" height="105" width="95" />';
 	}
 	echo "</center>";
 	echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';

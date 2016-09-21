@@ -820,7 +820,7 @@ class sonos3 extends eqLogic {
 			if (file_exists($img) && filesize($img) > 500) {
 				$replace['#thumbnail#'] = 'plugins/sonos3/sonos_' . $this->getId() . '.jpg?' . md5($cmd_track_image->execCmd());
 			} else {
-				$replace['#thumbnail#'] = 'plugins/sonos3/doc/images/sonos3_alt_icon.png';
+				$replace['#thumbnail#'] = 'plugins/sonos3/plugin_info/sonos3_alt_icon.png';
 			}
 		}
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', 'sonos3')));
