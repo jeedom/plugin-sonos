@@ -96,14 +96,14 @@
 			}
 		}
 
-		$(".sonos3[data-eqLogic_uid=#uid#] .volume").bootstrapSlider({
+		$(".sonos3[data-eqLogic_uid=#uid#] .volume").slider({
 			min: 0,
 			max: 100,
 			value: ('#volume#' == '') ? 0 : parseInt('#volume#')
 		});
 		$(".sonos3[data-eqLogic_uid=#uid#] .slider.slider-horizontal").css('z-index',1);
-		$(".sonos3[data-eqLogic_uid=#uid#] .volume").on('slideStop', function (ev) {
-			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: ev.value}});
+		$(".sonos3[data-eqLogic_uid=#uid#] .volume").on('slidestop', function (event,ui) {
+			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: ui.value}});
 		});
 		pause_and_play#uid#(#state_nb#);
 
