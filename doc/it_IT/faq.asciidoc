@@ -1,0 +1,14 @@
+== FAQ
+
+Je n'ai pas de liste de lecture ou radio::
+Cela est généralement du à un soucis réseaux : 
+
+- certain antivirus peuvent bloquer le traffic réseaux
+- des box adsl bloquent aussi le flux, il faut essayer de les redemarrer
+
+Attention après chaque test il faut relancer une synchronisation de Jeedom avec les sonos
+
+'''
+
+Puis-je lancer une liste de lecture Spotify, Google Music... ?::
+Non ce n'est pas possible, il n'est possible de lancer que les listes de lecture Sonos (par contre vous pouvez mettre vos musiques Spotify, Google Music et autres dans une liste de lecture Sonos).

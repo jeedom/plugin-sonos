@@ -1,0 +1,132 @@
+== Plugin Konfiguration
+
+La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout. Le plugin va rechercher les Sonos sur votre réseau et créer les équipements automatiquement. De plus, si il y a une correspondance entre les objets Jeedom et les pièces du Sonos, Jeedom affectera automatiquement les Sonos dans les bonnes pièces.
+
+[TIP]
+Ce plugin nécessite que les Sonos soit alimentés (même en mode veille) pour ne pas provoquer d'erreur. 
+
+Si plus tard vous ajoutez un Sonos, vous pouvez soit créer un équipement Sonos en donnant l'IP à Jeedom ou cliquer sur "Rechercher les équipements Sonos" : 
+
+image::../images/sonos1.PNG[]
+
+* *Voix* : choix de la voix lors du TTS
+* *Partage* : nom du partage ainsi que le chemin du dossier
+* *Nom d'utilisateur pour le partage* : nom d'utilisateur pour acceder au partage
+* *Mot de passe du partage* : mot de passe du partage
+* *Découverte* : decouvre automatiquement les sonos (ne marche pas sur une installation de type docker ou il faut creer à la main chaque sonos)
+* *Dépendance Sonos* : installer les dépendances sonos pour le TTS
+
+[IMPORTANT]
+Les messages trop long ne peuvent etre transmis en TTS (la limite depend du fournisseurs de TTS, en général environ 100 caractères)
+
+== Geräte Konfiguration
+
+La configuration des équipements Sonos est accessible à partir du menu plugin : 
+
+image::../images/sonos2.PNG[]
+
+Voilà à quoi ressemble la page du plugin Sonos (ici avec déjà 3 équipements) : 
+
+image::../images/sonos3.PNG[]
+
+Vous retrouvez ici la liste de vos Sonos avec une image en fonction du modèle. Une fois que vous cliquez sur un équipement vous obtenez : 
+
+image::../images/sonos4.PNG[]
+
+Hier finden sie die ganze Konfiguration Ihrer Geräte: 
+
+* *Nom de l'équipement Sonos* : nom de votre équipement Sonos
+* *Eltern-Objekt* : giebt an welchem Eltern Objekt das Gerät angehört
+* *aktivieren* : erlaubt, Ihr Gerät aktiv zu machen
+* *Sichtbar* : macht es auf dem Armaturenbrett sichtbar
+* *Modèle* : le modèle de votre Sonos (à ne changer que si ce n'est pas le bon)
+* *IP* : l'IP de votre Sonos, peut être utile si votre Sonos change d'IP ou si vous le remplacez
+
+Im unteren Bereich finden sie eine Liste der Befehle: 
+
+* *Nom* : nom de la commande
+* *Configuration avancée (petites roues crantées)* : permet d'afficher la configuration avancée de la commande (méthode d'historisation, widget...)
+* *Tester* : permet de tester la commande
+
+Comme commande vous retrouverez : 
+
+* *Jouer playlist* : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Vous pouvez mettre "random" dans message pour mélanger la playlist avant la lecture.
+* *Jouer une radio* : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio (ATTENTION celle ci doit etre dans les radio favorites).
+* *Ajout un haut parleur* : permet d'ajouter à haut parleur (un sonos) au haut parleur courant (pour associer 2 sonos par exemple). Il faut mettre le nom de la piece du sonos à ajouter dans le titre (le champs message n'est pas utilisé ici).
+* *Supprimer un haut parleur* : permet de supprimer un haut parleur (un sonos) au haut parleur courant (pour associer 2 sonos par exemple). Il faut mettre le nom de la piece du sonos à supprimer dans le titre (le champs message n'est pas utilisé ici).
+* *Aléatoire statut* : indique si on est en mode aléatoire ou non
+* *Aléatoire* : inverse le statut du mode aléatoire
+* *Répéter statut* : indique si on est en mode répété ou non
+* *Répéter* : inverse le statut du mode "répéter"
+* *Image* : lien vers l'image de l'album
+* *Album* : nom de l'album en cours de lecture
+* *Artiste* : nom de l'artiste en cours de lecture
+* *Piste* : nom de la piste en cours de lecture
+* *Muet* : passe en muet
+* *Précédent* : piste précédente
+* *Suivant* : piste suivante
+* *Lecture* : passer en lecture
+* *Pause* : mettre en pause
+* *Stop* : arrêter la lecture
+* *Volume* : modifier le volume (de 0 à 100)
+* *Volume statut* : niveau du volume
+* *Statut* : statut (pause, lecture, transition...)
+* *Dire* : permet de lire un texte sur le sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire
+
+[NOTE]
+Pour la lecture des playlists vous pouvez mettre des options (dans la case option). Pour lancer la playlist en lecture aléatoire il faut mettre dedans "random"
+
+== TTS
+
+Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. La configuration est assez simple il faut mettre le nom ou l'ip du nas (attention à bien mettre la même chose que ce qui est déclaré sur sonos) et le chemain (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture)
+
+[IMPORTANT]
+Il faut absolument mettre un mot de passe pour que cela marche
+
+[IMPORTANT]
+Il faut aussi absolument un sous repertoire pour que le fichier vocal soit correctement créé.
+
+.Voici un exemple de configuration (merci @masterfion) :
+
+Côté NAS, voici ma config :
+
+* le dossier Jeedom est partagé
+* l'utilisateur Sonos a un accès Lecture/Ecriture (nécessaire pour Jeedom)
+* l'utilisateur guest a un accès en Lecture seule (nécessaire pour les Sonos)
+
+Côté Plugin Sono, voici ma config :
+
+* Partage :
+** Champ 1 : 192.168.xxx.yyy
+** Champ 2 : Jeedom/TTS
+* Nom d'utilisateur : Sonos et son mot de passe...
+
+Côté Bibliothèque Sonos (appli PC)
+
+* le chemin est : //192.168.xxx.yyy/Jeedom/TTS
+
+== Widget
+
+Sur le dashboard vous retrouverez le widget suivant : 
+
+image::../images/sonos5.PNG[]
+
+A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d'attente et les playlists disponibles pour lancer leur lecture, gerer la sortie sur different sonos et les radios favorites.
+
+== Le panel
+
+Le plugin Sonos met aussi à disposition un panel qui rassemble tout vos Sonos. Disponible a partir du menu Accueil -> Sonos Controller : 
+
+image::../images/sonos7.PNG[]
+
+Cela permet d'avoir ce genre de vue synthétique :
+
+image::../images/sonos8.PNG[]
+
+Il existe aussi une version mobile du panel, accessible à partir de Plugins -> Sonos controller : 
+
+image::../images/sonos9.PNG[]
+
+Il vous permet comme en version bureau d'avoir une vue synthetique de vos Sonos : 
+
+image::../images/sonos10.PNG[]
