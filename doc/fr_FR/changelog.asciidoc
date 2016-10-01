@@ -1,0 +1,5 @@
+== Changelog
+
+- Mise à jour de librairie de communication avec les sonos
+- Optimisation du chargement des playlists
+- Ajout de picotts pour la génération du TTS en locale

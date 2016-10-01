@@ -18,6 +18,9 @@
 
 
  $('.eqLogicAttr[data-l1key=configuration][data-l2key=model]').on('change',function(){
+    if($(this).value() == null){
+        return;
+    }
     $('#img_sonosModel').attr('src','plugins/sonos3/core/img/'+$(this).value().replace(':','')+'.jpg');
 });
 

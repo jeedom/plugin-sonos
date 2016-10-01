@@ -774,4 +774,15 @@ class Controller extends Speaker
 
         return $this;
     }
+
+
+    /**
+     * Get the network instance used by this controller.
+     *
+     * @return Network
+     */
+    public function getNetwork()
+    {
+        return $this->network;
+    }
 }

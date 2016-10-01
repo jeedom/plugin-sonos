@@ -11,6 +11,8 @@ use duncan3dc\Sonos\Helper;
  */
 class Stream implements UriInterface
 {
+    const PREFIX = "x-sonosapi-stream";
+
     /**
      * @var string $uri The uri of the stream.
      */
@@ -99,6 +101,6 @@ class Stream implements UriInterface
      */
     public static function createFromXml(XmlElement $xml, Controller $controller)
     {
-        return new static($xml->getTag("res"));
+        return new static($xml->getTag("res")->nodeValue, $xml->getTag("title")->nodeValue);
     }
 }

@@ -21,7 +21,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Sonos\Tracks\Track;
-use duncan3dc\Speaker\Providers\GoogleProvider;
+use duncan3dc\Speaker\Providers\PicottsProvider;
 use duncan3dc\Speaker\Providers\VoxygenProvider;
 use Icewind\SMB\Server;
 use League\Flysystem\Filesystem;
@@ -1029,24 +1029,12 @@ class sonos3Cmd extends cmd {
 			if ($playlist == null) {
 				throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title']));
 			}
-			$tracks = $playlist->getTracks();
 			$queue->clear();
-			if (count($tracks) > 1) {
-				if (isset($_options['message']) && $_options['message'] == 'random') {
-					shuffle($tracks);
-				}
-				try {
-					$queue->addTrack($tracks[0]);
-					$controller->play();
-				} catch (Exception $e) {
-
-				}
-				unset($tracks[0]);
-				$queue->addTracks($tracks);
-			} else {
-				$queue->addTracks($tracks);
-				$controller->play();
+			$queue->addTrack($playlist->getUri());
+			if (isset($_options['message']) && $_options['message'] == 'random') {
+				$controller->setShuffle(true);
 			}
+			$controller->play();
 		}
 		if ($this->getLogicalId() == 'play_radio') {
 			$radio = $sonos->getRadio();
@@ -1078,9 +1066,13 @@ class sonos3Cmd extends cmd {
 			if (config::byKey('ttsProvider', 'sonos3') != 'voxygen' && strlen($_options['message']) > 100) {
 				$_options['message'] = substr($_options['message'], 0, 100);
 			}
-			$track = new TextToSpeech(trim($_options['message']), $directory, new GoogleProvider);
+			if (config::byKey('ttsProvider', 'sonos3') != 'voxygen') {
+				$track = new TextToSpeech(trim($_options['message']), $directory, new VoxygenProvider);
+				$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
+			} else if (config::byKey('ttsProvider', 'sonos3') != 'picotts') {
+				$track = new TextToSpeech(trim($_options['message']), $directory, new PicottsProvider);
+			}
 			$track->setLanguage("fr");
-			$track->setProvider(new VoxygenProvider);
 			$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
 			if ($_options['title'] != '' && is_numeric($_options['title'])) {
 				$controller->interrupt($track, $_options['title']);

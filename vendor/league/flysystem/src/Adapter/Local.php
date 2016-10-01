@@ -148,7 +148,7 @@ class Local extends AbstractAdapter
     {
         $location = $this->applyPathPrefix($path);
         $this->ensureDirectory(dirname($location));
-        $stream = fopen($location, 'w+');
+        $stream = fopen($location, 'w+b');
 
         if ( ! $stream) {
             return false;
@@ -173,7 +173,7 @@ class Local extends AbstractAdapter
     public function readStream($path)
     {
         $location = $this->applyPathPrefix($path);
-        $stream = fopen($location, 'r');
+        $stream = fopen($location, 'rb');
 
         return compact('stream', 'path');
     }
@@ -305,8 +305,13 @@ class Local extends AbstractAdapter
     {
         $location = $this->applyPathPrefix($path);
         $finfo = new Finfo(FILEINFO_MIME_TYPE);
+        $mimetype = $finfo->file($location);
 
-        return ['mimetype' => $finfo->file($location)];
+        if (in_array($mimetype, ['application/octet-stream', 'inode/x-empty'])) {
+            $mimetype = Util\MimeType::detectByFilename($location);
+        }
+
+        return ['mimetype' => $mimetype];
     }
 
     /**

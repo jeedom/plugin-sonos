@@ -371,25 +371,24 @@ function copy_to_stream(
     StreamInterface $dest,
     $maxLen = -1
 ) {
+    $bufferSize = 8192;
+
     if ($maxLen === -1) {
         while (!$source->eof()) {
-            if (!$dest->write($source->read(1048576))) {
+            if (!$dest->write($source->read($bufferSize))) {
                 break;
             }
         }
-        return;
-    }
-
-    $bytes = 0;
-    while (!$source->eof()) {
-        $buf = $source->read($maxLen - $bytes);
-        if (!($len = strlen($buf))) {
-            break;
-        }
-        $bytes += $len;
-        $dest->write($buf);
-        if ($bytes == $maxLen) {
-            break;
+    } else {
+        $remaining = $maxLen;
+        while ($remaining > 0 && !$source->eof()) {
+            $buf = $source->read(min($bufferSize, $remaining));
+            $len = strlen($buf);
+            if (!$len) {
+                break;
+            }
+            $remaining -= $len;
+            $dest->write($buf);
         }
     }
 }

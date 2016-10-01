@@ -5,11 +5,23 @@ Changelog
 
 --------
 
+## 1.9.2 - 2016-09-12
+
+### Added
+
+* [Controller] Allow the Network instance in use to be retrieved using getNetwork().
+
+### Fixed
+
+* [Tracks] Fix the caching of text-to-speech files.
+
+--------
+
 ## 1.9.1 - 2016-03-13
 
 ### Added
 
-* [Network] Add support for the ZP100 devoce.
+* [Network] Add support for the ZP100 device.
 
 --------
 
