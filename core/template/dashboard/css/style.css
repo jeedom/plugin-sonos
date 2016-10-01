@@ -26,7 +26,6 @@
 	border-radius:50%;
 	z-index: 3;
 	opacity: 0.6;
-	transition: all 2s;
 }
 .sonos_widget .cercle_downpart:hover{
 	border-radius:20%;

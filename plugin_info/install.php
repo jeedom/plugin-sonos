@@ -26,7 +26,7 @@ function sonos3_install() {
 		$cron->setFunction('pull');
 		$cron->setEnable(1);
 		$cron->setDeamon(1);
-		$cron->setDeamonSleepTime(5);
+		$cron->setDeamonSleepTime(3);
 		$cron->setSchedule('* * * * *');
 		$cron->setTimeout(1440);
 		$cron->save();

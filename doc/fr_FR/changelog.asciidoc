@@ -3,3 +3,4 @@
 - Mise à jour de librairie de communication avec les sonos
 - Optimisation du chargement des playlists
 - Ajout de picotts pour la génération du TTS en locale
+- Correction du bouton play/pause lors de la mise à jour du widget
