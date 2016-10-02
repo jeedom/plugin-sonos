@@ -1063,17 +1063,12 @@ class sonos3Cmd extends cmd {
 			$filesystem = new Filesystem($adapter);
 			$folder = array_pop($path);
 			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
-			if (config::byKey('ttsProvider', 'sonos3') != 'voxygen' && strlen($_options['message']) > 100) {
-				$_options['message'] = substr($_options['message'], 0, 100);
-			}
-			if (config::byKey('ttsProvider', 'sonos3') != 'voxygen') {
+			if (config::byKey('ttsProvider', 'sonos3') == 'voxygen') {
 				$track = new TextToSpeech(trim($_options['message']), $directory, new VoxygenProvider);
 				$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
-			} else if (config::byKey('ttsProvider', 'sonos3') != 'picotts') {
+			} else if (config::byKey('ttsProvider', 'sonos3') == 'picotts') {
 				$track = new TextToSpeech(trim($_options['message']), $directory, new PicottsProvider);
 			}
-			$track->setLanguage("fr");
-			$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
 			if ($_options['title'] != '' && is_numeric($_options['title'])) {
 				$controller->interrupt($track, $_options['title']);
 			} else {
