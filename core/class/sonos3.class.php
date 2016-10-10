@@ -232,7 +232,7 @@ class sonos3 extends eqLogic {
 				}
 
 				$changed = $changed || $eqLogic->checkAndUpdateCmd('state', $state);
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('volume', $volume);
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume());
 				$changed = $changed || $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle);
 				$changed = $changed || $eqLogic->checkAndUpdateCmd('mute_state', $mute);
 				$changed = $changed || $eqLogic->checkAndUpdateCmd('repeat_state', $repeat);
