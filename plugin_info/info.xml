@@ -5,7 +5,7 @@
     <description>Plugin de controle de sonos</description>
     <licence>AGPL</licence>
     <author>Loïc</author>
-    <require>2.2</require>
+    <require>2.4</require>
     <category>multimedia</category>
     <include type="php">sonos3.inc</include>
     <display>panel</display>

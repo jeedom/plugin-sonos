@@ -205,70 +205,15 @@ class sonos3 extends eqLogic {
 				if ($controller == null) {
 					continue;
 				}
-				$cmd_state = $eqLogic->getCmd(null, 'state');
-				if (is_object($cmd_state)) {
-					$state = self::convertState($controller->getStateName());
-					if ($state == __('Transition', __FILE__)) {
-						continue;
-					}
-					if ($state != $cmd_state->execCmd()) {
-						$cmd_state->setCollectDate('');
-						$cmd_state->event($state);
-						$changed = true;
-					}
-				}
 
-				$cmd_volume = $eqLogic->getCmd(null, 'volume');
-				if (is_object($cmd_volume)) {
-					$volume = $controller->getVolume();
-					if ($volume != $cmd_volume->execCmd()) {
-						$cmd_volume->setCollectDate('');
-						$cmd_volume->event($volume);
-						$changed = true;
-					}
+				$state = self::convertState($controller->getStateName());
+				if ($state == __('Transition', __FILE__)) {
+					continue;
 				}
-
-				$cmd_suffle = $eqLogic->getCmd(null, 'shuffle_state');
-				if (is_object($cmd_suffle)) {
-					$shuffle = $controller->getShuffle();
-					if ($shuffle == '') {
-						$shuffle = 0;
-					}
-					if ($shuffle != $cmd_suffle->execCmd()) {
-						$cmd_suffle->setCollectDate('');
-						$cmd_suffle->event($shuffle);
-						$changed = true;
-					}
-				}
-
-				$cmd_mute = $eqLogic->getCmd(null, 'mute_state');
-				if (is_object($cmd_mute)) {
-					$mute = $controller->isMuted();
-					if ($mute == '') {
-						$mute = 0;
-					}
-					if ($mute != $cmd_mute->execCmd()) {
-						$cmd_mute->setCollectDate('');
-						$cmd_mute->event($mute);
-						$changed = true;
-					}
-				}
-
-				$cmd_repeat = $eqLogic->getCmd(null, 'repeat_state');
-				if (is_object($cmd_repeat)) {
-					$repeat = $controller->getRepeat();
-					if ($repeat == '') {
-						$repeat = 0;
-					}
-					if ($repeat != $cmd_repeat->execCmd()) {
-						$cmd_repeat->setCollectDate('');
-						$cmd_repeat->event($repeat);
-						$changed = true;
-					}
-				}
-
+				$shuffle = ($controller->getShuffle() == '') ? 0 : $controller->getShuffle();
+				$repeat = ($controller->getRepeat() == '') ? 0 : $controller->getRepeat();
+				$mute = ($controller->isMuted() == '') ? 0 : $controller->isMuted();
 				$track = $controller->getStateDetails();
-				$cmd_track_title = $eqLogic->getCmd(null, 'track_title');
 				if ($track->stream == 'Line-In') {
 					$title = __('Entrée de ligne', __FILE__);
 				} else {
@@ -277,49 +222,28 @@ class sonos3 extends eqLogic {
 				if ($title == '') {
 					$title = __('Aucun', __FILE__);
 				}
-				if (is_object($cmd_track_title)) {
-					if ($title != $cmd_track_title->execCmd()) {
-						$cmd_track_title->setCollectDate('');
-						$cmd_track_title->event($title);
-						$changed = true;
-					}
-				}
-
-				$cmd_track_album = $eqLogic->getCmd(null, 'track_album');
 				$album = $track->album;
 				if ($album == '') {
 					$album = __('Aucun', __FILE__);
 				}
-				if (is_object($cmd_track_album)) {
-					if ($album != $cmd_track_album->execCmd()) {
-						$cmd_track_album->setCollectDate('');
-						$cmd_track_album->event($album);
-						$changed = true;
-					}
-				}
-
-				$cmd_track_artist = $eqLogic->getCmd(null, 'track_artist');
 				$artist = $track->artist;
 				if ($artist == '') {
 					$artist = __('Aucun', __FILE__);
 				}
-				if (is_object($cmd_track_artist)) {
-					if ($artist != $cmd_track_artist->execCmd()) {
-						$cmd_track_artist->setCollectDate('');
-						$cmd_track_artist->event($artist);
-						$changed = true;
-					}
-				}
 
-				$cmd_track_image = $eqLogic->getCmd(null, 'track_image');
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('state', $state);
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('volume', $volume);
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle);
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('mute_state', $mute);
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('repeat_state', $repeat);
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('track_title', $title);
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('track_album', $album);
+				$changed = $changed || $eqLogic->checkAndUpdateCmd('track_artist', $artist);
+
 				if ($track->albumArt != '') {
-					if (is_object($cmd_track_image)) {
-						if ($track->albumArt != $cmd_track_image->execCmd()) {
-							$cmd_track_image->setCollectDate('');
-							$cmd_track_image->event($track->albumArt);
-							file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->albumArt));
-							$changed = true;
-						}
+					if ($eqLogic->checkAndUpdateCmd('track_image', $track->albumArt)) {
+						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->albumArt));
+						$changed = true;
 					}
 				} else {
 					if (file_exists(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg')) {
@@ -337,12 +261,7 @@ class sonos3 extends eqLogic {
 					$eqLogic->save();
 					$changed = true;
 				}
-
 				if ($changed) {
-					$mc = cache::byKey('sonosWidgetmobile' . $eqLogic->getId());
-					$mc->remove();
-					$mc = cache::byKey('sonosWidgetdashboard' . $eqLogic->getId());
-					$mc->remove();
 					$eqLogic->refreshWidget();
 				}
 				if ($eqLogic->getConfiguration('sonosNumberFailed', 0) > 0) {
