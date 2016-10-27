@@ -45,7 +45,6 @@
 				$('.sonos3[data-eqLogic_uid=#uid#] .primarySubMenu').show();
 			}
 		}
-
 		$("body").undelegate(".sonos3[data-eqLogic_uid=#uid#] .volume",'slidestop');
 		$("body").delegate(".sonos3[data-eqLogic_uid=#uid#] .volume",'slidestop', function (event, ui) {
 			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: $(".sonos3[data-eqLogic_uid=#uid#] .volume input").value()}});
@@ -59,7 +58,6 @@
 		if('#mute_state#' == 1){
 			$(".sonos3[data-eqLogic_uid=#uid#] .mute").css('color','red');
 		}
-
 		if('#state_nb#' == 1){
 			$('.sonos3[data-eqLogic_uid=#uid#] .play').remove();
 		}else{

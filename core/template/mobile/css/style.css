@@ -27,6 +27,3 @@
 .sonos3 .volume .ui-slider-handle{
     background-color:#3498db !important;
 }
-.eqLogic[data-eqLogic_uid=#uid#] .sliderOrder .ui-slider-handle{
-    background-color:#3498db !important;
-}
