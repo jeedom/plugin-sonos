@@ -51,7 +51,7 @@
 		<a class="mute cmd noRefresh" data-cmd_id="#mute_id#" onclick="jeedom.cmd.execute({id: #mute_id#});"><i class="fa fa-volume-off"></i></a>
 		<img class="next cmd noRefresh" data-cmd_id="#next_id#" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #next_id#});" title="Suivant" />
 	</div>
-	<div class="volumeDownpart" style="display:none;">
+	<div class="volumeDownpart" style="display:none;background-color: #sub-background-color#;z-index: 2;">
 		<img src="plugins/sonos3/core/template/dashboard/images/working.png" height="15px" width="15px" class="bouton_sup_volume" onclick="volume_sonos#id#('volume')"/>
 		<div class="volume_sonos_widget" style="margin-top : 5px;margin-left: 40px;">
 			<div class="volume cmd noRefresh" data-cmd_id="#setVolume_id#" style="width: 180px;" value="#volume#" ></div>
@@ -99,12 +99,16 @@
 		$(".sonos3[data-eqLogic_uid=#uid#] .volume").slider({
 			min: 0,
 			max: 100,
+			range: "min",
 			value: ('#volume#' == '') ? 0 : parseInt('#volume#')
 		});
 		$(".sonos3[data-eqLogic_uid=#uid#] .slider.slider-horizontal").css('z-index',1);
 		$(".sonos3[data-eqLogic_uid=#uid#] .volume").on('slidestop', function (event,ui) {
 			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: ui.value}});
 		});
+		$(".sonos3[data-eqLogic_uid=#uid#] .ui-slider-handle").css("background","transparent");
+		$(".sonos3[data-eqLogic_uid=#uid#] .ui-slider-handle").css("border-color","transparent");
+		$(".sonos3[data-eqLogic_uid=#uid#] .ui-slider-handle").append('<i class="fa fa-volume-up" style="color:#253E5E;font-size:1.2em;margin-top:-5px;cursor:pointer" title="Volume"></i>');
 		pause_and_play#uid#(#state_nb#);
 
 		if('#repeat_state#' == 1){
