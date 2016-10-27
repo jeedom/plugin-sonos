@@ -17,6 +17,12 @@
 	width: 250px;
 	z-index: 2;
 }
+
+.sonos_widget .volumeDownpart{
+	height: 70px;
+	width: 250px;
+	z-index: 2;
+}
 .sonos_widget .cercle_downpart{
 	width: 52px;
 	height: 52px;
@@ -258,7 +264,7 @@
 .sonos_widget .volume_sonos_widget{
 	position: absolute;
 	width: 250px;
-	bottom: 20px;
+	bottom: 25px;
 }
 .sonos_widget .bouton_sup_volume{
 	opacity: 0.5;

@@ -51,9 +51,9 @@
 		<a class="mute cmd noRefresh" data-cmd_id="#mute_id#" onclick="jeedom.cmd.execute({id: #mute_id#});"><i class="fa fa-volume-off"></i></a>
 		<img class="next cmd noRefresh" data-cmd_id="#next_id#" src="plugins/sonos3/core/template/dashboard/images/change.png" onclick="jeedom.cmd.execute({id: #next_id#});" title="Suivant" />
 	</div>
-	<div class="volumeDownpart" style="display:none;background-color: #sub-background-color#;z-index: 2;">
+	<div class="volumeDownpart" style="display:none;background-color: #sub-background-color#;">
 		<img src="plugins/sonos3/core/template/dashboard/images/working.png" height="15px" width="15px" class="bouton_sup_volume" onclick="volume_sonos#id#('volume')"/>
-		<div class="volume_sonos_widget" style="margin-top : 5px;margin-left: 40px;">
+		<div class="volume_sonos_widget" style="margin-left: 40px;">
 			<div class="volume cmd noRefresh" data-cmd_id="#setVolume_id#" style="width: 180px;" value="#volume#" ></div>
 		</div>
 	</div>
