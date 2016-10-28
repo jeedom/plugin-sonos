@@ -231,14 +231,14 @@ class sonos3 extends eqLogic {
 					$artist = __('Aucun', __FILE__);
 				}
 
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('state', $state);
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume());
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle);
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('mute_state', $mute);
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('repeat_state', $repeat);
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('track_title', $title);
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('track_album', $album);
-				$changed = $changed || $eqLogic->checkAndUpdateCmd('track_artist', $artist);
+				$changed = $eqLogic->checkAndUpdateCmd('state', $state) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume()) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('mute_state', $mute) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('repeat_state', $repeat) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_title', $title) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_album', $album) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_artist', $artist) || $changed;
 
 				if ($track->albumArt != '') {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->albumArt)) {
