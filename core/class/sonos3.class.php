@@ -371,6 +371,7 @@ class sonos3 extends eqLogic {
 		}
 		$state->setType('info');
 		$state->setSubType('string');
+		$state->setConfiguration('repeatEventManagement', 'never');
 		$state->setEqLogic_id($this->getId());
 		$state->save();
 
@@ -459,6 +460,7 @@ class sonos3 extends eqLogic {
 		}
 		$mute_state->setType('info');
 		$mute_state->setSubType('binary');
+		$mute_state->setConfiguration('repeatEventManagement', 'never');
 		$mute_state->setEqLogic_id($this->getId());
 		$mute_state->save();
 
@@ -481,6 +483,7 @@ class sonos3 extends eqLogic {
 		}
 		$repeat_state->setType('info');
 		$repeat_state->setSubType('binary');
+		$repeat_state->setConfiguration('repeatEventManagement', 'never');
 		$repeat_state->setEqLogic_id($this->getId());
 		$repeat_state->save();
 
@@ -503,6 +506,7 @@ class sonos3 extends eqLogic {
 		}
 		$shuffle_state->setType('info');
 		$shuffle_state->setSubType('binary');
+		$shuffle_state->setConfiguration('repeatEventManagement', 'never');
 		$shuffle_state->setEqLogic_id($this->getId());
 		$shuffle_state->save();
 
@@ -515,6 +519,7 @@ class sonos3 extends eqLogic {
 		$volume->setUnite('%');
 		$volume->setType('info');
 		$volume->setSubType('numeric');
+		$volume->setConfiguration('repeatEventManagement', 'never');
 		$volume->setEqLogic_id($this->getId());
 		$volume->save();
 
@@ -538,6 +543,7 @@ class sonos3 extends eqLogic {
 		}
 		$track_title->setType('info');
 		$track_title->setSubType('string');
+		$track_title->setConfiguration('repeatEventManagement', 'never');
 		$track_title->setEqLogic_id($this->getId());
 		$track_title->save();
 
@@ -549,6 +555,7 @@ class sonos3 extends eqLogic {
 		}
 		$track_artist->setType('info');
 		$track_artist->setSubType('string');
+		$track_artist->setConfiguration('repeatEventManagement', 'never');
 		$track_artist->setEqLogic_id($this->getId());
 		$track_artist->save();
 
@@ -560,6 +567,7 @@ class sonos3 extends eqLogic {
 		}
 		$track_album->setType('info');
 		$track_album->setSubType('string');
+		$track_album->setConfiguration('repeatEventManagement', 'never');
 		$track_album->setEqLogic_id($this->getId());
 		$track_album->save();
 
@@ -571,6 +579,7 @@ class sonos3 extends eqLogic {
 		}
 		$track_position->setType('info');
 		$track_position->setSubType('string');
+		$track_position->setConfiguration('repeatEventManagement', 'never');
 		$track_position->setEqLogic_id($this->getId());
 		$track_position->save();
 
