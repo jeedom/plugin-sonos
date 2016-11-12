@@ -1,0 +1,152 @@
+{
+    "plugins/sonos3/plugin_info/info.xml": {
+        "Plugin de controle de sonos": "Plugin to control Sonos",
+        "Aucune": "None"
+    },
+    "plugins/sonos3/core/class/sonos3.class.php": {
+        "Status": "Status",
+        "Rafraîhir": "Refresh",
+        "Play": "Play",
+        "Stop": "Stop",
+        "Pause": "Pause",
+        "Suivant": "Next",
+        "Precedent": "Last",
+        "Muet": "Mute",
+        "Non muet": "Sound",
+        "Répéter": "Repeat",
+        "Aléatoire": "Random",
+        "Volume status": "Volume status",
+        "Volume": "Volume",
+        "Piste": "Track",
+        "Artiste": "ArtistArtist",
+        "Album": "AlbumAlbum",
+        "Durée": "Duration",
+        "Position": "Position",
+        "Lecture": "Playback",
+        "Image": "Image",
+        "Répéter status": "Repeat status",
+        "Aléatoire status": "Random status",
+        "Jouer playlist": "Play playlist",
+        "Aucun": "None",
+        "Arrêté": "Stop",
+        "Ajout un haut parleur": "Add a speaker",
+        "Supprimer un haut parleur": "Delete a speaker",
+        "Dire": "Say",
+        "Jouer une radio": "Playing a radio",
+        "Radio non trouvée : ": "Radio not found :",
+        "Playlist non trouvé : ": "Playlist not found :",
+        "Erreur sur ": "Error on",
+        "Options": "Options",
+        "Titre de la playlist": "Title playlist",
+        "Titre de la radio": "Title radio",
+        "Nom de la piece": "Part name",
+        "Message": "Message",
+        "Tache Z-Wave": "Z-Wave job",
+        "OK": "OK",
+        "Tache de synchronisation": "Synchronisation job",
+        "Tâche de synchronisation": "Synchronisation job",
+        "Transition": "Transition",
+        "NOK": "NOK",
+        "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "Go on the daemon task page and check start the task sonos3::pull",
+        "Muet status": "Mute status",
+        "Entrée de ligne": "Line input",
+        "Impossible de récuperer le sonos : ": "Impossible de récuperer le sonos :"
+    },
+    "plugins/sonos3/desktop/php/sonos3.php": {
+        "Ajouter un template": "Add template",
+        "Rechercher": "Search",
+        "Mes templates": "My templates",
+        "Général": "Main",
+        "Nom de l'équipement template": "Template device name",
+        "Objet parent": "Parent object",
+        "Aucun": "None",
+        "Activer": "Activate",
+        "Visible": "Visible",
+        "template param 1": "template param 1",
+        "Template": "Template",
+        "Nom": "Name",
+        "Type": "Type",
+        "Action": "Action",
+        "Supprimer": "Delete",
+        "Sauvegarder": "Save",
+        "IP": "IP",
+        "Commande": "Command",
+        "Nom du sonos": "Sonos name",
+        "Mes Sonos": "My Sonos",
+        "Model": "Model",
+        "Masquer la jaquette": "Hide cover",
+        "Gestion": "Management",
+        "Configuration": "Setup",
+        "Equipement": "Device",
+        "Commandes": "Commands",
+        "Configuration avancée": "Advanced configuration"
+    },
+    "plugins/sonos3/desktop/js/sonos3.js": {
+        "Nom": "Name",
+        "Tester": "Test"
+    },
+    "plugins/sonos3/plugin_info/configuration.php": {
+        "Découverte": "Discovery",
+        "Rechercher les équipements Sonos (play1, play3 et play5 seulement)": "Search Sonos devices (only play1, play3 and play5)",
+        "Synchronisation réussie": "Synchronization successful",
+        "Rechercher les équipements Sonos": "Search Sonos devices",
+        "Partage de fichier pour le text-to-speech": "File Sharing for the text-to-speech",
+        "[TTS] Chemin local du répertoire partagé": "[TTS] Local path of the shared directory",
+        "[TTS] Chemin Sonos du répertoire paratagé": "[TTS] Sonos path of the shared directory",
+        "[TTS] Chemin Sonos du répertoire partagé": "[TTS] Sonos path of the shared directory",
+        "Fournisseur TTS": "TTS supplier",
+        "Voix": "Voice",
+        "[TTS] IP du partage": "[TTS] IP du partage",
+        "[TTS] Nom d'utilisateur pour le partage": "[TTS] Username for sharing",
+        "[TTS] Mot de passe du partage": "[TTS] Sharing password",
+        "[TTS] Chemin sur le nas": "[TTS] Path on the nas",
+        "IP du partage": "IP of sharing",
+        "Nom d'utilisateur pour le partage": "Username for sharing",
+        "Mot de passe du partage": "sharing password",
+        "Chemin sur le nas": "Path on the nas",
+        "Nom ou IP du partage": "Sharing name or IP",
+        "Attention votre version de PHP (5.6.14-0+deb8u1) est trop veille il faut au minimum PHP 5.6": "Warning your PHP version (5.6.14-0 + deb8u1) is too old requires PHP 5.6 minimum",
+        "Dépendance Sonos": "Sonos dependence",
+        "Installer/Mettre à jour": "Install/Update",
+        "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Are you sure to install/update Sonos ?",
+        "Installation / Mise à jour": "Installation / Update",
+        "Partage": "Sharing"
+    },
+    "plugins/sonos3/desktop/modal/queue.sonos.php": {
+        "Artiste": "Artist",
+        "Album": "Album",
+        "Piste": "Track",
+        "Vider": "Clear",
+        "Action": "Action"
+    },
+    "plugins/sonos3/desktop/modal/playlist.sonos.php": {
+        "Artiste": "Artist",
+        "Album": "Album",
+        "Piste": "Track",
+        "Playlist": "Playlist",
+        "Action": "Action"
+    },
+    "plugins/sonos3/desktop/modal/radio.sonos.php": {
+        "Vider": "Clear",
+        "Action": "Action",
+        "Radio": "Radio"
+    },
+    "plugins/sonos3/desktop/modal/speaker.sonos.php": {
+        "Action": "Action",
+        "Radio": "Radio"
+    },
+    "plugins/sonos3/core/ajax/sonos3.ajax.php": {
+        "Aucune méthode correspondante à : ": "No methode matches:"
+    },
+    "plugins/sonos3/desktop/php/panel.php": {
+        "Liste objets": "Objects list",
+        "Rechercher": "Search"
+    },
+    "plugins/sonos3/desktop/modal/update.sonos.php": {
+        "Pause": "Pause",
+        "Rechercher": "Search"
+    },
+    "plugins/sonos3/plugin_info/info.json": {
+        "Plugin de controle de sonos": "Plugin to control Sonos"
+    }
+}
