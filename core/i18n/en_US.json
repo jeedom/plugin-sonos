@@ -50,7 +50,7 @@
         "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "Go on the daemon task page and check start the task sonos3::pull",
         "Muet status": "Mute status",
         "Entrée de ligne": "Line input",
-        "Impossible de récuperer le sonos : ": "Impossible de récuperer le sonos :"
+        "Impossible de récuperer le sonos : ": "It is no possible to get the Sonos"
     },
     "plugins/sonos3/desktop/php/sonos3.php": {
         "Ajouter un template": "Add template",
