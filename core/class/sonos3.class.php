@@ -118,8 +118,7 @@ class sonos3 extends eqLogic {
 
 	public static function getSonos($_emptyCache = false) {
 		if ($_emptyCache) {
-			shell_exec('rm -rf /tmp/sonos-cache');
-			shell_exec('sudo rm -rf /tmp/sonos-cache');
+			shell_exec('rm -rf /tmp/sonos-cache;sudo rm -rf /tmp/sonos-cache');
 		} else if (self::$_sonos !== null) {
 			return self::$_sonos;
 		}
@@ -131,8 +130,6 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function cronDaily() {
-		shell_exec('rm -rf /tmp/sonos-cache');
-		shell_exec('sudo rm -rf /tmp/sonos-cache');
 		self::getSonos(true);
 		self::deamon_start();
 	}
