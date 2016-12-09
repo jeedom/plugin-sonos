@@ -96,6 +96,7 @@ class sonos3 extends eqLogic {
 		if (!is_object($cron)) {
 			throw new Exception(__('Tache cron introuvable', __FILE__));
 		}
+		self::getSonos(true);
 		$cron->run();
 	}
 
@@ -130,7 +131,6 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function cronDaily() {
-		self::getSonos(true);
 		self::deamon_start();
 	}
 
