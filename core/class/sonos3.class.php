@@ -19,6 +19,8 @@
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 use duncan3dc\Sonos\Directory;
+use duncan3dc\Sonos\Network;
+use duncan3dc\Sonos\Speaker;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Sonos\Tracks\Track;
 use duncan3dc\Speaker\Providers\PicottsProvider;
