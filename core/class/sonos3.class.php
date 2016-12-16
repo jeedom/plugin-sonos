@@ -99,7 +99,6 @@ class sonos3 extends eqLogic {
 		if (!is_object($cron)) {
 			throw new Exception(__('Tache cron introuvable', __FILE__));
 		}
-		self::getSonos(true);
 		$cron->run();
 	}
 
@@ -121,14 +120,11 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getSonos($_emptyCache = false) {
-		if ($_emptyCache) {
-			shell_exec('rm -rf /tmp/sonos-cache;sudo rm -rf /tmp/sonos-cache');
-		} else if (self::$_sonos !== null) {
+		if (self::$_sonos !== null) {
 			return self::$_sonos;
 		}
 		$logger = log::getLogger('sonos3');
-		$cache = new \Doctrine\Common\Cache\FilesystemCache("/tmp/sonos-cache");
-		self::$_sonos = new duncan3dc\Sonos\Network($cache);
+		self::$_sonos = new duncan3dc\Sonos\Network(cache::getCache());
 		self::$_sonos->setLogger($logger);
 		return self::$_sonos;
 	}
@@ -138,7 +134,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function syncSonos() {
-		$sonos = self::getSonos(true);
+		$sonos = self::getSonos();
 		$controllers = $sonos->getControllers();
 		$speakers = sonos3::getSpeaker();
 		foreach ($controllers as $controller) {
@@ -344,14 +340,6 @@ class sonos3 extends eqLogic {
 			$controller = $sonos->getControllerByIp($_ip);
 		} catch (Exception $e) {
 
-		}
-		if ($controller == null) {
-			try {
-				$sonos = sonos3::getSonos(true);
-				$controller = $sonos->getControllerByIp($_ip);
-			} catch (Exception $e) {
-
-			}
 		}
 		if ($controller == null) {
 			try {
