@@ -32,6 +32,7 @@ class sonos3 extends eqLogic {
 
 	private static $_sonos = null;
 	private static $_eqLogics = null;
+	private static $_sonosAddOK = false;
 	public static $_widgetPossibility = array(
 		'custom' => true,
 		'parameters' => array(
