@@ -670,7 +670,6 @@ class sonos3 extends eqLogic {
 		try {
 			self::getRadioStations();
 			self::getPlayLists();
-			self::deamon_start();
 		} catch (Exception $e) {
 
 		}
