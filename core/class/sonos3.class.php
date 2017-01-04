@@ -180,11 +180,11 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function pull($_eqLogic_id = null) {
-		if (self::$_eqLogics == null) {
+		if (self::$_eqLogics === null) {
 			self::$_eqLogics = self::byType('sonos3');
 		}
 		foreach (self::$_eqLogics as $eqLogic) {
-			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
+			if ($_eqLogic_id !== null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
 			if ($eqLogic->getIsEnable() == 0) {
@@ -197,7 +197,7 @@ class sonos3 extends eqLogic {
 				$changed = false;
 				$controller = self::getControllerByIp($eqLogic->getLogicalId());
 
-				if ($controller == null) {
+				if ($controller === null) {
 					continue;
 				}
 
@@ -267,7 +267,7 @@ class sonos3 extends eqLogic {
 					$eqLogic->save();
 				}
 			} catch (Exception $e) {
-				if ($_eqLogic_id != null) {
+				if ($_eqLogic_id !== null) {
 					log::add('sonos', 'error', $e->getMessage());
 				} else {
 					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) == 150) {
@@ -340,7 +340,7 @@ class sonos3 extends eqLogic {
 		} catch (Exception $e) {
 
 		}
-		if ($controller == null) {
+		if ($controller === null) {
 			try {
 				if (!self::$_sonosAddOK) {
 					$speakers = array();
@@ -749,7 +749,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public function getQueue() {
-		$sonos = sonos3::getSonos();
+		sonos3::getSonos();
 		$controller = self::getControllerByIp($this->getLogicalId());
 		$queue = $controller->getQueue();
 		return $queue->getTracks();
@@ -863,7 +863,6 @@ class sonos3Cmd extends cmd {
 		$controller = sonos3::getControllerByIp($eqLogic->getLogicalId());
 		if (!is_object($controller)) {
 			throw new Exception(__('Impossible de récuperer le sonos : ', __FILE__) . $eqLogic->getHumanName());
-			return;
 		} else if ($this->getLogicalId() == 'play') {
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
@@ -928,7 +927,7 @@ class sonos3Cmd extends cmd {
 			}
 			$queue = $controller->getQueue();
 			$playlist = $sonos->getPlaylistByName(trim(trim($_options['title']), '"'));
-			if ($playlist == null) {
+			if ($playlist === null) {
 				foreach ($sonos->getPlaylists() as $playlist_search) {
 					if (str_replace('  ', ' ', $playlist_search->getName()) == $_options['title']) {
 						$playlist = $playlist_search;
@@ -936,7 +935,7 @@ class sonos3Cmd extends cmd {
 					}
 				}
 			}
-			if ($playlist == null) {
+			if ($playlist === null) {
 				throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title']));
 			}
 			$queue->clear();
