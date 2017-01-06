@@ -691,13 +691,25 @@ class sonos3 extends eqLogic {
 		if (!is_object($track_position)) {
 			$track_position = new sonos3Cmd();
 			$track_position->setLogicalId('track_position');
-			$track_position->setName(__('Position', __FILE__));
+			$track_position->setName(__('Position status', __FILE__));
 		}
 		$track_position->setType('info');
 		$track_position->setSubType('string');
 		$track_position->setConfiguration('repeatEventManagement', 'never');
 		$track_position->setEqLogic_id($this->getId());
 		$track_position->save();
+
+		$setPosition = $this->getCmd(null, 'setPosition');
+		if (!is_object($setPosition)) {
+			$setPosition = new sonos3Cmd();
+			$setPosition->setLogicalId('setPosition');
+			$setPosition->setName(__('Position', __FILE__));
+		}
+		$setPosition->setType('action');
+		$setPosition->setSubType('slider');
+		$setPosition->setValue($track_position->getId());
+		$setPosition->setEqLogic_id($this->getId());
+		$setPosition->save();
 
 		try {
 			self::getRadioStations();
@@ -857,6 +869,9 @@ class sonos3Cmd extends cmd {
 			case 'setvolume':
 				$eqLogic->getCmd('action', 'setVolume')->execCmd(array('slider' => $_value));
 				break;
+			case 'setposition':
+				$eqLogic->getCmd('action', 'setPosition')->execCmd(array('slider' => $_value));
+				break;
 			case 'play':
 				$eqLogic->getCmd('action', 'play')->execCmd();
 				break;
@@ -1014,6 +1029,8 @@ class sonos3Cmd extends cmd {
 			} else {
 				$controller->interrupt($track);
 			}
+		} else if ($this->getLogicalId() == 'setPosition') {
+			$controller->seek($_options['slider']);
 		} else {
 			sonos3::pull($eqLogic->getId());
 		}
