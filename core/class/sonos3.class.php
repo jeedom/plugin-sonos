@@ -226,6 +226,12 @@ class sonos3 extends eqLogic {
 					$artist = __('Aucun', __FILE__);
 				}
 
+				$time_duration = explode(":", $track->duration);
+				$duration = $time_duration[0] * 3600 + $time_duration[1] * 60 + $time_duration[2];
+				
+				$time_position = explode(":", $track->position);
+				$position = $time_position[0] * 3600 + $time_position[1] * 60 + $time_position[2];
+
 				$changed = $eqLogic->checkAndUpdateCmd('state', $state) || $changed;
 				$changed = $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume()) || $changed;
 				$changed = $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle) || $changed;
@@ -234,6 +240,8 @@ class sonos3 extends eqLogic {
 				$changed = $eqLogic->checkAndUpdateCmd('track_title', $title) || $changed;
 				$changed = $eqLogic->checkAndUpdateCmd('track_album', $album) || $changed;
 				$changed = $eqLogic->checkAndUpdateCmd('track_artist', $artist) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_duration', $duration) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_position', $position) || $changed;
 
 				if ($track->albumArt != '') {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->albumArt)) {
@@ -666,6 +674,31 @@ class sonos3 extends eqLogic {
 		$tts->setDisplay('message_placeholder', __('Message', __FILE__));
 		$tts->setEqLogic_id($this->getId());
 		$tts->save();
+
+		$track_duration = $this->getCmd(null, 'track_duration');
+		if (!is_object($track_duration)) {
+			$track_duration = new sonos3Cmd();
+			$track_duration->setLogicalId('track_duration');
+			$track_duration->setName(__('Durée', __FILE__));
+		}
+		$track_duration->setType('info');
+		$track_duration->setSubType('string');
+		$track_duration->setConfiguration('repeatEventManagement', 'never');
+		$track_duration->setEqLogic_id($this->getId());
+		$track_duration->save();
+
+		$track_position = $this->getCmd(null, 'track_position');
+		if (!is_object($track_position)) {
+			$track_position = new sonos3Cmd();
+			$track_position->setLogicalId('track_position');
+			$track_position->setName(__('Position', __FILE__));
+		}
+		$track_position->setType('info');
+		$track_position->setSubType('string');
+		$track_position->setConfiguration('repeatEventManagement', 'never');
+		$track_position->setEqLogic_id($this->getId());
+		$track_position->save();
+
 		try {
 			self::getRadioStations();
 			self::getPlayLists();
@@ -809,8 +842,8 @@ class sonos3Cmd extends cmd {
 		$info_device['params'][0]['value'] = '#' . $eqLogic->getCmd('info', 'state')->getId() . '#';
 		$info_device['params'][1]['value'] = '#' . $eqLogic->getCmd('info', 'volume')->getId() . '#';
 		$info_device['params'][2]['value'] = '#' . $eqLogic->getCmd('info', 'mute_state')->getId() . '#';
-		$info_device['params'][3]['value'] = '';
-		$info_device['params'][4]['value'] = '';
+		$info_device['params'][3]['value'] = '#' . $eqLogic->getCmd('info', 'track_duration')->getId() . '#';
+		$info_device['params'][4]['value'] = '#' . $eqLogic->getCmd('info', 'track_position')->getId() . '#';
 		$info_device['params'][5]['value'] = '#' . $eqLogic->getCmd('info', 'track_title')->getId() . '#';
 		$info_device['params'][6]['value'] = '#' . $eqLogic->getCmd('info', 'track_album')->getId() . '#';
 		$info_device['params'][7]['value'] = '#' . $eqLogic->getCmd('info', 'track_artist')->getId() . '#';
