@@ -113,7 +113,7 @@ image::../images/sonos5.PNG[]
 
 A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d'attente et les playlists disponibles pour lancer leur lecture, gerer la sortie sur different sonos et les radios favorites.
 
-== Le panel
+== Panel
 
 Le plugin Sonos met aussi à disposition un panel qui rassemble tout vos Sonos. Disponible a partir du menu Accueil -> Sonos Controller : 
 
