@@ -1029,7 +1029,7 @@ class sonos3Cmd extends cmd {
 			} else {
 				$controller->interrupt($track);
 			}
-		} else if ($this->getLogicalId() == 'setPosition') {
+		} elseif ($this->getLogicalId() == 'setPosition') {
 			$controller->seek($_options['slider']);
 		} else {
 			sonos3::pull($eqLogic->getId());
