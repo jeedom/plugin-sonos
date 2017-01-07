@@ -1,4 +1,4 @@
-== Changelog
+== Änderungsprotokoll
 
 - Ajout d'une commande "entrée de ligne"
 

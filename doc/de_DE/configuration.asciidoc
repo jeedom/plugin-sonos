@@ -21,7 +21,7 @@ Les messages trop long ne peuvent etre transmis en TTS (la limite depend du four
 
 == Geräte Konfiguration
 
-La configuration des équipements Sonos est accessible à partir du menu plugin : 
+Die Konfiguration von Sonos-Geräten ist in dem Plugin-Menü verfügbar : 
 
 image::../images/sonos2.PNG[]
 
