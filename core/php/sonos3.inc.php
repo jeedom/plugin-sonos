@@ -19,4 +19,3 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 include_file('core', 'sonos3', 'class', 'sonos3');
 require_once dirname(__FILE__) . '/../../vendor/autoload.php';
-?>
