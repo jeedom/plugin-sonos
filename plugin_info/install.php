@@ -40,7 +40,6 @@ function sonos3_install() {
 
 function sonos3_update() {
 	$cron = cron::byClassAndFunction('sonos3', 'pull');
-
 	if (!is_object($cron)) {
 		$cron = new cron();
 	}
@@ -48,7 +47,7 @@ function sonos3_update() {
 	$cron->setFunction('pull');
 	$cron->setEnable(1);
 	$cron->setDeamon(1);
-	$cron->setDeamonSleepTime(5);
+	$cron->setDeamonSleepTime(3);
 	$cron->setTimeout(1440);
 	$cron->setSchedule('* * * * *');
 	$cron->save();
