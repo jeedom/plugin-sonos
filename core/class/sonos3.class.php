@@ -238,8 +238,10 @@ class sonos3 extends eqLogic {
 				if ($track->albumArt != '') {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->albumArt)) {
 						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->albumArt));
+						$eqLogic->checkAndUpdateCmd('dominantColor', getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg'));
 						$changed = true;
 					}
+
 				} else {
 					if (file_exists(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg')) {
 						unlink(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg');
@@ -666,6 +668,18 @@ class sonos3 extends eqLogic {
 		$tts->setDisplay('message_placeholder', __('Message', __FILE__));
 		$tts->setEqLogic_id($this->getId());
 		$tts->save();
+
+		$dominantColor = $this->getCmd(null, 'dominantColor');
+		if (!is_object($dominantColor)) {
+			$dominantColor = new sonos3Cmd();
+			$dominantColor->setLogicalId('dominantColor');
+			$dominantColor->setName(__('Couleur dominante', __FILE__));
+		}
+		$dominantColor->setType('info');
+		$dominantColor->setSubType('string');
+		$dominantColor->setEqLogic_id($this->getId());
+		$dominantColor->save();
+
 		try {
 			self::getRadioStations();
 			self::getPlayLists();
