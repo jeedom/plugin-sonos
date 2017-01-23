@@ -1,12 +1,12 @@
 == FAQ
 
 Je n'ai pas de liste de lecture ou radio::
-Cela est généralement du à un soucis réseaux : 
+Cela est généralement dû à un soucis réseau : 
 
-- certain antivirus peuvent bloquer le traffic réseaux
-- des box adsl bloquent aussi le flux, il faut essayer de les redemarrer
+- certains antivirus peuvent bloquer le traffic réseau
+- des box ADSL bloquent aussi le flux, il faut essayer de les redémarrer
 
-Attention après chaque test il faut relancer une synchronisation de Jeedom avec les sonos
+Attention après chaque test il faut relancer une synchronisation de Jeedom avec les Sonos
 
 '''
 
