@@ -70,10 +70,8 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function dependancy_install() {
-		log::remove('sonos_update');
-		$cmd = 'sudo /bin/bash ' . dirname(__FILE__) . '/../../ressources/install.sh';
-		$cmd .= ' >> ' . log::getPathToLog('sonos_update') . ' 2>&1 &';
-		exec($cmd);
+		log::remove(__CLASS__ . '_update');
+		return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh', 'log' => log::getPathToLog(__CLASS__ . '_update'));
 	}
 
 	public static function deamon_info() {
