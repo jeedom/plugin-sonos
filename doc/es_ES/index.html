@@ -429,7 +429,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Le plugin Sonos permet de piloter les Sonos Play 1,3,5, Sonos Connect, Sonos Connect AMP et Sonos Playbar. Il va vous permettre de voir l&#8217;état du Sonos et d&#8217;effectuer des actions dessus (lecture, pause, suivant, précédent, volume, choix d&#8217;une playlist&#8230;&#8203;)</p>
+<p>Le plugin Sonos permet de piloter les Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP et Sonos Playbar. Il va vous permettre de voir l&#8217;état du/des Sonos et d&#8217;effectuer des actions dessus (lecture, pause, suivant, précédent, volume, choix d&#8217;une playlist&#8230;&#8203;)</p>
 </div>
 </div>
 </div>
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_configuration_du_plugin">1. Configuration du plugin</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>La configuration est très simple, après téléchargement du plugin, il vous suffit de l&#8217;activer et c&#8217;est tout. Le plugin va rechercher les Sonos sur votre réseau et créer les équipements automatiquement. De plus, si il y a une correspondance entre les objets Jeedom et les pièces du Sonos, Jeedom affectera automatiquement les Sonos dans les bonnes pièces.</p>
+<p>La configuration est très simple, après téléchargement du plugin, il vous suffit de l&#8217;activer et c&#8217;est tout. Le plugin va rechercher les Sonos sur votre réseau et créer les équipements automatiquement. De plus, s&#8217;il y a une correspondance entre les objets Jeedom et les pièces du Sonos, Jeedom affectera automatiquement les Sonos dans les bonnes pièces.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -468,13 +468,13 @@ Ce plugin nécessite que les Sonos soit alimentés (même en mode veille) pour n
 <p><strong>Partage</strong> : nom du partage ainsi que le chemin du dossier</p>
 </li>
 <li>
-<p><strong>Nom d&#8217;utilisateur pour le partage</strong> : nom d&#8217;utilisateur pour acceder au partage</p>
+<p><strong>Nom d&#8217;utilisateur pour le partage</strong> : nom d&#8217;utilisateur pour accéder au partage</p>
 </li>
 <li>
 <p><strong>Mot de passe du partage</strong> : mot de passe du partage</p>
 </li>
 <li>
-<p><strong>Découverte</strong> : decouvre automatiquement les sonos (ne marche pas sur une installation de type docker ou il faut creer à la main chaque sonos)</p>
+<p><strong>Découverte</strong> : découvre automatiquement les sonos (ne marche pas sur une installation de type docker où il faut créer à la main chaque sonos)</p>
 </li>
 <li>
 <p><strong>Dépendance Sonos</strong> : installer les dépendances sonos pour le TTS</p>
@@ -488,7 +488,7 @@ Ce plugin nécessite que les Sonos soit alimentés (même en mode veille) pour n
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Les messages trop long ne peuvent etre transmis en TTS (la limite depend du fournisseurs de TTS, en général environ 100 caractères)
+Les messages trop longs ne peuvent être transmis en TTS (la limite dépend du fournisseur de TTS, en général environ 100 caractères)
 </td>
 </tr>
 </table>
@@ -499,7 +499,7 @@ Les messages trop long ne peuvent etre transmis en TTS (la limite depend du four
 <h2 id="_configuration_des_équipements">2. Configuration des équipements</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>La configuration des équipements Sonos est accessible à partir du menu plugin :</p>
+<p>La configuration des équipements Sonos est accessible à partir du menu Plugins :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -548,7 +548,7 @@ Les messages trop long ne peuvent etre transmis en TTS (la limite depend du four
 </ul>
 </div>
 <div class="paragraph">
-<p>En dessous vous retrouvez la liste des commandes :</p>
+<p>En-dessous vous retrouvez la liste des commandes :</p>
 </div>
 <div class="ulist">
 <ul>
@@ -572,13 +572,13 @@ Les messages trop long ne peuvent etre transmis en TTS (la limite depend du four
 <p><strong>Jouer playlist</strong> : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Vous pouvez mettre "random" dans message pour mélanger la playlist avant la lecture.</p>
 </li>
 <li>
-<p><strong>Jouer une radio</strong> : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio (ATTENTION celle ci doit etre dans les radio favorites).</p>
+<p><strong>Jouer une radio</strong> : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio (ATTENTION celle ci doit être dans les radios favorites).</p>
 </li>
 <li>
-<p><strong>Ajout un haut parleur</strong> : permet d&#8217;ajouter à haut parleur (un sonos) au haut parleur courant (pour associer 2 sonos par exemple). Il faut mettre le nom de la piece du sonos à ajouter dans le titre (le champs message n&#8217;est pas utilisé ici).</p>
+<p><strong>Ajout un haut-parleur</strong> : permet d&#8217;ajouter un haut-parleur (un Sonos) au haut-parleur courant (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à ajouter dans le titre (le champs message n&#8217;est pas utilisé ici).</p>
 </li>
 <li>
-<p><strong>Supprimer un haut parleur</strong> : permet de supprimer un haut parleur (un sonos) au haut parleur courant (pour associer 2 sonos par exemple). Il faut mettre le nom de la piece du sonos à supprimer dans le titre (le champs message n&#8217;est pas utilisé ici).</p>
+<p><strong>Supprimer un haut-parleur</strong> : permet de supprimer un haut-parleur (un Sonos) au haut-parleur courant (pour dissocier 2 Sonos par exemple). Il faut mettre le nom de la piéce du Sonos à supprimer dans le titre (le champs message n&#8217;est pas utilisé ici).</p>
 </li>
 <li>
 <p><strong>Aléatoire statut</strong> : indique si on est en mode aléatoire ou non</p>
@@ -632,7 +632,7 @@ Les messages trop long ne peuvent etre transmis en TTS (la limite depend du four
 <p><strong>Statut</strong> : statut (pause, lecture, transition&#8230;&#8203;)</p>
 </li>
 <li>
-<p><strong>Dire</strong> : permet de lire un texte sur le sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire</p>
+<p><strong>Dire</strong> : permet de lire un texte sur le Sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire</p>
 </li>
 </ul>
 </div>
@@ -654,7 +654,7 @@ Pour la lecture des playlists vous pouvez mettre des options (dans la case optio
 <h2 id="_tts">3. TTS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Le TTS (text-to-speech) vers le Sonos necessite d&#8217;avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. La configuration est assez simple il faut mettre le nom ou l&#8217;ip du nas (attention à bien mettre la même chose que ce qui est déclaré sur sonos) et le chemain (relatif), le nom d&#8217;utilisateur et le mot de passe (attention l&#8217;utilisateur doit avoir les droits en écriture)</p>
+<p>Le TTS (text-to-speech) vers le Sonos nécessite d&#8217;avoir un partage Windows (Samba) sur le réseau (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le réseau. La configuration est assez simple il faut mettre le nom ou l&#8217;ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemain (relatif), le nom d&#8217;utilisateur et le mot de passe (attention l&#8217;utilisateur doit avoir les droits en écriture)</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -675,7 +675,7 @@ Il faut absolument mettre un mot de passe pour que cela marche
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Il faut aussi absolument un sous repertoire pour que le fichier vocal soit correctement créé.
+Il faut aussi absolument un sous-répertoire pour que le fichier vocal soit correctement créé.
 </td>
 </tr>
 </table>
@@ -698,7 +698,7 @@ Il faut aussi absolument un sous repertoire pour que le fichier vocal soit corre
 </ul>
 </div>
 <div class="paragraph">
-<p>Côté Plugin Sono, voici ma config :</p>
+<p>Côté Plugin Sonos, voici ma config :</p>
 </div>
 <div class="ulist">
 <ul>
@@ -744,7 +744,7 @@ Il faut aussi absolument un sous repertoire pour que le fichier vocal soit corre
 </div>
 </div>
 <div class="paragraph">
-<p>A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d&#8217;attente et les playlists disponibles pour lancer leur lecture, gerer la sortie sur different sonos et les radios favorites.</p>
+<p>A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d&#8217;attente et les playlists disponibles pour lancer leur lecture, gérer la sortie sur différents Sonos et les radios favorites.</p>
 </div>
 </div>
 </div>
@@ -752,7 +752,7 @@ Il faut aussi absolument un sous repertoire pour que le fichier vocal soit corre
 <h2 id="_le_panel">5. Le panel</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Le plugin Sonos met aussi à disposition un panel qui rassemble tout vos Sonos. Disponible a partir du menu Accueil &#8594; Sonos Controller :</p>
+<p>Le plugin Sonos met aussi à disposition un panel qui rassemble tous vos Sonos. Disponible à partir du menu Accueil &#8594; Sonos Controller :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -776,7 +776,7 @@ Il faut aussi absolument un sous repertoire pour que le fichier vocal soit corre
 </div>
 </div>
 <div class="paragraph">
-<p>Il vous permet comme en version bureau d&#8217;avoir une vue synthetique de vos Sonos :</p>
+<p>Il vous permet comme en version bureau d&#8217;avoir une vue synthétique de vos Sonos :</p>
 </div>
 <div class="imageblock">
 <div class="content">

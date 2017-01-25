@@ -1,6 +1,6 @@
 == Plugin configuration
 
-La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout. Le plugin va rechercher les Sonos sur votre réseau et créer les équipements automatiquement. De plus, si il y a une correspondance entre les objets Jeedom et les pièces du Sonos, Jeedom affectera automatiquement les Sonos dans les bonnes pièces.
+La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout. Le plugin va rechercher les Sonos sur votre réseau et créer les équipements automatiquement. De plus, s'il y a une correspondance entre les objets Jeedom et les pièces du Sonos, Jeedom affectera automatiquement les Sonos dans les bonnes pièces.
 
 [TIP]
 Ce plugin nécessite que les Sonos soit alimentés (même en mode veille) pour ne pas provoquer d'erreur. 
@@ -11,17 +11,17 @@ image::../images/sonos1.PNG[]
 
 * *Voix* : choix de la voix lors du TTS
 * *Partage* : nom du partage ainsi que le chemin du dossier
-* *Nom d'utilisateur pour le partage* : nom d'utilisateur pour acceder au partage
+* *Nom d'utilisateur pour le partage* : nom d'utilisateur pour accéder au partage
 * *Mot de passe du partage* : mot de passe du partage
-* *Découverte* : decouvre automatiquement les sonos (ne marche pas sur une installation de type docker ou il faut creer à la main chaque sonos)
+* *Découverte* : découvre automatiquement les sonos (ne marche pas sur une installation de type docker où il faut créer à la main chaque sonos)
 * *Dépendance Sonos* : installer les dépendances sonos pour le TTS
 
 [IMPORTANT]
-Les messages trop long ne peuvent etre transmis en TTS (la limite depend du fournisseurs de TTS, en général environ 100 caractères)
+Les messages trop longs ne peuvent être transmis en TTS (la limite dépend du fournisseur de TTS, en général environ 100 caractères)
 
 == Equipment configuration
 
-La configuration des équipements Sonos est accessible à partir du menu plugin : 
+La configuration des équipements Sonos est accessible à partir du menu Plugins : 
 
 image::../images/sonos2.PNG[]
 
@@ -42,7 +42,7 @@ Vous retrouvez ici toute la configuration de votre équipement :
 * *Modèle* : le modèle de votre Sonos (à ne changer que si ce n'est pas le bon)
 * *IP* : l'IP de votre Sonos, peut être utile si votre Sonos change d'IP ou si vous le remplacez
 
-En dessous vous retrouvez la liste des commandes : 
+En-dessous vous retrouvez la liste des commandes : 
 
 * *Nom* : nom de la commande
 * *Configuration avancée (petites roues crantées)* : permet d'afficher la configuration avancée de la commande (méthode d'historisation, widget...)
@@ -51,9 +51,9 @@ En dessous vous retrouvez la liste des commandes :
 Comme commande vous retrouverez : 
 
 * *Jouer playlist* : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Vous pouvez mettre "random" dans message pour mélanger la playlist avant la lecture.
-* *Jouer une radio* : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio (ATTENTION celle ci doit etre dans les radio favorites).
-* *Ajout un haut parleur* : permet d'ajouter à haut parleur (un sonos) au haut parleur courant (pour associer 2 sonos par exemple). Il faut mettre le nom de la piece du sonos à ajouter dans le titre (le champs message n'est pas utilisé ici).
-* *Supprimer un haut parleur* : permet de supprimer un haut parleur (un sonos) au haut parleur courant (pour associer 2 sonos par exemple). Il faut mettre le nom de la piece du sonos à supprimer dans le titre (le champs message n'est pas utilisé ici).
+* *Jouer une radio* : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio (ATTENTION celle ci doit être dans les radios favorites).
+* *Ajout un haut-parleur* : permet d'ajouter un haut-parleur (un Sonos) au haut-parleur courant (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à ajouter dans le titre (le champs message n'est pas utilisé ici).
+* *Supprimer un haut-parleur* : permet de supprimer un haut-parleur (un Sonos) au haut-parleur courant (pour dissocier 2 Sonos par exemple). Il faut mettre le nom de la piéce du Sonos à supprimer dans le titre (le champs message n'est pas utilisé ici).
 * *Aléatoire statut* : indique si on est en mode aléatoire ou non
 * *Aléatoire* : inverse le statut du mode aléatoire
 * *Répéter statut* : indique si on est en mode répété ou non
@@ -71,20 +71,20 @@ Comme commande vous retrouverez :
 * *Volume* : modifier le volume (de 0 à 100)
 * *Volume statut* : niveau du volume
 * *Statut* : statut (pause, lecture, transition...)
-* *Dire* : permet de lire un texte sur le sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire
+* *Dire* : permet de lire un texte sur le Sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire
 
 [NOTE]
 Pour la lecture des playlists vous pouvez mettre des options (dans la case option). Pour lancer la playlist en lecture aléatoire il faut mettre dedans "random"
 
 == TTS
 
-Le TTS (text-to-speech) vers le Sonos necessite d'avoir un partage Windows (Samba) sur le réseaux (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le reseaux. La configuration est assez simple il faut mettre le nom ou l'ip du nas (attention à bien mettre la même chose que ce qui est déclaré sur sonos) et le chemain (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture)
+Le TTS (text-to-speech) vers le Sonos nécessite d'avoir un partage Windows (Samba) sur le réseau (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le réseau. La configuration est assez simple il faut mettre le nom ou l'ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemain (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture)
 
 [IMPORTANT]
 Il faut absolument mettre un mot de passe pour que cela marche
 
 [IMPORTANT]
-Il faut aussi absolument un sous repertoire pour que le fichier vocal soit correctement créé.
+Il faut aussi absolument un sous-répertoire pour que le fichier vocal soit correctement créé.
 
 .Voici un exemple de configuration (merci @masterfion) :
 
@@ -94,7 +94,7 @@ Côté NAS, voici ma config :
 * l'utilisateur Sonos a un accès Lecture/Ecriture (nécessaire pour Jeedom)
 * l'utilisateur guest a un accès en Lecture seule (nécessaire pour les Sonos)
 
-Côté Plugin Sono, voici ma config :
+Côté Plugin Sonos, voici ma config :
 
 * Partage :
 ** Champ 1 : 192.168.xxx.yyy
@@ -111,11 +111,11 @@ Sur le dashboard vous retrouverez le widget suivant :
 
 image::../images/sonos5.PNG[]
 
-A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d'attente et les playlists disponibles pour lancer leur lecture, gerer la sortie sur different sonos et les radios favorites.
+A partir de ce widget (et seulement en version desktop), vous pouvez voir les musiques dans la file d'attente et les playlists disponibles pour lancer leur lecture, gérer la sortie sur différents Sonos et les radios favorites.
 
 == Le panel
 
-Le plugin Sonos met aussi à disposition un panel qui rassemble tout vos Sonos. Disponible a partir du menu Accueil -> Sonos Controller : 
+Le plugin Sonos met aussi à disposition un panel qui rassemble tous vos Sonos. Disponible à partir du menu Accueil -> Sonos Controller : 
 
 image::../images/sonos7.PNG[]
 
@@ -127,6 +127,6 @@ Il existe aussi une version mobile du panel, accessible à partir de Plugins -> 
 
 image::../images/sonos9.PNG[]
 
-Il vous permet comme en version bureau d'avoir une vue synthetique de vos Sonos : 
+Il vous permet comme en version bureau d'avoir une vue synthétique de vos Sonos : 
 
 image::../images/sonos10.PNG[]
