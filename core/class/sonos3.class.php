@@ -987,6 +987,7 @@ class sonos3Cmd extends cmd {
 				$track->getProvider()->setVoice(config::byKey('ttsVoxygenVoice', 'sonos3', 'Helene'));
 			} else if (config::byKey('ttsProvider', 'sonos3') == 'picotts') {
 				$track = new TextToSpeech(trim($_options['message']), $directory, new PicottsProvider);
+				$track->getProvider()->setLanguage(str_replace ('_', '-', config::byKey('language','core')));
 			}
 			if ($_options['title'] != '' && is_numeric($_options['title'])) {
 				$controller->interrupt($track, $_options['title']);
