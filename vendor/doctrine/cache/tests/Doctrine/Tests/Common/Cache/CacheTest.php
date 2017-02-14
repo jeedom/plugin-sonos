@@ -175,6 +175,18 @@ abstract class CacheTest extends \Doctrine\Tests\DoctrineTestCase
         $this->assertFalse($cache->contains('key2'));
     }
 
+    public function testDeleteMulti()
+    {
+        $cache = $this->_getCacheDriver();
+
+        $this->assertTrue($cache->save('key1', 1));
+        $this->assertTrue($cache->save('key2', 1));
+        $this->assertTrue($cache->deleteMultiple(['key1', 'key2', 'key3']));
+        $this->assertFalse($cache->contains('key1'));
+        $this->assertFalse($cache->contains('key2'));
+        $this->assertFalse($cache->contains('key3'));
+    }
+
     /**
      * @dataProvider provideCacheIds
      */
@@ -442,6 +454,35 @@ abstract class CacheTest extends \Doctrine\Tests\DoctrineTestCase
         $cache->deleteAll();
         $this->assertTrue($cache->save('without_ttl', 'without_ttl'));
         $this->assertTrue($cache->save('with_ttl', 'with_ttl', 3600));
+    }
+
+    /**
+     * @group 147
+     * @group 152
+     */
+    public function testFetchingANonExistingKeyShouldNeverCauseANoticeOrWarning()
+    {
+        $cache = $this->_getCacheDriver();
+
+        $errorHandler = function () {
+            restore_error_handler();
+
+            $this->fail('include failure captured');
+        };
+
+        set_error_handler($errorHandler);
+
+        $cache->fetch('key');
+
+        self::assertSame(
+            $errorHandler,
+            set_error_handler(function () {
+            }),
+            'The error handler is the one set by this test, and wasn\'t replaced'
+        );
+
+        restore_error_handler();
+        restore_error_handler();
     }
 
     /**

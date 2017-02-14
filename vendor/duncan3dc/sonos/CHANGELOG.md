@@ -5,6 +5,40 @@ Changelog
 
 --------
 
+## 1.9.6 - 2017-02-12
+
+### Fixed
+
+* [Tracks] Allow text-to-speech messages longer than 100 characters.
+
+--------
+
+## 1.9.5 - 2017-01-19
+
+### Added
+
+* [Logging] Soap request and responses are now logged under the Debug level.
+* [Support] Added support for PHP 7.1
+
+--------
+
+## 1.9.4 - 2016-12-31
+
+### Fixed
+
+* [Network] Added support for the new version of the PLAY:1.
+
+--------
+
+## 1.9.3 - 2016-10-04
+
+### Fixed
+
+* [Streams] Ensure the title is picked up when available.
+* [Queues] Prevent inifite loop when the start position is invalid.
+
+--------
+
 ## 1.9.2 - 2016-09-12
 
 ### Added

@@ -99,7 +99,7 @@ class PredisCache extends CacheProvider
      */
     protected function doContains($id)
     {
-        return $this->client->exists($id) !== 0;
+        return (bool) $this->client->exists($id);
     }
 
     /**
@@ -123,6 +123,14 @@ class PredisCache extends CacheProvider
     protected function doDelete($id)
     {
         return $this->client->del($id) >= 0;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doDeleteMultiple(array $keys)
+    {
+        return $this->client->del($keys) >= 0;
     }
 
     /**

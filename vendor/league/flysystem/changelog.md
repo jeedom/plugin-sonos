@@ -1,5 +1,54 @@
 # Changelog
 
+## 1.0.35 - 2017-02-09
+
+### Fixed 
+
+* Creating a directory in FTP checked whether a directory already existed, the check was not strict enough.
+
+## 1.0.34 - 2017-01-30
+
+### Fixed
+
+* Account for a Finfo buffer error which causes an array to string conversion.
+* Simplified path handling for Windows.
+
+## 1.0.33 - 2017-01-23
+
+### Fixed
+
+* Path traversing possibility on Windows.
+
+## 1.0.32 - 2016-10-19
+
+### Fixed
+
+* Fixed listings on windows.
+
+## 1.0.31 - 2016-10-19
+
+### Fixed
+
+* Relative path resolving was too greedy.
+
+## 1.0.30 - 2016-10-18
+
+### Altered
+
+* Lowered minimum PHP version to 5.5.9
+
+## 1.0.29 - 2016-10-18
+
+### Improved
+
+* All FTP-like adapters now have a safe storage for usernames and passwords.
+
+## 1.0.28 - 2016-10-07
+
+### Fixed
+
+* [#705] Config::has now also checks the fallback config.
+
 ## 1.0.27 - 2016-08-10
 
 ### Fixed

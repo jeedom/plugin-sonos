@@ -9,7 +9,7 @@ use duncan3dc\Sonos\Tracks\UriInterface;
 /**
  * Provides an interface for managing Sonos playlists on the current network.
  */
-class Playlist extends Queue implements UriInterface
+class Playlist extends Queue
 {
     /**
      * @var string|null $name The name of the playlist.
@@ -150,7 +150,7 @@ class Playlist extends Queue implements UriInterface
 
 
     /**
-     * Remove all tracks from the playlist.
+     * Remove all tracks from the queue.
      *
      * @return static
      */
@@ -175,38 +175,5 @@ class Playlist extends Queue implements UriInterface
     public function delete()
     {
         $this->soap("ContentDirectory", "DestroyObject");
-    }
-
-
-    /**
-     * Get the URI for this playlist.
-     *
-     * @return string
-     */
-    public function getUri()
-    {
-        $id = substr($this->id, 3);
-        return "file:///jffs/settings/savedqueues.rsq#{$id}";
-    }
-
-
-    /**
-     * Get the metadata xml for this playlist.
-     *
-     * @return string
-     */
-    public function getMetaData()
-    {
-        return Helper::createMetaDataXml($this->id, "SQ:", [
-            "dc:title"          =>  $this->getName(),
-            "upnp:class"        =>  "object.container.playlistContainer",
-            "desc"              =>  [
-                "_attributes"       =>  [
-                    "id"        =>  "cdudn",
-                    "nameSpace" =>  "urn:schemas-rinconnetworks-com:metadata-1-0/",
-                ],
-                "_value"            =>  "RINCON_AssociatedZPUDN",
-            ],
-        ]);
     }
 }

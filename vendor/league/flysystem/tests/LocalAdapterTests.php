@@ -81,6 +81,30 @@ class LocalAdapterTests extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testStreamWrappersAreSupported()
+    {
+        if (defined('HHVM_VERSION')) {
+            $this->markTestSkipped('HHVM fails while it should not.');
+        }
+
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $this->markTestSkipped('Windows does not support this.');
+        }
+
+        (new Local(__DIR__.'/files'))->write('file.txt', 'contents', new Config());
+
+        $adapter = new Local('file://'.__DIR__.'/files');
+        $this->assertCount(1, $adapter->listContents());
+    }
+
+    public function testRelativeRootsAreSupportes()
+    {
+        (new Local(__DIR__.'/files'))->write('file.txt', 'contents', new Config());
+
+        $adapter = new Local(__DIR__.'/files/../files');
+        $this->assertCount(1, $adapter->listContents());
+    }
+
     public function testHasWithDir()
     {
         $this->adapter->createDir('0', new Config());
@@ -171,9 +195,26 @@ class LocalAdapterTests extends \PHPUnit_Framework_TestCase
         $this->assertEquals($path, $this->adapter->removePathPrefix($path));
     }
 
+    public function testWindowsPrefix()
+    {
+        $path = 'some' . DIRECTORY_SEPARATOR . 'path.ext';
+        $expected = 'c:' . DIRECTORY_SEPARATOR . $path;
+
+        $this->adapter->setPathPrefix('c:/');
+        $prefixed = $this->adapter->applyPathPrefix($path);
+        $this->assertEquals($expected, $prefixed);
+        $this->assertEquals($path, $this->adapter->removePathPrefix($prefixed));
+
+        $expected = 'c:\\\\some\\dir' . DIRECTORY_SEPARATOR . $path;
+        $this->adapter->setPathPrefix('c:\\\\some\\dir\\');
+        $prefixed = $this->adapter->applyPathPrefix($path);
+        $this->assertEquals($expected, $prefixed);
+        $this->assertEquals($path, $this->adapter->removePathPrefix($prefixed));
+    }
+
     public function testGetPathPrefix()
     {
-        $this->assertEquals(realpath($this->root) . DIRECTORY_SEPARATOR, $this->adapter->getPathPrefix());
+        $this->assertEquals(realpath($this->root), realpath($this->adapter->getPathPrefix()));
     }
 
     public function testRenameToNonExistsingDirectory()

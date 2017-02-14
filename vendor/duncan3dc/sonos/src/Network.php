@@ -103,6 +103,10 @@ class Network implements LoggerAwareInterface {
 		return $this;
 	}
 
+	public function setSpeakers($speakers) {
+		$this->speakers = $speakers;
+	}
+
 	/**
 	 * Set the network interface to use for SSDP discovery.
 	 *
@@ -114,12 +118,6 @@ class Network implements LoggerAwareInterface {
 	 */
 	public function setNetworkInterface($networkInterface) {
 		$this->networkInterface = $networkInterface;
-
-		return $this;
-	}
-
-	public function setSpeakers($speakers) {
-		$this->speakers = $speakers;
 
 		return $this;
 	}
@@ -577,16 +575,6 @@ class Network implements LoggerAwareInterface {
 				return $alarm;
 			}
 		}
-	}
-
-	/**
-	 * Get the Sonos favourites.
-	 *
-	 * @return Favourites
-	 */
-	public function getFavourites() {
-		$controller = $this->getController();
-		return new Favourites($controller);
 	}
 
 	/**

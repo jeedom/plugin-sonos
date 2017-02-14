@@ -43,17 +43,22 @@ class Share extends AbstractShare {
 	/**
 	 * @param Server $server
 	 * @param string $name
+	 * @param System $system
 	 */
-	public function __construct($server, $name) {
+	public function __construct($server, $name, System $system = null) {
 		parent::__construct();
 		$this->server = $server;
 		$this->name = $name;
-		$this->system = new System();
+		$this->system = (!is_null($system)) ? $system : new System();
 		$this->parser = new Parser(new TimeZoneProvider($this->server->getHost(), $this->system));
 	}
 
 	protected function getConnection() {
 		$workgroupArgument = ($this->server->getWorkgroup()) ? ' -W ' . escapeshellarg($this->server->getWorkgroup()) : '';
+		$smbClientPath = $this->system->getSmbclientPath();
+		if (!$smbClientPath) {
+			throw new DependencyException('Can\'t find smbclient binary in path');
+		}
 		$command = sprintf('%s%s %s --authentication-file=%s %s',
 			$this->system->hasStdBuf() ? 'stdbuf -o0 ' : '',
 			$this->system->getSmbclientPath(),
@@ -61,7 +66,7 @@ class Share extends AbstractShare {
 			System::getFD(3),
 			escapeshellarg('//' . $this->server->getHost() . '/' . $this->name)
 		);
-		$connection = new Connection($command);
+		$connection = new Connection($command, $this->parser);
 		$connection->writeAuthentication($this->server->getUser(), $this->server->getPassword());
 		if (!$connection->isValid()) {
 			throw new ConnectionException();
@@ -99,8 +104,8 @@ class Share extends AbstractShare {
 	}
 
 	protected function simpleCommand($command, $path) {
-		$path = $this->escapePath($path);
-		$cmd = $command . ' ' . $path;
+		$escapedPath = $this->escapePath($path);
+		$cmd = $command . ' ' . $escapedPath;
 		$output = $this->execute($cmd);
 		return $this->parseOutput($output, $path);
 	}
@@ -218,8 +223,7 @@ class Share extends AbstractShare {
 	public function rename($from, $to) {
 		$path1 = $this->escapePath($from);
 		$path2 = $this->escapePath($to);
-		$cmd = 'rename ' . $path1 . ' ' . $path2;
-		$output = $this->execute($cmd);
+		$output = $this->execute('rename ' . $path1 . ' ' . $path2);
 		return $this->parseOutput($output, $to);
 	}
 
@@ -277,7 +281,7 @@ class Share extends AbstractShare {
 			System::getFD(3),
 			escapeshellarg('//' . $this->server->getHost() . '/' . $this->name)
 		);
-		$connection = new Connection($command);
+		$connection = new Connection($command, $this->parser);
 		$connection->writeAuthentication($this->server->getUser(), $this->server->getPassword());
 		$connection->write('get ' . $source . ' ' . System::getFD(5));
 		$connection->write('exit');
@@ -306,7 +310,7 @@ class Share extends AbstractShare {
 			System::getFD(3),
 			escapeshellarg('//' . $this->server->getHost() . '/' . $this->name)
 		);
-		$connection = new Connection($command);
+		$connection = new Connection($command, $this->parser);
 		$connection->writeAuthentication($this->server->getUser(), $this->server->getPassword());
 		$fh = $connection->getFileInputStream();
 
@@ -402,7 +406,11 @@ class Share extends AbstractShare {
 	 * @return bool
 	 */
 	protected function parseOutput($lines, $path = '') {
-		return $this->parser->checkForError($lines, $path);
+		if (count($lines) === 0) {
+			return true;
+		} else {
+			return $this->parser->checkForError($lines, $path);
+		}
 	}
 
 	/**

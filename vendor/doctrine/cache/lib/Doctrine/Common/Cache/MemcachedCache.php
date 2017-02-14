@@ -74,7 +74,7 @@ class MemcachedCache extends CacheProvider
      */
     protected function doFetchMultiple(array $keys)
     {
-        return $this->memcached->getMulti($keys);
+        return $this->memcached->getMulti($keys) ?: [];
     }
 
     /**
@@ -107,6 +107,15 @@ class MemcachedCache extends CacheProvider
             $lifeTime = time() + $lifeTime;
         }
         return $this->memcached->set($id, $data, (int) $lifeTime);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doDeleteMultiple(array $keys)
+    {
+        return $this->memcached->deleteMulti($keys)
+            || $this->memcached->getResultCode() === Memcached::RES_NOTFOUND;
     }
 
     /**

@@ -70,9 +70,14 @@ pairs:
   is encountered. The callable is invoked with the original request and the
   redirect response that was received. Any return value from the on_redirect
   function is ignored.
-- track_redirects: (bool) When set to ``true``, each redirected URI encountered
-  will be tracked in the ``X-Guzzle-Redirect-History`` header in the order in
-  which the redirects were encountered.
+- track_redirects: (bool) When set to ``true``, each redirected URI and status
+  code encountered will be tracked in the ``X-Guzzle-Redirect-History`` and
+  ``X-Guzzle-Redirect-Status-History`` headers respectively. All URIs and
+  status codes will be stored in the order which the redirects were encountered.
+
+  Note: When tracking redirects the ``X-Guzzle-Redirect-History`` header will
+  exclude the initial request's URI and the ``X-Guzzle-Redirect-Status-History``
+  header will exclude the final status code.
 
 .. code-block:: php
 
@@ -104,6 +109,9 @@ pairs:
 
     echo $res->getHeaderLine('X-Guzzle-Redirect-History');
     // http://first-redirect, http://second-redirect, etc...
+
+    echo $res->getHeaderLine('X-Guzzle-Redirect-Status-History');
+    // 301, 302, etc...
 
 .. warning::
 
@@ -396,6 +404,29 @@ the body of a request is greater than 1 MB and a request is using HTTP/1.1.
     implemented by Guzzle HTTP handlers used by a client.
 
 
+force_ip_resolve
+----------------
+
+:Summary: Set to "v4" if you want the HTTP handlers to use only ipv4 protocol or "v6" for ipv6 protocol.
+:Types: string
+:Default: null
+:Constant: ``GuzzleHttp\RequestOptions::FORCE_IP_RESOLVE``
+
+.. code-block:: php
+
+    // Force ipv4 protocol
+    $client->request('GET', '/foo', ['force_ip_resolve' => 'v4']);
+
+    // Force ipv6 protocol
+    $client->request('GET', '/foo', ['force_ip_resolve' => 'v6']);
+
+.. note::
+
+    This setting must be supported by the HTTP handler used to send a request.
+    ``force_ip_resolve`` is currently only supported by the built-in cURL
+    handler.
+
+
 form_params
 -----------
 
@@ -462,7 +493,7 @@ created by the client (e.g., ``request()`` and ``requestAsync()``).
 
     // Sets the X-Foo header to "test", which prevents the default header
     // from being applied.
-    $client->request('GET', '/get', ['headers' => ['X-Foo' => 'test']);
+    $client->request('GET', '/get', ['headers' => ['X-Foo' => 'test']]);
 
     // Will disable adding in default headers.
     $client->request('GET', '/get', ['headers' => null]);
@@ -534,7 +565,7 @@ over the wire.
     $clientHandler = $client->getConfig('handler');
     // Create a middleware that echoes parts of the request.
     $tapMiddleware = Middleware::tap(function ($request) {
-        echo $request->getHeader('Content-Type');
+        echo $request->getHeaderLine('Content-Type');
         // application/json
         echo $request->getBody();
         // {"foo":"bar"}
@@ -779,7 +810,7 @@ query
     // Send a GET request to /get?foo=bar
     $client->request('GET', '/get', ['query' => ['foo' => 'bar']]);
 
-Query strings specified in the ``query`` option will overwrite a query string
+Query strings specified in the ``query`` option will overwrite all query string
 values supplied in the URI of a request.
 
 .. code-block:: php

@@ -427,7 +427,7 @@ Cookies
 
 Guzzle can maintain a cookie session for you if instructed using the
 ``cookies`` request option. When sending a request, the ``cookies`` option
-must be set an an instance of ``GuzzleHttp\Cookie\CookieJarInterface``.
+must be set to an instance of ``GuzzleHttp\Cookie\CookieJarInterface``.
 
 .. code-block:: php
 
@@ -550,6 +550,8 @@ behavior of the library.
     the timeout.
 ``HTTP_PROXY``
     Defines the proxy to use when sending requests using the "http" protocol.
+    
+    Note: because the HTTP_PROXY variable may contain arbitrary user input on some (CGI) environments, the variable is only used on the CLI SAPI. See https://httpoxy.org for more information.
 ``HTTPS_PROXY``
     Defines the proxy to use when sending requests using the "https" protocol.
 

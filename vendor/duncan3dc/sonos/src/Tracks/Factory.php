@@ -4,7 +4,6 @@ namespace duncan3dc\Sonos\Tracks;
 
 use duncan3dc\DomParser\XmlElement;
 use duncan3dc\Sonos\Controller;
-use duncan3dc\Sonos\Playlist;
 
 /**
  * Factory for creating Track instances.
@@ -33,7 +32,7 @@ class Factory
      *
      * @param string $uri The URI of the track
      *
-     * @return string|UriInterface
+     * @return string
      */
     protected function guessTrackClass($uri)
     {
@@ -49,13 +48,6 @@ class Factory
             }
         }
 
-        if (substr($uri, 0, 38) === "file:///jffs/settings/savedqueues.rsq#") {
-            $id = (int) substr($uri, 38);
-            if ($id > 0) {
-                return new Playlist("SQ:{$id}", $this->controller);
-            }
-        }
-
         return Track::class;
     }
 
@@ -65,15 +57,11 @@ class Factory
      *
      * @param string $uri The URI of the track
      *
-     * @return UriInterface
+     * @return Track
      */
     public function createFromUri($uri)
     {
         $class = $this->guessTrackClass($uri);
-
-        if (is_object($class)) {
-            return $class;
-        }
 
         return new $class($uri);
     }
@@ -84,16 +72,12 @@ class Factory
      *
      * @param XmlElement $xml The xml element representing the track meta data.
      *
-     * @return UriInterface
+     * @return Track
      */
     public function createFromXml(XmlElement $xml)
     {
         $uri = (string) $xml->getTag("res");
         $class = $this->guessTrackClass($uri);
-
-        if (is_object($class)) {
-            return $class;
-        }
 
         return $class::createFromXml($xml, $this->controller);
     }
