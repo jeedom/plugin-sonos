@@ -81,6 +81,10 @@ class Network implements LoggerAwareInterface {
 		return $this;
 	}
 
+	public function setSpeakers($speakers) {
+		$this->speakers = $speakers;
+	}
+
 	/**
 	 * Get the logger object to use.
 	 *
@@ -101,10 +105,6 @@ class Network implements LoggerAwareInterface {
 		$this->multicastAddress = $multicastAddress;
 
 		return $this;
-	}
-
-	public function setSpeakers($speakers) {
-		$this->speakers = $speakers;
 	}
 
 	/**
