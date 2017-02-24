@@ -6,12 +6,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "dda7f3ab94158a002d9846a97dc18ebfb7acc062"
+            "reference": "6d64f3b51299db6cd56ab9d3a56fce5b38b397e0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/dda7f3ab94158a002d9846a97dc18ebfb7acc062",
-            "reference": "dda7f3ab94158a002d9846a97dc18ebfb7acc062",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/6d64f3b51299db6cd56ab9d3a56fce5b38b397e0",
+            "reference": "6d64f3b51299db6cd56ab9d3a56fce5b38b397e0",
             "shasum": ""
         },
         "require": {
@@ -40,7 +40,7 @@
             "league/flysystem-webdav": "Allows you to use WebDAV storage",
             "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
         },
-        "time": "2017-02-09 11:33:58",
+        "time": "2017-02-18 07:49:08",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -223,12 +223,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/psr7.git",
-            "reference": "5f17a79615bd36d52d3b3ce44075aec02605d8bf"
+            "reference": "04a6d1a00ea5da0727ee94309a9f0d3dbaecb569"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/psr7/zipball/5f17a79615bd36d52d3b3ce44075aec02605d8bf",
-            "reference": "5f17a79615bd36d52d3b3ce44075aec02605d8bf",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/04a6d1a00ea5da0727ee94309a9f0d3dbaecb569",
+            "reference": "04a6d1a00ea5da0727ee94309a9f0d3dbaecb569",
             "shasum": ""
         },
         "require": {
@@ -241,7 +241,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2016-11-02 14:11:11",
+        "time": "2017-02-21 01:20:32",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -290,12 +290,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "01324c2fbc7994bca00d10323bc3826a41426a9b"
+            "reference": "437c0c33217953b3b75e5080b73554da5f76b179"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/01324c2fbc7994bca00d10323bc3826a41426a9b",
-            "reference": "01324c2fbc7994bca00d10323bc3826a41426a9b",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/437c0c33217953b3b75e5080b73554da5f76b179",
+            "reference": "437c0c33217953b3b75e5080b73554da5f76b179",
             "shasum": ""
         },
         "require": {
@@ -311,7 +311,7 @@
         "suggest": {
             "psr/log": "Required for using the Log middleware"
         },
-        "time": "2017-02-05 02:32:13",
+        "time": "2017-02-23 20:32:34",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -584,66 +584,6 @@
         ]
     },
     {
-        "name": "duncan3dc/sonos",
-        "version": "1.9.6",
-        "version_normalized": "1.9.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/duncan3dc/sonos.git",
-            "reference": "bd11d940e32f2ea943d78ccd30baae06febccb63"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/bd11d940e32f2ea943d78ccd30baae06febccb63",
-            "reference": "bd11d940e32f2ea943d78ccd30baae06febccb63",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/cache": "^1.4",
-            "duncan3dc/domparser": "^1.4.1",
-            "duncan3dc/speaker": "^0.7.0",
-            "ext-soap": "*",
-            "ext-sockets": "*",
-            "guzzlehttp/guzzle": "^6.0",
-            "league/flysystem": "^1.0",
-            "php": "^5.6|^7.0",
-            "psr/log": "1.0.0"
-        },
-        "require-dev": {
-            "duncan3dc/object-intruder": "^0.1.0",
-            "mockery/mockery": "^0.9.4",
-            "phpunit/phpunit": "^5.7"
-        },
-        "time": "2017-02-12 14:22:19",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "duncan3dc\\Sonos\\": "src/",
-                "duncan3dc\\SonosTests\\": "tests/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Craig Duncan",
-                "email": "git@duncanc.co.uk",
-                "homepage": "https://github.com/duncan3dc",
-                "role": "Developer"
-            }
-        ],
-        "description": "Control Sonos speakers using a simple API",
-        "homepage": "https://github.com/duncan3dc/sonos",
-        "keywords": [
-            "sonos",
-            "streaming",
-            "upnp"
-        ]
-    },
-    {
         "name": "icewind/smb",
         "version": "v1.1.2",
         "version_normalized": "1.1.2.0",
@@ -729,5 +669,65 @@
             }
         ],
         "description": "A set of generic stream wrappers"
+    },
+    {
+        "name": "duncan3dc/sonos",
+        "version": "1.9.8",
+        "version_normalized": "1.9.8.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/sonos.git",
+            "reference": "3a1e8ad1569207e87a74fcd7e5d72e2108f820df"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/3a1e8ad1569207e87a74fcd7e5d72e2108f820df",
+            "reference": "3a1e8ad1569207e87a74fcd7e5d72e2108f820df",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/cache": "^1.4",
+            "duncan3dc/domparser": "^1.4.1",
+            "duncan3dc/speaker": "^0.7.0",
+            "ext-soap": "*",
+            "ext-sockets": "*",
+            "guzzlehttp/guzzle": "^6.0",
+            "league/flysystem": "^1.0",
+            "php": "^5.6|^7.0",
+            "psr/log": "1.0.0"
+        },
+        "require-dev": {
+            "duncan3dc/object-intruder": "^0.1.0",
+            "mockery/mockery": "^0.9.4",
+            "phpunit/phpunit": "^5.7.14"
+        },
+        "time": "2017-02-22 20:04:51",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "duncan3dc\\Sonos\\": "src/",
+                "duncan3dc\\SonosTests\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Craig Duncan",
+                "email": "git@duncanc.co.uk",
+                "homepage": "https://github.com/duncan3dc",
+                "role": "Developer"
+            }
+        ],
+        "description": "Control Sonos speakers using a simple API",
+        "homepage": "https://github.com/duncan3dc/sonos",
+        "keywords": [
+            "sonos",
+            "streaming",
+            "upnp"
+        ]
     }
 ]

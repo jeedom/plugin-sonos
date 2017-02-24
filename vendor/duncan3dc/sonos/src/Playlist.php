@@ -32,11 +32,6 @@ class Playlist extends Queue {
 		}
 	}
 
-	public function getUri() {
-		$id = substr($this->id, 3);
-		return "file:///jffs/settings/savedqueues.rsq#{$id}";
-	}
-
 	/**
 	 * Get the id of the playlist.
 	 *
@@ -44,6 +39,11 @@ class Playlist extends Queue {
 	 */
 	public function getId() {
 		return $this->id;
+	}
+
+	public function getUri() {
+		$id = substr($this->id, 3);
+		return "file:///jffs/settings/savedqueues.rsq#{$id}";
 	}
 
 	/**
