@@ -22,6 +22,10 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
             'duncan3dc\\DomParser\\' => 20,
             'duncan3dc\\DomParserTests\\' => 25,
         ),
+        'S' => 
+        array (
+            'Symfony\\Component\\Process\\' => 26,
+        ),
         'R' => 
         array (
             'RobGridley\\Flysystem\\Smb\\' => 25,
@@ -77,6 +81,10 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
         'duncan3dc\\DomParserTests\\' => 
         array (
             0 => __DIR__ . '/..' . '/duncan3dc/domparser/tests',
+        ),
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
         ),
         'RobGridley\\Flysystem\\Smb\\' => 
         array (

@@ -12,6 +12,7 @@ return array(
     'duncan3dc\\SonosTests\\' => array($vendorDir . '/duncan3dc/sonos/tests'),
     'duncan3dc\\DomParser\\' => array($vendorDir . '/duncan3dc/domparser/src'),
     'duncan3dc\\DomParserTests\\' => array($vendorDir . '/duncan3dc/domparser/tests'),
+    'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'RobGridley\\Flysystem\\Smb\\' => array($vendorDir . '/robgridley/flysystem-smb/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
