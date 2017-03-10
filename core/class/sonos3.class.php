@@ -150,10 +150,9 @@ class sonos3 extends eqLogic {
 			return null;
 		}
 		foreach (sonos3::getPlayLists() as $playlist) {
-			echo $playlist->getName() . "\n";
 			if (interactQuery::autoInteractWordFind($data['query'], $playlist->getName())) {
 				$sonos->getCmd(null, 'play_playlist')->execCmd(array('title' => $playlist->getName()));
-				return array('reply' => 'Ok');
+				return array('reply' => __('Ok j\'ai lancé : ', __FILE__) . $playlist->getName());
 			}
 		}
 		return array('reply' => 'Playlist non trouvée');
