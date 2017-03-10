@@ -116,6 +116,49 @@ class sonos3 extends eqLogic {
 		$cron->save();
 	}
 
+	public static function interact($_query, $_parameters = array()) {
+		$ok = false;
+		$files = array();
+		$matchs = explode("\n", config::byKey('interact::sentence', 'sonos3'));
+		if (count($matchs) == 0) {
+			return null;
+		}
+		$query = strtolower(sanitizeAccent($_query));
+		foreach ($matchs as $match) {
+			if (preg_match_all('/' . $match . '/', $query)) {
+				$ok = true;
+			}
+		}
+		if (!$ok) {
+			return null;
+		}
+		$sonos = null;
+		$data = interactQuery::findInQuery('object', $_query);
+		if (is_object($data['object'])) {
+			$founds = $data['object']->getEqLogic(true, false, 'sonos3');
+			if (count($founds) != 0) {
+				$sonos = $founds[0];
+			}
+		}
+		if ($sonos == null) {
+			$data = interactQuery::findInQuery('eqLogic', $_query);
+			if (is_object($data['eqLogic'])) {
+				$sonos = $data['eqLogic'];
+			}
+		}
+		if ($sonos == null) {
+			return null;
+		}
+		foreach (sonos3::getPlayLists() as $playlist) {
+			echo $playlist->getName() . "\n";
+			if (interactQuery::autoInteractWordFind($data['query'], $playlist->getName())) {
+				$sonos->getCmd(null, 'play_playlist')->execCmd(array('title' => $playlist->getName()));
+				return array('reply' => 'Ok');
+			}
+		}
+		return array('reply' => 'Playlist non trouvée');
+	}
+
 	public static function getSonos($_emptyCache = false) {
 		if (self::$_sonos !== null) {
 			return self::$_sonos;
