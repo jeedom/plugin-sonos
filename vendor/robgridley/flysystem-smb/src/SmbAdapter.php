@@ -47,10 +47,18 @@ class SmbAdapter extends AbstractAdapter
      */
     public function write($path, $contents, Config $config)
     {
-        $fullPath = $this->applyPathPrefix($path);
-        $stream = $this->share->write($fullPath);
+        $this->recursiveCreateDir(Util::dirname($path));
 
-        return fwrite($stream, $contents) === false || !fclose($stream) ? false : compact('path', 'contents');
+        $location = $this->applyPathPrefix($path);
+        $stream = $this->share->write($location);
+
+        fwrite($stream, $contents);
+
+        if (!fclose($stream)) {
+            return false;
+        }
+
+        return compact('path', 'contents');
     }
 
     /**
@@ -63,12 +71,18 @@ class SmbAdapter extends AbstractAdapter
      */
     public function writeStream($path, $resource, Config $config)
     {
-        $fullPath = $this->applyPathPrefix($path);
-        $stream = $this->share->write($fullPath);
+        $this->recursiveCreateDir(Util::dirname($path));
+
+        $location = $this->applyPathPrefix($path);
+        $stream = $this->share->write($location);
 
         stream_copy_to_stream($resource, $stream);
 
-        return fclose($stream) ? compact('path') : false;
+        if (!fclose($stream)) {
+            return false;
+        }
+
+        return compact('path');
     }
 
     /**
@@ -106,10 +120,18 @@ class SmbAdapter extends AbstractAdapter
      */
     public function rename($path, $newPath)
     {
-        $from = $this->applyPathPrefix($path);
-        $to = $this->applyPathPrefix($newPath);
+        $this->recursiveCreateDir(Util::dirname($newPath));
 
-        $this->share->rename($from, $to);
+        $location = $this->applyPathPrefix($path);
+        $destination = $this->applyPathPrefix($newPath);
+
+        try {
+            $this->share->rename($location, $destination);
+        } catch (NotFoundException $e) {
+            return false;
+        } catch (AlreadyExistsException $e) {
+            return false;
+        }
 
         return true;
     }
@@ -122,10 +144,12 @@ class SmbAdapter extends AbstractAdapter
      */
     public function delete($path)
     {
-        $fullPath = $this->applyPathPrefix($path);
+        $location = $this->applyPathPrefix($path);
 
         try {
-            $this->share->del($fullPath);
+            $this->share->del($location);
+        } catch (NotFoundException $e) {
+            return false;
         } catch (InvalidTypeException $e) {
             return false;
         }
@@ -142,11 +166,11 @@ class SmbAdapter extends AbstractAdapter
     public function deleteDir($path)
     {
         $this->deleteContents($path);
-        
-        $fullPath = $this->applyPathPrefix($path);
+
+        $location = $this->applyPathPrefix($path);
 
         try {
-            $this->share->rmdir($fullPath);
+            $this->share->rmdir($location);
         } catch (NotFoundException $e) {
             return false;
         } catch (InvalidTypeException $e) {
@@ -165,17 +189,31 @@ class SmbAdapter extends AbstractAdapter
      */
     public function createDir($path, Config $config)
     {
-        $fullPath = $this->applyPathPrefix($path);
+        $this->recursiveCreateDir($path);
 
-        try {
-            $this->share->mkdir($fullPath);
-        } catch (AlreadyExistsException $e) {
-            // That's okay.
-        } catch (NotFoundException $e) {
-            return false;
+        return compact('path');
+    }
+
+    /**
+     * Recursively create directories.
+     *
+     * @param $path
+     */
+    protected function recursiveCreateDir($path)
+    {
+        if ($this->isDirectory($path)) {
+            return;
         }
 
-        return ['path' => $path];
+        $directories = explode($this->pathSeparator, $path);
+        if (count($directories) > 1) {
+            $parentDirectories = array_splice($directories, 0, count($directories) - 1);
+            $this->recursiveCreateDir(implode($this->pathSeparator, $parentDirectories));
+        }
+
+        $location = $this->applyPathPrefix($path);
+
+        $this->share->mkdir($location);
     }
 
     /**
@@ -186,7 +224,15 @@ class SmbAdapter extends AbstractAdapter
      */
     public function has($path)
     {
-        return (bool) $this->getMetadata($path);
+        $location = $this->applyPathPrefix($path);
+
+        try {
+            $this->share->stat($location);
+        } catch (NotFoundException $e) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -197,30 +243,42 @@ class SmbAdapter extends AbstractAdapter
      */
     public function read($path)
     {
-        $fullPath = $this->applyPathPrefix($path);
+        $location = $this->applyPathPrefix($path);
 
-        $stream = $this->share->read($fullPath);
+        try {
+            $stream = $this->share->read($location);
+        } catch (NotFoundException $e) {
+            return false;
+        }
 
-        if (($contents = stream_get_contents($stream)) === false) {
+        $contents = stream_get_contents($stream);
+
+        if ($contents === false) {
             return false;
         }
 
         fclose($stream);
 
-        return compact('contents');
+        return compact('path', 'contents');
     }
 
     /**
      * Read a file as a stream.
      *
      * @param string $path
-     * @return array
+     * @return array|false
      */
     public function readStream($path)
     {
-        $fullPath = $this->applyPathPrefix($path);
+        $location = $this->applyPathPrefix($path);
 
-        return ['stream' => $this->share->read($fullPath)];
+        try {
+            $stream = $this->share->read($location);
+        } catch (NotFoundException $e) {
+            return false;
+        }
+
+        return compact('path', 'stream');
     }
 
     /**
@@ -232,28 +290,27 @@ class SmbAdapter extends AbstractAdapter
      */
     public function listContents($path = '', $recursive = false)
     {
-        $fullPath = $this->applyPathPrefix($path);
+        $location = $this->applyPathPrefix($path);
 
         try {
-            $files = $this->share->dir($this->stripTrailingSeparator($fullPath));
+            $files = $this->share->dir($location);
         } catch (InvalidTypeException $e) {
-            return array();
+            return [];
         } catch (NotFoundException $e) {
-            return false;
+            return [];
         }
 
-        $contents = array();
+        $result = [];
 
         foreach ($files as $file) {
-
-            $contents[] = $this->normalizeFileInfo($file);
+            $result[] = $this->normalizeFileInfo($file);
 
             if ($file->isDirectory() && $recursive) {
-                $contents = array_merge($contents, $this->listContents($this->getFilePath($file), true));
+                $result = array_merge($result, $this->listContents($this->getFilePath($file), true));
             }
         }
 
-        return $contents;
+        return $result;
     }
 
     /**
@@ -264,10 +321,10 @@ class SmbAdapter extends AbstractAdapter
      */
     public function getMetadata($path)
     {
-        $fullPath = $this->applyPathPrefix($path);
+        $location = $this->applyPathPrefix($path);
 
         try {
-            $file = $this->share->stat($fullPath);
+            $file = $this->share->stat($location);
         } catch (NotFoundException $e) {
             return false;
         }
@@ -294,7 +351,9 @@ class SmbAdapter extends AbstractAdapter
      */
     public function getMimetype($path)
     {
-        if (!$metadata = $this->read($path)) {
+        $metadata = $this->read($path);
+
+        if ($metadata === false) {
             return false;
         }
 
@@ -328,7 +387,7 @@ class SmbAdapter extends AbstractAdapter
             'timestamp' => $file->getMTime()
         ];
 
-        if ($normalized['type'] === 'file') {
+        if (!$file->isDirectory()) {
             $normalized['size'] = $file->getSize();
         }
 
@@ -343,18 +402,9 @@ class SmbAdapter extends AbstractAdapter
      */
     protected function getFilePath(IFileInfo $file)
     {
-        return $this->removePathPrefix(ltrim($file->getPath(), $this->pathSeparator));
-    }
+        $location = $file->getPath();
 
-    /**
-     * Strip any trailing separators from a path.
-     *
-     * @param string $path
-     * @return string
-     */
-    protected function stripTrailingSeparator($path)
-    {
-        return rtrim($path, $this->pathSeparator);
+        return $this->removePathPrefix($location);
     }
 
     /**
@@ -364,18 +414,39 @@ class SmbAdapter extends AbstractAdapter
      */
     protected function deleteContents($path)
     {
-        $contents = $this->listContents($path, true) ?: array();
+        $contents = $this->listContents($path, true);
 
         foreach (array_reverse($contents) as $object) {
-
-            $fullPath = $this->applyPathPrefix($object['path']);
+            $location = $this->applyPathPrefix($object['path']);
 
             if ($object['type'] === 'dir') {
-                $this->share->rmdir($fullPath);
+                $this->share->rmdir($location);
             } else {
-                $this->share->del($fullPath);
+                $this->share->del($location);
             }
         }
     }
 
+    /**
+     * Determine if the specified path is a directory.
+     *
+     * @param string $path
+     * @return bool
+     */
+    protected function isDirectory($path)
+    {
+        $location = $this->applyPathPrefix($path);
+
+        if (empty($location)) {
+            return true;
+        }
+
+        try {
+            $file = $this->share->stat($location);
+        } catch (NotFoundException $e) {
+            return false;
+        }
+
+        return $file->isDirectory();
+    }
 }
