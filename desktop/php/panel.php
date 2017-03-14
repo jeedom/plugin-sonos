@@ -20,13 +20,12 @@ $parentNumber = array();
 
 <div class="row row-overflow">
     <?php
-if ($_SESSION['user']->getOptions('displayObjetByDefault') == 1) {
+if ($_SESSION['user']->getOptions('displayObjetByDefault') == 1 && init('report') != 1) {
 	echo '<div class="col-lg-2 col-md-3 col-sm-4" id="div_displayObjectList">';
 } else {
 	echo '<div class="col-lg-2 col-md-3 col-sm-4" style="display:none;" id="div_displayObjectList">';
 }
 ?>
-
     <div class="bs-sidebar">
         <ul id="ul_object" class="nav nav-list bs-sidenav">
             <li class="nav-header">{{Liste objets}} </li>
@@ -47,13 +46,13 @@ foreach ($allObject as $object_li) {
     </div>
 </div>
 <?php
-if ($_SESSION['user']->getOptions('displayObjetByDefault') == 1) {
+if ($_SESSION['user']->getOptions('displayObjetByDefault') == 1 && init('report') != 1) {
 	echo '<div class="col-lg-10 col-md-9 col-sm-8" id="div_displayObject">';
 } else {
 	echo '<div class="col-lg-12 col-md-12 col-sm-12" id="div_displayObject">';
 }
 ?>
-<i class='fa fa-picture-o cursor pull-left' id='bt_displayObject' data-display='<?php echo $_SESSION['user']->getOptions('displayObjetByDefault') ?>' title="Afficher/Masquer les objets"></i>
+<i class='fa fa-picture-o cursor pull-left reportModeHidden' id='bt_displayObject' data-display='<?php echo $_SESSION['user']->getOptions('displayObjetByDefault') ?>' title="Afficher/Masquer les objets"></i>
 <br/>
 <?php
 echo '<div class="div_displayEquipement" style="width: 100%;">';
