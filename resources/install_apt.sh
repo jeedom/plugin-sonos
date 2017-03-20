@@ -1,11 +1,15 @@
-touch /tmp/dependancy_sonos_in_progress
-echo 0 > /tmp/dependancy_sonos_in_progress
+PROGRESS_FILE=/tmp/dependancy_camera_in_progress
+if [ ! -z $1 ]; then
+	PROGRESS_FILE=$1
+fi
+touch ${PROGRESS_FILE}
+echo 0 > ${PROGRESS_FILE}
 echo "Launch install of sonos dependancy"
 sudo apt-get clean
-echo 30 > /tmp/dependancy_sonos_in_progress
+echo 30 > ${PROGRESS_FILE}
 sudo apt-get update
-echo 50 > /tmp/dependancy_sonos_in_progress
+echo 50 > ${PROGRESS_FILE}
 sudo apt-get install -y smbclient
-echo 100 > /tmp/dependancy_sonos_in_progress
+echo 100 > ${PROGRESS_FILE}
 echo "Everything is successfully installed!"
-rm /tmp/dependancy_sonos_in_progress
+rm ${PROGRESS_FILE}
