@@ -836,6 +836,10 @@ class sonos3 extends eqLogic {
 		$controller->getQueue()->addTrack($track);
 	}
 
+	public function getImage() {
+		return 'plugins/sonos3/core/img/' . $this->getConfiguration('model') . '.jpg';
+	}
+
 	/*     * **********************Getteur Setteur*************************** */
 }
 
