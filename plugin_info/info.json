@@ -9,6 +9,5 @@
 	"hasDependency" : true,
 	"hasOwnDeamon" : true,
 	"display" : "panel",
-	"mobile" : "panel",
-	"include" : {"type" : "php" , "file" : "sonos3.inc" }
+	"mobile" : "panel"
 }

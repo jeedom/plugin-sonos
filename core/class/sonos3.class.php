@@ -18,6 +18,7 @@
 
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Speaker;
 use duncan3dc\Sonos\Tracks\TextToSpeech;
