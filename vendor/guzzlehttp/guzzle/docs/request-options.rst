@@ -438,7 +438,7 @@ force_ip_resolve
 
     This setting must be supported by the HTTP handler used to send a request.
     ``force_ip_resolve`` is currently only supported by the built-in cURL
-    handler.
+    and stream handlers.
 
 
 form_params
@@ -494,8 +494,8 @@ headers
 
 Headers may be added as default options when creating a client. When headers
 are used as default options, they are only applied if the request being created
-does not already contain the specific header. This include both requests passed
-to the client in the ``send()`` and ``sendAsync()`` methods and requests
+does not already contain the specific header. This includes both requests passed
+to the client in the ``send()`` and ``sendAsync()`` methods, and requests
 created by the client (e.g., ``request()`` and ``requestAsync()``).
 
 .. code-block:: php

@@ -61,12 +61,12 @@ abstract class BaseFileCacheTest extends CacheTest
         // Windows officially supports 260 bytes including null terminator
         // 259 characters is too large due to PHP bug (https://bugs.php.net/bug.php?id=70943)
         // 260 characters is too large - null terminator is included in allowable length
-        return [
-            [257, false],
-            [258, false],
-            [259, true],
-            [260, true]
-        ];
+        return array(
+            array(257, false),
+            array(258, false),
+            array(259, true),
+            array(260, true)
+        );
     }
 
     private static function getBasePathForWindowsPathLengthTests($pathLength)
@@ -111,7 +111,7 @@ abstract class BaseFileCacheTest extends CacheTest
             . '_' . $keyHash
             . '.doctrine.cache';
 
-        return [$key, $keyPath, $hashedKeyPath];
+        return array($key, $keyPath, $hashedKeyPath);
     }
 
     /**

@@ -12,20 +12,21 @@
         "role": "Developer"
     }],
     "require": {
-        "doctrine/cache": "^1.4",
         "duncan3dc/domparser": "^1.4.1",
+        "duncan3dc/logger-aware-trait": "^0.1.0",
         "duncan3dc/speaker": "^0.7.0",
         "guzzlehttp/guzzle": "^6.0",
         "league/flysystem": "^1.0",
+        "psr/simple-cache": "1.0.0",
         "psr/log": "1.0.0",
         "ext-soap": "*",
         "ext-sockets": "*",
-        "php": "^5.6|^7.0"
+        "php": "^7.0"
     },
     "require-dev": {
         "duncan3dc/object-intruder": "^0.1.0",
-        "mockery/mockery": "^0.9.4",
-        "phpunit/phpunit": "^5.7.14"
+        "mockery/mockery": "1.0.x-dev",
+        "phpunit/phpunit": "^6.0"
     },
     "autoload": {
         "psr-4": {

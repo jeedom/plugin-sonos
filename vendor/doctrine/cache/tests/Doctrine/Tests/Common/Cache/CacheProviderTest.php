@@ -2,8 +2,6 @@
 
 namespace Doctrine\Tests\Common\Cache;
 
-use Doctrine\Common\Cache\CacheProvider;
-
 class CacheProviderTest extends \Doctrine\Tests\DoctrineTestCase
 {
     public function testFetchMultiWillFilterNonRequestedKeys()
@@ -11,26 +9,26 @@ class CacheProviderTest extends \Doctrine\Tests\DoctrineTestCase
         /* @var $cache \Doctrine\Common\Cache\CacheProvider|\PHPUnit_Framework_MockObject_MockObject */
         $cache = $this->getMockForAbstractClass(
             'Doctrine\Common\Cache\CacheProvider',
-            [],
+            array(),
             '',
             true,
             true,
             true,
-            ['doFetchMultiple']
+            array('doFetchMultiple')
         );
 
         $cache
             ->expects($this->once())
             ->method('doFetchMultiple')
-            ->will($this->returnValue([
+            ->will($this->returnValue(array(
                 '[foo][1]' => 'bar',
                 '[bar][1]' => 'baz',
                 '[baz][1]' => 'tab',
-            ]));
+            )));
 
         $this->assertEquals(
-            ['foo' => 'bar', 'bar' => 'baz'],
-            $cache->fetchMultiple(['foo', 'bar'])
+            array('foo' => 'bar', 'bar' => 'baz'),
+            $cache->fetchMultiple(array('foo', 'bar'))
         );
     }
 
@@ -39,12 +37,12 @@ class CacheProviderTest extends \Doctrine\Tests\DoctrineTestCase
         /* @var $cache \Doctrine\Common\Cache\CacheProvider|\PHPUnit_Framework_MockObject_MockObject */
         $cache = $this->getMockForAbstractClass(
             'Doctrine\Common\Cache\CacheProvider',
-            [],
+            array(),
             '',
             true,
             true,
             true,
-            ['doFetch', 'doSave', 'doContains']
+            array('doFetch', 'doSave', 'doContains')
         );
 
         $cache
@@ -77,12 +75,12 @@ class CacheProviderTest extends \Doctrine\Tests\DoctrineTestCase
         /* @var $cache \Doctrine\Common\Cache\CacheProvider|\PHPUnit_Framework_MockObject_MockObject */
         $cache = $this->getMockForAbstractClass(
             'Doctrine\Common\Cache\CacheProvider',
-            [],
+            array(),
             '',
             true,
             true,
             true,
-            ['doSave']
+            array('doSave')
         );
 
         $cache
@@ -97,32 +95,9 @@ class CacheProviderTest extends \Doctrine\Tests\DoctrineTestCase
             ->with('[kok][1]', 'vok', 0)
             ->will($this->returnValue(true));
 
-        $cache->saveMultiple([
+        $cache->saveMultiple(array(
             'kerr'  => 'verr',
             'kok'   => 'vok',
-        ]);
-    }
-
-    public function testDeleteMultipleNoFail()
-    {
-        /* @var $cache \Doctrine\Common\Cache\CacheProvider|\PHPUnit_Framework_MockObject_MockObject */
-        $cache = $this
-            ->getMockBuilder(CacheProvider::class)
-            ->setMethods(['doDelete'])
-            ->getMockForAbstractClass();
-
-        $cache
-            ->expects($this->at(1))
-            ->method('doDelete')
-            ->with('[kerr][1]')
-            ->will($this->returnValue(false));
-
-        $cache
-            ->expects($this->at(2))
-            ->method('doDelete')
-            ->with('[kok][1]')
-            ->will($this->returnValue(true));
-
-        $cache->deleteMultiple(['kerr', 'kok']);
+        ));
     }
 }

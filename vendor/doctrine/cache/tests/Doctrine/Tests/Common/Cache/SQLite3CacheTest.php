@@ -9,7 +9,7 @@ use SQLite3;
 /**
  * @requires extension sqlite3
  */
-class SQLite3CacheTest extends CacheTest
+class SQLite3Test extends CacheTest
 {
     private $file;
     private $sqlite;

@@ -4,6 +4,7 @@ namespace duncan3dc\Sonos\Tracks;
 
 use duncan3dc\Sonos\Directory;
 use duncan3dc\Sonos\Helper;
+use duncan3dc\Sonos\Interfaces\UriInterface;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use duncan3dc\Speaker\Providers\ProviderInterface;
 use duncan3dc\Speaker\TextToSpeech as TextToSpeechHandler;
@@ -33,8 +34,9 @@ class TextToSpeech implements UriInterface
      *
      * @param string $text The text to convert
      * @param Directory $directory The directory to store the audio file in
+     * @param ProviderInterface $provider The tts provider to use
      */
-    public function __construct($text, Directory $directory, ProviderInterface $provider = null)
+    public function __construct(string $text, Directory $directory, ProviderInterface $provider = null)
     {
         $this->directory = $directory;
         $this->text = $text;
@@ -45,7 +47,7 @@ class TextToSpeech implements UriInterface
     }
 
 
-    public function setProvider(ProviderInterface $provider)
+    public function setProvider(ProviderInterface $provider): self
     {
         $this->provider = $provider;
 
@@ -53,7 +55,7 @@ class TextToSpeech implements UriInterface
     }
 
 
-    public function getProvider()
+    public function getProvider(): ProviderInterface
     {
         if ($this->provider === null) {
             $this->provider = new GoogleProvider;
@@ -68,9 +70,9 @@ class TextToSpeech implements UriInterface
      *
      * @param string $language The language to use (eg 'en')
      *
-     * @return static
+     * @return $this
      */
-    public function setLanguage($language)
+    public function setLanguage(string $language): self
     {
         $this->getProvider()->setLanguage($language);
 
@@ -85,7 +87,7 @@ class TextToSpeech implements UriInterface
      *
      * @return string
      */
-    public function getUri()
+    public function getUri(): string
     {
         $provider = $this->getProvider();
         $tts = new TextToSpeechHandler($this->text, $provider);
@@ -106,7 +108,7 @@ class TextToSpeech implements UriInterface
      *
      * @return string
      */
-    public function getMetaData()
+    public function getMetaData(): string
     {
         return Helper::createMetaDataXml("-1", "-1", [
             "res"               =>  $this->getUri(),

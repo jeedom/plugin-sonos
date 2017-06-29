@@ -4,50 +4,24 @@ namespace duncan3dc\Sonos;
 
 use duncan3dc\DomParser\XmlParser;
 use duncan3dc\Sonos\Exceptions\SoapException;
+use duncan3dc\Sonos\Interfaces\ControllerInterface;
+use duncan3dc\Sonos\Interfaces\NetworkInterface;
+use duncan3dc\Sonos\Interfaces\QueueInterface;
+use duncan3dc\Sonos\Interfaces\SpeakerInterface;
+use duncan3dc\Sonos\Interfaces\StateInterface;
+use duncan3dc\Sonos\Interfaces\UriInterface;
 use duncan3dc\Sonos\Tracks\Stream;
-use duncan3dc\Sonos\Tracks\UriInterface;
+use duncan3dc\Sonos\Utils\Time;
 
 /**
  * Allows interaction with the groups of speakers.
  *
  * Although sometimes a Controller is synonymous with a Speaker, when speakers are grouped together only the coordinator can receive events (play/pause/etc)
  */
-class Controller extends Speaker
+class Controller extends Speaker implements ControllerInterface
 {
     /**
-     * No music playing, but not paused.
-     *
-     * This is a rare state, but can be encountered after an upgrade, or if the queue was cleared
-     */
-    const STATE_STOPPED = 201;
-
-    /**
-     * Currently plating music.
-     */
-    const STATE_PLAYING = 202;
-
-    /**
-     * Music is currently paused.
-     */
-    const STATE_PAUSED = 203;
-
-    /**
-     * The speaker is currently working on either playing or pausing.
-     *
-     * Check it's state again in a second or two
-     */
-    const STATE_TRANSITIONING = 204;
-
-    /**
-     * The speaker is in an unknown state.
-     *
-     * This should only happen if Sonos introduce a new state that this code has not been updated to handle.
-     */
-    const STATE_UNKNOWN = 205;
-
-
-    /**
-     * @var Network $network The network instance this Controller is part of.
+     * @var NetworkInterface $network The network instance this Controller is part of.
      */
     protected $network;
 
@@ -57,14 +31,14 @@ class Controller extends Speaker
      *
      * The speaker must be a coordinator.
      *
-     * @param Speaker $speaker
+     * @param SpeakerInterface $speaker
      */
-    public function __construct(Speaker $speaker, Network $network)
+    public function __construct(SpeakerInterface $speaker, NetworkInterface $network)
     {
         if (!$speaker->isCoordinator()) {
             throw new \InvalidArgumentException("You cannot create a Controller instance from a Speaker that is not the coordinator of it's group");
         }
-        $this->ip = $speaker->ip;
+        $this->ip = $speaker->getIp();
         $this->device = $speaker->device;
 
         $this->network = $network;
@@ -78,12 +52,12 @@ class Controller extends Speaker
     /**
      * Check if this speaker is the coordinator of it's current group.
      *
-     * This method is only here to override the method from the Speaker class.
+     * This method is only here to override the method from the SpeakerInterface class.
      * A Controller instance is always the coordinator of it's group.
      *
      * @return bool
      */
-    public function isCoordinator()
+    public function isCoordinator(): bool
     {
         return true;
     }
@@ -94,7 +68,7 @@ class Controller extends Speaker
      *
      * @return string
      */
-    public function getStateName()
+    public function getStateName(): string
     {
         $data = $this->soap("AVTransport", "GetTransportInfo");
         return $data["CurrentTransportState"];
@@ -106,7 +80,7 @@ class Controller extends Speaker
      *
      * @return int One of the class STATE_ constants
      */
-    public function getState()
+    public function getState(): int
     {
         $name = $this->getStateName();
         switch ($name) {
@@ -126,16 +100,16 @@ class Controller extends Speaker
     /**
      * Get attributes about the currently active track in the queue.
      *
-     * @return State Track data containing the following elements
+     * @return StateInterface
      */
-    public function getStateDetails()
+    public function getStateDetails(): StateInterface
     {
         $data = $this->soap("AVTransport", "GetPositionInfo");
 
         # Check for line in mode
         if ($data["TrackMetaData"] === "NOT_IMPLEMENTED") {
             $state = new State($data["TrackURI"]);
-            $state->stream = "Line-In";
+            $state->setStream(new Stream("x-rincon-stream:" . $this->getUuid(), "Line-In"));
             return $state;
         }
 
@@ -149,18 +123,21 @@ class Controller extends Speaker
 
         if ((string) $parser->getTag("streamContent")) {
             $info = $this->getMediaInfo();
-            if (!$state->stream = (string) (new XmlParser($info["CurrentURIMetaData"]))->getTag("title")) {
-                $state->stream = (string) $parser->getTag("title");
+            $meta = new XmlParser($info["CurrentURIMetaData"]);
+            if ($title = (string) $meta->getTag("title")) {
+                $state->setStream(new Stream("", $title));
+            } else {
+                $state->setStream = new Stream("", $parser->getTag("title"));
             }
         }
 
-        $state->queueNumber = (int) $data["Track"];
-        $state->duration = $data["TrackDuration"];
-        $state->position = $data["RelTime"];
+        $state->setNumber($data["Track"]);
+        $state->setDuration(Time::parse($data["TrackDuration"]));
+        $state->setPosition(Time::parse($data["RelTime"]));
 
         # If we have a queue number, it'll be one-based, rather than zero-based, so convert it
-        if ($state->queueNumber > 0) {
-            $state->queueNumber--;
+        if ($state->getNumber() > 0) {
+            $state->setNumber($state->getNumber() - 1);
         }
 
         return $state;
@@ -172,9 +149,9 @@ class Controller extends Speaker
      *
      * @param int $state One of the class STATE_ constants
      *
-     * @return static
+     * @return $this
      */
-    public function setState($state)
+    public function setState(int $state): ControllerInterface
     {
         switch ($state) {
             case self::STATE_PLAYING:
@@ -191,9 +168,9 @@ class Controller extends Speaker
     /**
      * Start playing the active music for this group.
      *
-     * @return static
+     * @return $this
      */
-    public function play()
+    public function play(): ControllerInterface
     {
         try {
             $this->soap("AVTransport", "Play", [
@@ -213,9 +190,9 @@ class Controller extends Speaker
     /**
      * Pause the group.
      *
-     * @return static
+     * @return $this
      */
-    public function pause()
+    public function pause(): ControllerInterface
     {
         $this->soap("AVTransport", "Pause");
 
@@ -226,9 +203,9 @@ class Controller extends Speaker
     /**
      * Skip to the next track in the current queue.
      *
-     * @return static
+     * @return $this
      */
-    public function next()
+    public function next(): ControllerInterface
     {
         $this->soap("AVTransport", "Next");
 
@@ -239,9 +216,9 @@ class Controller extends Speaker
     /**
      * Skip back to the previous track in the current queue.
      *
-     * @return static
+     * @return $this
      */
-    public function previous()
+    public function previous(): ControllerInterface
     {
         $this->soap("AVTransport", "Previous");
 
@@ -254,9 +231,9 @@ class Controller extends Speaker
      *
      * @param int $position The zero-based position of the track to skip to
      *
-     * @return static
+     * @return $this
      */
-    public function selectTrack($position)
+    public function selectTrack(int $position): ControllerInterface
     {
         $this->soap("AVTransport", "Seek", [
             "Unit"      =>  "TRACK_NR",
@@ -270,20 +247,15 @@ class Controller extends Speaker
     /**
      * Seeks to a specific position within the current track.
      *
-     * @param int $seconds The number of seconds to position to in the track
+     * @param Time $position The position to seek to in the track
      *
-     * @return static
+     * @return $this
      */
-    public function seek($seconds)
+    public function seek(Time $position): ControllerInterface
     {
-        $minutes = floor($seconds / 60);
-        $seconds = $seconds % 60;
-        $hours = floor($minutes / 60);
-        $minutes = $minutes % 60;
-
         $this->soap("AVTransport", "Seek", [
             "Unit"      =>  "REL_TIME",
-            "Target"    =>  sprintf("%02s:%02s:%02s", $hours, $minutes, $seconds),
+            "Target"    =>  $position->asString(),
         ]);
 
         return $this;
@@ -295,7 +267,7 @@ class Controller extends Speaker
      *
      * @return array
      */
-    public function getMediaInfo()
+    public function getMediaInfo(): array
     {
         return $this->soap("AVTransport", "GetMediaInfo");
     }
@@ -306,7 +278,7 @@ class Controller extends Speaker
      *
      * @return bool
      */
-    public function isStreaming()
+    public function isStreaming(): bool
     {
         $media = $this->getMediaInfo();
 
@@ -336,9 +308,9 @@ class Controller extends Speaker
      *
      * @param Stream $stream The Stream object to play
      *
-     * @return static
+     * @return $this
      */
-    public function useStream(Stream $stream)
+    public function useStream(Stream $stream): ControllerInterface
     {
         $this->soap("AVTransport", "SetAVTransportURI", [
             "CurrentURI"            =>  $stream->getUri(),
@@ -354,11 +326,11 @@ class Controller extends Speaker
      *
      * If no speaker is passed then the current controller's is used.
      *
-     * @param Speaker|null $speaker The speaker to get the line-in from
+     * @param SpeakerInterface|null $speaker The speaker to get the line-in from
      *
      * @return static
      */
-    public function useLineIn(Speaker $speaker = null)
+    public function useLineIn(SpeakerInterface $speaker = null): ControllerInterface
     {
         if ($speaker === null) {
             $speaker = $this;
@@ -376,7 +348,7 @@ class Controller extends Speaker
      *
      * @return bool
      */
-    public function isUsingQueue()
+    public function isUsingQueue(): bool
     {
         $media = $this->getMediaInfo();
 
@@ -387,9 +359,9 @@ class Controller extends Speaker
     /**
      * Set this controller to use its queue (rather than a stream).
      *
-     * @return static
+     * @return $this
      */
-    public function useQueue()
+    public function useQueue(): ControllerInterface
     {
         $this->soap("AVTransport", "SetAVTransportURI", [
             "CurrentURI"            =>  "x-rincon-queue:" . $this->getUuid() . "#0",
@@ -403,9 +375,9 @@ class Controller extends Speaker
     /**
      * Get the speakers that are in the group of this controller.
      *
-     * @return Speaker[]
+     * @return SpeakerInterface[]
      */
-    public function getSpeakers()
+    public function getSpeakers(): array
     {
         $group = [];
         $speakers = $this->network->getSpeakers();
@@ -421,21 +393,26 @@ class Controller extends Speaker
     /**
      * Adds the specified speaker to the group of this Controller.
      *
-     * @param Speaker $speaker The speaker to add to the group
+     * @param SpeakerInterface $speaker The speaker to add to the group
      *
-     * @return static
+     * @return $this
      */
-    public function addSpeaker(Speaker $speaker)
+    public function addSpeaker(SpeakerInterface $speaker): ControllerInterface
     {
         if ($speaker->getUuid() === $this->getUuid()) {
             return $this;
         }
+
         $speaker->soap("AVTransport", "SetAVTransportURI", [
             "CurrentURI"            =>  "x-rincon:" . $this->getUuid(),
             "CurrentURIMetaData"    =>  "",
         ]);
 
-        $this->network->clearTopology();
+        $speaker->setTopology([
+            "uuid"          =>  $speaker->getUuid(),
+            "group"         =>  $this->getGroup(),
+            "coordinator"   =>  "false",
+        ]);
 
         return $this;
     }
@@ -444,15 +421,15 @@ class Controller extends Speaker
     /**
      * Removes the specified speaker from the group of this Controller.
      *
-     * @param Speaker $speaker The speaker to remove from the group
+     * @param SpeakerInterface $speaker The speaker to remove from the group
      *
-     * @return static
+     * @return $this
      */
-    public function removeSpeaker(Speaker $speaker)
+    public function removeSpeaker(SpeakerInterface $speaker): ControllerInterface
     {
         $speaker->soap("AVTransport", "BecomeCoordinatorOfStandaloneGroup");
 
-        $this->network->clearTopology();
+        $speaker->clearTopology();
 
         return $this;
     }
@@ -463,9 +440,9 @@ class Controller extends Speaker
      *
      * @param int $volume An amount between 0 and 100
      *
-     * @return static
+     * @return $this
      */
-    public function setVolume($volume)
+    public function setVolume(int $volume): SpeakerInterface
     {
         $speakers = $this->getSpeakers();
         foreach ($speakers as $speaker) {
@@ -481,9 +458,9 @@ class Controller extends Speaker
      *
      * @param int $adjust A relative amount between -100 and 100
      *
-     * @return static
+     * @return $this
      */
-    public function adjustVolume($adjust)
+    public function adjustVolume(int $adjust): SpeakerInterface
     {
         $speakers = $this->getSpeakers();
         foreach ($speakers as $speaker) {
@@ -499,7 +476,7 @@ class Controller extends Speaker
      *
      * @return array An array with 2 boolean elements (shuffle and repeat)
      */
-    public function getMode()
+    public function getMode(): array
     {
         $data = $this->soap("AVTransport", "GetTransportSettings");
         return Helper::getMode($data["PlayMode"]);
@@ -511,9 +488,9 @@ class Controller extends Speaker
      *
      * @param array $options An array with 2 boolean elements (shuffle and repeat)
      *
-     * @return static
+     * @return $this
      */
-    public function setMode(array $options)
+    public function setMode(array $options): ControllerInterface
     {
         $this->soap("AVTransport", "SetPlayMode", [
             "NewPlayMode"   =>  Helper::setMode($options),
@@ -530,7 +507,7 @@ class Controller extends Speaker
      *
      * @return bool
      */
-    protected function getPlayMode($type)
+    protected function getPlayMode(string $type): bool
     {
         $mode = $this->getMode();
         return $mode[$type];
@@ -543,9 +520,9 @@ class Controller extends Speaker
      * @param string $type The play mode attribute to update
      * @param bool $value The value to set the attribute to
      *
-     * @return static
+     * @return $this
      */
-    protected function setPlayMode($type, $value)
+    protected function setPlayMode(string $type, bool $value): ControllerInterface
     {
         $value = (bool) $value;
 
@@ -566,7 +543,7 @@ class Controller extends Speaker
      *
      * @return bool
      */
-    public function getRepeat()
+    public function getRepeat(): bool
     {
         return $this->getPlayMode("repeat");
     }
@@ -577,9 +554,9 @@ class Controller extends Speaker
      *
      * @param bool $repeat Whether repeat should be on or not
      *
-     * @return static
+     * @return $this
      */
-    public function setRepeat($repeat)
+    public function setRepeat(bool $repeat): ControllerInterface
     {
         return $this->setPlayMode("repeat", $repeat);
     }
@@ -590,7 +567,7 @@ class Controller extends Speaker
      *
      * @return bool
      */
-    public function getShuffle()
+    public function getShuffle(): bool
     {
         return $this->getPlayMode("shuffle");
     }
@@ -601,9 +578,9 @@ class Controller extends Speaker
      *
      * @param bool $shuffle Whether shuffle should be on or not
      *
-     * @return static
+     * @return $this
      */
-    public function setShuffle($shuffle)
+    public function setShuffle(bool $shuffle): ControllerInterface
     {
         return $this->setPlayMode("shuffle", $shuffle);
     }
@@ -614,7 +591,7 @@ class Controller extends Speaker
      *
      * @return bool
      */
-    public function getCrossfade()
+    public function getCrossfade(): bool
     {
         return (bool) $this->soap("AVTransport", "GetCrossfadeMode");
     }
@@ -625,9 +602,9 @@ class Controller extends Speaker
      *
      * @param bool $crossfade Whether crossfade should be on or not
      *
-     * @return static
+     * @return $this
      */
-    public function setCrossfade($crossfade)
+    public function setCrossfade(bool $crossfade): ControllerInterface
     {
         $this->soap("AVTransport", "SetCrossfadeMode", [
             "CrossfadeMode" =>  (bool) $crossfade,
@@ -642,7 +619,7 @@ class Controller extends Speaker
      *
      * @return Queue
      */
-    public function getQueue()
+    public function getQueue(): QueueInterface
     {
         return new Queue($this);
     }
@@ -655,7 +632,7 @@ class Controller extends Speaker
      *
      * @return ControllerState
      */
-    public function exportState($pause = true)
+    public function exportState(bool $pause = true): ControllerState
     {
         if ($pause) {
             $state = $this->getState();
@@ -679,9 +656,9 @@ class Controller extends Speaker
      *
      * @param ControllerState $state The state to be restored
      *
-     * @return static
+     * @return $this
      */
-    public function restoreState(ControllerState $state)
+    public function restoreState(ControllerState $state): ControllerInterface
     {
         $queue = $this->getQueue();
         $queue->clear();
@@ -693,8 +670,7 @@ class Controller extends Speaker
             $this->selectTrack($state->track);
 
             if ($state->position) {
-                list($hours, $minutes, $seconds) = explode(":", $state->position);
-                $time = ((($hours * 60) + $minutes) * 60) + $seconds;
+                $time = Time::parse($state->position);
                 $this->seek($time);
             }
         }
@@ -741,9 +717,9 @@ class Controller extends Speaker
      * @param UriInterface $track The track to play
      * @param int $volume The volume to play the track at
      *
-     * @return static
+     * @return $this
      */
-    public function interrupt(UriInterface $track, $volume = null)
+    public function interrupt(UriInterface $track, int $volume = null): ControllerInterface
     {
         /**
          * Ensure the track has been generated.
@@ -786,9 +762,9 @@ class Controller extends Speaker
     /**
      * Get the network instance used by this controller.
      *
-     * @return Network
+     * @return NetworkInterface
      */
-    public function getNetwork()
+    public function getNetwork(): NetworkInterface
     {
         return $this->network;
     }

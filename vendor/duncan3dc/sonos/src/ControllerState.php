@@ -2,8 +2,9 @@
 
 namespace duncan3dc\Sonos;
 
+use duncan3dc\Sonos\Interfaces\ControllerInterface;
+use duncan3dc\Sonos\Interfaces\TrackInterface;
 use duncan3dc\Sonos\Tracks\Stream;
-use duncan3dc\Sonos\Tracks\Track;
 
 /**
  * Representation of the current state of a controller.
@@ -11,7 +12,7 @@ use duncan3dc\Sonos\Tracks\Track;
 class ControllerState
 {
     /**
-     * @var int One of the Controller STATE_ constants
+     * @var int One of the ControllerInterface::STATE_ constants
      */
     public $state;
 
@@ -46,7 +47,7 @@ class ControllerState
     public $speakers;
 
     /**
-     * @var Track[] $tracks An array of tracks from the queue.
+     * @var TrackInterface[] $tracks An array of tracks from the queue.
      */
     public $tracks;
 
@@ -58,9 +59,9 @@ class ControllerState
     /**
      * Create a ControllerState object.
      *
-     * @param Controller $controller The Controller to grab the state of
+     * @param ControllerInterface $controller The Controller to grab the state of
      */
-    public function __construct(Controller $controller)
+    public function __construct(ControllerInterface $controller)
     {
         $this
             ->getState($controller)
@@ -73,17 +74,17 @@ class ControllerState
     /**
      * Get the current playing attributes (stream/position/etc).
      *
-     * @param Controller $controller The Controller to grab the state of
+     * @param ControllerInterface $controller The Controller to grab the state of
      *
-     * @return static
+     * @return $this
      */
-    protected function getState(Controller $controller)
+    protected function getState(ControllerInterface $controller): self
     {
         $this->state = $controller->getState();
 
         $details = $controller->getStateDetails();
-        $this->track = $details->queueNumber;
-        $this->position = $details->position;
+        $this->track = $details->getNumber();
+        $this->position = $details->getPosition();
 
         return $this;
     }
@@ -92,11 +93,11 @@ class ControllerState
     /**
      * Get the current playing mode (repeat/shuffle/etc).
      *
-     * @param Controller $controller The Controller to grab the state of
+     * @param ControllerInterface $controller The Controller to grab the state of
      *
-     * @return static
+     * @return $this
      */
-    protected function getMode(Controller $controller)
+    protected function getMode(ControllerInterface $controller): self
     {
         $mode = $controller->getMode();
         $this->repeat = $mode["repeat"];
@@ -111,11 +112,11 @@ class ControllerState
     /**
      * Get the current volume of all the speakers in this group.
      *
-     * @param Controller $controller The Controller to grab the state of
+     * @param ControllerInterface $controller The Controller to grab the state of
      *
-     * @return static
+     * @return $this
      */
-    protected function getVolume(Controller $controller)
+    protected function getVolume(ControllerInterface $controller): self
     {
         $this->speakers = [];
         foreach ($controller->getSpeakers() as $speaker) {
@@ -129,11 +130,11 @@ class ControllerState
     /**
      * Get the current tracks in the queue.
      *
-     * @param Controller $controller The Controller to grab the state of
+     * @param ControllerInterface $controller The Controller to grab the state of
      *
-     * @return static
+     * @return $this
      */
-    protected function getTracks(Controller $controller)
+    protected function getTracks(ControllerInterface $controller): self
     {
         $this->tracks = $controller->getQueue()->getTracks();
 

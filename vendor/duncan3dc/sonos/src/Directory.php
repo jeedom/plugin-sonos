@@ -33,7 +33,7 @@ class Directory
      * @param string $share The full path to the share (including the hostname).
      * @param string $directory The name of the directory (to be appended to both $filesystem and $share).
      */
-    public function __construct($filesystem, $share, $directory)
+    public function __construct($filesystem, string $share, string $directory)
     {
         # If a string was passed then convert it to a Filesystem instance
         if (is_string($filesystem)) {
@@ -57,7 +57,7 @@ class Directory
      *
      * @return string
      */
-    public function getSharePath()
+    public function getSharePath(): string
     {
         return "{$this->share}/{$this->directory}";
     }
@@ -70,7 +70,7 @@ class Directory
      *
      * @return bool
      */
-    public function has($file)
+    public function has(string $file): bool
     {
         return $this->filesystem->has("{$this->directory}/{$file}");
     }
@@ -82,11 +82,12 @@ class Directory
      * @param string $file The path to the file
      * @param string $contents The contents to write to the file
      *
-     * @return static
+     * @return $this
      */
-    public function write($file, $contents)
+    public function write(string $file, string $contents): self
     {
         $this->filesystem->write("{$this->directory}/{$file}", $contents);
+
         return $this;
     }
 }

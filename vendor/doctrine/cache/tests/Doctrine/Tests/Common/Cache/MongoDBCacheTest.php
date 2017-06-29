@@ -52,10 +52,7 @@ class MongoDBCacheTest extends CacheTest
     public function testMongoCursorExceptionsDoNotBubbleUp()
     {
         /* @var $collection \MongoCollection|\PHPUnit_Framework_MockObject_MockObject */
-        $collection = $this
-            ->getMockBuilder(\MongoCollection::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $collection = $this->getMock('MongoCollection', array(), array(), '', false);
 
         $collection->expects(self::once())->method('update')->willThrowException(new \MongoCursorException());
 

@@ -2,15 +2,15 @@
 
 namespace Doctrine\Tests\Common\Cache;
 
-use Doctrine\Common\Cache\WinCacheCache;
+use Doctrine\Common\Cache\WincacheCache;
 
 /**
  * @requires extension wincache
  */
-class WinCacheCacheTest extends CacheTest
+class WincacheCacheTest extends CacheTest
 {
     protected function _getCacheDriver()
     {
-        return new WinCacheCache();
+        return new WincacheCache();
     }
 }

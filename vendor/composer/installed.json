@@ -6,12 +6,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "9e5ae123c8a65b8b23af99aaef16db1427dbee84"
+            "reference": "e72817b107fa81fed42843f66e1c2e4934b5bbae"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/9e5ae123c8a65b8b23af99aaef16db1427dbee84",
-            "reference": "9e5ae123c8a65b8b23af99aaef16db1427dbee84",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/e72817b107fa81fed42843f66e1c2e4934b5bbae",
+            "reference": "e72817b107fa81fed42843f66e1c2e4934b5bbae",
             "shasum": ""
         },
         "require": {
@@ -32,7 +32,6 @@
             "league/flysystem-aws-s3-v3": "Allows you to use S3 storage with AWS SDK v3",
             "league/flysystem-azure": "Allows you to use Windows Azure Blob storage",
             "league/flysystem-cached-adapter": "Flysystem adapter decorator for metadata caching",
-            "league/flysystem-copy": "Allows you to use Copy.com storage",
             "league/flysystem-eventable-filesystem": "Allows you to use EventableFilesystem",
             "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
             "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
@@ -40,7 +39,7 @@
             "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter",
             "spatie/flysystem-dropbox": "Allows you to use Dropbox storage"
         },
-        "time": "2017-04-19 12:26:35",
+        "time": "2017-06-08T13:44:14+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -99,7 +98,7 @@
             "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
             "shasum": ""
         },
-        "time": "2012-12-21 11:40:51",
+        "time": "2012-12-21T11:40:51+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -142,7 +141,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-08-06 14:39:51",
+        "time": "2016-08-06T14:39:51+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -183,12 +182,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/psr7.git",
-            "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+            "reference": "526d8ef63e8701e02216b621e4a3a16085e2286f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-            "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/526d8ef63e8701e02216b621e4a3a16085e2286f",
+            "reference": "526d8ef63e8701e02216b621e4a3a16085e2286f",
             "shasum": ""
         },
         "require": {
@@ -201,7 +200,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2017-03-20 17:10:46",
+        "time": "2017-06-19T13:30:27+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -244,18 +243,128 @@
         ]
     },
     {
-        "name": "guzzlehttp/guzzle",
+        "name": "duncan3dc/domparser",
+        "version": "1.4.1",
+        "version_normalized": "1.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/domparser.git",
+            "reference": "30d212e4fc06ef808fbab12b8474e718d4152307"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/domparser/zipball/30d212e4fc06ef808fbab12b8474e718d4152307",
+            "reference": "30d212e4fc06ef808fbab12b8474e718d4152307",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-dom": "*",
+            "ext-libxml": "*",
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8"
+        },
+        "time": "2015-09-09T19:17:14+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "duncan3dc\\DomParser\\": "src/",
+                "duncan3dc\\DomParserTests\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Craig Duncan",
+                "email": "git@duncanc.co.uk",
+                "homepage": "https://github.com/duncan3dc",
+                "role": "Developer"
+            }
+        ],
+        "description": "Wrappers for the standard DOMDocument class to provide extra functionality for html/xml parsing",
+        "homepage": "https://github.com/duncan3dc/domparser",
+        "keywords": [
+            "domdocument",
+            "generation",
+            "html",
+            "parser",
+            "parsing",
+            "writer",
+            "xml"
+        ]
+    },
+    {
+        "name": "guzzlehttp/promises",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "b517bd912afa5aa1033ce434d7138641fd6c31ab"
+            "url": "https://github.com/guzzle/promises.git",
+            "reference": "09e549f5534380c68761260a71f847644d8f65aa"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b517bd912afa5aa1033ce434d7138641fd6c31ab",
-            "reference": "b517bd912afa5aa1033ce434d7138641fd6c31ab",
+            "url": "https://api.github.com/repos/guzzle/promises/zipball/09e549f5534380c68761260a71f847644d8f65aa",
+            "reference": "09e549f5534380c68761260a71f847644d8f65aa",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.0"
+        },
+        "time": "2017-05-20T23:14:18+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\Promise\\": "src/"
+            },
+            "files": [
+                "src/functions_include.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle promises library",
+        "keywords": [
+            "promise"
+        ]
+    },
+    {
+        "name": "guzzlehttp/guzzle",
+        "version": "6.3.0",
+        "version_normalized": "6.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/guzzle.git",
+            "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f4db5a78a5ea468d4831de7f0bf9d9415e348699",
+            "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699",
             "shasum": ""
         },
         "require": {
@@ -265,13 +374,13 @@
         },
         "require-dev": {
             "ext-curl": "*",
-            "phpunit/phpunit": "^4.0",
+            "phpunit/phpunit": "^4.0 || ^5.0",
             "psr/log": "^1.0"
         },
         "suggest": {
             "psr/log": "Required for using the Log middleware"
         },
-        "time": "2017-04-07 20:03:48",
+        "time": "2017-06-22T18:50:49+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -311,36 +420,87 @@
         ]
     },
     {
-        "name": "duncan3dc/domparser",
-        "version": "1.4.1",
-        "version_normalized": "1.4.1.0",
+        "name": "symfony/process",
+        "version": "2.8.x-dev",
+        "version_normalized": "2.8.9999999.9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/duncan3dc/domparser.git",
-            "reference": "30d212e4fc06ef808fbab12b8474e718d4152307"
+            "url": "https://github.com/symfony/process.git",
+            "reference": "d54232f5682fda2f8bbebff7c81b864646867ab9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/domparser/zipball/30d212e4fc06ef808fbab12b8474e718d4152307",
-            "reference": "30d212e4fc06ef808fbab12b8474e718d4152307",
+            "url": "https://api.github.com/repos/symfony/process/zipball/d54232f5682fda2f8bbebff7c81b864646867ab9",
+            "reference": "d54232f5682fda2f8bbebff7c81b864646867ab9",
             "shasum": ""
         },
         "require": {
-            "ext-curl": "*",
-            "ext-dom": "*",
-            "ext-libxml": "*",
-            "php": ">=5.5.0"
+            "php": ">=5.3.9"
+        },
+        "time": "2017-05-08T01:19:21+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Process\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Process Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "duncan3dc/speaker",
+        "version": "0.7.3",
+        "version_normalized": "0.7.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/speaker.git",
+            "reference": "28fc6f559a2be199d2c0f4bd33581e54c437ae40"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/speaker/zipball/28fc6f559a2be199d2c0f4bd33581e54c437ae40",
+            "reference": "28fc6f559a2be199d2c0f4bd33581e54c437ae40",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "^6.0",
+            "php": "^5.6|^7.0",
+            "symfony/process": "^2.3"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.8"
+            "mockery/mockery": "^0.9.5",
+            "phpunit/phpunit": "^5.5"
         },
-        "time": "2015-09-09 19:17:14",
+        "time": "2017-04-07T08:28:44+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "duncan3dc\\DomParser\\": "src/",
-                "duncan3dc\\DomParserTests\\": "tests/"
+                "duncan3dc\\Speaker\\": "src/",
+                "duncan3dc\\Speaker\\Test\\": "tests/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -355,48 +515,45 @@
                 "role": "Developer"
             }
         ],
-        "description": "Wrappers for the standard DOMDocument class to provide extra functionality for html/xml parsing",
-        "homepage": "https://github.com/duncan3dc/domparser",
+        "description": "Convert text to speech using web services",
+        "homepage": "https://github.com/duncan3dc/speaker",
         "keywords": [
-            "domdocument",
-            "generation",
-            "html",
-            "parser",
-            "parsing",
-            "writer",
-            "xml"
+            "speech",
+            "text-to-speech",
+            "tts"
         ]
     },
     {
         "name": "doctrine/cache",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "1.6.x-dev",
+        "version_normalized": "1.6.9999999.9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/cache.git",
-            "reference": "0da649fce4838f7a6121c501c9a86d4b8921b648"
+            "reference": "b6f544a20f4807e81f7044d31e679ccbb1866dc3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/cache/zipball/0da649fce4838f7a6121c501c9a86d4b8921b648",
-            "reference": "0da649fce4838f7a6121c501c9a86d4b8921b648",
+            "url": "https://api.github.com/repos/doctrine/cache/zipball/b6f544a20f4807e81f7044d31e679ccbb1866dc3",
+            "reference": "b6f544a20f4807e81f7044d31e679ccbb1866dc3",
             "shasum": ""
         },
         "require": {
-            "php": "~5.6|~7.0"
+            "php": "~5.5|~7.0"
         },
         "conflict": {
             "doctrine/common": ">2.2,<2.4"
         },
         "require-dev": {
-            "phpunit/phpunit": "^5.7",
-            "predis/predis": "~1.0"
+            "phpunit/phpunit": "~4.8|~5.0",
+            "predis/predis": "~1.0",
+            "satooshi/php-coveralls": "~0.6"
         },
-        "time": "2017-03-06 14:38:51",
+        "time": "2016-10-29T11:16:17+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.7.x-dev"
+                "dev-master": "1.6.x-dev"
             }
         },
         "installation-source": "source",
@@ -439,41 +596,35 @@
         ]
     },
     {
-        "name": "guzzlehttp/promises",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "name": "icewind/smb",
+        "version": "v2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/guzzle/promises.git",
-            "reference": "73815f322dc2d2aa711f8af41f87d3e9d9246bae"
+            "url": "https://github.com/icewind1991/SMB.git",
+            "reference": "97ea247c5c3db0edbe85cc43eb3850fdc29d8aa6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/promises/zipball/73815f322dc2d2aa711f8af41f87d3e9d9246bae",
-            "reference": "73815f322dc2d2aa711f8af41f87d3e9d9246bae",
+            "url": "https://api.github.com/repos/icewind1991/SMB/zipball/97ea247c5c3db0edbe85cc43eb3850fdc29d8aa6",
+            "reference": "97ea247c5c3db0edbe85cc43eb3850fdc29d8aa6",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.5.0"
+            "icewind/streams": ">=0.2.0",
+            "php": ">=5.4"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.0"
+            "phpunit/phpunit": "^4.8"
         },
-        "time": "2017-03-28 16:54:57",
+        "time": "2017-04-24T13:46:50+00:00",
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.4-dev"
-            }
-        },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "GuzzleHttp\\Promise\\": "src/"
-            },
-            "files": [
-                "src/functions_include.php"
-            ]
+                "Icewind\\SMB\\": "src/",
+                "Icewind\\SMB\\Test\\": "tests/"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -481,15 +632,11 @@
         ],
         "authors": [
             {
-                "name": "Michael Dowling",
-                "email": "mtdowling@gmail.com",
-                "homepage": "https://github.com/mtdowling"
+                "name": "Robin Appelman",
+                "email": "icewind@owncloud.com"
             }
         ],
-        "description": "Guzzle promises library",
-        "keywords": [
-            "promise"
-        ]
+        "description": "php wrapper for smbclient and libsmbclient-php"
     },
     {
         "name": "icewind/streams",
@@ -513,7 +660,7 @@
             "phpunit/phpunit": "^4.8",
             "satooshi/php-coveralls": "v1.0.0"
         },
-        "time": "2016-12-02 14:21:23",
+        "time": "2016-12-02T14:21:23+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -535,121 +682,18 @@
         "description": "A set of generic stream wrappers"
     },
     {
-        "name": "duncan3dc/sonos",
-        "version": "1.9.8",
-        "version_normalized": "1.9.8.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/duncan3dc/sonos.git",
-            "reference": "3a1e8ad1569207e87a74fcd7e5d72e2108f820df"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/3a1e8ad1569207e87a74fcd7e5d72e2108f820df",
-            "reference": "3a1e8ad1569207e87a74fcd7e5d72e2108f820df",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/cache": "^1.4",
-            "duncan3dc/domparser": "^1.4.1",
-            "duncan3dc/speaker": "^0.7.0",
-            "ext-soap": "*",
-            "ext-sockets": "*",
-            "guzzlehttp/guzzle": "^6.0",
-            "league/flysystem": "^1.0",
-            "php": "^5.6|^7.0",
-            "psr/log": "1.0.0"
-        },
-        "require-dev": {
-            "duncan3dc/object-intruder": "^0.1.0",
-            "mockery/mockery": "^0.9.4",
-            "phpunit/phpunit": "^5.7.14"
-        },
-        "time": "2017-02-22 20:04:51",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "duncan3dc\\Sonos\\": "src/",
-                "duncan3dc\\SonosTests\\": "tests/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Craig Duncan",
-                "email": "git@duncanc.co.uk",
-                "homepage": "https://github.com/duncan3dc",
-                "role": "Developer"
-            }
-        ],
-        "description": "Control Sonos speakers using a simple API",
-        "homepage": "https://github.com/duncan3dc/sonos",
-        "keywords": [
-            "sonos",
-            "streaming",
-            "upnp"
-        ]
-    },
-    {
-        "name": "icewind/smb",
-        "version": "v2.0.0",
-        "version_normalized": "2.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/icewind1991/SMB.git",
-            "reference": "95a5ecbaf92617f9800ad7d6070ef31d8ff28c3a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/icewind1991/SMB/zipball/95a5ecbaf92617f9800ad7d6070ef31d8ff28c3a",
-            "reference": "95a5ecbaf92617f9800ad7d6070ef31d8ff28c3a",
-            "shasum": ""
-        },
-        "require": {
-            "icewind/streams": ">=0.2.0",
-            "php": ">=5.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.8"
-        },
-        "time": "2016-12-13 13:56:55",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Icewind\\SMB\\": "src/",
-                "Icewind\\SMB\\Test\\": "tests/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Robin Appelman",
-                "email": "icewind@owncloud.com"
-            }
-        ],
-        "description": "php wrapper for smbclient and libsmbclient-php"
-    },
-    {
         "name": "robgridley/flysystem-smb",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/robgridley/flysystem-smb.git",
-            "reference": "0651b793640811cdf2b89ae7393ffef7d05bf4fd"
+            "reference": "72ca081bd44ae4fa905e3c0c48a2b2a76c1a9b3d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/robgridley/flysystem-smb/zipball/0651b793640811cdf2b89ae7393ffef7d05bf4fd",
-            "reference": "0651b793640811cdf2b89ae7393ffef7d05bf4fd",
+            "url": "https://api.github.com/repos/robgridley/flysystem-smb/zipball/72ca081bd44ae4fa905e3c0c48a2b2a76c1a9b3d",
+            "reference": "72ca081bd44ae4fa905e3c0c48a2b2a76c1a9b3d",
             "shasum": ""
         },
         "require": {
@@ -660,7 +704,7 @@
         "require-dev": {
             "phpspec/phpspec": "^3.2"
         },
-        "time": "2017-03-10 16:24:19",
+        "time": "2017-06-22T23:17:06+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -686,36 +730,36 @@
         ]
     },
     {
-        "name": "duncan3dc/speaker",
-        "version": "0.7.3",
-        "version_normalized": "0.7.3.0",
+        "name": "duncan3dc/logger-aware-trait",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/duncan3dc/speaker.git",
-            "reference": "28fc6f559a2be199d2c0f4bd33581e54c437ae40"
+            "url": "https://github.com/duncan3dc/logger-aware-trait.git",
+            "reference": "fe13e550a5ddcd11085e98d37637adc004db7c40"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/speaker/zipball/28fc6f559a2be199d2c0f4bd33581e54c437ae40",
-            "reference": "28fc6f559a2be199d2c0f4bd33581e54c437ae40",
+            "url": "https://api.github.com/repos/duncan3dc/logger-aware-trait/zipball/fe13e550a5ddcd11085e98d37637adc004db7c40",
+            "reference": "fe13e550a5ddcd11085e98d37637adc004db7c40",
             "shasum": ""
         },
         "require": {
-            "guzzlehttp/guzzle": "^6.0",
-            "php": "^5.6|^7.0",
-            "symfony/process": "^2.3"
+            "php": "^7.0",
+            "psr/log": "1.0.0"
         },
         "require-dev": {
-            "mockery/mockery": "^0.9.5",
-            "phpunit/phpunit": "^5.5"
+            "duncan3dc/object-intruder": "^0.1.0",
+            "mockery/mockery": "^0.9.7",
+            "phpunit/phpunit": "^6.0"
         },
-        "time": "2017-04-07 08:28:44",
+        "time": "2017-02-05T18:42:31+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "duncan3dc\\Speaker\\": "src/",
-                "duncan3dc\\Speaker\\Test\\": "tests/"
+                "duncan3dc\\Log\\": "src/",
+                "duncan3dc\\LogTests\\": "tests/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -730,47 +774,45 @@
                 "role": "Developer"
             }
         ],
-        "description": "Convert text to speech using web services",
-        "homepage": "https://github.com/duncan3dc/speaker",
+        "description": "A PSR-3 trait allowing any class to easily add logger support",
+        "homepage": "https://github.com/duncan3dc/logger-aware-trait",
         "keywords": [
-            "speech",
-            "text-to-speech",
-            "tts"
+            "PHPFIG",
+            "logger",
+            "logging",
+            "psr-3"
         ]
     },
     {
-        "name": "symfony/process",
-        "version": "2.8.x-dev",
-        "version_normalized": "2.8.9999999.9999999-dev",
+        "name": "psr/simple-cache",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/process.git",
-            "reference": "aff35fb3dee799c84a7313c576b72208b046ef8d"
+            "url": "https://github.com/php-fig/simple-cache.git",
+            "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/process/zipball/aff35fb3dee799c84a7313c576b72208b046ef8d",
-            "reference": "aff35fb3dee799c84a7313c576b72208b046ef8d",
+            "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/753fa598e8f3b9966c886fe13f370baa45ef0e24",
+            "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.9"
+            "php": ">=5.3.0"
         },
-        "time": "2017-04-12 14:07:15",
+        "time": "2017-01-02T13:31:39+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.8-dev"
+                "dev-master": "1.0.x-dev"
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Symfony\\Component\\Process\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
+                "Psr\\SimpleCache\\": "src/"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -778,15 +820,78 @@
         ],
         "authors": [
             {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
             }
         ],
-        "description": "Symfony Process Component",
-        "homepage": "https://symfony.com"
+        "description": "Common interfaces for simple caching",
+        "keywords": [
+            "cache",
+            "caching",
+            "psr",
+            "psr-16",
+            "simple-cache"
+        ]
+    },
+    {
+        "name": "duncan3dc/sonos",
+        "version": "2.0.x-dev",
+        "version_normalized": "2.0.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/sonos.git",
+            "reference": "50144e92dfdea637fbf70a41499ba85706fbdccd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/50144e92dfdea637fbf70a41499ba85706fbdccd",
+            "reference": "50144e92dfdea637fbf70a41499ba85706fbdccd",
+            "shasum": ""
+        },
+        "require": {
+            "duncan3dc/domparser": "^1.4.1",
+            "duncan3dc/logger-aware-trait": "^0.1.0",
+            "duncan3dc/speaker": "^0.7.0",
+            "ext-soap": "*",
+            "ext-sockets": "*",
+            "guzzlehttp/guzzle": "^6.0",
+            "league/flysystem": "^1.0",
+            "php": "^7.0",
+            "psr/log": "1.0.0",
+            "psr/simple-cache": "1.0.0"
+        },
+        "require-dev": {
+            "duncan3dc/object-intruder": "^0.1.0",
+            "mockery/mockery": "1.0.x-dev",
+            "phpunit/phpunit": "^6.0"
+        },
+        "time": "2017-06-15T18:31:37+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "duncan3dc\\Sonos\\": "src/",
+                "duncan3dc\\SonosTests\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Craig Duncan",
+                "email": "git@duncanc.co.uk",
+                "homepage": "https://github.com/duncan3dc",
+                "role": "Developer"
+            }
+        ],
+        "description": "Control Sonos speakers using a simple API",
+        "homepage": "https://github.com/duncan3dc/sonos",
+        "keywords": [
+            "sonos",
+            "streaming",
+            "upnp"
+        ]
     }
 ]

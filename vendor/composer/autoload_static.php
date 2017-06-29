@@ -19,6 +19,8 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
             'duncan3dc\\Speaker\\' => 18,
             'duncan3dc\\Sonos\\' => 16,
             'duncan3dc\\SonosTests\\' => 21,
+            'duncan3dc\\Log\\' => 14,
+            'duncan3dc\\LogTests\\' => 19,
             'duncan3dc\\DomParser\\' => 20,
             'duncan3dc\\DomParserTests\\' => 25,
         ),
@@ -32,6 +34,7 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
         ),
         'L' => 
@@ -74,6 +77,14 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
         array (
             0 => __DIR__ . '/..' . '/duncan3dc/sonos/tests',
         ),
+        'duncan3dc\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/duncan3dc/logger-aware-trait/src',
+        ),
+        'duncan3dc\\LogTests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/duncan3dc/logger-aware-trait/tests',
+        ),
         'duncan3dc\\DomParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/duncan3dc/domparser/src',
@@ -89,6 +100,10 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
         'RobGridley\\Flysystem\\Smb\\' => 
         array (
             0 => __DIR__ . '/..' . '/robgridley/flysystem-smb/src',
+        ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (

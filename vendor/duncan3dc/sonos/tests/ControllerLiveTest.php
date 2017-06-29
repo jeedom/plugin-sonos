@@ -14,7 +14,7 @@ class ControllerLiveTest extends LiveTest
         foreach ($this->network->getSpeakers() as $speaker) {
             if ($speaker->isCoordinator()) {
                 $controller = new Controller($speaker, $this->network);
-                $this->assertSame($speaker->ip, $controller->ip);
+                $this->assertSame($speaker->getIp(), $controller->getIp());
                 return;
             }
         }
@@ -25,7 +25,7 @@ class ControllerLiveTest extends LiveTest
 
     public function testConstructor2()
     {
-        $this->setExpectedException("InvalidArgumentException");
+        $this->expectException(\InvalidArgumentException::class);
 
         foreach ($this->network->getSpeakers() as $speaker) {
             if (!$speaker->isCoordinator()) {
@@ -64,11 +64,11 @@ class ControllerLiveTest extends LiveTest
 
     public function testGetStateDetails()
     {
-        $keys = ["title", "artist", "album", "trackNumber", "queueNumber", "duration", "position", "stream"];
+        $keys = ["title", "artist", "album", "number", "duration", "position", "stream"];
         $state = $this->network->getController()->getStateDetails();
         foreach ($keys as $key) {
             $this->assertObjectHasAttribute($key, $state);
-            if (in_array($key, ["trackNumber", "queueNumber"])) {
+            if ($key === "number") {
                 $this->assertInternalType("integer", $state->$key);
             } elseif ($key !== "stream") {
                 $this->assertInternalType("string", $state->$key);
@@ -226,5 +226,12 @@ class ControllerLiveTest extends LiveTest
     public function testGetQueue()
     {
         $this->assertInstanceOf(Queue::class, $this->network->getController()->getQueue());
+    }
+
+
+    public function testGetNetwork()
+    {
+        $controller = $this->network->getController();
+        $this->assertSame($this->network, $controller->getNetwork());
     }
 }

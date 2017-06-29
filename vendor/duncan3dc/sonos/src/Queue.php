@@ -3,14 +3,17 @@
 namespace duncan3dc\Sonos;
 
 use duncan3dc\DomParser\XmlParser;
-use duncan3dc\Sonos\Tracks\Track;
+use duncan3dc\Sonos\Exceptions\SonosException;
+use duncan3dc\Sonos\Interfaces\ControllerInterface;
+use duncan3dc\Sonos\Interfaces\QueueInterface;
+use duncan3dc\Sonos\Interfaces\TrackInterface;
+use duncan3dc\Sonos\Interfaces\UriInterface;
 use duncan3dc\Sonos\Tracks\Factory as TrackFactory;
-use duncan3dc\Sonos\Tracks\UriInterface;
 
 /**
  * Provides an interface for managing the queue of a controller.
  */
-class Queue implements \Countable
+class Queue implements QueueInterface
 {
     /**
      * @var string $id The unique id of the queue.
@@ -23,7 +26,7 @@ class Queue implements \Countable
     protected $updateId = 0;
 
     /**
-     * @var Controller $controller The Controller instance this queue is for.
+     * @var ControllerInterface $controller The Controller instance this queue is for.
      */
     protected $controller;
 
@@ -36,9 +39,9 @@ class Queue implements \Countable
     /**
      * Create an instance of the Queue class.
      *
-     * @param Controller $controller The Controller instance that this queue is for
+     * @param ControllerInterface $controller The Controller instance that this queue is for
      */
-    public function __construct(Controller $controller)
+    public function __construct(ControllerInterface $controller)
     {
         $this->id = "Q:0";
         $this->updateId = 0;
@@ -56,7 +59,7 @@ class Queue implements \Countable
      *
      * @return mixed
      */
-    protected function soap($service, $action, $params = [])
+    protected function soap(string $service, string $action, array $params = [])
     {
         $params["ObjectID"] = $this->id;
 
@@ -78,7 +81,7 @@ class Queue implements \Countable
      *
      * @return mixed
      */
-    protected function browse($type, $start = 0, $limit = 1)
+    protected function browse(string $type, int $start = 0, int $limit = 1)
     {
         return $this->soap("ContentDirectory", "Browse", [
             "BrowseFlag"        =>  "Browse{$type}",
@@ -95,7 +98,7 @@ class Queue implements \Countable
      *
      * @return int
      */
-    protected function getUpdateId()
+    protected function getUpdateId(): int
     {
         if (!$this->updateId) {
             $data = $this->browse("DirectChildren");
@@ -110,7 +113,7 @@ class Queue implements \Countable
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         $data = $this->browse("DirectChildren");
         return (int) $data["TotalMatches"];
@@ -123,9 +126,9 @@ class Queue implements \Countable
      * @param int $start The zero-based position in the queue to start from
      * @param int $total The maximum number of tracks to return
      *
-     * @return Track[]
+     * @return TrackInterface[]
      */
-    public function getTracks($start = 0, $total = 0)
+    public function getTracks(int $start = 0, int $total = 0): array
     {
         $tracks = [];
 
@@ -157,7 +160,7 @@ class Queue implements \Countable
      *
      * @return int
      */
-    protected function getNextPosition()
+    protected function getNextPosition(): int
     {
         $data = $this->browse("DirectChildren");
 
@@ -173,9 +176,9 @@ class Queue implements \Countable
      * @param UriInterface[] $tracks The track to add
      * @param int $position The position to insert the track in the queue (zero-based), by default the track will be added to the end of the queue
      *
-     * @return bool
+     * @return void
      */
-    protected function addUris(array $tracks, $position = null)
+    protected function addUris(array $tracks, int $position = null)
     {
         if ($position === null) {
             $position = $this->getNextPosition();
@@ -219,11 +222,9 @@ class Queue implements \Countable
             $position += $numberOfTracks;
 
             if ($data["NumTracksAdded"] != $numberOfTracks) {
-                return false;
+                throw new SonosException("Failed to add all the tracks");
             }
         }
-
-        return true;
     }
 
 
@@ -233,9 +234,9 @@ class Queue implements \Countable
      * @param string|UriInterface $track The URI of the track to add, or an object that implements the UriInterface
      * @param int $position The position to insert the track in the queue (zero-based), by default the track will be added to the end of the queue
      *
-     * @return bool
+     * @return $this
      */
-    public function addTrack($track, $position = null)
+    public function addTrack($track, int $position = null): QueueInterface
     {
         return $this->addTracks([$track], $position);
     }
@@ -247,9 +248,9 @@ class Queue implements \Countable
      * @param string[]|UriInterface[] $tracks An array where each element is either the URI of the tracks to add, or an object that implements the UriInterface
      * @param int $position The position to insert the tracks in the queue (zero-based), by default the tracks will be added to the end of the queue
      *
-     * @return bool
+     * @return $this
      */
-    public function addTracks(array $tracks, $position = null)
+    public function addTracks(array $tracks, int $position = null): QueueInterface
     {
         foreach ($tracks as &$track) {
             # If a simple uri has been passed then convert it to a Track instance
@@ -258,12 +259,14 @@ class Queue implements \Countable
             }
 
             if (!$track instanceof UriInterface) {
-                throw new \InvalidArgumentException("The addTracks() array must contain either string URIs or objects that implement \duncan3dc\Sonos\Tracks\UriInterface");
+                throw new \InvalidArgumentException("The addTracks() array must contain either string URIs or objects that implement " . UriInterface::class);
             }
         }
         unset($track);
 
-        return $this->addUris($tracks, $position);
+        $this->addUris($tracks, $position);
+
+        return $this;
     }
 
 
@@ -274,7 +277,7 @@ class Queue implements \Countable
      *
      * @return bool
      */
-    public function removeTrack($position)
+    public function removeTrack(int $position): bool
     {
         return $this->removeTracks([$position]);
     }
@@ -287,7 +290,7 @@ class Queue implements \Countable
      *
      * @return bool
      */
-    public function removeTracks(array $positions)
+    public function removeTracks(array $positions): bool
     {
         $ranges = [];
         $key = 0;
@@ -325,9 +328,9 @@ class Queue implements \Countable
     /**
      * Remove all tracks from the queue.
      *
-     * @return static
+     * @return $this
      */
-    public function clear()
+    public function clear(): QueueInterface
     {
         $this->soap("AVTransport", "RemoveAllTracksFromQueue");
 

@@ -28,7 +28,7 @@ class PhpFileCacheTest extends BaseFileCacheTest
         $cache = $this->_getCacheDriver();
 
         // Test save
-        $cache->save('test_set_state', new SetStateClass([1,2,3]));
+        $cache->save('test_set_state', new SetStateClass(array(1,2,3)));
 
         //Test __set_state call
         $this->assertCount(0, SetStateClass::$values);
@@ -36,7 +36,7 @@ class PhpFileCacheTest extends BaseFileCacheTest
         // Test fetch
         $value = $cache->fetch('test_set_state');
         $this->assertInstanceOf('Doctrine\Tests\Common\Cache\SetStateClass', $value);
-        $this->assertEquals([1,2,3], $value->getValue());
+        $this->assertEquals(array(1,2,3), $value->getValue());
 
         //Test __set_state call
         $this->assertCount(1, SetStateClass::$values);
@@ -45,27 +45,12 @@ class PhpFileCacheTest extends BaseFileCacheTest
         $this->assertTrue($cache->contains('test_set_state'));
     }
 
-    /**
-     * @group 154
-     */
     public function testNotImplementsSetState()
     {
         $cache = $this->_getCacheDriver();
 
-        $cache->save('test_not_set_state', new NotSetStateClass([5,6,7]));
-        $this->assertEquals(new NotSetStateClass([5,6,7]), $cache->fetch('test_not_set_state'));
-    }
-
-    /**
-     * @group 154
-     */
-    public function testNotImplementsSetStateInArray()
-    {
-        $cache = $this->_getCacheDriver();
-
-        $cache->save('test_not_set_state_in_array', [new NotSetStateClass([4,3,2])]);
-        $this->assertEquals([new NotSetStateClass([4,3,2])], $cache->fetch('test_not_set_state_in_array'));
-        $this->assertTrue($cache->contains('test_not_set_state_in_array'));
+        $this->setExpectedException('InvalidArgumentException');
+        $cache->save('test_not_set_state', new NotSetStateClass(array(1,2,3)));
     }
 
     public function testGetStats()
@@ -103,7 +88,7 @@ class NotSetStateClass
 
 class SetStateClass extends NotSetStateClass
 {
-    public static $values = [];
+    public static $values = array();
 
     public static function __set_state($data)
     {

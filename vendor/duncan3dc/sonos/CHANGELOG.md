@@ -3,6 +3,22 @@ Changelog
 
 ## x.y.z - UNRELEASED
 
+### Changed
+
+* [Support] Drop support for PHP 5.6, to make use of new PHP 7.0 features.
+* [Support] Drop support for HHVM as there is little demand to make it worthwhile.
+* [Network] The construction of a new instance now only accepts a DeviceCollection instance.
+* [Network] Replaced the doctrine/cache dependency with any PSR-16 compatible cache library.
+* [Network] Replaced the doctrine/cache dependency with any PSR-6 compatible cache library.
+* [Controllers] An exception is now throw when adding track(s) fails.
+* Scalar parameter type hints have been added where possible.
+* Return type hints have been added where possible.
+
+### Removed
+
+* [Tracks] The deprecated `getTitle()` method has been removed, use `getName()` instead.
+* [Radio] The deprecated `getRadioStations()` and `getRadioShows()` methods have been removed, use `getRadio()->getFavouriteShows()` and `getRadio()->getFavouriteStations()` instead.
+
 --------
 
 ## 1.9.8 - 2017-02-22
@@ -59,6 +75,7 @@ Changelog
 
 ### Added
 
+* [Network] A new DeviceCollection class can be used to manually add devices to the network.
 * [Controller] Allow the Network instance in use to be retrieved using getNetwork().
 
 ### Fixed
