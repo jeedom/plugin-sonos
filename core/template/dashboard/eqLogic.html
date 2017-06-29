@@ -16,10 +16,6 @@
 		<div style="margin-right : 24px;overflow: auto;height: 327px;background-color: #4a89dc;">
 			<legend style="color : white;margin-bottom:2px;">Enceintes</legend>
 			<div class="speakersList" style="text-align:left;"></div>
-
-			<legend style="color : white;margin-bottom:2px;">En cours</legend>
-			<div class="queueList" style="text-align:left;"></div>
-
 		</div>
 		<img class="rightRafter" style="display:none;" src="plugins/sonos3/core/template/dashboard/images/chevron.png" onClick="panelRightClose#uid#()"/>
 	</div>
@@ -203,16 +199,6 @@ $('.sonos3[data-eqLogic_uid=#uid#] .playRadio').on('click',function(){
 		}
 	});
 });
-
-if('#queue#' != ''){
-	queue#id# = json_decode('#queue#');
-	queueList#id# = '';
-	for(var i in queue#id#){
-		queueList#id# += '<span class="cursor playTrack" style="white-space: nowrap;margin-left:5px;" data-position="'+i+'" title="'+queue#id#[i]+'"><i class="fa fa-play"></i> '+queue#id#[i]+'</span><br/>';
-	}
-	$(".sonos3[data-eqLogic_uid=#uid#] .queueList").append(queueList#id#);
-}
-
 $('.sonos3[data-eqLogic_uid=#uid#] .playTrack').on('click',function(){
 	$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
 	var position = $(this).attr('data-position');
