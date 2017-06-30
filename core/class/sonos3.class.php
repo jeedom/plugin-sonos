@@ -336,7 +336,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getRadioStations() {
-		$radios = (sonos3::getSonos())->getRadio()->getFavouriteStations();
+		$radios = sonos3::getSonos()->getRadio()->getFavouriteStations();
 		$array = array();
 		foreach ($radios as $radio) {
 			$array[] = $radio->getTitle();
