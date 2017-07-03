@@ -789,7 +789,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public function getQueue() {
-		return ($this->getController()->getQueue())->getTracks();
+		return $this->getController()->getQueue()->getTracks();
 	}
 
 	public function playTrack($_position) {
