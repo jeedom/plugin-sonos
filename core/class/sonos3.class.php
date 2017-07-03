@@ -121,7 +121,7 @@ class sonos3 extends eqLogic {
 	public static function interact($_query, $_parameters = array()) {
 		$ok = false;
 		$files = array();
-		$matchs = explode("\n", config::byKey('interact::sentence', 'sonos3'));
+		$matchs = explode("\n", str_replace('\n', "\n", config::byKey('interact::sentence', 'sonos3')));
 		if (count($matchs) == 0) {
 			return null;
 		}
