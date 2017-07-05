@@ -38,60 +38,10 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
     <label class="col-lg-3 control-label">{{Voix}}</label>
     <div class="col-lg-2">
      <select class="configKey form-control" data-l1key="ttsProvider">
-       <option value="voxygen">Voxygen</option>
        <option value="picotts">Pico TTS</option>
      </select>
    </div>
  </div>
- <div class="form-group">
-  <label class="col-lg-3 control-label">{{Voix}}</label>
-  <div class="col-lg-2">
-   <select class="configKey form-control" data-l1key="ttsVoxygenVoice">
-     <optgroup label="Arabic">
-       <option value="Adel">Adel</option>
-     </optgroup>
-     <optgroup label="Deutch">
-       <option value="Matthias">Matthias</option>
-       <option value="Sylvia">Sylvia</option>
-     </optgroup>
-     <optgroup label="English U.K.">
-       <option value="Bibi">Bibi</option>
-       <option value="Bronwen">Bronwen</option>
-       <option value="Elizabeth">Elizabeth</option>
-       <option value="Paul">Paul</option>
-     </optgroup>
-     <optgroup label="English U.S.">
-       <option value="Amanda">Amanda</option>
-       <option value="Phil">Phil</option>
-     </optgroup>
-     <optgroup label="Español">
-       <option value="Marta">Marta</option>
-     </optgroup>
-     <optgroup label="Français">
-       <option value="Loic">Loic</option>
-       <option value="Agnes">Agnes</option>
-       <option value="Melodine">Melodine</option>
-       <option value="Chut">Chut</option>
-       <option value="Bicool">Bicool</option>
-       <option value="Philippe">Philippe</option>
-       <option value="Electra">Electra</option>
-       <option value="Damien">Damien</option>
-       <option value="Ramboo">Ramboo</option>
-       <option value="John">John</option>
-       <option value="Helene" selected>Helene</option>
-       <option value="JeanJean">JeanJean</option>
-       <option value="Papi">Papi</option>
-       <option value="Robot">Robot</option>
-       <option value="Sidoo">Sidoo</option>
-       <option value="Sorciere">Sorciere</option>
-       <option value="Zozo">Zozo</option>
-     </optgroup>
-     <optgroup label="Italiano">
-       <option value="Sonia">Sonia</option>
-     </optgroup>
-   </select>
- </div>
-</div>
 <div class="form-group useShare">
   <label class="col-lg-3 control-label">{{Partage}}</label>
   <div class="col-lg-2">
