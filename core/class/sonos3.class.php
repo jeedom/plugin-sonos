@@ -119,9 +119,12 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function interact($_query, $_parameters = array()) {
+		if (trim(config::byKey('interact::sentence', 'sonos3')) == '') {
+			return null;
+		}
 		$ok = false;
 		$files = array();
-		$matchs = explode("\n", str_replace('\n', "\n", config::byKey('interact::sentence', 'sonos3')));
+		$matchs = explode("\n", str_replace('\n', "\n", trim(config::byKey('interact::sentence', 'sonos3'))));
 		if (count($matchs) == 0) {
 			return null;
 		}
