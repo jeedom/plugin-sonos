@@ -62,10 +62,16 @@ class sonos3 extends eqLogic {
 	public static function dependancy_info() {
 		$return = array();
 		$return['log'] = 'sonos_update';
+		$return['state'] = 'ok';
 		$return['progress_file'] = jeedom::getTmpFolder('sonos') . '/dependance';
-		if (exec('which smbclient | wc -l') != 0) {
-			$return['state'] = 'ok';
-		} else {
+		if (exec('which smbclient | wc -l') == 0) {
+			$return['state'] = 'nok';
+		}
+		$extensions = get_loaded_extensions();
+		if (!in_array('soap', $extensions)) {
+			$return['state'] = 'nok';
+		}
+		if (!in_array('mbstring', $extensions)) {
 			$return['state'] = 'nok';
 		}
 		return $return;

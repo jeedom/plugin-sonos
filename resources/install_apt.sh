@@ -9,7 +9,8 @@ sudo apt-get clean
 echo 30 > ${PROGRESS_FILE}
 sudo apt-get update
 echo 50 > ${PROGRESS_FILE}
-sudo apt-get install -y smbclient
+sudo apt-get install -y smbclient php-mbstring php-soap
+sudo systemctl restart apache2
 echo 100 > ${PROGRESS_FILE}
 echo "Everything is successfully installed!"
 rm ${PROGRESS_FILE}
