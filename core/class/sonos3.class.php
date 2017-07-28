@@ -312,6 +312,7 @@ class sonos3 extends eqLogic {
 				}
 			}
 		}
+		gc_collect_cycles();
 	}
 
 	public static function convertState($_state) {
