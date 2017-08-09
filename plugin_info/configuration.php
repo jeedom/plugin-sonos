@@ -24,35 +24,27 @@ if (!isConnect('admin')) {
 <form class="form-horizontal">
 	<fieldset>
     <?php
-if (version_compare(PHP_VERSION, '5.6.0') < 0) {
-	echo '<div class="alert alert-danger">{{Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 5.6}}</div>';
+if (version_compare(PHP_VERSION, '7.0') < 0) {
+	echo '<div class="alert alert-danger">{{Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0}}</div>';
 }
 ?>
    <div class="form-group">
-   <label class="col-lg-3 control-label">{{Le plugin sonos doit réagir aux interactions :}}</label>
-    <div class="col-lg-4">
+     <label class="col-lg-3 control-label">{{Le plugin sonos doit réagir aux interactions :}}</label>
+     <div class="col-lg-4">
       <textarea class="configKey form-control" data-l1key="interact::sentence"></textarea>
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-lg-3 control-label">{{Voix}}</label>
+  <div class="form-group useShare">
+    <label class="col-lg-3 control-label">{{Partage}}</label>
     <div class="col-lg-2">
-     <select class="configKey form-control" data-l1key="ttsProvider">
-       <option value="picotts">Pico TTS</option>
-     </select>
+     <div class="input-group">
+       <input class="configKey form-control" data-l1key="tts_host" />
+       <div class="input-group-addon">/</div>
+       <input class="configKey form-control" data-l1key="tts_path" />
+     </div>
    </div>
  </div>
-<div class="form-group useShare">
-  <label class="col-lg-3 control-label">{{Partage}}</label>
-  <div class="col-lg-2">
-   <div class="input-group">
-     <input class="configKey form-control" data-l1key="tts_host" />
-     <div class="input-group-addon">/</div>
-     <input class="configKey form-control" data-l1key="tts_path" />
-   </div>
- </div>
-</div>
-<div class="form-group useShare">
+ <div class="form-group useShare">
   <label class="col-lg-3 control-label">{{Nom d'utilisateur pour le partage}}</label>
   <div class="col-lg-2">
     <input class="configKey form-control" data-l1key="tts_username" />
