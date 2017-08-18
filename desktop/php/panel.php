@@ -33,12 +33,11 @@ if ($_SESSION['user']->getOptions('displayObjetByDefault') == 1 && init('report'
             <?php
 $allObject = object::buildTree(null, true);
 foreach ($allObject as $object_li) {
-	$parentNumber[$object_li->getId()] = $object_li->parentNumber();
-	$margin = 15 * $parentNumber[$object_li->getId()];
+	$margin = 5 * $object_li->getConfiguration('parentNumber');
 	if ($object_li->getId() == $object->getId()) {
-		echo '<li class="cursor li_object active" ><a href="index.php?v=d&p=panel&m=sonos3&object_id=' . $object_li->getId() . '" style="position:relative;left:' . $margin . 'px;">' . $object_li->getHumanName(true) . '</a></li>';
+		echo '<li class="cursor li_object active" ><a data-object_id="' . $object_li->getId() . '" href="index.php?v=d&p=panel&m=sonos3&object_id=' . $object_li->getId() . '" style="padding: 2px 0px;"><span style="position:relative;left:' . $margin . 'px;">' . $object_li->getHumanName(true) . '</span><span style="font-size : 0.65em;float:right;position:relative;top:7px;">' . $object_li->getHtmlSummary() . '</span></a></li>';
 	} else {
-		echo '<li class="cursor li_object" ><a href="index.php?v=d&p=panel&m=sonos3&object_id=' . $object_li->getId() . '" style="position:relative;left:' . $margin . 'px;">' . $object_li->getHumanName(true) . '</a></li>';
+		echo '<li class="cursor li_object" ><a data-object_id="' . $object_li->getId() . '" href="index.php?v=d&p=panel&m=sonos3&object_id=' . $object_li->getId() . '" style="padding: 2px 0px;"><span style="position:relative;left:' . $margin . 'px;">' . $object_li->getHumanName(true) . '</span><span style="font-size : 0.65em;float:right;position:relative;top:7px;">' . $object_li->getHtmlSummary() . '</span></a></li>';
 	}
 }
 ?>
