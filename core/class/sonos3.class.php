@@ -918,7 +918,7 @@ class sonos3Cmd extends cmd {
 			} catch (Exception $e) {
 
 			}
-		} else if ($this->getLogicalId() == 'stop') {
+		} elseif ($this->getLogicalId() == 'stop') {
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
 			if ($track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Arrêté', __FILE__)) {
@@ -932,7 +932,7 @@ class sonos3Cmd extends cmd {
 			} catch (Exception $e) {
 
 			}
-		} else if ($this->getLogicalId() == 'pause') {
+		} elseif ($this->getLogicalId() == 'pause') {
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
 			if ($track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Arrêté', __FILE__)) {
@@ -946,26 +946,26 @@ class sonos3Cmd extends cmd {
 			} catch (Exception $e) {
 
 			}
-		} else if ($this->getLogicalId() == 'previous') {
+		} elseif ($this->getLogicalId() == 'previous') {
 			$controller->previous();
-		} else if ($this->getLogicalId() == 'next') {
+		} elseif ($this->getLogicalId() == 'next') {
 			$controller->next();
-		} else if ($this->getLogicalId() == 'mute') {
+		} elseif ($this->getLogicalId() == 'mute') {
 			$controller->mute();
-		} else if ($this->getLogicalId() == 'unmute') {
+		} elseif ($this->getLogicalId() == 'unmute') {
 			$controller->unmute();
-		} else if ($this->getLogicalId() == 'repeat') {
+		} elseif ($this->getLogicalId() == 'repeat') {
 			$controller->setRepeat(!$controller->getRepeat());
-		} else if ($this->getLogicalId() == 'shuffle') {
+		} elseif ($this->getLogicalId() == 'shuffle') {
 			$controller->setShuffle(!$controller->getShuffle());
-		} else if ($this->getLogicalId() == 'setVolume') {
+		} elseif ($this->getLogicalId() == 'setVolume') {
 			if ($_options['slider'] < 0) {
 				$_options['slider'] = 0;
 			} else if ($_options['slider'] > 100) {
 				$_options['slider'] = 100;
 			}
 			$controller->setVolume($_options['slider']);
-		} else if ($this->getLogicalId() == 'play_playlist') {
+		} elseif ($this->getLogicalId() == 'play_playlist') {
 			$mt = getMicroTime();
 			if (!$controller->isUsingQueue()) {
 				$controller->useQueue();
@@ -985,7 +985,7 @@ class sonos3Cmd extends cmd {
 				$controller->setShuffle(true);
 			}
 			$controller->play();
-		} else if ($this->getLogicalId() == 'play_radio') {
+		} elseif ($this->getLogicalId() == 'play_radio') {
 			$radio = $sonos->getRadio();
 			$stations = $radio->getFavouriteStations();
 			foreach ($stations as $station) {
@@ -994,15 +994,15 @@ class sonos3Cmd extends cmd {
 					break;
 				}
 			}
-		} else if ($this->getLogicalId() == 'add_speaker') {
+		} elseif ($this->getLogicalId() == 'add_speaker') {
 			$speaker = $sonos->getSpeakerByRoom($_options['title']);
 			$controller->addSpeaker($speaker);
-		} else if ($this->getLogicalId() == 'remove_speaker') {
+		} elseif ($this->getLogicalId() == 'remove_speaker') {
 			$speaker = $sonos->getSpeakerByRoom($_options['title']);
 			$controller->removeSpeaker($speaker);
-		} else if ($this->getLogicalId() == 'line_in') {
+		} elseif ($this->getLogicalId() == 'line_in') {
 			$controller->useLineIn()->play();
-		} else if ($this->getLogicalId() == 'tts') {
+		} elseif ($this->getLogicalId() == 'tts') {
 			$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
 			$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
 			$share = $server->getShare($path[0]);
@@ -1022,4 +1022,4 @@ class sonos3Cmd extends cmd {
 	/*     * **********************Getteur Setteur*************************** */
 }
 
-?>
+
