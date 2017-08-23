@@ -35,6 +35,7 @@ class sonos3 extends eqLogic {
 	private static $_sonosAddOK = false;
 	public static $_widgetPossibility = array(
 		'custom' => true,
+		'custom::layout' => false,
 		'parameters' => array(
 			'sub-background-color' => array(
 				'name' => 'Couleur de la barre de contrôle',
@@ -1021,5 +1022,3 @@ class sonos3Cmd extends cmd {
 
 	/*     * **********************Getteur Setteur*************************** */
 }
-
-
