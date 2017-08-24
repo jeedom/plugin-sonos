@@ -19,9 +19,7 @@
  setTimeout(function () {
     $('.div_displayEquipement').packery({
         itemSelector: ".eqLogic-widget",
-        columnWidth: 40,
-        rowHeight: 80,
-        gutter : 2,
+        gutter : 1.5
     });
 }, 2);
 
