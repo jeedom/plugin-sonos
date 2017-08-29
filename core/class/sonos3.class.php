@@ -986,6 +986,22 @@ class sonos3Cmd extends cmd {
 				$controller->setShuffle(true);
 			}
 			$controller->play();
+			$loop = 1;
+			while (true) {
+				if ($controller->getStateName() == 'PLAYING') {
+					break;
+				}
+				if (($loop % 4) === 0) {
+
+					$controller->play();
+				}
+				if ($loop > 20) {
+					break;
+				}
+				usleep(500000);
+				$loop++;
+			}
+
 		} elseif ($this->getLogicalId() == 'play_radio') {
 			$radio = $sonos->getRadio();
 			$stations = $radio->getFavouriteStations();
@@ -1004,6 +1020,7 @@ class sonos3Cmd extends cmd {
 		} elseif ($this->getLogicalId() == 'line_in') {
 			$controller->useLineIn()->play();
 		} elseif ($this->getLogicalId() == 'tts') {
+			$_options['message'] = str_replace(array('[', ']', '#', '{', '}'), '', $_options['message']);
 			$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
 			$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
 			$share = $server->getShare($path[0]);
