@@ -992,7 +992,6 @@ class sonos3Cmd extends cmd {
 					break;
 				}
 				if (($loop % 4) === 0) {
-
 					$controller->play();
 				}
 				if ($loop > 20) {
