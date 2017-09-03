@@ -9,5 +9,7 @@
 	"hasDependency" : true,
 	"hasOwnDeamon" : true,
 	"display" : "panel",
-	"mobile" : "panel"
+	"mobile" : "panel",
+	"changelog" : "https://github.com/jeedom/plugin-sonos3/blob/stable/doc/#language#/changelog.asciidoc",
+	"documentation" : "https://github.com/jeedom/plugin-sonos3/blob/stable/doc/#language#/index.asciidoc"
 }

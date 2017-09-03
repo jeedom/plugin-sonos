@@ -1,5 +1,7 @@
 == Changelog
 
+Changelog détaillé : https://github.com/jeedom/plugin-sonos3/commits/stable
+
 - Correction de la langue avec picotts
 
 - Ajout d'une commande "entrée de ligne"
