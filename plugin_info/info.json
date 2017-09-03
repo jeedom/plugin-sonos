@@ -4,7 +4,7 @@
 	"description" : "Plugin de controle de sonos",
 	"licence" : "AGPL",
 	"author" : "Loïc",
-	"require" : "2.4",
+	"require" : "3.0",
 	"category" : "multimedia",
 	"hasDependency" : true,
 	"hasOwnDeamon" : true,
