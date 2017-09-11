@@ -19,7 +19,7 @@
  setTimeout(function () {
     $('.div_displayEquipement').packery({
         itemSelector: ".eqLogic-widget",
-        gutter : 1.5
+        gutter : 2
     });
 }, 2);
 
