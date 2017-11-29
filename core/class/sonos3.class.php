@@ -172,6 +172,7 @@ class sonos3 extends eqLogic {
 	public static function getSonos($_emptyCache = false) {
 		if (self::$_sonos === null) {
 			self::$_sonos = new duncan3dc\Sonos\Network();
+			self::$_sonos->setLogger(log::getLogger('sonos3'));
 		}
 		return self::$_sonos;
 	}
@@ -368,7 +369,9 @@ class sonos3 extends eqLogic {
 		$factory = new \duncan3dc\Sonos\Devices\Factory;
 		$devices = new \duncan3dc\Sonos\Devices\Collection($factory);
 		$devices->addIp($_ip);
-		return (new \duncan3dc\Sonos\Network($devices))->getControllerByIp($_ip);
+		$sonos = new \duncan3dc\Sonos\Network($devices);
+		$sonos->setLogger(log::getLogger('sonos3'));
+		return $sonos->getControllerByIp($_ip);
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
