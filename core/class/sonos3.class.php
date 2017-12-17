@@ -986,7 +986,11 @@ class sonos3Cmd extends cmd {
 
 			}
 			if (isset($_options['message']) && $_options['message'] == 'random') {
-				$controller->setShuffle(true);
+				try {
+					$controller->setShuffle(true);
+				} catch (Exception $e) {
+					log::add('sonos3', 'warning', $this->getHumanName() . ' : ' . $e->getMessage());
+				}
 			}
 			$controller->play();
 			$loop = 1;
@@ -1003,7 +1007,6 @@ class sonos3Cmd extends cmd {
 				usleep(500000);
 				$loop++;
 			}
-
 		} elseif ($this->getLogicalId() == 'play_radio') {
 			$radio = $sonos->getRadio();
 			$stations = $radio->getFavouriteStations();
