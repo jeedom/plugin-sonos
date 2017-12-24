@@ -943,7 +943,7 @@ class sonos3Cmd extends cmd {
 				return;
 			}
 			if ($track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Lecture', __FILE__)) {
-				return $controller->mute();
+				$controller->mute();
 			}
 			try {
 				$controller->pause();
