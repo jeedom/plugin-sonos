@@ -18,7 +18,7 @@ couleursPerso:
   menu-background-color: 'EDEDED'
   menu-title-color: '82BA1B'
   menu-color: '000000'
-nameLogo: false
+nameLogo: sonos3_icon.png
 themeVersion: 1
 design: 1
 langs: [fr_FR,en_US]
