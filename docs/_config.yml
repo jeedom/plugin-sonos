@@ -1,5 +1,5 @@
 theme: jekyll-theme-cayman
-couleursPersoActif: true
+couleursPersoActif: false
 couleursDefaut: 
   body-background-color: '041453'
   body-color: 'A7C2FF'
