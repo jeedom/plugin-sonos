@@ -1,52 +1,40 @@
 ---
 ---
-{% if site.themePersoActif %}
-   {% assign themeCustom = site.themePerso %}
+{% if site.couleursPersoActif %}
+   {% assign couleursCustom = site.couleursPerso %}
 {% else %}
-	   {% assign themeCustom = site.themeDefaut %}
+	   {% assign couleursCustom = site.couleursDefaut %}
 {% endif %}
 
 /*
 *
-* Personnalisations pour la doc jeedom
+*** Personnalisations pour la doc jeedom ***
+*
+* Posissionnement général des éléments
 *
 */
-body{
- background-color: #{{ themeCustom.body-background-color }};
- color: #{{ themeCustom.body-color }};
-}
 
-
+/*** header ***/
 #logo_plugin {
   max-height: 100px;
   display: inline-block;
   position: absolute;
-  top: 5%;
-  right: 5%;
+  top: 2%;
+  right: 6%;
   float: right;
-}
-
-#logo_jeedom{
-  position: relative;
-}
-
-.page-header a.btn{
-  text-transform: uppercase;
-}
-/* Style des éléments quant le header est plus petit*/
-.header-min {
-  height: 80px;
-  position: fixed;
-  width: 100%;
-  z-index: 999;
 }
 
 .header-min .btn {
   display: none;
 }
 
-.contenu-main-min{
-  padding: 220px 5pk 40px 5px !important;
+/* Style des éléments quant le header est plus petit*/
+.header-min {
+  height: 80px;
+  position: fixed !important;
+  width: 100%;
+  z-index: 999;
+  transition: all 0.3s ease;
 }
 
 .header-min #logo_jeedom, .header-min #nom-plugin{
@@ -61,31 +49,111 @@ body{
   -webkit-transform: translate(-50%, -25%);
 }
 
-/* Animation du logo jeedom */
-.header-min #logo_jeedom{
-  position: absolute;
-  left: 15%;
-  transform: translate(-50%, 0%);
-  top: 10%;
-    animation-name: animLogoJeedomBas;
-    animation-duration: 2s;
+
+/*** Main ***/
+
+
+.contenu-main-min{
+  padding: 220px 5px 40px 5px !important;
+  
 }
 
-@keyframes animLogoJeedomBas {
-    0%   { left:50%; top:-70%;}
-    100% { left:15%; top:10%;}
+/* Ajuste le possitionement du contenu par rapport au sommaire*/
+#main_content{
+	position: relative;
+	left: 20%;
+	width: 80%;
+	min-width: 75%;
+	margin: 0;
+	padding: 10px 5px;	
 }
 
-.animLogoJeedomHaut{
-    animation-name: animLogoJeedomHaut;
-    animation-duration: 2s;
+
+/***
+*
+* Style du menu toc
+*
+***/
+#toc, .toc, .mw-warning {
+    border: 0 none;
 }
 
-@keyframes animLogoJeedomHaut {
-    0%   { left:-40%; top:65%;}
-    100% { left:0%; top:0%;}
+/*masque le bouton cacher/afficher*/
+#toc .toctoggle, .toc .toctoggle {
+    display:none;
 }
 
+/* Fixe la position du menu sommaire et le met en flottant*/
+#menu-sommaire{
+	position: absolute;
+	float: left;
+	width: 20%;
+}
+
+.menu-header-min{
+   position: fixed !important;
+   margin-top: 80px;
+   transition: all 0.3s ease;
+}
+
+
+/***
+*
+* Spécifique selon le media
+*
+***/
+
+@media (min-width: 640px){
+	
+	#blocLangs{
+	   max-width: 70%;
+	   margin: 0px 15%;
+	}
+	
+	#logo_jeedom{
+	  max-height: 100px;
+	  display: inline-block;
+	  position: absolute;
+	  top: 3%;
+	  left: 4%;
+	  float: left;
+	}
+
+	/*Masque les liens de retour au sommaire pour la version ordinateur*/
+	a.linkToTop {
+	    display: none;
+	}
+}
+
+@media (max-width: 640px){
+	
+/*Affiche les liens de retours au sommaire en version mobile
+	
+	/* place le menu sommaire en haut de page*/
+	#menu-sommaire{
+		position: relative;
+		float: none;
+		width: 100%;
+	}
+
+	/* Ajuste le possitionement du contenu par rapport au sommaire*/
+	#main_content{
+		position: relative;
+		left: 0px;
+		width: 100%;
+		margin: 0;
+		padding: 40px 10px;	
+	}
+	
+	/* ajustement de la largeur du menu sommaire */
+	table#toc{
+		width: 100%;	
+	}
+	
+	#toc .toctoggle, .toc .toctoggle {
+		display:inline;
+	}
+}
 
 @media screen and (max-height: 800px) {
   .project-name {
