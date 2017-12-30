@@ -1,0 +1,107 @@
+---
+---
+{% if site.themePersoActif %}
+   {% assign themeCustom = site.themePerso %}
+{% else %}
+	   {% assign themeCustom = site.themeDefaut %}
+{% endif %}
+
+/*
+*
+* Personnalisations pour la doc jeedom
+*
+*/
+body{
+ background-color: #{{ themeCustom.body-background-color }};
+ color: #{{ themeCustom.body-color }};
+}
+
+
+#logo_plugin {
+  max-height: 100px;
+  display: inline-block;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  float: right;
+}
+
+#logo_jeedom{
+  position: relative;
+}
+
+.page-header a.btn{
+  text-transform: uppercase;
+}
+/* Style des éléments quant le header est plus petit*/
+.header-min {
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+
+.header-min .btn {
+  display: none;
+}
+
+.contenu-main-min{
+  padding: 220px 5pk 40px 5px !important;
+}
+
+.header-min #logo_jeedom, .header-min #nom-plugin{
+  display: inline-block;
+}
+
+.header-min #nom-plugin{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  -moz-transform: translate(-50%, 0%) !important;
+  -webkit-transform: translate(-50%, -25%);
+}
+
+/* Animation du logo jeedom */
+.header-min #logo_jeedom{
+  position: absolute;
+  left: 15%;
+  transform: translate(-50%, 0%);
+  top: 10%;
+    animation-name: animLogoJeedomBas;
+    animation-duration: 2s;
+}
+
+@keyframes animLogoJeedomBas {
+    0%   { left:50%; top:-70%;}
+    100% { left:15%; top:10%;}
+}
+
+.animLogoJeedomHaut{
+    animation-name: animLogoJeedomHaut;
+    animation-duration: 2s;
+}
+
+@keyframes animLogoJeedomHaut {
+    0%   { left:-40%; top:65%;}
+    100% { left:0%; top:0%;}
+}
+
+
+@media screen and (max-height: 800px) {
+  .project-name {
+    font-size: 2rem !important;
+  }
+  .page-header {
+    padding : 0; 
+  }
+  .page-header a {
+     font-size: 0.7rem !important;
+   }
+  #main, #main_content {
+      font-size: 1rem !important;
+  }
+  .header-min #nom-plugin{
+        transform: translate(-50%, 25%);
+        -webkit-transform: translate(-50%, 25%); 
+ }
+}
