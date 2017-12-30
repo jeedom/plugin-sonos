@@ -1,4 +1,4 @@
-Changelog {#_changelog}
+Changelog
 =========
 
 Changelog détaillé :
