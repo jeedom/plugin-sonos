@@ -9,7 +9,7 @@
 @import "{{ site.theme }}";
 .page-header {
  padding: 1rem 6rem;
- color: #{{ themeCustom.head-color }};
+ color: {{ themeCustom.head-color }};
  text-align:center;
  background-color: #{{ themeCustom.head-background-color }};
  background-image: none;
