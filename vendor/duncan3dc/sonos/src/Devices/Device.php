@@ -192,6 +192,7 @@ class Device implements DeviceInterface
             "S5"    =>  "PLAY:5",
             "S6"    =>  "PLAY:5",
             "S9"    =>  "PLAYBAR",
+            "S11"   =>  "PLAYBASE",
             "ZP80"  =>  "ZONEPLAYER",
             "ZP90"  =>  "CONNECT",
             "ZP100" =>  "CONNECT:AMP",
