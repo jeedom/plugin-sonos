@@ -89,6 +89,10 @@ Comme commande vous retrouverez :
     la playlist. Vous pouvez mettre "random" dans message pour mélanger
     la playlist avant la lecture.
 
+-   **Jouer favoris** :  commande de type message permettant de lancer 
+    un favoris, il suffit dans le titre de mettre le nom du favoris. Vous 
+    pouvez mettre "random" dans message pour mélanger le favoris avant la lecture.
+
 -   **Jouer une radio** : commande de type message permettant de lancer
     une radio, il suffit dans le titre de mettre le nom de la radio
     (ATTENTION celle ci doit être dans les radios favorites).
@@ -202,24 +206,3 @@ Sonos. Disponible à partir du menu Accueil → Sonos Controller :
 > **Important**
 >
 > Pour avoir le panel il faut l’activer dans la configuration du plugin
-
-Changelog 
-=========
-
-Changelog détaillé :
-<https://github.com/jeedom/plugin-sonos/commits/stable>
-
--   Ajout Sonos One et Playbase
-
--   Correction de la langue avec picotts
-
--   Ajout d’une commande "entrée de ligne"
-
--   Mise à jour de librairie de communication avec les sonos
-
--   Optimisation du chargement des playlists
-
--   Ajout de picotts pour la génération du TTS en locale
-
--   Correction du bouton play/pause lors de la mise à jour du widget
-
