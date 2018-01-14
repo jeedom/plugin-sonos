@@ -14,6 +14,7 @@ class DeviceTest extends MockTest
         $models = [
             "S1"    =>  true,
             "S12"   =>  true,
+            "S11"   =>  true,
             "S3"    =>  true,
             "S5"    =>  true,
             "S6"    =>  true,

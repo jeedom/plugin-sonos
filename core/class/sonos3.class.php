@@ -208,6 +208,9 @@ class sonos3 extends eqLogic {
 				if (strpos($controller->getName(), 'PLAYBAR') !== false) {
 					$eqLogic->setConfiguration('model', 'PLAYBAR');
 				}
+                                if (strpos($controller->getName(), 'PLAYBASE') !== false) {
+                                        $eqLogic->setConfiguration('model', 'PLAYBASE');
+                                }
 				if (strpos($controller->getName(), 'CONNECT') !== false) {
 					$eqLogic->setConfiguration('model', 'CONNECT');
 				}
