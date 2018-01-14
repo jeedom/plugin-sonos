@@ -336,13 +336,33 @@ class sonos3 extends eqLogic {
 		foreach ($playlists as $playlist) {
 			$array[$playlist->getUri()] = $playlist->getName();
 		}
+		config::save('playlist', $array, 'sonos3');
 		foreach (sonos3::byType('sonos3') as $sonos3) {
-			config::save('playlist', $array, 'sonos3');
 			$cmd = $sonos3->getCmd('action', 'play_playlist');
-			$cmd->setDisplay('title_possibility_list', json_encode(array_values($array)));
-			$cmd->save();
+			if (is_object($cmd)) {
+				$cmd->setDisplay('title_possibility_list', json_encode(array_values($array)));
+				$cmd->save();
+			}
 		}
 		return $playlists;
+	}
+
+	public static function getFavourites() {
+		$sonos = sonos3::getSonos();
+		$favourites = $sonos->getFavourites()->listFavorite();
+		config::save('favourites', $favourites, 'sonos3');
+		$array = array();
+		foreach ($favourites as $favourite) {
+			$array[$favourite['uri']] = $favourite['name'];
+		}
+		foreach (sonos3::byType('sonos3') as $sonos3) {
+			$cmd = $sonos3->getCmd('action', 'play_favourite');
+			if (is_object($cmd)) {
+				$cmd->setDisplay('title_possibility_list', json_encode(array_values($array)));
+				$cmd->save();
+			}
+		}
+		return $favourites;
 	}
 
 	public static function getRadioStations() {
@@ -386,17 +406,38 @@ class sonos3 extends eqLogic {
 				}
 			}
 		}
-		$sonos = sonos3::getSonos();
-		$playlist = $sonos->getPlaylistByName($_playlist);
-		if ($playlist == null) {
-			foreach ($sonos->getPlaylists() as $playlist_search) {
-				if (str_replace('  ', ' ', $playlist_search->getName()) == $_playlist) {
-					$playlist = $playlist_search;
-					break;
+		$sonos = sonos3::getPlayLists();
+		$playlists = config::byKey('playlist', 'sonos3');
+		if (is_array($playlists)) {
+			foreach ($playlists as $uri => $name) {
+				if (strtolower($name) == strtolower($_playlist)) {
+					return $uri;
 				}
 			}
 		}
-		return $playlist->getUri();
+		return null;
+	}
+
+	public function getFavouritesUri($_favourite) {
+		$_favourite = trim(trim($_favourite), '"');
+		$favourites = config::byKey('favourites', 'sonos3');
+		if (is_array($favourites)) {
+			foreach ($favourites as $favourite) {
+				if (strtolower($favourite['name']) == strtolower($_favourite)) {
+					return $favourite;
+				}
+			}
+		}
+		$sonos = sonos3::getFavourites();
+		$favourites = config::byKey('favourites', 'sonos3');
+		if (is_array($favourites)) {
+			foreach ($favourites as $favourite) {
+				if (strtolower($favourite['name']) == strtolower($_favourite)) {
+					return $favourite;
+				}
+			}
+		}
+		return null;
 	}
 
 	public function getController() {
@@ -644,6 +685,19 @@ class sonos3 extends eqLogic {
 		$play_playlist->setEqLogic_id($this->getId());
 		$play_playlist->save();
 
+		$play_favourite = $this->getCmd(null, 'play_favourite');
+		if (!is_object($play_favourite)) {
+			$play_favourite = new sonos3Cmd();
+			$play_favourite->setLogicalId('play_favourite');
+			$play_favourite->setName(__('Jouer favoris', __FILE__));
+		}
+		$play_favourite->setType('action');
+		$play_favourite->setSubType('message');
+		$play_favourite->setDisplay('message_placeholder', __('Options', __FILE__));
+		$play_favourite->setDisplay('title_placeholder', __('Titre du favoris', __FILE__));
+		$play_favourite->setEqLogic_id($this->getId());
+		$play_favourite->save();
+
 		$play_radio = $this->getCmd(null, 'play_radio');
 		if (!is_object($play_radio)) {
 			$play_radio = new sonos3Cmd();
@@ -722,6 +776,7 @@ class sonos3 extends eqLogic {
 		try {
 			self::getRadioStations();
 			self::getPlayLists();
+			self::getFavourites();
 		} catch (Exception $e) {
 
 		}
@@ -865,6 +920,10 @@ class sonos3Cmd extends cmd {
 		return $info_device;
 	}
 
+	public function dontRemoveCmd() {
+		return true;
+	}
+
 	public function imperihomeAction($_action, $_value) {
 		$eqLogic = $this->getEqLogic();
 		switch ($_action) {
@@ -970,7 +1029,6 @@ class sonos3Cmd extends cmd {
 			}
 			$controller->setVolume($_options['slider']);
 		} elseif ($this->getLogicalId() == 'play_playlist') {
-			$mt = getMicroTime();
 			if (!$controller->isUsingQueue()) {
 				$controller->useQueue();
 			}
@@ -982,6 +1040,48 @@ class sonos3Cmd extends cmd {
 			}
 			try {
 				$queue->addTrack($uri);
+			} catch (Exception $e) {
+
+			}
+			if (isset($_options['message']) && $_options['message'] == 'random') {
+				try {
+					$controller->setShuffle(true);
+				} catch (Exception $e) {
+					log::add('sonos3', 'warning', $this->getHumanName() . ' : ' . $e->getMessage());
+				}
+			}
+			$controller->play();
+			$loop = 1;
+			while (true) {
+				if ($controller->getStateName() == 'PLAYING') {
+					break;
+				}
+				if (($loop % 4) === 0) {
+					$controller->play();
+				}
+				if ($loop > 20) {
+					break;
+				}
+				usleep(500000);
+				$loop++;
+			}
+		} elseif ($this->getLogicalId() == 'play_favourite') {
+			if (!$controller->isUsingQueue()) {
+				$controller->useQueue();
+			}
+			$controller->soap("AVTransport", "RemoveAllTracksFromQueue");
+			$queue = $controller->getQueue();
+			$favourite = $eqLogic->getFavouritesUri($_options['title']);
+			if ($favourite == null) {
+				throw new Exception(__('Favoris non trouvé : ', __FILE__) . trim($_options['title']));
+			}
+			try {
+				$controller->soap("AVTransport", "AddURIToQueue", [
+					"EnqueuedURI" => $favourite['uri'],
+					"EnqueuedURIMetaData" => $favourite['metadata'],
+					"DesiredFirstTrackNumberEnqueued" => 0,
+					"EnqueueAsNext" => 0,
+				]);
 			} catch (Exception $e) {
 
 			}

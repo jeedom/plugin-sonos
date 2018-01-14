@@ -193,6 +193,8 @@ class Queue implements QueueInterface {
 
 			$numberOfTracks = count($chunk);
 
+			var_dump($metaData);
+
 			$data = $this->soap("AVTransport", "AddMultipleURIsToQueue", [
 				"UpdateID" => 0,
 				"NumberOfURIs" => $numberOfTracks,
