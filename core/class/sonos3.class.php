@@ -160,13 +160,25 @@ class sonos3 extends eqLogic {
 		if ($sonos == null) {
 			return null;
 		}
-		foreach (sonos3::getPlayLists() as $playlist) {
-			if (interactQuery::autoInteractWordFind($data['query'], $playlist->getName())) {
-				$sonos->getCmd(null, 'play_playlist')->execCmd(array('title' => $playlist->getName()));
-				return array('reply' => __('Ok j\'ai lancé : ', __FILE__) . $playlist->getName());
+		$playlists = config::byKey('playlist', 'sonos3');
+		if (is_array($playlists)) {
+			foreach ($playlists as $uri => $name) {
+				if (interactQuery::autoInteractWordFind($data['query'], $name)) {
+					$sonos->getCmd(null, 'play_playlist')->execCmd(array('title' => $name));
+					return array('reply' => __('Ok j\'ai lancé : ', __FILE__) . $name);
+				}
 			}
 		}
-		return array('reply' => 'Playlist non trouvée');
+		$favourites = config::byKey('favourites', 'sonos3');
+		if (is_array($favourites)) {
+			foreach ($favourites as $favourite) {
+				if (interactQuery::autoInteractWordFind($data['query'], $favourite['name'])) {
+					$sonos->getCmd(null, 'play_favoris')->execCmd(array('title' => $favourite['name']));
+					return array('reply' => __('Ok j\'ai lancé : ', __FILE__) . $favourite['name']);
+				}
+			}
+		}
+		return array('reply' => 'Playlist ou favoris non trouvé');
 	}
 
 	public static function getSonos($_emptyCache = false) {
@@ -208,9 +220,9 @@ class sonos3 extends eqLogic {
 				if (strpos($controller->getName(), 'PLAYBAR') !== false) {
 					$eqLogic->setConfiguration('model', 'PLAYBAR');
 				}
-                                if (strpos($controller->getName(), 'PLAYBASE') !== false) {
-                                        $eqLogic->setConfiguration('model', 'PLAYBASE');
-                                }
+				if (strpos($controller->getName(), 'PLAYBASE') !== false) {
+					$eqLogic->setConfiguration('model', 'PLAYBASE');
+				}
 				if (strpos($controller->getName(), 'CONNECT') !== false) {
 					$eqLogic->setConfiguration('model', 'CONNECT');
 				}
