@@ -83,6 +83,16 @@ try {
 		ajax::success();
 	}
 
+	if (init('action') == 'playFavourite') {
+		$sonos = sonos3::byId(init('id'));
+		if (!is_object($sonos)) {
+			ajax::success();
+		}
+		$cmd = $sonos->getCmd(null, 'play_favourite');
+		$cmd->execCmd(array('title' => init('favourite')));
+		ajax::success();
+	}
+
 	if (init('action') == 'addSpeaker') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -146,4 +156,3 @@ try {
 } catch (Exception $e) {
 	ajax::error(displayExeption($e), $e->getCode());
 }
-

@@ -9,6 +9,9 @@
 			<legend style="color : white;margin-bottom:2px;">Radio</legend>
 			<div class="radioList" style="text-align:left;"></div>
 
+			<legend style="color : white;margin-bottom:2px;">Favoris</legend>
+			<div class="favouriteList" style="text-align:left;"></div>
+
 		</div>
 		<img class="leftRafter" style="display:none;" src="plugins/sonos3/core/template/dashboard/images/chevron.png" title="Listes" onClick="panelLeftClose#uid#()"/>
 	</div>
@@ -158,151 +161,194 @@
 			});
 		});
 
-if('#radio#' != ''){
-	radio#id# = json_decode('#radio#');
-	radioList#id# = '';
-	for(var i in radio#id#){
-		radioList#id# += '<span class="cursor playRadio" style="white-space: nowrap;margin-left:5px;text-align:left;" data-name="'+radio#id#[i]+'" title="'+radio#id#[i]+'"><i class="fa fa-play"></i> '+radio#id#[i]+'</span><br/>';
-	}
-	$(".sonos3[data-eqLogic_uid=#uid#] .radioList").append(radioList#id#);
-}
-
-$('.sonos3[data-eqLogic_uid=#uid#] .playRadio').on('click',function(){
-	$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
-	var name = $(this).attr('data-name');
-	$.ajax({
-		type: "POST", 
-		url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
-		data: {
-			action: "playRadio",
-			id :'#id#',
-			radio : name
-		},
-		global:false,
-		dataType: 'json',
-		error: function (request, status, error) {
-			handleAjaxError(request, status, error);
-		},
-		success: function (data) { 
-			if (data.state != 'ok') {
-				$('#div_alert').showAlert({message: data.result, level: 'danger'});
-				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
-				setTimeout(function() {
-					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
-				}, 3000);
-				return;
+		if('#radio#' != ''){
+			radio#id# = json_decode('#radio#');
+			radioList#id# = '';
+			for(var i in radio#id#){
+				radioList#id# += '<span class="cursor playRadio" style="white-space: nowrap;margin-left:5px;text-align:left;" data-name="'+radio#id#[i]+'" title="'+radio#id#[i]+'"><i class="fa fa-play"></i> '+radio#id#[i]+'</span><br/>';
 			}
-			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
-			setTimeout(function() {
-				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
-			}, 3000);
+			$(".sonos3[data-eqLogic_uid=#uid#] .radioList").append(radioList#id#);
 		}
-	});
-});
-$('.sonos3[data-eqLogic_uid=#uid#] .playTrack').on('click',function(){
-	$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
-	var position = $(this).attr('data-position');
-	$.ajax({
-		type: "POST",
-		url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
-		data: {
-			action: "playTrack",
-			id :'#id#',
-			position : position
-		},
-		global:false,
-		dataType: 'json',
-		error: function (request, status, error) {
-			handleAjaxError(request, status, error);
-		},
-		success: function (data) { 
-			if (data.state != 'ok') {
-				$('#div_alert').showAlert({message: data.result, level: 'danger'});
-				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
-				setTimeout(function() {
-					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
-				}, 3000);
-				return;
+
+		$('.sonos3[data-eqLogic_uid=#uid#] .playRadio').on('click',function(){
+			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+			var name = $(this).attr('data-name');
+			$.ajax({
+				type: "POST", 
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "playRadio",
+					id :'#id#',
+					radio : name
+				},
+				global:false,
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function (data) { 
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						setTimeout(function() {
+							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+						}, 3000);
+						return;
+					}
+					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+					setTimeout(function() {
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+					}, 3000);
+				}
+			});
+		});
+
+		if('#favourite#' != ''){
+			favourite#id# = json_decode('#favourite#');
+			favouriteList#id# = '';
+			for(var i in favourite#id#){
+				favouriteList#id# += '<span class="cursor playFavourite" style="white-space: nowrap;margin-left:5px;text-align:left;" data-name="'+favourite#id#[i]+'" title="'+favourite#id#[i]+'"><i class="fa fa-play"></i> '+favourite#id#[i]+'</span><br/>';
 			}
-			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
-			setTimeout(function() {
-				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
-			}, 3000);
+			$(".sonos3[data-eqLogic_uid=#uid#] .favouriteList").append(favouriteList#id#);
 		}
-	});
-});
 
-if('#speakers#' != ''){
-	speakers#id# = json_decode('#speakers#');
-	speakersList#id# = '';
-	for(var i in speakers#id#){
-		speakersList#id# += '<span class="cursor" style="white-space: nowrap;margin-left:5px;" title="'+speakers#id#[i]+'"><i class="addSpeaker fa fa-plus" data-name="'+speakers#id#[i]+'"></i> <i class=" removeSpeaker fa fa-minus" data-name="'+speakers#id#[i]+'"></i> '+speakers#id#[i]+'</span><br/>';
-	}
-	$(".sonos3[data-eqLogic_uid=#uid#] .speakersList").append(speakersList#id#);
-}
+		$('.sonos3[data-eqLogic_uid=#uid#] .playFavourite').on('click',function(){
+			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+			var name = $(this).attr('data-name');
+			$.ajax({
+				type: "POST", 
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "playFavourite",
+					id :'#id#',
+					favourite : name
+				},
+				global:false,
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function (data) { 
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						setTimeout(function() {
+							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+						}, 3000);
+						return;
+					}
+					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+					setTimeout(function() {
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+					}, 3000);
+				}
+			});
+		});
 
+		$('.sonos3[data-eqLogic_uid=#uid#] .playTrack').on('click',function(){
+			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+			var position = $(this).attr('data-position');
+			$.ajax({
+				type: "POST",
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "playTrack",
+					id :'#id#',
+					position : position
+				},
+				global:false,
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function (data) { 
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						setTimeout(function() {
+							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+						}, 3000);
+						return;
+					}
+					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+					setTimeout(function() {
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+					}, 3000);
+				}
+			});
+		});
 
-$('.sonos3[data-eqLogic_uid=#uid#] .addSpeaker').on('click',function(){
-	$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
-	var name = $(this).attr('data-name');
-	$.ajax({
-		type: "POST", 
-		url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
-		data: {
-			action: "addSpeaker",
-			id :'#id#',
-			speaker : name
-		},
-		global:false,
-		dataType: 'json',
-		error: function (request, status, error) {
-			handleAjaxError(request, status, error);
-		},
-		success: function (data) {
-			if (data.state != 'ok') {
-				$('#div_alert').showAlert({message: data.result, level: 'danger'});
-				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
-				setTimeout(function() {
-					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
-				}, 3000);
-				return;
+		if('#speakers#' != ''){
+			speakers#id# = json_decode('#speakers#');
+			speakersList#id# = '';
+			for(var i in speakers#id#){
+				speakersList#id# += '<span class="cursor" style="white-space: nowrap;margin-left:5px;" title="'+speakers#id#[i]+'"><i class="addSpeaker fa fa-plus" data-name="'+speakers#id#[i]+'"></i> <i class=" removeSpeaker fa fa-minus" data-name="'+speakers#id#[i]+'"></i> '+speakers#id#[i]+'</span><br/>';
 			}
-			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
-			setTimeout(function() {
-				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
-			}, 3000);
+			$(".sonos3[data-eqLogic_uid=#uid#] .speakersList").append(speakersList#id#);
 		}
-	});
-});
 
-$('.sonos3[data-eqLogic_uid=#uid#] .removeSpeaker').on('click',function(){
-	$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
-	var name = $(this).attr('data-name');
-	$.ajax({
-		type: "POST", 
-		url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
-		data: {
-			action: "removeSpeaker",
-			id :'#id#',
-			speaker : name
-		},
-		global:false,
-		dataType: 'json',
-		error: function (request, status, error) {
-			handleAjaxError(request, status, error);
-		},
-		success: function (data) {
-			if (data.state != 'ok') {
-				$('#div_alert').showAlert({message: data.result, level: 'danger'});
-				return;
-			}
-			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
-			setTimeout(function() {
-				$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
-			}, 3000);
-		}
-	});
-});
-</script>
+
+		$('.sonos3[data-eqLogic_uid=#uid#] .addSpeaker').on('click',function(){
+			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+			var name = $(this).attr('data-name');
+			$.ajax({
+				type: "POST", 
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "addSpeaker",
+					id :'#id#',
+					speaker : name
+				},
+				global:false,
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function (data) {
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						setTimeout(function() {
+							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+						}, 3000);
+						return;
+					}
+					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+					setTimeout(function() {
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+					}, 3000);
+				}
+			});
+		});
+
+		$('.sonos3[data-eqLogic_uid=#uid#] .removeSpeaker').on('click',function(){
+			$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-spinner fa-spin"></i>');
+			var name = $(this).attr('data-name');
+			$.ajax({
+				type: "POST", 
+				url: "plugins/sonos3/core/ajax/sonos3.ajax.php", 
+				data: {
+					action: "removeSpeaker",
+					id :'#id#',
+					speaker : name
+				},
+				global:false,
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function (data) {
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+					$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-rss"></i>');
+					setTimeout(function() {
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
+					}, 3000);
+				}
+			});
+		});
+	</script>
 </div>
 

@@ -173,7 +173,7 @@ class sonos3 extends eqLogic {
 		if (is_array($favourites)) {
 			foreach ($favourites as $favourite) {
 				if (interactQuery::autoInteractWordFind($data['query'], $favourite['name'])) {
-					$sonos->getCmd(null, 'play_favoris')->execCmd(array('title' => $favourite['name']));
+					$sonos->getCmd(null, 'play_favourite')->execCmd(array('title' => $favourite['name']));
 					return array('reply' => __('Ok j\'ai lancé : ', __FILE__) . $favourite['name']);
 				}
 			}
@@ -823,6 +823,9 @@ class sonos3 extends eqLogic {
 			}
 			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_radio') {
 				$replace['#radio#'] = str_replace(array("'", '+'), array("\'", '\+'), $cmd->getDisplay('title_possibility_list'));
+			}
+			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_favourite') {
+				$replace['#favourite#'] = str_replace(array("'", '+'), array("\'", '\+'), $cmd->getDisplay('title_possibility_list'));
 			}
 		}
 
