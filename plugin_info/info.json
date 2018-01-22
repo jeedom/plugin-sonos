@@ -10,6 +10,6 @@
 	"hasOwnDeamon" : true,
 	"display" : "panel",
 	"mobile" : "panel",
-	"changelog" : "https://github.com/jeedom/plugin-sonos/blob/stable/doc/#language#/changelog.asciidoc",
-	"documentation" : "https://github.com/jeedom/plugin-sonos/blob/stable/doc/#language#/index.asciidoc"
+	"changelog" : "https://jeedom.github.io/plugin-sonos/#language#/changelog",
+	"documentation" : "https://jeedom.github.io/plugin-sonos/#language#/"
 }
