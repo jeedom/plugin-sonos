@@ -6,7 +6,7 @@
     "plugins/sonos3/core/class/sonos3.class.php": {
         "Status": "Stato",
         "Rafraîhir": "Rafraîhir",
-        "Play": "Play",
+        "Play": "giocare",
         "Stop": "Ferma",
         "Pause": "Pausa",
         "Suivant": "Successivo",
@@ -57,7 +57,7 @@
         "Rechercher": "Cerca",
         "Mes templates": "Mes templates",
         "Général": "Generale",
-        "Nom de l'équipement template": "Nom de l'équipement template",
+        "Nom de l'équipement template": "Nome di attrezzature template",
         "Objet parent": "Oggetto padre",
         "Aucun": "Nessuno",
         "Activer": "Attiva",
@@ -136,7 +136,7 @@
         "Radio": "Radio"
     },
     "plugins/sonos3/core/ajax/sonos3.ajax.php": {
-        "Aucune méthode correspondante à : ": "Aucune méthode correspondante à :"
+        "Aucune méthode correspondante à : ": "Nessun metodo di corrispondenza:"
     },
     "plugins/sonos3/desktop/php/panel.php": {
         "Liste objets": "Liste objets",

@@ -10,8 +10,7 @@ Sonos Connect AMP et Sonos Playbar. Il va vous permettre de voir l’état
 du/des Sonos et d’effectuer des actions dessus (lecture, pause, suivant,
 précédent, volume, choix d’une playlist…​)
 
-Configuration du plugin 
-=======================
+== Plugin configuration
 
 La configuration est très simple, après téléchargement du plugin, il
 vous suffit de l’activer et c’est tout. Le plugin va rechercher les
@@ -55,11 +54,11 @@ Configuration des équipements
 La configuration des équipements Sonos est accessible à partir du menu
 Plugins puis multimedia
 
-Vous retrouvez ici toute la configuration de votre équipement :
+You can find here the full configuration of your device :
 
 -   **Nom de l’équipement Sonos** : nom de votre équipement Sonos
 
--   **Objet parent** : indique l’objet parent auquel appartient
+-   **Parent Object** : means the parent object the equipment depend
     l’équipement
 
 -   **Activer** : permet de rendre votre équipement actif

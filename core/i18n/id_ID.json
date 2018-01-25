@@ -6,12 +6,12 @@
     "plugins/sonos3/core/class/sonos3.class.php": {
         "Status": "Status",
         "Rafraîhir": "Menyegarkan",
-        "Play": "Play",
+        "Play": "bermain",
         "Stop": "Stop",
         "Pause": "Berhenti Sebentar",
         "Suivant": "Suivant",
         "Precedent": "Precedent",
-        "Muet": "Muet",
+        "Muet": "bisu",
         "Non muet": "Non muet",
         "Répéter": "Répéter",
         "Aléatoire": "Aléatoire",
@@ -20,10 +20,10 @@
         "Piste": "Piste",
         "Artiste": "Artiste",
         "Album": "Album",
-        "Durée": "Durée",
+        "Durée": "lamanya",
         "Position": "Position",
         "Lecture": "Lecture",
-        "Image": "Image",
+        "Image": "gambar",
         "Répéter status": "Répéter status",
         "Aléatoire status": "Aléatoire status",
         "Jouer playlist": "Jouer playlist",
@@ -53,7 +53,7 @@
         "Impossible de récuperer le sonos : ": "Impossible de récuperer le sonos :"
     },
     "plugins/sonos3/desktop/php/sonos3.php": {
-        "Ajouter un template": "Ajouter un template",
+        "Ajouter un template": "menambahkan template",
         "Rechercher": "Mencari",
         "Mes templates": "Mes templates",
         "Général": "Umum",
@@ -79,7 +79,7 @@
         "Configuration": "Konfigurasi",
         "Equipement": "Peralatan",
         "Commandes": "Perintah",
-        "Configuration avancée": "Configuration avancée"
+        "Configuration avancée": "konfigurasi lanjutan"
     },
     "plugins/sonos3/desktop/js/sonos3.js": {
         "Nom": "Nama",
@@ -136,7 +136,7 @@
         "Radio": "Radio"
     },
     "plugins/sonos3/core/ajax/sonos3.ajax.php": {
-        "Aucune méthode correspondante à : ": "Aucune méthode correspondante à :"
+        "Aucune méthode correspondante à : ": "Tidak ada metode yang cocok:"
     },
     "plugins/sonos3/desktop/php/panel.php": {
         "Liste objets": "Liste objets",
