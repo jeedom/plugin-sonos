@@ -1,0 +1,152 @@
+{
+    "plugins/sonos3/plugin_info/info.xml": {
+        "Plugin de controle de sonos": "コントロールプラグインSONOS",
+        "Aucune": "何でもありません"
+    },
+    "plugins/sonos3/core/class/sonos3.class.php": {
+        "Status": "ステータス",
+        "Rafraîhir": "Rafraîhir",
+        "Play": "遊びます",
+        "Stop": "ストップ",
+        "Pause": "休止",
+        "Suivant": "以下",
+        "Precedent": "前",
+        "Muet": "ミュート",
+        "Non muet": "ダムではありません",
+        "Répéter": "繰り返します",
+        "Aléatoire": "偶然",
+        "Volume status": "ステータス問題",
+        "Volume": "ボリューム",
+        "Piste": "トラック",
+        "Artiste": "アーティスト",
+        "Album": "アルバム",
+        "Durée": "期間",
+        "Position": "位置",
+        "Lecture": "読書",
+        "Image": "画像",
+        "Répéter status": "繰り返しのステータス",
+        "Aléatoire status": "ランダムな状態",
+        "Jouer playlist": "プレイプレイリスト",
+        "Aucun": "何でもありません",
+        "Arrêté": "逮捕",
+        "Ajout un haut parleur": "スピーカーを追加します",
+        "Supprimer un haut parleur": "スピーカーの削除",
+        "Dire": "伝えます",
+        "Jouer une radio": "ラジオを再生",
+        "Radio non trouvée : ": "ラジオが見つかりません。",
+        "Playlist non trouvé : ": "プレイリストが見つかりません。",
+        "Erreur sur ": "エラー",
+        "Options": "オプション",
+        "Titre de la playlist": "タイトルプレイリスト",
+        "Titre de la radio": "タイトルラジオ",
+        "Nom de la piece": "部屋の名前",
+        "Message": "メッセージ",
+        "Tache Z-Wave": "スポットZ-Waveの",
+        "OK": "OK",
+        "Tache de synchronisation": "ステイン同期",
+        "Tâche de synchronisation": "タスクの同期",
+        "Transition": "推移",
+        "NOK": "NOK",
+        "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "タスクエンジンスタートページに移動し、汚れsonos3 ::セーターをチェック",
+        "Muet status": "ミュート状態",
+        "Entrée de ligne": "ライン入力",
+        "Impossible de récuperer le sonos : ": "サウンドシステムを取得できませんでした。"
+    },
+    "plugins/sonos3/desktop/php/sonos3.php": {
+        "Ajouter un template": "テンプレートを追加します。",
+        "Rechercher": "検索する",
+        "Mes templates": "私のテンプレート",
+        "Général": "コモン",
+        "Nom de l'équipement template": "テンプレート機器の名称",
+        "Objet parent": "親オブジェクト",
+        "Aucun": "何でもありません",
+        "Activer": "アクティブにし",
+        "Visible": "目に見えます",
+        "template param 1": "テンプレートPARAM 1",
+        "Template": "テンプレート",
+        "Nom": "表題",
+        "Type": "タイプ",
+        "Action": "アクション",
+        "Supprimer": "取り除きます",
+        "Sauvegarder": "セーブ",
+        "IP": "IP",
+        "Commande": "オーダー",
+        "Nom du sonos": "名前SONOS",
+        "Mes Sonos": "私のSonosの",
+        "Model": "モデル",
+        "Masquer la jaquette": "隠すジャケット",
+        "Gestion": "管理",
+        "Configuration": "コンフィギュレーション",
+        "Equipement": "設備",
+        "Commandes": "コマンド",
+        "Configuration avancée": "高度な設定"
+    },
+    "plugins/sonos3/desktop/js/sonos3.js": {
+        "Nom": "表題",
+        "Tester": "テスト"
+    },
+    "plugins/sonos3/plugin_info/configuration.php": {
+        "Découverte": "発見",
+        "Rechercher les équipements Sonos (play1, play3 et play5 seulement)": "Sonosの機器を検索する（PLAY1、play3とPLAY5のみ）",
+        "Synchronisation réussie": "正常な同期",
+        "Rechercher les équipements Sonos": "Sonosの機器を検索します",
+        "Partage de fichier pour le text-to-speech": "テキストを音声に変換するためのファイル共有",
+        "[TTS] Chemin local du répertoire partagé": "[TTS]共有ディレクトリのローカルパス",
+        "[TTS] Chemin Sonos du répertoire paratagé": "[TTS]パスSonosのparatagéディレクトリ",
+        "[TTS] Chemin Sonos du répertoire partagé": "共有ディレクトリの[TTS] Sonosのパス",
+        "Fournisseur TTS": "TTSサプライヤー",
+        "Voix": "声",
+        "[TTS] IP du partage": "[TTS] IPを共有します",
+        "[TTS] Nom d'utilisateur pour le partage": "[TTS]共有するためのユーザー名を",
+        "[TTS] Mot de passe du partage": "[TTS]パスワードの共有",
+        "[TTS] Chemin sur le nas": "[TTS] NAS上のパス",
+        "IP du partage": "IP共有",
+        "Nom d'utilisateur pour le partage": "共有のためのユーザー名",
+        "Mot de passe du partage": "パスワード共有",
+        "Chemin sur le nas": "NAS上のパス",
+        "Nom ou IP du partage": "名前またはIP共有",
+        "Attention votre version de PHP (5.6.14-0+deb8u1) est trop veille il faut au minimum PHP 5.6": "お使いのPHPのバージョン（5.6.14-0 + deb8u1）に警告すぎ前夜には、少なくともPHP 5.6を必要としています",
+        "Dépendance Sonos": "Sonosの依存性",
+        "Installer/Mettre à jour": "インストール/更新",
+        "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "あなたは/更新Sonosのインストールしてもよろしいでしょうか？",
+        "Installation / Mise à jour": "インストール/更新",
+        "Partage": "シェアリング"
+    },
+    "plugins/sonos3/desktop/modal/queue.sonos.php": {
+        "Artiste": "アーティスト",
+        "Album": "アルバム",
+        "Piste": "トラック",
+        "Vider": "空",
+        "Action": "アクション"
+    },
+    "plugins/sonos3/desktop/modal/playlist.sonos.php": {
+        "Artiste": "アーティスト",
+        "Album": "アルバム",
+        "Piste": "トラック",
+        "Playlist": "プレイリスト",
+        "Action": "アクション"
+    },
+    "plugins/sonos3/desktop/modal/radio.sonos.php": {
+        "Vider": "空",
+        "Action": "アクション",
+        "Radio": "ラジオ"
+    },
+    "plugins/sonos3/desktop/modal/speaker.sonos.php": {
+        "Action": "アクション",
+        "Radio": "ラジオ"
+    },
+    "plugins/sonos3/core/ajax/sonos3.ajax.php": {
+        "Aucune méthode correspondante à : ": "一致する方法でありません："
+    },
+    "plugins/sonos3/desktop/php/panel.php": {
+        "Liste objets": "リスト項目",
+        "Rechercher": "検索"
+    },
+    "plugins/sonos3/desktop/modal/update.sonos.php": {
+        "Pause": "休止",
+        "Rechercher": "検索する"
+    },
+    "plugins/sonos3/plugin_info/info.json": {
+        "Plugin de controle de sonos": "コントロールプラグインSONOS"
+    }
+}

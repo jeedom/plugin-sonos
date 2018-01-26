@@ -1,0 +1,152 @@
+{
+    "plugins/sonos3/plugin_info/info.xml": {
+        "Plugin de controle de sonos": "Controle Plug-in Sonos",
+        "Aucune": "Nenhum"
+    },
+    "plugins/sonos3/core/class/sonos3.class.php": {
+        "Status": "estado",
+        "Rafraîhir": "Rafraîhir",
+        "Play": "jogar",
+        "Stop": "Pare",
+        "Pause": "Pause",
+        "Suivant": "seguinte",
+        "Precedent": "anterior",
+        "Muet": "mudo",
+        "Non muet": "não mudo",
+        "Répéter": "repetição",
+        "Aléatoire": "aleatório",
+        "Volume status": "questão do estatuto",
+        "Volume": "volume",
+        "Piste": "pista",
+        "Artiste": "artista",
+        "Album": "álbum",
+        "Durée": "duração",
+        "Position": "posição",
+        "Lecture": "leitura",
+        "Image": "imagem",
+        "Répéter status": "status de repetição",
+        "Aléatoire status": "estado aleatório",
+        "Jouer playlist": "jogo lista",
+        "Aucun": "Nemhum",
+        "Arrêté": "preso",
+        "Ajout un haut parleur": "Adicionando um alto-falante",
+        "Supprimer un haut parleur": "Excluir um alto-falante",
+        "Dire": "dizer",
+        "Jouer une radio": "jogo de rádio",
+        "Radio non trouvée : ": "não encontrado Radio:",
+        "Playlist non trouvé : ": "Playlist não encontrado:",
+        "Erreur sur ": "erro",
+        "Options": "opções",
+        "Titre de la playlist": "título Playlist",
+        "Titre de la radio": "Rádio título",
+        "Nom de la piece": "Nome da sala",
+        "Message": "mensagem",
+        "Tache Z-Wave": "Ponto Z-Wave",
+        "OK": "ok",
+        "Tache de synchronisation": "sincronização Stain",
+        "Tâche de synchronisation": "a sincronização de tarefas",
+        "Transition": "transição",
+        "NOK": "NOK",
+        "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "Ir para a página inicial do motor de tarefas e verificar a mancha sonos3 :: camisola",
+        "Muet status": "status mudo",
+        "Entrée de ligne": "entrada de linha",
+        "Impossible de récuperer le sonos : ": "Não foi possível obter os sistemas de som:"
+    },
+    "plugins/sonos3/desktop/php/sonos3.php": {
+        "Ajouter un template": "Adicionar template",
+        "Rechercher": "Pesquisar",
+        "Mes templates": "meus modelos",
+        "Général": "Geral",
+        "Nom de l'équipement template": "Nome do equipamento modelo",
+        "Objet parent": "objeto pai",
+        "Aucun": "Nemhum",
+        "Activer": "Ativar",
+        "Visible": "Visivél",
+        "template param 1": "Molde param 1",
+        "Template": "modelo",
+        "Nom": "Nome",
+        "Type": "tipo",
+        "Action": "ação",
+        "Supprimer": "remover",
+        "Sauvegarder": "Salvar",
+        "IP": "IP",
+        "Commande": "ordem",
+        "Nom du sonos": "Nome Sonos",
+        "Mes Sonos": "meus Sonos",
+        "Model": "modelo",
+        "Masquer la jaquette": "Esconder jaqueta",
+        "Gestion": "gestão",
+        "Configuration": "Configuração",
+        "Equipement": "Equipamento",
+        "Commandes": "comandos",
+        "Configuration avancée": "configuração avançada"
+    },
+    "plugins/sonos3/desktop/js/sonos3.js": {
+        "Nom": "Nome",
+        "Tester": "teste"
+    },
+    "plugins/sonos3/plugin_info/configuration.php": {
+        "Découverte": "descoberta",
+        "Rechercher les équipements Sonos (play1, play3 et play5 seulement)": "Busca de equipamento Sonos (Play1, play3 e PLAY5 apenas)",
+        "Synchronisation réussie": "sincronização bem-sucedida",
+        "Rechercher les équipements Sonos": "Busca de equipamento Sonos",
+        "Partage de fichier pour le text-to-speech": "Compartilhamento de arquivos para o discurso de texto para",
+        "[TTS] Chemin local du répertoire partagé": "[TTS] Caminho local do diretório compartilhado",
+        "[TTS] Chemin Sonos du répertoire paratagé": "diretório [TTS] Caminho Sonos paratagé",
+        "[TTS] Chemin Sonos du répertoire partagé": "caminho [TTS] Sonos do diretório compartilhado",
+        "Fournisseur TTS": "fornecedor TTS",
+        "Voix": "voz",
+        "[TTS] IP du partage": "[TTS] partilha de IP",
+        "[TTS] Nom d'utilisateur pour le partage": "[TTS] Nome de usuário para compartilhamento",
+        "[TTS] Mot de passe du partage": "[TTS] compartilhamento de senha",
+        "[TTS] Chemin sur le nas": "[TTS] caminho no NAS",
+        "IP du partage": "compartilhamento de IP",
+        "Nom d'utilisateur pour le partage": "Nome de usuário para compartilhamento",
+        "Mot de passe du partage": "compartilhamento de senha",
+        "Chemin sur le nas": "Path no NAS",
+        "Nom ou IP du partage": "Nome ou compartilhamento de IP",
+        "Attention votre version de PHP (5.6.14-0+deb8u1) est trop veille il faut au minimum PHP 5.6": "Aviso sua versão do PHP (5.6.14-0 + deb8u1) é demasiado véspera requer pelo menos PHP 5.6",
+        "Dépendance Sonos": "dependência Sonos",
+        "Installer/Mettre à jour": "Instalar / Atualizar",
+        "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Tem certeza de que deseja instalar / atualização Sonos?",
+        "Installation / Mise à jour": "Instalar / Atualizar",
+        "Partage": "compartilhando"
+    },
+    "plugins/sonos3/desktop/modal/queue.sonos.php": {
+        "Artiste": "artista",
+        "Album": "álbum",
+        "Piste": "pista",
+        "Vider": "vazio",
+        "Action": "ação"
+    },
+    "plugins/sonos3/desktop/modal/playlist.sonos.php": {
+        "Artiste": "artista",
+        "Album": "álbum",
+        "Piste": "pista",
+        "Playlist": "lista",
+        "Action": "ação"
+    },
+    "plugins/sonos3/desktop/modal/radio.sonos.php": {
+        "Vider": "vazio",
+        "Action": "ação",
+        "Radio": "rádio"
+    },
+    "plugins/sonos3/desktop/modal/speaker.sonos.php": {
+        "Action": "ação",
+        "Radio": "rádio"
+    },
+    "plugins/sonos3/core/ajax/sonos3.ajax.php": {
+        "Aucune méthode correspondante à : ": "No método de correspondência:"
+    },
+    "plugins/sonos3/desktop/php/panel.php": {
+        "Liste objets": "os itens da lista",
+        "Rechercher": "pesquisa"
+    },
+    "plugins/sonos3/desktop/modal/update.sonos.php": {
+        "Pause": "Pause",
+        "Rechercher": "Pesquisar"
+    },
+    "plugins/sonos3/plugin_info/info.json": {
+        "Plugin de controle de sonos": "Controle Plug-in Sonos"
+    }
+}
