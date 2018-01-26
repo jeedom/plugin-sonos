@@ -50,7 +50,12 @@
         "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "Pergi ke halaman awal mesin tugas dan memeriksa noda sonos3 :: sweater",
         "Muet status": "Status bisu",
         "Entrée de ligne": "line input",
-        "Impossible de récuperer le sonos : ": "tidak bisa mendapatkan sistem suara:"
+        "Impossible de récuperer le sonos : ": "tidak bisa mendapatkan sistem suara:",
+        "Précédent": "sebelumnya",
+        "Couleur dominante": "Couleur dominante",
+        "Jouer favoris": "Jouer favoris",
+        "Titre du favoris": "Titre du favoris",
+        "Favoris non trouvé : ": "Favoris non trouvé :"
     },
     "plugins/sonos3/desktop/php/sonos3.php": {
         "Ajouter un template": "menambahkan template",
@@ -110,7 +115,8 @@
         "Installer/Mettre à jour": "Install / Update",
         "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Apakah Anda yakin Anda ingin menginstal / update Sonos?",
         "Installation / Mise à jour": "Install / Update",
-        "Partage": "berbagi"
+        "Partage": "berbagi",
+        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :"
     },
     "plugins/sonos3/desktop/modal/queue.sonos.php": {
         "Artiste": "artis",

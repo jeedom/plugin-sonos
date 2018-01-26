@@ -50,7 +50,12 @@
         "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "Ir para a página inicial do motor de tarefas e verificar a mancha sonos3 :: camisola",
         "Muet status": "status mudo",
         "Entrée de ligne": "entrada de linha",
-        "Impossible de récuperer le sonos : ": "Não foi possível obter os sistemas de som:"
+        "Impossible de récuperer le sonos : ": "Não foi possível obter os sistemas de som:",
+        "Précédent": "anterior",
+        "Couleur dominante": "Couleur dominante",
+        "Jouer favoris": "Jouer favoris",
+        "Titre du favoris": "Titre du favoris",
+        "Favoris non trouvé : ": "Favoris non trouvé :"
     },
     "plugins/sonos3/desktop/php/sonos3.php": {
         "Ajouter un template": "Adicionar template",
@@ -110,7 +115,8 @@
         "Installer/Mettre à jour": "Instalar / Atualizar",
         "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Tem certeza de que deseja instalar / atualização Sonos?",
         "Installation / Mise à jour": "Instalar / Atualizar",
-        "Partage": "compartilhando"
+        "Partage": "compartilhando",
+        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :"
     },
     "plugins/sonos3/desktop/modal/queue.sonos.php": {
         "Artiste": "artista",

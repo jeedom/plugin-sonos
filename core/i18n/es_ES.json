@@ -50,7 +50,12 @@
         "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "Accede a la pagina del motor de las tareas y verifique/lanzar la tarea sonos3::pull",
         "Muet status": "Mudo estado",
         "Entrée de ligne": "Entrada de linea",
-        "Impossible de récuperer le sonos : ": "Imposible de recuperar el sonos :"
+        "Impossible de récuperer le sonos : ": "Imposible de recuperar el sonos :",
+        "Précédent": "Anterior",
+        "Couleur dominante": "Couleur dominante",
+        "Jouer favoris": "Jouer favoris",
+        "Titre du favoris": "Titre du favoris",
+        "Favoris non trouvé : ": "Favoris non trouvé :"
     },
     "plugins/sonos3/desktop/php/sonos3.php": {
         "Ajouter un template": "Añadir una plantilla",
@@ -110,7 +115,8 @@
         "Installer/Mettre à jour": "Instalar/Actualizar",
         "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Está seguro de instalar/actualizar Sonos ?",
         "Installation / Mise à jour": "Instalación / Actualización",
-        "Partage": "Reparto"
+        "Partage": "Reparto",
+        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :"
     },
     "plugins/sonos3/desktop/modal/queue.sonos.php": {
         "Artiste": "Artista",

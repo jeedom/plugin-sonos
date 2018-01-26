@@ -50,7 +50,12 @@
         "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "Görev motor çalıştırma sayfasına gidin ve leke sonos3 :: kazak kontrol",
         "Muet status": "Sessiz durum",
         "Entrée de ligne": "Çizgi girişi",
-        "Impossible de récuperer le sonos : ": "ses sistemleri alınamadı:"
+        "Impossible de récuperer le sonos : ": "ses sistemleri alınamadı:",
+        "Précédent": "Önceki",
+        "Couleur dominante": "Couleur dominante",
+        "Jouer favoris": "Jouer favoris",
+        "Titre du favoris": "Titre du favoris",
+        "Favoris non trouvé : ": "Favoris non trouvé :"
     },
     "plugins/sonos3/desktop/php/sonos3.php": {
         "Ajouter un template": "şablon ekle",
@@ -110,7 +115,8 @@
         "Installer/Mettre à jour": "Yükle/Güncelle",
         "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Sonos'u yüklemek/güncellemek istediğinizden eminmisiniz ?",
         "Installation / Mise à jour": "Yükleme / Güncelleme",
-        "Partage": "Paylaşım"
+        "Partage": "Paylaşım",
+        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :"
     },
     "plugins/sonos3/desktop/modal/queue.sonos.php": {
         "Artiste": "Şarkicı",
