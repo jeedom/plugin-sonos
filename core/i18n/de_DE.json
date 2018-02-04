@@ -52,10 +52,10 @@
         "Entrée de ligne": "Line-Eingang",
         "Impossible de récuperer le sonos : ": "Unmöglich, die Sonos abzurufen :",
         "Précédent": "zurück",
-        "Couleur dominante": "Couleur dominante",
-        "Jouer favoris": "Jouer favoris",
-        "Titre du favoris": "Titre du favoris",
-        "Favoris non trouvé : ": "Favoris non trouvé :"
+        "Couleur dominante": "Dominierende Farbe",
+        "Jouer favoris": "Spiele Favoriten",
+        "Titre du favoris": "Titel der Favoriten",
+        "Favoris non trouvé : ": "Favoriten nicht gefunden :"
     },
     "plugins/sonos3/desktop/php/sonos3.php": {
         "Ajouter un template": "Vorlage hinzufügen",
@@ -116,7 +116,7 @@
         "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Sind Sie sicher, dass Sie Sonos installieren/aktualisieren möchten?",
         "Installation / Mise à jour": "Install/Update",
         "Partage": "Teilen",
-        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :"
+        "Le plugin sonos doit réagir aux interactions :": "Das Sonos-Plugin muss auf Interaktionen reagieren :"
     },
     "plugins/sonos3/desktop/modal/queue.sonos.php": {
         "Artiste": "Interpret",
