@@ -67,14 +67,7 @@ if (version_compare(PHP_VERSION, '7.0') < 0) {
 </form>
 
 <script>
-  $('.configKey[data-l1key=ttsProvider').on('change',function(){
-    $('.configKey[data-l1key=ttsVoxygenVoice').closest('.form-group').hide();
-    if($(this).value() == 'voxygen'){
-      $('.configKey[data-l1key=ttsVoxygenVoice').closest('.form-group').show();
-    }
-  });
-
-  $('#bt_syncSonos').on('click', function () {
+$('#bt_syncSonos').on('click', function () {
         $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
             url: "plugins/sonos3/core/ajax/sonos3.ajax.php", // url du fichier php
