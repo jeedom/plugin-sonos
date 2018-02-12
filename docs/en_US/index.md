@@ -59,11 +59,11 @@ You can find here the full configuration of your device :
 -   **Nom de l’équipement Sonos** : nom de votre équipement Sonos
 
 -   **Parent Object** : means the parent object the equipment depend
-    l’équipement
+    equipment
 
--   **Activer** : permet de rendre votre équipement actif
+-   **Enable**: makes your equipment active
 
--   **Visible** : le rend visible sur le dashboard
+-   **Visible**: makes it visible on the dashboard
 
 -   **Modèle** : le modèle de votre Sonos (à ne changer que si ce n’est
     pas le bon)

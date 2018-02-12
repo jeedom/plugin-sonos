@@ -60,11 +60,11 @@ Aquí encontrará toda la configuración de su dispositivo:
 -   **Nom de l’équipement Sonos** : nom de votre équipement Sonos
 
 -   **Objeto padre** : especifica el objeto padre al que pertenece
-    l’équipement
+    equipo
 
--   **Activer** : permet de rendre votre équipement actif
+-   ** ** Activar: para que su equipo activo
 
--   **Visible** : le rend visible sur le dashboard
+-   Visible ** **: hace visible en el tablero de instrumentos
 
 -   **Modèle** : le modèle de votre Sonos (à ne changer que si ce n’est
     pas le bon)
