@@ -48,7 +48,7 @@ Sonos en donnant l’IP à Jeedom ou cliquer sur "Rechercher les
 > Les messages trop longs ne peuvent être transmis en TTS (la limite
 > dépend du fournisseur de TTS, en général environ 100 caractères)
 
-Configuration des équipements 
+Equipment configuration
 =============================
 
 La configuration des équipements Sonos est accessible à partir du menu
