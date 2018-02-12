@@ -10,7 +10,7 @@ Sonos Connect AMP et Sonos Playbar. Il va vous permettre de voir l’état
 du/des Sonos et d’effectuer des actions dessus (lecture, pause, suivant,
 précédent, volume, choix d’une playlist…​)
 
-Configuration du plugin 
+configuración del plugin
 =======================
 
 La configuration est très simple, après téléchargement du plugin, il
