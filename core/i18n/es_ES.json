@@ -52,10 +52,10 @@
         "Entrée de ligne": "Entrada de linea",
         "Impossible de récuperer le sonos : ": "Imposible de recuperar el sonos :",
         "Précédent": "Anterior",
-        "Couleur dominante": "Couleur dominante",
-        "Jouer favoris": "Jouer favoris",
-        "Titre du favoris": "Titre du favoris",
-        "Favoris non trouvé : ": "Favoris non trouvé :"
+        "Couleur dominante": "Color dominante",
+        "Jouer favoris": "Juego Favorito",
+        "Titre du favoris": "Título Favorito",
+        "Favoris non trouvé : ": "Favoritos no encontrados :"
     },
     "plugins/sonos3/desktop/php/sonos3.php": {
         "Ajouter un template": "Añadir una plantilla",
@@ -116,7 +116,7 @@
         "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Está seguro de instalar/actualizar Sonos ?",
         "Installation / Mise à jour": "Instalación / Actualización",
         "Partage": "Reparto",
-        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :"
+        "Le plugin sonos doit réagir aux interactions :": "El plugin de sonos debe reaccionar a las interacciones :"
     },
     "plugins/sonos3/desktop/modal/queue.sonos.php": {
         "Artiste": "Artista",
