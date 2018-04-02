@@ -77,7 +77,7 @@ En-dessous vous retrouvez la liste des commandes :
 -   **Nom** : nom de la commande
 
 -   **Configuration avancée (petites roues crantées)** : permet
-    d’afficher la configuration avancée de la commande (méthode
+    die erweiterte Konfiguration des Befehls anzuzeigen (Informationen,
     d’historisation, widget…​)
 
 -   **Tester** : permet de tester la commande
