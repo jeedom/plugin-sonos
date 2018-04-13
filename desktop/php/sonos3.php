@@ -104,7 +104,7 @@ foreach (object::all() as $object) {
                 <option value="CONNECT">Sonos Connect</option>
                 <option value="CONNECT:AMP">Sonos Connect AMP</option>
                 <option value="PLAYBAR">Sonos Playbar</option>
-                <option value="PLAYBASE">Sonos Playbase</option> 
+                <option value="PLAYBASE">Sonos Playbase</option>
               </select>
             </div>
           </div>
@@ -119,7 +119,7 @@ foreach (object::all() as $object) {
     </div>
     <div class="col-xs-6">
       <center>
-        <img src="plugins/sonos3/doc/images/sonos3_icon.png" id="img_sonosModel" style="height : 300px;" />
+        <img src="<?php echo $plugin->getPathImgIcon(); ?>" id="img_sonosModel" style="height : 300px;" />
       </center>
     </div>
   </div>

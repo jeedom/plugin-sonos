@@ -1152,11 +1152,16 @@ class sonos3Cmd extends cmd {
 			$folder = array_pop($path);
 			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
 			$track = new TextToSpeech(trim($_options['message']), $directory, new PicottsProvider(str_replace('_', '-', config::byKey('language', 'core', 'fr_FR'))));
-			if ($_options['title'] != '' && is_numeric($_options['title'])) {
-				$controller->interrupt($track, $_options['title']);
-			} else {
-				$controller->interrupt($track);
+			try {
+				if ($_options['title'] != '' && is_numeric($_options['title'])) {
+					$controller->interrupt($track, $_options['title']);
+				} else {
+					$controller->interrupt($track);
+				}
+			} catch (Exception $e) {
+				log::add('sonos3', 'debug', $e->getMessage());
 			}
+
 		}
 	}
 
