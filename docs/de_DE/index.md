@@ -78,7 +78,7 @@ En-dessous vous retrouvez la liste des commandes :
 
 -   **Configuration avancée (petites roues crantées)** : permet
     die erweiterte Konfiguration des Befehls anzuzeigen (Informationen,
-    d’historisation, widget…​)
+    Archivierung, Widget ...)
 
 -   **Tester** : permet de tester la commande
 
