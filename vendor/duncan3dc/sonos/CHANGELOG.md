@@ -9,15 +9,49 @@ Changelog
 * [Support] Drop support for HHVM as there is little demand to make it worthwhile.
 * [Network] The construction of a new instance now only accepts a DeviceCollection instance.
 * [Network] Replaced the doctrine/cache dependency with any PSR-16 compatible cache library.
-* [Network] Replaced the doctrine/cache dependency with any PSR-6 compatible cache library.
 * [Controllers] An exception is now throw when adding track(s) fails.
 * Scalar parameter type hints have been added where possible.
 * Return type hints have been added where possible.
+* The Alarm constants are now on the AlarmInterface
+* All classes now implement an interface, and are marked as final to prevent inheritance.
+* NotFoundException is now thrown instead of returning null
 
 ### Removed
 
 * [Tracks] The deprecated `getTitle()` method has been removed, use `getName()` instead.
 * [Radio] The deprecated `getRadioStations()` and `getRadioShows()` methods have been removed, use `getRadio()->getFavouriteShows()` and `getRadio()->getFavouriteStations()` instead.
+
+Controller::getNetwork() has been removed
+The Controller:: constants are now on ControllerInterface::
+
+--------
+
+## 1.9.11 - 2017-11-25
+
+### Added
+
+* [Support] Loosen the requirement on psr/log.
+
+--------
+
+## 1.9.10 - 2017-11-03
+
+### Added
+
+* [Network] Added support for the new ONE devices.
+
+--------
+
+## 1.9.9 - 2017-09-29
+
+### Added
+
+* [Network] Added support for the PLAYBASE devices.
+* [Support] Added support for PHP 7.1
+
+### Removed
+
+* [Support] Dropped support for HHVM
 
 --------
 

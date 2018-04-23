@@ -23,8 +23,12 @@ namespace League\Flysystem\Adapter
 
 namespace League\Flysystem
 {
-    class FailTests extends \PHPUnit_Framework_TestCase
+    use PHPUnit\Framework\TestCase;
+
+    class FailTests extends TestCase
     {
+        use \PHPUnitHacks;
+
         public function testFails()
         {
             $adapter = new Adapter\Local(__DIR__ . '/files');
@@ -34,5 +38,4 @@ namespace League\Flysystem
             $this->assertFalse($adapter->deleteDir('non-existing'));
         }
     }
-
 }

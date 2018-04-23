@@ -2,10 +2,12 @@
 
 namespace duncan3dc\Sonos\Utils;
 
+use duncan3dc\Sonos\Interfaces\Utils\TimeInterface;
+
 /**
  * A class to represent amounts of time.
  */
-class Time
+final class Time implements TimeInterface
 {
     /**
      * @var int $seconds The number of seconds this instance represents.
@@ -18,9 +20,9 @@ class Time
      *
      * @param int $seconds The number of seconds
      *
-     * @return self
+     * @return TimeInterface
      */
-    public static function inSeconds(int $seconds): self
+    public static function inSeconds(int $seconds): TimeInterface
     {
         return new self($seconds);
     }
@@ -31,9 +33,9 @@ class Time
      *
      * @param string $string The time to parse
      *
-     * @return self
+     * @return TimeInterface
      */
-    public static function parse(string $string): self
+    public static function parse(string $string): TimeInterface
     {
         $bits = explode(":", $string);
 
@@ -56,9 +58,9 @@ class Time
     /**
      * Create a new time instance representing the start.
      *
-     * @return self
+     * @return TimeInterface
      */
-    public static function start(): self
+    public static function start(): TimeInterface
     {
         return new self(0);
     }
@@ -69,7 +71,7 @@ class Time
      *
      * @param int $seconds The number of seconds
      */
-    protected function __construct($seconds)
+    private function __construct($seconds)
     {
         $this->seconds = $seconds;
     }
@@ -80,7 +82,7 @@ class Time
      *
      * @return int
      */
-    public function asInt()
+    public function asInt(): int
     {
         return $this->seconds;
     }
@@ -91,7 +93,7 @@ class Time
      *
      * @return string
      */
-    public function asString()
+    public function asString(): string
     {
         return $this->format("%H:%M:%S");
     }
@@ -102,7 +104,7 @@ class Time
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->asString();
     }
@@ -113,7 +115,7 @@ class Time
      *
      * @return int
      */
-    private function getSeconds()
+    public function getSeconds(): int
     {
         return (int) $this->seconds % 60;
     }
@@ -124,7 +126,7 @@ class Time
      *
      * @return int
      */
-    private function getMinutes()
+    public function getMinutes(): int
     {
         $minutes = (int) floor($this->seconds / 60);
         return (int) $minutes % 60;
@@ -136,7 +138,7 @@ class Time
      *
      * @return int
      */
-    private function getHours()
+    public function getHours(): int
     {
         return (int) floor($this->seconds / 3600);
     }
@@ -149,7 +151,7 @@ class Time
      *
      * @return string
      */
-    public function format($format)
+    public function format(string $format): string
     {
         $hours = $this->getHours();
         $minutes = $this->getMinutes();

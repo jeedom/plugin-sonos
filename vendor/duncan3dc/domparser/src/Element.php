@@ -21,8 +21,10 @@ trait Element
 
             case "childNodes":
                 $elements = [];
-                foreach ($value as $element) {
-                    $elements[] = $this->newElement($element);
+                if ($value !== null) {
+                    foreach ($value as $element) {
+                        $elements[] = $this->newElement($element);
+                    }
                 }
                 return $elements;
 
@@ -73,5 +75,13 @@ trait Element
             $attributes[$attr->name] = $attr->value;
         }
         return $attributes;
+    }
+
+
+    public function removeChild(Base $element)
+    {
+        $this->dom->removeChild($element->dom);
+
+        return $this;
     }
 }

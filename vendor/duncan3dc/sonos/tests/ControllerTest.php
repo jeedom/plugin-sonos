@@ -3,8 +3,8 @@
 namespace duncan3dc\SonosTests;
 
 use duncan3dc\Sonos\Controller;
-use duncan3dc\Sonos\ControllerState;
 use duncan3dc\Sonos\Exceptions\SoapException;
+use duncan3dc\Sonos\Interfaces\ControllerStateInterface;
 use duncan3dc\Sonos\Utils\Time;
 use Mockery;
 
@@ -26,10 +26,6 @@ class ControllerTest extends MockTest
 
     public function testPlayEmptyQueue()
     {
-        if (defined("HHVM_VERSION")) {
-            $this->markTestSkipped("Unable to mock Exceptions on HHVM");
-        }
-
         $device = $this->getDevice();
         $controller = $this->getController($device);
         $exception = Mockery::mock(SoapException::class);
@@ -127,15 +123,14 @@ class ControllerTest extends MockTest
         $device = $this->getDevice();
         $controller = $this->getController($device);
 
-        $state = Mockery::mock(ControllerState::class);
-        $state->state = Controller::STATE_STOPPED;
-        $state->track = 0;
-        $state->position = "00:00:00";
-        $state->repeat = false;
-        $state->shuffle = false;
-        $state->crossfade = false;
-        $state->speakers = [];
-        $state->tracks = [];
+        $state = Mockery::mock(ControllerStateInterface::class);
+        $state->shouldReceive("getState")->once()->with()->andReturn(Controller::STATE_STOPPED);
+        $state->shouldReceive("getRepeat")->once()->with()->andReturn(false);
+        $state->shouldReceive("getShuffle")->once()->with()->andReturn(false);
+        $state->shouldReceive("getCrossfade")->once()->with()->andReturn(false);
+        $state->shouldReceive("getSpeakers")->once()->with()->andReturn([]);
+        $state->shouldReceive("getTracks")->once()->with()->andReturn([]);
+        $state->shouldReceive("getStream")->once()->with()->andReturn(null);
 
         $device->shouldReceive("soap")->once()->with("AVTransport", "RemoveAllTracksFromQueue", ["ObjectID" => "Q:0"]);
         $device->shouldReceive("soap")->once()->with("AVTransport", "GetTransportSettings", [])->andReturn(["PlayMode" => "TEST"]);
@@ -144,7 +139,8 @@ class ControllerTest extends MockTest
         $device->shouldReceive("soap")->once()->with("AVTransport", "GetTransportInfo", [])->andReturn(["CurrentTransportState" => "TEST"]);
         $device->shouldReceive("soap")->once()->with("AVTransport", "GetTransportSettings", [])->andReturn(["PlayMode" => "TEST"]);
 
-        $controller->restoreState($state);
+        $result = $controller->restoreState($state);
+        $this->assertSame($controller, $result);
     }
 
 
@@ -153,15 +149,16 @@ class ControllerTest extends MockTest
         $device = $this->getDevice();
         $controller = $this->getController($device);
 
-        $state = Mockery::mock(ControllerState::class);
-        $state->state = Controller::STATE_STOPPED;
-        $state->track = 0;
-        $state->position = "05:03:01";
-        $state->repeat = false;
-        $state->shuffle = false;
-        $state->crossfade = false;
-        $state->speakers = [];
-        $state->tracks = ["track"];
+        $state = Mockery::mock(ControllerStateInterface::class);
+        $state->shouldReceive("getState")->once()->with()->andReturn(Controller::STATE_STOPPED);
+        $state->shouldReceive("getTrack")->once()->with()->andReturn(0);
+        $state->shouldReceive("getPosition")->once()->with()->andReturn(Time::parse("05:03:01"));
+        $state->shouldReceive("getRepeat")->once()->with()->andReturn(false);
+        $state->shouldReceive("getShuffle")->once()->with()->andReturn(false);
+        $state->shouldReceive("getCrossfade")->once()->with()->andReturn(false);
+        $state->shouldReceive("getSpeakers")->once()->with()->andReturn([]);
+        $state->shouldReceive("getTracks")->once()->with()->andReturn(["track"]);
+        $state->shouldReceive("getStream")->once()->with()->andReturn(null);
 
         $device->shouldReceive("soap")->once()->with("AVTransport", "RemoveAllTracksFromQueue", ["ObjectID" => "Q:0"]);
         $device->shouldReceive("soap")->once()->with("AVTransport", "GetTransportSettings", [])->andReturn(["PlayMode" => "TEST"]);
@@ -188,7 +185,8 @@ class ControllerTest extends MockTest
         $device->shouldReceive("soap")->once()->with("AVTransport", "GetTransportInfo", [])->andReturn(["CurrentTransportState" => "TEST"]);
         $device->shouldReceive("soap")->once()->with("AVTransport", "GetTransportSettings", [])->andReturn(["PlayMode" => "TEST"]);
 
-        $controller->restoreState($state);
+        $result = $controller->restoreState($state);
+        $this->assertSame($controller, $result);
     }
 
 
@@ -323,14 +321,5 @@ class ControllerTest extends MockTest
         ]);
 
         $this->assertTrue($controller->isStreaming());
-    }
-
-
-    public function testGetNetwork()
-    {
-        $device = $this->getDevice();
-        $controller = $this->getController($device);
-
-        $this->assertSame($this->network, $controller->getNetwork());
     }
 }

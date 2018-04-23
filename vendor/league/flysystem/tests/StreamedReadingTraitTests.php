@@ -3,9 +3,12 @@
 namespace League\Flysystem\Adapter;
 
 use League\Flysystem\Stub\StreamedReadingStub;
+use PHPUnit\Framework\TestCase;
 
-class StreamedReadingTraitTests extends \PHPUnit_Framework_TestCase
+class StreamedReadingTraitTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     public function testStreamRead()
     {
         $stub = new StreamedReadingStub();

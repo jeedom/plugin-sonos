@@ -2,8 +2,12 @@
 
 namespace League\Flysystem;
 
-class FileTests extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class FileTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     /** @var Filesystem */
     protected $filesystem;
 
@@ -130,22 +134,12 @@ class FileTests extends \PHPUnit_Framework_TestCase
 
     public function testRenameFails()
     {
-        $adapter = $this->getMock('League\Flysystem\AdapterInterface');
-        $adapter
-            ->expects($this->exactly(2))
-            ->method('has')
-            ->withConsecutive(
-                ['file.txt'],
-                ['files/renamed.txt']
-            )
-            ->willReturnOnConsecutiveCalls(true, false);
-        $adapter
-            ->expects($this->once())
-            ->method('rename')
-            ->with('file.txt', 'files/renamed.txt')
-            ->willReturn(false);
+        $adapter = $this->prophesize('League\Flysystem\AdapterInterface');
+        $adapter->has('file.txt')->willReturn(true)->shouldBeCalled();
+        $adapter->has('files/renamed.txt')->willReturn(false)->shouldBeCalled();
+        $adapter->rename('file.txt', 'files/renamed.txt')->willReturn(false)->shouldBeCalled();
 
-        $filesystem = new Filesystem($adapter);
+        $filesystem = new Filesystem($adapter->reveal());
         /** @var File $file */
         $file = $filesystem->get('file.txt', new File());
         $result = $file->rename('files/renamed.txt');
@@ -165,22 +159,12 @@ class FileTests extends \PHPUnit_Framework_TestCase
 
     public function testCopyFails()
     {
-        $adapter = $this->getMock('League\Flysystem\AdapterInterface');
-        $adapter
-            ->expects($this->exactly(2))
-            ->method('has')
-            ->withConsecutive(
-                ['file.txt'],
-                ['files/copied.txt']
-            )
-            ->willReturnOnConsecutiveCalls(true, false);
-        $adapter
-            ->expects($this->once())
-            ->method('copy')
-            ->with('file.txt', 'files/copied.txt')
-            ->willReturn(false);
+        $adapter = $this->prophesize('League\Flysystem\AdapterInterface');
+        $adapter->has('file.txt')->willReturn(true)->shouldBeCalled();
+        $adapter->has('files/copied.txt')->willReturn(false)->shouldBeCalled();
+        $adapter->copy('file.txt', 'files/copied.txt')->willReturn(false)->shouldBeCalled();
 
-        $filesystem = new Filesystem($adapter);
+        $filesystem = new Filesystem($adapter->reveal());
         /** @var File $file */
         $file = $filesystem->get('file.txt', new File());
         $result = $file->copy('files/copied.txt');

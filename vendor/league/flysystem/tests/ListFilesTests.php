@@ -1,10 +1,12 @@
 <?php
 
-
 use League\Flysystem\Plugin\ListFiles;
+use PHPUnit\Framework\TestCase;
 
-class ListFilesTests extends \PHPUnit_Framework_TestCase
+class ListFilesTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     private $filesystem;
     private $actualFilesystem;
 

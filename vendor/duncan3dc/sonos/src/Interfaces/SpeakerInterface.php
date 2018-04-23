@@ -182,4 +182,14 @@ interface SpeakerInterface
      * @return self
      */
     public function setLoudness(bool $on): SpeakerInterface;
+
+
+    /**
+     * Set the topology of this speaker.
+     *
+     * @param array $topology The topology attributes as key/value pairs
+     *
+     * @return $this
+     */
+    public function setTopology(array $topology): SpeakerInterface;
 }

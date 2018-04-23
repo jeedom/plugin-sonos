@@ -4,9 +4,12 @@ namespace League\Flysystem\Adapter;
 
 use League\Flysystem\Config;
 use League\Flysystem\Stub\StreamedWritingStub;
+use PHPUnit\Framework\TestCase;
 
-class StreamedWritingPolyfillTests extends \PHPUnit_Framework_TestCase
+class StreamedWritingPolyfillTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     public function testWrite()
     {
         $stream = tmpfile();

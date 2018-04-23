@@ -3,9 +3,12 @@
 namespace League\Flysystem\Adapter;
 
 use League\Flysystem\Util\StreamHasher;
+use PHPUnit\Framework\TestCase;
 
-class StreamHasherTest extends \PHPUnit_Framework_TestCase
+class StreamHasherTest extends TestCase
 {
+    use \PHPUnitHacks;
+
     public function testHasher()
     {
         $filename = __DIR__.'/../src/Filesystem.php';

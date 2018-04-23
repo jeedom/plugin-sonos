@@ -21,6 +21,16 @@ interface CollectionInterface extends LoggerAwareInterface
 
 
     /**
+     * Add a device to this collection using its IP address
+     *
+     * @param string $address The IP address of the device to add
+     *
+     * @return $this
+     */
+    public function addIp(string $address): CollectionInterface;
+
+
+    /**
      * Get all of the devices in this collection.
      *
      * @return DeviceInterface[]

@@ -2,9 +2,8 @@
 
 namespace duncan3dc\Sonos\Interfaces;
 
-use duncan3dc\DomParser\XmlElement;
-use duncan3dc\Sonos\Interfaces\NetworkInterface;
 use duncan3dc\Sonos\Interfaces\SpeakerInterface;
+use duncan3dc\Sonos\Interfaces\Utils\TimeInterface;
 use duncan3dc\Sonos\Utils\Time;
 
 /**
@@ -70,37 +69,37 @@ interface AlarmInterface
     /**
      * Get the start time of the alarm.
      *
-     * @return Time
+     * @return TimeInterface
      */
-    public function getTime(): Time;
+    public function getTime(): TimeInterface;
 
 
     /**
      * Set the start time of the alarm.
      *
-     * @param Time $time The time to set the alarm for
+     * @param TimeInterface $time The time to set the alarm for
      *
      * @return AlarmInterface
      */
-    public function setTime(Time $time): AlarmInterface;
+    public function setTime(TimeInterface $time): AlarmInterface;
 
 
     /**
      * Get the duration of the alarm.
      *
-     * @return Time
+     * @return TimeInterface
      */
-    public function getDuration(): Time;
+    public function getDuration(): TimeInterface;
 
 
     /**
      * Set the duration of the alarm.
      *
-     * @param Time $duration The duration of the alarm
+     * @param TimeInterface $duration The duration of the alarm
      *
      * @return AlarmInterface
      */
-    public function setDuration(Time $duration): AlarmInterface;
+    public function setDuration(TimeInterface $duration): AlarmInterface;
 
 
     /**

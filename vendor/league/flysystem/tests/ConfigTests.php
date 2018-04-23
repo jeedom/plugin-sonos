@@ -1,9 +1,12 @@
 <?php
 
 use League\Flysystem\Config;
+use PHPUnit\Framework\TestCase;
 
-class ConfigTests extends PHPUnit_Framework_TestCase
+class ConfigTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     public function testGet()
     {
         $config = new Config();

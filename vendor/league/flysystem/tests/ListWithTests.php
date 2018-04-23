@@ -3,9 +3,12 @@
 namespace League\Flysystem\Adapter;
 
 use League\Flysystem\Plugin\ListWith;
+use PHPUnit\Framework\TestCase;
 
-class ListWithTests extends \PHPUnit_Framework_TestCase
+class ListWithTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     public function testHandle()
     {
         $prophecy = $this->prophesize('League\Flysystem\Filesystem');
@@ -32,7 +35,7 @@ class ListWithTests extends \PHPUnit_Framework_TestCase
         ]);
         $filesystem = $prophecy->reveal();
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $plugin = new ListWith();
         $plugin->setFilesystem($filesystem);
         $plugin->handle(['invalid'], '', true);

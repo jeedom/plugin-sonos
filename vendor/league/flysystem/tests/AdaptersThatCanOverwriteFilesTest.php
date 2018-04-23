@@ -4,10 +4,12 @@ namespace League\Flysystem\Adapter;
 
 use League\Flysystem\Filesystem;
 use League\Flysystem\Stub\FileOverwritingAdapterStub;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AdaptersThatCanOverwriteFilesTest extends PHPUnit_Framework_TestCase
+class AdaptersThatCanOverwriteFilesTest extends TestCase
 {
+    use \PHPUnitHacks;
+
     /**
      * @test
      */

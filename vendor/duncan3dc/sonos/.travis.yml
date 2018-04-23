@@ -3,6 +3,7 @@ language: php
 php:
   - 7.0
   - 7.1
+  - 7.2
   - nightly
 
 matrix:
@@ -18,8 +19,14 @@ install:
   - composer update $COMPOSER_OPTS
 
 script:
-  - ./vendor/bin/phpunit
-  - ./tests/lint.sh
+  - vendor/bin/phpunit --coverage-clover=clover.xml
+  - vendor/bin/phplint src tests
+
+after_success:
+  - vendor/bin/php-coveralls
 
 git:
   depth: 5
+
+dist: trusty
+sudo: false

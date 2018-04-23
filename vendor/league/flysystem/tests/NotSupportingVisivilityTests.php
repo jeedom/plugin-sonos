@@ -3,19 +3,22 @@
 namespace League\Flysystem\Adapter;
 
 use League\Flysystem\Stub\NotSupportingVisibilityStub;
+use PHPUnit\Framework\TestCase;
 
-class NotSupportingVisivilityTests extends \PHPUnit_Framework_TestCase
+class NotSupportingVisivilityTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     public function testGetVisibility()
     {
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
         $stub = new NotSupportingVisibilityStub();
         $stub->getVisibility('path.txt');
     }
 
     public function testSetVisibility()
     {
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
         $stub = new NotSupportingVisibilityStub();
         $stub->setVisibility('path.txt', 'public');
     }

@@ -1,9 +1,15 @@
 Getting Started:
     Introduction: '/'
     Installation: '/installation/'
-    Integrations: '/integrations/'
-    Core concepts: '/core-concepts/'
+    Sponsors: '/sponsors/'
+
+Usage:
+    Focus and Goals: '/focus-and-goals/'
     The API: '/api/'
+    Integrations: '/integrations/'
+
+
+Advanced Usage:
     Mount Manager: '/mount-manager/'
     Caching: '/caching/'
     Recipes: '/recipes/'
@@ -14,12 +20,10 @@ Getting Started:
 Adapters:
     Local: '/adapter/local/'
     Azure: '/adapter/azure/'
-    AWS S3 V2: '/adapter/aws-s3-v2/'
-    AWS S3 V3: '/adapter/aws-s3-v3/'
-    Copy.com: '/adapter/copy/'
+    AWS S3: '/adapter/aws-s3/'
+    DigitalOcean Spaces: '/adapter/digitalocean-spaces/'
     Dropbox: '/adapter/dropbox/'
     FTP: '/adapter/ftp/'
-    GridFS: '/adapter/gridfs/'
     Memory: '/adapter/memory/'
     Null / Test: '/adapter/null-test/'
     Rackspace: '/adapter/rackspace/'

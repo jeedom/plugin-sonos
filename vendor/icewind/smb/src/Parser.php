@@ -30,6 +30,7 @@ class Parser {
 	// todo replace with static once <5.6 support is dropped
 	// see error.h
 	private static $exceptionMap = [
+		ErrorCodes::LogonFailure      => '\Icewind\SMB\Exception\AuthenticationException',
 		ErrorCodes::PathNotFound      => '\Icewind\SMB\Exception\NotFoundException',
 		ErrorCodes::ObjectNotFound    => '\Icewind\SMB\Exception\NotFoundException',
 		ErrorCodes::NoSuchFile        => '\Icewind\SMB\Exception\NotFoundException',
@@ -38,7 +39,8 @@ class Parser {
 		ErrorCodes::DirectoryNotEmpty => '\Icewind\SMB\Exception\NotEmptyException',
 		ErrorCodes::FileIsADirectory  => '\Icewind\SMB\Exception\InvalidTypeException',
 		ErrorCodes::NotADirectory     => '\Icewind\SMB\Exception\InvalidTypeException',
-		ErrorCodes::SharingViolation  => '\Icewind\SMB\Exception\FileInUseException'
+		ErrorCodes::SharingViolation  => '\Icewind\SMB\Exception\FileInUseException',
+		ErrorCodes::InvalidParameter  => '\Icewind\SMB\Exception\InvalidParameterException'
 	];
 
 	/**
@@ -79,6 +81,7 @@ class Parser {
 	 * @throws AuthenticationException
 	 * @throws InvalidHostException
 	 * @throws NoLoginServerException
+	 * @throws AccessDeniedException
 	 */
 	public function checkConnectionError($line) {
 		$line = rtrim($line, ')');
@@ -96,6 +99,9 @@ class Parser {
 		}
 		if (substr($line, -26) === ErrorCodes::NoLogonServers) {
 			throw new NoLoginServerException('No login server');
+		}
+		if (substr($line, -23) === ErrorCodes::AccessDenied) {
+			throw new AccessDeniedException('Access denied');
 		}
 	}
 
@@ -131,7 +137,7 @@ class Parser {
 		return [
 			'mtime' => strtotime($data['write_time']),
 			'mode'  => hexdec(substr($data['attributes'], strpos($data['attributes'], '('), -1)),
-			'size'  => isset($data['stream']) ? intval(explode(' ', $data['stream'])[1]) : 0
+			'size'  => isset($data['stream']) ? (int)(explode(' ', $data['stream'])[1]) : 0
 		];
 	}
 

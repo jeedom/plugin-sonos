@@ -2,14 +2,14 @@
 
 namespace duncan3dc\Sonos\Devices;
 
-use duncan3dc\Sonos\Cache;
+use duncan3dc\Cache\ArrayPool;
 use duncan3dc\Sonos\Interfaces\Devices\DeviceInterface;
 use duncan3dc\Sonos\Interfaces\Devices\FactoryInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
 
-class Factory implements FactoryInterface
+final class Factory implements FactoryInterface
 {
     /**
      * @var CacheInterface $cache The cache object to use for the expensive multicast discover to find Sonos devices on the network.
@@ -31,7 +31,7 @@ class Factory implements FactoryInterface
     public function __construct(CacheInterface $cache = null, LoggerInterface $logger = null)
     {
         if ($cache === null) {
-            $cache = new Cache;
+            $cache = new ArrayPool;
         }
         $this->cache = $cache;
 

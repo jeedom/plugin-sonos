@@ -8,11 +8,12 @@ use GuzzleHttp\Handler;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\TransferStats;
 use Psr\Http\Message\ResponseInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \GuzzleHttp\Handler\CurlFactory
  */
-class CurlFactoryTest extends \PHPUnit_Framework_TestCase
+class CurlFactoryTest extends TestCase
 {
     public static function setUpBeforeClass()
     {
@@ -404,7 +405,7 @@ class CurlFactoryTest extends \PHPUnit_Framework_TestCase
             'sink'           => $tmpfile,
         ]);
         $response->wait();
-        $this->assertEquals('test', file_get_contents($tmpfile));
+        $this->assertStringEqualsFile($tmpfile, 'test');
         unlink($tmpfile);
     }
 
@@ -556,7 +557,7 @@ class CurlFactoryTest extends \PHPUnit_Framework_TestCase
         $request = new Psr7\Request('PUT', Server::$url, [], $bd);
         $f->create($request, []);
         $this->assertEquals(1, $_SERVER['_curl'][CURLOPT_UPLOAD]);
-        $this->assertTrue(is_callable($_SERVER['_curl'][CURLOPT_READFUNCTION]));
+        $this->assertInternalType('callable', $_SERVER['_curl'][CURLOPT_READFUNCTION]);
     }
 
     /**

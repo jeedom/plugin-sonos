@@ -1,11 +1,13 @@
 <?php
 
-
 use League\Flysystem\Directory;
 use League\Flysystem\File;
+use PHPUnit\Framework\TestCase;
 
-class HandlerTests extends \PHPUnit_Framework_TestCase
+class HandlerTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     public function testFileRead()
     {
         $prophecy = $this->prophesize('League\Flysystem\FilesystemInterface');

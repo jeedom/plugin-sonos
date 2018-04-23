@@ -7,7 +7,7 @@ use duncan3dc\Sonos\Interfaces\Devices\CollectionInterface;
 use duncan3dc\Sonos\Interfaces\Devices\DeviceInterface;
 use duncan3dc\Sonos\Interfaces\Devices\FactoryInterface;
 
-class Collection implements CollectionInterface
+final class Collection implements CollectionInterface
 {
     use LoggerAwareTrait;
 
@@ -85,7 +85,6 @@ class Collection implements CollectionInterface
     public function clear(): CollectionInterface
     {
         $this->devices = [];
-        $this->speakers = [];
 
         return $this;
     }

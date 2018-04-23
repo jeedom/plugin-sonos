@@ -2,190 +2,233 @@
 
 namespace duncan3dc\Sonos\Devices;
 
-use duncan3dc\Sonos\Interfaces\Devices\FactoryInterface;
+use duncan3dc\Sonos\Interfaces\Devices\CollectionInterface;
+use duncan3dc\Sonos\Interfaces\Devices\DeviceInterface;
+use duncan3dc\Sonos\Interfaces\Utils\SocketInterface;
+use duncan3dc\Sonos\Utils\Socket;
 use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 
-class Discovery extends Collection {
-	/**
-	 * @var bool $discovered A flag to indicate whether we've discovered the devices yet or not.
-	 */
-	private $discovered = false;
+final class Discovery implements CollectionInterface
+{
+    /**
+     * @var CollectionInterface $collection The collection we'll store our discovered devices in.
+     */
+    private $collection;
 
-	/**
-	 * @var string $networkInterface The network interface to use for SSDP discovery.
-	 */
-	private $networkInterface;
+    /**
+     * @var bool $discovered A flag to indicate whether we've discovered the devices yet or not.
+     */
+    private $discovered = false;
 
-	/**
-	 * @var string $multicastAddress The multicast address to use for SSDP discovery.
-	 */
-	private $multicastAddress = "239.255.255.250";
+    /**
+     * @var string $networkInterface The network interface to use for SSDP discovery.
+     */
+    private $networkInterface;
 
-	/**
-	 * @var LoggerInterface $logger The logging object.
-	 */
-	private $logger;
+    /**
+     * @var string $multicastAddress The multicast address to use for SSDP discovery.
+     */
+    private $multicastAddress = "239.255.255.250";
 
-	/**
-	 * Create a new instance.
-	 *
-	 * @param FactoryInterface $factory The factory to create new devices from
-	 * @param LoggerInterface $logger A logging object
-	 */
-	public function __construct(FactoryInterface $factory, LoggerInterface $logger = null) {
-		parent::__construct($factory);
 
-		if ($logger === null) {
-			$logger = new NullLogger;
-		}
-		$this->logger = $logger;
-	}
+    /**
+     * Create a new instance.
+     *
+     * @param CollectionInterface $collection The device collection to actually use
+     */
+    public function __construct(CollectionInterface $collection)
+    {
+        $this->collection = $collection;
+    }
 
-	/**
-	 * Set the network interface to use for SSDP discovery.
-	 *
-	 * See the documentation on IP_MULTICAST_IF at http://php.net/manual/en/function.socket-get-option.php
-	 *
-	 * @var string|int $networkInterface The interface to use
-	 *
-	 * @return $this
-	 */
-	public function setNetworkInterface($networkInterface): Discovery{
-		$this->networkInterface = $networkInterface;
 
-		$this->discovered = false;
+    /**
+     * Set the logger object to use.
+     *
+     * @var LoggerInterface $logger The logging object
+     *
+     * @return $this
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->collection->setLogger($logger);
+        return $this;
+    }
 
-		return $this;
-	}
 
-	/**
-	 * Get the network interface currently in use
-	 *
-	 * @return string|int|null The network interface name
-	 */
-	public function getNetworkInterface() {
-		return $this->networkInterface;
-	}
+    /**
+     * Get the logger object to use.
+     *
+     * @return LoggerInterface $logger The logging object
+     */
+    public function getLogger()
+    {
+        return $this->collection->getLogger();
+    }
 
-	/**
-	 * Set the multicast address to use for SSDP discovery.
-	 *
-	 * @var string $multicastAddress The address to use
-	 *
-	 * @return $this
-	 */
-	public function setMulticastAddress(string $multicastAddress): Discovery{
-		$this->multicastAddress = $multicastAddress;
 
-		$this->discovered = false;
+    /**
+     * Set the network interface to use for SSDP discovery.
+     *
+     * See the documentation on IP_MULTICAST_IF at http://php.net/manual/en/function.socket-get-option.php
+     *
+     * @param string|int $networkInterface The interface to use
+     *
+     * @return $this
+     */
+    public function setNetworkInterface($networkInterface): Discovery
+    {
+        $this->networkInterface = $networkInterface;
+        return $this;
+    }
 
-		return $this;
-	}
 
-	/**
-	 * Get the multicast address to use for SSDP discovery.
-	 *
-	 * @return string The address to use
-	 */
-	public function getMulticastAddress(): string {
-		return $this->multicastAddress;
-	}
+    /**
+     * Get the network interface currently in use
+     *
+     * @return string|int|null The network interface name
+     */
+    public function getNetworkInterface()
+    {
+        return $this->networkInterface;
+    }
 
-	/**
-	 * Get all of the devices on the current network
-	 *
-	 * @return DeviceInterface[]
-	 */
-	public function getDevices(): array
-	{
-		if (!$this->discovered) {
-			$this->discoverDevices();
-			$this->discovered = true;
-		}
 
-		return parent::getDevices();
-	}
+    /**
+     * Set the multicast address to use for SSDP discovery.
+     *
+     * @param string $multicastAddress The address to use
+     *
+     * @return $this
+     */
+    public function setMulticastAddress(string $multicastAddress): Discovery
+    {
+        $this->multicastAddress = $multicastAddress;
+        return $this;
+    }
 
-	/**
-	 * Get all the devices on the current network.
-	 *
-	 * @return void
-	 */
-	private function discoverDevices() {
-		$this->logger->info("discovering devices...");
 
-		$port = 1900;
+    /**
+     * Get the multicast address to use for SSDP discovery.
+     *
+     * @return string The address to use
+     */
+    public function getMulticastAddress(): string
+    {
+        return $this->multicastAddress;
+    }
 
-		$sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
-		$level = getprotobyname("ip");
+    /**
+     * Add a device to this collection.
+     *
+     * @param DeviceInterface $device The device to add
+     *
+     * @return $this
+     */
+    public function addDevice(DeviceInterface $device): CollectionInterface
+    {
+        $this->collection->addDevice($device);
+        return $this;
+    }
 
-		socket_set_option($sock, $level, IP_MULTICAST_TTL, 2);
 
-		if ($this->getNetworkInterface() !== null) {
-			socket_set_option($sock, $level, IP_MULTICAST_IF, $this->getNetworkInterface());
-		}
+    /**
+     * Add a device to this collection using its IP address
+     *
+     * @param string $address The IP address of the device to add
+     *
+     * @return $this
+     */
+    public function addIp(string $address): CollectionInterface
+    {
+        $this->collection->addIp($address);
+        return $this;
+    }
 
-		$data = "M-SEARCH * HTTP/1.1\r\n";
-		$data .= "HOST: " . $this->getMulticastAddress() . ":reservedSSDPport\r\n";
-		$data .= "MAN: ssdp:discover\r\n";
-		$data .= "MX: 1\r\n";
-		$data .= "ST: urn:schemas-upnp-org:device:ZonePlayer:1\r\n";
 
-		$this->logger->debug($data);
+    /**
+     * Get all of the devices on the current network
+     *
+     * @return DeviceInterface[]
+     */
+    public function getDevices(): array
+    {
+        if (!$this->discovered) {
+            $socket = new Socket($this->getNetworkInterface(), $this->getMulticastAddress(), $this->collection->getLogger());
+            $this->discoverDevices($socket);
+            $this->discovered = true;
+        }
 
-		socket_sendto($sock, $data, strlen($data), null, $this->getMulticastAddress(), $port);
+        return $this->collection->getDevices();
+    }
 
-		$read = [$sock];
-		$write = [];
-		$except = [];
-		$name = null;
-		$port = null;
-		$tmp = "";
 
-		$response = "";
-		while (socket_select($read, $write, $except, 1)) {
-			socket_recvfrom($sock, $tmp, 2048, null, $name, $port);
-			$response .= $tmp;
-		}
+    /**
+     * Get all the devices on the current network.
+     *
+     * @param SocketInterface $socket An instance to send the discovery request via
+     *
+     * @return void
+     */
+    private function discoverDevices(SocketInterface $socket)
+    {
+        $this->collection->getLogger()->info("discovering devices...");
 
-		$this->logger->debug($response);
+        $response = $socket->request();
 
-		$devices = [];
-		foreach (explode("\r\n\r\n", $response) as $reply) {
-			if (!$reply) {
-				continue;
-			}
+        $search = "urn:schemas-upnp-org:device:ZonePlayer:1";
 
-			$data = [];
-			foreach (explode("\r\n", $reply) as $line) {
-				if (!$pos = strpos($line, ":")) {
-					continue;
-				}
-				$key = strtolower(substr($line, 0, $pos));
-				$val = trim(substr($line, $pos + 1));
-				$data[$key] = $val;
-			}
-			$devices[] = $data;
-		}
+        $devices = [];
+        foreach (explode("\r\n\r\n", $response) as $reply) {
+            if (!$reply) {
+                continue;
+            }
 
-		$unique = [];
-		foreach ($devices as $device) {
-			if ($device["st"] !== "urn:schemas-upnp-org:device:ZonePlayer:1") {
-				continue;
-			}
-			if (in_array($device["usn"], $unique)) {
-				continue;
-			}
-			$this->logger->info("found device: {usn}", $device);
+            # Only attempt to parse responses from Sonos speakers
+            if (strpos($reply, $search) === false) {
+                continue;
+            }
 
-			$unique[] = $device["usn"];
+            $data = [];
+            foreach (explode("\r\n", $reply) as $line) {
+                if (!$pos = strpos($line, ":")) {
+                    continue;
+                }
+                $key = strtolower(substr($line, 0, $pos));
+                $val = trim(substr($line, $pos + 1));
+                $data[$key] = $val;
+            }
+            $devices[] = $data;
+        }
 
-			$url = parse_url($device["location"]);
-			$this->addIp($url["host"]);
-		}
+        $unique = [];
+        foreach ($devices as $device) {
+            if ($device["st"] !== $search) {
+                continue;
+            }
+            if (in_array($device["usn"], $unique)) {
+                continue;
+            }
+            $this->collection->getLogger()->info("found device: {usn}", $device);
 
-		return $this;
-	}
+            $unique[] = $device["usn"];
+
+            $url = parse_url($device["location"]);
+            $this->collection->addIp($url["host"]);
+        }
+    }
+
+
+    /**
+     * Remove all devices from this collection.
+     *
+     * @return $this
+     */
+    public function clear(): CollectionInterface
+    {
+        $this->collection->clear();
+
+        return $this;
+    }
 }

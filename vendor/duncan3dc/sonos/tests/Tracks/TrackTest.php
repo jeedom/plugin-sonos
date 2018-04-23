@@ -3,7 +3,8 @@
 namespace duncan3dc\SonosTests\Tracks;
 
 use duncan3dc\DomParser\XmlParser;
-use duncan3dc\Sonos\Controller;
+use duncan3dc\ObjectIntruder\Intruder;
+use duncan3dc\Sonos\Interfaces\ControllerInterface;
 use duncan3dc\Sonos\Tracks\Track;
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -35,7 +36,7 @@ XML;
 
     public function setUp()
     {
-        $controller = Mockery::mock(Controller::class);
+        $controller = Mockery::mock(ControllerInterface::class);
         $controller->shouldReceive("getIp")->with()->andReturn("192.168.0.66");
 
         $xml = new XmlParser($this->xml1);
@@ -108,13 +109,15 @@ XML;
     }
 
 
-    public function testGetId1()
+    public function testItemId1()
     {
-        $this->assertSame("-1", $this->track1->getId());
+        $track = new Intruder($this->track1);
+        $this->assertSame("-1", $track->itemId);
     }
     public function testGetId2()
     {
-        $this->assertSame("O:345", $this->track2->getId());
+        $track = new Intruder($this->track2);
+        $this->assertSame("O:345", $track->itemId);
     }
 
 

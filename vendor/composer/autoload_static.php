@@ -18,11 +18,11 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
             'duncan3dc\\Speaker\\Test\\' => 23,
             'duncan3dc\\Speaker\\' => 18,
             'duncan3dc\\Sonos\\' => 16,
-            'duncan3dc\\SonosTests\\' => 21,
             'duncan3dc\\Log\\' => 14,
             'duncan3dc\\LogTests\\' => 19,
             'duncan3dc\\DomParser\\' => 20,
             'duncan3dc\\DomParserTests\\' => 25,
+            'duncan3dc\\Cache\\' => 16,
         ),
         'S' => 
         array (
@@ -36,6 +36,7 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
+            'Psr\\Cache\\' => 10,
         ),
         'L' => 
         array (
@@ -73,10 +74,6 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
         array (
             0 => __DIR__ . '/..' . '/duncan3dc/sonos/src',
         ),
-        'duncan3dc\\SonosTests\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/duncan3dc/sonos/tests',
-        ),
         'duncan3dc\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/duncan3dc/logger-aware-trait/src',
@@ -93,6 +90,10 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
         array (
             0 => __DIR__ . '/..' . '/duncan3dc/domparser/tests',
         ),
+        'duncan3dc\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/duncan3dc/cache/src',
+        ),
         'Symfony\\Component\\Process\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
@@ -108,6 +109,10 @@ class ComposerStaticInitb131b39c3e439adf68e754ff7761fe23
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
         'League\\Flysystem\\' => 
         array (

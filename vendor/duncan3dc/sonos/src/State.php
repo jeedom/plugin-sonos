@@ -4,6 +4,7 @@ namespace duncan3dc\Sonos;
 
 use duncan3dc\DomParser\XmlElement;
 use duncan3dc\Sonos\Interfaces\ControllerInterface;
+use duncan3dc\Sonos\Interfaces\Utils\TimeInterface;
 use duncan3dc\Sonos\Interfaces\StateInterface;
 use duncan3dc\Sonos\Interfaces\TrackInterface;
 use duncan3dc\Sonos\Tracks\Stream;
@@ -13,7 +14,7 @@ use duncan3dc\Sonos\Utils\Time;
 /**
  * Representation of the current state of a controller.
  */
-class State extends Track implements StateInterface
+final class State extends Track implements StateInterface
 {
     /**
      * @var string|null $stream The name of the stream currently currently playing (or null if we are not on a stream).
@@ -21,12 +22,12 @@ class State extends Track implements StateInterface
     private $stream;
 
     /**
-     * @var Time $duration The duration of the currently active track.
+     * @var TimeInterface $duration The duration of the currently active track.
      */
     private $duration;
 
     /**
-     * @var Time $position The position of the currently active track.
+     * @var TimeInterface $position The position of the currently active track.
      */
     private $position;
 
@@ -37,7 +38,7 @@ class State extends Track implements StateInterface
      * @param XmlElement $xml The xml element representing the track meta data.
      * @param ControllerInterface $controller A controller instance on the playlist's network
      *
-     * @return self
+     * @return StateInterface
      */
     public static function createFromXml(XmlElement $xml, ControllerInterface $controller): TrackInterface
     {

@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.0.44 - 2018-04-06
+
+* Added missing file presence checks on `Filesystem::setVisibility` and `Filesystem::getSize`.
+* The `Handler` types are now deprecated and will be removed in 2.0.0
+* The `FilesystemInterface::get` method is now deprecated and will be removed in 2.0.0
+
+## 1.0.43 - 2018-03-01
+
+* Remove /docs from composer artifact.
+
+## 1.0.42 - 2018-01-27
+
+* Fixed FTP manual recursion.
+* Various code style fixes.
+
+## 1.0.41 - 2017-08-06
+
+### Fixed
+
+* Response array check mistake was corrected.
+
+### Altered
+
+* Removed support for HHVM.
+
 ## 1.0.40 - 2017-04-28
 
 ### Improved
@@ -10,7 +35,7 @@
 
 ### Fixed
 
-* Some FTP servers return the `total` of 0 when a file doesn't exist instead of saying it doesn't exist. 
+* Some FTP servers return the `total` of 0 when a file doesn't exist instead of saying it doesn't exist.
 
 ## 1.0.38 - 2017-04-22
 
@@ -40,7 +65,7 @@
 
 ## 1.0.35 - 2017-02-09
 
-### Fixed 
+### Fixed
 
 * Creating a directory in FTP checked whether a directory already existed, the check was not strict enough.
 
@@ -208,7 +233,7 @@
 
 ### Fixed
 
-* [Filesystem::listContents] This function now uses DIRECTORY_SEPARATOR when the local adapter is used. 
+* [Filesystem::listContents] This function now uses DIRECTORY_SEPARATOR when the local adapter is used.
 
 ## 1.0.8 - 2015-07-12
 

@@ -1,3 +1,19 @@
+# Increase the test coverage
+
+# Run phan over the codebase
+
+# Can we make logging easier? At the moment it seems like you have to pass a logger instance to 3 different objects just to get basic logging
+
+
+
+
+
+
+
+
+
+
+
 AVTransport
   ReorderTracksInQueue
   ReorderTracksInSavedQueue
@@ -12,6 +28,3 @@ What's this mess in Controller.php
                 $state->setStream = new Stream("", $parser->getTag("title"));
             }
         }
-
-
-Can we make logging easier? At the moment it seems like you have to pass a logger instance to 3 different objects just to get basic logging

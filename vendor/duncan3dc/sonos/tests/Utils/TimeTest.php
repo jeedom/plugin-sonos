@@ -100,4 +100,11 @@ class TimeTest extends TestCase
         $time = Time::parse("00:00:00");
         $this->assertSame("0-0-0", $time->format("%h-%m-%s"));
     }
+
+
+    public function testToString()
+    {
+        $time = Time::parse("01:02:03");
+        $this->assertSame("01:02:03", (string) $time);
+    }
 }

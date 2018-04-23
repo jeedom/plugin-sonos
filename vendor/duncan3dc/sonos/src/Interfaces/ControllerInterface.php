@@ -2,13 +2,8 @@
 
 namespace duncan3dc\Sonos\Interfaces;
 
-use duncan3dc\Sonos\ControllerState;
-use duncan3dc\Sonos\Interfaces\NetworkInterface;
-use duncan3dc\Sonos\Interfaces\QueueInterface;
-use duncan3dc\Sonos\Interfaces\StateInterface;
-use duncan3dc\Sonos\Interfaces\UriInterface;
+use duncan3dc\Sonos\Interfaces\Utils\TimeInterface;
 use duncan3dc\Sonos\Tracks\Stream;
-use duncan3dc\Sonos\Utils\Time;
 
 /**
  * Allows interaction with the groups of speakers.
@@ -128,11 +123,11 @@ interface ControllerInterface extends SpeakerInterface
     /**
      * Seeks to a specific position within the current track.
      *
-     * @param Time $position The position to seek to in the track
+     * @param TimeInterface $position The position to seek to in the track
      *
      * @return self
      */
-    public function seek(Time $position): ControllerInterface;
+    public function seek(TimeInterface $position): ControllerInterface;
 
 
     /**
@@ -302,19 +297,19 @@ interface ControllerInterface extends SpeakerInterface
      *
      * @param bool $pause Whether to pause the controller or not
      *
-     * @return ControllerState
+     * @return ControllerStateInterface
      */
-    public function exportState(bool $pause = true): ControllerState;
+    public function exportState(bool $pause = true): ControllerStateInterface;
 
 
     /**
      * Restore the Controller to a previously exported state.
      *
-     * @param ControllerState $state The state to be restored
+     * @param ControllerStateInterface $state The state to be restored
      *
      * @return self
      */
-    public function restoreState(ControllerState $state): ControllerInterface;
+    public function restoreState(ControllerStateInterface $state): ControllerInterface;
 
 
     /**
@@ -331,12 +326,4 @@ interface ControllerInterface extends SpeakerInterface
      * @return self
      */
     public function interrupt(UriInterface $track, int $volume = null): ControllerInterface;
-
-
-    /**
-     * Get the network instance used by this controller.
-     *
-     * @return NetworkInterface
-     */
-    public function getNetwork(): NetworkInterface;
 }

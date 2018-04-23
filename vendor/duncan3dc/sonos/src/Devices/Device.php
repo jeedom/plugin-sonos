@@ -2,8 +2,8 @@
 
 namespace duncan3dc\Sonos\Devices;
 
+use duncan3dc\Cache\ArrayPool;
 use duncan3dc\DomParser\XmlParser;
-use duncan3dc\Sonos\Cache;
 use duncan3dc\Sonos\Exceptions\SoapException;
 use duncan3dc\Sonos\Interfaces\Devices\DeviceInterface;
 use GuzzleHttp\Client;
@@ -14,7 +14,7 @@ use Psr\SimpleCache\CacheInterface;
 /**
  * Make http requests to a Sonos device.
  */
-class Device implements DeviceInterface
+final class Device implements DeviceInterface
 {
     /**
      * @var string $ip The IP address of the device.
@@ -49,7 +49,7 @@ class Device implements DeviceInterface
         $this->ip = $ip;
 
         if ($cache === null) {
-            $cache = new Cache;
+            $cache = new ArrayPool;
         }
         $this->cache = $cache;
 
@@ -76,14 +76,15 @@ class Device implements DeviceInterface
     public function getXml(string $url): XmlParser
     {
         $uri = "http://{$this->ip}:1400{$url}";
+        $key = str_replace("/", "_", $this->ip . $url);
 
-        if ($this->cache->has($uri)) {
+        if ($this->cache->has($key)) {
             $this->logger->info("getting xml from cache: {$uri}");
-            $xml = $this->cache->get($uri);
+            $xml = $this->cache->get($key);
         } else {
             $this->logger->notice("requesting xml from: {$uri}");
             $xml = (string) (new Client)->get($uri)->getBody();
-            $this->cache->set($uri, $xml, new \DateInterval("P1D"));
+            $this->cache->set($key, $xml, new \DateInterval("P1D"));
         }
 
         return new XmlParser($xml);
@@ -193,6 +194,7 @@ class Device implements DeviceInterface
             "S6"    =>  "PLAY:5",
             "S9"    =>  "PLAYBAR",
             "S11"   =>  "PLAYBASE",
+            "S13"   =>  "ONE",
             "ZP80"  =>  "ZONEPLAYER",
             "ZP90"  =>  "CONNECT",
             "ZP100" =>  "CONNECT:AMP",

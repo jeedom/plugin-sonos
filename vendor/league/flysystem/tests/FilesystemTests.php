@@ -1,14 +1,18 @@
 <?php
 
 use League\Flysystem\Config;
+use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Util;
 use Prophecy\Argument;
 use Prophecy\Argument\Token\TypeToken;
 use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\TestCase;
 
-class FilesystemTests extends \PHPUnit_Framework_TestCase
+class FilesystemTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     /**
      * @var ObjectProphecy
      */
@@ -149,19 +153,19 @@ class FilesystemTests extends \PHPUnit_Framework_TestCase
 
     public function testPutStreamInvalid()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->filesystem->putStream('path.txt', '__INVALID__');
     }
 
     public function testWriteStreamInvalid()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->filesystem->writeStream('path.txt', '__INVALID__');
     }
 
     public function testUpdateStreamInvalid()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->filesystem->updateStream('path.txt', '__INVALID__');
     }
 
@@ -246,7 +250,7 @@ class FilesystemTests extends \PHPUnit_Framework_TestCase
 
     public function testDeleteDirRootViolation()
     {
-        $this->setExpectedException('League\Flysystem\RootViolationException');
+        $this->expectException('League\Flysystem\RootViolationException');
         $this->filesystem->deleteDir('');
     }
 
@@ -311,16 +315,23 @@ class FilesystemTests extends \PHPUnit_Framework_TestCase
         $this->assertFalse($output);
     }
 
+    public function testGetSizeOnFileThatDoesNotExist()
+    {
+        $this->expectException(FileNotFoundException::class);
+        $this->prophecy->has('path.txt')->willReturn(false);
+        $this->filesystem->getSize('path.txt');
+    }
+
     public function testAssertPresentThrowsException()
     {
-        $this->setExpectedException('League\Flysystem\FileExistsException');
+        $this->expectException('League\Flysystem\FileExistsException');
         $this->prophecy->has('path.txt')->willReturn(true);
         $this->filesystem->write('path.txt', 'contents');
     }
 
     public function testAssertAbsentThrowsException()
     {
-        $this->setExpectedException('League\Flysystem\FileNotFoundException');
+        $this->expectException('League\Flysystem\FileNotFoundException');
         $this->prophecy->has('path.txt')->willReturn(false);
         $this->filesystem->read('path.txt');
     }
@@ -332,6 +343,13 @@ class FilesystemTests extends \PHPUnit_Framework_TestCase
         $this->prophecy->setVisibility($path, 'public')->willReturn(['path' => $path, 'visibility' => 'public']);
         $output = $this->filesystem->setVisibility($path, 'public');
         $this->assertTrue($output);
+    }
+
+    public function testSetVisibilityOnFileThatDoesNotExist()
+    {
+        $this->expectException(FileNotFoundException::class);
+        $this->prophecy->has('path.txt')->willReturn(false);
+        $this->filesystem->setVisibility('path.txt', 'public');
     }
 
     public function testSetVisibilityFail()
@@ -442,7 +460,7 @@ class FilesystemTests extends \PHPUnit_Framework_TestCase
 
     public function testInvalidPluginCall()
     {
-        $this->setExpectedException('BadMethodCallException');
+        $this->expectException('BadMethodCallException');
         $this->filesystem->invalidCall();
     }
 }

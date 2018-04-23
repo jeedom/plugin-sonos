@@ -14,7 +14,6 @@ class DeviceTest extends MockTest
         $models = [
             "S1"    =>  true,
             "S12"   =>  true,
-            "S11"   =>  true,
             "S3"    =>  true,
             "S5"    =>  true,
             "S6"    =>  true,
@@ -36,7 +35,7 @@ class DeviceTest extends MockTest
     /**
      * @dataProvider modelProvider
      */
-    public function testIsSpeaker($model, $expected)
+    public function testIsSpeaker($model, bool $expected)
     {
         $device = new Intruder(new Device("127.0.0.1"));
 

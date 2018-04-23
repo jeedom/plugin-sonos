@@ -6,12 +6,13 @@ use duncan3dc\DomParser\XmlElement;
 use duncan3dc\Sonos\Interfaces\AlarmInterface;
 use duncan3dc\Sonos\Interfaces\NetworkInterface;
 use duncan3dc\Sonos\Interfaces\SpeakerInterface;
+use duncan3dc\Sonos\Interfaces\Utils\TimeInterface;
 use duncan3dc\Sonos\Utils\Time;
 
 /**
  * Provides an interface for managing the alarms on the network.
  */
-class Alarm implements AlarmInterface
+final class Alarm implements AlarmInterface
 {
     /**
      * @var array $days An mapping of php day values to our day constants.
@@ -142,9 +143,9 @@ class Alarm implements AlarmInterface
     /**
      * Get the start time of the alarm.
      *
-     * @return Time
+     * @return TimeInterface
      */
-    public function getTime(): Time
+    public function getTime(): TimeInterface
     {
         return Time::parse($this->attributes["StartTime"]);
     }
@@ -153,11 +154,11 @@ class Alarm implements AlarmInterface
     /**
      * Set the start time of the alarm.
      *
-     * @param Time $time The time to set the alarm for
+     * @param TimeInterface $time The time to set the alarm for
      *
      * @return $this
      */
-    public function setTime(Time $time): AlarmInterface
+    public function setTime(TimeInterface $time): AlarmInterface
     {
         $this->attributes["StartTime"] = $time->asString();
 
@@ -168,9 +169,9 @@ class Alarm implements AlarmInterface
     /**
      * Get the duration of the alarm.
      *
-     * @return Time
+     * @return TimeInterface
      */
-    public function getDuration(): Time
+    public function getDuration(): TimeInterface
     {
         return Time::parse($this->attributes["Duration"]);
     }
@@ -179,11 +180,11 @@ class Alarm implements AlarmInterface
     /**
      * Set the duration of the alarm.
      *
-     * @param Time $duration The duration of the alarm
+     * @param TimeInterface $duration The duration of the alarm
      *
      * @return $this
      */
-    public function setDuration(Time $duration): AlarmInterface
+    public function setDuration(TimeInterface $duration): AlarmInterface
     {
         $this->attributes["Duration"] = $duration->asString();
 

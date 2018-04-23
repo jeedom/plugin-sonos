@@ -1,13 +1,14 @@
 <?php
 
-
 use League\Flysystem\Plugin\GetWithMetadata;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\TestCase;
 
-class GetWithMetadataTests extends \PHPUnit_Framework_TestCase
+class GetWithMetadataTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     /**
-     * @var ObjectProphecy
+     * @var \Prophecy\Prophecy\ObjectProphecy
      */
     private $prophecy;
 
@@ -60,7 +61,7 @@ class GetWithMetadataTests extends \PHPUnit_Framework_TestCase
 
     public function testHandleInvalid()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->prophecy->getMetadata('path.txt')->willReturn([
             'path' => 'path.txt',
             'type' => 'file',

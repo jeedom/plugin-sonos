@@ -3,9 +3,12 @@
 use League\Flysystem\Adapter\NullAdapter;
 use League\Flysystem\Config;
 use League\Flysystem\Filesystem;
+use PHPUnit\Framework\TestCase;
 
-class NullAdapterTest extends PHPUnit_Framework_TestCase
+class NullAdapterTest extends TestCase
 {
+    use \PHPUnitHacks;
+
     /**
      * @return Filesystem
      */

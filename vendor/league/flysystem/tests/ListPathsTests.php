@@ -1,10 +1,12 @@
 <?php
 
-
 use League\Flysystem\Plugin\ListPaths;
+use PHPUnit\Framework\TestCase;
 
-class ListPathsTests extends \PHPUnit_Framework_TestCase
+class ListPathsTests extends TestCase
 {
+    use \PHPUnitHacks;
+
     private $filesystem;
     private $actualFilesystem;
 
