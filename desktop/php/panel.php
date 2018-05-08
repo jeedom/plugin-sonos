@@ -4,17 +4,18 @@ if (!isConnect()) {
 }
 
 if (init('object_id') == '') {
-	$object = object::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
+	$object = jeeObject::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
 } else {
-	$object = object::byId(init('object_id'));
+	$object = jeeObject::byId(init('object_id'));
 }
 if (!is_object($object)) {
-	$object = object::rootObject();
+	$object = jeeObject::rootObject();
 }
 if (!is_object($object)) {
 	throw new Exception('{{Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br/> Si vous ne savez pas quoi faire ou que c\'est la premiere fois que vous utilisez Jeedom n\'hésitez pas a consulter cette <a href="http://jeedom.fr/premier_pas.php" target="_blank">page</a>}}');
 }
-$child_object = object::buildTree($object);
+$allObject = jeeObject::buildTree(null, true);
+$child_object = jeeObject::buildTree($object);
 $parentNumber = array();
 ?>
 
@@ -31,8 +32,11 @@ if ($_SESSION['user']->getOptions('displayObjetByDefault') == 1 && init('report'
             <li class="nav-header">{{Liste objets}} </li>
             <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
             <?php
-$allObject = object::buildTree(null, true);
+
 foreach ($allObject as $object_li) {
+	if ($object_li->getIsVisible() != 1 || count($object_li->getEqLogic(true, false, 'sonos3', null, true)) == 0) {
+		continue;
+	}
 	$margin = 5 * $object_li->getConfiguration('parentNumber');
 	if ($object_li->getId() == $object->getId()) {
 		echo '<li class="cursor li_object active" ><a data-object_id="' . $object_li->getId() . '" href="index.php?v=d&p=panel&m=sonos3&object_id=' . $object_li->getId() . '" style="padding: 2px 0px;"><span style="position:relative;left:' . $margin . 'px;">' . $object_li->getHumanName(true) . '</span><span style="font-size : 0.65em;float:right;position:relative;top:7px;">' . $object_li->getHtmlSummary() . '</span></a></li>';
