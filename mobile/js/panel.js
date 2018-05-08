@@ -16,6 +16,7 @@
 
  function initSonos3Panel(_object_id) {
     jeedom.object.all({
+        onlyHasEqLogic : 'sonos3', 
         error: function (error) {
             $('#div_alert').showAlert({message: error.message, level: 'danger'});
         },
