@@ -1050,7 +1050,6 @@ class sonos3Cmd extends cmd {
 			if (!$controller->isUsingQueue()) {
 				$controller->useQueue();
 			}
-			$controller->getQueue()->clear();
 			$controller->soap("AVTransport", "RemoveAllTracksFromQueue");
 			$queue = $controller->getQueue();
 			$uri = $eqLogic->getPlayListsUri($_options['title']);
@@ -1153,14 +1152,23 @@ class sonos3Cmd extends cmd {
 			$folder = array_pop($path);
 			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
 			$track = new TextToSpeech(trim($_options['message']), $directory, new PicottsProvider(str_replace('_', '-', config::byKey('language', 'core', 'fr_FR'))));
-			try {
-				if ($_options['title'] != '' && is_numeric($_options['title'])) {
-					$controller->interrupt($track, $_options['title']);
-				} else {
-					$controller->interrupt($track);
+			$loop = 1;
+			while (true) {
+				try {
+					if ($_options['title'] != '' && is_numeric($_options['title'])) {
+						$controller->interrupt($track, $_options['title']);
+					} else {
+						$controller->interrupt($track);
+					}
+					break;
+				} catch (Exception $e) {
+					log::add('sonos3', 'debug', $e->getMessage());
 				}
-			} catch (Exception $e) {
-				log::add('sonos3', 'debug', $e->getMessage());
+				if ($loop > 20) {
+					break;
+				}
+				usleep(500000);
+				$loop++;
 			}
 
 		}
