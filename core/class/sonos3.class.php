@@ -887,11 +887,11 @@ class sonos3 extends eqLogic {
 	}
 
 	public function removeTrack($_position) {
-		$queue = $this->getController()->getQueue()->removeTrack($_position);
+		$this->getController()->getQueue()->removeTrack($_position);
 	}
 
-	public function emptyQueue($_position) {
-		$queue = $this->getController()->getQueue()->clear();
+	public function emptyQueue() {
+		$this->getController()->getQueue()->clear();
 	}
 
 	public function playGoogleMusic($_id) {
@@ -1050,6 +1050,7 @@ class sonos3Cmd extends cmd {
 			if (!$controller->isUsingQueue()) {
 				$controller->useQueue();
 			}
+			$controller->getQueue()->clear();
 			$controller->soap("AVTransport", "RemoveAllTracksFromQueue");
 			$queue = $controller->getQueue();
 			$uri = $eqLogic->getPlayListsUri($_options['title']);
