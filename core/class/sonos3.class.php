@@ -194,7 +194,11 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function syncSonos() {
-		$sonos = self::getSonos();
+		$factory = new \duncan3dc\Sonos\Devices\Factory;
+		$devices = new \duncan3dc\Sonos\Devices\Discovery(new \duncan3dc\Sonos\Devices\Collection($factory));
+		$devices->getDevices();
+		$sonos = new \duncan3dc\Sonos\Network($devices);
+		$sonos->setLogger(log::getLogger('sonos3'));
 		$controllers = $sonos->getControllers();
 		$speakers = sonos3::getSpeaker();
 		foreach ($controllers as $controller) {
