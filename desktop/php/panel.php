@@ -2,7 +2,7 @@
 if (!isConnect()) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
-
+sendVarToJs('jeedomBackgroundImg', 'plugins/sonos3/core/img/panel.jpg');
 if (init('object_id') == '') {
 	$object = jeeObject::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
 } else {
