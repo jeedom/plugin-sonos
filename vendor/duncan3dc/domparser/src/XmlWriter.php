@@ -8,7 +8,7 @@ namespace duncan3dc\DomParser;
 class XmlWriter
 {
     /**
-     * @var DomDocument $dom The internal dom instance.
+     * @var \DOMDocument $dom The internal dom instance.
      */
     protected $dom;
 
@@ -24,7 +24,7 @@ class XmlWriter
         if ($encoding === null) {
             $encoding = "utf-8";
         }
-        $this->dom = new \DomDocument("1.0", $encoding);
+        $this->dom = new \DOMDocument("1.0", $encoding);
 
         foreach ($structure as $key => $val) {
             $this->addElement($key, $val, $this->dom);
@@ -35,7 +35,7 @@ class XmlWriter
     /**
      * Get the internal dom instance.
      *
-     * @return DomDocument
+     * @return \DOMDocument
      */
     public function getDomDocument()
     {
@@ -66,7 +66,7 @@ class XmlWriter
      * @param mixed $params The value to set the new element to, or the elements to append to it
      * @param mixed $parent The dom instance to append the element to
      *
-     * @return DomElement
+     * @return \DOMElement
      */
     public function addElement($name, $params, $parent)
     {

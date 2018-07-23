@@ -2,7 +2,8 @@
 
 namespace duncan3dc\Speaker\Providers;
 
-use duncan3dc\Speaker\Exception;
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+use duncan3dc\Speaker\Exceptions\ProviderException;
 
 /**
  * Convert a string of a text to spoken word audio.
@@ -12,42 +13,42 @@ class VoiceRssProvider extends AbstractProvider
     /**
      * @var string $language The language to use.
      */
-    protected $language = "en-gb";
+    private $language = "en-gb";
 
     /**
      * @var int $speed The speech rate.
      */
-    protected $speed = 0;
+    private $speed = 0;
 
     /**
      * Create a new instance.
      *
      * @param string $api Your Voice RSS API key.
      * @param string $language The language to use.
-     * @param string $speed The speech rate to use.
+     * @param int $speed The speech rate to use.
      */
-    public function __construct($apikey, $language = null, $speed = null)
+    public function __construct(string $apikey, string $language = null, int $speed = null)
     {
         $this->apikey = $apikey;
 
         if ($language !== null) {
-            $this->setLanguage($language);
+            $this->language = $this->getLanguage($language);
         }
 
         if ($speed !== null) {
-            $this->setSpeed($speed);
+            $this->speed = $this->getSpeed($speed);
         }
     }
 
 
     /**
-     * Set the language to use.
+     * Check if the language is valid, and convert it to the required format.
      *
-     * @param string $language The language to use (eg 'en')
+     * @param string $language The language to use
      *
-     * @return static
+     * @return string
      */
-    public function setLanguage($language)
+    private function getLanguage(string $language): string
     {
         $language = strtolower(trim($language));
 
@@ -56,12 +57,44 @@ class VoiceRssProvider extends AbstractProvider
         }
 
         if (!preg_match("/^[a-z]{2}-[a-z]{2}$/", $language)) {
-            throw new \InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters, a hyphen, and a further 2 characters");
+            throw new InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters, a hyphen, and a further 2 characters");
         }
 
-        $this->language = $language;
+        return $language;
+    }
 
-        return $this;
+
+    /**
+     * Set the language to use.
+     *
+     * @param string $language The language to use (eg 'en')
+     *
+     * @return self
+     */
+    public function withLanguage(string $language): self
+    {
+        $provider = clone $this;
+
+        $provider->language = $this->getLanguage($language);
+
+        return $provider;
+    }
+
+
+    /**
+     * Check the speech rate is valid.
+     *
+     * @param int $speed The speech rate to use
+     *
+     * @return int
+     */
+    private function getSpeed(int $speed)
+    {
+        if ($speed < -10 || $speed > 10) {
+            throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between -10 and 10");
+        }
+
+        return $speed;
     }
 
 
@@ -70,18 +103,15 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @param int $speed The speech rate to use (between -10 and 10)
      *
-     * @return static
+     * @return $this
      */
-    public function setSpeed($speed)
+    public function withSpeed(int $speed): self
     {
-        $speed = (int) $speed;
-        if ($speed < -10 || $speed > 10) {
-            throw new \InvalidArgumentException("Invalid speed ({$speed}), must be a number between -10 and 10");
-        }
+        $provider = clone $this;
 
-        $this->speed = $speed;
+        $provider->speed = $this->getSpeed($speed);
 
-        return $this;
+        return $provider;
     }
 
 
@@ -90,7 +120,7 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             "language"  =>  $this->language,
@@ -106,7 +136,7 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text)
+    public function textToSpeech(string $text): string
     {
         $result = $this->sendRequest("https://api.voicerss.org/", [
             "key"   =>  $this->apikey,
@@ -118,7 +148,7 @@ class VoiceRssProvider extends AbstractProvider
         ]);
 
         if (substr($result, 0, 6) === "ERROR:") {
-            throw new Exception("TextToSpeech {$result}");
+            throw new ProviderException("TextToSpeech {$result}");
         }
 
         return $result;

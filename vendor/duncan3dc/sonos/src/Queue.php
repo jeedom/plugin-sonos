@@ -41,7 +41,7 @@ class Queue implements QueueInterface
      * Create an instance of the Queue class.
      *
      * @param ControllerInterface $controller The Controller instance that this queue is for
-     * @param FactoryInterface $trackFactory A factory to create tracks from
+     * @param FactoryInterface $factory A factory to create tracks from
      */
     public function __construct(ControllerInterface $controller, FactoryInterface $factory = null)
     {
@@ -180,7 +180,8 @@ class Queue implements QueueInterface
      * Add multiple uris to the queue.
      *
      * @param UriInterface[] $tracks The track to add
-     * @param int $position The position to insert the track in the queue (zero-based), by default the track will be added to the end of the queue
+     * @param int $position The position to insert the track in the queue (zero-based),
+     *                      by default the track will be added to the end of the queue
      *
      * @return void
      */
@@ -238,7 +239,8 @@ class Queue implements QueueInterface
      * Add a track to the queue.
      *
      * @param string|UriInterface $track The URI of the track to add, or an object that implements the UriInterface
-     * @param int $position The position to insert the track in the queue (zero-based), by default the track will be added to the end of the queue
+     * @param int $position The position to insert the track in the queue (zero-based),
+     *                      by default the track will be added to the end of the queue
      *
      * @return $this
      */
@@ -251,26 +253,31 @@ class Queue implements QueueInterface
     /**
      * Add tracks to the queue.
      *
-     * @param string[]|UriInterface[] $tracks An array where each element is either the URI of the tracks to add, or an object that implements the UriInterface
-     * @param int $position The position to insert the tracks in the queue (zero-based), by default the tracks will be added to the end of the queue
+     * @param string[]|UriInterface[] $tracks An array where each element is either the URI of the tracks to add,
+     *                                          or an object that implements the UriInterface
+     * @param int $position The position to insert the tracks in the queue (zero-based),
+     *                      by default the tracks will be added to the end of the queue
      *
      * @return $this
      */
     public function addTracks(array $tracks, int $position = null): QueueInterface
     {
-        foreach ($tracks as &$track) {
+        $uris = [];
+        foreach ($tracks as $track) {
             # If a simple uri has been passed then convert it to a Track instance
             if (is_string($track)) {
                 $track = $this->trackFactory->createFromUri($track);
             }
 
             if (!$track instanceof UriInterface) {
-                throw new \InvalidArgumentException("The addTracks() array must contain either string URIs or objects that implement " . UriInterface::class);
+                $error = "The tracks must contain either string URIs or objects that implement " . UriInterface::class;
+                throw new \InvalidArgumentException($error);
             }
-        }
-        unset($track);
 
-        $this->addUris($tracks, $position);
+            $uris[] = $track;
+        }
+
+        $this->addUris($uris, $position);
 
         return $this;
     }

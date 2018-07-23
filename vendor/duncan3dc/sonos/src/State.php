@@ -4,9 +4,9 @@ namespace duncan3dc\Sonos;
 
 use duncan3dc\DomParser\XmlElement;
 use duncan3dc\Sonos\Interfaces\ControllerInterface;
-use duncan3dc\Sonos\Interfaces\Utils\TimeInterface;
 use duncan3dc\Sonos\Interfaces\StateInterface;
 use duncan3dc\Sonos\Interfaces\TrackInterface;
+use duncan3dc\Sonos\Interfaces\Utils\TimeInterface;
 use duncan3dc\Sonos\Tracks\Stream;
 use duncan3dc\Sonos\Tracks\Track;
 use duncan3dc\Sonos\Utils\Time;
@@ -17,7 +17,7 @@ use duncan3dc\Sonos\Utils\Time;
 final class State extends Track implements StateInterface
 {
     /**
-     * @var string|null $stream The name of the stream currently currently playing (or null if we are not on a stream).
+     * @var Stream|null $stream The name of the stream currently currently playing (or null if we are not on a stream).
      */
     private $stream;
 
@@ -102,11 +102,11 @@ final class State extends Track implements StateInterface
     /**
      * Set the duration of the currently active track.
      *
-     * @param Time $duration The duration
+     * @param TimeInterface $duration The duration
      *
      * @return StateInterface
      */
-    public function setDuration(Time $duration): StateInterface
+    public function setDuration(TimeInterface $duration): StateInterface
     {
         $this->duration = $duration;
         return $this;
@@ -116,9 +116,9 @@ final class State extends Track implements StateInterface
     /**
      * Get the duration of the currently active track.
      *
-     * @return Time
+     * @return TimeInterface
      */
-    public function getDuration(): Time
+    public function getDuration(): TimeInterface
     {
         return $this->duration;
     }
@@ -127,11 +127,11 @@ final class State extends Track implements StateInterface
     /**
      * Set the position of the currently active track.
      *
-     * @param Time $position The position
+     * @param TimeInterface $position The position
      *
      * @return StateInterface
      */
-    public function setPosition(Time $position): StateInterface
+    public function setPosition(TimeInterface $position): StateInterface
     {
         $this->position = $position;
         return $this;
@@ -141,9 +141,9 @@ final class State extends Track implements StateInterface
     /**
      * Get the position of the currently active track.
      *
-     * @return Time
+     * @return TimeInterface
      */
-    public function getPosition(): Time
+    public function getPosition(): TimeInterface
     {
         return $this->position;
     }

@@ -3,25 +3,16 @@
 namespace duncan3dc\Speaker\Providers;
 
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
-use duncan3dc\Speaker\Exceptions\ProviderException;
-use duncan3dc\Speaker\Providers\AbstractProvider;
-use Symfony\Component\Process\ProcessBuilder;
 
 /**
- * Convert a string of a text to a spoken word wav.
+ * Convert a string of a text to spoken word audio.
  */
-class PicottsProvider extends AbstractProvider
+class ResponsiveVoiceProvider extends AbstractProvider
 {
-    /**
-     * @var string $pico The picotts program.
-     */
-    private $pico;
-
     /**
      * @var string $language The language to use.
      */
-    private $language = "en-US";
-
+    private $language = "en-GB";
 
     /**
      * Create a new instance.
@@ -30,13 +21,6 @@ class PicottsProvider extends AbstractProvider
      */
     public function __construct(string $language = null)
     {
-        $pico = trim(exec("which pico2wave"));
-        if (!file_exists($pico)) {
-            throw new ProviderException("Unable to find picotts program, please install pico2wave before trying again");
-        }
-
-        $this->pico = $pico;
-
         if ($language !== null) {
             $this->language = $this->getLanguage($language);
         }
@@ -87,17 +71,6 @@ class PicottsProvider extends AbstractProvider
 
 
     /**
-     * Get the format of this audio.
-     *
-     * @return string
-     */
-    public function getFormat(): string
-    {
-        return "wav";
-    }
-
-
-    /**
      * Get the current options.
      *
      * @return array
@@ -117,39 +90,11 @@ class PicottsProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech(string $text, ProcessBuilder $builder = null): string
+    public function textToSpeech(string $text): string
     {
-        $filename = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "speaker_picotts.wav";
-
-        if (file_exists($filename)) {
-            unlink($filename);
-        }
-
-        if ($builder === null) {
-            $builder = new ProcessBuilder;
-        }
-
-        $process = $builder
-            ->setPrefix($this->pico)
-            ->add("--wave={$filename}")
-            ->add("--lang={$this->language}")
-            ->add($text);
-
-        $process = $builder->getProcess();
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            $output = $process->getErrorOutput();
-            throw new ProviderException(explode("\n", $output)[0]);
-        }
-
-        if (!file_exists($filename)) {
-            throw new ProviderException("TextToSpeech unable to create file: {$filename}");
-        }
-
-        $result = file_get_contents($filename);
-        unlink($filename);
-
-        return $result;
+        return $this->sendRequest("https://code.responsivevoice.org/getvoice.php", [
+            "tl"        =>  $this->language,
+            "t"         =>  $text,
+        ]);
     }
 }

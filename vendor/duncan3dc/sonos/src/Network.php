@@ -5,7 +5,6 @@ namespace duncan3dc\Sonos;
 use duncan3dc\DomParser\XmlParser;
 use duncan3dc\Sonos\Devices\Collection;
 use duncan3dc\Sonos\Devices\Discovery;
-use duncan3dc\Sonos\Devices\Factory;
 use duncan3dc\Sonos\Exceptions\NotFoundException;
 use duncan3dc\Sonos\Interfaces\AlarmInterface;
 use duncan3dc\Sonos\Interfaces\ControllerInterface;
@@ -15,7 +14,6 @@ use duncan3dc\Sonos\Interfaces\PlaylistInterface;
 use duncan3dc\Sonos\Interfaces\Services\RadioInterface;
 use duncan3dc\Sonos\Interfaces\SpeakerInterface;
 use duncan3dc\Sonos\Services\Radio;
-use GuzzleHttp\Client;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 
@@ -50,7 +48,7 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 	 */
 	public function __construct(CollectionInterface $collection = null) {
 		if ($collection === null) {
-			$collection = new Discovery(new Collection(new Factory));
+			$collection = new Discovery();
 		}
 		$this->collection = $collection;
 	}
@@ -95,19 +93,6 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 
 		$this->getLogger()->info("creating speaker instances");
 
-		# Get the topology information from 1 speaker
-		$topology = [];
-		$ip = reset($devices)->ip;
-		$uri = "http://{$ip}:1400/status/topology";
-		$this->getLogger()->notice("Getting topology info from: {$uri}");
-		$xml = (string) (new Client)->get($uri)->getBody();
-		$players = (new XmlParser($xml))->getTag("ZonePlayers")->getTags("ZonePlayer");
-		foreach ($players as $player) {
-			$attributes = $player->getAttributes();
-			$ip = parse_url($attributes["location"])["host"];
-			$topology[$ip] = $attributes;
-		}
-
 		$this->speakers = [];
 		foreach ($devices as $device) {
 			if (!$device->isSpeaker()) {
@@ -116,13 +101,7 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 
 			$speaker = new Speaker($device);
 
-			if (!isset($topology[$device->ip])) {
-				throw new \RuntimeException("Failed to lookup the topology info for this speaker");
-			}
-
-			$speaker->setTopology($topology[$device->ip]);
-
-			$this->speakers[$device->ip] = $speaker;
+			$this->speakers[$device->getIp()] = $speaker;
 		}
 
 		return $this->speakers;
@@ -281,7 +260,7 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 	 *
 	 * If no case-sensitive match is found it will return a case-insensitive match.
 	 *
-	 * @param string The name of the playlist
+	 * @param string $name The name of the playlist
 	 *
 	 * @return bool
 	 */
@@ -304,7 +283,7 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 	 *
 	 * If no case-sensitive match is found it will return a case-insensitive match.
 	 *
-	 * @param string The name of the playlist
+	 * @param string $name The name of the playlist
 	 *
 	 * @return PlaylistInterface
 	 */
@@ -331,7 +310,7 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 	/**
 	 * Get the playlist with the specified id.
 	 *
-	 * @param string The ID of the playlist (eg SQ:123)
+	 * @param string $id The ID of the playlist (eg SQ:123)
 	 *
 	 * @return PlaylistInterface
 	 */
@@ -344,7 +323,7 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 	/**
 	 * Create a new playlist.
 	 *
-	 * @param string The name to give to the playlist
+	 * @param string $name The name to give to the playlist
 	 *
 	 * @return PlaylistInterface
 	 */
@@ -394,8 +373,6 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 	 * @return AlarmInterface
 	 */
 	public function getAlarmById(int $id): AlarmInterface{
-		$id = (int) $id;
-
 		$alarms = $this->getAlarms();
 		foreach ($alarms as $alarm) {
 			if ($alarm->getId() === $id) {

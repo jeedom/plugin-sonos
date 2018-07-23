@@ -18,7 +18,8 @@ use duncan3dc\Sonos\Utils\Time;
 /**
  * Allows interaction with the groups of speakers.
  *
- * Although sometimes a Controller is synonymous with a Speaker, when speakers are grouped together only the coordinator can receive events (play/pause/etc)
+ * Although sometimes a Controller is synonymous with a Speaker,
+ * when speakers are grouped together only the coordinator can receive events (play/pause/etc)
  */
 final class Controller implements ControllerInterface
 {
@@ -44,7 +45,8 @@ final class Controller implements ControllerInterface
     public function __construct(SpeakerInterface $speaker, NetworkInterface $network)
     {
         if (!$speaker->isCoordinator()) {
-            throw new \InvalidArgumentException("You cannot create a Controller instance from a Speaker that is not the coordinator of it's group");
+            $error = "You cannot create a Controller instance from a Speaker that is not the coordinator of its group";
+            throw new \InvalidArgumentException($error);
         }
 
         $this->network = $network;
@@ -104,7 +106,7 @@ final class Controller implements ControllerInterface
 
         # Check for an empty queue
         if (!$data["TrackMetaData"]) {
-            return new State;
+            return new State();
         }
 
         $parser = new XmlParser($data["TrackMetaData"]);
@@ -116,7 +118,7 @@ final class Controller implements ControllerInterface
             if ($title = (string) $meta->getTag("title")) {
                 $state->setStream(new Stream("", $title));
             } else {
-                $state->setStream = new Stream("", $parser->getTag("title"));
+                $state->setStream(new Stream("", $parser->getTag("title")));
             }
         }
 
@@ -147,7 +149,7 @@ final class Controller implements ControllerInterface
                 return $this->play();
             case self::STATE_PAUSED:
                 return $this->pause();
-            case self::STATE_STOPPED;
+            case self::STATE_STOPPED:
                 return $this->pause();
         }
         throw new \InvalidArgumentException("Unknown state: {$state})");
@@ -380,20 +382,6 @@ final class Controller implements ControllerInterface
 
 
     /**
-     * Set the topology of this speaker.
-     *
-     * @param array $topology The topology attributes as key/value pairs
-     *
-     * @return $this
-     */
-    public function setTopology(array $topology): SpeakerInterface
-    {
-        $this->speaker->setTopology($topology);
-        return $this;
-    }
-
-
-    /**
      * Adds the specified speaker to the group of this Controller.
      *
      * @param SpeakerInterface $speaker The speaker to add to the group
@@ -411,11 +399,7 @@ final class Controller implements ControllerInterface
             "CurrentURIMetaData"    =>  "",
         ]);
 
-        $speaker->setTopology([
-            "uuid"          =>  $speaker->getUuid(),
-            "group"         =>  $this->getGroup(),
-            "coordinator"   =>  "false",
-        ]);
+        $speaker->setGroup($speaker->getUuid());
 
         return $this;
     }
@@ -432,7 +416,7 @@ final class Controller implements ControllerInterface
     {
         $speaker->soap("AVTransport", "BecomeCoordinatorOfStandaloneGroup");
 
-        $speaker->clearTopology();
+        $speaker->updateGroup();
 
         return $this;
     }
@@ -491,8 +475,6 @@ final class Controller implements ControllerInterface
      */
     private function setPlayMode(string $type, bool $value): ControllerInterface
     {
-        $value = (bool) $value;
-
         $mode = $this->getMode();
         if ($mode[$type] === $value) {
             return $this;
@@ -574,7 +556,7 @@ final class Controller implements ControllerInterface
     public function setCrossfade(bool $crossfade): ControllerInterface
     {
         $this->soap("AVTransport", "SetCrossfadeMode", [
-            "CrossfadeMode" =>  (bool) $crossfade,
+            "CrossfadeMode" => $crossfade,
         ]);
 
         return $this;
@@ -610,7 +592,7 @@ final class Controller implements ControllerInterface
 
         $export = new ControllerState($this);
 
-        if ($pause) {
+        if ($pause && isset($state)) {
             $export->setState($state);
         }
 
@@ -772,13 +754,29 @@ final class Controller implements ControllerInterface
 
 
     /**
-     * Get the uuid of the group this speaker is a member of.
-     *
-     * @return string
+     * @inheritDoc
      */
     public function getGroup(): string
     {
         return $this->speaker->getGroup();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function updateGroup(): void
+    {
+        $this->speaker->updateGroup();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function setGroup(string $group): void
+    {
+        $this->speaker->setGroup($group);
     }
 
 
@@ -810,9 +808,7 @@ final class Controller implements ControllerInterface
     /**
      * Get the current volume of this speaker.
      *
-     * @param int The current volume between 0 and 100
-     *
-     * @return int
+     * @return int The current volume between 0 and 100
      */
     public function getVolume(): int
     {

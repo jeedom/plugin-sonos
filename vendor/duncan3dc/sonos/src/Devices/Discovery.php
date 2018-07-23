@@ -21,7 +21,7 @@ final class Discovery implements CollectionInterface
     private $discovered = false;
 
     /**
-     * @var string $networkInterface The network interface to use for SSDP discovery.
+     * @var string|int $networkInterface The network interface to use for SSDP discovery.
      */
     private $networkInterface;
 
@@ -36,8 +36,11 @@ final class Discovery implements CollectionInterface
      *
      * @param CollectionInterface $collection The device collection to actually use
      */
-    public function __construct(CollectionInterface $collection)
+    public function __construct(CollectionInterface $collection = null)
     {
+        if ($collection === null) {
+            $collection = new Collection();
+        }
         $this->collection = $collection;
     }
 
@@ -61,7 +64,7 @@ final class Discovery implements CollectionInterface
      *
      * @return LoggerInterface $logger The logging object
      */
-    public function getLogger()
+    public function getLogger(): LoggerInterface
     {
         return $this->collection->getLogger();
     }
@@ -155,7 +158,11 @@ final class Discovery implements CollectionInterface
     public function getDevices(): array
     {
         if (!$this->discovered) {
-            $socket = new Socket($this->getNetworkInterface(), $this->getMulticastAddress(), $this->collection->getLogger());
+            $socket = new Socket(
+                $this->getNetworkInterface(),
+                $this->getMulticastAddress(),
+                $this->collection->getLogger()
+            );
             $this->discoverDevices($socket);
             $this->discovered = true;
         }

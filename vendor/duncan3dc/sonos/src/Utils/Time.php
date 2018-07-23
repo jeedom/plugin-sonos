@@ -117,7 +117,7 @@ final class Time implements TimeInterface
      */
     public function getSeconds(): int
     {
-        return (int) $this->seconds % 60;
+        return $this->seconds % 60;
     }
 
 
@@ -129,7 +129,7 @@ final class Time implements TimeInterface
     public function getMinutes(): int
     {
         $minutes = (int) floor($this->seconds / 60);
-        return (int) $minutes % 60;
+        return $minutes % 60;
     }
 
 
@@ -147,7 +147,8 @@ final class Time implements TimeInterface
     /**
      * Format the time in a custom way.
      *
-     * @param string $format The custom format to use. %h, %m, %s are available, and uppercase versions (%H, %M, %S) ensure a leading zero is present for single digit values
+     * @param string $format The custom format to use. %h, %m, %s are available,
+     *                     and uppercase versions (%H, %M, %S) ensure a leading zero is present for single digit values
      *
      * @return string
      */

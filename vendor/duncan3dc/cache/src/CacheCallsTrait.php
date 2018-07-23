@@ -3,9 +3,16 @@
 namespace duncan3dc\Cache;
 
 use Psr\SimpleCache\CacheInterface as SimpleCacheInterface;
+use function get_class;
+use function method_exists;
+use function print_r;
+use function sha1;
 
 trait CacheCallsTrait
 {
+    /**
+     * @var SimpleCacheInterface The internal cache instance we are using.
+     */
     private $_cache;
 
 
@@ -15,19 +22,19 @@ trait CacheCallsTrait
     }
 
 
-    private function getCacheCallsPool()
+    private function getCacheCallsPool(): SimpleCacheInterface
     {
         if ($this->_cache === null) {
-            $this->_cache = new ArrayPool;
+            $this->_cache = new ArrayPool();
         }
 
         return $this->_cache;
     }
 
 
-    public function cacheMethod($method, ...$args)
+    public function cacheMethod(string $method, ...$args)
     {
-        # Generatea a key for this method call and it's arguments
+        # Generates a key for this method call and its arguments
         $key = sha1($method . print_r($args, true));
 
         /**
@@ -45,6 +52,11 @@ trait CacheCallsTrait
          * to $instance->getData() will return the previously cached value.
          */
         $call = "_{$method}";
+
+        if (!method_exists($this, $call)) {
+            throw new \BadMethodCallException("Call to undefined method " . get_class($this) . "::{$method}()");
+        }
+
         $result = $this->$call(...$args);
 
         # Store the result for future calls
@@ -54,7 +66,7 @@ trait CacheCallsTrait
     }
 
 
-    public function __call($method, $args)
+    public function __call(string $method, array $args)
     {
         return $this->cacheMethod($method, ...$args);
     }

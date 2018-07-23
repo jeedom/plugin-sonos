@@ -88,7 +88,7 @@ final class Radio implements RadioInterface
      *
      * If no case-sensitive match is found it will return a case-insensitive match.
      *
-     * @param string The name of the station
+     * @param string $name The name of the station
      *
      * @return Stream
      */
@@ -130,7 +130,7 @@ final class Radio implements RadioInterface
      *
      * If no case-sensitive match is found it will return a case-insensitive match.
      *
-     * @param string The name of the show
+     * @param string $name The name of the show
      *
      * @return Stream
      */

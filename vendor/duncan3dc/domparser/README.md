@@ -33,7 +33,7 @@ Alias: getElementByTagName()
 * getElementsByClassName(mixed $className): array - Matches elements that have a class attribute that matches the string parameter.  
 If you want to find elements with multiple classes, pass the $className as an array of classes, and only elements that have all classes will be returned
 * getElementByClassName(mixed $className): Element - Similar to getElementsByClassName() except this will return the first element matched
-* output(): string - Returns the xml/html repesented by the receiver, formatted using DOMDocument::formatOutput
+* output() - Returns the xml/html repesented by the receiver, formatted using DOMDocument::formatOutput
 * xpath(string $path): array - Returns an array of elements matching the $path
 
 

@@ -196,7 +196,8 @@ final class Alarm implements AlarmInterface
      * Get the frequency of the alarm.
      *
      * The result is an integer which can be compared using the bitwise operators and the class constants for each day.
-     * If the alarm is a one time only alarm then it will not match any of the day constants, but will be equal to the class constant ONCE.
+     * If the alarm is a one time only alarm then it will not match any of the day constants,
+     * but will be equal to the class constant ONCE.
      *
      * @return int
      */
@@ -214,7 +215,8 @@ final class Alarm implements AlarmInterface
             $data = "ON_06";
         }
         if (!preg_match("/^ON_([0-9]+)$/", $data, $matches)) {
-            throw new \RuntimeException("Unrecognised frequency for alarm ({$data}), please report this issue at github.com/duncan3dc/sonos/issues");
+            $error = "Unrecognised frequency for alarm ({$data}), please report this issue on github.com";
+            throw new \RuntimeException($error);
         }
 
         $data = $matches[1];
@@ -503,8 +505,6 @@ final class Alarm implements AlarmInterface
      */
     protected function setPlayMode(string $type, bool $value): AlarmInterface
     {
-        $value = (bool) $value;
-
         $mode = Helper::getMode($this->attributes["PlayMode"]);
         if ($mode[$type] === $value) {
             return $this;
@@ -610,7 +610,7 @@ final class Alarm implements AlarmInterface
     public function delete()
     {
         $this->soap("AlarmClock", "DestroyAlarm");
-        $this->id = null;
+        unset($this->id);
     }
 
 

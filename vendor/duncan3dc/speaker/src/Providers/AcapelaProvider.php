@@ -2,6 +2,8 @@
 
 namespace duncan3dc\Speaker\Providers;
 
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+
 /**
  * Convert a string of a text to spoken word audio.
  */
@@ -10,47 +12,69 @@ class AcapelaProvider extends AbstractProvider
     /**
      * @var string $login Your acapela login.
      */
-    protected $login = "";
+    private $login = "";
 
     /**
      * @var string $application Your acapela application.
      */
-    protected $application = "";
+    private $application = "";
 
     /**
      * @var string $password Your acapela password.
      */
-    protected $password = "";
+    private $password = "";
 
     /**
      * @var string $voice The voice to use.
      */
-    protected $voice = "rod";
+    private $voice = "rod";
 
     /**
      * @var int $speed The speech rate.
      */
-    protected $speed = 180;
+    private $speed = 180;
 
 
     /**
      * Create a new instance.
      *
-     * @param string $voice The voice to use.
+     * @param string $login The username to access the service
+     * @param string $application The name of the application
+     * @param string $password The password to access the service
+     * @param string $voice The voice to use
+     * @param int $speed The speech rate
      */
-    public function __construct($login, $application, $password, $voice = null, $speed = null)
+    public function __construct(string $login, string $application, string $password, string $voice = null, int $speed = null)
     {
         $this->login = $login;
         $this->application = $application;
         $this->password = $password;
 
         if ($voice !== null) {
-            $this->setVoice($voice);
+            $this->voice = $this->getVoice($voice);
         }
 
         if ($speed !== null) {
-            $this->setSpeed($speed);
+            $this->speed = $this->getSpeed($speed);
         }
+    }
+
+
+    /**
+     * Check if the voce is valid, and convert it to the required format.
+     *
+     * @param string $voice The voice to use
+     *
+     * @return string
+     */
+    private function getVoice(string $voice): string
+    {
+        $voice = trim($voice);
+        if (strlen($voice) < 3) {
+            throw new InvalidArgumentException("Unexpected voice name ({$voice}), names should be at least 3 characters long");
+        }
+
+        return strtolower($voice);
     }
 
 
@@ -61,18 +85,32 @@ class AcapelaProvider extends AbstractProvider
      *
      * @param string $voice The voice to use (eg 'Graham')
      *
-     * @return static
+     * @return self
      */
-    public function setVoice($voice)
+    public function withVoice(string $voice): self
     {
-        $voice = trim($voice);
-        if (strlen($voice) < 3) {
-            throw new \InvalidArgumentException("Unexpected voice name ({$voice}), names should be at least 3 characters long");
+        $provider = clone $this;
+
+        $provider->voice = $this->getVoice($voice);
+
+        return $provider;
+    }
+
+
+    /**
+     * Check the speech rate is valid.
+     *
+     * @param int $speed The speech rate to use
+     *
+     * @return int
+     */
+    private function getSpeed(int $speed): int
+    {
+        if ($speed < 60 || $speed > 360) {
+            throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between 60 and 360");
         }
 
-        $this->voice = strtolower($voice);
-
-        return $this;
+        return $speed;
     }
 
 
@@ -81,20 +119,16 @@ class AcapelaProvider extends AbstractProvider
      *
      * @param int $speed The speech rate to use (between 60 and 360)
      *
-     * @return static
+     * @return self
      */
-    public function setSpeed($speed)
+    public function withSpeed(int $speed): self
     {
-        $speed = (int) $speed;
-        if ($speed < 60 || $speed > 360) {
-            throw new \InvalidArgumentException("Invalid speed ({$speed}), must be a number between 60 and 360");
-        }
+        $provider = clone $this;
 
-        $this->speed = $speed;
+        $provider->speed = $this->getSpeed($speed);
 
-        return $this;
+        return $provider;
     }
-
 
 
     /**
@@ -102,7 +136,7 @@ class AcapelaProvider extends AbstractProvider
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             "voice" =>  $this->voice,
@@ -118,10 +152,10 @@ class AcapelaProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text)
+    public function textToSpeech(string $text): string
     {
         if (strlen($text) > 300) {
-            throw new \InvalidArgumentException("Only messages under 300 characters are supported");
+            throw new InvalidArgumentException("Only messages under 300 characters are supported");
         }
 
         return $this->sendRequest("http://vaas.acapela-group.com/Services/FileMaker.mp3", [

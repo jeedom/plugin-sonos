@@ -12,7 +12,12 @@ final class Collection implements CollectionInterface
     use LoggerAwareTrait;
 
     /**
-     * @var DeviceInterface[] $devices The devices that are in this collection.
+     * @var FactoryInterface The factory to create new devices from
+     */
+    private $factory;
+
+    /**
+     * @var DeviceInterface[] The devices that are in this collection.
      */
     private $devices = [];
 
@@ -22,8 +27,11 @@ final class Collection implements CollectionInterface
      *
      * @param FactoryInterface $factory The factory to create new devices from
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct(FactoryInterface $factory = null)
     {
+        if ($factory === null) {
+            $factory = new Factory();
+        }
         $this->factory = $factory;
     }
 

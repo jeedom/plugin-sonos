@@ -5,55 +5,54 @@ namespace duncan3dc\Sonos\Interfaces;
 /**
  * Representation of a track.
  */
-interface TrackInterface extends UriInterface
-{
-    /**
-     * Set the name of the track.
-     */
-    public function setTitle(string $title): TrackInterface;
+interface TrackInterface extends UriInterface {
+	/**
+	 * Set the name of the track.
+	 */
+	public function setTitle(string $title);
 
-    /**
-     * Get the name of the track.
-     */
-    public function getTitle(): string;
+	/**
+	 * Get the name of the track.
+	 */
+	public function getTitle();
 
-    /**
-     * Set the artist of the track.
-     */
-    public function setArtist(string $artist): TrackInterface;
+	/**
+	 * Set the artist of the track.
+	 */
+	public function setArtist(string $artist);
 
-    /**
-     * Get the name of the artist of the track.
-     */
-    public function getArtist(): string;
+	/**
+	 * Get the name of the artist of the track.
+	 */
+	public function getArtist();
 
-    /**
-     * Set the album of the track.
-     */
-    public function setAlbum(string $album): TrackInterface;
+	/**
+	 * Set the album of the track.
+	 */
+	public function setAlbum(string $album);
 
-    /**
-     * Get the name of the album of the track.
-     */
-    public function getAlbum(): string;
+	/**
+	 * Get the name of the album of the track.
+	 */
+	public function getAlbum();
 
-    /**
-     * Set the number of the track.
-     */
-    public function setNumber(int $number): TrackInterface;
+	/**
+	 * Set the number of the track.
+	 */
+	public function setNumber(int $number);
 
-    /**
-     * Get the track number.
-     */
-    public function getNumber(): int;
+	/**
+	 * Get the track number.
+	 */
+	public function getNumber();
 
-    /**
-     * Set the album art of the track.
-     */
-    public function setAlbumArt(string $albumArt): TrackInterface;
+	/**
+	 * Set the album art of the track.
+	 */
+	public function setAlbumArt(string $albumArt);
 
-    /**
-     * @var string $albumArt The full path to the album art for this track.
-     */
-    public function getAlbumArt(): string;
+	/**
+	 * @var string $albumArt The full path to the album art for this track.
+	 */
+	public function getAlbumArt();
 }

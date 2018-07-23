@@ -2,6 +2,8 @@
 
 namespace duncan3dc\Speaker\Providers;
 
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+
 /**
  * Convert a string of a text to spoken word audio.
  */
@@ -10,18 +12,37 @@ class GoogleProvider extends AbstractProvider
     /**
      * @var string $language The language to use.
      */
-    protected $language = "en";
+    private $language = "en";
 
     /**
      * Create a new instance.
      *
      * @param string $language The language to use.
      */
-    public function __construct($language = null)
+    public function __construct(string $language = null)
     {
         if ($language !== null) {
-            $this->setLanguage($language);
+            $this->language = $this->getLanguage($language);
         }
+    }
+
+
+    /**
+     * Check if the language is valid, and convert it to the required format.
+     *
+     * @param string $language The language to use
+     *
+     * @return string
+     */
+    private function getLanguage(string $language): string
+    {
+        $language = trim($language);
+
+        if (strlen($language) !== 2) {
+            throw new InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters");
+        }
+
+        return $language;
     }
 
 
@@ -30,18 +51,15 @@ class GoogleProvider extends AbstractProvider
      *
      * @param string $language The language to use (eg 'en')
      *
-     * @return static
+     * @return self
      */
-    public function setLanguage($language)
+    public function withLanguage(string $language): self
     {
-        $language = trim($language);
-        if (strlen($language) !== 2) {
-            throw new \InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters");
-        }
+        $provider = clone $this;
 
-        $this->language = $language;
+        $provider->language = $this->getLanguage($language);
 
-        return $this;
+        return $provider;
     }
 
 
@@ -50,7 +68,7 @@ class GoogleProvider extends AbstractProvider
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             "language"  =>  $this->language,
@@ -65,10 +83,10 @@ class GoogleProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text)
+    public function textToSpeech(string $text): string
     {
         if (strlen($text) > 100) {
-            throw new \InvalidArgumentException("Only messages under 100 characters are supported");
+            throw new InvalidArgumentException("Only messages under 100 characters are supported");
         }
 
         return $this->sendRequest("http://translate.google.com/translate_tts", [

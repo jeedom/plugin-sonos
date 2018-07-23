@@ -2,92 +2,83 @@
 
 namespace duncan3dc\Sonos;
 
-use League\Flysystem\Filesystem;
 use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
 
 /**
  * Represents a shared directory.
  */
-class Directory
-{
-    /**
-     * @var Filesystem $filesystem The full path to the share on the local filesystem.
-     */
-    protected $filesystem;
+class Directory {
+	/**
+	 * @var Filesystem $filesystem The full path to the share on the local filesystem.
+	 */
+	protected $filesystem;
 
-    /**
-     * @var string $share The full path to the share (including the hostname).
-     */
-    protected $share;
+	/**
+	 * @var string $share The full path to the share (including the hostname).
+	 */
+	protected $share;
 
-    /**
-     * @var string $directory The name of the directory (to be appended to both $filesystem and $share).
-     */
-    protected $directory;
+	/**
+	 * @var string $directory The name of the directory (to be appended to both $filesystem and $share).
+	 */
+	protected $directory;
 
+	/**
+	 * Create a Directory instance to represent a file share.
+	 *
+	 * @param Filesystem|string $filesystem A Filesystem instance or the full path to the share on the local filesystem.
+	 * @param string $share The full path to the share (including the hostname).
+	 * @param string $directory The name of the directory (to be appended to both $filesystem and $share).
+	 */
+	public function __construct($filesystem, string $share, string $directory) {
+		# If a string was passed then convert it to a Filesystem instance
+		if (is_string($filesystem)) {
+			$adapter = new Local($filesystem);
+			$filesystem = new Filesystem($adapter);
+		}
 
-    /**
-     * Create a Directory instance to represent a file share.
-     *
-     * @param Filesystem|string $filesystem A Filesystem instance or the full path to the share on the local filesystem.
-     * @param string $share The full path to the share (including the hostname).
-     * @param string $directory The name of the directory (to be appended to both $filesystem and $share).
-     */
-    public function __construct($filesystem, string $share, string $directory)
-    {
-        # If a string was passed then convert it to a Filesystem instance
-        if (is_string($filesystem)) {
-            $adapter = new Local($filesystem);
-            $filesystem = new Filesystem($adapter);
-        }
+		# Ensure we got a Filesystem instance
+		if (!$filesystem instanceof Filesystem) {
+			throw new \InvalidArgumentException("Invalid filesystem, must be an instance of " . Filesystem::class . " or a string containing a local path");
+		}
 
-        # Ensure we got a Filesystem instance
-        if (!$filesystem instanceof Filesystem) {
-            throw new \InvalidArgumentException("Invalid filesystem, must be an instance of " . Filesystem::class . " or a string containing a local path");
-        }
+		$this->filesystem = $filesystem;
+		$this->share = rtrim($share, "/");
+		$this->directory = trim($directory, "/");
+	}
 
-        $this->filesystem = $filesystem;
-        $this->share = rtrim($share, "/");
-        $this->directory = trim($directory, "/");
-    }
+	/**
+	 * Get the full path to the directory on the file share.
+	 *
+	 * @return string
+	 */
+	public function getSharePath() {
+		return "{$this->share}/{$this->directory}";
+	}
 
+	/**
+	 * Check if a file exists.
+	 *
+	 * @param string $file The path to the file.
+	 *
+	 * @return bool
+	 */
+	public function has(string $file) {
+		return $this->filesystem->has("{$this->directory}/{$file}");
+	}
 
-    /**
-     * Get the full path to the directory on the file share.
-     *
-     * @return string
-     */
-    public function getSharePath(): string
-    {
-        return "{$this->share}/{$this->directory}";
-    }
+	/**
+	 * Write data to a file.
+	 *
+	 * @param string $file The path to the file
+	 * @param string $contents The contents to write to the file
+	 *
+	 * @return $this
+	 */
+	public function write(string $file, string $contents) {
+		$this->filesystem->write("{$this->directory}/{$file}", $contents);
 
-
-    /**
-     * Check if a file exists.
-     *
-     * @param string $file The path to the file.
-     *
-     * @return bool
-     */
-    public function has(string $file): bool
-    {
-        return $this->filesystem->has("{$this->directory}/{$file}");
-    }
-
-
-    /**
-     * Write data to a file.
-     *
-     * @param string $file The path to the file
-     * @param string $contents The contents to write to the file
-     *
-     * @return $this
-     */
-    public function write(string $file, string $contents): self
-    {
-        $this->filesystem->write("{$this->directory}/{$file}", $contents);
-
-        return $this;
-    }
+		return $this;
+	}
 }

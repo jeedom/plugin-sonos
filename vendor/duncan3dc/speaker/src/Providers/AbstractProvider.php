@@ -2,8 +2,9 @@
 
 namespace duncan3dc\Speaker\Providers;
 
-use duncan3dc\Speaker\Exception;
+use duncan3dc\Speaker\Exceptions\ProviderException;
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 /**
  * Convert a string of a text to spoken word audio.
@@ -11,18 +12,18 @@ use GuzzleHttp\Client;
 abstract class AbstractProvider implements ProviderInterface
 {
     /**
-     * @var Client $client A guzzle instance for http requests.
+     * @var ClientInterface $client A guzzle instance for http requests.
      */
-    protected $client;
+    private $client;
 
     /**
      * Get the guzzle client instance to use.
      *
-     * @param Client $client
+     * @param ClientInterface $client
      *
-     * @return static
+     * @return ProviderInterface
      */
-    public function setClient(Client $client)
+    public function setClient(ClientInterface $client): ProviderInterface
     {
         $this->client = $client;
 
@@ -33,9 +34,9 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * Get the guzzle client.
      *
-     * @return Client
+     * @return ClientInterface
      */
-    public function getClient()
+    public function getClient(): ClientInterface
     {
         if ($this->client === null) {
             $this->client = new Client;
@@ -50,7 +51,7 @@ abstract class AbstractProvider implements ProviderInterface
      *
      * @return string
      */
-    public function getFormat()
+    public function getFormat(): string
     {
         return "mp3";
     }
@@ -64,7 +65,7 @@ abstract class AbstractProvider implements ProviderInterface
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return [];
     }
@@ -78,14 +79,14 @@ abstract class AbstractProvider implements ProviderInterface
      *
      * @return string The response body
      */
-    protected function sendRequest($hostname, array $params)
+    protected function sendRequest(string $hostname, array $params): string
     {
         $url = $hostname . "?" . http_build_query($params);
 
         $response = $this->getClient()->get($url);
 
         if ($response->getStatusCode() != "200") {
-            throw new Exception("Failed to call the external text-to-speech service");
+            throw new ProviderException("Failed to call the external text-to-speech service");
         }
 
         return $response->getBody();
