@@ -15,6 +15,7 @@
  */
 
  function initSonos3Panel(_object_id) {
+    setBackgroundImage('plugins/sonos3/core/img/panel.jpg');
     jeedom.object.all({
         onlyHasEqLogic : 'sonos3', 
         error: function (error) {
