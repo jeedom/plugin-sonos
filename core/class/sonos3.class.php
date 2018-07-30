@@ -257,7 +257,10 @@ class sonos3 extends eqLogic {
 				continue;
 			}
 			if ($eqLogic->getIsEnable() == 0) {
-				continue;
+				$eqLogic->refresh();
+				if ($eqLogic->getIsEnable() == 0) {
+					continue;
+				}
 			}
 			if ($eqLogic->getLogicalId() == '') {
 				continue;
