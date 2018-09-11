@@ -215,14 +215,14 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 		if (!array_key_exists($ip, $speakers)) {
 			throw new NotFoundException("Unable to find the speaker for the IP address '{$ip}'");
 		}
-
 		$group = $speakers[$ip]->getGroup();
-
-		foreach ($this->getControllers() as $controller) {
+		$controllers = $this->getControllers();
+		foreach ($controllers as $controller) {
 			if ($controller->getGroup() === $group) {
 				return $controller;
 			}
 		}
+		return new Controller($speakers[$ip], $this);
 	}
 
 	/**
