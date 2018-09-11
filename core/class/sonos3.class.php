@@ -1140,7 +1140,7 @@ class sonos3Cmd extends cmd {
 			$radio = $sonos->getRadio();
 			$stations = $radio->getFavouriteStations();
 			foreach ($stations as $station) {
-				if ($station->getName() == $_options['title']) {
+				if ($station->getTitle() == $_options['title']) {
 					$controller->useStream($station)->play();
 					break;
 				}
