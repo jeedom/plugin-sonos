@@ -182,6 +182,10 @@ class Device {
 			"ZP120" => "CONNECT:AMP",
 		];
 
+		if (!array_key_exists($model, $models)) {
+			$this->logger->debug("Model not found : " . $model);
+		}
+
 		return array_key_exists($model, $models);
 	}
 }
