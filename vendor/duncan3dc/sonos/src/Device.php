@@ -174,8 +174,10 @@ class Device {
 			"S9" => "PLAYBAR",
 			"S11" => "PLAYBASE",
 			"S13" => "ONE",
+			"S15" => "CONNECT",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
+			"ZB100" => "BRIDGE",
 			"ZP100" => "CONNECT:AMP",
 			"ZP120" => "CONNECT:AMP",
 		];

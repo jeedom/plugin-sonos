@@ -215,24 +215,18 @@ class sonos3 extends eqLogic {
 				}
 				if (strpos($controller->getName(), 'PLAY:1') !== false) {
 					$eqLogic->setConfiguration('model', 'PLAY1');
-				}
-				if (strpos($controller->getName(), 'PLAY:3') !== false) {
+				} else if (strpos($controller->getName(), 'PLAY:3') !== false) {
 					$eqLogic->setConfiguration('model', 'PLAY3');
-				}
-				if (strpos($controller->getName(), 'PLAY:5') !== false) {
+				} else if (strpos($controller->getName(), 'PLAY:5') !== false) {
 					$eqLogic->setConfiguration('model', 'PLAY5');
-				}
-				if (strpos($controller->getName(), 'PLAYBAR') !== false) {
+				} else if (strpos($controller->getName(), 'PLAYBAR') !== false) {
 					$eqLogic->setConfiguration('model', 'PLAYBAR');
-				}
-				if (strpos($controller->getName(), 'PLAYBASE') !== false) {
+				} else if (strpos($controller->getName(), 'PLAYBASE') !== false) {
 					$eqLogic->setConfiguration('model', 'PLAYBASE');
-				}
-				if (strpos($controller->getName(), 'CONNECT') !== false) {
-					$eqLogic->setConfiguration('model', 'CONNECT');
-				}
-				if (strpos($controller->getName(), 'CONNECT:AMP') !== false) {
+				} else if (strpos($controller->getName(), 'CONNECT:AMP') !== false) {
 					$eqLogic->setConfiguration('model', 'CONNECTAMP');
+				} else if (strpos($controller->getName(), 'CONNECT') !== false) {
+					$eqLogic->setConfiguration('model', 'CONNECT');
 				}
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);
