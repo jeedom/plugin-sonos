@@ -911,7 +911,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public function getImage() {
-		return 'plugins/sonos3/core/img/' . $this->getConfiguration('model') . '.jpg';
+		return 'plugins/sonos3/core/img/' . str_replace(':', '', $this->getConfiguration('model')) . '.jpg';
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
