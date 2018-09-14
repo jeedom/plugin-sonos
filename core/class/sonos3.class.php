@@ -201,7 +201,6 @@ class sonos3 extends eqLogic {
 		$sonos->setLogger(log::getLogger('sonos3'));
 		$controllers = $sonos->getControllers();
 		$speakers = sonos3::getSpeaker();
-		log::add('sonos3', 'debug', print_r($controllers, true));
 		foreach ($controllers as $controller) {
 			$eqLogic = sonos3::byLogicalId($controller->getIp(), 'sonos3');
 			if (!is_object($eqLogic)) {
