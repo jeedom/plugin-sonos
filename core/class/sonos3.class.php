@@ -1061,17 +1061,17 @@ class sonos3Cmd extends cmd {
 			if ($uri == null) {
 				throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title']));
 			}
-			try {
-				$queue->addTrack($uri);
-			} catch (Exception $e) {
-
-			}
 			if (isset($_options['message']) && $_options['message'] == 'random') {
 				try {
 					$controller->setShuffle(true);
 				} catch (Exception $e) {
 					log::add('sonos3', 'warning', $this->getHumanName() . ' : ' . $e->getMessage());
 				}
+			}
+			try {
+				$queue->addTrack($uri);
+			} catch (Exception $e) {
+
 			}
 			$controller->play();
 			$loop = 1;
@@ -1098,6 +1098,13 @@ class sonos3Cmd extends cmd {
 			if ($favourite == null) {
 				throw new Exception(__('Favoris non trouvé : ', __FILE__) . trim($_options['title']));
 			}
+			if (isset($_options['message']) && $_options['message'] == 'random') {
+				try {
+					$controller->setShuffle(true);
+				} catch (Exception $e) {
+					log::add('sonos3', 'warning', $this->getHumanName() . ' : ' . $e->getMessage());
+				}
+			}
 			try {
 				$controller->soap("AVTransport", "AddURIToQueue", [
 					"EnqueuedURI" => $favourite['uri'],
@@ -1108,13 +1115,7 @@ class sonos3Cmd extends cmd {
 			} catch (Exception $e) {
 
 			}
-			if (isset($_options['message']) && $_options['message'] == 'random') {
-				try {
-					$controller->setShuffle(true);
-				} catch (Exception $e) {
-					log::add('sonos3', 'warning', $this->getHumanName() . ' : ' . $e->getMessage());
-				}
-			}
+
 			$controller->play();
 			$loop = 1;
 			while (true) {
