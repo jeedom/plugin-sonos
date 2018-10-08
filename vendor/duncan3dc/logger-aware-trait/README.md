@@ -1,8 +1,10 @@
 # logger-aware-trait
 A PSR-3 trait allowing any class to easily add logger support
 
-[![Build Status](https://img.shields.io/travis/duncan3dc/logger-aware-trait.svg)](https://travis-ci.org/duncan3dc/logger-aware-trait)
-[![Latest Version](https://img.shields.io/packagist/v/duncan3dc/logger--aware--trait.svg)](https://packagist.org/packages/duncan3dc/logger-aware-trait)
+[![Latest Stable Version](https://poser.pugx.org/duncan3dc/logger-aware-trait/version.svg)](https://packagist.org/packages/duncan3dc/logger-aware-trait)
+[![Build Status](https://travis-ci.org/duncan3dc/logger-aware-trait.svg?branch=master)](https://travis-ci.org/duncan3dc/logger-aware-trait)
+[![Coverage Status](https://coveralls.io/repos/github/duncan3dc/logger-aware-trait/badge.svg?branch=master)](https://coveralls.io/github/duncan3dc/logger-aware-trait)
+
 
 ## Installing
 

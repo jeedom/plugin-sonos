@@ -1,10 +1,9 @@
 ---
 layout: default
-permalink: /
-title: Introduction
+title: Filesystem abstraction for PHP
+permalink: /docs/
+redirect_from: /
 ---
-
-# Introduction
 
 [![Author](//img.shields.io/badge/author-@frankdejonge-blue.svg?style=flat-square)](//twitter.com/frankdejonge)
 [![Source Code](//img.shields.io/badge/source-thephpleague/flysystem-blue.svg?style=flat-square)](//github.com/thephpleague/flysystem)
@@ -16,34 +15,39 @@ title: Introduction
 [![Total Downloads](//img.shields.io/packagist/dt/league/flysystem.svg?style=flat-square)](//packagist.org/packages/league/flysystem)
 ![php 5.5.9+](//img.shields.io/badge/php-min%205.5.9-red.svg?style=flat-square)
 
-Flysystem is a filesystem abstraction which allows you to easily swap out a local filesystem for a remote one. Technical debt is reduced as is the chance of vendor lock-in.
+## About Flysystem
 
-### Gold Sponsors
+Flysystem is a filesystem abstraction library for PHP. By providing a unified interface
+for many different filesystems you're able to swap out filesystems without application wide
+rewrites.
 
-<a href="https://laravel.com/"><img src="/logo/laravel.svg" alt="Laravel.com" height="100px" /></a>
+Using Flysystem can eliminate vendor-lock in, reduce technical debt, and improve the testability
+of your code.
 
-View all the [sponsors](/sponsors/).
+## Gold Sponsor(s)
 
-## Goals
+<div class="flex my-6 max-w-sm">
+    <a target="_blank" href="https://laravel.com" class="flex-no-grow w-1/3 bg-white rounded shadow-md mr-4 overflow-hidden">
+        <img src="/img/laravel.svg" class="w-full" alt="Laravel.com"/>
+    </a>
+    <a target="_blank" href="https://azure.microsoft.com/free/?utm_source=flysystem&utm_medium=banner&utm_campaign=flysystem_sponsorship" class="flex-no-grow w-1/3 bg-white rounded shadow-md mr-4 overflow-hidden">
+        <img src="/img/azure.svg" class="max-w-full m-6" alt="Microsoft Azure"/>
+    </a>
+</div>
 
-* Have a generic API for handling common tasks across multiple file storage engines.
-* Have consistent output which you can rely on.
-* Integrate well with other packages/frameworks.
-* Be cacheable.
-* Emulate directories in systems that support none, like AwsS3.
-* Support third party plugins.
-* Make it easy to test your filesystem interactions.
-* Support streams for big file handling
+View all the <a href="/docs/sponsors/">sponsors</a>.
 
-## Development Sponsors
+## Getting Started
 
-In order to free up more time to work on maintenance of this package I'm looking for sponsors.
-If you (or your company), want to sponsor my efforts, consider becoming a sponsor via Patreon
+* **[Architecture](/docs/architecture/)**: Flysystem's internal architecture
+* **[Setup/Bootstrap](/docs/usage/setup/)**: Load Flysystem and set up your first adapter
+* **[Flysystem API](/docs/usage/filesystem-api/)**: How to interact with your Flysystem instance
 
-<a href="https://www.patreon.com/bePatron?u=8623643"><img src="/logo/become_a_patron_button.png" alt="Become a Patron!" title="Become a Patron!"/></a>
+### Commonly-Used Adapters
 
-## Questions?
-
-Flysystem was created by Frank de Jonge, follow him on Twitter for updates: [@frankdejonge](//twitter.com/frankdejonge).
-
-Please submit issues on [Github](//github.com/thephpleague/flysystem).
+* **[AWS S3](/docs/adapter/aws-s3/)**
+* **[Azure](/docs/adapter/azure/)**
+* **[Digital Ocean Spaces](/docs/adapter/digitalocean-spaces/)**
+* **[Local](/docs/adapter/local/)**
+* **[Memory](/docs/adapter/memory/)**
+* **[Creating An Adapter](/docs/advanced/creating-an-adapter/)**

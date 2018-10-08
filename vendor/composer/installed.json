@@ -6,24 +6,24 @@
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "d45208173f7e3f2a0605e80b453a80e26212da8e"
+            "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/d45208173f7e3f2a0605e80b453a80e26212da8e",
-            "reference": "d45208173f7e3f2a0605e80b453a80e26212da8e",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a11e4a75f256bdacf99d20780ce42d3b8272975c",
+            "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c",
             "shasum": ""
         },
         "require": {
+            "ext-fileinfo": "*",
             "php": ">=5.5.9"
         },
         "conflict": {
             "league/flysystem-sftp": "<1.0.6"
         },
         "require-dev": {
-            "ext-fileinfo": "*",
             "phpspec/phpspec": "^3.4",
-            "phpunit/phpunit": "^5.7"
+            "phpunit/phpunit": "^5.7.10"
         },
         "suggest": {
             "ext-fileinfo": "Required for MimeType",
@@ -41,7 +41,7 @@
             "spatie/flysystem-dropbox": "Allows you to use Dropbox storage",
             "srmklive/flysystem-dropbox-v2": "Allows you to use Dropbox storage for PHP 5 applications"
         },
-        "time": "2018-04-22T15:27:08+00:00",
+        "time": "2018-09-14T15:30:29+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -83,46 +83,6 @@
             "s3",
             "sftp",
             "storage"
-        ]
-    },
-    {
-        "name": "psr/log",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/log.git",
-            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-            "shasum": ""
-        },
-        "time": "2012-12-21T11:40:51+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Psr\\Log\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for logging libraries",
-        "keywords": [
-            "log",
-            "psr",
-            "psr-3"
         ]
     },
     {
@@ -184,29 +144,30 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/psr7.git",
-            "reference": "da9aa31add41b20bf77011b0314b95fac3a06f86"
+            "reference": "4b981cdeb8c13d22a6c193554f8c686f53d5c958"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/psr7/zipball/da9aa31add41b20bf77011b0314b95fac3a06f86",
-            "reference": "da9aa31add41b20bf77011b0314b95fac3a06f86",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/4b981cdeb8c13d22a6c193554f8c686f53d5c958",
+            "reference": "4b981cdeb8c13d22a6c193554f8c686f53d5c958",
             "shasum": ""
         },
         "require": {
             "php": ">=5.4.0",
-            "psr/http-message": "~1.0"
+            "psr/http-message": "~1.0",
+            "ralouphie/getallheaders": "^2.0.5"
         },
         "provide": {
             "psr/http-message-implementation": "1.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "~4.0"
+            "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
         },
-        "time": "2018-04-22T16:11:15+00:00",
+        "time": "2018-07-29T08:09:46+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.4-dev"
+                "dev-master": "1.5-dev"
             }
         },
         "installation-source": "source",
@@ -399,110 +360,6 @@
         ]
     },
     {
-        "name": "duncan3dc/logger-aware-trait",
-        "version": "0.1.0",
-        "version_normalized": "0.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/duncan3dc/logger-aware-trait.git",
-            "reference": "fe13e550a5ddcd11085e98d37637adc004db7c40"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/logger-aware-trait/zipball/fe13e550a5ddcd11085e98d37637adc004db7c40",
-            "reference": "fe13e550a5ddcd11085e98d37637adc004db7c40",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^7.0",
-            "psr/log": "1.0.0"
-        },
-        "require-dev": {
-            "duncan3dc/object-intruder": "^0.1.0",
-            "mockery/mockery": "^0.9.7",
-            "phpunit/phpunit": "^6.0"
-        },
-        "time": "2017-02-05T18:42:31+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "duncan3dc\\Log\\": "src/",
-                "duncan3dc\\LogTests\\": "tests/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Craig Duncan",
-                "email": "git@duncanc.co.uk",
-                "homepage": "https://github.com/duncan3dc",
-                "role": "Developer"
-            }
-        ],
-        "description": "A PSR-3 trait allowing any class to easily add logger support",
-        "homepage": "https://github.com/duncan3dc/logger-aware-trait",
-        "keywords": [
-            "PHPFIG",
-            "logger",
-            "logging",
-            "psr-3"
-        ]
-    },
-    {
-        "name": "psr/simple-cache",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/simple-cache.git",
-            "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/753fa598e8f3b9966c886fe13f370baa45ef0e24",
-            "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2017-01-02T13:31:39+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Psr\\SimpleCache\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interfaces for simple caching",
-        "keywords": [
-            "cache",
-            "caching",
-            "psr",
-            "psr-16",
-            "simple-cache"
-        ]
-    },
-    {
         "name": "icewind/smb",
         "version": "v2.0.5",
         "version_normalized": "2.0.5.0",
@@ -610,12 +467,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba"
+            "reference": "2798c457a4fc5a9bda4587ea0da9b177e22aff5a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/407b0cb880ace85c9b63c5f9551db498cb2d50ba",
-            "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/2798c457a4fc5a9bda4587ea0da9b177e22aff5a",
+            "reference": "2798c457a4fc5a9bda4587ea0da9b177e22aff5a",
             "shasum": ""
         },
         "require": {
@@ -631,7 +488,7 @@
         "suggest": {
             "psr/log": "Required for using the Log middleware"
         },
-        "time": "2018-04-22T15:46:56+00:00",
+        "time": "2018-10-08T11:42:37+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -669,165 +526,6 @@
             "rest",
             "web service"
         ]
-    },
-    {
-        "name": "psr/cache",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/cache.git",
-            "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/cache/zipball/9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
-            "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2015-12-11T02:52:07+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Psr\\Cache\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for caching libraries",
-        "keywords": [
-            "cache",
-            "psr",
-            "psr-6"
-        ]
-    },
-    {
-        "name": "duncan3dc/cache",
-        "version": "0.3.0",
-        "version_normalized": "0.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/duncan3dc/cache.git",
-            "reference": "d621aaafd47ea5886e678f1889db2f9790cd0013"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/cache/zipball/d621aaafd47ea5886e678f1889db2f9790cd0013",
-            "reference": "d621aaafd47ea5886e678f1889db2f9790cd0013",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.6|^7.0",
-            "psr/cache": "1.0.0",
-            "psr/simple-cache": "1.0.0"
-        },
-        "require-dev": {
-            "duncan3dc/object-intruder": "^0.3.0",
-            "mockery/mockery": "^1.0",
-            "php-coveralls/php-coveralls": "^2.0",
-            "phpunit/phpunit": "^5.7.10"
-        },
-        "time": "2018-01-10T20:34:13+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "duncan3dc\\Cache\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Craig Duncan",
-                "email": "git@duncanc.co.uk",
-                "homepage": "https://github.com/duncan3dc",
-                "role": "Developer"
-            }
-        ],
-        "description": "Simple PSR-6/PSR-16 compatible disk cache",
-        "homepage": "https://github.com/duncan3dc/cache",
-        "keywords": [
-            "array",
-            "cache",
-            "disk",
-            "memory",
-            "psr-16",
-            "psr-6",
-            "psr16",
-            "psr6",
-            "simple-cache"
-        ]
-    },
-    {
-        "name": "symfony/process",
-        "version": "2.8.x-dev",
-        "version_normalized": "2.8.9999999.9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/process.git",
-            "reference": "ee2c91470ff262b1a00aec27875d38594aa87629"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/process/zipball/ee2c91470ff262b1a00aec27875d38594aa87629",
-            "reference": "ee2c91470ff262b1a00aec27875d38594aa87629",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.9"
-        },
-        "time": "2018-04-03T05:20:27+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.8-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Process\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Process Component",
-        "homepage": "https://symfony.com"
     },
     {
         "name": "doctrine/cache",
@@ -902,34 +600,34 @@
         ]
     },
     {
-        "name": "icewind/streams",
+        "name": "psr/log",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/icewind1991/Streams.git",
-            "reference": "851b822ac29724c88c546755f52f76bf953e574c"
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "3490ba5925e6dcbe6de950c5c6b8dce9f6e96eda"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/icewind1991/Streams/zipball/851b822ac29724c88c546755f52f76bf953e574c",
-            "reference": "851b822ac29724c88c546755f52f76bf953e574c",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/3490ba5925e6dcbe6de950c5c6b8dce9f6e96eda",
+            "reference": "3490ba5925e6dcbe6de950c5c6b8dce9f6e96eda",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3"
+            "php": ">=5.3.0"
         },
-        "require-dev": {
-            "phpunit/phpunit": "^4.8",
-            "satooshi/php-coveralls": "v1.0.0"
-        },
-        "time": "2018-01-30T14:09:12+00:00",
+        "time": "2018-04-03T15:59:15+00:00",
         "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
         "installation-source": "source",
         "autoload": {
             "psr-4": {
-                "Icewind\\Streams\\Tests\\": "tests/",
-                "Icewind\\Streams\\": "src/"
+                "Psr\\Log\\": "Psr/Log/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -938,48 +636,93 @@
         ],
         "authors": [
             {
-                "name": "Robin Appelman",
-                "email": "icewind@owncloud.com"
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
             }
         ],
-        "description": "A set of generic stream wrappers"
+        "description": "Common interface for logging libraries",
+        "homepage": "https://github.com/php-fig/log",
+        "keywords": [
+            "log",
+            "psr",
+            "psr-3"
+        ]
     },
     {
-        "name": "duncan3dc/sonos",
-        "version": "2.0.x-dev",
-        "version_normalized": "2.0.9999999.9999999-dev",
+        "name": "ralouphie/getallheaders",
+        "version": "2.0.5",
+        "version_normalized": "2.0.5.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/duncan3dc/sonos.git",
-            "reference": "f4a11d51eb8007ede58440f38219c0362fe77b9e"
+            "url": "https://github.com/ralouphie/getallheaders.git",
+            "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/f4a11d51eb8007ede58440f38219c0362fe77b9e",
-            "reference": "f4a11d51eb8007ede58440f38219c0362fe77b9e",
+            "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+            "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
             "shasum": ""
         },
         "require": {
-            "duncan3dc/cache": "^0.3.0",
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~3.7.0",
+            "satooshi/php-coveralls": ">=1.0"
+        },
+        "time": "2016-02-11T07:05:27+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/getallheaders.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ralph Khattar",
+                "email": "ralph.khattar@gmail.com"
+            }
+        ],
+        "description": "A polyfill for getallheaders."
+    },
+    {
+        "name": "duncan3dc/sonos",
+        "version": "1.9.x-dev",
+        "version_normalized": "1.9.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/sonos.git",
+            "reference": "a273a30eedaba39e4add5501fafd8024059eea21"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/sonos/zipball/a273a30eedaba39e4add5501fafd8024059eea21",
+            "reference": "a273a30eedaba39e4add5501fafd8024059eea21",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/cache": "^1.4",
             "duncan3dc/domparser": "^1.4.1",
-            "duncan3dc/logger-aware-trait": "^0.1.0",
             "duncan3dc/speaker": "^0.7.0",
             "ext-soap": "*",
             "ext-sockets": "*",
             "guzzlehttp/guzzle": "^6.0",
             "league/flysystem": "^1.0",
-            "php": "^7.0",
-            "psr/log": "^1.0",
-            "psr/simple-cache": "^1.0"
+            "php": "^5.6|^7.0",
+            "psr/log": "^1.0"
         },
         "require-dev": {
-            "duncan3dc/object-intruder": "^0.3.0",
-            "mockery/mockery": "^1.0",
-            "overtrue/phplint": "^1.0",
-            "php-coveralls/php-coveralls": "^2.0",
-            "phpunit/phpunit": "^6.4"
+            "duncan3dc/object-intruder": "^0.1.0",
+            "mockery/mockery": "^0.9.4",
+            "phpunit/phpunit": "^5.7.14",
+            "satooshi/php-coveralls": "^1.0"
         },
-        "time": "2018-04-08T21:18:41+00:00",
+        "time": "2017-11-25T19:28:20+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -1005,6 +748,313 @@
             "sonos",
             "streaming",
             "upnp"
+        ]
+    },
+    {
+        "name": "symfony/process",
+        "version": "2.8.x-dev",
+        "version_normalized": "2.8.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/process.git",
+            "reference": "3c7e102cfa84e976996c847ce6aaccbe6a11ac52"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/process/zipball/3c7e102cfa84e976996c847ce6aaccbe6a11ac52",
+            "reference": "3c7e102cfa84e976996c847ce6aaccbe6a11ac52",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "time": "2018-10-02T03:12:00+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Process\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Process Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "icewind/streams",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/icewind1991/Streams.git",
+            "reference": "0a78597117d8a02937ea05206f219294449fb06e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/icewind1991/Streams/zipball/0a78597117d8a02937ea05206f219294449fb06e",
+            "reference": "0a78597117d8a02937ea05206f219294449fb06e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8",
+            "satooshi/php-coveralls": "v1.0.0"
+        },
+        "time": "2018-04-24T09:07:38+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Icewind\\Streams\\Tests\\": "tests/",
+                "Icewind\\Streams\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Robin Appelman",
+                "email": "icewind@owncloud.com"
+            }
+        ],
+        "description": "A set of generic stream wrappers"
+    },
+    {
+        "name": "duncan3dc/logger-aware-trait",
+        "version": "0.2.0",
+        "version_normalized": "0.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/logger-aware-trait.git",
+            "reference": "94211a910bfb4dd26f9e509c79382c4345a5699b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/logger-aware-trait/zipball/94211a910bfb4dd26f9e509c79382c4345a5699b",
+            "reference": "94211a910bfb4dd26f9e509c79382c4345a5699b",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.0",
+            "psr/log": "^1.0"
+        },
+        "require-dev": {
+            "duncan3dc/object-intruder": "^0.1.0",
+            "mockery/mockery": "^0.9.7",
+            "phpunit/phpunit": "^6.0",
+            "satooshi/php-coveralls": "^1.0"
+        },
+        "time": "2017-08-24T15:08:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "duncan3dc\\Log\\": "src/",
+                "duncan3dc\\LogTests\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Craig Duncan",
+                "email": "git@duncanc.co.uk",
+                "homepage": "https://github.com/duncan3dc",
+                "role": "Developer"
+            }
+        ],
+        "description": "A PSR-3 trait allowing any class to easily add logger support",
+        "homepage": "https://github.com/duncan3dc/logger-aware-trait",
+        "keywords": [
+            "PHPFIG",
+            "logger",
+            "logging",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "psr/simple-cache",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/simple-cache.git",
+            "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+            "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-10-23T01:57:42+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Psr\\SimpleCache\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interfaces for simple caching",
+        "keywords": [
+            "cache",
+            "caching",
+            "psr",
+            "psr-16",
+            "simple-cache"
+        ]
+    },
+    {
+        "name": "psr/cache",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/cache.git",
+            "reference": "78c5a01ddbf11cf731f1338a4f5aba23b14d5b47"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/cache/zipball/78c5a01ddbf11cf731f1338a4f5aba23b14d5b47",
+            "reference": "78c5a01ddbf11cf731f1338a4f5aba23b14d5b47",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-10-13T14:48:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Cache\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for caching libraries",
+        "keywords": [
+            "cache",
+            "psr",
+            "psr-6"
+        ]
+    },
+    {
+        "name": "duncan3dc/cache",
+        "version": "0.5.0",
+        "version_normalized": "0.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/duncan3dc/cache.git",
+            "reference": "d41bd082707a8e0f4a81c543556e9af34b4568af"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/duncan3dc/cache/zipball/d41bd082707a8e0f4a81c543556e9af34b4568af",
+            "reference": "d41bd082707a8e0f4a81c543556e9af34b4568af",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.0",
+            "psr/cache": "^1.0",
+            "psr/simple-cache": "^1.0"
+        },
+        "require-dev": {
+            "duncan3dc/object-intruder": "^0.3.0",
+            "duncan3dc/php-ini": "^0.1.0",
+            "mockery/mockery": "^1.0",
+            "phpunit/phpunit": "^6.0"
+        },
+        "time": "2018-05-30T19:21:02+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "duncan3dc\\Cache\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Craig Duncan",
+                "email": "git@duncanc.co.uk",
+                "homepage": "https://github.com/duncan3dc",
+                "role": "Developer"
+            }
+        ],
+        "description": "Simple PSR-6/PSR-16 compatible disk cache",
+        "homepage": "https://github.com/duncan3dc/cache",
+        "keywords": [
+            "array",
+            "cache",
+            "disk",
+            "memory",
+            "psr-16",
+            "psr-6",
+            "psr16",
+            "psr6",
+            "simple-cache"
         ]
     }
 ]

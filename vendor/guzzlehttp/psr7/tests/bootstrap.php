@@ -1,11 +1,7 @@
 <?php
-namespace GuzzleHttp\Tests\Psr7;
 
-require __DIR__ . '/../vendor/autoload.php';
+require_once './vendor/autoload.php';
 
-class HasToString
-{
-    public function __toString() {
-        return 'foo';
-    }
+if (!class_exists('PHPUnit\Framework\Error\Warning')) {
+    class_alias('PHPUnit_Framework_Error_Warning', 'PHPUnit\Framework\Error\Warning');
 }

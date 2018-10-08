@@ -106,6 +106,13 @@ class StreamWrapper
         return true;
     }
 
+    public function stream_cast($cast_as)
+    {
+        $stream = clone($this->stream);
+
+        return $stream->detach();
+    }
+
     public function stream_stat()
     {
         static $modeMap = [

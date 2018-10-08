@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\FnStream;
 use GuzzleHttp\Psr7\NoSeekStream;
 use Psr\Http\Message\ServerRequestInterface;
 
-class FunctionsTest extends \PHPUnit_Framework_TestCase
+class FunctionsTest extends BaseTest
 {
     public function testCopiesToString()
     {
@@ -699,11 +699,11 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     {
         $r1 = new Psr7\Request('GET', 'http://foo.com');
         $r2 = Psr7\modify_request($r1, []);
-        $this->assertTrue($r2 instanceof Psr7\Request);
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Request', $r2);
 
         $r1 = new Psr7\ServerRequest('GET', 'http://foo.com');
         $r2 = Psr7\modify_request($r1, []);
-        $this->assertTrue($r2 instanceof ServerRequestInterface);
+        $this->assertInstanceOf('Psr\Http\Message\ServerRequestInterface', $r2);
     }
 
     public function testReturnsUriAsIsWhenNoChanges()
@@ -734,11 +734,11 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     {
         $r1 = new Psr7\Request('GET', 'http://foo.com');
         $r2 = Psr7\modify_request($r1, ['remove_headers' => ['non-existent']]);
-        $this->assertTrue($r2 instanceof Psr7\Request);
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Request', $r2);
 
         $r1 = new Psr7\ServerRequest('GET', 'http://foo.com');
         $r2 = Psr7\modify_request($r1, ['remove_headers' => ['non-existent']]);
-        $this->assertTrue($r2 instanceof ServerRequestInterface);
+        $this->assertInstanceOf('Psr\Http\Message\ServerRequestInterface', $r2);
     }
 
     public function testMessageBodySummaryWithSmallBody()

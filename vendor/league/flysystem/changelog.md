@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.47 - 2018-09-14
+
+* Specify mimetype for .epub files
+
+## 1.0.46 - 2018-08-22
+
+* Return failure when copying a stream does not work instead of relying only on fclose.
+
+## 1.0.45 - 2018-05-07
+
+* Fixed a regression in path-derived metadata fetching.
+
 ## 1.0.44 - 2018-04-06
 
 * Added missing file presence checks on `Filesystem::setVisibility` and `Filesystem::getSize`.

@@ -7,7 +7,7 @@ use GuzzleHttp\Psr7;
 /**
  * @covers GuzzleHttp\Psr7\StreamWrapper
  */
-class StreamWrapperTest extends \PHPUnit_Framework_TestCase
+class StreamWrapperTest extends BaseTest
 {
     public function testResource()
     {
@@ -66,6 +66,17 @@ class StreamWrapperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', file_get_contents('guzzle://stream', false, StreamWrapper::createStreamContext($stream)));
     }
 
+    public function testStreamCast()
+    {
+        $streams = [
+            StreamWrapper::getResource(Psr7\stream_for('foo')),
+            StreamWrapper::getResource(Psr7\stream_for('bar'))
+        ];
+        $write = null;
+        $except = null;
+        $this->assertInternalType('integer', stream_select($streams, $write, $except, 0));
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */
@@ -84,7 +95,7 @@ class StreamWrapperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_Error_Warning
+     * @expectedException \PHPUnit\Framework\Error\Warning
      */
     public function testReturnsFalseWhenStreamDoesNotExist()
     {

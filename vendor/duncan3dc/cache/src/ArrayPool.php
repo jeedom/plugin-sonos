@@ -2,9 +2,7 @@
 
 namespace duncan3dc\Cache;
 
-use duncan3dc\Cache\Exceptions\CacheKeyException;
 use Psr\Cache\CacheItemInterface;
-use function array_key_exists;
 
 class ArrayPool implements CacheInterface
 {
@@ -12,7 +10,7 @@ class ArrayPool implements CacheInterface
     use SimpleCacheTrait;
 
     /**
-     * @var array The array to store the cache data in.
+     * @var array $data The array to store the cache data in.
      */
     private $data = [];
 
@@ -23,7 +21,6 @@ class ArrayPool implements CacheInterface
      * @param string $key The key for which to return the corresponding Cache Item.
      *
      * @return CacheItemInterface
-     * @throws CacheKeyException
      */
     public function getItem($key)
     {
@@ -43,8 +40,7 @@ class ArrayPool implements CacheInterface
      *
      * @param array $keys An indexed array of keys of items to retrieve.
      *
-     * @return iterable
-     * @throws CacheKeyException
+     * @return \Traversable
      */
     public function getItems(array $keys = [])
     {
@@ -66,7 +62,6 @@ class ArrayPool implements CacheInterface
      * @param string $key The key for which to check existence.
      *
      * @return bool
-     * @throws CacheKeyException
      */
     public function hasItem($key)
     {
@@ -95,7 +90,6 @@ class ArrayPool implements CacheInterface
      * @param string $key The key for which to delete
      *
      * @return bool
-     * @throws CacheKeyException
      */
     public function deleteItem($key)
     {
@@ -115,7 +109,6 @@ class ArrayPool implements CacheInterface
      * @param array $keys An array of keys that should be removed from the pool
      *
      * @return bool
-     * @throws CacheKeyException
      */
     public function deleteItems(array $keys)
     {
@@ -139,7 +132,6 @@ class ArrayPool implements CacheInterface
      * @param CacheItemInterface $item The cache item to save
      *
      * @return bool
-     * @throws CacheKeyException
      */
     public function save(CacheItemInterface $item)
     {
@@ -159,7 +151,6 @@ class ArrayPool implements CacheInterface
      * @param CacheItemInterface $item The cache item to save.
      *
      * @return bool
-     * @throws CacheKeyException
      */
     public function saveDeferred(CacheItemInterface $item)
     {
