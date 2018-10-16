@@ -63,7 +63,7 @@ class sonos3 extends eqLogic {
 		$return = array();
 		$return['log'] = 'sonos_update';
 		$return['state'] = 'ok';
-		$return['progress_file'] = jeedom::getTmpFolder('sonos') . '/dependance';
+		$return['progress_file'] = jeedom::getTmpFolder('sonos3') . '/dependance';
 		if (exec('which smbclient | wc -l') == 0) {
 			$return['state'] = 'nok';
 		}
@@ -79,7 +79,7 @@ class sonos3 extends eqLogic {
 
 	public static function dependancy_install() {
 		log::remove(__CLASS__ . '_update');
-		return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('sonos') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
+		return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('sonos3') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
 	}
 
 	public static function deamon_info() {
@@ -310,7 +310,7 @@ class sonos3 extends eqLogic {
 					$eqLogic->refreshWidget();
 				}
 				if ($eqLogic->getConfiguration('sonosNumberFailed', 0) > 0) {
-					foreach (message::byPluginLogicalId('sonos', 'sonosLost' . $eqLogic->getId()) as $message) {
+					foreach (message::byPluginLogicalId('sonos3', 'sonosLost' . $eqLogic->getId()) as $message) {
 						$message->remove();
 					}
 					$eqLogic->setConfiguration('sonosNumberFailed', 0);
@@ -318,14 +318,14 @@ class sonos3 extends eqLogic {
 				}
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
-					log::add('sonos', 'error', $e->getMessage());
+					log::add('sonos3', 'error', $e->getMessage());
 				} else {
 					$eqLogic->refresh();
 					if ($eqLogic->getIsEnable() == 0) {
 						continue;
 					}
 					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) == 150) {
-						log::add('sonos', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage(), 'sonosLost' . $eqLogic->getId());
+						log::add('sonos3', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage(), 'sonosLost' . $eqLogic->getId());
 					} else {
 						$eqLogic->setConfiguration('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
 						$eqLogic->save();
