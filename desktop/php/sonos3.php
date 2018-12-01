@@ -105,6 +105,7 @@ foreach (object::all() as $object) {
                 <option value="CONNECT:AMP">Sonos Connect AMP</option>
                 <option value="PLAYBAR">Sonos Playbar</option>
                 <option value="PLAYBASE">Sonos Playbase</option>
+		<option value="BEAM">Sonos Beam</option>
               </select>
             </div>
           </div>
