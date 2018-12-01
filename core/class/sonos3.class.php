@@ -224,8 +224,10 @@ class sonos3 extends eqLogic {
 					$eqLogic->setConfiguration('model', 'PLAYBASE');
 				} else if (strpos(strtoupper($controller->getName()), 'CONNECT:AMP') !== false) {
 					$eqLogic->setConfiguration('model', 'CONNECTAMP');
-				} else if (strpos(strtoupper($controller->getName()), 'CONNECT') !== false) {
-					$eqLogic->setConfiguration('model', 'CONNECT');
+                		} else if (strpos(strtoupper($controller->getName()), 'CONNECT') !== false) {
+				    $eqLogic->setConfiguration('model', 'CONNECT');
+				} else if (strpos(strtoupper($controller->getName()), 'BEAM') !== false) {
+				    $eqLogic->setConfiguration('model', 'BEAM');
 				}
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);
