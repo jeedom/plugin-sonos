@@ -22,7 +22,7 @@ require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Sonos\Tracks\Track;
 use duncan3dc\Sonos\Utils\Directory;
-use duncan3dc\Speaker\Providers\PicottsProvider;
+use duncan3dc\Speaker\Providers\JeedomProvider;
 use Icewind\SMB\Server;
 use League\Flysystem\Filesystem;
 use RobGridley\Flysystem\Smb\SmbAdapter;
@@ -1157,7 +1157,7 @@ class sonos3Cmd extends cmd {
 			$filesystem = new Filesystem($adapter);
 			$folder = array_pop($path);
 			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
-			$track = new TextToSpeech(trim($_options['message']), $directory, new PicottsProvider(str_replace('_', '-', config::byKey('language', 'core', 'fr_FR'))));
+			$track = new TextToSpeech(trim($_options['message']), $directory, new JeedomProvider(network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . config::byKey('api', 'core')));
 			$loop = 1;
 			while (true) {
 				try {
