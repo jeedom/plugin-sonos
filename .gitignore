@@ -4,3 +4,4 @@ core/config/common.config.php
 plugins
 deployment-config.json
 .project
+.remote-sync.json
