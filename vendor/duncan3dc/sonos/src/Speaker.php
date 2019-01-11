@@ -135,8 +135,7 @@ final class Speaker implements SpeakerInterface {
 	*
 	* @return void
 	*/
-	private function lookupTopology(): void
-	{
+	private function lookupTopology()	{
 		if ($this->group !== null) {
 			return;
 		}
