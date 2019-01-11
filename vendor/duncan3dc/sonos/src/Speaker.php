@@ -140,7 +140,9 @@ final class Speaker implements SpeakerInterface {
 			return;
 		}
 		$attributes = $this->soap("ZoneGroupTopology", "GetZoneGroupAttributes");
-		$this->setGroup($attributes["CurrentZoneGroupID"]);
+		if($attributes["CurrentZoneGroupID"] !== ""){
+			$this->setGroup($attributes["CurrentZoneGroupID"]);
+		}
 		$this->coordinator = false;
 		if (strpos($attributes["CurrentZonePlayerUUIDsInGroup"], ",") === false) {
 			$this->coordinator = true;
