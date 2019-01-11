@@ -12,7 +12,6 @@ use function assert;
 
 final class Collection implements CollectionInterface
 {
-  use LoggerAwareTrait;
   
   /**
   * @var FactoryInterface The factory to create new devices from
