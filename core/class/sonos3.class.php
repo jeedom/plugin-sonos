@@ -405,11 +405,10 @@ class sonos3 extends eqLogic {
 	}
 	
 	public static function getControllerByIp($_ip) {
-		$factory = new \duncan3dc\Sonos\Devices\Factory;
-		$devices = new \duncan3dc\Sonos\Devices\Collection($factory);
+		$devices = new \duncan3dc\Sonos\Devices\Collection();
+		$devices->setLogger(log::getLogger('sonos3'));
 		$devices->addIp($_ip);
 		$sonos = new \duncan3dc\Sonos\Network($devices);
-		$sonos->setLogger(log::getLogger('sonos3'));
 		return $sonos->getControllerByIp($_ip);
 	}
 	
