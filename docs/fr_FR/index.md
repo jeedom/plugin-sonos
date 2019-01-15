@@ -147,6 +147,11 @@ Côté Plugin Sonos, voici ma config :
 Côté Bibliothèque Sonos (appli PC)
 -   le chemin est : //192.168.xxx.yyy/Jeedom/TTS
 
+> **Important**
+>
+> La lanque dépend de la langue de Jeedom et utilise par defaut picotts. A partir de jeedom 3.3.X il sera possible d'utiliser le TTS de Google pour avoir une plus jolie voix
+
+
 # Le panel
 
 Le plugin Sonos met aussi à disposition un panel qui rassemble tous vos
