@@ -1,7 +1,7 @@
 {
 	"id" : "sonos3",
 	"name" : "Sonos controller",
-	"description" : "Plugin de controle de sonos. Permet de controler les play1,3,5, connect, connect AMP et playbar. ATTENTION : il faut au minimum PHP 5.6",
+	"description" : "Plugin de controle de sonos. Permet de controler les play1,3,5, connect, connect AMP et playbar. ATTENTION : il faut au minimum PHP 7.0",
 	"licence" : "AGPL",
 	"author" : "Jeedom SAS",
 	"require" : "3.2",
