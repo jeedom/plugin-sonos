@@ -14,7 +14,7 @@ if (!is_object($object)) {
 if (!is_object($object)) {
 	throw new Exception('{{Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br/> Si vous ne savez pas quoi faire ou que c\'est la premiere fois que vous utilisez Jeedom n\'hésitez pas a consulter cette <a href="http://jeedom.fr/premier_pas.php" target="_blank">page</a>}}');
 }
-$allObject = jeeObject::buildTree(null, true);
+$allObject = jeeObject::all();
 $child_object = jeeObject::buildTree($object);
 $parentNumber = array();
 ?>
@@ -32,7 +32,6 @@ $parentNumber = array();
 			<li class="nav-header">{{Liste objets}} </li>
 			<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 			<?php
-			
 			foreach ($allObject as $object_li) {
 				if ($object_li->getIsVisible() != 1 || count($object_li->getEqLogic(true, false, 'sonos3', null, true)) == 0) {
 					continue;

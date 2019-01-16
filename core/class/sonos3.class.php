@@ -206,7 +206,7 @@ class sonos3 extends eqLogic {
 			foreach ($eqLogics as $eqLogic) {
 				$ips[] = $eqLogic->getLogicalId();
 			}
-			$controllers = self::getControllerByIp();
+			$controllers = self::getControllerByIp($ips);
 		}
 		$speakers = sonos3::getSpeaker();
 		foreach ($controllers as $controller) {
