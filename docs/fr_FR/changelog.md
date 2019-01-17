@@ -1,3 +1,7 @@
+# 17/01/2019
+
+- Correction de bugs dans le cas ou les sonos ont été ajouté manuellement
+
 # 15/01/2019
 
 ** IMPORTANT NE MARCHE QUE AVEC PHP7, VOIR PAGE SANTE DE JEEDOM POUR VOTRE VERSION**
