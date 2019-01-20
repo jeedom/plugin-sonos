@@ -982,8 +982,8 @@ class sonos3Cmd extends cmd {
 		$info_device['params'][0]['value'] = '#' . $eqLogic->getCmd('info', 'state')->getId() . '#';
 		$info_device['params'][1]['value'] = '#' . $eqLogic->getCmd('info', 'volume')->getId() . '#';
 		$info_device['params'][2]['value'] = '#' . $eqLogic->getCmd('info', 'mute_state')->getId() . '#';
-		$info_device['params'][3]['value'] = '';
-		$info_device['params'][4]['value'] = '';
+		$info_device['params'][3]['value'] = '#' . $eqLogic->getCmd('info', 'track_duration')->getId() . '#';
+		$info_device['params'][4]['value'] = '#' . $eqLogic->getCmd('info', 'track_position')->getId() . '#';
 		$info_device['params'][5]['value'] = '#' . $eqLogic->getCmd('info', 'track_title')->getId() . '#';
 		$info_device['params'][6]['value'] = '#' . $eqLogic->getCmd('info', 'track_album')->getId() . '#';
 		$info_device['params'][7]['value'] = '#' . $eqLogic->getCmd('info', 'track_artist')->getId() . '#';
