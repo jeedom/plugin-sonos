@@ -874,7 +874,7 @@ class sonos3 extends eqLogic {
         if (is_object($cmd_track_position) && is_object($cmd_track_duration)) {
             $tp = $cmd_track_position->execCmd();
             $td = $cmd_track_duration->execCmd();
-            $replace['#time#'] = sprintf('%02d:%02d:%02d', ($tp/3600),($tp/60%60), $tp%60) . " / " . sprintf('%02d:%02d:%02d', ($td/3600),($td/60%60), $td%60)
+            $replace['#time#'] = sprintf('%02d:%02d:%02d', ($tp/3600),($tp/60%60), $tp%60) . " / " . sprintf('%02d:%02d:%02d', ($td/3600),($td/60%60), $td%60);
         }
 		
 		foreach ($this->getCmd('action') as $cmd) {
