@@ -315,6 +315,21 @@ class sonos3 extends eqLogic {
 				if ($artist == '') {
 					$artist = __('Aucun', __FILE__);
 				}
+                
+                $duration = $track->getDuration();
+                if ($duration == '') {
+                    $duration = '00:00:00';
+                }
+                sscanf($duration, '%d:%d:%d', $hours, $minutes, $seconds);
+                $duration_sec = $hours * 3600 + $minutes * 60 + $seconds;
+                
+                $position = $track->getPosition();
+                if ($position == '') {
+                    $position = '00:00:00';
+                }
+                sscanf($position, '%d:%d:%d', $hours, $minutes, $seconds);
+                $position_sec = $hours * 3600 + $minutes * 60 + $seconds;
+                
 				$changed = $eqLogic->checkAndUpdateCmd('state', $state) || $changed;
 				$changed = $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume()) || $changed;
 				$changed = $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle) || $changed;
@@ -323,6 +338,9 @@ class sonos3 extends eqLogic {
 				$changed = $eqLogic->checkAndUpdateCmd('track_title', $title) || $changed;
 				$changed = $eqLogic->checkAndUpdateCmd('track_album', $album) || $changed;
 				$changed = $eqLogic->checkAndUpdateCmd('track_artist', $artist) || $changed;
+                $changed = $eqLogic->checkAndUpdateCmd('track_duration', $duration_sec) || $changed;
+                $changed = $eqLogic->checkAndUpdateCmd('track_position', $position_sec) || $changed;
+                
 				if ($track->getAlbumArt() != '') {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->getAlbumArt())) {
 						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->getAlbumArt()));
@@ -694,17 +712,41 @@ class sonos3 extends eqLogic {
 		$track_album->setEqLogic_id($this->getId());
 		$track_album->save();
 		
-		$track_position = $this->getCmd(null, 'track_image');
+		$track_image = $this->getCmd(null, 'track_image');
+		if (!is_object($track_image)) {
+			$track_image = new sonos3Cmd();
+			$track_image->setLogicalId('track_image');
+			$track_image->setName(__('Image', __FILE__));
+		}
+		$track_image->setType('info');
+		$track_image->setSubType('string');
+		$track_image->setConfiguration('repeatEventManagement', 'never');
+		$track_image->setEqLogic_id($this->getId());
+		$track_image->save();
+        
+		$track_duration = $this->getCmd(null, 'track_duration');
+		if (!is_object($track_duration)) {
+			$track_duration = new sonos3Cmd();
+			$track_duration->setLogicalId('track_duration');
+			$track_duration->setName(__('Duration', __FILE__));
+		}
+		$track_duration->setType('info');
+		$track_duration->setSubType('numeric');
+		$track_duration->setConfiguration('repeatEventManagement', 'never');
+		$track_duration->setEqLogic_id($this->getId());
+		$track_duration->save();    
+        
+        $track_position = $this->getCmd(null, 'track_position');
 		if (!is_object($track_position)) {
 			$track_position = new sonos3Cmd();
-			$track_position->setLogicalId('track_image');
-			$track_position->setName(__('Image', __FILE__));
+			$track_position->setLogicalId('track_position');
+			$track_position->setName(__('Position', __FILE__));
 		}
 		$track_position->setType('info');
-		$track_position->setSubType('string');
+		$track_position->setSubType('numeric');
 		$track_position->setConfiguration('repeatEventManagement', 'never');
 		$track_position->setEqLogic_id($this->getId());
-		$track_position->save();
+		$track_position->save(); 
 		
 		$play_playlist = $this->getCmd(null, 'play_playlist');
 		if (!is_object($play_playlist)) {
