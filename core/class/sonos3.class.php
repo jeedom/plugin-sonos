@@ -188,7 +188,7 @@ class sonos3 extends eqLogic {
 			}else{
 				$devices = new \duncan3dc\Sonos\Devices\Collection();
 				$devices->setLogger(log::getLogger('sonos3'));
-				$eqLogics = eqLogic::byType('sonos3');
+				$eqLogics = eqLogic::byType('sonos3',true);
 				if(count(	$eqLogics) != 0){
 					foreach ($eqLogics as $eqLogic) {
 						$devices->addIp($eqLogic->getLogicalId());
@@ -287,7 +287,12 @@ class sonos3 extends eqLogic {
 			}
 			try {
 				$changed = false;
-				$controller = $eqLogic->getController();
+				try {
+					$controller = $eqLogic->getController();
+				} catch (\Exception $e) {
+					self::$_sonos = null;
+					continue;
+				}
 				if ($controller == null) {
 					continue;
 				}
