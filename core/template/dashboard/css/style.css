@@ -26,7 +26,7 @@
 	width: 52px;
 	height: 52px;
 	position: absolute;
-	margin : 6.5px 110px 6.5px;
+	margin : 1px 110px 6.5px;
 	border: 2px solid black;
 	border-radius:50%;
 	z-index: 3;
