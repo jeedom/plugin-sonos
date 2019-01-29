@@ -48,6 +48,7 @@ class sonos3 extends eqLogic {
 	);
 	
 	private $_controller = null;
+	private $_stateChange = false;
 	
 	/*     * ***********************Methode static*************************** */
 	
@@ -275,12 +276,6 @@ class sonos3 extends eqLogic {
 		foreach (self::$_eqLogics as $eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
-			}
-			if ($eqLogic->getIsEnable() == 0) {
-				$eqLogic->refresh();
-				if ($eqLogic->getIsEnable() == 0) {
-					continue;
-				}
 			}
 			if ($eqLogic->getLogicalId() == '') {
 				continue;
@@ -811,6 +806,10 @@ class sonos3 extends eqLogic {
 		$dominantColor->setSubType('string');
 		$dominantColor->setEqLogic_id($this->getId());
 		$dominantColor->save();
+		
+		if($this->_stateChange){
+			self::deamon_start();
+		}
 	}
 	
 	public function toHtml($_version = 'dashboard') {
@@ -919,6 +918,13 @@ class sonos3 extends eqLogic {
 	}
 	
 	/*     * **********************Getteur Setteur*************************** */
+	
+	public function setIsEnable($_isEnable) {
+		if($this->getIsEnable() != $_isEnable){
+			$this->_stateChange = true;
+		}
+		return parent::setIsEnable($_isEnable);
+	}
 }
 
 class sonos3Cmd extends cmd {

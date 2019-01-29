@@ -14,7 +14,6 @@
 }
 .sonos_widget .downpart{
 	height: 70px;
-	width: 250px;
 	z-index: 2;
 }
 
@@ -27,7 +26,7 @@
 	width: 52px;
 	height: 52px;
 	position: absolute;
-	margin : 6.5px 99px 6.5px;
+	margin : 1px 110px 6.5px;
 	border: 2px solid black;
 	border-radius:50%;
 	z-index: 3;
@@ -120,7 +119,7 @@
 	height: 20px;
 	position: absolute;
 	margin-top: 12px;
-	left: 180px;
+	right: 50px;
 	cursor:pointer;
 	z-index: 4;
 	opacity: 0.6;
@@ -150,15 +149,15 @@
 }
 .sonos_widget .leftRafter{
 	width: 15px;
-	height: 40px;	
-	position: absolute;	
+	height: 40px;
+	position: absolute;
 	top: 143.5px;
-	left: 5px;	
-	cursor:pointer;	
+	left: 5px;
+	cursor:pointer;
 	-ms-transform: rotate(180deg);
 	-webkit-transform: rotate(180deg);
-	transform: rotate(180deg);	
-	z-index: 4;	
+	transform: rotate(180deg);
+	z-index: 4;
 	opacity: 0.1;
 }
 .sonos_widget .leftRafter:hover{
@@ -167,7 +166,7 @@
 .sonos_widget .leftpanel .leftRafter{
 	-ms-transform: rotate(0deg);
 	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg);	
+	transform: rotate(0deg);
 }
 .sonos_widget .rightpanel{
 	width: 200px;
@@ -190,7 +189,7 @@
 }
 .sonos_widget .title_downpart{
 	text-align: center;
-	width: 220px;	
+	width: 220px;
 	position: absolute;
 	margin-left:15px;
 }
@@ -206,31 +205,31 @@
 }
 .sonos_widget .affiche_premiere_sonos{
 	width: 150px;
-	height: 150px;	
-	position: absolute;	
+	height: 150px;
+	position: absolute;
 	margin-left: -80px;
-	margin-top: 25px;	
-	z-index: 7;	
+	margin-top: 25px;
+	z-index: 7;
 	border-radius: 10%;
 }
 .sonos_widget .affiche_deuxieme_sonos{
 	width: 140px;
-	height: 140px;	
-	position: absolute;	
+	height: 140px;
+	position: absolute;
 	margin-left: -100px;
-	margin-top: 35px;	
-	z-index: 6;	
-	opacity: 0.22;	
+	margin-top: 35px;
+	z-index: 6;
+	opacity: 0.22;
 	border-radius: 10%;
 }
 .sonos_widget .affiche_troisieme_sonos{
 	width: 140px;
-	height: 140px;	
-	position: absolute;	
+	height: 140px;
+	position: absolute;
 	margin-left: -40px;
-	margin-top: 35px;	
-	z-index: 6;	
-	opacity: 0.22;	
+	margin-top: 35px;
+	z-index: 6;
+	opacity: 0.22;
 	border-radius: 10%;
 }
 .sonos_widget .shadow_fenetre_sonos{
@@ -281,7 +280,7 @@
 	margin-top: 5px;
 	left: 5px;
 	cursor:pointer;
-	text-decoration: none; 
+	text-decoration: none;
 	cursor:default;
 	z-index: 4;
 	opacity: 0.3;
