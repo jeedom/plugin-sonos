@@ -172,7 +172,7 @@
 	position: absolute;
 	z-index: 10;
 	right: -200px;
-	background-color: #4a89dc;
+	background-color: white;
 }
 .sonos_widget .leftpanel{
 	text-align: left;
@@ -182,7 +182,7 @@
 	position: absolute;
 	z-index: 10;
 	left: -200px;
-	background-color: #4a89dc;
+	background-color: white;
 }
 .sonos_widget .title_downpart{
 	text-align: center;
