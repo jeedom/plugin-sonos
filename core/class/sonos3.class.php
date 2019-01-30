@@ -504,6 +504,7 @@ class sonos3 extends eqLogic {
 			$play->setLogicalId('play');
 			$play->setName(__('Play', __FILE__));
 		}
+		$play->setGeneric_type('MEDIA_RESUME');
 		$play->setType('action');
 		$play->setSubType('other');
 		$play->setEqLogic_id($this->getId());
@@ -515,6 +516,7 @@ class sonos3 extends eqLogic {
 			$stop->setLogicalId('stop');
 			$stop->setName(__('Stop', __FILE__));
 		}
+		$stop->setGeneric_type('MEDIA_STOP');
 		$stop->setType('action');
 		$stop->setSubType('other');
 		$stop->setEqLogic_id($this->getId());
@@ -526,6 +528,7 @@ class sonos3 extends eqLogic {
 			$pause->setLogicalId('pause');
 			$pause->setName(__('Pause', __FILE__));
 		}
+		$pause->setGeneric_type('MEDIA_PAUSE');
 		$pause->setType('action');
 		$pause->setSubType('other');
 		$pause->setEqLogic_id($this->getId());
@@ -537,6 +540,7 @@ class sonos3 extends eqLogic {
 			$next->setLogicalId('next');
 			$next->setName(__('Suivant', __FILE__));
 		}
+		$next->setGeneric_type('MEDIA_NEXT');
 		$next->setType('action');
 		$next->setSubType('other');
 		$next->setEqLogic_id($this->getId());
@@ -548,6 +552,7 @@ class sonos3 extends eqLogic {
 			$previous->setLogicalId('previous');
 			$previous->setName(__('Précédent', __FILE__));
 		}
+		$previous->setGeneric_type('MEDIA_PREVIOUS');
 		$previous->setType('action');
 		$previous->setSubType('other');
 		$previous->setEqLogic_id($this->getId());
@@ -639,6 +644,7 @@ class sonos3 extends eqLogic {
 			$volume->setLogicalId('volume');
 			$volume->setName(__('Volume status', __FILE__));
 		}
+		$volume->setGeneric_type('VOLUME');
 		$volume->setUnite('%');
 		$volume->setType('info');
 		$volume->setSubType('numeric');
@@ -652,6 +658,7 @@ class sonos3 extends eqLogic {
 			$setVolume->setLogicalId('setVolume');
 			$setVolume->setName(__('Volume', __FILE__));
 		}
+		$setVolume->setGeneric_type('SET_VOLUME');
 		$setVolume->setType('action');
 		$setVolume->setSubType('slider');
 		$setVolume->setValue($volume->getId());
