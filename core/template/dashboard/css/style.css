@@ -1,5 +1,4 @@
 .sonos_widget{
-	width: 220px;
 	height: 330px;
 	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	background-color: black;
@@ -8,8 +7,7 @@
 	z-index: 1;
 }
 .sonos_widget .uppart{
-	height: 257px;
-	width: 250px;
+	height: 233px;
 	z-index: 2;
 }
 .sonos_widget .downpart{
@@ -19,7 +17,6 @@
 
 .sonos_widget .volumeDownpart{
 	height: 70px;
-	width: 250px;
 	z-index: 2;
 }
 .sonos_widget .cercle_downpart{
@@ -189,8 +186,8 @@
 }
 .sonos_widget .title_downpart{
 	text-align: center;
-	width: 220px;
 	position: absolute;
+	width: 230px;
 	margin-left:15px;
 }
 .sonos_widget .title{
@@ -200,14 +197,13 @@
 	font-size:14px;
 }
 .sonos_widget .jaquette_sonos{
-	width: 250px;
 	height: 180px;
 }
 .sonos_widget .affiche_premiere_sonos{
 	width: 150px;
 	height: 150px;
 	position: absolute;
-	margin-left: -80px;
+	margin-left: -75px;
 	margin-top: 25px;
 	z-index: 7;
 	border-radius: 10%;
@@ -262,7 +258,6 @@
 }
 .sonos_widget .volume_sonos_widget{
 	position: absolute;
-	width: 250px;
 	bottom: 25px;
 }
 .sonos_widget .bouton_sup_volume{
