@@ -6,6 +6,11 @@
 	position: relative;
 	z-index: 1;
 }
+
+.sonos_widget .selected{
+	color : red !important;
+}
+
 .sonos_widget .uppart{
 	height: 233px;
 	z-index: 2;

@@ -1,20 +1,20 @@
 <div class="eqLogic eqLogic-widget noResize sonos_widget sonos3" data-eqType="#eqType#" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#" data-version="#version#" style="text-align:center; width: 272px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;height:320px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#">
 	<link rel="stylesheet" href="plugins/sonos3/core/template/dashboard/css/style.css" />
-	<span class="statusCmd" style="position : absolute;left : 0px;width : 30px;z-index: 1030;"></span>
+	<span class="statusCmd" style="position : absolute;left : 0px;width : 30px;z-index: 1030;color:white !important;"></span>
 	<div class="leftpanel">
 		<div style="margin-left : 24px;overflow: auto;height: 327px;">
-			<legend style="color : white;margin-bottom:2px;">Playlist</legend>
+			<legend style="margin-bottom:2px;">Playlist</legend>
 			<div class="playlistList" style="text-align:left;"></div>
-			<legend style="color : white;margin-bottom:2px;">Radio</legend>
+			<legend style="margin-bottom:2px;">Radio</legend>
 			<div class="radioList" style="text-align:left;"></div>
-			<legend style="color : white;margin-bottom:2px;">Favoris</legend>
+			<legend style="margin-bottom:2px;">Favoris</legend>
 			<div class="favouriteList" style="text-align:left;"></div>
 		</div>
 		<img class="leftRafter" style="display:none;" src="plugins/sonos3/core/template/dashboard/images/chevron.png" title="Listes" onClick="panelLeftClose#uid#()"/>
 	</div>
 	<div class="rightpanel">
 		<div style="margin-right : 24px;overflow: auto;height: 327px;">
-			<legend style="color : white;margin-bottom:2px;">Enceintes</legend>
+			<legend style="margin-bottom:2px;">Enceintes</legend>
 			<div class="speakersList" style="text-align:left;"></div>
 		</div>
 		<img class="rightRafter" style="display:none;" src="plugins/sonos3/core/template/dashboard/images/chevron.png" onClick="panelRightClose#uid#()"/>
@@ -111,13 +111,13 @@
 		pause_and_play#uid#(#state_nb#);
 		
 		if('#repeat_state#' == 1){
-			$(".sonos3[data-eqLogic_uid=#uid#] .repeat").css('color','red');
+			$(".sonos3[data-eqLogic_uid=#uid#] .repeat").addClass('selected');
 		}
 		if('#shuffle_state#' == 1){
-			$(".sonos3[data-eqLogic_uid=#uid#] .shuffle").css('color','red');
+			$(".sonos3[data-eqLogic_uid=#uid#] .shuffle").addClass('selected');
 		}
 		if('#mute_state#' == 1){
-			$(".sonos3[data-eqLogic_uid=#uid#] .mute").css('color','red');
+			$(".sonos3[data-eqLogic_uid=#uid#] .mute").addClass('selected');
 		}
 		if('#playlist#' != ''){
 			playlist#id# = json_decode('#playlist#');
