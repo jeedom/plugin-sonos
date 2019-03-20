@@ -147,7 +147,7 @@
 				success: function (data) {
 					if (data.state != 'ok') {
 						$('#div_alert').showAlert({message: data.result, level: 'danger'});
-						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fas fa-times"></i>');
 						setTimeout(function() {
 							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
 						}, 3000);
@@ -189,7 +189,7 @@
 				success: function (data) {
 					if (data.state != 'ok') {
 						$('#div_alert').showAlert({message: data.result, level: 'danger'});
-						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fas fa-times"></i>');
 						setTimeout(function() {
 							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
 						}, 3000);
@@ -231,7 +231,7 @@
 				success: function (data) {
 					if (data.state != 'ok') {
 						$('#div_alert').showAlert({message: data.result, level: 'danger'});
-						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fas fa-times"></i>');
 						setTimeout(function() {
 							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
 						}, 3000);
@@ -264,7 +264,7 @@
 				success: function (data) {
 					if (data.state != 'ok') {
 						$('#div_alert').showAlert({message: data.result, level: 'danger'});
-						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fas fa-times"></i>');
 						setTimeout(function() {
 							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
 						}, 3000);
@@ -282,7 +282,7 @@
 			speakers#id# = json_decode('#speakers#');
 			speakersList#id# = '';
 			for(var i in speakers#id#){
-				speakersList#id# += '<span class="cursor" style="white-space: nowrap;margin-left:5px;" title="'+speakers#id#[i]+'"><i class="addSpeaker fa fa-plus" data-name="'+speakers#id#[i]+'"></i> <i class=" removeSpeaker fa fa-minus" data-name="'+speakers#id#[i]+'"></i> '+speakers#id#[i]+'</span><br/>';
+				speakersList#id# += '<span class="cursor" style="white-space: nowrap;margin-left:5px;" title="'+speakers#id#[i]+'"><i class="addSpeaker fa fa-plus" data-name="'+speakers#id#[i]+'"></i> <i class=" removeSpeaker fas fa-minus" data-name="'+speakers#id#[i]+'"></i> '+speakers#id#[i]+'</span><br/>';
 			}
 			$(".sonos3[data-eqLogic_uid=#uid#] .speakersList").append(speakersList#id#);
 		}
@@ -307,7 +307,7 @@
 				success: function (data) {
 					if (data.state != 'ok') {
 						$('#div_alert').showAlert({message: data.result, level: 'danger'});
-						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fa fa-times"></i>');
+						$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty().append('<i class="fas fa-times"></i>');
 						setTimeout(function() {
 							$(".sonos3[data-eqLogic_uid=#uid#] .statusCmd").empty();
 						}, 3000);
