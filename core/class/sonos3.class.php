@@ -226,7 +226,7 @@ class sonos3 extends eqLogic {
 				$eqLogic = new self();
 				$eqLogic->setLogicalId($controller->getIp());
 				$eqLogic->setName($controller->getRoom() . ' - ' . $controller->getName());
-				$object = object::byName($controller->getRoom());
+				$object = jeeObject::byName($controller->getRoom());
 				if (is_object($object)) {
 					$eqLogic->setObject_id($object->getId());
 					$eqLogic->setName($controller->getName());
