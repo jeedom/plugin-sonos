@@ -71,6 +71,7 @@ function displaySonos(_object_id) {
       }
       setTileSize('.eqLogic');
       $('#div_displayEquipementSonos').packery({gutter : 0});
+      $('#div_displayEquipementSonos').packery({gutter : 0});
       $.hideLoading();
     }
   });
