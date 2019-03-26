@@ -879,7 +879,7 @@ class sonos3 extends eqLogic {
 		if (strlen($replace['#title#']) > 12) {
 			$replace['#title#'] = '<marquee behavior="scroll" direction="left" scrollamount="2">' . $replace['#title#'] . '</marquee>';
 		}
-		if ($_version != 'mobile' && $_version != 'mview') {
+		if ($_version != 'mobile') {
 			$replace['#speakers#'] = str_replace(array("'", '+'), array("\'", '\+'), $this->getConfiguration('speakers'));
 		}
 		
