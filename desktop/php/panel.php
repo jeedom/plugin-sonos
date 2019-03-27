@@ -57,18 +57,18 @@ echo '<div class="div_displayEquipement" style="width: 100%;">';
 if (init('object_id') == '') {
 	foreach ($allObject as $object) {
 		foreach ($object->getEqLogic(true, false, 'sonos3') as $sonos) {
-			echo $sonos->toHtml('dview');
+			echo $sonos->toHtml('dashboard');
 		}
 	}
 } else {
 	foreach ($object->getEqLogic(true, false, 'sonos3') as $sonos) {
-		echo $sonos->toHtml('dview');
+		echo $sonos->toHtml('dashboard');
 	}
 	foreach ($child_object as $child) {
 		$sonoss = $child->getEqLogic(true, false, 'sonos3');
 		if (count($sonoss) > 0) {
 			foreach ($sonoss as $sonos) {
-				echo $sonos->toHtml('dview');
+				echo $sonos->toHtml('dashboard');
 			}
 		}
 	}
