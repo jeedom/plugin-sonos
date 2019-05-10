@@ -40,7 +40,7 @@ function initSonos3Panel(_object_id) {
   });
   displaySonos(_object_id);
   
-  $(window).on("orientationchange", function (event) {
+  $(window).on("resize", function (event) {
     setTileSize('.eqLogic');
     $('#div_displayEquipementSonos').packery({gutter : 0});
   });
