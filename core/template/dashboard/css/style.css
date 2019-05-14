@@ -1,7 +1,6 @@
 .sonos_widget{
 	height: 330px;
 	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	background-color: black;
 	overflow:hidden;
 	position: relative;
 	z-index: 1;
@@ -90,8 +89,8 @@
 	width: 20px;
 	height: 20px;
 	position: absolute;
-	margin-top: 16px;
-	left: 48px;
+	margin-top: 20px;
+	left: 60px;
 	cursor:pointer;
 	z-index: 4;
 	opacity: 0.6;
@@ -120,7 +119,7 @@
 	width: 20px;
 	height: 20px;
 	position: absolute;
-	margin-top: 12px;
+	margin-top: 18px;
 	right: 50px;
 	cursor:pointer;
 	z-index: 4;
