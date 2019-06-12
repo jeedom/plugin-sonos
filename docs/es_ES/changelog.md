@@ -1,3 +1,7 @@
+# 23/04/2019
+
+- Ajout des sonos one gen2
+
 # 17/01/2019
 
 - Correction de bugs dans le cas ou les sonos ont été ajouté manuellement

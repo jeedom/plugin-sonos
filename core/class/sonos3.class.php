@@ -225,7 +225,7 @@ class sonos3 extends eqLogic {
 				$eqLogic = new self();
 				$eqLogic->setLogicalId($controller->getIp());
 				$eqLogic->setName($controller->getRoom() . ' - ' . $controller->getName());
-				$object = object::byName($controller->getRoom());
+				$object = jeeObject::byName($controller->getRoom());
 				if (is_object($object)) {
 					$eqLogic->setObject_id($object->getId());
 					$eqLogic->setName($controller->getName());
@@ -839,13 +839,13 @@ class sonos3 extends eqLogic {
 		
 		foreach ($this->getCmd('action') as $cmd) {
 			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_playlist') {
+			if ($_version != 'mobile' && $cmd->getLogicalId() == 'play_playlist') {
 				$replace['#playlist#'] = str_replace(array("'", '+'), array("\'", '\+'), $cmd->getDisplay('title_possibility_list'));
 			}
-			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_radio') {
+			if ($_version != 'mobile' && $cmd->getLogicalId() == 'play_radio') {
 				$replace['#radio#'] = str_replace(array("'", '+'), array("\'", '\+'), $cmd->getDisplay('title_possibility_list'));
 			}
-			if ($_version != 'mobile' && $_version != 'mview' && $cmd->getLogicalId() == 'play_favourite') {
+			if ($_version != 'mobile' && $cmd->getLogicalId() == 'play_favourite') {
 				$replace['#favourite#'] = str_replace(array("'", '+'), array("\'", '\+'), $cmd->getDisplay('title_possibility_list'));
 			}
 		}
@@ -878,7 +878,7 @@ class sonos3 extends eqLogic {
 		if (strlen($replace['#title#']) > 12) {
 			$replace['#title#'] = '<marquee behavior="scroll" direction="left" scrollamount="2">' . $replace['#title#'] . '</marquee>';
 		}
-		if ($_version != 'mobile' && $_version != 'mview') {
+		if ($_version != 'mobile') {
 			$replace['#speakers#'] = str_replace(array("'", '+'), array("\'", '\+'), $this->getConfiguration('speakers'));
 		}
 		
@@ -1166,7 +1166,7 @@ class sonos3Cmd extends cmd {
 		} elseif ($this->getLogicalId() == 'line_in') {
 			$controller->useLineIn()->play();
 		} elseif ($this->getLogicalId() == 'tts') {
-			$_options['message'] = str_replace(array('[', ']', '#', '{', '}'), '', $_options['message']);
+			$_options['message'] = $_options['message'];
 			$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
 			$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
 			$share = $server->getShare($path[0]);

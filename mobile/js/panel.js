@@ -40,7 +40,7 @@ function initSonos3Panel(_object_id) {
   });
   displaySonos(_object_id);
   
-  $(window).on("orientationchange", function (event) {
+  $(window).on("resize", function (event) {
     setTileSize('.eqLogic');
     $('#div_displayEquipementSonos').packery({gutter : 0});
   });
@@ -70,6 +70,7 @@ function displaySonos(_object_id) {
         $('#div_displayEquipementSonos').append(data.result.eqLogics[i]).trigger('create');
       }
       setTileSize('.eqLogic');
+      $('#div_displayEquipementSonos').packery({gutter : 0});
       $('#div_displayEquipementSonos').packery({gutter : 0});
       $.hideLoading();
     }
