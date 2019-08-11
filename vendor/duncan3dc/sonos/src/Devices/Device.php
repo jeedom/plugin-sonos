@@ -191,6 +191,7 @@ final class Device implements DeviceInterface {
 			"S14" => "BEAM",
 			"S15" => "CONNECT",
 			"S18" => "ONE",
+			"S21" => "SYMFONISK",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZP100" => "CONNECT:AMP",

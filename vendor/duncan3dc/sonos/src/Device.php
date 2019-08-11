@@ -177,6 +177,7 @@ class Device {
 			"S14" => "BEAM",
 			"S15" => "CONNECT",
 			"S18" => "ONE",
+			"S21" => "SYMFONISK",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",
