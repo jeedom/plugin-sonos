@@ -14,7 +14,7 @@
 * You should have received a copy of the GNU General Public License
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
-
+jeedom.eqLogic.bt_displayObjectName = true;
 positionEqLogic();
 setTimeout(function () {
   $('.div_displayEquipement').packery({
@@ -23,7 +23,6 @@ setTimeout(function () {
   });
   $('.object_name').show();
 }, 2);
-
 
 $('#bt_displayObject').on('click', function () {
   if ($(this).attr('data-display') == 1) {
