@@ -70,6 +70,7 @@ function displaySonos(_object_id) {
         $('#div_displayEquipementSonos').append(data.result.eqLogics[i]).trigger('create');
       }
       setTileSize('.eqLogic');
+      $('.object_name').show();
       $('#div_displayEquipementSonos').packery({gutter : 0});
       $('#div_displayEquipementSonos').packery({gutter : 0});
       $.hideLoading();
