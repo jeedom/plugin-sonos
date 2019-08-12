@@ -15,7 +15,6 @@
 */
 
 function initSonos3Panel(_object_id) {
-  jeedom.eqLogic.bt_displayObjectName = true;
   if(typeof setBackgroundImage == 'function'){
     setBackgroundImage('plugins/sonos3/core/img/panel.jpg');
   }
@@ -71,7 +70,7 @@ function displaySonos(_object_id) {
         $('#div_displayEquipementSonos').append(data.result.eqLogics[i]).trigger('create');
       }
       setTileSize('.eqLogic');
-      $('.object_name').show();
+      jeedom.eqLogic.changeDisplayObjectName(true);
       $('#div_displayEquipementSonos').packery({gutter : 0});
       $('#div_displayEquipementSonos').packery({gutter : 0});
       $.hideLoading();

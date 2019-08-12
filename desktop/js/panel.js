@@ -14,14 +14,13 @@
 * You should have received a copy of the GNU General Public License
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
-jeedom.eqLogic.bt_displayObjectName = true;
 positionEqLogic();
 setTimeout(function () {
   $('.div_displayEquipement').packery({
     itemSelector: ".eqLogic-widget",
     gutter : 2
   });
-  $('.object_name').show();
+  jeedom.eqLogic.changeDisplayObjectName(true);
 }, 2);
 
 $('#bt_displayObject').on('click', function () {
