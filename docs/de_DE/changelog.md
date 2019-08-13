@@ -1,3 +1,7 @@
+# 12/08/2019
+
+- Support de l'enceinte étagere Ikea SYMFONISK
+
 # 23/04/2019
 
 - Ajout des sonos one gen2
