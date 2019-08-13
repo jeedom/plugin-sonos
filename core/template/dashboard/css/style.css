@@ -4,6 +4,8 @@
 	overflow:hidden;
 	position: relative;
 	z-index: 1;
+	color: rgb(172, 172, 172);
+	
 }
 
 .sonos_widget .selected{
