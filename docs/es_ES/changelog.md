@@ -1,3 +1,7 @@
+# 01/09/2019
+
+- Support de l'enceinte lampe Ikea SYMFONISK
+
 # 12/08/2019
 
 - Support de l'enceinte étagere Ikea SYMFONISK

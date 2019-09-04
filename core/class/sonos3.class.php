@@ -253,6 +253,8 @@ class sonos3 extends eqLogic {
 					$eqLogic->setConfiguration('model', 'BEAM');
 				} else if (strpos(strtoupper($controller->getName()), 'ONE') !== false) {
 					$eqLogic->setConfiguration('model', 'ONE');
+				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK_LIGHT') !== false) {
+					$eqLogic->setConfiguration('model', 'SYMFONISK_LIGHT');
 				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK') !== false) {
 					$eqLogic->setConfiguration('model', 'SYMFONISK');
 				}
