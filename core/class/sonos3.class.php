@@ -281,7 +281,7 @@ class sonos3 extends eqLogic {
 		if (self::$_eqLogics == null) {
 			self::$_eqLogics = self::byType('sonos3');
 		}
-		foreach (self::$_eqLogics as $eqLogic) {
+		foreach (self::$_eqLogics as &$eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
