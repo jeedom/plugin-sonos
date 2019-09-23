@@ -20,7 +20,7 @@ setTimeout(function () {
     itemSelector: ".eqLogic-widget",
     gutter : 2
   });
-  jeedom.eqLogic.changeDisplayObjectName(true);
+  $('.eqLogic-widget').addClass('displayObjectName');
 }, 2);
 
 $('#bt_displayObject').on('click', function () {

@@ -202,7 +202,12 @@ class sonos3 extends eqLogic {
 	}
 	
 	public static function cronDaily() {
-		self::deamon_start();
+		try {
+			$plugin = plugin::byId(__CLASS__);
+			$plugin->deamon_start(true);
+		} catch (\Exception $e) {
+			
+		}
 	}
 	
 	public static function syncSonos() {
@@ -276,7 +281,7 @@ class sonos3 extends eqLogic {
 		if (self::$_eqLogics == null) {
 			self::$_eqLogics = self::byType('sonos3');
 		}
-		foreach (self::$_eqLogics as $eqLogic) {
+		foreach (self::$_eqLogics as &$eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
@@ -318,14 +323,14 @@ class sonos3 extends eqLogic {
 				if ($artist == '') {
 					$artist = __('Aucun', __FILE__);
 				}
-				$changed = $eqLogic->checkAndUpdateCmd('state', $state) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume()) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('mute_state', $mute) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('repeat_state', $repeat) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('track_title', $title) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('track_album', $album) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('track_artist', $artist) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('state', $state,false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume(),false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle,false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('mute_state', $mute,false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('repeat_state', $repeat,false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_title', $title,false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_album', $album,false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_artist', $artist,false) || $changed;
 				if ($track->getAlbumArt() != '') {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->getAlbumArt())) {
 						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->getAlbumArt()));
