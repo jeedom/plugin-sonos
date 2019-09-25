@@ -1052,13 +1052,6 @@ class sonos3Cmd extends cmd {
 				
 			}
 		} elseif ($this->getLogicalId() == 'pause') {
-			try {
-				if (!$controller->isUsingQueue()) {
-					$controller->useQueue();
-				}
-			} catch (\Exception $e) {
-				
-			}
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
 			if ($track_title->execCmd() == __('Aucun', __FILE__) && $state->execCmd() == __('Arrêté', __FILE__)) {
