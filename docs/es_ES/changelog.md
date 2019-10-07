@@ -1,3 +1,7 @@
+# 23/09/2019
+
+- Optimisations
+
 # 01/09/2019
 
 - Support de l'enceinte lampe Ikea SYMFONISK
