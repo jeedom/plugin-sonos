@@ -335,7 +335,7 @@ class sonos3 extends eqLogic {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->getAlbumArt())) {
 						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->getAlbumArt()));
 						$eqLogic->checkAndUpdateCmd('dominantColor', getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg'));
-						eqLogic->checkAndUpdateCmd('dominantColor2', getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg',2));
+						$eqLogic->checkAndUpdateCmd('dominantColor2', getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg',2));
 						$changed = true;
 					}
 				} else if (file_exists(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg')) {
@@ -826,14 +826,14 @@ class sonos3 extends eqLogic {
 		
 		$dominantColor2 = $this->getCmd(null, 'dominantColor2');
 		if (!is_object($dominantColor2)) {
-			$dominantColor = new sonos3Cmd();
-			$dominantColor->setLogicalId('dominantColor2');
-			$dominantColor->setName(__('Couleur dominante 2', __FILE__));
+			$dominantColor2 = new sonos3Cmd();
+			$dominantColor2->setLogicalId('dominantColor2');
+			$dominantColor2->setName(__('Couleur dominante 2', __FILE__));
 		}
-		$dominantColor->setType('info');
-		$dominantColor->setSubType('string');
-		$dominantColor->setEqLogic_id($this->getId());
-		$dominantColor->save();
+		$dominantColor2->setType('info');
+		$dominantColor2->setSubType('string');
+		$dominantColor2->setEqLogic_id($this->getId());
+		$dominantColor2->save();
 		
 		if($this->getChanged()){
 			self::deamon_start();
