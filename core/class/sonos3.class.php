@@ -334,11 +334,9 @@ class sonos3 extends eqLogic {
 				if ($track->getAlbumArt() != '') {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->getAlbumArt())) {
 						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->getAlbumArt()));
-						$dominantColor = getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg',3);
-						$i = ($dominantColor[$i] == '#000000') ? 1:0;
-						$eqLogic->checkAndUpdateCmd('dominantColor', $dominantColor[$i]);
-						$i++;
-						$eqLogic->checkAndUpdateCmd('dominantColor2', $dominantColor[$i]);
+						$dominantColor = getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg',2,true);
+						$eqLogic->checkAndUpdateCmd('dominantColor', $dominantColor[0]);
+						$eqLogic->checkAndUpdateCmd('dominantColor2', $dominantColor[1]);
 						$changed = true;
 					}
 				} else if (file_exists(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg')) {
