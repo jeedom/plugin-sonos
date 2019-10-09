@@ -1196,13 +1196,6 @@ class sonos3Cmd extends cmd {
 		} elseif ($this->getLogicalId() == 'line_in') {
 			$controller->useLineIn()->play();
 		} elseif ($this->getLogicalId() == 'tts') {
-			try {
-				if (!$controller->isUsingQueue()) {
-					$controller->useQueue();
-				}
-			} catch (\Exception $e) {
-				
-			}
 			$_options['message'] = $_options['message'];
 			$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
 			$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
