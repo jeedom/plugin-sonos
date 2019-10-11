@@ -179,6 +179,7 @@ class Device {
 			"S18" => "ONE",
 			"S20" => "SYMFONISK_LIGHT",
 			"S21" => "SYMFONISK",
+			"S23" => "PORT",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",
