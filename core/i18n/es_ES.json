@@ -83,7 +83,7 @@
         "Gestion": "Gestión",
         "Configuration": "Configuración",
         "Equipement": "Dispositivos",
-        "Commandes": "Órdenes",
+        "Commandes": "Comandos",
         "Configuration avancée": "Configuración avanzada"
     },
     "plugins/sonos3/desktop/js/sonos3.js": {
