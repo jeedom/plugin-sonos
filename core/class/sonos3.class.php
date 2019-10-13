@@ -203,8 +203,8 @@ class sonos3 extends eqLogic {
 	
 	public static function cronDaily() {
 		try {
-			if(date('i') == 0){
-				sleep(60);
+			if(date('i') == 0 && date('s') < 10){
+				sleep(10);
 			}
 			$plugin = plugin::byId(__CLASS__);
 			$plugin->deamon_start(true);
