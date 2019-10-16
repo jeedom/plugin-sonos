@@ -1,4 +1,7 @@
+# 15/10/2019
+
 - Ajout du Sonos port
+- Amélioration du script d'installation des dépendances
 
 # 07/10/2019
 
