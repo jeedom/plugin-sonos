@@ -1,3 +1,12 @@
+# 21/10/2017
+
+- Amélioration de la reprise suite à un TTS
+
+# 15/10/2019
+
+- Ajout du Sonos port
+- Amélioration du script d'installation des dépendances
+
 # 07/10/2019
 
 - Amélioration du script d'installation de dépendances (pourra permettre de corriger dans certain cas les soucis de TTS)

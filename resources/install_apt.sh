@@ -11,7 +11,7 @@ sudo apt-get update
 echo 50 > ${PROGRESS_FILE}
 sudo apt-get install -y smbclient
 echo 60 > ${PROGRESS_FILE}
-sudo apt-get install -y php7.0-mbstring php7.0-soap
+sudo apt-get install -y php-mbstring php-soap
 echo 75 > ${PROGRESS_FILE}
 sudo apt-get install libsox-fmt-mp3 sox libttspico-utils
 echo 100 > ${PROGRESS_FILE}

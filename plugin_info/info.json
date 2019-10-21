@@ -4,7 +4,7 @@
 	"description" : "Plugin de controle de sonos. Permet de controler les play1,3,5, connect, connect AMP et playbar. ATTENTION : il faut au minimum PHP 7.0",
 	"licence" : "AGPL",
 	"author" : "Jeedom SAS",
-	"require" : "3.3.32",
+	"require" : "3.3.34",
 	"category" : "multimedia",
 	"hasDependency" : true,
 	"hasOwnDeamon" : true,

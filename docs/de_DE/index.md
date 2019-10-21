@@ -149,6 +149,10 @@ Côté Bibliothèque Sonos (appli PC)
 
 > **Important**
 >
+> Il faut ABSOLUEMENT ajouter le partage réseaux dans la bibliothèque du sonos, sinon Jeedom va bien creer le mp3 du tts mais il ne pourra pas etre joué par le Sonos
+
+> **Important**
+>
 > La lanque dépend de la langue de Jeedom et utilise par defaut picotts. A partir de jeedom 3.3.X il sera possible d'utiliser le TTS de Google pour avoir une plus jolie voix
 
 

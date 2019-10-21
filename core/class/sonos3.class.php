@@ -203,6 +203,9 @@ class sonos3 extends eqLogic {
 	
 	public static function cronDaily() {
 		try {
+			if(date('i') == 0 && date('s') < 10){
+				sleep(10);
+			}
 			$plugin = plugin::byId(__CLASS__);
 			$plugin->deamon_start(true);
 		} catch (\Exception $e) {
@@ -257,6 +260,8 @@ class sonos3 extends eqLogic {
 					$eqLogic->setConfiguration('model', 'SYMFONISK_LIGHT');
 				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK') !== false) {
 					$eqLogic->setConfiguration('model', 'SYMFONISK');
+				}else if (strpos(strtoupper($controller->getName()), 'PORT') !== false) {
+					$eqLogic->setConfiguration('model', 'PORT');
 				}
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);
@@ -334,7 +339,9 @@ class sonos3 extends eqLogic {
 				if ($track->getAlbumArt() != '') {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->getAlbumArt())) {
 						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->getAlbumArt()));
-						$eqLogic->checkAndUpdateCmd('dominantColor', getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg'));
+						$dominantColor = getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg',2,true);
+						$eqLogic->checkAndUpdateCmd('dominantColor', $dominantColor[0]);
+						$eqLogic->checkAndUpdateCmd('dominantColor2', $dominantColor[1]);
 						$changed = true;
 					}
 				} else if (file_exists(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg')) {
@@ -822,6 +829,18 @@ class sonos3 extends eqLogic {
 		$dominantColor->setEqLogic_id($this->getId());
 		$dominantColor->save();
 		
+		
+		$dominantColor2 = $this->getCmd(null, 'dominantColor2');
+		if (!is_object($dominantColor2)) {
+			$dominantColor2 = new sonos3Cmd();
+			$dominantColor2->setLogicalId('dominantColor2');
+			$dominantColor2->setName(__('Couleur dominante 2', __FILE__));
+		}
+		$dominantColor2->setType('info');
+		$dominantColor2->setSubType('string');
+		$dominantColor2->setEqLogic_id($this->getId());
+		$dominantColor2->save();
+		
 		if($this->getChanged()){
 			self::deamon_start();
 		}
@@ -1182,13 +1201,6 @@ class sonos3Cmd extends cmd {
 		} elseif ($this->getLogicalId() == 'line_in') {
 			$controller->useLineIn()->play();
 		} elseif ($this->getLogicalId() == 'tts') {
-			try {
-				if (!$controller->isUsingQueue()) {
-					$controller->useQueue();
-				}
-			} catch (\Exception $e) {
-				
-			}
 			$_options['message'] = $_options['message'];
 			$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
 			$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
