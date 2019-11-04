@@ -508,7 +508,10 @@ class sonos3 extends eqLogic {
 	}
 	
 	public function getController() {
-		return self::getSonos()->getControllerByIp($this->getLogicalId());
+		if($this->_controller == null){
+			$this->_controller =  self::getSonos()->getControllerByIp($this->getLogicalId());
+		}
+		return $this->_controller;
 	}
 	
 	public function preSave() {
