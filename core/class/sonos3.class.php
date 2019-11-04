@@ -372,6 +372,21 @@ class sonos3 extends eqLogic {
 						$eqLogic->save();
 					}
 				}
+			} catch (Error $ex) {
+				if ($_eqLogic_id != null) {
+					log::add('sonos3', 'error', $e->getMessage());
+				} else {
+					$eqLogic->refresh();
+					if ($eqLogic->getIsEnable() == 0) {
+						continue;
+					}
+					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) == 150) {
+						log::add('sonos3', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage(), 'sonosLost' . $eqLogic->getId());
+					} else {
+						$eqLogic->setConfiguration('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
+						$eqLogic->save();
+					}
+				}
 			}
 		}
 	}
