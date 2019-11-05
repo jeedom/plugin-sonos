@@ -32,7 +32,6 @@ class sonos3 extends eqLogic {
 	
 	private static $_sonos = null;
 	private static $_eqLogics = null;
-	private static $_sonosAddOK = false;
 	public static $_widgetPossibility = array(
 		'custom' => true,
 		'custom::layout' => false,
@@ -297,7 +296,10 @@ class sonos3 extends eqLogic {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
-			if ($eqLogic->getLogicalId() == '') {
+			if($eqLogic->getIsEnable() == 0){
+				$eqLogic->refresh();
+			}
+			if ($eqLogic->getLogicalId() == '' || $eqLogic->getIsEnable() == 0) {
 				continue;
 			}
 			try {
@@ -517,9 +519,9 @@ class sonos3 extends eqLogic {
 	public function getController($_justHim = false) {
 		if($this->_controller == null){
 			if($_justHim){
-				$this->_controller =  self::getSonos(false,$this->getLogicalId())->getControllerByIp($this->getLogicalId());
+				$this->_controller = self::getSonos(false,$this->getLogicalId())->getControllerByIp($this->getLogicalId());
 			}else{
-				$this->_controller =  self::getSonos(false)->getControllerByIp($this->getLogicalId());
+				$this->_controller = self::getSonos(false)->getControllerByIp($this->getLogicalId());
 			}
 		}
 		return $this->_controller;
