@@ -190,6 +190,9 @@ class sonos3 extends eqLogic {
 				$devices->setLogger(log::getLogger('sonos3'));
 				if($_ip !== null){
 					$devices->addIp($_ip);
+					$sonos =  new duncan3dc\Sonos\Network($devices);
+					$sonos->setLogger(log::getLogger('sonos3'));
+					return $sonos;
 				}else{
 					$eqLogics = eqLogic::byType('sonos3',true);
 					if(count(	$eqLogics) != 0){
@@ -511,9 +514,13 @@ class sonos3 extends eqLogic {
 		return null;
 	}
 	
-	public function getController() {
+	public function getController($_justHim = false) {
 		if($this->_controller == null){
-			$this->_controller =  self::getSonos(false,$this->getLogicalId())->getControllerByIp($this->getLogicalId());
+			if($_justHim){
+				$this->_controller =  self::getSonos(false,$this->getLogicalId())->getControllerByIp($this->getLogicalId());
+			}else{
+				$this->_controller =  self::getSonos(false)->getControllerByIp($this->getLogicalId());
+			}
 		}
 		return $this->_controller;
 	}
@@ -995,7 +1002,7 @@ class sonos3Cmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
-		$controller = $eqLogic->getController();
+		$controller = $eqLogic->getController(true);
 		if (!is_object($controller)) {
 			throw new Exception(__('Impossible de récuperer le sonos : ', __FILE__) . $eqLogic->getHumanName());
 		}
@@ -1154,10 +1161,10 @@ class sonos3Cmd extends cmd {
 				}
 			}
 		} elseif ($this->getLogicalId() == 'add_speaker') {
-			$speaker = sonos3::getSonos(true)->getSpeakerByRoom($_options['title']);
+			$speaker = sonos3::getSonos()->getSpeakerByRoom($_options['title']);
 			$controller->addSpeaker($speaker);
 		} elseif ($this->getLogicalId() == 'remove_speaker') {
-			$speaker = sonos3::getSonos(true)->getSpeakerByRoom($_options['title']);
+			$speaker = sonos3::getSonos()->getSpeakerByRoom($_options['title']);
 			$controller->removeSpeaker($speaker);
 		} elseif ($this->getLogicalId() == 'line_in') {
 			$controller->useLineIn()->play();
