@@ -181,17 +181,21 @@ class sonos3 extends eqLogic {
 		return array('reply' => 'Playlist ou favoris non trouvé');
 	}
 	
-	public static function getSonos($_discover = false) {
+	public static function getSonos($_discover = false,$_ip = null) {
 		if (self::$_sonos === null || $_discover) {
 			if($_discover){
 				self::$_sonos = new duncan3dc\Sonos\Network();
 			}else{
 				$devices = new \duncan3dc\Sonos\Devices\Collection();
 				$devices->setLogger(log::getLogger('sonos3'));
-				$eqLogics = eqLogic::byType('sonos3',true);
-				if(count(	$eqLogics) != 0){
-					foreach ($eqLogics as $eqLogic) {
-						$devices->addIp($eqLogic->getLogicalId());
+				if($_ip !== null){
+					$devices->addIp($_ip);
+				}else{
+					$eqLogics = eqLogic::byType('sonos3',true);
+					if(count(	$eqLogics) != 0){
+						foreach ($eqLogics as $eqLogic) {
+							$devices->addIp($eqLogic->getLogicalId());
+						}
 					}
 				}
 				self::$_sonos = new duncan3dc\Sonos\Network($devices);
@@ -509,7 +513,7 @@ class sonos3 extends eqLogic {
 	
 	public function getController() {
 		if($this->_controller == null){
-			$this->_controller =  self::getSonos()->getControllerByIp($this->getLogicalId());
+			$this->_controller =  self::getSonos(false,$this->getLogicalId())->getControllerByIp($this->getLogicalId());
 		}
 		return $this->_controller;
 	}
@@ -1051,7 +1055,6 @@ class sonos3Cmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
-		$sonos = sonos3::getSonos();
 		$controller = $eqLogic->getController();
 		if (!is_object($controller)) {
 			throw new Exception(__('Impossible de récuperer le sonos : ', __FILE__) . $eqLogic->getHumanName());
@@ -1202,7 +1205,7 @@ class sonos3Cmd extends cmd {
 				$loop++;
 			}
 		} elseif ($this->getLogicalId() == 'play_radio') {
-			$radio = $sonos->getRadio();
+			$radio = sonos3::getSonos()->getRadio();
 			$stations = $radio->getFavouriteStations();
 			foreach ($stations as $station) {
 				if ($station->getTitle() == $_options['title']) {
@@ -1211,10 +1214,10 @@ class sonos3Cmd extends cmd {
 				}
 			}
 		} elseif ($this->getLogicalId() == 'add_speaker') {
-			$speaker = $sonos->getSpeakerByRoom($_options['title']);
+			$speaker = sonos3::getSonos(true)->getSpeakerByRoom($_options['title']);
 			$controller->addSpeaker($speaker);
 		} elseif ($this->getLogicalId() == 'remove_speaker') {
-			$speaker = $sonos->getSpeakerByRoom($_options['title']);
+			$speaker = sonos3::getSonos(true)->getSpeakerByRoom($_options['title']);
 			$controller->removeSpeaker($speaker);
 		} elseif ($this->getLogicalId() == 'line_in') {
 			$controller->useLineIn()->play();
