@@ -372,11 +372,6 @@ class sonos3 extends eqLogic {
 					if ($eqLogic->getIsEnable() == 0) {
 						continue;
 					}
-					if ($eqLogic->getCache('sonosNumberFailed', 0) == 150) {
-						log::add('sonos3', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage(), 'sonosLost' . $eqLogic->getId());
-					} else {
-						$eqLogic->setCache('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
-					}
 				}
 			} catch (Error $ex) {
 				if ($_eqLogic_id != null) {
@@ -385,11 +380,6 @@ class sonos3 extends eqLogic {
 					$eqLogic->refresh();
 					if ($eqLogic->getIsEnable() == 0) {
 						continue;
-					}
-					if ($eqLogic->getCache('sonosNumberFailed', 0) == 150) {
-						log::add('sonos3', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage(), 'sonosLost' . $eqLogic->getId());
-					} else {
-						$eqLogic->setCache('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
 					}
 				}
 			}
