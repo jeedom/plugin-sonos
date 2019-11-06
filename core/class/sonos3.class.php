@@ -285,7 +285,6 @@ class sonos3 extends eqLogic {
 		self::getRadioStations();
 		self::getPlayLists();
 		self::getFavourites();
-		self::deamon_start();
 	}
 	
 	public static function pull($_eqLogic_id = null) {
@@ -359,12 +358,11 @@ class sonos3 extends eqLogic {
 				if ($changed) {
 					$eqLogic->refreshWidget();
 				}
-				if ($eqLogic->getConfiguration('sonosNumberFailed', 0) > 0) {
+				if ($eqLogic->getCache('sonosNumberFailed', 0) > 0) {
 					foreach (message::byPluginLogicalId('sonos3', 'sonosLost' . $eqLogic->getId()) as $message) {
 						$message->remove();
 					}
-					$eqLogic->setConfiguration('sonosNumberFailed', 0);
-					$eqLogic->save();
+					$eqLogic->setCache('sonosNumberFailed', 0);
 				}
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
@@ -374,11 +372,10 @@ class sonos3 extends eqLogic {
 					if ($eqLogic->getIsEnable() == 0) {
 						continue;
 					}
-					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) == 150) {
+					if ($eqLogic->getCache('sonosNumberFailed', 0) == 150) {
 						log::add('sonos3', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage(), 'sonosLost' . $eqLogic->getId());
 					} else {
-						$eqLogic->setConfiguration('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
-						$eqLogic->save();
+						$eqLogic->setCache('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
 					}
 				}
 			} catch (Error $ex) {
@@ -389,11 +386,10 @@ class sonos3 extends eqLogic {
 					if ($eqLogic->getIsEnable() == 0) {
 						continue;
 					}
-					if ($eqLogic->getConfiguration('sonosNumberFailed', 0) == 150) {
+					if ($eqLogic->getCache('sonosNumberFailed', 0) == 150) {
 						log::add('sonos3', 'error', __('Erreur sur ', __FILE__) . $eqLogic->getHumanName() . ' : ' . $e->getMessage(), 'sonosLost' . $eqLogic->getId());
 					} else {
-						$eqLogic->setConfiguration('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
-						$eqLogic->save();
+						$eqLogic->setCache('sonosNumberFailed', $eqLogic->getConfiguration('sonosNumberFailed', 0) + 1);
 					}
 				}
 			}
