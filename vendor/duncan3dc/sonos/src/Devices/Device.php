@@ -190,6 +190,7 @@ final class Device implements DeviceInterface {
 			"S13" => "ONE",
 			"S14" => "BEAM",
 			"S15" => "CONNECT",
+			"S16" => "CONNECT:AMP",
 			"S18" => "ONE",
 			"S20" => "SYMFONISK_LIGHT",
 			"S21" => "SYMFONISK",
