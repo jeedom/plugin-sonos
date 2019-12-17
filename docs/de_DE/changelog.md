@@ -1,3 +1,7 @@
+# 16/12/2019
+
+- Correction de bug si un sonos n'est pas joignable
+
 # 21/10/2017
 
 - Amélioration de la reprise suite à un TTS
