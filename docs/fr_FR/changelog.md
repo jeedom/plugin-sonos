@@ -1,3 +1,5 @@
+- Ajout Sonos Move
+
 # 16/12/2019
 
 - Correction de bug si un sonos n'est pas joignable
