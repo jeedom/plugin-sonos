@@ -268,6 +268,8 @@ class sonos3 extends eqLogic {
 					$eqLogic->setConfiguration('model', 'SYMFONISK');
 				}else if (strpos(strtoupper($controller->getName()), 'PORT') !== false) {
 					$eqLogic->setConfiguration('model', 'PORT');
+				}else if (strpos(strtoupper($controller->getName()), 'MOVE') !== false) {
+					$eqLogic->setConfiguration('model', 'MOVE');
 				}
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);
@@ -304,7 +306,7 @@ class sonos3 extends eqLogic {
 			try {
 				$changed = false;
 				try {
-					$controller = $eqLogic->getController();
+					$controller = $eqLogic->getController(true);
 				} catch (\Exception $e) {
 					self::$_sonos = null;
 					continue;
@@ -358,12 +360,6 @@ class sonos3 extends eqLogic {
 				if ($changed) {
 					$eqLogic->refreshWidget();
 				}
-				if ($eqLogic->getCache('sonosNumberFailed', 0) > 0) {
-					foreach (message::byPluginLogicalId('sonos3', 'sonosLost' . $eqLogic->getId()) as $message) {
-						$message->remove();
-					}
-					$eqLogic->setCache('sonosNumberFailed', 0);
-				}
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
 					log::add('sonos3', 'error', $e->getMessage());
@@ -375,7 +371,7 @@ class sonos3 extends eqLogic {
 				}
 			} catch (Error $ex) {
 				if ($_eqLogic_id != null) {
-					log::add('sonos3', 'error', $e->getMessage());
+					log::add('sonos3', 'error', $ex->getMessage());
 				} else {
 					$eqLogic->refresh();
 					if ($eqLogic->getIsEnable() == 0) {

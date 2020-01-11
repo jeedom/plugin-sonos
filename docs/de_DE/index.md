@@ -14,8 +14,7 @@ pièces.
 
 > **Tip**
 >
-> Ce plugin nécessite que les Sonos soit alimentés (même en mode veille)
-> pour ne pas provoquer d’erreur.
+> Lors d ela decouverte initial il est fortement conseillé de ne pas avoir de sonos groupé sous peine d'avoir des erreurs
 
 Si plus tard vous ajoutez un Sonos, vous pouvez soit créer un équipement
 Sonos en donnant l’IP à Jeedom ou cliquer sur "Rechercher les

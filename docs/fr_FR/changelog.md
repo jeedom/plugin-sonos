@@ -1,3 +1,8 @@
+# 11/01/2020
+
+- Ajout Sonos Move
+- Optimisation du code en cas de Sonos non connecté
+
 # 16/12/2019
 
 - Correction de bug si un sonos n'est pas joignable

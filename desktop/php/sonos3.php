@@ -103,6 +103,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="SYMFONISK_LIGHT">Ikea SYMFONISK Lampe</option>
 											<option value="SYMFONISK">Ikea SYMFONISK</option>
 											<option value="PORT">Sonos port</option>
+											<option value="MOVE">Sonos move</option>
 										</select>
 									</div>
 								</div>
