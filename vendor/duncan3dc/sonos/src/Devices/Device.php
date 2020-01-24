@@ -195,9 +195,11 @@ final class Device implements DeviceInterface {
 			"S17" => "MOVE",
 			"S20" => "SYMFONISK_LIGHT",
 			"S21" => "SYMFONISK",
+			"S22" => "ONE",
 			"S23" => "PORT",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
+			"ZB100" => "BRIDGE",
 			"ZP100" => "CONNECT:AMP",
 			"ZP120" => "CONNECT:AMP",
 		];
