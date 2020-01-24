@@ -1,3 +1,7 @@
+# 24/01/2020
+
+- Support du Sonos One S22
+
 # 11/01/2020
 
 - Ajout Sonos Move
