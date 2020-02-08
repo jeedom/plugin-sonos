@@ -1,15 +1,15 @@
 # 24/01/2020
 
-- Support du Sonos One S22
+- Support of Sonos One S22
 
 # 11/01/2020
 
-- Ajout Sonos Move
-- Optimisation du code en cas de Sonos non connecté
+- Add Sonos Move
+- Code optimization in case of Sonos not connected
 
 # 16/12/2019
 
-- Correction de bug si un sonos n'est pas joignable
+- Bug fix if a Sonos cannot be reached
 
 # 21/10/2017
 
@@ -17,8 +17,8 @@
 
 # 15/10/2019
 
-- Ajout du Sonos port
-- Amélioration du script d'installation des dépendances
+- Add Sonos port
+- Improve dependency installation script
 
 # 07/10/2019
 
