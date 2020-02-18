@@ -1,158 +1,52 @@
 {
-    "plugins/sonos3/plugin_info/info.xml": {
-        "Plugin de controle de sonos": "Plugin zum steuern von SONOS Sound-Systeme",
-        "Aucune": "Ohne"
+    "plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "Bitte beachten Sie, dass Ihre PHP-Version (&#39;. PHP_VERSION.&#39;) Zu alt ist, Sie benötigen mindestens PHP 7.0",
+        "Le plugin sonos doit réagir aux interactions :": "Das Sonos-Plugin muss auf Interaktionen reagieren :",
+        "Partage": "Teilen",
+        "Nom d'utilisateur pour le partage": "Benutzername für den Austausch",
+        "Mot de passe du partage": "Passwort für den Austausch",
+        "Découverte": "Entdeckung",
+        "Rechercher les équipements Sonos": "Suche nach Sonos Geräte",
+        "Synchronisation réussie": "erfolgreiche Synchronisation"
     },
-    "plugins/sonos3/core/class/sonos3.class.php": {
-        "Status": "Status",
-        "Rafraîhir": "Aktualisieren",
-        "Play": "Play",
-        "Stop": "Stop",
-        "Pause": "Pause",
-        "Suivant": "nächster",
-        "Precedent": "Zurück",
-        "Muet": "Stumm",
-        "Non muet": "Stumm aus",
-        "Répéter": "Wiederholung",
-        "Aléatoire": "Zufällig ",
-        "Volume status": "Status Lautstärke",
-        "Volume": "Lautstärke",
-        "Piste": "Spur",
-        "Artiste": "Interpret",
-        "Album": "Album",
-        "Durée": "Dauer",
-        "Position": "Position",
-        "Lecture": "Lesen",
-        "Image": "Bild",
-        "Répéter status": "Status Wiederholen",
-        "Aléatoire status": "Zufallsstatus",
-        "Jouer playlist": "Playlist spielen",
-        "Aucun": "Ohne",
-        "Arrêté": "Anordnung",
-        "Ajout un haut parleur": "Hinzufügen eines Lautsprechers",
-        "Supprimer un haut parleur": "Löschen eines Lautsprechers",
-        "Dire": "sagen",
-        "Jouer une radio": "Radio abspielen",
-        "Radio non trouvée : ": "Radio nicht gefunden :",
-        "Playlist non trouvé : ": "Wiedergabeliste nicht gefunden:",
-        "Erreur sur ": "Fehler auf ",
-        "Options": "Optionen",
-        "Titre de la playlist": "Titel der Wiedergabeliste",
-        "Titre de la radio": "Titel des Radios",
-        "Nom de la piece": "Name des Stückes",
-        "Message": "Nachricht",
-        "Tache Z-Wave": "Z-Wave Aufgaben",
-        "OK": "OK",
-        "Tache de synchronisation": "Synchronisierungsaufgabe",
-        "Tâche de synchronisation": "Synchronisierungsaufgabe",
-        "Transition": "Übergang",
-        "NOK": "NOK",
-        "Allez sur la page du moteur des tâches et vérifiez lancer la tache sonos3::pull": "Gehen Sie auf die Aufgabe Motorstart und überprüfen Sie den Fleck sonos3 :: Pullover",
-        "Muet status": "Stumm Status",
-        "Entrée de ligne": "Line-Eingang",
-        "Impossible de récuperer le sonos : ": "Unmöglich, die Sonos abzurufen :",
-        "Précédent": "zurück",
-        "Couleur dominante": "Dominierende Farbe",
-        "Jouer favoris": "Spiele Favoriten",
-        "Titre du favoris": "Titel der Favoriten",
-        "Favoris non trouvé : ": "Favoriten nicht gefunden :"
+    "desktop\/js\/sonos3.js": {
+        "Nom": "Name",
+        "Tester": "Test"
     },
-    "plugins/sonos3/desktop/php/sonos3.php": {
-        "Ajouter un template": "Vorlage hinzufügen",
+    "desktop\/php\/sonos3.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "Gestion": "Verwaltung",
+        "Ajouter": "hinzufügen",
+        "Configuration": "Konfiguration",
+        "Mes Sonos": "Mein Sonos",
         "Rechercher": "Suchen nach",
-        "Mes templates": "Meine Vorlage",
-        "Général": "Allgemein",
+        "Configuration avancée": "Erweiterte Konfiguration",
+        "Sauvegarder": "Speichern",
+        "Supprimer": "Löschen",
+        "Equipement": "Gerät",
+        "Commandes": "Befehle",
+        "Nom du sonos": "Sonos Name",
         "Nom de l'équipement template": "Name der Vorlage ",
         "Objet parent": "Eltern-Objekt",
         "Aucun": "Ohne",
         "Activer": "aktivieren",
         "Visible": "Sichtbar",
-        "template param 1": "Vorlage param 1",
-        "Template": "Vorlage",
-        "Nom": "Name",
-        "Type": "Typ",
-        "Action": "Aktion",
-        "Supprimer": "Löschen",
-        "Sauvegarder": "Speichern",
+        "Model": "Modell",
         "IP": "IP",
-        "Commande": "Befehl",
-        "Nom du sonos": "Sonos Name",
-        "Mes Sonos": "Mein Sonos",
-        "Model": "Model",
-        "Masquer la jaquette": "Das Cover ausblenden",
-        "Gestion": "Verwaltung",
-        "Configuration": "Konfiguration",
-        "Equipement": "Gerät",
-        "Commandes": "Befehle",
-        "Configuration avancée": "Erweiterte Konfiguration"
-    },
-    "plugins/sonos3/desktop/js/sonos3.js": {
         "Nom": "Name",
-        "Tester": "Test"
-    },
-    "plugins/sonos3/plugin_info/configuration.php": {
-        "Découverte": "Entdeckung",
-        "Rechercher les équipements Sonos (play1, play3 et play5 seulement)": "Suche nach Sonos Anlagen (play1, play3 und play5 ausschlißlich)",
-        "Synchronisation réussie": "erfolgreiche Synchronisation",
-        "Rechercher les équipements Sonos": "Suche nach Sonos Geräte",
-        "Partage de fichier pour le text-to-speech": "Dateifreigabe für den Text-zu-Sprache",
-        "[TTS] Chemin local du répertoire partagé": "[TTS] Lokaler Pfad des freigegebenen Verzeichnis",
-        "[TTS] Chemin Sonos du répertoire paratagé": "[TTS] Sonos-Pfad des freigegebenen Verzeichnises",
-        "[TTS] Chemin Sonos du répertoire partagé": "[TTS] Sonos-Pfad des freigegebenen Verzeichnises",
-        "Fournisseur TTS": "TTS Anbieter",
-        "Voix": "Stimme",
-        "[TTS] IP du partage": "[TTS] IP  teilen",
-        "[TTS] Nom d'utilisateur pour le partage": "[TTS] Benutzername für den Austausch",
-        "[TTS] Mot de passe du partage": "[TTS] Passwort für den Austausch",
-        "[TTS] Chemin sur le nas": "[TTS] Pfad  auf der NAS",
-        "IP du partage": "IP  teilen",
-        "Nom d'utilisateur pour le partage": "Benutzername für den Austausch",
-        "Mot de passe du partage": "Passwort für den Austausch",
-        "Chemin sur le nas": "Pfad auf der NAS",
-        "Nom ou IP du partage": "Name oder IP für den Austausch",
-        "Attention votre version de PHP (5.6.14-0+deb8u1) est trop veille il faut au minimum PHP 5.6": "Achtung: Ihre PHP-Version (5.6.14-0 + deb8u1) ist zu Vorabend benötigt mindestens PHP 5.6",
-        "Dépendance Sonos": "Sonos Abhängigkeit",
-        "Installer/Mettre à jour": "Installieren/Aktualisieren",
-        "Etes-vous sûr de vouloir installer/mettre à jour Sonos ? ": "Sind Sie sicher, dass Sie Sonos installieren/aktualisieren möchten?",
-        "Installation / Mise à jour": "Install/Update",
-        "Partage": "Teilen",
-        "Le plugin sonos doit réagir aux interactions :": "Das Sonos-Plugin muss auf Interaktionen reagieren :"
-    },
-    "plugins/sonos3/desktop/modal/queue.sonos.php": {
-        "Artiste": "Interpret",
-        "Album": "Album",
-        "Piste": "Spur",
-        "Vider": "Leeren",
         "Action": "Aktion"
     },
-    "plugins/sonos3/desktop/modal/playlist.sonos.php": {
-        "Artiste": "Interpret",
-        "Album": "Album",
-        "Piste": "Spur",
-        "Playlist": "Playlist",
-        "Action": "Aktion"
+    "desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Kein Stammobjekt gefunden. Um eine zu erstellen, gehen Sie zu Allgemein -&gt; Objekt. <br\/> Wenn Sie nicht wissen, was Sie tun sollen, oder wenn Sie Jeedom zum ersten Mal verwenden, zögern Sie nicht, diese <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">Seite<\/a> zu konsultieren",
+        "Rechercher": "Suchen nach"
     },
-    "plugins/sonos3/desktop/modal/radio.sonos.php": {
-        "Vider": "Leeren",
-        "Action": "Aktion",
-        "Radio": "Radio"
-    },
-    "plugins/sonos3/desktop/modal/speaker.sonos.php": {
-        "Action": "Aktion",
-        "Radio": "Radio"
-    },
-    "plugins/sonos3/core/ajax/sonos3.ajax.php": {
+    "core\/ajax\/sonos3.ajax.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Aucune méthode correspondante à : ": "Keine passenden Methode, um:"
     },
-    "plugins/sonos3/desktop/php/panel.php": {
-        "Liste objets": "Objekt Liste",
-        "Rechercher": "Suchen nach"
-    },
-    "plugins/sonos3/desktop/modal/update.sonos.php": {
-        "Pause": "Pause",
-        "Rechercher": "Suchen nach"
-    },
-    "plugins/sonos3/plugin_info/info.json": {
+    "core\/class\/sonos3.class.php": {
         "Plugin de controle de sonos": "Plugin zum steuern von SONOS Sound-Systeme"
     }
 }
