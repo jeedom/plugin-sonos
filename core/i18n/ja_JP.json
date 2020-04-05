@@ -1,52 +1,95 @@
 {
-    "plugin_info\/configuration.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0",
-        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :",
-        "Partage": "シェアリング",
-        "Nom d'utilisateur pour le partage": "共有のためのユーザー名",
-        "Mot de passe du partage": "パスワード共有",
-        "Découverte": "発見",
-        "Rechercher les équipements Sonos": "Sonosの機器を検索します",
-        "Synchronisation réussie": "正常な同期"
+    "plugins\/sonos3\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "",
+        "Le plugin sonos doit réagir aux interactions :": "",
+        "Partage": "",
+        "Nom d'utilisateur pour le partage": "",
+        "Mot de passe du partage": "",
+        "Découverte": "",
+        "Rechercher les équipements Sonos": "",
+        "Synchronisation réussie": ""
     },
-    "desktop\/js\/sonos3.js": {
-        "Nom": "表題",
-        "Tester": "テスト"
+    "plugins\/sonos3\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "",
+        "Rechercher": "検索"
     },
-    "desktop\/php\/sonos3.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/sonos3\/desktop\/php\/sonos3.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
         "Gestion": "管理",
-        "Ajouter": "Ajouter",
+        "Ajouter": "加えます",
         "Configuration": "コンフィギュレーション",
-        "Mes Sonos": "私のSonosの",
-        "Rechercher": "検索する",
-        "Configuration avancée": "高度な設定",
+        "Mes Sonos": "",
+        "Rechercher": "検索",
+        "Configuration avancée": "高度な構成",
         "Sauvegarder": "セーブ",
         "Supprimer": "取り除きます",
         "Equipement": "設備",
         "Commandes": "コマンド",
-        "Nom du sonos": "名前SONOS",
-        "Nom de l'équipement template": "テンプレート機器の名称",
+        "Nom du sonos": "",
+        "Nom de l'équipement template": "",
         "Objet parent": "親オブジェクト",
         "Aucun": "何でもありません",
-        "Activer": "アクティブにし",
+        "Activer": "アクティブ",
         "Visible": "目に見えます",
-        "Model": "モデル",
-        "IP": "IP",
+        "Model": "",
+        "IP": "",
         "Nom": "表題",
         "Action": "アクション"
     },
-    "desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>",
-        "Rechercher": "検索する"
+    "plugins\/sonos3\/desktop\/js\/sonos3.js": {
+        "Nom": "表題",
+        "Tester": "テスト"
     },
-    "core\/ajax\/sonos3.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucune méthode correspondante à : ": "一致する方法でありません："
+    "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Aucune méthode correspondante à : ": "以下に対応するメソッドはありません："
     },
-    "core\/class\/sonos3.class.php": {
-        "Plugin de controle de sonos": "コントロールプラグインSONOS"
+    "plugins\/sonos3\/core\/class\/sonos3.class.php": {
+        "Veuillez vérifier la configuration": "",
+        "Tache cron introuvable": "",
+        "Ok j\\'ai lancé : ": "",
+        "Transition": "",
+        "Entrée de ligne": "",
+        "Aucun": "何でもありません",
+        "Lecture": "",
+        "Pause": "休止",
+        "Arrêté": "逮捕",
+        "Status": "ステータス",
+        "Play": "",
+        "Stop": "ストップ",
+        "Suivant": "",
+        "Précédent": "前",
+        "Muet": "",
+        "Non muet": "",
+        "Muet status": "",
+        "Répéter": "繰り返します",
+        "Répéter status": "",
+        "Aléatoire": "",
+        "Aléatoire status": "",
+        "Volume status": "",
+        "Volume": "ボリューム",
+        "Piste": "",
+        "Artiste": "",
+        "Album": "",
+        "Image": "画像",
+        "Jouer playlist": "",
+        "Options": "オプション",
+        "Titre de la playlist": "",
+        "Jouer favoris": "",
+        "Titre du favoris": "",
+        "Jouer une radio": "",
+        "Titre de la radio": "",
+        "Ajout un haut parleur": "",
+        "Nom de la piece": "",
+        "Supprimer un haut parleur": "",
+        "Dire": "",
+        "Message": "メッセージ",
+        "Couleur dominante": "",
+        "Couleur dominante 2": "",
+        "Impossible de récuperer le sonos : ": "",
+        "Playlist non trouvé : ": "",
+        "Favoris non trouvé : ": ""
     }
 }

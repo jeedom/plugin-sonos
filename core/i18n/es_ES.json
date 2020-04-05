@@ -1,52 +1,95 @@
 {
-    "plugin_info\/configuration.php": {
+    "plugins\/sonos3\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "Tenga en cuenta que su versión de PHP (&#39;. PHP_VERSION.&#39;) Es demasiado antigua, necesita al menos PHP 7.0",
-        "Le plugin sonos doit réagir aux interactions :": "El plugin de sonos debe reaccionar a las interacciones :",
-        "Partage": "Reparto",
-        "Nom d'utilisateur pour le partage": "Nombre de usuario para el reparto",
-        "Mot de passe du partage": "Contraseña del reparto",
+        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "",
+        "Le plugin sonos doit réagir aux interactions :": "",
+        "Partage": "",
+        "Nom d'utilisateur pour le partage": "",
+        "Mot de passe du partage": "",
         "Découverte": "Descubrimiento",
-        "Rechercher les équipements Sonos": "Buscar los dispositivos Sonos",
-        "Synchronisation réussie": "Sincronización exitosa"
+        "Rechercher les équipements Sonos": "",
+        "Synchronisation réussie": ""
     },
-    "desktop\/js\/sonos3.js": {
-        "Nom": "Nombre",
-        "Tester": "Probar"
+    "plugins\/sonos3\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "",
+        "Rechercher": "Buscar"
     },
-    "desktop\/php\/sonos3.php": {
+    "plugins\/sonos3\/desktop\/php\/sonos3.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Gestion": "Gestión",
-        "Ajouter": "añadir",
+        "Ajouter": "Añadir",
         "Configuration": "Configuración",
-        "Mes Sonos": "Mis Sonos",
+        "Mes Sonos": "",
         "Rechercher": "Buscar",
         "Configuration avancée": "Configuración avanzada",
         "Sauvegarder": "Guardar",
         "Supprimer": "Borrar",
         "Equipement": "Dispositivos",
         "Commandes": "Comandos",
-        "Nom du sonos": "Nombre del sonos",
-        "Nom de l'équipement template": "Nombre del dispositivo plantilla",
+        "Nom du sonos": "",
+        "Nom de l'équipement template": "Plantilla de nombre de equipo",
         "Objet parent": "Objeto padre",
-        "Aucun": "Ningún",
+        "Aucun": "Ninguna",
         "Activer": "Activar",
-        "Visible": "visible",
+        "Visible": "Visible",
         "Model": "Modelo",
         "IP": "IP",
         "Nom": "Nombre",
         "Action": "Acción"
     },
-    "desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "No se ha encontrado ningún objeto raíz. Para crear uno, vaya a General -&gt; Objeto. <br\/> Si no sabe qué hacer o es la primera vez que usa Jeedom, no dude en consultar esta <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">página<\/a>",
-        "Rechercher": "Buscar"
+    "plugins\/sonos3\/desktop\/js\/sonos3.js": {
+        "Nom": "Nombre",
+        "Tester": "Probar"
     },
-    "core\/ajax\/sonos3.ajax.php": {
+    "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Aucune méthode correspondante à : ": "Ningún método corresponde con:"
+        "Aucune méthode correspondante à : ": "Ningún método correspondiente a:"
     },
-    "core\/class\/sonos3.class.php": {
-        "Plugin de controle de sonos": "Plugin de control de sonos"
+    "plugins\/sonos3\/core\/class\/sonos3.class.php": {
+        "Veuillez vérifier la configuration": "Por favor verifique la configuración",
+        "Tache cron introuvable": "Tarea Cron no encontrada",
+        "Ok j\\'ai lancé : ": "",
+        "Transition": "",
+        "Entrée de ligne": "",
+        "Aucun": "Ninguna",
+        "Lecture": "",
+        "Pause": "Pausa",
+        "Arrêté": "Detenido",
+        "Status": "Estado",
+        "Play": "",
+        "Stop": "Detener",
+        "Suivant": "Próximo",
+        "Précédent": "Anterior",
+        "Muet": "",
+        "Non muet": "",
+        "Muet status": "",
+        "Répéter": "Repetición",
+        "Répéter status": "",
+        "Aléatoire": "",
+        "Aléatoire status": "",
+        "Volume status": "",
+        "Volume": "Volumen",
+        "Piste": "",
+        "Artiste": "",
+        "Album": "",
+        "Image": "Imagen",
+        "Jouer playlist": "",
+        "Options": "Opciones",
+        "Titre de la playlist": "",
+        "Jouer favoris": "",
+        "Titre du favoris": "",
+        "Jouer une radio": "",
+        "Titre de la radio": "",
+        "Ajout un haut parleur": "",
+        "Nom de la piece": "",
+        "Supprimer un haut parleur": "",
+        "Dire": "",
+        "Message": "Mensaje",
+        "Couleur dominante": "",
+        "Couleur dominante 2": "",
+        "Impossible de récuperer le sonos : ": "",
+        "Playlist non trouvé : ": "",
+        "Favoris non trouvé : ": ""
     }
 }

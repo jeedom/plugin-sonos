@@ -1,52 +1,95 @@
 {
-    "plugin_info\/configuration.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0",
-        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :",
-        "Partage": "разделение",
-        "Nom d'utilisateur pour le partage": "Имя для совместного использования",
-        "Mot de passe du partage": "совместное использование пароля",
-        "Découverte": "Открытие",
-        "Rechercher les équipements Sonos": "Поиск оборудование Sonos ",
-        "Synchronisation réussie": "Успешная синхронизация"
+    "plugins\/sonos3\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
+        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "",
+        "Le plugin sonos doit réagir aux interactions :": "",
+        "Partage": "",
+        "Nom d'utilisateur pour le partage": "",
+        "Mot de passe du partage": "",
+        "Découverte": "",
+        "Rechercher les équipements Sonos": "",
+        "Synchronisation réussie": ""
     },
-    "desktop\/js\/sonos3.js": {
-        "Nom": "Имя",
-        "Tester": "Тест"
+    "plugins\/sonos3\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "",
+        "Rechercher": "поиск"
     },
-    "desktop\/php\/sonos3.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/sonos3\/desktop\/php\/sonos3.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
         "Gestion": "Управление",
-        "Ajouter": "Ajouter",
+        "Ajouter": "Добавить",
         "Configuration": "Конфигурация",
-        "Mes Sonos": "Мои Sonos",
-        "Rechercher": "Искать",
+        "Mes Sonos": "",
+        "Rechercher": "поиск",
         "Configuration avancée": "Расширенные настройки",
         "Sauvegarder": "Сохранить",
-        "Supprimer": "Удалить",
+        "Supprimer": "удаление",
         "Equipement": "Оборудование",
         "Commandes": "Команды",
-        "Nom du sonos": "Название звуковой системы",
-        "Nom de l'équipement template": "Название шаблона оборудования",
+        "Nom du sonos": "",
+        "Nom de l'équipement template": "",
         "Objet parent": "Родительский объект",
         "Aucun": "Нет",
-        "Activer": "Активировать",
+        "Activer": "активировать",
         "Visible": "Видимый",
-        "Model": "Модель",
-        "IP": "IP",
+        "Model": "",
+        "IP": "",
         "Nom": "Имя",
         "Action": "Действие"
     },
-    "desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>",
-        "Rechercher": "Искать"
+    "plugins\/sonos3\/desktop\/js\/sonos3.js": {
+        "Nom": "Имя",
+        "Tester": "Тест"
     },
-    "core\/ajax\/sonos3.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucune méthode correspondante à : ": "Нет соответствующего метода:"
+    "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
+        "Aucune méthode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "core\/class\/sonos3.class.php": {
-        "Plugin de controle de sonos": "Плагин управления Sonos "
+    "plugins\/sonos3\/core\/class\/sonos3.class.php": {
+        "Veuillez vérifier la configuration": "",
+        "Tache cron introuvable": "",
+        "Ok j\\'ai lancé : ": "",
+        "Transition": "",
+        "Entrée de ligne": "",
+        "Aucun": "Нет",
+        "Lecture": "",
+        "Pause": "Пауза",
+        "Arrêté": "арестованный",
+        "Status": "Статус",
+        "Play": "",
+        "Stop": "Стоп",
+        "Suivant": "",
+        "Précédent": "предыдущий",
+        "Muet": "",
+        "Non muet": "",
+        "Muet status": "",
+        "Répéter": "повторение",
+        "Répéter status": "",
+        "Aléatoire": "",
+        "Aléatoire status": "",
+        "Volume status": "",
+        "Volume": "Громкость",
+        "Piste": "",
+        "Artiste": "",
+        "Album": "",
+        "Image": "Изображение",
+        "Jouer playlist": "",
+        "Options": "Опции",
+        "Titre de la playlist": "",
+        "Jouer favoris": "",
+        "Titre du favoris": "",
+        "Jouer une radio": "",
+        "Titre de la radio": "",
+        "Ajout un haut parleur": "",
+        "Nom de la piece": "",
+        "Supprimer un haut parleur": "",
+        "Dire": "",
+        "Message": "Сообщение",
+        "Couleur dominante": "",
+        "Couleur dominante 2": "",
+        "Impossible de récuperer le sonos : ": "",
+        "Playlist non trouvé : ": "",
+        "Favoris non trouvé : ": ""
     }
 }

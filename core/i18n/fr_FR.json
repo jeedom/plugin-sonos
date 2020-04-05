@@ -1,5 +1,5 @@
 {
-    "plugin_info\/configuration.php": {
+    "plugins\/sonos3\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0",
         "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :",
@@ -10,11 +10,12 @@
         "Rechercher les équipements Sonos": "Rechercher les équipements Sonos",
         "Synchronisation réussie": "Synchronisation réussie"
     },
-    "desktop\/js\/sonos3.js": {
-        "Nom": "Nom",
-        "Tester": "Tester"
+    "plugins\/sonos3\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>",
+        "Rechercher": "Rechercher"
     },
-    "desktop\/php\/sonos3.php": {
+    "plugins\/sonos3\/desktop\/php\/sonos3.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
@@ -37,16 +38,15 @@
         "Nom": "Nom",
         "Action": "Action"
     },
-    "desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>",
-        "Rechercher": "Rechercher"
+    "plugins\/sonos3\/desktop\/js\/sonos3.js": {
+        "Nom": "Nom",
+        "Tester": "Tester"
     },
-    "core\/ajax\/sonos3.ajax.php": {
+    "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Aucune méthode correspondante à : ": "Aucune méthode correspondante à : "
     },
-    "core\/class\/sonos3.class.php": {
+    "plugins\/sonos3\/core\/class\/sonos3.class.php": {
         "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
         "Tache cron introuvable": "Tache cron introuvable",
         "Ok j\\'ai lancé : ": "Ok j\\'ai lancé : ",

@@ -1,52 +1,95 @@
 {
-    "plugin_info\/configuration.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0",
-        "Le plugin sonos doit réagir aux interactions :": "Le plugin sonos doit réagir aux interactions :",
-        "Partage": "compartilhando",
-        "Nom d'utilisateur pour le partage": "Nome de usuário para compartilhamento",
-        "Mot de passe du partage": "compartilhamento de senha",
-        "Découverte": "descoberta",
-        "Rechercher les équipements Sonos": "Busca de equipamento Sonos",
-        "Synchronisation réussie": "sincronização bem-sucedida"
+    "plugins\/sonos3\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "",
+        "Le plugin sonos doit réagir aux interactions :": "",
+        "Partage": "",
+        "Nom d'utilisateur pour le partage": "",
+        "Mot de passe du partage": "",
+        "Découverte": "",
+        "Rechercher les équipements Sonos": "",
+        "Synchronisation réussie": ""
     },
-    "desktop\/js\/sonos3.js": {
-        "Nom": "Nome",
-        "Tester": "teste"
+    "plugins\/sonos3\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "",
+        "Rechercher": "Pesquisa"
     },
-    "desktop\/php\/sonos3.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Gestion": "gestão",
-        "Ajouter": "Ajouter",
+    "plugins\/sonos3\/desktop\/php\/sonos3.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Gestion": "Gestão",
+        "Ajouter": "Adicionar",
         "Configuration": "Configuração",
-        "Mes Sonos": "meus Sonos",
-        "Rechercher": "Pesquisar",
-        "Configuration avancée": "configuração avançada",
+        "Mes Sonos": "",
+        "Rechercher": "Pesquisa",
+        "Configuration avancée": "Configuração avançada",
         "Sauvegarder": "Salvar",
-        "Supprimer": "remover",
+        "Supprimer": "Remover",
         "Equipement": "Equipamento",
-        "Commandes": "comandos",
-        "Nom du sonos": "Nome Sonos",
-        "Nom de l'équipement template": "Nome do equipamento modelo",
-        "Objet parent": "objeto pai",
+        "Commandes": "Comandos",
+        "Nom du sonos": "",
+        "Nom de l'équipement template": "",
+        "Objet parent": "Objeto pai",
         "Aucun": "Nemhum",
         "Activer": "Ativar",
         "Visible": "Visivél",
-        "Model": "modelo",
-        "IP": "IP",
+        "Model": "",
+        "IP": "",
         "Nom": "Nome",
-        "Action": "ação"
+        "Action": "Ação"
     },
-    "desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>",
-        "Rechercher": "Pesquisar"
+    "plugins\/sonos3\/desktop\/js\/sonos3.js": {
+        "Nom": "Nome",
+        "Tester": "Teste"
     },
-    "core\/ajax\/sonos3.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucune méthode correspondante à : ": "No método de correspondência:"
+    "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Aucune méthode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "core\/class\/sonos3.class.php": {
-        "Plugin de controle de sonos": "Controle Plug-in Sonos"
+    "plugins\/sonos3\/core\/class\/sonos3.class.php": {
+        "Veuillez vérifier la configuration": "",
+        "Tache cron introuvable": "",
+        "Ok j\\'ai lancé : ": "",
+        "Transition": "",
+        "Entrée de ligne": "",
+        "Aucun": "Nemhum",
+        "Lecture": "",
+        "Pause": "Pausa",
+        "Arrêté": "Preso",
+        "Status": "Estado",
+        "Play": "",
+        "Stop": "Pare",
+        "Suivant": "",
+        "Précédent": "Anterior",
+        "Muet": "",
+        "Non muet": "",
+        "Muet status": "",
+        "Répéter": "",
+        "Répéter status": "",
+        "Aléatoire": "",
+        "Aléatoire status": "",
+        "Volume status": "",
+        "Volume": "Volume",
+        "Piste": "",
+        "Artiste": "",
+        "Album": "",
+        "Image": "Imagem",
+        "Jouer playlist": "",
+        "Options": "Opções",
+        "Titre de la playlist": "",
+        "Jouer favoris": "",
+        "Titre du favoris": "",
+        "Jouer une radio": "",
+        "Titre de la radio": "",
+        "Ajout un haut parleur": "",
+        "Nom de la piece": "",
+        "Supprimer un haut parleur": "",
+        "Dire": "",
+        "Message": "Mensagem",
+        "Couleur dominante": "",
+        "Couleur dominante 2": "",
+        "Impossible de récuperer le sonos : ": "",
+        "Playlist non trouvé : ": "",
+        "Favoris non trouvé : ": ""
     }
 }
