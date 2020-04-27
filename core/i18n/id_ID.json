@@ -8,7 +8,7 @@
         "Mot de passe du partage": "",
         "Découverte": "",
         "Rechercher les équipements Sonos": "",
-        "Synchronisation réussie": ""
+        "Synchronisation réussie": "Sinkronisasi berhasil"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
         "401 - Accès non autorisé": "401 - Akses tidak sah",
@@ -28,7 +28,7 @@
         "Equipement": "Peralatan",
         "Commandes": "Perintah",
         "Nom du sonos": "",
-        "Nom de l'équipement template": "",
+        "Nom de l'équipement template": "Nama peralatan contoh",
         "Objet parent": "Objek induk",
         "Aucun": "Tak ada",
         "Activer": "Mengaktifkan",

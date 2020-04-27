@@ -8,7 +8,7 @@
         "Mot de passe du partage": "",
         "Découverte": "",
         "Rechercher les équipements Sonos": "",
-        "Synchronisation réussie": ""
+        "Synchronisation réussie": "Успешная синхронизация"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
         "401 - Accès non autorisé": "401 - Несанкционированный доступ",
@@ -28,7 +28,7 @@
         "Equipement": "Оборудование",
         "Commandes": "Команды",
         "Nom du sonos": "",
-        "Nom de l'équipement template": "",
+        "Nom de l'équipement template": "Название шаблона оборудования",
         "Objet parent": "Родительский объект",
         "Aucun": "Нет",
         "Activer": "активировать",

@@ -91,10 +91,10 @@ Below you find the list of orders :
 -   **** : 
 -   **Previous** : 
 -   **Next** : 
--   **** : 
+-   **Play** : 
 -   **Pause** : 
 -   **STOP** : 
--   **** : 
+-   **Volume** : 
 -   **** : 
 -   **Status** : 
 -   **** : .

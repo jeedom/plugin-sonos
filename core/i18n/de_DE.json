@@ -8,7 +8,7 @@
         "Mot de passe du partage": "",
         "Découverte": "Entdeckung",
         "Rechercher les équipements Sonos": "",
-        "Synchronisation réussie": ""
+        "Synchronisation réussie": "Erfolgreiche Synchronisation"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",

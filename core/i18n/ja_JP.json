@@ -8,7 +8,7 @@
         "Mot de passe du partage": "",
         "Découverte": "",
         "Rechercher les équipements Sonos": "",
-        "Synchronisation réussie": ""
+        "Synchronisation réussie": "正常な同期"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
         "401 - Accès non autorisé": "401-不正アクセス",
@@ -28,7 +28,7 @@
         "Equipement": "設備",
         "Commandes": "コマンド",
         "Nom du sonos": "",
-        "Nom de l'équipement template": "",
+        "Nom de l'équipement template": "テンプレート機器の名称",
         "Objet parent": "親オブジェクト",
         "Aucun": "何でもありません",
         "Activer": "アクティブ",
