@@ -55,7 +55,7 @@ Aqui você encontra toda a configuração do seu equipamento :
 Abaixo você encontra a lista de pedidos :
 
 -   **Nom** : nome do comando
--   **Configuração avançada (pequenas rodas dentadas)** : permite
+-   **Configuração avançada (pequenas rodas dentadas)** : permet
     exibir a configuração avançada do comando (método
     história, widget ...)
 -   **Tester** : permite testar o comando
@@ -141,7 +141,7 @@ Lado do Sonos Plugin, aqui está minha configuração :
 -   Partilha :
     -   Campo 1 : 192.168.xxx.aaa
     -   Campo 2 : Jeedom / TTS
--   Nomee de Usuário : Sonos e sua senha…
+-   Nome de Usuário : Sonos e sua senha…
 
 Lado da Biblioteca Sonos (aplicativo para PC)
 -   o caminho é : //192.168.xxx.aaa/Jeedom / TTS
@@ -164,7 +164,7 @@ Sonos. Disponível no menu Início → Sonos Controller :
 >
 > Para ter o painel, você precisa ativá-lo na configuração do plugin
 
-# Faq
+# FAQ
 
 ** Erro "Nenhum dispositivo nesta coleção" ao procurar equipamento **
 >

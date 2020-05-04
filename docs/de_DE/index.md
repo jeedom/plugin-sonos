@@ -1,96 +1,96 @@
-,
-. 
-,
-
+Mit dem Sonos-Plugin können Sie Sonos Play 1, 3, 5 und Sonos Connect steuern,
+Sonos Connect AMP und Sonos Playbar. Hier können Sie den Status anzeigen
+Sonos und führen Sie Aktionen auf ihnen aus (spielen, pausieren, weiter,
+Zurück, Lautstärke, Auswahl einer Wiedergabeliste…)
 
 # Plugin Konfiguration
 
 Die Konfiguration ist sehr einfach, nach dem Herunterladen des Plugins ist es
-Sie aktivieren es einfach und das wars. 
-
-
-
-.
+Sie aktivieren es einfach und das wars. Das Plugin sucht nach
+Sonos in Ihrem Netzwerk und erstellen Sie die Geräte automatisch. Von
+Plus, wenn es eine Übereinstimmung zwischen Jeedom-Objekten und Teilen gibt
+Sonos, Jeedom weist Sonos automatisch rechts zu
+Stücke.
 
 > **Tip**
 >
-> 
+> Während der ersten Entdeckung wird dringend empfohlen, Soundsysteme nicht zu gruppieren, wenn Fehler auftreten
 
+Wenn Sie später einen Sonos hinzufügen, können Sie entweder ein Gerät erstellen
+Sonos, indem Sie Jeedom die IP geben oder auf "Suchen nach" klicken
+Sonos-Ausrüstung"
 
-
-"
-
--   **Voix** : 
--   **Partage** : 
--   **Benutzername für die Freigabe** : 
-    
+-   **Voix** : Wahl der Stimme während der TTS
+-   **Partage** : Freigabename und Ordnerpfad
+-   **Benutzername für die Freigabe** : Benutzername für
+    Zugriffsfreigabe
 -   **Passwort teilen** : Passwort teilen
--   **Entdeckung** : 
-    
-    
--   **** : 
+-   **Entdeckung** : erkennt automatisch die Soundsysteme (funktioniert nicht
+    bei einer Docker-Installation, bei der Sie von Hand erstellen müssen
+    jeder sonos)
+-   **Sonos Nebengebäude** : Installieren Sie Sonos-Abhängigkeiten für TTS
 
 > **Important**
 >
-> 
-> 
+> Zu lange Nachrichten können nicht in TTS (dem Limit) übertragen werden
+> hängt vom TTS-Anbieter ab, normalerweise ca. 100 Zeichen)
 
 # Gerätekonfiguration
 
-
-
+Die Konfiguration der Sonos-Geräte ist über das Menü zugänglich
+Plugins dann Multimedia
 
 Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
--   **** : 
+-   **Name der Sonos-Ausrüstung** : Name Ihres Sonos-Geräts
 -   **Übergeordnetes Objekt** : gibt das übergeordnete Objekt an, zu dem es gehört
     Ausrüstung
 -   **Activer** : macht Ihre Ausrüstung aktiv
 -   **Visible** : macht es auf dem Dashboard sichtbar
--   **Modell** : 
-    
--   **IP** : 
-    
+-   **Modell** : Ihr Sonos-Modell (ändern Sie es nur, wenn
+    nicht der richtige)
+-   **IP** : Die IP Ihres Sonos kann nützlich sein, wenn sich Ihr Sonos ändert
+    von IP oder wenn Sie es ersetzen
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
 -   **Nom** : Name der Bestellung
--   **Erweiterte Konfiguration (kleine gekerbte Räder)** : erlaubt
-    
+-   **Erweiterte Konfiguration (kleine gekerbte Räder)** : permet
+    Zeigen Sie die erweiterte Konfiguration des Befehls (Methode) an
     Geschichte, Widget…)
 -   **Tester** : Wird zum Testen des Befehls verwendet
 
- :
+Als Bestellung finden Sie :
 
--   **Playlist abspielen** : 
-    
-    . 
-    .
--   **Favoriten spielen** :  
-    
-    .
--   **Spielen Sie ein Radio** : 
-    
-    .
--   **** : 
-    
-    zum Beispiel). 
-    .
--   **** : 
-    
-    zum Beispiel). 
-    .
--   **** : 
--   **Zufällig** : 
--   **** : 
--   **Wiederholung** : "
--   **Image** : 
--   **Album** : 
--   **Artiste** : 
--   **Piste** : 
--   **Muet** : 
--   **Früher** : 
--   **Suivant** : 
+-   **Playlist abspielen** : Nachrichtentyp Befehl zum Starten
+    Eine Wiedergabeliste, geben Sie einfach den Namen in den Titel ein
+    die Wiedergabeliste. Sie können "zufällig" in die Nachricht einfügen, um sie zu mischen
+    die Wiedergabeliste vor dem Lesen.
+-   **Favoriten spielen** :  Nachrichtentyp Befehl zum Starten
+    Als Favorit reicht es aus, im Titel den Namen der Favoriten anzugeben. Sie
+    kann "zufällig" in die Nachricht einfügen, um Favoriten vor dem Lesen zu mischen.
+-   **Spielen Sie ein Radio** : Nachrichtentyp Befehl zum Starten
+    ein Radio, nur im Titel den Namen des Radios setzen
+    (Seien Sie vorsichtig, dies muss in den Lieblingsradiosendern sein).
+-   **Hinzufügen eines Lautsprechers** : ermöglicht das Hinzufügen eines Lautsprechers
+    (ein Sonos) an den aktuellen Sprecher (um 2 Sonos zuzuordnen
+    zum Beispiel). Sie müssen den Namen des Sonos-Raums eingeben, um ihn hinzuzufügen
+    im Titel (das Nachrichtenfeld wird hier nicht verwendet).
+-   **Lautsprecher entfernen** : Mit dieser Option können Sie einen Lautsprecher löschen
+    (ein Sonos) an den aktuellen Sprecher (um 2 Sonos zu trennen
+    zum Beispiel). Sie müssen den Namen des zu löschenden Sonos-Raums eingeben
+    im Titel (das Nachrichtenfeld wird hier nicht verwendet).
+-   **Zufälliger Status** : zeigt an, ob wir uns im Zufallsmodus befinden oder nicht
+-   **Zufällig** : Kehren Sie den Status des Zufallsmodus um
+-   **Status wiederholen** : zeigt an, ob wir uns im Wiederholungsmodus befinden oder nicht
+-   **Wiederholung** : Kehren Sie den Status des "Wiederholungs" -Modus um"
+-   **Image** : Link zum Albumbild
+-   **Album** : Name des aktuell wiedergegebenen Albums
+-   **Artiste** : Künstlername spielt gerade
+-   **Piste** : Name des aktuell wiedergegebenen Titels
+-   **Muet** : Geh stumm
+-   **Früher** : vorheriger Titel
+-   **Suivant** : nächster Track
 -   **Lecture** : lesen
 -   **Pause** : Pause
 -   **Stop** : Hör auf zu lesen
@@ -164,7 +164,7 @@ Sonos. Verfügbar über das Home-Menü → Sonos Controller :
 >
 > Um das Panel zu haben, müssen Sie es in der Plugin-Konfiguration aktivieren
 
-# Faq
+# FAQ
 
 ** Fehler "Keine Geräte in dieser Sammlung" bei der Suche nach Geräten **
 >

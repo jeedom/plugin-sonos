@@ -55,7 +55,7 @@ Here you find all the configuration of your equipment :
 Below you find the list of orders :
 
 -   **Nom** : Name of the order
--   **Advanced configuration (small notched wheels)** : allows
+-   **Advanced configuration (small notched wheels)** : permet
     display the advanced configuration of the command (method
     history, widget…)
 -   **Tester** : Used to test the command

@@ -26,7 +26,7 @@
 
 # 09/23/2019
 
-- Optimizations
+- Optimisations
 
 # 09/01/2019
 

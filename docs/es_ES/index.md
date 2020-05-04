@@ -54,8 +54,8 @@ Aquí encontrarás toda la configuración de tu equipo :
 
 A continuación encontrará la lista de pedidos. :
 
--   **Nom** : Nombrebre de la orden
--   **Configuración avanzada (ruedas con muescas pequeñas)** : permite
+-   **Nom** : Nombre de la orden
+-   **Configuración avanzada (ruedas con muescas pequeñas)** : permet
     muestra la configuración avanzada del comando (método
     historia, widget ...)
 -   **Tester** : Se usa para probar el comando
@@ -141,7 +141,7 @@ Lado del complemento de Sonos, aquí está mi configuración :
 -   Compartir :
     -   Campo 1 : 192.168.xxx.yyy
     -   Campo 2 : Jeedom / TTS
--   Nombrebre de usuario : Sonos y su contraseña ...
+-   Nombre de usuario : Sonos y su contraseña ...
 
 Sonos Library Side (aplicación para PC)
 -   el camino es : //192.168.xxx.yyy/Jeedom / TTS
@@ -164,7 +164,7 @@ Sonos Disponible desde el menú Inicio → Sonos Controller :
 >
 > Para tener el panel debes activarlo en la configuración del complemento
 
-# Preguntas frecuentes
+# FAQ
 
 ** Error "No hay dispositivos en esta colección" al buscar equipo **
 >
