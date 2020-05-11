@@ -1,4 +1,4 @@
->**IMPORTANT**
+>**Importante**
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto.
 
@@ -30,7 +30,7 @@
 
 # 09/23/2019
 
-- Optimisations
+- Optimizaciones
 
 # 01/09/2019
 
@@ -58,7 +58,7 @@
 - Corrección de número de error
 - Optimización global
 
-**Important**
+**Importante**
 - Solo PHP7 compatible
 - Cierta función debería haberse eliminado
 

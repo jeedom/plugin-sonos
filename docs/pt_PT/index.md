@@ -6,20 +6,20 @@ O plugin Sonos permite controlar o Sonos Play 1, 3, 5, Sonos Connect, Sonos Conn
 
 A configuração é muito simples, depois de baixar o plugin, você só precisa ativá-lo e pronto.. O plugin irá procurar Sonos na sua rede e criar o equipamento automaticamente. Além disso, se houver uma correspondência entre os objetos Jeedom e as salas Sonos, o Jeedom atribuirá automaticamente o Sonos às salas certas.
 
-> **Tip**
+> **Dica**
 >
 > Durante a descoberta inicial, é altamente recomendável não agrupar os sistemas de som sob pena de ter erros
 
 Se você adicionar um Sonos posteriormente, poderá criar um dispositivo Sonos fornecendo o IP a Jeedom ou clique em "Procurar dispositivos Sonos"
 
--   **Voix** : escolha de voz durante TTS
--   **Partage** : compartilhar nome e caminho da pasta
+-   **Voz** : escolha de voz durante TTS
+-   **Partilha** : compartilhar nome e caminho da pasta
 -   **Nome de usuário para compartilhamento** : nome de usuário para acessar o compartilhamento
 -   **Compartilhando senha** : Compartilhando senha
 -   **Descoberta** : descobrir automaticamente os sistemas de som (não funciona em uma instalação do tipo docker em que cada sistema de som deve ser criado manualmente)
 -   **Dependência Sonos** : instalar dependências de sonos para TTS
 
-> **Important**
+> **IMPORTANTE**
 >
 > Mensagens muito longas não podem ser transmitidas no TTS (o limite
 > depende do provedor TTS, geralmente com cerca de 100 caracteres)
@@ -32,16 +32,16 @@ Aqui você encontra toda a configuração do seu equipamento :
 
 -   **Nome do equipamento Sonos** : nome do seu equipamento Sonos
 -   **Objeto pai** : indica o objeto pai ao qual o equipamento pertence
--   **Activer** : torna seu equipamento ativo
--   **Visible** : torna visível no painel
+-   **Ativar** : torna seu equipamento ativo
+-   **Visivél** : torna visível no painel
 -   **Modelo** : o modelo do seu Sonos (só mude se não for o correto)
 -   **IP** : o IP do seu Sonos, pode ser útil se o seu Sonos alterar o IP ou se você o substituir
 
 Abaixo você encontra a lista de pedidos :
 
--   **Nom** : nome do comando
+-   **Nome** : nome do comando
 -   **Configuração avançada (pequenas rodas dentadas)** : exibe a configuração avançada do comando (método de registro, widget etc.)
--   **Tester** : permite testar o comando
+-   **Teste** : permite testar o comando
 
 Como ordem, você encontrará :
 
@@ -54,22 +54,22 @@ Como ordem, você encontrará :
 -   **Aleatório** : reverter o status do modo aleatório
 -   **Repita o status** : indica se estamos no modo de repetição ou não
 -   **Repetir** : reverter o status do modo "repetir""
--   **Image** : link para a imagem do álbum
+-   **Imagem** : link para a imagem do álbum
 -   **Album** : nome do álbum atualmente sendo reproduzido
--   **Artiste** : nome do artista atualmente sendo reproduzido
--   **Piste** : nome da faixa atualmente sendo reproduzida
--   **Muet** : mudo
+-   **Artista** : nome do artista atualmente sendo reproduzido
+-   **Track** : nome da faixa atualmente sendo reproduzida
+-   **Silenciar** : mudo
 -   **Anterior** : faixa anterior
--   **Suivant** : próxima faixa
--   **Lecture** : ler
--   **Pause** : pausar
--   **Stop** : pare de ler
+-   **Seguinte** : próxima faixa
+-   **Leitura** : ler
+-   **Pausa** : pausar
+-   **Pare** : pare de ler
 -   **Volume** : alterar o volume (de 0 a 100)
 -   **Volume de status** : Nível de volume
--   **Statut** : status (pausa, leitura, transição ...)
--   **Dire** : permite ler um texto no Sonos (consulte a parte TTS). No título, você pode definir o volume e, na mensagem, a mensagem a ser lida
+-   **Estado** : status (pausa, leitura, transição ...)
+-   **Para dizer** : permite ler um texto no Sonos (consulte a parte TTS). No título, você pode definir o volume e, na mensagem, a mensagem a ser lida
 
-> **Note**
+> **NOTA**
 >
 > Para reproduzir listas de reprodução, você pode colocar opções (na caixa de opções). Para iniciar a lista de reprodução em leitura aleatória, você deve colocar ""
 
@@ -77,11 +77,11 @@ Como ordem, você encontrará :
 
 O TTS (conversão de texto em fala) para o Sonos requer o compartilhamento do Windows (Samba) na rede (imposto pelo Sonos, não há como fazer o contrário). Então você precisa de um NAS na rede. A configuração é bastante simples: você deve colocar o nome ou o ip do NAS (tenha o cuidado de colocar o mesmo que o declarado no Sonos) e o caminho (relativo), o nome do usuário e a senha ( atenção que o usuário deve ter direitos de gravação)
 
-> **Important**
+> **IMPORTANTE**
 >
 > É absolutamente necessário colocar uma senha para que isso funcione
 
-> **Important**
+> **IMPORTANTE**
 >
 > Um subdiretório também é absolutamente necessário para que o arquivo de voz seja criado corretamente.
 
@@ -103,11 +103,11 @@ Lado do Sonos Plugin, aqui está minha configuração :
 Lado da Biblioteca Sonos (aplicativo para PC)
 -   o caminho é : //192.168.xxx.aaa/Jeedom/TTS
 
-> **Important**
+> **IMPORTANTE**
 >
 > É absolutamente necessário adicionar o compartilhamento de rede à biblioteca de sons, caso contrário, o Jeedom criará o mp3 para o tts, mas ele não poderá ser reproduzido pelo Sonos.
 
-> **Important**
+> **IMPORTANTE**
 >
 > O idioma depende do idioma Jeedom e usa picotts por padrão. A partir do jeedom 3.3.X será possível usar o Google TTS para ter uma voz mais bonita
 
@@ -116,11 +116,11 @@ Lado da Biblioteca Sonos (aplicativo para PC)
 
 O plugin Sonos também fornece um painel que reúne todos os seus Sonos. Disponível no menu Início → Sonos Controller :
 
-> **Important**
+> **IMPORTANTE**
 >
 > Para ter o painel, você precisa ativá-lo na configuração do plugin
 
-# FAQ
+# Faq
 
 **Erro "Nenhum dispositivo nesta coleção" ao procurar equipamento**
 >
