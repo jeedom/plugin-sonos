@@ -59,8 +59,7 @@
     },
     "index.md": {
         "Plugin Sonos": "Sonos plugin",
-        "Le plugin Sonos permet de piloter les Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP et Sonos Playbar": "Sonos plugin allows you to control Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP and Sonos Playbar",
-        "Il va vous permettre de voir l'état du\/des Sonos et d'effectuer des actions dessus (lecture, pause, suivant, précédent, volume, choix d'une playlist…​)": "It will allow you to see the state of the Sonos and to perform actions on it (play, pause, next, previous, volume, choice of a playlist…)",
+        "Le plugin Sonos permet de piloter les Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar, Ikea Symfonisk... Il va vous permettre de voir l'état du\/des Sonos et d'effectuer des actions dessus (lecture, pause, suivant, précédent, volume, choix d'une playlist…​)": "The Sonos plugin allows you to control the Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar, Ikea Symfonisk ... It will allow you to see the state of the Sonos and to perform actions on it (play, pause, next, previous, volume, choice of a playlist…)",
         "Configuration du plugin": "Plugin configuration",
         "La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout": "The configuration is very simple, after downloading the plugin, you just need to activate it and that's it",
         "Le plugin va rechercher les Sonos sur votre réseau et créer les équipements automatiquement": "The plugin will search for Sonos on your network and create the equipment automatically",

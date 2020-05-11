@@ -1,6 +1,6 @@
 # Sonos Plugin
 
-Mit dem Sonos-Plugin können Sie Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP und Sonos Playbar steuern. Hier können Sie den Status des Sonos anzeigen und Aktionen für ihn ausführen (Wiedergabe, Pause, Weiter, Zurück, Lautstärke, Auswahl einer Wiedergabeliste…).
+Mit dem Sonos-Plugin können Sie Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar und Ikea Symfonisk steuern. Sie können den Status des Sonos anzeigen und Aktionen ausführen (Wiedergabe, Pause, Weiter, Zurück, Lautstärke, Auswahl einer Wiedergabeliste…)
 
 # Plugin Konfiguration
 

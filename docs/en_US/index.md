@@ -1,6 +1,6 @@
 # Sonos plugin
 
-Sonos plugin allows you to control Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP and Sonos Playbar. It will allow you to see the state of the Sonos and to perform actions on it (play, pause, next, previous, volume, choice of a playlist…)
+The Sonos plugin allows you to control the Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar, Ikea Symfonisk ... It will allow you to see the state of the Sonos and to perform actions on it (play, pause, next, previous, volume, choice of a playlist…)
 
 # Plugin configuration
 
