@@ -6,20 +6,20 @@ Mit dem Sonos-Plugin können Sie Sonos Play 1, 3, 5, Sonos Connect, Sonos Connec
 
 Die Konfiguration ist sehr einfach. Nach dem Herunterladen des Plugins müssen Sie es nur noch aktivieren und fertig. Das Plugin sucht in Ihrem Netzwerk nach Sonos und erstellt die Geräte automatisch. Wenn zwischen Jeedom-Objekten und Sonos-Räumen eine Übereinstimmung besteht, weist Jeedom Sonos automatisch den richtigen Räumen zu.
 
-> **Tip**
+> **Spitze**
 >
 > Während der ersten Entdeckung wird dringend empfohlen, Soundsysteme nicht zu gruppieren, wenn Fehler auftreten
 
 Wenn Sie später ein Sonos hinzufügen, können Sie entweder ein Sonos-Gerät erstellen, indem Sie Jeedom die IP-Adresse geben, oder auf "Nach Sonos-Geräten suchen" klicken"
 
--   **Voix** : Wahl der Stimme während der TTS
--   **Partage** : Freigabename und Ordnerpfad
--   **Benutzername für die Freigabe** : Benutzername für den Zugriff auf die Freigabe
+-   **Stimme** : Wahl der Stimme während der TTS
+-   **Teilen** : Freigabename und Ordnerpfad
+-   **Name d'utilisateur pour le partage** : Benutzername für den Zugriff auf die Freigabe
 -   **Passwort teilen** : Passwort teilen
 -   **Entdeckung** : Erkennen Sie automatisch die Soundsysteme (funktioniert nicht bei einer Docker-Installation, bei der jedes Soundsystem von Hand erstellt werden muss)
 -   **Sonos Nebengebäude** : Installieren Sie Sonos-Abhängigkeiten für TTS
 
-> **Important**
+> **Wichtig**
 >
 > Zu lange Nachrichten können nicht in TTS (dem Limit) übertragen werden
 > hängt vom TTS-Anbieter ab, normalerweise ca. 100 Zeichen)
@@ -30,18 +30,18 @@ Auf die Konfiguration der Sonos-Geräte kann über das Plugins-Menü und dann ü
 
 Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
--   **Name der Sonos-Ausrüstung** : Name Ihres Sonos-Geräts
+-   **Name de l'équipement Sonos** : Name Ihres Sonos-Geräts
 -   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört
--   **Activer** : macht Ihre Ausrüstung aktiv
--   **Visible** : macht es auf dem Dashboard sichtbar
+-   **Aktivieren** : macht Ihre Ausrüstung aktiv
+-   **Sichtbar** : macht es auf dem Dashboard sichtbar
 -   **Modell** : das Modell Ihres Sonos (nur ändern, wenn es nicht das richtige ist)
 -   **IP** : Die IP Ihres Sonos kann nützlich sein, wenn Ihr Sonos die IP ändert oder wenn Sie sie ersetzen
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
--   **Nom** : Name der Bestellung
+-   **Name** : Name der Bestellung
 -   **Erweiterte Konfiguration (kleine gekerbte Räder)** : Zeigt die erweiterte Konfiguration des Befehls an (Protokollierungsmethode, Widget usw.)
--   **Tester** : Wird zum Testen des Befehls verwendet
+-   **Test** : Wird zum Testen des Befehls verwendet
 
 Als Bestellung finden Sie :
 
@@ -54,22 +54,22 @@ Als Bestellung finden Sie :
 -   **Zufällig** : Kehren Sie den Status des Zufallsmodus um
 -   **Status wiederholen** : zeigt an, ob wir uns im Wiederholungsmodus befinden oder nicht
 -   **Wiederholung** : Kehren Sie den Status des "Wiederholungs" -Modus um"
--   **Image** : Link zum Albumbild
+-   **Bild** : Link zum Albumbild
 -   **Album** : Name des aktuell wiedergegebenen Albums
--   **Artiste** : Künstlername spielt gerade
--   **Piste** : Name des aktuell wiedergegebenen Titels
--   **Muet** : Geh stumm
+-   **Künstler** : Künstlername spielt gerade
+-   **Verfolgen** : Name des aktuell wiedergegebenen Titels
+-   **Stumm** : Geh stumm
 -   **Früher** : vorheriger Titel
--   **Suivant** : nächster Track
--   **Lecture** : lesen
+-   **Folgende** : nächster Track
+-   **Lesen** : lesen
 -   **Pause** : Pause
--   **Stop** : Hör auf zu lesen
--   **Volume** : Lautstärke ändern (von 0 auf 100)
--   **Statusvolumen** : Lautstärke
--   **Statut** : Status (Pause, Lesen, Übergang…)
--   **Dire** : ermöglicht das Lesen eines Textes auf Sonos (siehe TTS-Teil). Im Titel können Sie die Lautstärke und in der Nachricht die zu lesende Nachricht einstellen
+-   **STOP** : Hör auf zu lesen
+-   **Lautstärke** : Lautstärke ändern (von 0 auf 100)
+-   **Lautstärke statut** : Lautstärke
+-   **Status** : Status (Pause, Lesen, Übergang…)
+-   **Zu sagen** : ermöglicht das Lesen eines Textes auf Sonos (siehe TTS-Teil). Im Titel können Sie die Lautstärke und in der Nachricht die zu lesende Nachricht einstellen
 
-> **Note**
+> **Notiz**
 >
 > Zum Abspielen von Wiedergabelisten können Sie Optionen einfügen (im Optionsfeld). Um die Wiedergabeliste zufällig zu lesen, müssen Sie "zufällig" eingeben"
 
@@ -77,11 +77,11 @@ Als Bestellung finden Sie :
 
 Für TTS (Text-to-Speech) für Sonos muss Windows (Samba) im Netzwerk freigegeben sein (von Sonos vorgeschrieben, keine andere Möglichkeit). Sie benötigen also einen NAS im Netzwerk. Die Konfiguration ist recht einfach. Sie müssen den Namen oder die IP-Adresse des NAS (achten Sie darauf, dass Sie die gleichen Angaben wie auf Sonos machen) sowie den Pfad (relativ), den Benutzernamen und das Kennwort ( Aufmerksamkeit der Benutzer muss Schreibrechte haben)
 
-> **Important**
+> **Wichtig**
 >
 > Es ist unbedingt erforderlich, ein Passwort einzugeben, damit dies funktioniert
 
-> **Important**
+> **Wichtig**
 >
 > Ein Unterverzeichnis ist auch unbedingt erforderlich, damit die Sprachdatei korrekt erstellt wird.
 
@@ -95,7 +95,7 @@ NAS-Seite, hier ist meine Konfiguration :
 
 Sonos Plugin Seite, hier ist meine Konfiguration :
 
--   Teilen:
+-   Teilen :
     -   Feld 1 : 192.168.xxx.yyy
     -   Feld 2 : Jeedom / TTS
 -   Benutzername : Sonos und sein Passwort…
@@ -103,11 +103,11 @@ Sonos Plugin Seite, hier ist meine Konfiguration :
 Sonos Library Seite (PC App)
 -   der Weg ist : //192.168.xxx.yyy/Jeedom/TTS
 
-> **Important**
+> **Wichtig**
 >
 > ABSOLUT Netzwerkfreigabe in der Soundbibliothek hinzufügen, andernfalls erstellt Jeedom die MP3-Datei für die tts, kann jedoch nicht vom Sonos abgespielt werden
 
-> **Important**
+> **Wichtig**
 >
 > Die Sprache hängt von der Jeedom-Sprache ab und verwendet standardmäßig Picotts. Ab jeedom 3.3.X Es wird möglich sein, Google TTS zu verwenden, um eine schönere Stimme zu haben
 
@@ -116,7 +116,7 @@ Sonos Library Seite (PC App)
 
 Das Sonos-Plugin bietet auch ein Bedienfeld, in dem alle Ihre Sonos zusammengefasst sind. Verfügbar über das Home-Menü → Sonos Controller :
 
-> **Important**
+> **Wichtig**
 >
 > Um das Panel zu haben, müssen Sie es in der Plugin-Konfiguration aktivieren
 

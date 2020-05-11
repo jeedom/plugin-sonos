@@ -1,4 +1,4 @@
->**IMPORTANT**
+>**IMPORTANTE**
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
@@ -58,7 +58,7 @@
 - Correção do número do bug
 - Otimização global
 
-**Important**
+**IMPORTANTE**
 - Apenas PHP7 compatível
 - Certas funções deveriam ter sido removidas
 

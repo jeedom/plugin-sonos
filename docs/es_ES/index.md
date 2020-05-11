@@ -6,20 +6,20 @@ El complemento de Sonos le permite controlar Sonos Play 1, 3, 5, Sonos Connect, 
 
 La configuración es muy simple, después de descargar el complemento, solo necesita activarlo y listo. El complemento buscará Sonos en su red y creará el equipo automáticamente. Además, si hay una coincidencia entre los objetos Jeedom y las habitaciones de Sonos, Jeedom asignará automáticamente Sonos a las habitaciones correctas.
 
-> **Tip**
+> **Punta**
 >
 > Durante el descubrimiento inicial, se recomienda no agrupar los sistemas de sonido so pena de tener errores
 
 Si luego agrega un Sonos, puede crear un dispositivo Sonos dándole a Jeedom la IP o hacer clic en "Buscar dispositivos Sonos"
 
--   **Voix** : elección de voz durante TTS
--   **Partage** : compartir nombre y ruta de carpeta
--   **Nombre de usuario para compartir** : nombre de usuario para acceder a compartir
+-   **Voz** : elección de voz durante TTS
+-   **Compartir** : compartir nombre y ruta de carpeta
+-   **Nombre d'utilisateur pour le partage** : nombre de usuario para acceder a compartir
 -   **Compartir contraseña** : Compartir contraseña
 -   **Descubrimiento** : descubra automáticamente los sistemas de sonido (no funciona en una instalación de tipo acoplable donde cada sistema de sonido debe crearse a mano)
 -   **Dependencia de Sonos** : instalar dependencias de sonos para TTS
 
-> **Important**
+> **Importante**
 >
 > Los mensajes que son demasiado largos no se pueden transmitir en TTS (el límite
 > depende del proveedor de TTS, generalmente alrededor de 100 caracteres)
@@ -30,18 +30,18 @@ Se puede acceder a la configuración del equipo Sonos desde el menú Complemento
 
 Aquí encontrarás toda la configuración de tu equipo :
 
--   **Nombre del equipo de Sonos** : nombre de su equipo Sonos
+-   **Nombre de l'équipement Sonos** : nombre de su equipo Sonos
 -   **Objeto padre** : indica el objeto padre al que pertenece el equipo
--   **Activer** : activa su equipo
+-   **Activar** : activa su equipo
 -   **Visible** : lo hace visible en el tablero
 -   **Modelo** : El modelo de su Sonos (solo cambie si no es el correcto)
 -   **IP** : la IP de su Sonos, puede ser útil si su Sonos cambia de IP o si la reemplaza
 
 A continuación encontrará la lista de pedidos :
 
--   **Nom** : Nombre de la orden
+-   **Nombre** : Nombre de la orden
 -   **Configuración avanzada (ruedas con muescas pequeñas)** : muestra la configuración avanzada del comando (método de registro, widget, etc.)
--   **Tester** : Se usa para probar el comando
+-   **Probar** : Se usa para probar el comando
 
 Como orden encontrarás :
 
@@ -54,22 +54,22 @@ Como orden encontrarás :
 -   **Al azar** : invertir el estado del modo aleatorio
 -   **Repita el estado** : indica si estamos en modo de repetición o no
 -   **Repetición** : invertir el estado del modo "repetir""
--   **Image** : enlace a la imagen del álbum
--   **Album** : nombre del álbum actualmente en reproducción
--   **Artiste** : nombre del artista actualmente en reproducción
--   **Piste** : nombre de la pista que se está reproduciendo actualmente
--   **Muet** : callarse
+-   **Imagen** : enlace a la imagen del álbum
+-   **Álbum** : nombre del álbum actualmente en reproducción
+-   **Artista** : nombre del artista actualmente en reproducción
+-   **Seguir** : nombre de la pista que se está reproduciendo actualmente
+-   **Mudo** : callarse
 -   **Anterior** : pista anterior
--   **Suivant** : siguiente pista
--   **Lecture** : leer
--   **Pause** : pausa
--   **Stop** : deja de leer
--   **Volume** : cambiar el volumen (de 0 a 100)
--   **Volumen de estado** : Nivel de volumen
--   **Statut** : estado (pausa, lectura, transición ...)
--   **Dire** : permite leer un texto en Sonos (ver parte de TTS). En el título puede configurar el volumen y en el mensaje, el mensaje a leer
+-   **Próximo** : siguiente pista
+-   **Lectura** : leer
+-   **Pausa** : pausa
+-   **Detener** : deja de leer
+-   **Volumen** : cambiar el volumen (de 0 a 100)
+-   **Volumen statut** : Nivel de volumen
+-   **Estado** : estado (pausa, lectura, transición ...)
+-   **Decir** : permite leer un texto en Sonos (ver parte de TTS). En el título puede configurar el volumen y en el mensaje, el mensaje a leer
 
-> **Note**
+> **Nota**
 >
 > Para reproducir listas de reproducción, puede poner opciones (en el cuadro de opciones). Para comenzar la lista de reproducción en una lectura aleatoria, debes poner "aleatorio"
 
@@ -77,11 +77,11 @@ Como orden encontrarás :
 
 TTS (texto a voz) para Sonos requiere que Windows (Samba) se comparta en la red (impuesto por Sonos, no hay forma de hacerlo de otra manera). Entonces necesita un NAS en la red. La configuración es bastante simple, debe poner el nombre o la ip del NAS (tenga cuidado de poner lo mismo que lo que se declara en Sonos) y la ruta (relativa), el nombre de usuario y la contraseña ( atención, el usuario debe tener derechos de escritura)
 
-> **Important**
+> **Importante**
 >
 > Es absolutamente necesario poner una contraseña para que esto funcione
 
-> **Important**
+> **Importante**
 >
 > Un subdirectorio también es absolutamente necesario para que el archivo de voz se cree correctamente.
 
@@ -95,7 +95,7 @@ Lado NAS, aquí está mi configuración :
 
 Lado del complemento de Sonos, aquí está mi configuración :
 
--   Compartir:
+-   Compartir :
     -   Campo 1 : 192.168.xxx.yyy
     -   Campo 2 : Jeedom / TTS
 -   Nombre de usuario : Sonos y su contraseña
@@ -103,11 +103,11 @@ Lado del complemento de Sonos, aquí está mi configuración :
 Sonos Library Side (aplicación para PC)
 -   el camino es : //192.168.xxx.yyy/Jeedom/TTS
 
-> **Important**
+> **Importante**
 >
 > ABSOLUTAMENTE agregue el uso compartido de red en la biblioteca de sonidos, de lo contrario Jeedom creará el mp3 de tts pero Sonos no puede reproducirlo
 
-> **Important**
+> **Importante**
 >
 > El idioma depende del idioma de Jeedom y usa picotts por defecto. A partir de la libertad 3.3.X será posible usar Google TTS para tener una voz más bonita
 
@@ -116,7 +116,7 @@ Sonos Library Side (aplicación para PC)
 
 El complemento de Sonos también proporciona un panel que reúne a todos sus Sonos. Disponible desde el menú Inicio → Sonos Controller :
 
-> **Important**
+> **Importante**
 >
 > Para tener el panel debes activarlo en la configuración del complemento
 
