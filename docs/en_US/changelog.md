@@ -1,6 +1,6 @@
->**Important**
+>**IMPORTANT**
 >
->As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
+>As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
 # 01/24/2020
 
@@ -30,7 +30,7 @@
 
 # 09/23/2019
 
-- Optimizations
+- Optimisations
 
 # 09/01/2019
 

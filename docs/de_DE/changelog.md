@@ -1,6 +1,6 @@
->**Wichtig**
+>**IMPORTANT**
 >
->Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt.
+>Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
 # 24.01.2020
 
@@ -30,7 +30,7 @@
 
 # 2019.09.23
 
-- Optimierungen
+- Optimisations
 
 # 09/01/2019
 
@@ -58,7 +58,7 @@
 - Korrektur der Fehlernummer
 - Globale Optimierung
 
-**Wichtig**
+**Important**
 - Nur kompatibles PHP7
 - Bestimmte Funktionen sollten entfernt worden sein
 

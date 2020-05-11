@@ -1,6 +1,6 @@
->**IMPORTANTE**
+>**IMPORTANT**
 >
->Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto.
+>Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
 # 24/01/2020
 
@@ -30,7 +30,7 @@
 
 # 23/09/2019
 
-- Otimizações
+- Optimisations
 
 # 01/09/2019
 
@@ -58,7 +58,7 @@
 - Correção do número do bug
 - Otimização global
 
-**IMPORTANTE**
+**Important**
 - Apenas PHP7 compatível
 - Certas funções deveriam ter sido removidas
 

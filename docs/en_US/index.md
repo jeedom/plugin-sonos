@@ -12,8 +12,8 @@ The configuration is very simple, after downloading the plugin, you just need to
 
 If you later add a Sonos, you can either create a Sonos device by giving Jeedom the IP or click on "Search for Sonos devices"
 
--   **Voice** : choice of voice during TTS
--   **Sharing** : share name and folder path
+-   **Voix** : choice of voice during TTS
+-   **Partage** : share name and folder path
 -   **Username for sharing** : username to access share
 -   **Sharing password** : Sharing password
 -   **Discovery** : automatically discover the sound systems (does not work on a docker type installation where each sound system must be created by hand)
@@ -32,16 +32,16 @@ Here you find all the configuration of your equipment :
 
 -   **Sonos equipment name** : name of your Sonos equipment
 -   **Parent object** : indicates the parent object to which the equipment belongs
--   **Activate** : makes your equipment active
+-   **Activer** : makes your equipment active
 -   **Visible** : makes it visible on the dashboard
 -   **Model** : the model of your Sonos (only change if it is not the right one)
 -   **IP** : the IP of your Sonos, can be useful if your Sonos changes IP or if you replace it
 
 Below you find the list of orders :
 
--   **Name** : Name of the order
+-   **Nom** : Name of the order
 -   **Advanced configuration (small notched wheels)** : displays the advanced configuration of the command (logging method, widget, etc.)
--   **Test** : Used to test the command
+-   **Tester** : Used to test the command
 
 As order you will find :
 
@@ -54,22 +54,22 @@ As order you will find :
 -   **Random** : reverse the status of random mode
 -   **Repeat status** : indicates if we are in repeat mode or not
 -   **Repeat** : reverse the status of the "repeat" mode"
--   **Picture** : link to the album image
+-   **Image** : link to the album image
 -   **Album** : name of album currently playing
--   **Artist** : artist name currently playing
--   **Track** : name of the track currently playing
--   **Mute** : go mute
+-   **Artiste** : artist name currently playing
+-   **Piste** : name of the track currently playing
+-   **Muet** : go mute
 -   **Previous** : previous track
--   **Next** : next track
--   **Play** : read
+-   **Suivant** : next track
+-   **Lecture** : read
 -   **Pause** : Pause
--   **STOP** : stop reading
+-   **Stop** : stop reading
 -   **Volume** : change the volume (from 0 to 100)
 -   **Status volume** : Volume level
--   **Status** : status (pause, reading, transition…)
--   **Say** : allows to read a text on Sonos (see TTS part). In the title you can set the volume and in the message, the message to read
+-   **Statut** : status (pause, reading, transition…)
+-   **Dire** : allows to read a text on Sonos (see TTS part). In the title you can set the volume and in the message, the message to read
 
-> **NOTE**
+> **Note**
 >
 > For playing playlists you can put options (in the option box). To start the playlist in random reading you have to put in "random"
 
@@ -95,7 +95,7 @@ NAS side, here is my config :
 
 Sonos Plugin side, here is my config :
 
--   Sharing :
+-   Sharing:
     -   Field 1 : 192.168.xxx.yyy
     -   Field 2 : Jeedom / TTS
 -   Username : Sonos and its password…

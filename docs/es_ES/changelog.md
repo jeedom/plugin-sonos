@@ -1,6 +1,6 @@
->**Importante**
+>**IMPORTANT**
 >
->Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto.
+>Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
 # 24/01/2020
 
@@ -30,7 +30,7 @@
 
 # 09/23/2019
 
-- Optimizaciones
+- Optimisations
 
 # 01/09/2019
 
@@ -58,7 +58,7 @@
 - Corrección de número de error
 - Optimización global
 
-**Importante**
+**Important**
 - Solo PHP7 compatible
 - Cierta función debería haberse eliminado
 
@@ -69,7 +69,7 @@
 -   Agregue Sonos One y Playbase
 -   Corrección de lengua con picotts
 -   Agregar un comando de "entrada de línea""
--   Actualización de la biblioteca de comunicación de sonido.
+-   Actualización de la biblioteca de comunicación de sonido
 -   Carga optimizada de listas de reproducción
 -   Adición de picotts para la generación local de TTS
 -   Corrección del botón de reproducción / pausa al actualizar el widget
