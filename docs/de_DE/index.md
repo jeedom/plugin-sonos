@@ -1,33 +1,22 @@
-Mit dem Sonos-Plugin können Sie Sonos Play 1, 3, 5 und Sonos Connect steuern,
-Sonos Connect AMP und Sonos Playbar. Hier können Sie den Status anzeigen
-Sonos und führen Sie Aktionen auf ihnen aus (spielen, pausieren, weiter,
-Zurück, Lautstärke, Auswahl einer Wiedergabeliste…)
+# Sonos Plugin
+
+Mit dem Sonos-Plugin können Sie Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP und Sonos Playbar steuern. Hier können Sie den Status des Sonos anzeigen und Aktionen für ihn ausführen (Wiedergabe, Pause, Weiter, Zurück, Lautstärke, Auswahl einer Wiedergabeliste…).
 
 # Plugin Konfiguration
 
-Die Konfiguration ist sehr einfach, nach dem Herunterladen des Plugins ist es
-Sie aktivieren es einfach und das wars. Das Plugin sucht nach
-Sonos in Ihrem Netzwerk und erstellen Sie die Geräte automatisch. Von
-Plus, wenn es eine Übereinstimmung zwischen Jeedom-Objekten und Teilen gibt
-Sonos, Jeedom weist Sonos automatisch rechts zu
-Stücke.
+Die Konfiguration ist sehr einfach. Nach dem Herunterladen des Plugins müssen Sie es nur noch aktivieren und fertig. Das Plugin sucht in Ihrem Netzwerk nach Sonos und erstellt die Geräte automatisch. Wenn zwischen Jeedom-Objekten und Sonos-Räumen eine Übereinstimmung besteht, weist Jeedom Sonos automatisch den richtigen Räumen zu.
 
 > **Tip**
 >
 > Während der ersten Entdeckung wird dringend empfohlen, Soundsysteme nicht zu gruppieren, wenn Fehler auftreten
 
-Wenn Sie später einen Sonos hinzufügen, können Sie entweder ein Gerät erstellen
-Sonos, indem Sie Jeedom die IP geben oder auf "Suchen nach" klicken
-Sonos-Ausrüstung"
+Wenn Sie später ein Sonos hinzufügen, können Sie entweder ein Sonos-Gerät erstellen, indem Sie Jeedom die IP-Adresse geben, oder auf "Nach Sonos-Geräten suchen" klicken"
 
 -   **Voix** : Wahl der Stimme während der TTS
 -   **Partage** : Freigabename und Ordnerpfad
--   **Benutzername für die Freigabe** : Benutzername für
-    Zugriffsfreigabe
+-   **Benutzername für die Freigabe** : Benutzername für den Zugriff auf die Freigabe
 -   **Passwort teilen** : Passwort teilen
--   **Entdeckung** : erkennt automatisch die Soundsysteme (funktioniert nicht
-    bei einer Docker-Installation, bei der Sie von Hand erstellen müssen
-    jeder sonos)
+-   **Entdeckung** : Erkennen Sie automatisch die Soundsysteme (funktioniert nicht bei einer Docker-Installation, bei der jedes Soundsystem von Hand erstellt werden muss).
 -   **Sonos Nebengebäude** : Installieren Sie Sonos-Abhängigkeiten für TTS
 
 > **Important**
@@ -37,49 +26,30 @@ Sonos-Ausrüstung"
 
 # Gerätekonfiguration
 
-Die Konfiguration der Sonos-Geräte ist über das Menü zugänglich
-Plugins dann Multimedia
+Auf die Konfiguration der Sonos-Geräte kann über das Plugins-Menü und dann über Multimedia zugegriffen werden
 
 Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
 -   **Name der Sonos-Ausrüstung** : Name Ihres Sonos-Geräts
--   **Übergeordnetes Objekt** : gibt das übergeordnete Objekt an, zu dem es gehört
-    Ausrüstung
+-   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört
 -   **Activer** : macht Ihre Ausrüstung aktiv
 -   **Visible** : macht es auf dem Dashboard sichtbar
--   **Modell** : Ihr Sonos-Modell (ändern Sie es nur, wenn
-    nicht der richtige)
--   **IP** : Die IP Ihres Sonos kann nützlich sein, wenn sich Ihr Sonos ändert
-    von IP oder wenn Sie es ersetzen
+-   **Modell** : das Modell Ihres Sonos (nur ändern, wenn es nicht das richtige ist)
+-   **IP** : Die IP Ihres Sonos kann nützlich sein, wenn Ihr Sonos die IP ändert oder wenn Sie sie ersetzen
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
 -   **Nom** : Name der Bestellung
--   **Erweiterte Konfiguration (kleine gekerbte Räder)** : permet
-    Zeigen Sie die erweiterte Konfiguration des Befehls (Methode) an
-    Geschichte, Widget…)
+-   **Erweiterte Konfiguration (kleine gekerbte Räder)** : Zeigt die erweiterte Konfiguration des Befehls an (Protokollierungsmethode, Widget usw.)
 -   **Tester** : Wird zum Testen des Befehls verwendet
 
 Als Bestellung finden Sie :
 
--   **Playlist abspielen** : Nachrichtentyp Befehl zum Starten
-    Eine Wiedergabeliste, geben Sie einfach den Namen in den Titel ein
-    die Wiedergabeliste. Sie können "zufällig" in die Nachricht einfügen, um sie zu mischen
-    die Wiedergabeliste vor dem Lesen.
--   **Favoriten spielen** :  Nachrichtentyp Befehl zum Starten
-    Als Favorit reicht es aus, im Titel den Namen der Favoriten anzugeben. Sie
-    kann "zufällig" in die Nachricht einfügen, um Favoriten vor dem Lesen zu mischen.
--   **Spielen Sie ein Radio** : Nachrichtentyp Befehl zum Starten
-    ein Radio, nur im Titel den Namen des Radios setzen
-    (Seien Sie vorsichtig, dies muss in den Lieblingsradiosendern sein).
--   **Hinzufügen eines Lautsprechers** : ermöglicht das Hinzufügen eines Lautsprechers
-    (ein Sonos) an den aktuellen Sprecher (um 2 Sonos zuzuordnen
-    zum Beispiel). Sie müssen den Namen des Sonos-Raums eingeben, um ihn hinzuzufügen
-    im Titel (das Nachrichtenfeld wird hier nicht verwendet).
--   **Lautsprecher entfernen** : Mit dieser Option können Sie einen Lautsprecher löschen
-    (ein Sonos) an den aktuellen Sprecher (um 2 Sonos zu trennen
-    zum Beispiel). Sie müssen den Namen des zu löschenden Sonos-Raums eingeben
-    im Titel (das Nachrichtenfeld wird hier nicht verwendet).
+-   **Playlist abspielen** : Befehl zum Nachrichtentyp, um eine Wiedergabeliste zu starten. Geben Sie einfach den Namen der Wiedergabeliste in den Titel ein. Sie können "zufällig" in die Nachricht einfügen, um die Wiedergabeliste vor dem Spielen zu mischen.
+-   **Favoriten spielen** :  Befehl zum Nachrichtentyp, um ein Lesezeichen zu starten. Fügen Sie einfach den Namen des Lesezeichens in den Titel ein. Sie können "zufällig" in die Nachricht einfügen, um die Favoriten vor dem Lesen zu mischen.
+-   **Spielen Sie ein Radio** : Nachrichtentyp Befehl zum Starten eines Radios, geben Sie im Titel den Namen des Radios ein (VORSICHT, dies muss in den Lieblingsradios sein).
+-   **Hinzufügen eines Lautsprechers** : Ermöglicht das Hinzufügen eines Lautsprechers (eines Sonos) zum aktuellen Lautsprecher (um beispielsweise 2 Sonos zuzuordnen).. Sie müssen den Namen des Sonos-Raums in den Titel einfügen (das Nachrichtenfeld wird hier nicht verwendet)..
+-   **Lautsprecher entfernen** : Mit dieser Option können Sie einen Lautsprecher (einen Sonos) aus dem aktuellen Lautsprecher löschen (um beispielsweise 2 Sonos zu trennen).. Sie müssen den Namen des zu löschenden Sonos-Teils in den Titel einfügen (das Nachrichtenfeld wird hier nicht verwendet)..
 -   **Zufälliger Status** : zeigt an, ob wir uns im Zufallsmodus befinden oder nicht
 -   **Zufällig** : Kehren Sie den Status des Zufallsmodus um
 -   **Status wiederholen** : zeigt an, ob wir uns im Wiederholungsmodus befinden oder nicht
@@ -97,25 +67,15 @@ Als Bestellung finden Sie :
 -   **Volume** : Lautstärke ändern (von 0 auf 100)
 -   **Statusvolumen** : Lautstärke
 -   **Statut** : Status (Pause, Lesen, Übergang…)
--   **Dire** : ermöglicht das Lesen eines Textes auf Sonos (siehe TTS-Teil).
-    Im Titel können Sie die Lautstärke einstellen und in der Nachricht die
-    Nachricht zu lesen
+-   **Dire** : ermöglicht das Lesen eines Textes auf Sonos (siehe TTS-Teil). Im Titel können Sie die Lautstärke und in der Nachricht die zu lesende Nachricht einstellen
 
 > **Note**
 >
-> Um Wiedergabelisten abzuspielen, können Sie Optionen (in die
-> Optionsfeld). Um die Wiedergabeliste in zufälliger Wiedergabe zu starten, müssen Sie
-> in "zufällig setzen"
+> Zum Abspielen von Wiedergabelisten können Sie Optionen einfügen (im Optionsfeld).. Um die Wiedergabeliste zufällig zu lesen, müssen Sie "zufällig" eingeben"
 
 # TTS
 
-TTS (Text-to-Speech) für Sonos erfordert das Teilen
-Windows (Samba) im Netzwerk (von Sonos auferlegt, keine Möglichkeit dazu
-sonst). Sie benötigen also einen NAS im Netzwerk. Die Konfiguration ist
-ziemlich einfach muss man den Namen oder die IP des NAS eingeben (sei vorsichtig
-Setzen Sie das gleiche wie auf Sonos angegeben) und die Chemain
-(relativ), Benutzername und Passwort (Aufmerksamkeit
-der Benutzer muss Schreibrechte haben)
+Für TTS (Text-to-Speech) für Sonos muss Windows (Samba) im Netzwerk freigegeben sein (von Sonos vorgeschrieben, keine andere Möglichkeit).. Sie benötigen also einen NAS im Netzwerk. Die Konfiguration ist recht einfach. Sie müssen den Namen oder die IP-Adresse des NAS (achten Sie darauf, dass Sie die gleichen Angaben wie auf Sonos machen) sowie den Pfad (relativ), den Benutzernamen und das Kennwort ( Aufmerksamkeit der Benutzer muss Schreibrechte haben)
 
 > **Important**
 >
@@ -123,18 +83,15 @@ der Benutzer muss Schreibrechte haben)
 
 > **Important**
 >
-> Es ist auch unbedingt ein Unterverzeichnis erforderlich, damit die Sprachdatei
-> korrekt erstellt werden.
+> Ein Unterverzeichnis ist auch unbedingt erforderlich, damit die Sprachdatei korrekt erstellt wird.
 
 **Hier ist ein Beispiel für die Konfiguration (danke @masterfion) :.**
 
 NAS-Seite, hier ist meine Konfiguration :
 
 -   Jeedom-Ordner wird freigegeben
--   Der Sonos-Benutzer hat Lese- / Schreibzugriff (erforderlich)
-    für Jeedom)
--   Der Gastbenutzer hat nur Lesezugriff (erforderlich für
-    Sonos)
+-   Sonos-Benutzer hat Lese- / Schreibzugriff (erforderlich für Jeedom)
+-   Gastbenutzer haben Lesezugriff (für Sonos erforderlich)
 
 Sonos Plugin Seite, hier ist meine Konfiguration :
 
@@ -144,7 +101,7 @@ Sonos Plugin Seite, hier ist meine Konfiguration :
 -   Benutzername : Sonos und sein Passwort…
 
 Sonos Library Seite (PC App)
--   der Weg ist : //192.168.xxx.yyy/Jeedom / TTS
+-   der Weg ist : //192.168.xxx.yyy/Jeedom/TTS
 
 > **Important**
 >
@@ -157,8 +114,7 @@ Sonos Library Seite (PC App)
 
 # Das Panel
 
-Das Sonos-Plugin bietet auch ein Panel, das alle Ihre Funktionen zusammenführt
-Sonos. Verfügbar über das Home-Menü → Sonos Controller :
+Das Sonos-Plugin bietet auch ein Bedienfeld, in dem alle Ihre Sonos zusammengefasst sind. Verfügbar über das Home-Menü → Sonos Controller :
 
 > **Important**
 >
@@ -166,6 +122,6 @@ Sonos. Verfügbar über das Home-Menü → Sonos Controller :
 
 # FAQ
 
-** Fehler "Keine Geräte in dieser Sammlung" bei der Suche nach Geräten **
+**Fehler "Keine Geräte in dieser Sammlung" bei der Suche nach Geräten**
 >
 > Dieser Fehler tritt auf, wenn die automatische Erkennung blockiert ist (Router, der beispielsweise den Boradcast blockiert).. Es spielt keine Rolle, dass Sie Ihre Sonos nur von Hand hinzufügen müssen, indem Sie das Modell und die IP angeben.
