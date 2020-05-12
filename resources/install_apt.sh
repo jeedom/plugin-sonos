@@ -13,7 +13,7 @@ sudo apt-get install -y smbclient
 echo 60 > ${PROGRESS_FILE}
 sudo apt-get install -y php-mbstring php-soap
 echo 75 > ${PROGRESS_FILE}
-sudo apt-get install libsox-fmt-mp3 sox libttspico-utils
+sudo apt-get install -y libsox-fmt-mp3 sox libttspico-utils
 echo 100 > ${PROGRESS_FILE}
 sudo systemctl reload apache2
 echo "Everything is successfully installed!"
