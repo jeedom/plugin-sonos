@@ -28,7 +28,7 @@
 
 # 07/07/2019
 
-- Melhoria do script de instalação de dependências (pode permitir que as preocupações do TTS sejam corrigidas em certos casos)
+- Melhoria do script de instalação de dependências (pode permitir que as preocupações do TTS sejam corrigidas em certos casos))
 
 # 23/09/2019
 

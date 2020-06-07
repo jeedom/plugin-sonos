@@ -28,7 +28,7 @@
 
 # 10/07/2019
 
-- Improvement of the dependencies installation script (may allow TTS concerns to be corrected in certain cases)
+- Improvement of the dependencies installation script (may allow TTS concerns to be corrected in certain cases))
 
 # 09/23/2019
 

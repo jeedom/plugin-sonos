@@ -14,7 +14,7 @@ If you later add a Sonos, you can either create a Sonos device by giving Jeedom 
 
 -   **Voice** : choice of voice during TTS
 -   **Sharing** : share name and folder path
--   **Name d'utilisateur pour le partage** : username to access share
+-   **Username for sharing** : username to access share
 -   **Sharing password** : Sharing password
 -   **Discovery** : automatically discover the sound systems (does not work on a docker type installation where each sound system must be created by hand)
 -   **Sonos outbuilding** : install sonos dependencies for TTS
@@ -30,7 +30,7 @@ The configuration of Sonos equipment is accessible from the Plugins menu then mu
 
 Here you find all the configuration of your equipment :
 
--   **Name de l'équipement Sonos** : name of your Sonos equipment
+-   **Sonos equipment name** : name of your Sonos equipment
 -   **Parent object** : indicates the parent object to which the equipment belongs
 -   **Activate** : makes your equipment active
 -   **Visible** : makes it visible on the dashboard
@@ -40,16 +40,16 @@ Here you find all the configuration of your equipment :
 Below you find the list of orders :
 
 -   **Name** : Name of the order
--   **Advanced configuration (small notched wheels)** : displays the advanced configuration of the command (logging method, widget, etc.)
+-   **Advanced configuration (small notched wheels)** : displays the advanced configuration of the command (logging method, widget, etc.))
 -   **Test** : Used to test the command
 
 As order you will find :
 
 -   **Play Playlist** : message type command to launch a playlist, just put the name of the playlist in the title. You can put "random" in message to mix the playlist before playing.
 -   **Play Favorites** :  command of the message type allowing to launch a favorites, it suffices in the title to put the name of the favorites. You can put "random" in message to mix favorites before reading.
--   **Play a radio** : command type message to launch a radio, just in the title to put the name of the radio (BE CAREFUL this must be in favorite radios).
+-   **Play a radio** : command type message to launch a radio, just in the title to put the name of the radio (BE CAREFUL this must be in the favorite radios).
 -   **Adding a speaker** : allows to add a speaker (a Sonos) to the current speaker (to associate 2 Sonos for example). You have to put the name of the sonos room to add in the title (the message field is not used here).
--   **Remove speaker** : allows you to delete a speaker (a Sonos) from the current speaker (to dissociate 2 Sonos for example). You must put the name of the Sonos part to delete in the title (the message field is not used here).
+-   **Remove speaker** : allows you to delete a speaker (a Sonos) from the current speaker (to dissociate 2 Sonos for example). You have to put the name of the Sonos part to delete in the title (the message field is not used here).
 -   **Random status** : indicates if we are in random mode or not
 -   **Random** : reverse the status of random mode
 -   **Repeat status** : indicates if we are in repeat mode or not
@@ -65,7 +65,7 @@ As order you will find :
 -   **Pause** : Pause
 -   **STOP** : stop reading
 -   **Volume** : change the volume (from 0 to 100)
--   **Volume statut** : Volume level
+-   **Status volume** : Volume level
 -   **Status** : status (pause, reading, transition…)
 -   **Say** : allows to read a text on Sonos (see TTS part). In the title you can set the volume and in the message, the message to read
 
@@ -85,7 +85,7 @@ TTS (text-to-speech) to Sonos requires having Windows (Samba) sharing on the net
 >
 > A subdirectory is also absolutely necessary for the voice file to be correctly created.
 
-**Here is an example of configuration (thank you @masterfion) :.**
+**Here is an example of configuration (thanks @masterfion) :.**
 
 NAS side, here is my config :
 

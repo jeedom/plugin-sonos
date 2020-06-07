@@ -14,7 +14,7 @@ Wenn Sie später ein Sonos hinzufügen, können Sie entweder ein Sonos-Gerät er
 
 -   **Stimme** : Wahl der Stimme während der TTS
 -   **Teilen** : Freigabename und Ordnerpfad
--   **Name d'utilisateur pour le partage** : Benutzername für den Zugriff auf die Freigabe
+-   **Benutzername für die Freigabe** : Benutzername für den Zugriff auf die Freigabe
 -   **Passwort teilen** : Passwort teilen
 -   **Entdeckung** : Erkennen Sie automatisch die Soundsysteme (funktioniert nicht bei einer Docker-Installation, bei der jedes Soundsystem von Hand erstellt werden muss)
 -   **Sonos Nebengebäude** : Installieren Sie Sonos-Abhängigkeiten für TTS
@@ -30,7 +30,7 @@ Auf die Konfiguration der Sonos-Geräte kann über das Plugins-Menü und dann ü
 
 Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
--   **Name de l'équipement Sonos** : Name Ihres Sonos-Geräts
+-   **Name der Sonos-Ausrüstung** : Name Ihres Sonos-Geräts
 -   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört
 -   **Aktivieren** : macht Ihre Ausrüstung aktiv
 -   **Sichtbar** : macht es auf dem Dashboard sichtbar
@@ -40,14 +40,14 @@ Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 Nachfolgend finden Sie die Liste der Bestellungen :
 
 -   **Name** : Name der Bestellung
--   **Erweiterte Konfiguration (kleine gekerbte Räder)** : Zeigt die erweiterte Konfiguration des Befehls an (Protokollierungsmethode, Widget usw.)
+-   **Erweiterte Konfiguration (kleine gekerbte Räder)** : Zeigt die erweiterte Konfiguration des Befehls an (Protokollierungsmethode, Widget usw.))
 -   **Test** : Wird zum Testen des Befehls verwendet
 
 Als Bestellung finden Sie :
 
 -   **Playlist abspielen** : Befehl zum Nachrichtentyp, um eine Wiedergabeliste zu starten. Geben Sie einfach den Namen der Wiedergabeliste in den Titel ein. Sie können "zufällig" in die Nachricht einfügen, um die Wiedergabeliste vor dem Spielen zu mischen.
 -   **Favoriten spielen** :  Befehl zum Nachrichtentyp, um ein Lesezeichen zu starten. Fügen Sie einfach den Namen des Lesezeichens in den Titel ein. Sie können "zufällig" in die Nachricht einfügen, um die Favoriten vor dem Lesen zu mischen.
--   **Spielen Sie ein Radio** : Nachrichtentyp Befehl zum Starten eines Radios, geben Sie im Titel den Namen des Radios ein (VORSICHT, dies muss in den Lieblingsradios sein).
+-   **Spielen Sie ein Radio** : Befehlstyp Nachricht zum Starten eines Radios, nur im Titel, um den Namen des Radios anzugeben (ACHTUNG, dies muss in den Lieblingsradios sein).
 -   **Hinzufügen eines Lautsprechers** : Ermöglicht das Hinzufügen eines Lautsprechers (eines Sonos) zum aktuellen Lautsprecher (um beispielsweise 2 Sonos zuzuordnen). Sie müssen den Namen des Sonos-Raums in den Titel einfügen (das Nachrichtenfeld wird hier nicht verwendet).
 -   **Lautsprecher entfernen** : Mit dieser Option können Sie einen Lautsprecher (einen Sonos) aus dem aktuellen Lautsprecher löschen (um beispielsweise 2 Sonos zu trennen). Sie müssen den Namen des zu löschenden Sonos-Teils in den Titel einfügen (das Nachrichtenfeld wird hier nicht verwendet).
 -   **Zufälliger Status** : zeigt an, ob wir uns im Zufallsmodus befinden oder nicht
@@ -64,18 +64,18 @@ Als Bestellung finden Sie :
 -   **Lesen** : lesen
 -   **Pause** : Pause
 -   **STOP** : Hör auf zu lesen
--   **Lautstärke** : Lautstärke ändern (von 0 auf 100)
--   **Lautstärke statut** : Lautstärke
+-   **Lautstärke** : Ändern Sie die Lautstärke (von 0 auf 100))
+-   **Statusvolumen** : Lautstärke
 -   **Status** : Status (Pause, Lesen, Übergang…)
 -   **Zu sagen** : ermöglicht das Lesen eines Textes auf Sonos (siehe TTS-Teil). Im Titel können Sie die Lautstärke und in der Nachricht die zu lesende Nachricht einstellen
 
 > **Notiz**
 >
-> Zum Abspielen von Wiedergabelisten können Sie Optionen einfügen (im Optionsfeld). Um die Wiedergabeliste zufällig zu lesen, müssen Sie "zufällig" eingeben"
+> Zum Abspielen von Wiedergabelisten können Sie Optionen (im Optionsfeld) einfügen). Um die Wiedergabeliste zufällig zu lesen, müssen Sie "zufällig" eingeben"
 
 # TTS
 
-Für TTS (Text-to-Speech) für Sonos muss Windows (Samba) im Netzwerk freigegeben sein (von Sonos vorgeschrieben, keine andere Möglichkeit). Sie benötigen also einen NAS im Netzwerk. Die Konfiguration ist recht einfach. Sie müssen den Namen oder die IP-Adresse des NAS (achten Sie darauf, dass Sie die gleichen Angaben wie auf Sonos machen) sowie den Pfad (relativ), den Benutzernamen und das Kennwort ( Aufmerksamkeit der Benutzer muss Schreibrechte haben)
+TTS (Text-to-Speech) für Sonos erfordert die Freigabe von Windows (Samba) im Netzwerk (von Sonos vorgeschrieben, keine andere Möglichkeit)). Sie benötigen also einen NAS im Netzwerk. Die Konfiguration ist recht einfach. Sie müssen den Namen oder die IP-Adresse des NAS (achten Sie darauf, dass Sie das Gleiche wie auf Sonos deklarieren) sowie den Pfad (relativ), den Benutzernamen und das Kennwort ( Aufmerksamkeit der Benutzer muss Schreibrechte haben)
 
 > **Wichtig**
 >
@@ -90,8 +90,8 @@ Für TTS (Text-to-Speech) für Sonos muss Windows (Samba) im Netzwerk freigegebe
 NAS-Seite, hier ist meine Konfiguration :
 
 -   Jeedom-Ordner wird freigegeben
--   Sonos-Benutzer hat Lese- / Schreibzugriff (erforderlich für Jeedom)
--   Gastbenutzer haben Lesezugriff (für Sonos erforderlich)
+-   Der Sonos-Benutzer hat Lese- / Schreibzugriff (erforderlich für Jeedom))
+-   Der Gastbenutzer hat nur Lesezugriff (für Sonos erforderlich))
 
 Sonos Plugin Seite, hier ist meine Konfiguration :
 
@@ -124,4 +124,4 @@ Das Sonos-Plugin bietet auch ein Bedienfeld, in dem alle Ihre Sonos zusammengefa
 
 **Fehler "Keine Geräte in dieser Sammlung" bei der Suche nach Geräten**
 >
-> Dieser Fehler tritt auf, wenn die automatische Erkennung blockiert ist (Router, der beispielsweise den Boradcast blockiert). Es spielt keine Rolle, dass Sie Ihre Sonos nur von Hand hinzufügen müssen, indem Sie das Modell und die IP angeben.
+> Dieser Fehler tritt auf, wenn die automatische Erkennung blockiert ist (z. B. Router, der den Boradcast blockiert)). Es spielt keine Rolle, dass Sie Ihre Sonos nur von Hand hinzufügen müssen, indem Sie das Modell und die IP angeben.
