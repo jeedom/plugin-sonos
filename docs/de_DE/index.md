@@ -122,6 +122,10 @@ Das Sonos-Plugin bietet auch ein Bedienfeld, in dem alle Ihre Sonos zusammengefa
 
 # FAQ
 
-**Fehler "Keine Geräte in dieser Sammlung" bei der Suche nach Geräten**
+> **Fehler "Keine Geräte in dieser Sammlung" bei der Suche nach Geräten**
 >
 > Dieser Fehler tritt auf, wenn die automatische Erkennung blockiert ist (z. B. Router, der den Boradcast blockiert)). Es spielt keine Rolle, dass Sie Ihre Sonos nur von Hand hinzufügen müssen, indem Sie das Modell und die IP angeben.
+
+> **Ich habe Bedenken bezüglich TTS (in Schleife), die Radios funktionieren nicht, ich habe bizarre Fehler...**
+>
+> Das erste, was Sie bei Problemen tun müssen, ist, alle Sonos zu trennen, sie wieder anzuschließen, um zu warten, bis sie starten, und dann den Sonos-Dämon in Jeedom neu zu starten. Im Allgemeinen löst dies 90% der Probleme

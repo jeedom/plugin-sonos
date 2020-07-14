@@ -122,6 +122,10 @@ El complemento de Sonos también proporciona un panel que reúne a todos sus Son
 
 # FAQ
 
-**Error "No hay dispositivos en esta colección" al buscar equipo**
+> **Error "No hay dispositivos en esta colección" al buscar equipo**
 >
 > Este error se produce si el descubrimiento automático está bloqueado (por ejemplo, el enrutador que bloquea el boradcast)). No importa, solo tendrá que agregar sus sonos a mano especificando el modelo y la IP.
+
+> **Tengo dudas sobre TTS (en bucle), las radios no funcionan, tengo errores extraños...**
+>
+> En primer lugar, lo primero que debe hacer en caso de problemas es desconectar todos los Sonos, volver a conectarlos para esperar hasta que comiencen y luego reiniciar el demonio Sonos en Jeedom. En general, esto resuelve el 90% de los problemas
