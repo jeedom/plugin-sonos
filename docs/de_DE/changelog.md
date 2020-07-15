@@ -28,7 +28,7 @@
 
 # 10/07/2019
 
-- Verbesserung des Installationsskripts für Abhängigkeiten (in bestimmten Fällen können TTS-Bedenken behoben werden)
+- Verbesserung des Installationsskripts für Abhängigkeiten (in bestimmten Fällen können TTS-Bedenken behoben werden))
 
 # 2019.09.23
 

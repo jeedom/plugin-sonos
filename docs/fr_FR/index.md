@@ -122,6 +122,10 @@ Le plugin Sonos met aussi à disposition un panel qui rassemble tous vos Sonos. 
 
 # FAQ
 
-**Erreur "No devices in this collection" lors de la recherche d'équipement**
+> **Erreur "No devices in this collection" lors de la recherche d'équipement**
 >
 > Cette erreur arrive si la decouverte automatique est bloquée (routeur qui bloque le boradcast par exemple). Ce n'est pas grave il vous faudra juste ajouter à la main vos sonos en précisant le model et l'IP.
+
+> **J'ai des soucis sur TTS (en boucle), les radios ne marchent pas, j'ai des erreurs bizarre...**
+>
+> Avant toute chose la 1er chose à faire en cas de soucis est de débrancher tous les Sonos, de les rebrancher d'attendre qu'ils démarrent puis de relancer le demon Sonos dans Jeedom. En général cela résoud 90% des problèmes

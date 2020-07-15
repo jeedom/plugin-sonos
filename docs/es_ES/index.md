@@ -1,6 +1,6 @@
 # Complemento Sonos
 
-El complemento de Sonos le permite controlar Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar, Ikea Symfonisk ... Le permitirá ver el estado de Sonos y realizar acciones en él. (reproducir, pausar, siguiente, anterior, volumen, elección de una lista de reproducción ...)
+El complemento de Sonos le permite controlar Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar, Ikea Symfonisk ... Le permitirá ver el estado de Sonos y realizar acciones en él. (reproducir, pausar, siguiente, anterior, volumen, elección de una lista de reproducción)
 
 # Configuración del plugin
 
@@ -14,7 +14,7 @@ Si luego agrega un Sonos, puede crear un dispositivo Sonos dándole a Jeedom la 
 
 -   **Voz** : elección de voz durante TTS
 -   **Compartir** : compartir nombre y ruta de carpeta
--   **Nombre d'utilisateur pour le partage** : nombre de usuario para acceder a compartir
+-   **Nombre de usuario para compartir** : nombre de usuario para acceder a compartir
 -   **Compartir contraseña** : Compartir contraseña
 -   **Descubrimiento** : descubra automáticamente los sistemas de sonido (no funciona en una instalación de tipo acoplable donde cada sistema de sonido debe crearse a mano)
 -   **Dependencia de Sonos** : instalar dependencias de sonos para TTS
@@ -30,7 +30,7 @@ Se puede acceder a la configuración del equipo Sonos desde el menú Complemento
 
 Aquí encontrarás toda la configuración de tu equipo :
 
--   **Nombre de l'équipement Sonos** : nombre de su equipo Sonos
+-   **Nombre del equipo de Sonos** : nombre de su equipo Sonos
 -   **Objeto padre** : indica el objeto padre al que pertenece el equipo
 -   **Activar** : activa su equipo
 -   **Visible** : lo hace visible en el tablero
@@ -40,15 +40,15 @@ Aquí encontrarás toda la configuración de tu equipo :
 A continuación encontrará la lista de pedidos :
 
 -   **Nombre** : Nombre de la orden
--   **Configuración avanzada (ruedas con muescas pequeñas)** : muestra la configuración avanzada del comando (método de registro, widget, etc.)
+-   **Configuración avanzada (ruedas pequeñas con muescas)** : muestra la configuración avanzada del comando (método de registro, widget, etc.))
 -   **Probar** : Se usa para probar el comando
 
 Como orden encontrarás :
 
 -   **Reproducir lista de reproducción** : comando de tipo de mensaje para iniciar una lista de reproducción, solo ponga el nombre de la lista de reproducción en el título. Puede poner "al azar" en el mensaje para mezclar la lista de reproducción antes de jugar.
 -   **Jugar favoritos** :  comando del tipo de mensaje que permite iniciar un favorito, basta con que el título ponga el nombre de los favoritos. Puede poner "al azar" en el mensaje para mezclar favoritos antes de leer.
--   **Tocar una radio** : comando de tipo de mensaje para iniciar una radio, solo en el título ponga el nombre de la radio (TENGA CUIDADO esto debe estar en las radios favoritas).
--   **Agregar un altavoz** : permite agregar un altavoz (un Sonos) al altavoz actual (para asociar 2 Sonos, por ejemplo). Debe agregar el nombre de la sala de sonos para agregar en el título (el campo del mensaje no se usa aquí).
+-   **Tocar una radio** : mensaje de tipo de comando para iniciar una radio, solo en el título para poner el nombre de la radio (TENGA CUIDADO esto debe estar en las radios favoritas).
+-   **Agregar un altavoz** : permite agregar un altavoz (un Sonos) al altavoz actual (para asociar 2 Sonos por ejemplo). Debe agregar el nombre de la sala de sonos para agregar en el título (el campo del mensaje no se usa aquí).
 -   **Retire el altavoz** : le permite eliminar un altavoz (un Sonos) del altavoz actual (para disociar 2 Sonos, por ejemplo). Debe poner el nombre de la parte de Sonos para eliminar en el título (el campo del mensaje no se usa aquí).
 -   **Estado aleatorio** : indica si estamos en modo aleatorio o no
 -   **Al azar** : invertir el estado del modo aleatorio
@@ -65,8 +65,8 @@ Como orden encontrarás :
 -   **Pausa** : pausa
 -   **Detener** : deja de leer
 -   **Volumen** : cambiar el volumen (de 0 a 100)
--   **Volumen statut** : Nivel de volumen
--   **Estado** : estado (pausa, lectura, transición ...)
+-   **Volumen de estado** : Nivel de volumen
+-   **Estado** : estado (pausa, lectura, transición)
 -   **Decir** : permite leer un texto en Sonos (ver parte de TTS). En el título puede configurar el volumen y en el mensaje, el mensaje a leer
 
 > **Nota**
@@ -75,7 +75,7 @@ Como orden encontrarás :
 
 # TTS
 
-TTS (texto a voz) para Sonos requiere que Windows (Samba) se comparta en la red (impuesto por Sonos, no hay forma de hacerlo de otra manera). Entonces necesita un NAS en la red. La configuración es bastante simple, debe poner el nombre o la ip del NAS (tenga cuidado de poner lo mismo que lo que se declara en Sonos) y la ruta (relativa), el nombre de usuario y la contraseña ( atención, el usuario debe tener derechos de escritura)
+TTS (texto a voz) para Sonos requiere que Windows (Samba) se comparta en la red (impuesto por Sonos, no hay forma de hacerlo de otra manera)). Entonces necesita un NAS en la red. La configuración es bastante simple, tiene que poner el nombre o la ip del NAS (tenga cuidado de poner lo mismo que lo que se declara en Sonos) y la ruta (relativa), el nombre de usuario y la contraseña ( atención el usuario debe tener derechos de escritura)
 
 > **Importante**
 >
@@ -100,7 +100,7 @@ Lado del complemento de Sonos, aquí está mi configuración :
     -   Campo 2 : Jeedom / TTS
 -   Nombre de usuario : Sonos y su contraseña
 
-Sonos Library Side (aplicación para PC)
+Sonos Library side (aplicación para PC)
 -   el camino es : //192.168.xxx.yyy/Jeedom/TTS
 
 > **Importante**
@@ -122,6 +122,10 @@ El complemento de Sonos también proporciona un panel que reúne a todos sus Son
 
 # FAQ
 
-**Error "No hay dispositivos en esta colección" al buscar equipo**
+> **Error "No hay dispositivos en esta colección" al buscar equipo**
 >
-> Este error se produce si el descubrimiento automático está bloqueado (por ejemplo, el enrutador que bloquea el boradcast). No importa, solo tendrá que agregar sus sonos a mano especificando el modelo y la IP.
+> Este error se produce si el descubrimiento automático está bloqueado (por ejemplo, el enrutador que bloquea el boradcast)). No importa, solo tendrá que agregar sus sonos a mano especificando el modelo y la IP.
+
+> **Tengo dudas sobre TTS (en bucle), las radios no funcionan, tengo errores extraños...**
+>
+> En primer lugar, lo primero que debe hacer en caso de problemas es desconectar todos los Sonos, volver a conectarlos para esperar hasta que comiencen y luego reiniciar el demonio Sonos en Jeedom. En general, esto resuelve el 90% de los problemas
