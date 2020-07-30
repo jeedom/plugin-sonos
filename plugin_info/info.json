@@ -12,20 +12,6 @@
     "mobile": "panel",
     "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/sonos3\/changelog",
     "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/sonos3\/",
-    "language": [
-        "fr_FR",
-        "en_US",
-        "de_DE",
-        "sp_SP",
-        "ru_RU",
-        "id_ID",
-        "it_IT"
-    ],
-    "compatibility": [
-        "miniplus",
-        "smart",
-        "rpi",
-        "docker",
-        "diy"
-    ]
+   "language" : ["fr_FR","en_US","de_DE","sp_SP"],
+	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile","v4"]
 }
