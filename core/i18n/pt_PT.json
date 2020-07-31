@@ -91,5 +91,8 @@
         "Impossible de récuperer le sonos : ": "Não foi possível recuperar o sistema de som:",
         "Playlist non trouvé : ": "Lista de reprodução não encontrada:",
         "Favoris non trouvé : ": "Favoritos não encontrados:"
+    },
+    "info.json": {
+        "Plugin de controle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0": "Sonos \/ Ikea Symfonisk plugin de controle. CUIDADO: é necessário um mínimo de PHP 7.0"
     }
 }
