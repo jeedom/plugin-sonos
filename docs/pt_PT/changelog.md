@@ -4,6 +4,8 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+- Suporte Sonos Arc S19
+
 # 24/01/2020
 
 - Suporte para Sonos One S22

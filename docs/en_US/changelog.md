@@ -4,6 +4,8 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+- Sonos Arc S19 support
+
 # 01/24/2020
 
 - Sonos One S22 support
