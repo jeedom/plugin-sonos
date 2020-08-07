@@ -1,7 +1,13 @@
 {
     "id": "sonos3",
     "name": "Sonos controller",
-    "description": "Plugin de controle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0",
+    "description": {
+        "fr_FR": "Plugin de controle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0",
+        "en_US": "Sonos \/ Ikea Symfonisk control plugin. CAUTION: PHP 7.0 minimum is required",
+        "es_ES": "Sonos \/ Ikea Symfonisk plugin de control. PRECAUCIÓN: se requiere PHP 7.0 mínimo",
+        "de_DE": "Sonos \/ Ikea Symfonisk-Steuerungs-Plugin. VORSICHT: Mindestens PHP 7.0 ist erforderlich",
+        "pt_PT": "Sonos \/ Ikea Symfonisk plugin de controle. CUIDADO: é necessário um mínimo de PHP 7.0"
+    },
     "licence": "AGPL",
     "author": "Jeedom SAS",
     "require": "3.3.34",
@@ -15,11 +21,9 @@
     "language": [
         "fr_FR",
         "en_US",
+        "es_ES",
         "de_DE",
-        "sp_SP",
-        "ru_RU",
-        "id_ID",
-        "it_IT"
+        "pt_PT"
     ],
     "compatibility": [
         "miniplus",

@@ -179,6 +179,7 @@ class Device {
 			"S16" => "CONNECT:AMP",
 			"S18" => "ONE",
 			"S17" => "MOVE",
+			"S19" => "ARC",
 			"S20" => "SYMFONISK_LIGHT",
 			"S21" => "SYMFONISK",
 			"S22" => "ONE",

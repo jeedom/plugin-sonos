@@ -4,6 +4,10 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 07/08/2020
+
+- Adicionar Sonos ARC
+
 # 24/01/2020
 
 - Suporte para Sonos One S22
