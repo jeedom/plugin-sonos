@@ -122,6 +122,10 @@ O plugin Sonos também fornece um painel que reúne todos os seus Sonos. Dispon�
 
 # FAQ
 
-**Erro "Nenhum dispositivo nesta coleção" ao procurar equipamento**
+> **Erro "Nenhum dispositivo nesta coleção" ao procurar equipamento**
 >
 > Este erro ocorre se a descoberta automática estiver bloqueada (roteador que bloqueia o boradcast, por exemplo,). Não importa que você tenha que adicionar seus sonos manualmente, especificando o modelo e o IP.
+
+> **Tenho preocupações com o TTS (em loop), os rádios não funcionam, tenho erros bizarros...**
+>
+> Antes de tudo, a primeira coisa a fazer em caso de problemas é desconectar todos os Sonos, reconectá-los para esperar até que eles comecem e depois reiniciar o demônio Sonos em Jeedom. Em geral, isso resolve 90% dos problemas
