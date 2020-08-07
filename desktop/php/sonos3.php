@@ -98,6 +98,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="CONNECT:AMP">Sonos Connect AMP</option>
 											<option value="PLAYBAR">Sonos Playbar</option>
 											<option value="PLAYBASE">Sonos Playbase</option>
+											<option value="ARC">Sonos Arc</option>
 											<option value="ONE">Sonos One</option>
 											<option value="BEAM">Sonos Beam</option>
 											<option value="SYMFONISK_LIGHT">Ikea SYMFONISK Lampe</option>
