@@ -4,17 +4,22 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# 24/11/2020
+
+- Nouvelle présentation de la liste des objets
+- Ajout du tag "Compatibilité V4"
+
 # 07/08/2020
 
-- Ajout Sonos ARC
+- Prise en charge du Sonos ARC
 
 # 24/01/2020
 
-- Support du Sonos One S22
+- Prise en charge du Sonos One S22
 
 # 11/01/2020
 
-- Ajout Sonos Move
+- Prise en charge du Sonos Move
 - Optimisation du code en cas de Sonos non connecté
 
 # 16/12/2019
@@ -27,12 +32,12 @@
 
 # 15/10/2019
 
-- Ajout du Sonos port
+- Prise en charge du Sonos port
 - Amélioration du script d'installation des dépendances
 
 # 07/10/2019
 
-- Amélioration du script d'installation de dépendances (pourra permettre de corriger dans certain cas les soucis de TTS)
+- Amélioration du script d'installation des dépendances (pourra permettre de corriger dans certain cas les soucis de TTS)
 
 # 23/09/2019
 
@@ -40,42 +45,42 @@
 
 # 01/09/2019
 
-- Support de l'enceinte lampe Ikea SYMFONISK
+- Prise en charge de l'enceinte lampe Ikea SYMFONISK
 
 # 12/08/2019
 
-- Support de l'enceinte étagere Ikea SYMFONISK
+- Prise en charge de l'enceinte étagere Ikea SYMFONISK
 
 # 23/04/2019
 
-- Ajout des sonos one gen2
+- Prise en charge des sonos one gen2
 
 # 17/01/2019
 
-- Correction de bugs dans le cas ou les sonos ont été ajouté manuellement
+- Correction de bugs dans le cas où les sonos ont été ajoutés manuellement
 
 # 15/01/2019
 
-** IMPORTANT NE MARCHE QUE AVEC PHP7, VOIR PAGE SANTE DE JEEDOM POUR VOTRE VERSION**
+**IMPORTANT NE MARCHE QUE AVEC PHP7, VOIR PAGE SANTE DE JEEDOM POUR VOTRE VERSION**
 
-- Réecriture complete du plugin
-- Support de la nouvelle api Sonos
-- Support des sonos beam et One
+- Réecriture complète du plugin
+- Prise en charge de la nouvelle api Sonos
+- Prise en charge des sonos beam et One
 - Correction de nombre bug
-- Optimisation global
+- Optimisations globales
 
-**Important**
+**IMPORTANT**
 - Compatible PHP7 uniquement
-- Certain fonction on du être retirées
+- Certaines fonctionnalités ont dû être retirées
 
 
 # 2018
 
 - 	Ajout de la gestion des favoris sonos
--   Ajout Sonos One et Playbase
+-   Prise en charge des Sonos One et Playbase
 -   Correction de la langue avec picotts
 -   Ajout d’une commande "entrée de ligne"
 -   Mise à jour de librairie de communication avec les sonos
 -   Optimisation du chargement des playlists
--   Ajout de picotts pour la génération du TTS en locale
+-   Ajout de picotts pour la génération du TTS en local
 -   Correction du bouton play/pause lors de la mise à jour du widget
