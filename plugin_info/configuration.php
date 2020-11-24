@@ -25,18 +25,18 @@ if (!isConnect('admin')) {
 	<fieldset>
     <?php
 if (version_compare(PHP_VERSION, '7.0') < 0) {
-	echo '<div class="alert alert-danger">{{Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0}}</div>';
+	echo '<div class="alert alert-danger">{{Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.}}</div>';
 }
 ?>
    <div class="form-group">
-     <label class="col-lg-3 control-label">{{Le plugin sonos doit réagir aux interactions :}}</label>
-     <div class="col-lg-4">
+     <label class="col-sm-3 control-label">{{Le plugin sonos doit réagir aux interactions}}</label>
+     <div class="col-xs-11 col-sm-7">
       <textarea class="configKey form-control" data-l1key="interact::sentence"></textarea>
     </div>
   </div>
   <div class="form-group useShare">
-    <label class="col-lg-3 control-label">{{Partage}}</label>
-    <div class="col-lg-2">
+    <label class="col-sm-3 control-label">{{Partage}}</label>
+    <div class="col-xs-11 col-sm-7">
      <div class="input-group">
        <input class="configKey form-control" data-l1key="tts_host" />
        <div class="input-group-addon">/</div>
@@ -45,22 +45,22 @@ if (version_compare(PHP_VERSION, '7.0') < 0) {
    </div>
  </div>
  <div class="form-group useShare">
-  <label class="col-lg-3 control-label">{{Nom d'utilisateur pour le partage}}</label>
-  <div class="col-lg-2">
+  <label class="col-sm-3 control-label">{{Nom d'utilisateur du partage}}</label>
+  <div class="col-xs-11 col-sm-7">
     <input class="configKey form-control" data-l1key="tts_username" />
   </div>
 </div>
 <div class="form-group useShare">
-  <label class="col-lg-3 control-label">{{Mot de passe du partage}}</label>
-  <div class="col-lg-2">
+  <label class="col-sm-3 control-label">{{Mot de passe du partage}}</label>
+  <div class="col-xs-11 col-sm-7">
     <input type="password" class="configKey form-control" data-l1key="tts_password" />
   </div>
 </div>
 </div>
 <div class="form-group">
- <label class="col-lg-3 control-label">{{Découverte}}</label>
- <div class="col-lg-2">
-  <a class="btn btn-default" id="bt_syncSonos"><i class='fa fa-refresh'></i> {{Rechercher les équipements Sonos}}</a>
+ <label class="col-sm-3 control-label">{{Découverte}}</label>
+ <div class="col-xs-11 col-sm-7">
+  <a class="btn btn-default" id="bt_syncSonos"><i class='fas fa-sync'></i> {{Rechercher les équipements Sonos}}</a>
 </div>
 </div>
 </fieldset>
