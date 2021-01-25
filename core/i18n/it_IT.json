@@ -1,10 +1,10 @@
 {
     "plugins\/sonos3\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Accesso non autorizzato",
-        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "",
-        "Le plugin sonos doit réagir aux interactions :": "",
+        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "",
+        "Le plugin sonos doit réagir aux interactions": "",
         "Partage": "",
-        "Nom d'utilisateur pour le partage": "",
+        "Nom d'utilisateur du partage": "",
         "Mot de passe du partage": "",
         "Découverte": "",
         "Rechercher les équipements Sonos": "",
@@ -27,14 +27,18 @@
         "Supprimer": "Rimuovere",
         "Equipement": "Dispositivo",
         "Commandes": "Comandi",
+        "Général": "Principale",
         "Nom du sonos": "",
         "Nom de l'équipement template": "Nome di attrezzature template",
         "Objet parent": "Oggetto padre",
         "Aucun": "Nessuno",
+        "Options": "Opzioni",
         "Activer": "Attivare",
         "Visible": "Visibile",
-        "Model": "",
+        "Paramètres": "Impostazioni",
+        "Modèle": "Modello",
         "IP": "",
+        "Informations": "Informazioni",
         "Nom": "Nome",
         "Action": "Azione"
     },
@@ -93,6 +97,6 @@
         "Favoris non trouvé : ": ""
     },
     "info.json": {
-        "Plugin de controle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0": ""
+        "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": ""
     }
 }
