@@ -1,15 +1,33 @@
 {
   "apt" : {
-    "libav-tools" : {"alternative" : ["ffmpeg"]},
-    "ffmpeg" : {"alternative" : ["libav-tools"]},
-    "ibttspico-utils" : {},
-    "sox" : {},
-    "libsox-fmt-mp3" : {},
-    "smbclient" : {},
-    "php-mbstring" : {},
-    "php-soap" : {}
+    "git" : {},
+    "python-pip" : {},
+    "python-dev" : {},
+    "python-pyudev" : {},
+    "python-louie" : {},
+    "python-setuptools" : {},
+    "make" : {},
+    "build-essential" : {},
+    "libudev-dev" : {},
+    "g++" : {},
+    "gcc" : {},
+    "python-lxml" : {},
+    "unzip" : {},
+    "libjpeg-dev" : {},
+    "python-serial" : {},
+    "python-requests" : {}
+  },
+  "pip":{
+    "wheel" : {},
+    "urwid" : {},
+    "louie" : {},
+    "six" : {},
+    "tornado" : {}
   },
   "post-install" : {
-    "restart_apache" : true
-  }
+    "script" : "plugins/openzwave/resources/post-install.sh"
+  },
 }
+
+
+
