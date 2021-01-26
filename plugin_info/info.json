@@ -6,7 +6,12 @@
         "en_US": "Sonos \/ Ikea Symfonisk control plugin. CAUTION: PHP 7.0 minimum is required",
         "es_ES": "Complemento de control de Sonos \/ Ikea Symfonisk. PRECAUCIÓN: Se requiere PHP 7.0 como mínimo",
         "de_DE": "Sonos \/ Ikea Symfonisk-Steuerungs-Plugin. VORSICHT: Mindestens PHP 7.0 ist erforderlich",
-        "pt_PT": "Plug-in de controle Sonos \/ Ikea Symfonisk. CUIDADO: PHP 7.0 mínimo é necessário"
+        "pt_PT": "Plug-in de controle Sonos \/ Ikea Symfonisk. CUIDADO: PHP 7.0 mínimo é necessário",
+        "ru_RU": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0",
+        "id_ID": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0",
+        "it_IT": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0",
+        "ja_JP": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0",
+        "tr": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0"
     },
     "licence": "AGPL",
     "author": "Jeedom SAS",
@@ -23,7 +28,12 @@
         "en_US",
         "es_ES",
         "de_DE",
-        "pt_PT"
+        "ru_RU",
+        "id_ID",
+        "it_IT",
+        "ja_JP",
+        "pt_PT",
+        "tr"
     ],
     "compatibility": [
         "miniplus",
