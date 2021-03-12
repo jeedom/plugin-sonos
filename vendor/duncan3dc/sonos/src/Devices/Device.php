@@ -198,6 +198,7 @@ final class Device implements DeviceInterface {
 			"S21" => "SYMFONISK",
 			"S22" => "ONE",
 			"S23" => "PORT",
+			"S24" => "FIVE",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",
