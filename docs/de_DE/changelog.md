@@ -4,6 +4,9 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+
+- Hinzufügung der Sonos Five
+
 # 24/11/2020
 
 - Neue Darstellung der Objektliste

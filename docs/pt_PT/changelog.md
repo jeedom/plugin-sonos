@@ -4,6 +4,9 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+
+- Adição dos Sonos Five
+
 # 24/11/2020
 
 - Nova apresentação da lista de objetos
