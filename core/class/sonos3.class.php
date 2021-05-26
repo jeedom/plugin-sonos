@@ -272,6 +272,8 @@ class sonos3 extends eqLogic {
 					$eqLogic->setConfiguration('model', 'MOVE');
 				}else if (strpos(strtoupper($controller->getName()), 'FIVE') !== false) {
 					$eqLogic->setConfiguration('model', 'FIVE');
+				}else if (strpos(strtoupper($controller->getName()), 'ROAM') !== false) {
+					$eqLogic->setConfiguration('model', 'ROAM');
 				}
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);

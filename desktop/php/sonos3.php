@@ -120,6 +120,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="PORT">Sonos port</option>
 											<option value="MOVE">Sonos move</option>
 											<option value="FIVE">Sonos five</option>
+											<option value="ROAM">Sonos roam</option>
 										</select>
 									</div>
 								</div>

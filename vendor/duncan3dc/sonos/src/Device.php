@@ -167,6 +167,7 @@ class Device {
 		
 		$models = [
 			"S1" => "PLAY:1",
+			"S2" => "ROAM",
 			"S12" => "PLAY:1",
 			"S3" => "PLAY:3",
 			"S5" => "PLAY:5",
