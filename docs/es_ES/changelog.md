@@ -6,6 +6,7 @@
 
 
 - Adición de Sonos Five
+- Agregar Sonos Roam
 
 # 24/11/2020
 
