@@ -1059,6 +1059,7 @@ class sonos3Cmd extends cmd {
 				$_options['slider'] = 100;
 			}
 			$controller->setVolume($_options['slider']);
+			$eqLogic->getCmd(null, 'volume')->event($_options['slider']);
 		} elseif ($this->getLogicalId() == 'play_playlist') {
 			if (!$controller->isUsingQueue()) {
 				$controller->useQueue();
