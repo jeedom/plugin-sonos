@@ -1,0 +1,32 @@
+{
+    "active": true,
+    "name": "Cache",
+    "slug": "cache",
+    "docsSlug": "doctrine-cache",
+    "versions": [
+        {
+            "name": "1.11",
+            "branchName": "1.11.x",
+            "slug": "latest",
+            "upcoming": true
+        },
+        {
+            "name": "1.10",
+            "branchName": "1.10.x",
+            "slug": "1.10",
+            "current": true
+        },
+        {
+            "name": "1.9",
+            "branchName": "1.8.x",
+            "slug": "1.9",
+            "maintained": false
+        },
+        {
+            "name": "1.8",
+            "branchName": "1.8.x",
+            "slug": "1.8",
+            "maintained": false
+        }
+    ]
+}

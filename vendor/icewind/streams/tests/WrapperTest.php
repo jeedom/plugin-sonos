@@ -7,7 +7,9 @@
 
 namespace Icewind\Streams\Tests;
 
-abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+abstract class WrapperTest extends TestCase {
 	/**
 	 * @param resource $source
 	 * @return resource
@@ -20,9 +22,9 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 		rewind($source);
 
 		$wrapped = $this->wrapSource($source);
-		$this->assertEquals('foo', fread($wrapped, 3));
-		$this->assertEquals('bar', fread($wrapped, 3));
-		$this->assertEquals('', fread($wrapped, 3));
+		$this->assertSame('foo', fread($wrapped, 3));
+		$this->assertSame('bar', fread($wrapped, 3));
+		$this->assertSame('', fread($wrapped, 3));
 	}
 
 	public function testWrite() {
@@ -31,9 +33,9 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 
 		$wrapped = $this->wrapSource($source);
 
-		$this->assertEquals(6, fwrite($wrapped, 'foobar'));
+		$this->assertSame(6, fwrite($wrapped, 'foobar'));
 		rewind($source);
-		$this->assertEquals('foobar', stream_get_contents($source));
+		$this->assertSame('foobar', stream_get_contents($source));
 	}
 
 	public function testClose() {
@@ -53,19 +55,19 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 
 		$wrapped = $this->wrapSource($source);
 
-		$this->assertEquals(0, ftell($wrapped));
+		$this->assertSame(0, ftell($wrapped));
 
 		fseek($wrapped, 2);
-		$this->assertEquals(2, ftell($source));
-		$this->assertEquals(2, ftell($wrapped));
+		$this->assertSame(2, ftell($source));
+		$this->assertSame(2, ftell($wrapped));
 
 		fseek($wrapped, 2, SEEK_CUR);
-		$this->assertEquals(4, ftell($source));
-		$this->assertEquals(4, ftell($wrapped));
+		$this->assertSame(4, ftell($source));
+		$this->assertSame(4, ftell($wrapped));
 
 		fseek($wrapped, -1, SEEK_END);
-		$this->assertEquals(5, ftell($source));
-		$this->assertEquals(5, ftell($wrapped));
+		$this->assertSame(5, ftell($source));
+		$this->assertSame(5, ftell($wrapped));
 	}
 
 	public function testStat() {
@@ -84,7 +86,7 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 		$wrapped = $this->wrapSource($source);
 
 		ftruncate($wrapped, 2);
-		$this->assertEquals('fo', fread($wrapped, 10));
+		$this->assertSame('fo', fread($wrapped, 10));
 	}
 
 	public function testLock() {
@@ -93,6 +95,7 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 		if (!flock($wrapped, LOCK_EX)) {
 			$this->fail('Unable to acquire lock');
 		}
+		$this->assertTrue(true);
 	}
 
 	public function testStreamOptions() {
@@ -101,11 +104,12 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 		stream_set_blocking($wrapped, 0);
 		stream_set_timeout($wrapped, 1, 0);
 		stream_set_write_buffer($wrapped, 0);
+		$this->assertTrue(true);
 	}
 
 	public function testReadDir() {
 		$source = opendir(__DIR__);
-		$content = array();
+		$content = [];
 		while (($name = readdir($source)) !== false) {
 			$content[] = $name;
 		}
@@ -113,7 +117,7 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 
 		$source = opendir(__DIR__);
 		$wrapped = $this->wrapSource($source);
-		$wrappedContent = array();
+		$wrappedContent = [];
 		while (($name = readdir($wrapped)) !== false) {
 			$wrappedContent[] = $name;
 		}
@@ -122,7 +126,7 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRewindDir() {
 		$source = opendir(__DIR__);
-		$content = array();
+		$content = [];
 		while (($name = readdir($source)) !== false) {
 			$content[] = $name;
 		}
@@ -130,10 +134,21 @@ abstract class WrapperTest extends \PHPUnit_Framework_TestCase {
 
 		$source = opendir(__DIR__);
 		$wrapped = $this->wrapSource($source);
-		$this->assertEquals($content[0], readdir($wrapped));
-		$this->assertEquals($content[1], readdir($wrapped));
-		$this->assertEquals($content[2], readdir($wrapped));
+		$this->assertSame($content[0], readdir($wrapped));
+		$this->assertSame($content[1], readdir($wrapped));
+		$this->assertSame($content[2], readdir($wrapped));
 		rewinddir($wrapped);
-		$this->assertEquals($content[0], readdir($wrapped));
+		$this->assertSame($content[0], readdir($wrapped));
+	}
+
+	public function testDoubleClose() {
+		$source = fopen('php://temp', 'r+');
+		rewind($source);
+
+		$wrapped = $this->wrapSource($source);
+
+		fclose($source);
+		fclose($wrapped);
+		$this->assertFalse(is_resource($source));
 	}
 }

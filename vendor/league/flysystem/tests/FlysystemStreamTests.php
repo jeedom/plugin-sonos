@@ -1,12 +1,14 @@
 <?php
 
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\AdapterInterface;
 use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 
 class FlysystemStreamTests extends TestCase
 {
-    use \PHPUnitHacks;
 
     public function testWriteStream()
     {
@@ -21,12 +23,10 @@ class FlysystemStreamTests extends TestCase
         $this->assertFalse($filesystem->writeStream('file.txt', $stream));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testWriteStreamFail()
     {
-        $filesystem = new Filesystem($this->createMock('League\Flysystem\AdapterInterface'));
+        $this->expectException(InvalidArgumentException::class);
+        $filesystem = new Filesystem(new Local(__DIR__));
         $filesystem->writeStream('file.txt', 'not a resource');
     }
 
@@ -46,12 +46,10 @@ class FlysystemStreamTests extends TestCase
         $this->assertFalse($filesystem->updateStream('file.txt', $stream));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testUpdateStreamFail()
     {
-        $filesystem = new Filesystem($this->createMock('League\Flysystem\AdapterInterface'));
+        $this->expectException(InvalidArgumentException::class);
+        $filesystem = new Filesystem(new Local(__DIR__));
         $filesystem->updateStream('file.txt', 'not a resource');
     }
 
@@ -63,7 +61,7 @@ class FlysystemStreamTests extends TestCase
         $adapter->readStream('file.txt')->willReturn(['stream' => $stream])->shouldBeCalled();
         $adapter->readStream('other.txt')->willReturn(false)->shouldBeCalled();
         $filesystem = new Filesystem($adapter->reveal());
-        $this->assertInternalType('resource', $filesystem->readStream('file.txt'));
+        $this->assertIsResource($filesystem->readStream('file.txt'));
         $this->assertFalse($filesystem->readStream('other.txt'));
         fclose($stream);
         $this->assertFalse($filesystem->readStream('other.txt'));

@@ -3,9 +3,10 @@
 namespace League\Flysystem\Adapter;
 
 use League\Flysystem\Config;
-use League\Flysystem\FileNotFoundException;
-use League\Flysystem\Filesystem;
+use League\Flysystem\Exception;
+use League\Flysystem\NotSupportedException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 function fopen($result, $mode)
 {
@@ -52,7 +53,6 @@ function mkdir($pathname, $mode = 0777, $recursive = false, $context = null)
 
 class LocalAdapterTests extends TestCase
 {
-    use \PHPUnitHacks;
 
     /**
      * @var Local
@@ -61,13 +61,13 @@ class LocalAdapterTests extends TestCase
 
     protected $root;
 
-    public function setup()
+    public function setup(): void
     {
         $this->root = __DIR__ . '/files/';
         $this->adapter = new Local($this->root);
     }
 
-    public function teardown()
+    public function teardown(): void
     {
         $it = new \RecursiveDirectoryIterator($this->root, \RecursiveDirectoryIterator::SKIP_DOTS);
         $files = new \RecursiveIteratorIterator(
@@ -86,15 +86,28 @@ class LocalAdapterTests extends TestCase
         }
     }
 
+    public function testUpdateSetsNewVisibility()
+    {
+        $this->adapter->write('file.txt', 'old contents', new Config(['visibility' => 'public']));
+        $this->assertEquals('old contents', $this->adapter->read('file.txt')['contents']);
+        $this->assertEquals('public', $this->adapter->getVisibility('file.txt')['visibility']);
+
+        $this->adapter->update('file.txt', 'new contents', new Config(['visibility' => 'private']));
+
+        $this->assertEquals('new contents', $this->adapter->read('file.txt')['contents']);
+        $this->assertEquals('private', $this->adapter->getVisibility('file.txt')['visibility']);
+    }
+
+
     public function testStreamWrappersAreSupported()
     {
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        if (IS_WINDOWS) {
             $this->markTestSkipped('Windows does not support this.');
         }
 
-        (new Local(__DIR__.'/files'))->write('file.txt', 'contents', new Config());
+        $this->adapter->write('file.txt', 'contents', new Config());
 
-        $adapter = new Local('file://'.__DIR__.'/files');
+        $adapter = new Local('file://' . $this->root);
         $this->assertCount(1, $adapter->listContents());
     }
 
@@ -126,9 +139,9 @@ class LocalAdapterTests extends TestCase
         $adapter = $this->adapter;
         $adapter->write('file.txt', 'contents', new Config());
         $result = $adapter->readStream('file.txt');
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('stream', $result);
-        $this->assertInternalType('resource', $result['stream']);
+        $this->assertIsResource($result['stream']);
         fclose($result['stream']);
         $adapter->delete('file.txt');
     }
@@ -191,7 +204,7 @@ class LocalAdapterTests extends TestCase
     public function testNullPrefix()
     {
         $this->adapter->setPathPrefix('');
-        $path = 'some'.DIRECTORY_SEPARATOR.'path.ext';
+        $path = 'some' . DIRECTORY_SEPARATOR . 'path.ext';
         $this->assertEquals($path, $this->adapter->applyPathPrefix($path));
         $this->assertEquals($path, $this->adapter->removePathPrefix($path));
     }
@@ -232,8 +245,12 @@ class LocalAdapterTests extends TestCase
             $this->markTestSkipped("File permissions not supported on Windows.");
         }
 
+        if (posix_getuid() === 0) {
+            $this->markTestSkipped("Cannot make non-writable for the root user.");
+        }
+
         try {
-            $root = __DIR__ . '/files/not-writable';
+            $root = $this->root . 'not-writable';
             mkdir($root, 0000, true);
             $this->expectException('LogicException');
             new Local($root);
@@ -263,7 +280,7 @@ class LocalAdapterTests extends TestCase
     {
         $this->adapter->write('dummy.txt', '1234', new Config());
         $result = $this->adapter->getSize('dummy.txt');
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('size', $result);
         $this->assertEquals(4, $result['size']);
     }
@@ -272,16 +289,16 @@ class LocalAdapterTests extends TestCase
     {
         $this->adapter->write('dummy.txt', '1234', new Config());
         $result = $this->adapter->getTimestamp('dummy.txt');
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('timestamp', $result);
-        $this->assertInternalType('int', $result['timestamp']);
+        $this->assertIsInt($result['timestamp']);
     }
 
     public function testGetMimetype()
     {
         $this->adapter->write('text.txt', 'contents', new Config());
         $result = $this->adapter->getMimetype('text.txt');
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('mimetype', $result);
         $this->assertEquals('text/plain', $result['mimetype']);
     }
@@ -295,7 +312,7 @@ class LocalAdapterTests extends TestCase
     {
         $this->adapter->createDir('test-dir', new Config());
         $output = $this->adapter->getVisibility('test-dir');
-        $this->assertInternalType('array', $output);
+        $this->assertIsArray($output);
         $this->assertArrayHasKey('visibility', $output);
         $this->assertEquals('public', $output['visibility']);
     }
@@ -318,7 +335,7 @@ class LocalAdapterTests extends TestCase
         $this->adapter->write('path.txt', 'contents', new Config());
         $this->adapter->setVisibility('path.txt', 'public');
         $output = $this->adapter->getVisibility('path.txt');
-        $this->assertInternalType('array', $output);
+        $this->assertIsArray($output);
         $this->assertArrayHasKey('visibility', $output);
         $this->assertEquals('public', $output['visibility']);
 
@@ -334,7 +351,7 @@ class LocalAdapterTests extends TestCase
         $this->adapter->createDir('public-dir', new Config());
         $this->adapter->setVisibility('public-dir', 'public');
         $output = $this->adapter->getVisibility('public-dir');
-        $this->assertInternalType('array', $output);
+        $this->assertIsArray($output);
         $this->assertArrayHasKey('visibility', $output);
         $this->assertEquals('public', $output['visibility']);
     }
@@ -348,7 +365,7 @@ class LocalAdapterTests extends TestCase
         $this->adapter->write('path.txt', 'contents', new Config());
         $this->adapter->setVisibility('path.txt', 'private');
         $output = $this->adapter->getVisibility('path.txt');
-        $this->assertInternalType('array', $output);
+        $this->assertIsArray($output);
         $this->assertArrayHasKey('visibility', $output);
         $this->assertEquals('private', $output['visibility']);
         $this->assertEquals("0600", substr(sprintf('%o', fileperms($this->root . 'path.txt')), -4));
@@ -363,7 +380,7 @@ class LocalAdapterTests extends TestCase
         $this->adapter->createDir('private-dir', new Config());
         $this->adapter->setVisibility('private-dir', 'private');
         $output = $this->adapter->getVisibility('private-dir');
-        $this->assertInternalType('array', $output);
+        $this->assertIsArray($output);
         $this->assertArrayHasKey('visibility', $output);
         $this->assertEquals('private', $output['visibility']);
     }
@@ -373,6 +390,100 @@ class LocalAdapterTests extends TestCase
         $this->assertFalse(
             $this->adapter->setVisibility('chmod.fail', 'public')
         );
+    }
+
+    public function testUnknownVisibility()
+    {
+        if (IS_WINDOWS) {
+            $this->markTestSkipped("Visibility not supported on Windows.");
+        }
+
+        $umask = umask(0);
+        mkdir($this->root . 'subdir', 0750);
+        umask($umask);
+
+        $output = $this->adapter->getVisibility('subdir');
+
+        $this->assertNotEquals('private', $output['visibility']);  // private is 0700 not 0750
+        $this->assertNotEquals('public', $output['visibility']);  // public is 0755 not 0750
+        $this->assertEquals('0750', $output['visibility']);
+    }
+
+    public function testCustomizedVisibility()
+    {
+        if (IS_WINDOWS) {
+            $this->markTestSkipped("Visibility not supported on Windows.");
+        }
+
+        // override a permission mapping
+        $permissions = [
+            'dir' => [
+                'private' => 0770,  // private to me and the gang
+            ],
+        ];
+
+        $adapter = new Local($this->root, LOCK_EX, Local::DISALLOW_LINKS, $permissions);
+
+        $adapter->createDir('private-dir', new Config());
+        $adapter->setVisibility('private-dir', 'private');
+
+        $output = $adapter->getVisibility('private-dir');
+
+        $this->assertEquals('private', $output['visibility']);
+        $this->assertEquals('0770', substr(sprintf('%o', fileperms($this->root . 'private-dir')), -4));
+    }
+
+    public function testCustomVisibility()
+    {
+        if (IS_WINDOWS) {
+            $this->markTestSkipped("Visibility not supported on Windows.");
+        }
+
+        // add a permission mapping
+        $permissions = [
+            'dir' => [
+                'yolo' => 0777,
+            ],
+        ];
+
+        $adapter = new Local($this->root, LOCK_EX, Local::DISALLOW_LINKS, $permissions);
+
+        $adapter->createDir('yolo-dir', new Config());
+        $adapter->setVisibility('yolo-dir', 'yolo');
+
+        $location = $this->root . 'yolo-dir';
+
+        $output = $adapter->getVisibility('yolo-dir');
+        $this->assertEquals('yolo', $output['visibility']);
+        $this->assertEquals('0777', substr(sprintf('%o', fileperms($location)), -4));
+    }
+
+    public function testFirstVisibilityOctet()
+    {
+        if (IS_WINDOWS) {
+            $this->markTestSkipped("Visibility not supported on Windows.");
+        }
+
+        $permissions = [
+            'file' => [
+                'public' => 0644,
+                'private' => 0600,
+            ],
+            'dir' => [
+                'sticky' => 01777,
+                'public' => 0755,
+                'private' => 0700,
+            ],
+        ];
+
+        $adapter = new Local($this->root, LOCK_EX, Local::DISALLOW_LINKS, $permissions);
+
+        $adapter->createDir('sticky-dir', new Config());
+        $adapter->setVisibility('sticky-dir', 'sticky');
+
+        $output = $adapter->getVisibility('sticky-dir');
+        $this->assertEquals('sticky', $output['visibility']);
+        $this->assertEquals('1777', substr(sprintf('%o', fileperms($this->root . 'sticky-dir')), -4));
     }
 
     public function testApplyPathPrefix()
@@ -387,8 +498,8 @@ class LocalAdapterTests extends TestCase
             $this->markTestSkipped("File permissions not supported on Windows.");
         }
 
-        $target = __DIR__ . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
-        $link = __DIR__ . DIRECTORY_SEPARATOR .'link_to_files';
+        $target = $this->root;
+        $link = __DIR__ . DIRECTORY_SEPARATOR . 'link_to_files';
         symlink($target, $link);
 
         $adapter = new Local($link);
@@ -396,41 +507,35 @@ class LocalAdapterTests extends TestCase
         unlink($link);
     }
 
-    /**
-     * @expectedException \League\Flysystem\NotSupportedException
-     */
     public function testLinkCausedUnsupportedException()
     {
-        $root = __DIR__ . '/files/';
-        $original = $root . 'original.txt';
-        $link = $root . 'link.txt';
+        $this->expectException(NotSupportedException::class);
+        $original = $this->root . 'original.txt';
+        $link = $this->root . 'link.txt';
         file_put_contents($original, 'something');
         symlink($original, $link);
-        $adapter = new Local($root);
-        $adapter->listContents();
+        $this->adapter->listContents();
     }
 
     public function testLinkIsSkipped()
     {
-        $root = __DIR__ . '/files/';
-        $original = $root . 'original.txt';
-        $link = $root . 'link.txt';
+        $original = $this->root . 'original.txt';
+        $link = $this->root . 'link.txt';
         file_put_contents($original, 'something');
         symlink($original, $link);
-        $adapter = new Local($root, LOCK_EX, Local::SKIP_LINKS);
+        $adapter = new Local($this->root, LOCK_EX, Local::SKIP_LINKS);
         $result = $adapter->listContents();
         $this->assertCount(1, $result);
     }
 
     public function testLinksAreDeletedDuringDeleteDir()
     {
-        $root = __DIR__ . '/files/';
-        mkdir($root . 'subdir', 0777, true);
-        $original = $root . 'original.txt';
-        $link = $root . 'subdir/link.txt';
+        mkdir($this->root . 'subdir', 0777, true);
+        $original = $this->root . 'original.txt';
+        $link = $this->root . 'subdir/link.txt';
         file_put_contents($original, 'something');
         symlink($original, $link);
-        $adapter = new Local($root, LOCK_EX, Local::SKIP_LINKS);
+        $adapter = new Local($this->root, LOCK_EX, Local::SKIP_LINKS);
 
         $this->assertTrue(is_link($link));
         $adapter->deleteDir('subdir');
@@ -441,7 +546,7 @@ class LocalAdapterTests extends TestCase
     {
         $this->expectException('League\Flysystem\UnreadableFileException');
 
-        $adapter = new Local(__DIR__ . '/files/', LOCK_EX, Local::SKIP_LINKS);
+        $adapter = new Local($this->root, LOCK_EX, Local::SKIP_LINKS);
         $reflection = new \ReflectionClass($adapter);
         $method = $reflection->getMethod('guardAgainstUnreadableFileInfo');
         $method->setAccessible(true);
@@ -454,28 +559,26 @@ class LocalAdapterTests extends TestCase
 
     public function testMimetypeFallbackOnExtension()
     {
-        $adapter = new Local(__DIR__ . '/files/', LOCK_EX);
-        $adapter->write('test.xlsx', '', new Config);
-        $this->assertEquals('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', $adapter->getMimetype('test.xlsx')['mimetype']);
+        $this->adapter->write('test.xlsx', '', new Config());
+        $this->assertEquals('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', $this->adapter->getMimetype('test.xlsx')['mimetype']);
     }
 
-    public function testDeleteFileShouldReturnTrue(){
-        $root = __DIR__ . '/files/';
-        $original = $root . 'delete.txt';
+    public function testDeleteFileShouldReturnTrue()
+    {
+        $original = $this->root . 'delete.txt';
         file_put_contents($original, 'something');
         $this->assertTrue($this->adapter->delete('delete.txt'));
     }
 
-    public function testDeleteMissingFileShouldReturnFalse(){
+    public function testDeleteMissingFileShouldReturnFalse()
+    {
         $this->assertFalse($this->adapter->delete('missing.txt'));
     }
 
-    /**
-     * @expectedException \League\Flysystem\Exception
-     */
     public function testRootDirectoryCreationProblemCausesAnError()
     {
-        $root = __DIR__ . '/files/fail.plz';
+        $this->expectException(Exception::class);
+        $root = $this->root . 'fail.plz';
         new Local($root);
     }
 }

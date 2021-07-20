@@ -2,11 +2,11 @@
 
 namespace League\Flysystem;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
 
 class UtilTests extends TestCase
 {
-    use \PHPUnitHacks;
 
     public function testEmulateDirectories()
     {
@@ -18,11 +18,38 @@ class UtilTests extends TestCase
         $output = Util::emulateDirectories($input);
         $this->assertCount(4, $output);
     }
+    public function testEmulateDirectoriesWithNumberZeroDirectoryName()
+    {
+        $input = [
+            ['dirname' => 'something/0', 'path' => 'something/0/dirname', 'type' => 'dir'],
+            ['dirname' => '0/other', 'path' => '0/other/dir', 'type' => 'dir'],
+        ];
+        $output = Util::emulateDirectories($input);
+
+        $this->assertCount(6, $output);
+    }
 
     public function testContentSize()
     {
         $this->assertEquals(5, Util::contentSize('12345'));
         $this->assertEquals(3, Util::contentSize('135'));
+    }
+
+    /**
+     * @dataProvider dbCorruptedPath
+     */
+    public function testRejectingPathWithFunkyWhitespace($path)
+    {
+        $this->expectException(CorruptedPathDetected::class);
+        Util::normalizePath($path);
+    }
+
+    /**
+     * @return array
+     */
+    public function dbCorruptedPath()
+    {
+        return [["some\0/path.txt"], ["s\x09i.php"]];
     }
 
     public function mapProvider()
@@ -67,11 +94,9 @@ class UtilTests extends TestCase
         $this->assertInstanceOf('League\Flysystem\Config', Util::ensureConfig(new Config()));
     }
 
-    /**
-     * @expectedException  LogicException
-     */
     public function testInvalidValueEnsureConfig()
     {
+        $this->expectException(LogicException::class);
         Util::ensureConfig(false);
     }
 
@@ -87,11 +112,11 @@ class UtilTests extends TestCase
     }
 
     /**
-     * @expectedException  LogicException
-     * @dataProvider       invalidPathProvider
+     * @dataProvider invalidPathProvider
      */
     public function testOutsideRootPath($path)
     {
+        $this->expectException(LogicException::class);
         Util::normalizePath($path);
     }
 
@@ -117,7 +142,6 @@ class UtilTests extends TestCase
             ['example/path/..txt', 'example/path/..txt'],
             ['\\example\\path.txt', 'example/path.txt'],
             ['\\example\\..\\path.txt', 'path.txt'],
-            ["some\0/path.txt", 'some/path.txt'],
         ];
     }
 
@@ -157,6 +181,13 @@ class UtilTests extends TestCase
         fwrite($stream, 'aaa');
         $size = Util::getStreamSize($stream);
         $this->assertEquals(3, $size);
+        fclose($stream);
+    }
+
+    public function testStreamSizeForUrl()
+    {
+        $stream = \fopen('https://flysystem.thephpleague.com/img/flysystem.svg', 'r');
+        $this->assertNull(Util::getStreamSize($stream));
         fclose($stream);
     }
 
@@ -241,6 +272,10 @@ class UtilTests extends TestCase
 
     public function testPathinfoHandlesUtf8()
     {
+        if (setlocale(LC_ALL, 'C.UTF-8', 'C.utf8') === false) {
+            $this->markTestSkipped('testPathinfoHandlesUtf8 requires UTF-8.');
+        }
+
         $path = 'files/繁體中文字/test.txt';
         $expected = [
             'path' => 'files/繁體中文字/test.txt',

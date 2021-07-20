@@ -11,7 +11,7 @@ use function sha1;
 trait CacheCallsTrait
 {
     /**
-     * @var SimpleCacheInterface $_cache The internal cache instance we are using.
+     * @var SimpleCacheInterface The internal cache instance we are using.
      */
     private $_cache;
 
@@ -25,7 +25,7 @@ trait CacheCallsTrait
     private function getCacheCallsPool(): SimpleCacheInterface
     {
         if ($this->_cache === null) {
-            $this->_cache = new ArrayPool;
+            $this->_cache = new ArrayPool();
         }
 
         return $this->_cache;

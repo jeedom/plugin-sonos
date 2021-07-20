@@ -218,7 +218,6 @@ final class Network implements NetworkInterface, LoggerAwareInterface {
 	*/
 	public function getControllerByIp(string $ip): ControllerInterface{
 		$speakers = $this->getSpeakers();
-		
 		if (!array_key_exists($ip, $speakers)) {
 			throw new NotFoundException("Unable to find a speaker for the IP address '{$ip}'");
 		}

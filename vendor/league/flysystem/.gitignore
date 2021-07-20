@@ -1,6 +1,10 @@
-vendor
+.php_cs.cache
+.phpunit.result.cache
+php-cs-fixer
 bin
+composer.lock
 coverage
 coverage.xml
-composer.lock
+phpstan.phar
 tests/files
+vendor

@@ -1,5 +1,6 @@
 <?php
 
+use League\Flysystem\Adapter\Local;
 use League\Flysystem\File;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemInterface;
@@ -57,30 +58,25 @@ class AuthorizePlugin implements PluginInterface
 
 class PluginTests extends TestCase
 {
-    use \PHPUnitHacks;
 
     protected $filesystem;
 
-    public function setup()
+    public function setup(): void
     {
-        $this->filesystem = new Filesystem($this->createMock('League\Flysystem\AdapterInterface'));
+        $this->filesystem = new Filesystem(new Local(__DIR__));
     }
 
-    /**
-     * @expectedException  \LogicException
-     */
     public function testPlugin()
     {
+        $this->expectException(LogicException::class);
         $this->filesystem->addPlugin(new MyPlugin());
         $this->assertEquals('result', $this->filesystem->beAwesome('result'));
         $this->filesystem->unknownPlugin();
     }
 
-    /**
-     * @expectedException  \LogicException
-     */
     public function testInvalidPlugin()
     {
+        $this->expectException(LogicException::class);
         $this->filesystem->addPlugin(new InvalidPlugin());
         $this->filesystem->beInvalid();
     }
@@ -96,11 +92,9 @@ class PluginTests extends TestCase
         $this->assertTrue($goodFile->authorize());
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     */
     public function testBadMagicCall()
     {
+        $this->expectException(BadMethodCallException::class);
         $file = $this->filesystem->get('foo', new File());
         $file->nonExistentMethod();
     }

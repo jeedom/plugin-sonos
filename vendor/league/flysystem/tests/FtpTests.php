@@ -2,9 +2,15 @@
 
 namespace League\Flysystem\Adapter;
 
+use DateTime;
 use ErrorException;
 use League\Flysystem\Config;
+use League\Flysystem\NotSupportedException;
+use LogicException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
+
+use const PHP_VERSION;
 
 function ftp_systype($connection)
 {
@@ -88,15 +94,19 @@ function ftp_chdir($connection, $directory)
         return false;
     }
 
-    if ($directory === 'not.found') {
-        return false;
-    }
-
-    if ($directory === 'windows.not.found') {
-        return false;
-    }
-
-    if (in_array($directory, ['rawlist-total-0.txt', 'file1.txt', 'file2.txt', 'file3.txt', 'file4.txt', 'dir1', 'file1.with-total-line.txt', 'file1.with-invalid-line.txt'])) {
+    if (in_array($directory, [
+        'not.found',
+        'windows.not.found',
+        'syno.not.found',
+        'rawlist-total-0.txt',
+        'file1.txt',
+        'file2.txt',
+        'file3.txt',
+        'file4.txt',
+        'dir1',
+        'file1.with-total-line.txt',
+        'file1.with-invalid-line.txt',
+    ], true)) {
         return false;
     }
 
@@ -114,8 +124,16 @@ function ftp_raw($connection, $command)
         return [0 => '421 Service not available, closing control connection'];
     }
 
-	if ($command === 'OPTS UTF8 ON') {
+    if ($command === 'OPTS UTF8 ON') {
         return [0 => '200 UTF8 set to on'];
+    }
+
+    if ($command === 'NOOP') {
+        if (getenv('FTP_CLOSE_THROW') === 'DISCONNECT_CATCH') {
+            return [0 => '500 Internal error'];
+        }
+
+        return [0 => '200 Zzz...'];
     }
 
     if ($command === 'STAT syno.not.found') {
@@ -363,7 +381,6 @@ function ftp_set_option($connection, $option, $value)
 
 class FtpTests extends TestCase
 {
-    use \PHPUnitHacks;
 
     protected $options = [
         'host' => 'example.org',
@@ -379,7 +396,7 @@ class FtpTests extends TestCase
         'recurseManually' => false,
     ];
 
-    public function setUp()
+    public function setUp(): void
     {
         putenv('FTP_CLOSE_THROW=nope');
     }
@@ -393,7 +410,7 @@ class FtpTests extends TestCase
         $adapter = new Ftp($this->options);
         $this->assertOptionsAreRetrievable($adapter);
         $listing = $adapter->listContents('', true);
-        $this->assertInternalType('array', $listing);
+        $this->assertIsArray($listing);
         $this->assertGetterFailuresReturnFalse($adapter);
         $this->assertTrue($adapter->rename('a', 'b'));
         $this->assertTrue($adapter->delete('a'));
@@ -405,10 +422,10 @@ class FtpTests extends TestCase
         $result = $adapter->getMimetype('something.txt');
         $this->assertEquals('text/plain', $result['mimetype']);
         $this->assertFalse($adapter->createDir('some.nested/mkdir.fail', new Config()));
-        $this->assertInternalType('array', $adapter->write('unknowndir/file.txt', 'contents', new Config(['visibility' => 'public'])));
-        $this->assertInternalType('array', $adapter->writeStream('unknowndir/file.txt', tmpfile(), new Config(['visibility' => 'public'])));
-        $this->assertInternalType('array', $adapter->updateStream('unknowndir/file.txt', tmpfile(), new Config()));
-        $this->assertInternalType('array', $adapter->getTimestamp('some/file.ext'));
+        $this->assertIsArray($adapter->write('unknowndir/file.txt', 'contents', new Config(['visibility' => 'public'])));
+        $this->assertIsArray($adapter->writeStream('unknowndir/file.txt', tmpfile(), new Config(['visibility' => 'public'])));
+        $this->assertIsArray($adapter->updateStream('unknowndir/file.txt', tmpfile(), new Config()));
+        $this->assertIsArray($adapter->getTimestamp('some/file.ext'));
     }
 
     /**
@@ -434,19 +451,6 @@ class FtpTests extends TestCase
         $this->assertTrue($adapter->isConnected());
         $adapter->disconnect();
         $this->assertFalse($adapter->isConnected());
-    }
-
-    /**
-     * @depends testInstantiable
-     */
-    public function testIsConnectedTimeoutPassthu()
-    {
-        putenv('FTP_CLOSE_THROW=DISCONNECT_RETHROW');
-
-        $this->expectException('ErrorException');
-        $adapter = new Ftp(array_merge($this->options, ['host' => 'disconnect.check']));
-        $adapter->connect();
-        $adapter->isConnected();
     }
 
     /**
@@ -494,7 +498,7 @@ class FtpTests extends TestCase
     {
         $adapter = new Ftp($this->options);
         $metadata = $adapter->getMetadata('file1.txt');
-        $this->assertInternalType('array', $metadata);
+        $this->assertIsArray($metadata);
         $this->assertEquals('file', $metadata['type']);
         $this->assertEquals('file1.txt', $metadata['path']);
     }
@@ -515,7 +519,7 @@ class FtpTests extends TestCase
     {
         $adapter = new Ftp($this->options);
         $metadata = $adapter->getMetadata('0');
-        $this->assertInternalType('array', $metadata);
+        $this->assertIsArray($metadata);
         $this->assertEquals('file', $metadata['type']);
         $this->assertEquals('0', $metadata['path']);
     }
@@ -537,7 +541,7 @@ class FtpTests extends TestCase
     {
         $adapter = new Ftp($this->options);
         $metadata = $adapter->getMetadata('file2.txt');
-        $this->assertInternalType('array', $metadata);
+        $this->assertIsArray($metadata);
         $this->assertEquals('file', $metadata['type']);
         $this->assertEquals('file2.txt', $metadata['path']);
         $this->assertEquals(1432382940, $metadata['timestamp']);
@@ -545,7 +549,7 @@ class FtpTests extends TestCase
         $this->assertEquals(684, $metadata['size']);
 
         $metadata = $adapter->getMetadata('file3.txt');
-        $this->assertInternalType('array', $metadata);
+        $this->assertIsArray($metadata);
         $this->assertEquals('file', $metadata['type']);
         $this->assertEquals('file3.txt', $metadata['path']);
         $this->assertEquals(1473163740, $metadata['timestamp']);
@@ -553,7 +557,7 @@ class FtpTests extends TestCase
         $this->assertEquals(684, $metadata['size']);
 
         $metadata = $adapter->getMetadata('file4.txt');
-        $this->assertInternalType('array', $metadata);
+        $this->assertIsArray($metadata);
         $this->assertEquals('file', $metadata['type']);
         $this->assertEquals('file4.txt', $metadata['path']);
         $this->assertEquals(1464005340, $metadata['timestamp']);
@@ -605,7 +609,6 @@ class FtpTests extends TestCase
         $adapter = new Ftp($this->options);
 
         $listing = $adapter->listContents('lastfiledir');
-
         $last_modified_file = reset($listing);
         foreach ($listing as $file) {
             $file_time = $adapter->getTimestamp($file['path'])['timestamp'];
@@ -634,22 +637,166 @@ class FtpTests extends TestCase
     /**
      * @depends testInstantiable
      */
-    public function testListingDoNotIncludeTimestamp()
+    public function testListingNotEmpty()
     {
         $adapter = new Ftp($this->options);
 
         $listing = $adapter->listContents('');
 
         $this->assertNotEmpty($listing);
-        $this->assertArrayNotHasKey('timestamp', $listing);
+    }
+
+    public function expectedUnixListings()
+    {
+        return [
+            [
+                /*$directory=*/ '',
+                /*$recursive=*/ false,
+                /*$enableTimestamps=*/ true,
+                /*'expectedListing'=>*/ [
+                    [
+                        'type' => 'dir',
+                        'path' => 'cgi-bin',
+                        'timestamp' => 1350086400,
+                    ],
+                    [
+                        'type' => 'dir',
+                        'path' => 'folder',
+                        'timestamp' => DateTime::createFromFormat('M d H:i', 'Nov 24 13:59')->getTimestamp(),
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'index.html',
+                        'visibility' => 'public',
+                        'size' => 409,
+                        'timestamp' => 1350086400,
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'somewhere/folder/dummy.txt',
+                        'visibility' => 'public',
+                        'size' => 0,
+                        'timestamp' => DateTime::createFromFormat('M d H:i', 'Nov 24 13:59')->getTimestamp(),
+                    ],
+                ]
+            ],
+            [
+                /*$directory=*/ '',
+                /*$recursive=*/ true,
+                /*$enableTimestamps=*/ true,
+                /*'expectedListing'=>*/ [
+                    [
+                        'type' => 'dir',
+                        'path' => 'cgi-bin',
+                        'timestamp' => 1350086400,
+                    ],
+                    [
+                        'type' => 'dir',
+                        'path' => 'folder',
+                        'timestamp' => DateTime::createFromFormat('M d H:i', 'Nov 24 13:59')->getTimestamp(),
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'index.html',
+                        'visibility' => 'public',
+                        'size' => 409,
+                        'timestamp' => 1350086400,
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'somewhere/folder/dummy.txt',
+                        'visibility' => 'public',
+                        'size' => 0,
+                        'timestamp' => DateTime::createFromFormat('M d H:i', 'Nov 24 13:59')->getTimestamp(),
+                    ],
+                ]
+            ],
+            [
+                /*$directory=*/ 'lastfiledir',
+                /*$recursive=*/ true,
+                /*$enableTimestamps=*/ true,
+                /*'expectedListing'=>*/ [
+                    [
+                        'type' => 'file',
+                        'path' => 'lastfiledir/file1.txt',
+                        'visibility' => 'public',
+                        'size' => 409,
+                        'timestamp' => DateTime::createFromFormat('M d H:i', 'Aug 19 09:01')->getTimestamp(),
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'lastfiledir/file2.txt',
+                        'visibility' => 'public',
+                        'size' => 409,
+                        'timestamp' => DateTime::createFromFormat('M d H:i', 'Aug 14 09:01')->getTimestamp(),
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'lastfiledir/file3.txt',
+                        'visibility' => 'public',
+                        'size' => 409,
+                        'timestamp' => DateTime::createFromFormat('M d H:i', 'Feb 6 10:06')->getTimestamp(),
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'lastfiledir/file4.txt',
+                        'visibility' => 'public',
+                        'size' => 409,
+                        'timestamp' => 1395273600,
+                    ],
+                ]
+            ],
+            [
+                /*$directory=*/ 'lastfiledir',
+                /*$recursive=*/ true,
+                /*$enableTimestamps=*/ false,
+                /*'expectedListing'=>*/ [
+                    [
+                        'type' => 'file',
+                        'path' => 'lastfiledir/file1.txt',
+                        'visibility' => 'public',
+                        'size' => 409,
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'lastfiledir/file2.txt',
+                        'visibility' => 'public',
+                        'size' => 409,
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'lastfiledir/file3.txt',
+                        'visibility' => 'public',
+                        'size' => 409,
+                    ],
+                    [
+                        'type' => 'file',
+                        'path' => 'lastfiledir/file4.txt',
+                        'visibility' => 'public',
+                        'size' => 409,
+                    ],
+                ]
+            ]
+        ];
     }
 
     /**
      * @depends testInstantiable
-     * @expectedException RuntimeException
+     * @dataProvider expectedUnixListings
+     */
+    public function testListingFromUnixFormat($directory, $recursive, $enableTimestamps, $expectedListing)
+    {
+        $adapter = new Ftp($this->options += ['enableTimestampsOnUnixListings' => $enableTimestamps]);
+        $listing = $adapter->listContents($directory, $recursive);
+        $this->assertEquals($listing, $expectedListing);
+    }
+
+    /**
+     * @depends testInstantiable
      */
     public function testConnectFail()
     {
+        $this->expectException(RuntimeException::class);
         $adapter = new Ftp(['host' => 'fail.me', 'ssl' => false, 'transferMode' => FTP_BINARY]);
         $adapter->connect();
     }
@@ -666,40 +813,44 @@ class FtpTests extends TestCase
 
     /**
      * @depends testInstantiable
-     * @expectedException RuntimeException
      */
     public function testConnectFailSsl()
     {
+        $this->expectException(RuntimeException::class);
         $adapter = new Ftp(['host' => 'fail.me', 'ssl' => true]);
         $adapter->connect();
     }
 
     /**
      * @depends testInstantiable
-     * @expectedException RuntimeException
      */
     public function testLoginFailSsl()
     {
+        if (PHP_MAJOR_VERSION > 7) {
+            $this->markTestSkipped('PHP 8.0.0 does not accept non resource arguments.');
+        }
+
+        $this->expectException(RuntimeException::class);
         $adapter = new Ftp(['host' => 'login.fail', 'ssl' => true]);
         $adapter->connect();
     }
 
     /**
      * @depends testInstantiable
-     * @expectedException RuntimeException
      */
     public function testRootFailSsl()
     {
+        $this->expectException(RuntimeException::class);
         $adapter = new Ftp(['host' => 'chdir.fail', 'ssl' => true, 'root' => 'somewhere']);
         $adapter->connect();
     }
 
     /**
      * @depends testInstantiable
-     * @expectedException RuntimeException
      */
     public function testPassiveFailSsl()
     {
+        $this->expectException(RuntimeException::class);
         $adapter = new Ftp(['host' => 'pasv.fail', 'ssl' => true, 'root' => 'somewhere']);
         $adapter->connect();
     }
@@ -727,23 +878,22 @@ class FtpTests extends TestCase
 
     /**
      * @depends testInstantiable
-     * @expectedException \League\Flysystem\NotSupportedException
      */
     public function testItThrowsAnExceptionWhenAnInvalidSystemTypeIsSet()
     {
+        $this->expectException(NotSupportedException::class);
         $adapter = new Ftp($this->options + ['systemType' => 'unknown']);
         $adapter->listContents();
     }
 
     /**
      * @depends testInstantiable
-     * @expectedException \RuntimeException
      */
     public function testItThrowsAnExceptionWhenAnInvalidUnixListingIsFound()
     {
+        $this->expectException(RuntimeException::class);
         $adapter = new Ftp($this->options + ['systemType' => 'unix']);
-        $metadata = $adapter->getMetadata('file1.with-invalid-line.txt');
-        $this->assertEquals('file1.txt', $metadata['path']);
+        $adapter->getMetadata('file1.with-invalid-line.txt');
     }
 
     /**
@@ -757,10 +907,10 @@ class FtpTests extends TestCase
 
     /**
      * @depends testInstantiable
-     * @expectedException \RuntimeException
      */
     public function testItThrowsAnExceptionWhenAnInvalidWindowsListingIsFound()
     {
+        $this->expectException(RuntimeException::class);
         $adapter = new Ftp($this->options + ['systemType' => 'windows']);
         $metadata = $adapter->getMetadata('file1.with-invalid-line.txt');
         $this->assertEquals('file1.txt', $metadata['path']);
@@ -778,10 +928,10 @@ class FtpTests extends TestCase
 
     /**
      * @depends testInstantiable
-     * @expectedException \RuntimeException
      */
     public function testItThrowsAnExceptionWhenItCouldNotSetUtf8ModeForConnection()
     {
+        $this->expectException(RuntimeException::class);
         $adapter = new Ftp(['host' => 'utf8.fail', 'utf8' => true]);
         $adapter->setUtf8(true);
         $adapter->connect();

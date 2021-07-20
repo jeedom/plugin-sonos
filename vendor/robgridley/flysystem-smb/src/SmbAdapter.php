@@ -351,13 +351,14 @@ class SmbAdapter extends AbstractAdapter
      */
     public function getMimetype($path)
     {
-        $metadata = $this->read($path);
+        $metadata = $this->readStream($path);
 
         if ($metadata === false) {
             return false;
         }
 
-        $metadata['mimetype'] = Util::guessMimeType($path, $metadata['contents']);
+        $metadata['mimetype'] = Util::guessMimeType($path, stream_get_contents($metadata['stream'], 65536));
+        rewind($metadata['stream']);
 
         return $metadata;
     }
@@ -383,7 +384,7 @@ class SmbAdapter extends AbstractAdapter
     {
         $normalized = [
             'type' => $file->isDirectory() ? 'dir' : 'file',
-            'path' => $this->getFilePath($file),
+            'path' => ltrim($this->getFilePath($file), $this->pathSeparator),
             'timestamp' => $file->getMTime()
         ];
 
