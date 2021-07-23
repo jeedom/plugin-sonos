@@ -25,62 +25,57 @@ namespace Icewind\Streams;
  */
 class CallbackWrapper extends Wrapper {
 	/**
-	 * @var callable|null
+	 * @var callable
 	 */
 	protected $readCallback;
 
 	/**
-	 * @var callable|null
+	 * @var callable
 	 */
 	protected $writeCallback;
 
 	/**
-	 * @var callable|null
+	 * @var callable
 	 */
 	protected $closeCallback;
 
 	/**
-	 * @var callable|null
+	 * @var callable
 	 */
 	protected $readDirCallBack;
-
-	/**
-	 * @var callable|null
-	 */
-	protected $preCloseCallback;
 
 	/**
 	 * Wraps a stream with the provided callbacks
 	 *
 	 * @param resource $source
-	 * @param callable|null $read (optional)
-	 * @param callable|null $write (optional)
-	 * @param callable|null $close (optional)
-	 * @param callable|null $readDir (optional)
-	 * @param callable|null $preClose (optional)
-	 * @return resource|bool
+	 * @param callable $read (optional)
+	 * @param callable $write (optional)
+	 * @param callable $close (optional)
+	 * @param callable $readDir (optional)
+	 * @return resource
 	 *
+	 * @throws \BadMethodCallException
 	 */
-	public static function wrap($source, $read = null, $write = null, $close = null, $readDir = null, $preClose = null) {
-		$context = [
-			'source'   => $source,
-			'read'     => $read,
-			'write'    => $write,
-			'close'    => $close,
-			'readDir'  => $readDir,
-			'preClose' => $preClose,
-		];
-		return self::wrapSource($source, $context);
+	public static function wrap($source, $read = null, $write = null, $close = null, $readDir = null) {
+		$context = stream_context_create(array(
+			'callback' => array(
+				'source' => $source,
+				'read' => $read,
+				'write' => $write,
+				'close' => $close,
+				'readDir' => $readDir
+			)
+		));
+		return Wrapper::wrapSource($source, $context, 'callback', '\Icewind\Streams\CallbackWrapper');
 	}
 
 	protected function open() {
-		$context = $this->loadContext();
+		$context = $this->loadContext('callback');
 
 		$this->readCallback = $context['read'];
 		$this->writeCallback = $context['write'];
 		$this->closeCallback = $context['close'];
 		$this->readDirCallBack = $context['readDir'];
-		$this->preCloseCallback = $context['preClose'];
 		return true;
 	}
 
@@ -95,7 +90,7 @@ class CallbackWrapper extends Wrapper {
 	public function stream_read($count) {
 		$result = parent::stream_read($count);
 		if (is_callable($this->readCallback)) {
-			call_user_func($this->readCallback, strlen($result));
+			call_user_func($this->readCallback, $count);
 		}
 		return $result;
 	}
@@ -109,11 +104,6 @@ class CallbackWrapper extends Wrapper {
 	}
 
 	public function stream_close() {
-		if (is_callable($this->preCloseCallback)) {
-			call_user_func($this->preCloseCallback, $this->source);
-			// prevent further calls by potential PHP 7 GC ghosts
-			$this->preCloseCallback = null;
-		}
 		$result = parent::stream_close();
 		if (is_callable($this->closeCallback)) {
 			call_user_func($this->closeCallback);

@@ -7,48 +7,44 @@
 
 namespace Icewind\SMB;
 
-class TimeZoneProvider implements ITimeZoneProvider {
+class TimeZoneProvider {
 	/**
-	 * @var string[]
+	 * @var string
 	 */
-	private $timeZones = [];
+	private $host;
 
 	/**
-	 * @var ISystem
+	 * @var string
+	 */
+	private $timeZone;
+
+	/**
+	 * @var System
 	 */
 	private $system;
 
 	/**
-	 * @param ISystem $system
+	 * @param string $host
+	 * @param System $system
 	 */
-	public function __construct(ISystem $system) {
+	public function __construct($host, System $system) {
+		$this->host = $host;
 		$this->system = $system;
 	}
 
-	public function get(string $host): string {
-		if (!isset($this->timeZones[$host])) {
-			$timeZone = null;
+	public function get() {
+		if (!$this->timeZone) {
 			$net = $this->system->getNetPath();
-			// for local domain names we can assume same timezone
-			if ($net && $host && strpos($host, '.') !== false) {
-				$command = sprintf(
-					'%s time zone -S %s',
+			if ($net) {
+				$command = sprintf('%s time zone -S %s',
 					$net,
-					escapeshellarg($host)
+					escapeshellarg($this->host)
 				);
-				$timeZone = exec($command);
+				$this->timeZone = exec($command);
+			} else { // fallback to server timezone
+				$this->timeZone = date_default_timezone_get();
 			}
-
-			if (!$timeZone) {
-				$date = $this->system->getDatePath();
-				if ($date) {
-					$timeZone = exec($date . " +%z");
-				} else {
-					$timeZone = date_default_timezone_get();
-				}
-			}
-			$this->timeZones[$host] = $timeZone;
 		}
-		return $this->timeZones[$host];
+		return $this->timeZone;
 	}
 }

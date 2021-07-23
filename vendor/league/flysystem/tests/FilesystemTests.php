@@ -4,13 +4,14 @@ use League\Flysystem\Config;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Util;
-use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Argument\Token\TypeToken;
 use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\TestCase;
 
 class FilesystemTests extends TestCase
 {
+    use \PHPUnitHacks;
 
     /**
      * @var ObjectProphecy
@@ -154,26 +155,6 @@ class FilesystemTests extends TestCase
     {
         $this->expectException('InvalidArgumentException');
         $this->filesystem->putStream('path.txt', '__INVALID__');
-    }
-
-    /**
-     * @dataProvider methodsThatGuardAgainstClosedResources
-     */
-    public function testSupplyingClosedStreams($method)
-    {
-        $handle = tmpfile();
-        fclose($handle);
-        $this->expectException('InvalidArgumentException');
-        $this->filesystem->{$method}('path.txt', $handle);
-    }
-
-    public function methodsThatGuardAgainstClosedResources()
-    {
-        return [
-            ['putStream'],
-            ['writeStream'],
-            ['updateStream'],
-        ];
     }
 
     public function testWriteStreamInvalid()

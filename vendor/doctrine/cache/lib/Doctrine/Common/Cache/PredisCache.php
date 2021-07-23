@@ -4,24 +4,23 @@ namespace Doctrine\Common\Cache;
 
 use Predis\ClientInterface;
 
-use function array_combine;
-use function array_filter;
-use function array_map;
-use function array_values;
-use function call_user_func_array;
-use function serialize;
-use function unserialize;
-
 /**
  * Predis cache provider.
  *
- * @deprecated Deprecated without replacement in doctrine/cache 1.11. This class will be dropped in 2.0
+ * @author othillo <othillo@othillo.nl>
  */
 class PredisCache extends CacheProvider
 {
-    /** @var ClientInterface */
+    /**
+     * @var ClientInterface
+     */
     private $client;
 
+    /**
+     * @param ClientInterface $client
+     *
+     * @return void
+     */
     public function __construct(ClientInterface $client)
     {
         $this->client = $client;
@@ -33,7 +32,7 @@ class PredisCache extends CacheProvider
     protected function doFetch($id)
     {
         $result = $this->client->get($id);
-        if ($result === null) {
+        if (null === $result) {
             return false;
         }
 
@@ -45,7 +44,7 @@ class PredisCache extends CacheProvider
      */
     protected function doFetchMultiple(array $keys)
     {
-        $fetchedItems = call_user_func_array([$this->client, 'mget'], array_values($keys));
+        $fetchedItems = call_user_func_array(array($this->client, 'mget'), $keys);
 
         return array_map('unserialize', array_filter(array_combine($keys, $fetchedItems)));
     }
@@ -60,20 +59,18 @@ class PredisCache extends CacheProvider
 
             // Keys have lifetime, use SETEX for each of them
             foreach ($keysAndValues as $key => $value) {
-                $response = (string) $this->client->setex($key, $lifetime, serialize($value));
+                $response = $this->client->setex($key, $lifetime, serialize($value));
 
-                if ($response == 'OK') {
-                    continue;
+                if ((string) $response != 'OK') {
+                    $success = false;
                 }
-
-                $success = false;
             }
 
             return $success;
         }
 
         // No lifetime, use MSET
-        $response = $this->client->mset(array_map(static function ($value) {
+        $response = $this->client->mset(array_map(function ($value) {
             return serialize($value);
         }, $keysAndValues));
 
@@ -114,14 +111,6 @@ class PredisCache extends CacheProvider
     /**
      * {@inheritdoc}
      */
-    protected function doDeleteMultiple(array $keys)
-    {
-        return $this->client->del($keys) >= 0;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function doFlush()
     {
         $response = $this->client->flushdb();
@@ -136,12 +125,12 @@ class PredisCache extends CacheProvider
     {
         $info = $this->client->info();
 
-        return [
+        return array(
             Cache::STATS_HITS              => $info['Stats']['keyspace_hits'],
             Cache::STATS_MISSES            => $info['Stats']['keyspace_misses'],
             Cache::STATS_UPTIME            => $info['Server']['uptime_in_seconds'],
             Cache::STATS_MEMORY_USAGE      => $info['Memory']['used_memory'],
-            Cache::STATS_MEMORY_AVAILABLE  => false,
-        ];
+            Cache::STATS_MEMORY_AVAILABLE  => false
+        );
     }
 }

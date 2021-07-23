@@ -3,10 +3,6 @@
 namespace duncan3dc\Cache;
 
 use duncan3dc\Cache\Exceptions\CacheKeyException;
-use function is_array;
-use function is_string;
-use function preg_match;
-use function strlen;
 
 trait CacheKeyTrait
 {
@@ -16,7 +12,6 @@ trait CacheKeyTrait
      * @param string $key
      *
      * @return void
-     * @throws CacheKeyException
      */
     protected function validateKey($key)
     {
@@ -40,18 +35,11 @@ trait CacheKeyTrait
      * @param array|\Traversable $keys
      *
      * @return void
-     * @throws CacheKeyException
      */
     private function validateKeys($keys)
     {
-        if (is_array($keys)) {
-            return;
+        if (!is_array($keys) || $keys instanceof \Traversable) {
+            throw new CacheKeyException("Invalid keys, must be iterable");
         }
-
-        if ($keys instanceof \Traversable) {
-            return;
-        }
-
-        throw new CacheKeyException("Invalid keys, must be iterable");
     }
 }

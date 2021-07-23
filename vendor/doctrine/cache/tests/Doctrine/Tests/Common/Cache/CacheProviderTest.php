@@ -2,54 +2,48 @@
 
 namespace Doctrine\Tests\Common\Cache;
 
-use Doctrine\Common\Cache\CacheProvider;
-use Doctrine\Tests\DoctrineTestCase;
-use PHPUnit_Framework_MockObject_MockObject;
-
-use function assert;
-
-class CacheProviderTest extends DoctrineTestCase
+class CacheProviderTest extends \Doctrine\Tests\DoctrineTestCase
 {
-    public function testFetchMultiWillFilterNonRequestedKeys(): void
+    public function testFetchMultiWillFilterNonRequestedKeys()
     {
+        /* @var $cache \Doctrine\Common\Cache\CacheProvider|\PHPUnit_Framework_MockObject_MockObject */
         $cache = $this->getMockForAbstractClass(
-            CacheProvider::class,
-            [],
+            'Doctrine\Common\Cache\CacheProvider',
+            array(),
             '',
             true,
             true,
             true,
-            ['doFetchMultiple']
+            array('doFetchMultiple')
         );
-        assert($cache instanceof CacheProvider || $cache instanceof PHPUnit_Framework_MockObject_MockObject);
 
         $cache
             ->expects($this->once())
             ->method('doFetchMultiple')
-            ->will($this->returnValue([
+            ->will($this->returnValue(array(
                 '[foo][1]' => 'bar',
                 '[bar][1]' => 'baz',
                 '[baz][1]' => 'tab',
-            ]));
+            )));
 
-        self::assertEquals(
-            ['foo' => 'bar', 'bar' => 'baz'],
-            $cache->fetchMultiple(['foo', 'bar'])
+        $this->assertEquals(
+            array('foo' => 'bar', 'bar' => 'baz'),
+            $cache->fetchMultiple(array('foo', 'bar'))
         );
     }
 
-    public function testFailedDeleteAllDoesNotChangeNamespaceVersion(): void
+    public function testFailedDeleteAllDoesNotChangeNamespaceVersion()
     {
+        /* @var $cache \Doctrine\Common\Cache\CacheProvider|\PHPUnit_Framework_MockObject_MockObject */
         $cache = $this->getMockForAbstractClass(
-            CacheProvider::class,
-            [],
+            'Doctrine\Common\Cache\CacheProvider',
+            array(),
             '',
             true,
             true,
             true,
-            ['doFetch', 'doSave', 'doContains']
+            array('doFetch', 'doSave', 'doContains')
         );
-        assert($cache instanceof CacheProvider || $cache instanceof PHPUnit_Framework_MockObject_MockObject);
 
         $cache
             ->expects($this->once())
@@ -72,22 +66,22 @@ class CacheProviderTest extends DoctrineTestCase
             ->with('[key][1]')
             ->will($this->returnValue(true));
 
-        self::assertFalse($cache->deleteAll(), 'deleteAll() returns false when saving the namespace version fails');
+        $this->assertFalse($cache->deleteAll(), 'deleteAll() returns false when saving the namespace version fails');
         $cache->contains('key');
     }
 
-    public function testSaveMultipleNoFail(): void
+    public function testSaveMultipleNoFail()
     {
+        /* @var $cache \Doctrine\Common\Cache\CacheProvider|\PHPUnit_Framework_MockObject_MockObject */
         $cache = $this->getMockForAbstractClass(
-            CacheProvider::class,
-            [],
+            'Doctrine\Common\Cache\CacheProvider',
+            array(),
             '',
             true,
             true,
             true,
-            ['doSave']
+            array('doSave')
         );
-        assert($cache instanceof CacheProvider || $cache instanceof PHPUnit_Framework_MockObject_MockObject);
 
         $cache
             ->expects($this->at(1))
@@ -101,50 +95,9 @@ class CacheProviderTest extends DoctrineTestCase
             ->with('[kok][1]', 'vok', 0)
             ->will($this->returnValue(true));
 
-        $cache->saveMultiple([
+        $cache->saveMultiple(array(
             'kerr'  => 'verr',
             'kok'   => 'vok',
-        ]);
-    }
-
-    public function testDeleteMultipleNoFail(): void
-    {
-        $cache = $this
-            ->getMockBuilder(CacheProvider::class)
-            ->setMethods(['doDelete'])
-            ->getMockForAbstractClass();
-        assert($cache instanceof CacheProvider || $cache instanceof PHPUnit_Framework_MockObject_MockObject);
-
-        $cache
-            ->expects($this->at(1))
-            ->method('doDelete')
-            ->with('[kerr][1]')
-            ->will($this->returnValue(false));
-
-        $cache
-            ->expects($this->at(2))
-            ->method('doDelete')
-            ->with('[kok][1]')
-            ->will($this->returnValue(true));
-
-        $cache->deleteMultiple(['kerr', 'kok']);
-    }
-
-    public function testInvalidNamespaceVersionCacheEntry(): void
-    {
-        $cache = $this->getMockForAbstractClass(CacheProvider::class);
-        assert($cache instanceof CacheProvider || $cache instanceof PHPUnit_Framework_MockObject_MockObject);
-
-        $cache->expects($this->once())
-              ->method('doFetch')
-              ->with('DoctrineNamespaceCacheKey[]')
-              ->willReturn('corruptedStringKey');
-
-        $cache->expects($this->once())
-              ->method('doSave')
-              ->with('DoctrineNamespaceCacheKey[]', 2, 0)
-              ->willReturn(true);
-
-        self::assertTrue($cache->deleteAll());
+        ));
     }
 }

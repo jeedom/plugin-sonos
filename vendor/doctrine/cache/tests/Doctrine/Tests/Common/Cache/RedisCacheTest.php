@@ -2,74 +2,58 @@
 
 namespace Doctrine\Tests\Common\Cache;
 
-use Doctrine\Common\Cache\Cache;
-use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\RedisCache;
-use Redis;
-
-use function defined;
-use function extension_loaded;
+use Doctrine\Common\Cache\Cache;
 
 /**
  * @requires extension redis
  */
 class RedisCacheTest extends CacheTest
 {
-    /** @var Redis */
     private $_redis;
 
-    protected function setUp(): void
+    protected function setUp()
     {
-        $this->_redis = new Redis();
-        $ok           = @$this->_redis->connect('127.0.0.1');
-        if ($ok) {
-            return;
+        $this->_redis = new \Redis();
+        $ok = @$this->_redis->connect('127.0.0.1');
+        if (!$ok) {
+            $this->markTestSkipped('Cannot connect to Redis.');
         }
-
-        $this->markTestSkipped('Cannot connect to Redis.');
     }
 
-    public function testHitMissesStatsAreProvided(): void
+    public function testHitMissesStatsAreProvided()
     {
-        $cache = $this->getCacheDriver();
+        $cache = $this->_getCacheDriver();
         $stats = $cache->getStats();
 
-        self::assertNotNull($stats[Cache::STATS_HITS]);
-        self::assertNotNull($stats[Cache::STATS_MISSES]);
+        $this->assertNotNull($stats[Cache::STATS_HITS]);
+        $this->assertNotNull($stats[Cache::STATS_MISSES]);
     }
 
-    public function testGetRedisReturnsInstanceOfRedis(): void
+    public function testGetRedisReturnsInstanceOfRedis()
     {
-        self::assertInstanceOf(Redis::class, $this->getCacheDriver()->getRedis());
+        $this->assertInstanceOf('Redis', $this->_getCacheDriver()->getRedis());
     }
 
-    public function testSerializerOptionWithOutIgbinaryExtension(): void
+    public function testSerializerOptionWithOutIgbinaryExtension()
     {
         if (defined('Redis::SERIALIZER_IGBINARY') && extension_loaded('igbinary')) {
             $this->markTestSkipped('Extension igbinary is loaded.');
         }
 
-        self::assertEquals(
-            Redis::SERIALIZER_PHP,
-            $this->getCacheDriver()->getRedis()->getOption(Redis::OPT_SERIALIZER)
+        $this->assertEquals(
+            \Redis::SERIALIZER_PHP,
+            $this->_getCacheDriver()->getRedis()->getOption(\Redis::OPT_SERIALIZER)
         );
     }
 
-    public function testDeleteAll(): void
-    {
-        $this->markTestSkipped('this is probably a bug that needs to be fixed');
-    }
-
-    public function testDeleteAllAndNamespaceVersioningBetweenCaches(): void
-    {
-        $this->markTestSkipped('this is probably a bug that needs to be fixed');
-    }
-
-    protected function getCacheDriver(): CacheProvider
+    /**
+     * {@inheritDoc}
+     */
+    protected function _getCacheDriver()
     {
         $driver = new RedisCache();
         $driver->setRedis($this->_redis);
-
         return $driver;
     }
 }

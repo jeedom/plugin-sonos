@@ -6,11 +6,12 @@ use PHPUnit\Framework\TestCase;
 
 class FileTests extends TestCase
 {
+    use \PHPUnitHacks;
 
     /** @var Filesystem */
     protected $filesystem;
 
-    public function setup(): void
+    public function setup()
     {
         clearstatcache();
         $fs = new Adapter\Local(__DIR__ . '/');
@@ -20,7 +21,7 @@ class FileTests extends TestCase
         $this->filesystem = new Filesystem($fs);
     }
 
-    public function tearDown(): void
+    public function tearDown()
     {
         try {
             $this->filesystem->delete('file.txt');
@@ -53,7 +54,7 @@ class FileTests extends TestCase
     public function testReadSteam()
     {
         $file = $this->getFile();
-        $this->assertIsResource($file->readStream());
+        $this->assertInternalType('resource', $file->readStream());
     }
 
     public function testWrite()

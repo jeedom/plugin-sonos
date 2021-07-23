@@ -8,6 +8,7 @@
 
 namespace Icewind\SMB;
 
+
 interface INotifyHandler {
 	// https://msdn.microsoft.com/en-us/library/dn392331.aspx
 	const NOTIFY_ADDED = 1;
@@ -25,21 +26,21 @@ interface INotifyHandler {
 	 *
 	 * @return Change[]
 	 */
-	public function getChanges(): array;
+	public function getChanges();
 
 	/**
 	 * Listen actively to all incoming changes
 	 *
 	 * Note that this is a blocking process and will cause the process to block forever if not explicitly terminated
 	 *
-	 * @param callable(Change):?bool $callback
+	 * @param callable $callback
 	 */
-	public function listen(callable $callback): void;
+	public function listen($callback);
 
 	/**
 	 * Stop listening for changes
 	 *
 	 * Note that any pending changes will be discarded
 	 */
-	public function stop(): void;
+	public function stop();
 }

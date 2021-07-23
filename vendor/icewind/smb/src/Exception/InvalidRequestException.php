@@ -13,11 +13,15 @@ class InvalidRequestException extends Exception {
 	 */
 	protected $path;
 
-	public function __construct(string $path = "", int $code = 0, \Throwable $previous = null) {
+	/**
+	 * @param string $path
+	 * @param int $code
+	 */
+	public function __construct($path, $code = 0) {
 		$class = get_class($this);
 		$parts = explode('\\', $class);
 		$baseName = array_pop($parts);
-		parent::__construct('Invalid request for ' . $path . ' (' . $baseName . ')', $code, $previous);
+		parent::__construct('Invalid request for ' . $path . ' (' . $baseName . ')', $code);
 		$this->path = $path;
 	}
 

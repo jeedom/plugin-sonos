@@ -7,5 +7,4 @@
 
 namespace Icewind\SMB\Exception;
 
-class NoLoginServerException extends ConnectException {
-}
+class NoLoginServerException extends ConnectException {}

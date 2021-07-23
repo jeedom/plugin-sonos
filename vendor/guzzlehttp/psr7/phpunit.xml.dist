@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-    backupGlobals="true"
-    colors="true"
-    beStrictAboutOutputDuringTests="true"
-    beStrictAboutTestsThatDoNotTestAnything="true"
-    bootstrap="vendor/autoload.php"
->
+<phpunit bootstrap="tests/bootstrap.php"
+         colors="true">
   <testsuites>
-    <testsuite name="GuzzleHttp PSR7 Test Suite">
-      <directory>tests/</directory>
-      <exclude>tests/Integration</exclude>
-    </testsuite>
-    <testsuite name="Integration">
-      <directory>tests/Integration</directory>
+    <testsuite>
+      <directory>tests</directory>
     </testsuite>
   </testsuites>
-
   <filter>
     <whitelist>
-      <directory suffix=".php">src/</directory>
+      <directory suffix=".php">src</directory>
     </whitelist>
   </filter>
 </phpunit>

@@ -15,24 +15,23 @@ class CallbackWrapperTest extends WrapperTest {
 	 * @param callable $write
 	 * @param callable $close
 	 * @param callable $readDir
-	 * @param callable $preClose
 	 * @return resource
 	 */
-	protected function wrapSource($source, $read = null, $write = null, $close = null, $readDir = null, $preClose = null) {
-		return \Icewind\Streams\CallbackWrapper::wrap($source, $read, $write, $close, $readDir, $preClose);
+	protected function wrapSource($source, $read = null, $write = null, $close = null, $readDir = null) {
+		return \Icewind\Streams\CallbackWrapper::wrap($source, $read, $write, $close, $readDir);
 	}
 
+	/**
+	 * @expectedException \BadMethodCallException
+	 */
 	public function testWrapInvalidSource() {
-		$this->expectException(\BadMethodCallException::class);
 		$this->wrapSource('foo');
 	}
 
 	public function testReadCallback() {
 		$called = false;
-		$bytesRead = 0;
-		$callBack = function ($count) use (&$called, &$bytesRead) {
+		$callBack = function () use (&$called) {
 			$called = true;
-			$bytesRead += $count;
 		};
 
 		$source = fopen('php://temp', 'r+');
@@ -40,11 +39,8 @@ class CallbackWrapperTest extends WrapperTest {
 		rewind($source);
 
 		$wrapped = $this->wrapSource($source, $callBack);
-		$this->assertSame('foo', fread($wrapped, 3));
+		$this->assertEquals('foo', fread($wrapped, 3));
 		$this->assertTrue($called);
-
-		$this->assertSame('bar', fread($wrapped, 1000));
-		$this->assertSame(6, $bytesRead);
 	}
 
 	public function testWriteCallback() {
@@ -57,7 +53,7 @@ class CallbackWrapperTest extends WrapperTest {
 
 		$wrapped = $this->wrapSource($source, null, $callBack);
 		fwrite($wrapped, 'foobar');
-		$this->assertSame('foobar', $lastData);
+		$this->assertEquals('foobar', $lastData);
 	}
 
 	public function testCloseCallback() {
@@ -85,23 +81,6 @@ class CallbackWrapperTest extends WrapperTest {
 
 		$wrapped = $this->wrapSource($source, null, null, null, $callBack);
 		readdir($wrapped);
-		$this->assertTrue($called);
-	}
-
-	public function testPreCloseCallback() {
-		$called = false;
-
-		$source = fopen('php://temp', 'r+');
-		fwrite($source, 'foobar');
-		rewind($source);
-
-		$callBack = function ($stream) use (&$called, $source) {
-			$called = true;
-			$this->assertSame($stream, $source);
-		};
-
-		$wrapped = $this->wrapSource($source, null, null, null, null, $callBack);
-		fclose($wrapped);
 		$this->assertTrue($called);
 	}
 }

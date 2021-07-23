@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class GetWithMetadataTests extends TestCase
 {
+    use \PHPUnitHacks;
 
     /**
      * @var \Prophecy\Prophecy\ObjectProphecy

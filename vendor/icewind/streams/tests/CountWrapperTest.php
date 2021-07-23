@@ -21,6 +21,7 @@
 
 namespace Icewind\Streams\Tests;
 
+
 use Icewind\Streams\CountWrapper;
 
 class CountWrapperTest extends WrapperTest {
@@ -45,7 +46,7 @@ class CountWrapperTest extends WrapperTest {
 
 		stream_get_contents($wrapped);
 		fclose($wrapped);
-		$this->assertSame(6, $count);
+		$this->assertEquals(6, $count);
 	}
 
 	public function testWriteCount() {
@@ -59,6 +60,6 @@ class CountWrapperTest extends WrapperTest {
 
 		fwrite($wrapped, 'foobar');
 		fclose($wrapped);
-		$this->assertSame(6, $count);
+		$this->assertEquals(6, $count);
 	}
 }

@@ -5,11 +5,12 @@ use PHPUnit\Framework\TestCase;
 
 class ForcedRenamePluginTests extends TestCase
 {
+    use \PHPUnitHacks;
 
     protected $filesystem;
     protected $plugin;
 
-    public function setUp(): void
+    public function setUp()
     {
         $this->filesystem = $this->prophesize('League\Flysystem\FilesystemInterface');
         $this->plugin = new ForcedRename();

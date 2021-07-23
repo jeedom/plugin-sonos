@@ -2,12 +2,12 @@
 
 use League\Flysystem\Adapter\NullAdapter;
 use League\Flysystem\Config;
-use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use PHPUnit\Framework\TestCase;
 
 class NullAdapterTest extends TestCase
 {
+    use \PHPUnitHacks;
 
     /**
      * @return Filesystem
@@ -30,9 +30,11 @@ class NullAdapterTest extends TestCase
         $this->assertFalse($fs->has('path'));
     }
 
+    /**
+     * @expectedException  \League\Flysystem\FileNotFoundException
+     */
     public function testRead()
     {
-        $this->expectException(FileNotFoundException::class);
         $fs = $this->getFilesystem();
         $fs->read('something');
     }
@@ -90,12 +92,12 @@ class NullAdapterTest extends TestCase
     public function testArrayResult($method)
     {
         $adapter = new NullAdapter();
-        $this->assertIsArray($adapter->{$method}('one', tmpfile(), new Config(['visibility' => 'public'])));
+        $this->assertInternalType('array', $adapter->{$method}('one', tmpfile(), new Config(['visibility' => 'public'])));
     }
 
     public function testArrayResultForCreateDir()
     {
         $adapter = new NullAdapter();
-        $this->assertIsArray($adapter->createDir('one', new Config(['visibility' => 'public'])));
+        $this->assertInternalType('array', $adapter->createDir('one', new Config(['visibility' => 'public'])));
     }
 }

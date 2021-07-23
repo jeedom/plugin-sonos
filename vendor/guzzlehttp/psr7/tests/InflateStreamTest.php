@@ -1,5 +1,4 @@
 <?php
-
 namespace GuzzleHttp\Tests\Psr7;
 
 use GuzzleHttp\Psr7;
@@ -11,27 +10,27 @@ class InflateStreamTest extends BaseTest
     public function testInflatesStreams()
     {
         $content = gzencode('test');
-        $a = Psr7\Utils::streamFor($content);
+        $a = Psr7\stream_for($content);
         $b = new InflateStream($a);
-        self::assertSame('test', (string) $b);
+        $this->assertEquals('test', (string) $b);
     }
 
     public function testInflatesStreamsWithFilename()
     {
         $content = $this->getGzipStringWithFilename('test');
-        $a = Psr7\Utils::streamFor($content);
+        $a = Psr7\stream_for($content);
         $b = new InflateStream($a);
-        self::assertSame('test', (string) $b);
+        $this->assertEquals('test', (string) $b);
     }
 
     public function testInflatesStreamsPreserveSeekable()
     {
         $content = $this->getGzipStringWithFilename('test');
-        $seekable = Psr7\Utils::streamFor($content);
-        $nonSeekable = new NoSeekStream(Psr7\Utils::streamFor($content));
+        $seekable = Psr7\stream_for($content);
+        $nonSeekable = new NoSeekStream(Psr7\stream_for($content));
 
-        self::assertTrue((new InflateStream($seekable))->isSeekable());
-        self::assertFalse((new InflateStream($nonSeekable))->isSeekable());
+        $this->assertTrue((new InflateStream($seekable))->isSeekable());
+        $this->assertFalse((new InflateStream($nonSeekable))->isSeekable());
     }
 
     private function getGzipStringWithFilename($original_string)

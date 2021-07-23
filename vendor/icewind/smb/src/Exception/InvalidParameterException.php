@@ -7,5 +7,4 @@
 
 namespace Icewind\SMB\Exception;
 
-class InvalidParameterException extends InvalidRequestException {
-}
+class InvalidParameterException extends InvalidRequestException {}

@@ -11,10 +11,10 @@
         }
     ],
     "require": {
-        "php": ">=5.5"
+        "php": ">=5.5.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.4 || ^5.1"
+        "phpunit/phpunit": "^4.8.36"
     },
     "autoload": {
         "psr-4": {
@@ -28,8 +28,8 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/simple-phpunit",
-        "test-ci": "vendor/bin/simple-phpunit --coverage-text"
+        "test": "vendor/bin/phpunit",
+        "test-ci": "vendor/bin/phpunit --coverage-text"
     },
     "extra": {
         "branch-alias": {

@@ -2,172 +2,73 @@
 
 namespace Doctrine\Tests\Common\Cache;
 
-use ArrayIterator;
+use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\ChainCache;
 
 class ChainCacheTest extends CacheTest
 {
-    protected function getCacheDriver(): CacheProvider
+    protected function _getCacheDriver()
     {
-        return new ChainCache([new ArrayCache()]);
+        return new ChainCache(array(new ArrayCache()));
     }
 
-    public function testGetStats(): void
+    public function testLifetime()
     {
-        $cache = $this->getCacheDriver();
+        $this->markTestSkipped('The ChainCache test uses ArrayCache which does not implement TTL currently.');
+    }
+
+    public function testGetStats()
+    {
+        $cache = $this->_getCacheDriver();
         $stats = $cache->getStats();
 
-        self::assertIsArray($stats);
+        $this->assertInternalType('array', $stats);
     }
 
-    public function testOnlyFetchFirstOne(): void
+    public function testOnlyFetchFirstOne()
     {
         $cache1 = new ArrayCache();
-        $cache2 = $this->getMockForAbstractClass(CacheProvider::class);
+        $cache2 = $this->getMockForAbstractClass('Doctrine\Common\Cache\CacheProvider');
 
         $cache2->expects($this->never())->method('doFetch');
 
-        $chainCache = new ChainCache([$cache1, $cache2]);
+        $chainCache = new ChainCache(array($cache1, $cache2));
         $chainCache->save('id', 'bar');
 
-        self::assertEquals('bar', $chainCache->fetch('id'));
+        $this->assertEquals('bar', $chainCache->fetch('id'));
     }
 
-    public function testOnlyFetchFirstCompleteSet(): void
-    {
-        $cache1 = new ArrayCache();
-        $cache2 = $this
-            ->getMockBuilder(CacheProvider::class)
-            ->setMethods(['doFetchMultiple'])
-            ->getMockForAbstractClass();
-
-        $cache2->expects($this->never())->method('doFetchMultiple');
-
-        $chainCache = new ChainCache([$cache1, $cache2]);
-        $chainCache->saveMultiple(['bar' => 'Bar', 'foo' => 'Foo']);
-
-        self::assertEquals(['bar' => 'Bar', 'foo' => 'Foo'], $chainCache->fetchMultiple(['bar', 'foo']));
-    }
-
-    public function testFetchPropagateToFastestCache(): void
+    public function testFetchPropagateToFastestCache()
     {
         $cache1 = new ArrayCache();
         $cache2 = new ArrayCache();
 
         $cache2->save('bar', 'value');
 
-        $chainCache = new ChainCache([$cache1, $cache2]);
+        $chainCache = new ChainCache(array($cache1, $cache2));
 
-        self::assertFalse($cache1->contains('bar'));
-
-        $result = $chainCache->fetch('bar');
-
-        self::assertEquals('value', $result);
-        self::assertTrue($cache1->contains('bar'));
-    }
-
-    public function testFetchPropagatesToFastestCacheUsingDefaultLifeTimeForDownstreamCacheProviders(): void
-    {
-        $defaultLifeTimeForDownstreamCacheProviders = 0;
-
-        $cache1 = $this
-            ->getMockBuilder(ArrayCache::class)
-            ->setMethods(['doSave'])
-            ->getMock();
-        $cache1
-            ->expects($this->once())
-            ->method('doSave')
-            ->with('[bar][1]', 'value', $defaultLifeTimeForDownstreamCacheProviders);
-        $cache2 = new ArrayCache();
-        $cache2->save('bar', 'value');
-
-        $chainCache = new ChainCache([$cache1, $cache2]);
+        $this->assertFalse($cache1->contains('bar'));
 
         $result = $chainCache->fetch('bar');
 
-        self::assertEquals('value', $result);
+        $this->assertEquals('value', $result);
+        $this->assertTrue($cache2->contains('bar'));
     }
 
-    public function testFetchPropagatesToFastestCacheUsingIndicatedDefaultLifeTimeForDownstreamCacheProviders(): void
-    {
-        $specificDefaultLifeTimeForDownstreamCacheProviders = 12345;
-
-        $cache1 = $this
-            ->getMockBuilder(ArrayCache::class)
-            ->setMethods(['doSave'])
-            ->getMock();
-        $cache1
-            ->expects($this->once())
-            ->method('doSave')
-            ->with('[bar][1]', 'value', $specificDefaultLifeTimeForDownstreamCacheProviders);
-        $cache2 = new ArrayCache();
-        $cache2->save('bar', 'value');
-
-        $chainCache = new ChainCache([$cache1, $cache2]);
-        $chainCache->setDefaultLifeTimeForDownstreamCacheProviders($specificDefaultLifeTimeForDownstreamCacheProviders);
-
-        $result = $chainCache->fetch('bar');
-
-        self::assertEquals('value', $result);
-    }
-
-    public function testFetchMultiplePropagateToFastestCache(): void
+    public function testNamespaceIsPropagatedToAllProviders()
     {
         $cache1 = new ArrayCache();
         $cache2 = new ArrayCache();
 
-        $cache1->save('bar', 'Bar');
-        $cache2->saveMultiple(['bar' => 'Bar', 'foo' => 'Foo']);
-
-        $chainCache = new ChainCache([$cache1, $cache2]);
-
-        self::assertTrue($cache1->contains('bar'));
-        self::assertFalse($cache1->contains('foo'));
-
-        $result = $chainCache->fetchMultiple(['bar', 'foo']);
-
-        self::assertEquals(['bar' => 'Bar', 'foo' => 'Foo'], $result);
-        self::assertTrue($cache1->contains('foo'));
-    }
-
-    public function testFetchMultiplePropagatesToFastestCacheUsingIndicatedDefaultLifeTimeForDownstreamCacheProviders(): void
-    {
-        $specificDefaultLifeTimeForDownstreamCacheProviders = 12345;
-
-        $cache1 = $this
-            ->getMockBuilder(ArrayCache::class)
-            ->setMethods(['doSaveMultiple'])
-            ->getMock();
-        $cache1
-            ->expects($this->once())
-            ->method('doSaveMultiple')
-            ->with(['[bar][1]' => 'Bar', '[foo][1]' => 'Foo'], $specificDefaultLifeTimeForDownstreamCacheProviders);
-        $cache2 = new ArrayCache();
-        $cache2->saveMultiple(['bar' => 'Bar', 'foo' => 'Foo']);
-
-        $chainCache = new ChainCache([$cache1, $cache2]);
-        $chainCache->setDefaultLifeTimeForDownstreamCacheProviders($specificDefaultLifeTimeForDownstreamCacheProviders);
-
-        $result = $chainCache->fetchMultiple(['bar', 'foo']);
-
-        self::assertEquals(['bar' => 'Bar', 'foo' => 'Foo'], $result);
-    }
-
-    public function testNamespaceIsPropagatedToAllProviders(): void
-    {
-        $cache1 = new ArrayCache();
-        $cache2 = new ArrayCache();
-
-        $chainCache = new ChainCache([$cache1, $cache2]);
+        $chainCache = new ChainCache(array($cache1, $cache2));
         $chainCache->setNamespace('bar');
 
-        self::assertEquals('bar', $cache1->getNamespace());
-        self::assertEquals('bar', $cache2->getNamespace());
+        $this->assertEquals('bar', $cache1->getNamespace());
+        $this->assertEquals('bar', $cache2->getNamespace());
     }
 
-    public function testDeleteToAllProviders(): void
+    public function testDeleteToAllProviders()
     {
         $cache1 = $this->getMockForAbstractClass('Doctrine\Common\Cache\CacheProvider');
         $cache2 = $this->getMockForAbstractClass('Doctrine\Common\Cache\CacheProvider');
@@ -175,29 +76,11 @@ class ChainCacheTest extends CacheTest
         $cache1->expects($this->once())->method('doDelete');
         $cache2->expects($this->once())->method('doDelete');
 
-        $chainCache = new ChainCache([$cache1, $cache2]);
+        $chainCache = new ChainCache(array($cache1, $cache2));
         $chainCache->delete('bar');
     }
 
-    public function testDeleteMultipleToAllProviders(): void
-    {
-        $cache1 = $this
-            ->getMockBuilder(CacheProvider::class)
-            ->setMethods(['doDeleteMultiple'])
-            ->getMockForAbstractClass();
-        $cache2 = $this
-            ->getMockBuilder(CacheProvider::class)
-            ->setMethods(['doDeleteMultiple'])
-            ->getMockForAbstractClass();
-
-        $cache1->expects($this->once())->method('doDeleteMultiple')->willReturn(true);
-        $cache2->expects($this->once())->method('doDeleteMultiple')->willReturn(true);
-
-        $chainCache = new ChainCache([$cache1, $cache2]);
-        $chainCache->deleteMultiple(['bar', 'foo']);
-    }
-
-    public function testFlushToAllProviders(): void
+    public function testFlushToAllProviders()
     {
         $cache1 = $this->getMockForAbstractClass('Doctrine\Common\Cache\CacheProvider');
         $cache2 = $this->getMockForAbstractClass('Doctrine\Common\Cache\CacheProvider');
@@ -205,25 +88,11 @@ class ChainCacheTest extends CacheTest
         $cache1->expects($this->once())->method('doFlush');
         $cache2->expects($this->once())->method('doFlush');
 
-        $chainCache = new ChainCache([$cache1, $cache2]);
+        $chainCache = new ChainCache(array($cache1, $cache2));
         $chainCache->flushAll();
     }
 
-    /**
-     * @group 155
-     */
-    public function testChainCacheAcceptsArrayIteratorsAsDependency(): void
-    {
-        $cache1 = $this->getMockForAbstractClass(CacheProvider::class);
-        $cache2 = $this->getMockForAbstractClass(CacheProvider::class);
-
-        $cache1->expects($this->once())->method('doFlush');
-        $cache2->expects($this->once())->method('doFlush');
-
-        (new ChainCache(new ArrayIterator([$cache1, $cache2])))->flushAll();
-    }
-
-    protected function isSharedStorage(): bool
+    protected function isSharedStorage()
     {
         return false;
     }

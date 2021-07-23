@@ -7,5 +7,4 @@
 
 namespace Icewind\SMB\Exception;
 
-class NotFoundException extends InvalidRequestException {
-}
+class NotFoundException extends InvalidRequestException {}

@@ -1,13 +1,12 @@
 <?php
 namespace GuzzleHttp\Handler;
 
-use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\TransferStats;
-use GuzzleHttp\Utils;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -34,7 +33,7 @@ class StreamHandler
             usleep($options['delay'] * 1000);
         }
 
-        $startTime = isset($options['on_stats']) ? Utils::currentTime() : null;
+        $startTime = isset($options['on_stats']) ? microtime(true) : null;
 
         try {
             // Does not support the expect header.
@@ -83,7 +82,7 @@ class StreamHandler
             $stats = new TransferStats(
                 $request,
                 $response,
-                Utils::currentTime() - $startTime,
+                microtime(true) - $startTime,
                 $error,
                 []
             );

@@ -145,7 +145,7 @@ class SmbAdapterSpec extends ObjectBehavior
         $share->read('prefix/foo.txt')->shouldBeCalled()->willReturn($temp);
         $this->getMimetype('foo.txt')->shouldReturn([
             'path' => 'foo.txt',
-            'stream' => $temp,
+            'contents' => 'string',
             'mimetype' => 'text/plain'
         ]);
     }

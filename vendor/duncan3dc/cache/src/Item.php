@@ -3,24 +3,18 @@
 namespace duncan3dc\Cache;
 
 use Psr\Cache\CacheItemInterface;
-use function time;
 
 class Item implements CacheItemInterface
 {
     /**
-     * @var string The unique key of this item.
+     * @var string $key The unique key of this item.
      */
     private $key;
 
     /**
-     * @var mixed The current value of this item.
+     * @var mixed $value The current value of this item.
      */
     private $value;
-
-    /**
-     * @var int The expiration time of this item.
-     */
-    private $expiration;
 
 
     /**
@@ -67,17 +61,7 @@ class Item implements CacheItemInterface
      */
     public function isHit()
     {
-        if ($this->value === null) {
-            return false;
-        }
-
-        if ($this->expiration !== null) {
-            if ($this->expiration < time()) {
-                return false;
-            }
-        }
-
-        return true;
+        return ($this->value !== null);
     }
 
 
@@ -114,14 +98,14 @@ class Item implements CacheItemInterface
     /**
      * Sets the expiration time for this cache item.
      *
-     * @param int|\DateInterval $time The period of time from now after which the item MUST be considered expired
+     * @param int|\DateInterval $time The period of time from the present after which the item MUST be considered expired
      *
      * @return $this
      */
     public function expiresAfter($time)
     {
         if ($time instanceof \DateInterval) {
-            $time = (int) $time->format("%r%s");
+            $time = $time->format("%s");
         }
 
         $this->expiration = time() + $time;

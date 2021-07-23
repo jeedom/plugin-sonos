@@ -2,34 +2,24 @@
 
 namespace League\Flysystem\Adapter;
 
-use InvalidArgumentException;
-use League\Flysystem\Filesystem;
 use League\Flysystem\Plugin\ListWith;
 use PHPUnit\Framework\TestCase;
 
 class ListWithTests extends TestCase
 {
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    protected function setUp(): void
-    {
-        $this->filesystem = new Filesystem(new Local(__DIR__.'/../test_files/list_with'));
-    }
-
-    protected function tearDown(): void
-    {
-        $fs = new Filesystem(new Local(__DIR__.'/../test_files/'));
-        $fs->deleteDir('list_with');
-    }
+    use \PHPUnitHacks;
 
     public function testHandle()
     {
-        $this->filesystem->write('path.txt', 'contents');
+        $prophecy = $this->prophesize('League\Flysystem\Filesystem');
+        $prophecy->listContents('', true)->willReturn([
+           ['path' => 'path.txt', 'type' => 'file'],
+        ]);
+        $prophecy->getMimetype('path.txt')->willReturn('text/plain');
+        $filesystem = $prophecy->reveal();
+
         $plugin = new ListWith();
-        $plugin->setFilesystem($this->filesystem);
+        $plugin->setFilesystem($filesystem);
         $this->assertEquals('listWith', $plugin->getMethod());
         $listing = $plugin->handle(['mimetype'], '', true);
         $this->assertContainsOnly('array', $listing, true);
@@ -39,10 +29,15 @@ class ListWithTests extends TestCase
 
     public function testInvalidInput()
     {
-        $this->filesystem->write('path.txt', 'contents');
-        $this->expectException(InvalidArgumentException::class);
+        $prophecy = $this->prophesize('League\Flysystem\Filesystem');
+        $prophecy->listContents('', true)->willReturn([
+            ['path' => 'path.txt', 'type' => 'file'],
+        ]);
+        $filesystem = $prophecy->reveal();
+
+        $this->expectException('InvalidArgumentException');
         $plugin = new ListWith();
-        $plugin->setFilesystem($this->filesystem);
+        $plugin->setFilesystem($filesystem);
         $plugin->handle(['invalid'], '', true);
     }
 }

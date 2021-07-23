@@ -10,18 +10,13 @@ namespace Icewind\SMB;
 use Icewind\SMB\Exception\InvalidPathException;
 
 abstract class AbstractShare implements IShare {
-	/** @var string[] */
 	private $forbiddenCharacters;
 
 	public function __construct() {
-		$this->forbiddenCharacters = ['?', '<', '>', ':', '*', '|', '"', chr(0), "\n", "\r"];
+		$this->forbiddenCharacters = array('?', '<', '>', ':', '*', '|', '"', chr(0), "\n", "\r");
 	}
 
-	/**
-	 * @param string $path
-	 * @throws InvalidPathException
-	 */
-	protected function verifyPath(string $path): void {
+	protected function verifyPath($path) {
 		foreach ($this->forbiddenCharacters as $char) {
 			if (strpos($path, $char) !== false) {
 				throw new InvalidPathException('Invalid path, "' . $char . '" is not allowed');
@@ -29,10 +24,7 @@ abstract class AbstractShare implements IShare {
 		}
 	}
 
-	/**
-	 * @param string[] $charList
-	 */
-	public function setForbiddenChars(array $charList): void {
+	public function setForbiddenChars(array $charList) {
 		$this->forbiddenCharacters = $charList;
 	}
 }

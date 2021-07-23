@@ -2,39 +2,31 @@
 
 namespace Doctrine\Tests\Common\Cache;
 
-use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\MemcacheCache;
 use Memcache;
-
-use const PHP_VERSION_ID;
 
 /**
  * @requires extension memcache
  */
 class MemcacheCacheTest extends CacheTest
 {
-    /** @var Memcache */
     private $memcache;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->memcache = new Memcache();
 
-        if (@$this->memcache->connect('localhost', 11211) !== false) {
-            return;
+        if (@$this->memcache->connect('localhost', 11211) === false) {
+            unset($this->memcache);
+            $this->markTestSkipped('Cannot connect to Memcache.');
         }
-
-        unset($this->memcache);
-        $this->markTestSkipped('Cannot connect to Memcache.');
     }
 
-    protected function tearDown(): void
+    protected function tearDown()
     {
-        if (! ($this->memcache instanceof Memcache)) {
-            return;
+        if ($this->memcache instanceof Memcache) {
+            $this->memcache->flush();
         }
-
-        $this->memcache->flush();
     }
 
     /**
@@ -42,7 +34,7 @@ class MemcacheCacheTest extends CacheTest
      *
      * Memcache does not support " " and null byte as key so we remove them from the tests.
      */
-    public function provideCacheIds(): array
+    public function provideCacheIds()
     {
         $ids = parent::provideCacheIds();
         unset($ids[21], $ids[22]);
@@ -50,44 +42,18 @@ class MemcacheCacheTest extends CacheTest
         return $ids;
     }
 
-    public function testGetMemcacheReturnsInstanceOfMemcache(): void
+    public function testGetMemcacheReturnsInstanceOfMemcache()
     {
-        self::assertInstanceOf('Memcache', $this->getCacheDriver()->getMemcache());
+        $this->assertInstanceOf('Memcache', $this->_getCacheDriver()->getMemcache());
     }
 
-    protected function getCacheDriver(): CacheProvider
+    /**
+     * {@inheritDoc}
+     */
+    protected function _getCacheDriver()
     {
         $driver = new MemcacheCache();
         $driver->setMemcache($this->memcache);
-
         return $driver;
-    }
-
-    /**
-     * @param mixed $value
-     *
-     * @dataProvider provideDataToCache
-     */
-    public function testSetContainsFetchDelete($value): void
-    {
-        if (PHP_VERSION_ID >= 80000) {
-            $this->markTestSkipped('this is probably a bug that needs to be fixed');
-        }
-
-        parent::testSetContainsFetchDelete($value);
-    }
-
-    /**
-     * @param mixed $value
-     *
-     * @dataProvider provideDataToCache
-     */
-    public function testUpdateExistingEntry($value): void
-    {
-        if (PHP_VERSION_ID >= 80000) {
-            $this->markTestSkipped('this is probably a bug that needs to be fixed');
-        }
-
-        parent::testSetContainsFetchDelete($value);
     }
 }

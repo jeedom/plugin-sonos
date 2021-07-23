@@ -2,7 +2,6 @@
 
 namespace Doctrine\Tests\Common\Cache;
 
-use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\XcacheCache;
 
 /**
@@ -10,7 +9,7 @@ use Doctrine\Common\Cache\XcacheCache;
  */
 class XcacheCacheTest extends CacheTest
 {
-    protected function getCacheDriver(): CacheProvider
+    protected function _getCacheDriver()
     {
         return new XcacheCache();
     }

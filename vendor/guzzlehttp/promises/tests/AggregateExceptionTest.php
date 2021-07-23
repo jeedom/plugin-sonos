@@ -1,5 +1,4 @@
 <?php
-
 namespace GuzzleHttp\Promise\Tests;
 
 use GuzzleHttp\Promise\AggregateException;
@@ -10,7 +9,7 @@ class AggregateExceptionTest extends TestCase
     public function testHasReason()
     {
         $e = new AggregateException('foo', ['baz', 'bar']);
-        $this->assertStringContainsString('foo', $e->getMessage());
-        $this->assertSame(['baz', 'bar'], $e->getReason());
+        $this->assertContains('foo', $e->getMessage());
+        $this->assertEquals(['baz', 'bar'], $e->getReason());
     }
 }

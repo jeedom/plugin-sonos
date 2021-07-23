@@ -3,33 +3,28 @@
 namespace Doctrine\Tests\Common\Cache;
 
 use Couchbase;
-use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\CouchbaseCache;
-use Throwable;
 
 /**
- * @requires extension couchbase >=1.0
- * @requires extension couchbase <2.0
+ * @requires extension couchbase
  */
 class CouchbaseCacheTest extends CacheTest
 {
-    /** @var Couchbase */
     private $couchbase;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         try {
             $this->couchbase = new Couchbase('127.0.0.1', 'Administrator', 'password', 'default');
-        } catch (Throwable $ex) {
+        } catch(Exception $ex) {
              $this->markTestSkipped('Could not instantiate the Couchbase cache because of: ' . $ex);
         }
     }
 
-    protected function getCacheDriver(): CacheProvider
+    protected function _getCacheDriver()
     {
         $driver = new CouchbaseCache();
         $driver->setCouchbase($this->couchbase);
-
         return $driver;
     }
 }

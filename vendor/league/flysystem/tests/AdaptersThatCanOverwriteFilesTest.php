@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class AdaptersThatCanOverwriteFilesTest extends TestCase
 {
+    use \PHPUnitHacks;
 
     /**
      * @test
@@ -29,7 +30,7 @@ class AdaptersThatCanOverwriteFilesTest extends TestCase
         $filesystem = new Filesystem($adapter = new FileOverwritingAdapterStub());
         $stream = tmpfile();
         fwrite($stream, 'stream contents');
-        $filesystem->putStream('path.txt', $stream);
+        $filesystem->putStream('path.txt',$stream);
         fclose($stream);
 
         $this->assertEquals('path.txt', $adapter->writtenPath);

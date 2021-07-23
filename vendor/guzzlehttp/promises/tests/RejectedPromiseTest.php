@@ -1,8 +1,6 @@
 <?php
-
 namespace GuzzleHttp\Promise\Tests;
 
-use GuzzleHttp\Promise as P;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\RejectedPromise;
 use PHPUnit\Framework\TestCase;
@@ -15,13 +13,13 @@ class RejectedPromiseTest extends TestCase
     public function testThrowsReasonWhenWaitedUpon()
     {
         $p = new RejectedPromise('foo');
-        $this->assertTrue(P\Is::rejected($p));
+        $this->assertEquals('rejected', $p->getState());
         try {
             $p->wait(true);
             $this->fail();
         } catch (\Exception $e) {
-            $this->assertTrue(P\Is::rejected($p));
-            $this->assertStringContainsString('foo', $e->getMessage());
+            $this->assertEquals('rejected', $p->getState());
+            $this->assertContains('foo', $e->getMessage());
         }
     }
 
@@ -29,27 +27,25 @@ class RejectedPromiseTest extends TestCase
     {
         $p = new RejectedPromise('foo');
         $p->cancel();
-        $this->assertTrue(P\Is::rejected($p));
+        $this->assertEquals('rejected', $p->getState());
     }
 
     /**
+     * @expectedException \LogicException
      * @exepctedExceptionMessage Cannot resolve a rejected promise
      */
     public function testCannotResolve()
     {
-        $this->expectException(\LogicException::class);
-
         $p = new RejectedPromise('foo');
         $p->resolve('bar');
     }
 
     /**
+     * @expectedException \LogicException
      * @exepctedExceptionMessage Cannot reject a rejected promise
      */
     public function testCannotReject()
     {
-        $this->expectException(\LogicException::class);
-
         $p = new RejectedPromise('foo');
         $p->reject('bar');
     }
@@ -58,7 +54,6 @@ class RejectedPromiseTest extends TestCase
     {
         $p = new RejectedPromise('foo');
         $p->reject('foo');
-        $this->assertTrue(P\Is::rejected($p));
     }
 
     public function testThrowsSpecificException()
@@ -73,10 +68,11 @@ class RejectedPromiseTest extends TestCase
         }
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testCannotResolveWithPromise()
     {
-        $this->expectException(\InvalidArgumentException::class);
-
         new RejectedPromise(new Promise());
     }
 
@@ -93,8 +89,8 @@ class RejectedPromiseTest extends TestCase
         $f = function ($reason) use (&$r) { $r = $reason; };
         $p->then(null, $f);
         $this->assertNull($r);
-        P\Utils::queue()->run();
-        $this->assertSame('a', $r);
+        \GuzzleHttp\Promise\queue()->run();
+        $this->assertEquals('a', $r);
     }
 
     public function testReturnsNewRejectedWhenOnRejectedFails()
@@ -107,7 +103,7 @@ class RejectedPromiseTest extends TestCase
             $p2->wait();
             $this->fail();
         } catch (\Exception $e) {
-            $this->assertSame('b', $e->getMessage());
+            $this->assertEquals('b', $e->getMessage());
         }
     }
 
@@ -115,14 +111,13 @@ class RejectedPromiseTest extends TestCase
     {
         $p = new RejectedPromise('a');
         $p->wait(false);
-        $this->assertTrue(P\Is::rejected($p));
     }
 
     public function testOtherwiseIsSugarForRejections()
     {
         $p = new RejectedPromise('foo');
         $p->otherwise(function ($v) use (&$c) { $c = $v; });
-        P\Utils::queue()->run();
+        \GuzzleHttp\Promise\queue()->run();
         $this->assertSame('foo', $c);
     }
 
@@ -135,8 +130,8 @@ class RejectedPromiseTest extends TestCase
         })->then(function ($v) use (&$actual) {
             $actual = $v;
         });
-        P\Utils::queue()->run();
-        $this->assertSame('foo bar', $actual);
+        \GuzzleHttp\Promise\queue()->run();
+        $this->assertEquals('foo bar', $actual);
     }
 
     public function testDoesNotTryToRejectTwiceDuringTrampoline()
@@ -144,6 +139,6 @@ class RejectedPromiseTest extends TestCase
         $fp = new RejectedPromise('a');
         $t1 = $fp->then(null, function ($v) { return $v . ' b'; });
         $t1->resolve('why!');
-        $this->assertSame('why!', $t1->wait());
+        $this->assertEquals('why!', $t1->wait());
     }
 }

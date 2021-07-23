@@ -1,7 +1,11 @@
-artifacts/
-vendor/
-composer.lock
 phpunit.xml
-.php_cs
-.php_cs.cache
-.phpunit.result.cache
+composer.phar
+composer.lock
+composer-test.lock
+vendor/
+build/artifacts/
+artifacts/
+docs/_build
+docs/*.pyc
+.idea
+.DS_STORE

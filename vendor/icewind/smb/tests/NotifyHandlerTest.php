@@ -7,17 +7,10 @@
 
 namespace Icewind\SMB\Test;
 
-use Icewind\SMB\BasicAuth;
 use Icewind\SMB\Change;
 use Icewind\SMB\Exception\AlreadyExistsException;
-use Icewind\SMB\Exception\Exception;
-use Icewind\SMB\Exception\RevisionMismatchException;
 use Icewind\SMB\INotifyHandler;
 use Icewind\SMB\IShare;
-use Icewind\SMB\Options;
-use Icewind\SMB\System;
-use Icewind\SMB\TimeZoneProvider;
-use Icewind\SMB\Wrapped\Server;
 
 class NotifyHandlerTest extends TestCase {
 	/**
@@ -27,20 +20,10 @@ class NotifyHandlerTest extends TestCase {
 
 	private $config;
 
-	public function setUp(): void {
+	public function setUp() {
 		$this->requireBackendEnv('smbclient');
 		$this->config = json_decode(file_get_contents(__DIR__ . '/config.json'));
-		$this->server = new Server(
-			$this->config->host,
-			new BasicAuth(
-				$this->config->user,
-				'test',
-				$this->config->password
-			),
-			new System(),
-			new TimeZoneProvider(new System()),
-			new Options()
-		);
+		$this->server = new \Icewind\SMB\Server($this->config->host, $this->config->user, $this->config->password);
 	}
 
 	/**
@@ -68,16 +51,7 @@ class NotifyHandlerTest extends TestCase {
 		$share->del('target.txt');
 		usleep(1000 * 100);// give it some time
 
-		try {
-			$changes = $process->getChanges();
-		} catch (RevisionMismatchException $e) {
-			$this->markTestSkipped("notify not supported with configured smb version");
-		}
-
-		$changes = array_filter($changes, function (Change $change) {
-			return $change->getPath()[0] !== '.';
-		});
-
+		$changes = $process->getChanges();
 		$process->stop();
 		$expected = [
 			new Change(INotifyHandler::NOTIFY_ADDED, 'source.txt'),
@@ -95,6 +69,7 @@ class NotifyHandlerTest extends TestCase {
 		try {
 			$share->mkdir('sub');
 		} catch (AlreadyExistsException $e) {
+
 		}
 		$process = $share->notify('sub');
 		usleep(1000 * 100);// give it some time to start listening
@@ -102,11 +77,7 @@ class NotifyHandlerTest extends TestCase {
 		$share->del('sub/source.txt');
 		usleep(1000 * 100);// give it some time
 
-		try {
-			$changes = $process->getChanges();
-		} catch (RevisionMismatchException $e) {
-			$this->markTestSkipped("notify not supported with configured smb version");
-		}
+		$changes = $process->getChanges();
 		$process->stop();
 
 		$expected = [
@@ -130,14 +101,10 @@ class NotifyHandlerTest extends TestCase {
 		$results = [];
 
 		// the notify process buffers incoming messages so callback will be triggered for the above changes
-		try {
-			$process->listen(function ($change) use (&$results) {
-				$results = $change;
-				return false; // stop listening
-			});
-		} catch (RevisionMismatchException $e) {
-			$this->markTestSkipped("notify not supported with configured smb version");
-		}
+		$process->listen(function ($change) use (&$results) {
+			$results = $change;
+			return false; // stop listening
+		});
 		$this->assertEquals($results, new Change(INotifyHandler::NOTIFY_ADDED, 'source.txt'));
 	}
 
@@ -159,11 +126,7 @@ class NotifyHandlerTest extends TestCase {
 		$share->del('target.txt');
 		usleep(1000 * 100);// give it some time
 
-		try {
-			$changes = $process->getChanges();
-		} catch (RevisionMismatchException $e) {
-			$this->markTestSkipped("notify not supported with configured smb version");
-		}
+		$changes = $process->getChanges();
 		$expected = [
 			new Change(INotifyHandler::NOTIFY_ADDED, 'source.txt'),
 			new Change(INotifyHandler::NOTIFY_RENAMED_OLD, 'source.txt'),
@@ -186,30 +149,5 @@ class NotifyHandlerTest extends TestCase {
 			return false; // stop listening
 		});
 		$this->assertNotNull($results);
-	}
-
-	public function testNoStdBuf(): void {
-		$this->requireBackendEnv('smbclient');
-		$this->config = json_decode(file_get_contents(__DIR__ . '/config.json'));
-		$system = $this->getMockBuilder(System::class)
-			->onlyMethods(['getStdBufPath'])
-			->getMock();
-		$system->method('getStdBufPath')
-			->willReturn(null);
-		$server = new Server(
-			$this->config->host,
-			new BasicAuth(
-				$this->config->user,
-				'test',
-				$this->config->password
-			),
-			$system,
-			new TimeZoneProvider(new System()),
-			new Options()
-		);
-		$share = $server->getShare($this->config->share);
-
-		$this->expectException(Exception::class);
-		$share->notify('');
 	}
 }

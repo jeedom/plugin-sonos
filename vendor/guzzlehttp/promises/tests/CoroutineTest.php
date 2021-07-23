@@ -1,8 +1,6 @@
 <?php
-
 namespace GuzzleHttp\Promise\Tests;
 
-use GuzzleHttp\Promise as P;
 use GuzzleHttp\Promise\Coroutine;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -11,17 +9,11 @@ use ReflectionClass;
 
 class CoroutineTest extends TestCase
 {
-    public function testReturnsCoroutine()
-    {
-        $fn = function () { yield 'foo'; };
-        $this->assertInstanceOf(P\Coroutine::class, P\Coroutine::of($fn));
-    }
-
     /**
      * @dataProvider promiseInterfaceMethodProvider
      *
      * @param string $method
-     * @param array  $args
+     * @param array $args
      */
     public function testShouldProxyPromiseMethodsToResultPromise($method, $args = [])
     {
@@ -75,7 +67,7 @@ class CoroutineTest extends TestCase
     public function testWaitShouldResolveChainedCoroutines()
     {
         $promisor = function () {
-            return P\Coroutine::of(function () {
+            return \GuzzleHttp\Promise\coroutine(function () {
                 yield $promise = new Promise(function () use (&$promise) {
                     $promise->resolve(1);
                 });
@@ -89,13 +81,13 @@ class CoroutineTest extends TestCase
 
     public function testWaitShouldHandleIntermediateErrors()
     {
-        $promise = P\Coroutine::of(function () {
+        $promise = \GuzzleHttp\Promise\coroutine(function () {
             yield $promise = new Promise(function () use (&$promise) {
                 $promise->resolve(1);
             });
         })
         ->then(function () {
-            return P\Coroutine::of(function () {
+            return \GuzzleHttp\Promise\coroutine(function () {
                 yield $promise = new Promise(function () use (&$promise) {
                     $promise->reject(new \Exception);
                 });
