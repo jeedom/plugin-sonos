@@ -7,6 +7,7 @@
 
 - Hinzufügung der Sonos Five
 - Hinzufügen von Sonos Roam
+- Symfonisk Framework hinzufügen
 
 # 24/11/2020
 
