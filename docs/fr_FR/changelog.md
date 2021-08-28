@@ -7,6 +7,7 @@
 
 - Ajout de la Sonos Five
 - Ajout Sonos Roam
+- Ajout Symfonisk Cadre
 
 # 24/11/2020
 
