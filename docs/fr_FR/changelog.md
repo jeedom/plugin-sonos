@@ -4,10 +4,12 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# 09/10/2021
 
 - Ajout de la Sonos Five
 - Ajout Sonos Roam
 - Ajout Symfonisk Cadre
+- Mise à jour immediate du volume en cas de changement par Jeedom, merci @Domochip
 
 # 24/11/2020
 
