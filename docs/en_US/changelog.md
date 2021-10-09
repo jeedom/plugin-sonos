@@ -4,10 +4,12 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 09/10/2021
 
 - Addition of the Sonos Five
 - Adding Sonos Roam
 - Adding Symfonisk Framework
+- Immediate volume update in case of change by Jeedom, thank you @Domochip
 
 # 24/11/2020
 

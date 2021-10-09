@@ -4,10 +4,12 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 09.10.2021
 
 - Hinzufügung der Sonos Five
 - Hinzufügen von Sonos Roam
 - Symfonisk Framework hinzufügen
+- Sofortige Volumenaktualisierung bei Änderung durch Jeedom, danke @Domochip
 
 # 24/11/2020
 

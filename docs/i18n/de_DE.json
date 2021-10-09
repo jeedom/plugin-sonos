@@ -2,9 +2,11 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos Controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
+        "09\/10\/2021": "09.10.2021",
         "Ajout de la Sonos Five": "Hinzufügung der Sonos Five",
         "Ajout Sonos Roam": "Hinzufügen von Sonos Roam",
         "Ajout Symfonisk Cadre": "Symfonisk Framework hinzufügen",
+        "Mise à jour immediate du volume en cas de changement par Jeedom, merci @Domochip": "Sofortige Volumenaktualisierung bei Änderung durch Jeedom, danke @Domochip",
         "24\/11\/2020": "24\/11\/2020",
         "Nouvelle présentation de la liste des objets": "Neue Darstellung der Objektliste",
         "Ajout du tag \"Compatibilité V4": "Hinzufügung des Tags \"V4-Kompatibilität",
