@@ -4,6 +4,11 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+
+- Ajout de la Sonos Five
+- Ajout Sonos Roam
+- Ajout Symfonisk Cadre
+
 # 24/11/2020
 
 - Nouvelle présentation de la liste des objets

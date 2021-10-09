@@ -19,6 +19,7 @@
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 require_once dirname(__FILE__) . '/../../vendor/autoload.php';
+
 use duncan3dc\Sonos\Tracks\TextToSpeech;
 use duncan3dc\Sonos\Tracks\Track;
 use duncan3dc\Sonos\Utils\Directory;
@@ -54,7 +55,6 @@ class sonos3 extends eqLogic {
 		try {
 			sonos3::syncSonos();
 		} catch (Exception $e) {
-
 		}
 	}
 
@@ -180,21 +180,21 @@ class sonos3 extends eqLogic {
 		return array('reply' => 'Playlist ou favoris non trouvé');
 	}
 
-	public static function getSonos($_discover = false,$_ip = null) {
+	public static function getSonos($_discover = false, $_ip = null) {
 		if (self::$_sonos === null || $_discover) {
-			if($_discover){
+			if ($_discover) {
 				self::$_sonos = new duncan3dc\Sonos\Network();
-			}else{
+			} else {
 				$devices = new \duncan3dc\Sonos\Devices\Collection();
 				$devices->setLogger(log::getLogger('sonos3'));
-				if($_ip !== null){
+				if ($_ip !== null) {
 					$devices->addIp($_ip);
 					$sonos =  new duncan3dc\Sonos\Network($devices);
 					$sonos->setLogger(log::getLogger('sonos3'));
 					return $sonos;
-				}else{
-					$eqLogics = eqLogic::byType('sonos3',true);
-					if(count(	$eqLogics) != 0){
+				} else {
+					$eqLogics = eqLogic::byType('sonos3', true);
+					if (count($eqLogics) != 0) {
 						foreach ($eqLogics as $eqLogic) {
 							$devices->addIp($eqLogic->getLogicalId());
 						}
@@ -209,13 +209,12 @@ class sonos3 extends eqLogic {
 
 	public static function cronDaily() {
 		try {
-			if(date('i') == 0 && date('s') < 10){
+			if (date('i') == 0 && date('s') < 10) {
 				sleep(10);
 			}
 			$plugin = plugin::byId(__CLASS__);
 			$plugin->deamon_start(true);
 		} catch (\Exception $e) {
-
 		}
 	}
 
@@ -266,10 +265,16 @@ class sonos3 extends eqLogic {
 					$eqLogic->setConfiguration('model', 'SYMFONISK_LIGHT');
 				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK') !== false) {
 					$eqLogic->setConfiguration('model', 'SYMFONISK');
-				}else if (strpos(strtoupper($controller->getName()), 'PORT') !== false) {
+				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK_INWALL') !== false) {
+					$eqLogic->setConfiguration('model', 'SYMFONISK_INWALL');
+				} else if (strpos(strtoupper($controller->getName()), 'PORT') !== false) {
 					$eqLogic->setConfiguration('model', 'PORT');
-				}else if (strpos(strtoupper($controller->getName()), 'MOVE') !== false) {
+				} else if (strpos(strtoupper($controller->getName()), 'MOVE') !== false) {
 					$eqLogic->setConfiguration('model', 'MOVE');
+				} else if (strpos(strtoupper($controller->getName()), 'FIVE') !== false) {
+					$eqLogic->setConfiguration('model', 'FIVE');
+				} else if (strpos(strtoupper($controller->getName()), 'ROAM') !== false) {
+					$eqLogic->setConfiguration('model', 'ROAM');
 				}
 				$eqLogic->setEqType_name('sonos3');
 				$eqLogic->setIsVisible(1);
@@ -278,7 +283,7 @@ class sonos3 extends eqLogic {
 			}
 		}
 		$eqLogics = eqLogic::byType('sonos3');
-		if(count($eqLogics) != 0){
+		if (count($eqLogics) != 0) {
 			foreach ($eqLogics as $eqLogic) {
 				$eqLogic->setConfiguration('speakers', json_encode($speakers_array));
 				$eqLogic->save();
@@ -297,7 +302,7 @@ class sonos3 extends eqLogic {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
 				continue;
 			}
-			if($eqLogic->getIsEnable() == 0){
+			if ($eqLogic->getIsEnable() == 0) {
 				$eqLogic->refresh();
 			}
 			if ($eqLogic->getLogicalId() == '' || $eqLogic->getIsEnable() == 0) {
@@ -338,18 +343,18 @@ class sonos3 extends eqLogic {
 				if ($artist == '') {
 					$artist = __('Aucun', __FILE__);
 				}
-				$changed = $eqLogic->checkAndUpdateCmd('state', $state,false) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume(),false) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle,false) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('mute_state', $mute,false) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('repeat_state', $repeat,false) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('track_title', $title,false) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('track_album', $album,false) || $changed;
-				$changed = $eqLogic->checkAndUpdateCmd('track_artist', $artist,false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('state', $state, false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('volume', $controller->getVolume(), false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('shuffle_state', $shuffle, false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('mute_state', $mute, false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('repeat_state', $repeat, false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_title', $title, false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_album', $album, false) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('track_artist', $artist, false) || $changed;
 				if ($track->getAlbumArt() != '') {
 					if ($eqLogic->checkAndUpdateCmd('track_image', $track->getAlbumArt())) {
 						file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->getAlbumArt()));
-						$dominantColor = getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg',2,true);
+						$dominantColor = getDominantColor(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', 2, true);
 						$eqLogic->checkAndUpdateCmd('dominantColor', $dominantColor[0]);
 						$eqLogic->checkAndUpdateCmd('dominantColor2', $dominantColor[1]);
 						$changed = true;
@@ -385,13 +390,13 @@ class sonos3 extends eqLogic {
 	public static function convertState($_state) {
 		switch ($_state) {
 			case 'PLAYING':
-			return __('Lecture', __FILE__);
+				return __('Lecture', __FILE__);
 			case 'PAUSED_PLAYBACK':
-			return __('Pause', __FILE__);
+				return __('Pause', __FILE__);
 			case 'STOPPED':
-			return __('Arrêté', __FILE__);
+				return __('Arrêté', __FILE__);
 			case 'TRANSITIONING':
-			return __('Transition', __FILE__);
+				return __('Transition', __FILE__);
 		}
 		return $_state;
 	}
@@ -499,10 +504,10 @@ class sonos3 extends eqLogic {
 	}
 
 	public function getController($_justHim = false) {
-		if($this->_controller == null){
-			if($_justHim){
-				$this->_controller = self::getSonos(false,$this->getLogicalId())->getControllerByIp($this->getLogicalId());
-			}else{
+		if ($this->_controller == null) {
+			if ($_justHim) {
+				$this->_controller = self::getSonos(false, $this->getLogicalId())->getControllerByIp($this->getLogicalId());
+			} else {
 				$this->_controller = self::getSonos(false)->getControllerByIp($this->getLogicalId());
 			}
 		}
@@ -854,7 +859,7 @@ class sonos3 extends eqLogic {
 		$dominantColor2->setEqLogic_id($this->getId());
 		$dominantColor2->save();
 
-		if($this->getChanged()){
+		if ($this->getChanged()) {
 			self::deamon_start();
 		}
 	}
@@ -965,7 +970,6 @@ class sonos3 extends eqLogic {
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
-
 }
 
 class sonos3Cmd extends cmd {
@@ -999,7 +1003,6 @@ class sonos3Cmd extends cmd {
 			try {
 				$controller->play();
 			} catch (Exception $e) {
-
 			}
 		} elseif ($this->getLogicalId() == 'stop') {
 			try {
@@ -1007,7 +1010,6 @@ class sonos3Cmd extends cmd {
 					$controller->useQueue();
 				}
 			} catch (\Exception $e) {
-
 			}
 			$state = $eqLogic->getCmd(null, 'state');
 			$track_title = $eqLogic->getCmd(null, 'track_title');
@@ -1020,7 +1022,6 @@ class sonos3Cmd extends cmd {
 			try {
 				$controller->pause();
 			} catch (Exception $e) {
-
 			}
 		} elseif ($this->getLogicalId() == 'pause') {
 			$state = $eqLogic->getCmd(null, 'state');
@@ -1034,7 +1035,6 @@ class sonos3Cmd extends cmd {
 			try {
 				$controller->pause();
 			} catch (Exception $e) {
-
 			}
 		} elseif ($this->getLogicalId() == 'previous') {
 			$controller->previous();
@@ -1055,6 +1055,7 @@ class sonos3Cmd extends cmd {
 				$_options['slider'] = 100;
 			}
 			$controller->setVolume($_options['slider']);
+			$eqLogic->getCmd(null, 'volume')->event($_options['slider']);
 		} elseif ($this->getLogicalId() == 'play_playlist') {
 			if (!$controller->isUsingQueue()) {
 				$controller->useQueue();
@@ -1075,7 +1076,6 @@ class sonos3Cmd extends cmd {
 			try {
 				$queue->addTrack($uri);
 			} catch (Exception $e) {
-
 			}
 			$controller->play();
 			$loop = 1;
@@ -1117,7 +1117,6 @@ class sonos3Cmd extends cmd {
 					"EnqueueAsNext" => 0,
 				]);
 			} catch (Exception $e) {
-
 			}
 
 			$controller->play();
@@ -1180,7 +1179,6 @@ class sonos3Cmd extends cmd {
 				usleep(500000);
 				$loop++;
 			}
-
 		}
 	}
 

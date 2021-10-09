@@ -4,17 +4,27 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+
+- Adición de Sonos Five
+- Agregar Sonos Roam
+- Añadiendo Symfonisk Framework
+
+# 24/11/2020
+
+- Nueva presentación de la lista de objetos
+- Adición de la etiqueta "compatibilidad V4"
+
 # 07/08/2020
 
-- Agregar Sonos ARC
+- Compatibilidad con Sonos ARC
 
 # 24/01/2020
 
-- Soporte de Sonos One S22
+- Soporte para Sonos One S22
 
 # 01/11/2020
 
-- Añadir Sonos Move
+- Soporte para Sonos Move
 - Optimización de código en caso de que Sonos no esté conectado
 
 # 16/12/2019
@@ -27,12 +37,12 @@
 
 # 15/10/2019
 
-- Puerto Sonos agregado
+- Soporte de puerto de Sonos
 - Script de instalación de dependencia mejorado
 
 # 10/07/2019
 
-- Mejora del script de instalación de dependencias (puede permitir que las inquietudes de TTS se corrijan en ciertos casos))
+- Mejora del script de instalación de dependencias (puede permitir corregir en algunos casos los problemas de TTS)
 
 # 09/23/2019
 
@@ -40,15 +50,15 @@
 
 # 01/09/2019
 
-- Soporte para el altavoz de la lámpara Ikea SYMFONISK
+- Soporte de altavoz de lámpara Ikea SYMFONISK
 
 # 08/12/2019
 
-- Soporte para el gabinete de estante Ikea SYMFONISK
+- Soporte para altavoz de estantería Ikea SYMFONISK
 
 # 23/04/2019
 
-- Adición de un sistema de sonido gen2
+- Soporte para un sonos gen2
 
 # 17/01/2019
 
@@ -56,23 +66,23 @@
 
 # 01/15/2019
 
-** IMPORTANTE SOLO FUNCIONA CON PHP7, VEA LA PÁGINA DE SALUD DE JEEDOM PARA SU VERSIÓN**
+**IMPORTANTE SOLO FUNCIONA CON PHP7, VEA LA PÁGINA DE SALUD DE JEEDOM PARA SU VERSIÓN**
 
 - Completa reescritura del complemento
 - Soporte para la nueva API de Sonos
-- Soporte para sonos beam y One
+- Soporte para sistemas de sonido Beam y One
 - Corrección de número de error
-- Optimización global
+- Optimizaciones globales
 
 **Importante**
 - Solo PHP7 compatible
-- Cierta función debería haberse eliminado
+- Algunas características tuvieron que ser eliminadas
 
 
 # 2018
 
 - 	Administración agregada de favoritos de sonos
--   Agregue Sonos One y Playbase
+-   Soporte para Sonos One y Playbase
 -   Corrección de lengua con picotts
 -   Agregar un comando de "entrada de línea""
 -   Actualización de la biblioteca de comunicación de sonido

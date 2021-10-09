@@ -1,10 +1,10 @@
 {
     "plugins\/sonos3\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
-        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille il faut au minimum PHP 7.0": "Bitte beachten Sie, dass Ihre PHP-Version ('. PHP_VERSION.') Zu alt ist, Sie benötigen mindestens PHP 7.0",
-        "Le plugin sonos doit réagir aux interactions :": "Das Sonos-Plugin muss auf Interaktionen reagieren:",
+        "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "Seien Sie vorsichtig, Ihre Version von PHP ('. PHP_VERSION.') Ist zu alt, Sie benötigen mindestens PHP 7.0",
+        "Le plugin sonos doit réagir aux interactions": "Das Sonos-Plugin muss auf Interaktionen reagieren",
         "Partage": "Teilen",
-        "Nom d'utilisateur pour le partage": "Benutzername für die Freigabe",
+        "Nom d'utilisateur du partage": "Teilen Sie den Benutzernamen",
         "Mot de passe du partage": "Passwort teilen",
         "Découverte": "Entdeckung",
         "Rechercher les équipements Sonos": "Finden Sie Sonos-Geräte",
@@ -27,14 +27,18 @@
         "Supprimer": "Löschen",
         "Equipement": "Gerät",
         "Commandes": "Befehle",
+        "Général": "Allgemein",
         "Nom du sonos": "Sonos Name",
         "Nom de l'équipement template": "Gerätename Vorlage",
         "Objet parent": "Übergeordnetes Objekt",
         "Aucun": "Ohne",
+        "Options": "Optionen",
         "Activer": "Aktivieren",
         "Visible": "Sichtbar",
-        "Model": "Modell",
+        "Paramètres": "Einstellungen",
+        "Modèle": "Modell",
         "IP": "IP",
+        "Informations": "Information",
         "Nom": "Name",
         "Action": "Aktion"
     },
@@ -93,6 +97,6 @@
         "Favoris non trouvé : ": "Favoriten nicht gefunden:"
     },
     "info.json": {
-        "Plugin de controle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0": "Sonos \/ Ikea Symfonisk-Steuerungs-Plugin. VORSICHT: Mindestens PHP 7.0 ist erforderlich"
+        "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": "Sonos \/ Ikea Symfonisk-Steuerungs-Plugin. VORSICHT: Mindestens PHP 7.0 ist erforderlich"
     }
 }

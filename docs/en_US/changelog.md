@@ -4,17 +4,27 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+
+- Addition of the Sonos Five
+- Adding Sonos Roam
+- Adding Symfonisk Framework
+
+# 24/11/2020
+
+- New presentation of the list of objects
+- Addition of the tag "V4 compatibility"
+
 # 08/07/2020
 
-- Add Sonos ARC
+- Sonos ARC support
 
 # 01/24/2020
 
-- Sonos One S22 support
+- Support for Sonos One S22
 
 # 01/11/2020
 
-- Add Sonos Move
+- Support for Sonos Move
 - Code optimization in case of Sonos not connected
 
 # 12/16/2019
@@ -27,12 +37,12 @@
 
 # 10/15/2019
 
-- Added Sonos port
+- Sonos port support
 - Improved dependency installation script
 
 # 10/07/2019
 
-- Improvement of the dependencies installation script (may allow TTS concerns to be corrected in certain cases))
+- Improvement of the dependency installation script (may allow to correct in some cases the problems of TTS)
 
 # 09/23/2019
 
@@ -40,15 +50,15 @@
 
 # 09/01/2019
 
-- Support for the Ikea SYMFONISK lamp speaker
+- Ikea SYMFONISK lamp speaker support
 
 # 08/12/2019
 
-- Support for the Ikea SYMFONISK shelf enclosure
+- Support for Ikea SYMFONISK bookshelf speaker
 
 # 04/23/2019
 
-- Addition of one gen2 sound systems
+- Support for one gen2 sonos
 
 # 01/17/2019
 
@@ -56,23 +66,23 @@
 
 # 01/15/2019
 
-** IMPORTANT ONLY WORKS WITH PHP7, SEE JEEDOM HEALTH PAGE FOR YOUR VERSION**
+**IMPORTANT ONLY WORKS WITH PHP7, SEE JEEDOM HEALTH PAGE FOR YOUR VERSION**
 
 - Complete rewrite of the plugin
 - Support for the new Sonos API
-- Support for sonos beam and One
+- Support for Beam and One sound systems
 - Bug number correction
-- Global optimization
+- Global optimizations
 
 **Important**
 - Compatible PHP7 only
-- Certain function should have been removed
+- Some features had to be removed
 
 
 # 2018
 
 - 	Added management of sonos favorites
--   Add Sonos One and Playbase
+-   Support for Sonos One and Playbase
 -   Tongue correction with picotts
 -   Adding a "line entry" command"
 -   Update of sound communication library

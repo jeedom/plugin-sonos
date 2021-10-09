@@ -46,7 +46,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			?>
 		</div>
 	</div>
-
+	
 	<div class="col-xs-12 eqLogic" style="display: none;">
 		<div class="input-group pull-right" style="display:inline-flex">
 			<span class="input-group-btn">
@@ -98,7 +98,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 									</div>
 								</div>
-
+								
 								<br/>
 								<legend><i class="fas fa-cogs"></i> {{Paramètres}}</legend>
 								<div class="form-group">
@@ -119,6 +119,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="SYMFONISK">Ikea SYMFONISK</option>
 											<option value="PORT">Sonos port</option>
 											<option value="MOVE">Sonos move</option>
+											<option value="FIVE">Sonos five</option>
+											<option value="ROAM">Sonos roam</option>
 										</select>
 									</div>
 								</div>
@@ -132,7 +134,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</fieldset>
 						</form>
 					</div>
-
+					
 					<div class="col-lg-5">
 						<form class="form-horizontal">
 							<fieldset>
@@ -147,7 +149,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</form>
 					</div>
 				</div>
-
+				
 			</div>
 			<div role="tabpanel" class="tab-pane" id="commandtab">
 				<br/>
@@ -160,10 +162,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					<tbody>
 					</tbody>
 				</table>
-
+				
 			</div>
 		</div>
-
+		
 	</div>
 </div>
 

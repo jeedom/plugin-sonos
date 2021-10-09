@@ -4,9 +4,19 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+
+- Adição dos Sonos Five
+- Adicionando Sonos Roam
+- Adicionando Symfonisk Framework
+
+# 24/11/2020
+
+- Nova apresentação da lista de objetos
+- Adição da tag "compatibilidade V4"
+
 # 07/08/2020
 
-- Adicionar Sonos ARC
+- Suporte Sonos ARC
 
 # 24/01/2020
 
@@ -14,7 +24,7 @@
 
 # 01/11/2020
 
-- Adicionar Sonos Move
+- Suporte para Sonos Move
 - Otimização de código no caso de Sonos não conectado
 
 # 16/12/2019
@@ -27,12 +37,12 @@
 
 # 15/10/2019
 
-- Adicionada porta Sonos
+- Suporte para porta Sonos
 - Script de instalação de dependência aprimorado
 
 # 07/07/2019
 
-- Melhoria do script de instalação de dependências (pode permitir que as preocupações do TTS sejam corrigidas em certos casos))
+- Melhoria do script de instalação de dependências (pode permitir corrigir em alguns casos os problemas de TTS)
 
 # 23/09/2019
 
@@ -40,42 +50,42 @@
 
 # 01/09/2019
 
-- Suporte para o alto-falante da lâmpada Ikea SYMFONISK
+- Suporte de alto-falante para lâmpada Ikea SYMFONISK
 
 # 12/08/2019
 
-- Suporte para o gabinete de prateleira Ikea SYMFONISK
+- Suporte para alto-falante de estante Ikea SYMFONISK
 
 # 23/04/2019
 
-- Adição de sistemas de som gen2
+- Suporte para sonos gen2
 
 # 17/01/2019
 
-- Correção de erros caso os sistemas de som fossem adicionados manualmente
+- Erros corrigidos no caso de os sistemas de som serem adicionados manualmente
 
 # 15/01/2019
 
-** IMPORTANTE APENAS FUNCIONA COM PHP7, VEJA A PÁGINA DE SAÚDE DA JEEDOM PARA SUA VERSÃO**
+**IMPORTANTE APENAS FUNCIONA COM PHP7, VEJA A PÁGINA DE SAÚDE DA JEEDOM PARA SUA VERSÃO**
 
 - Reescrita completa do plug-in
 - Suporte para a nova API Sonos
-- Suporte para sonos beam e One
+- Suporte para sistemas de som Beam e One
 - Correção do número do bug
-- Otimização global
+- Otimizações globais
 
 **IMPORTANTE**
 - Apenas PHP7 compatível
-- Certas funções deveriam ter sido removidas
+- Alguns recursos tiveram que ser removidos
 
 
 # 2018
 
 - 	Adicionado gerenciamento dos favoritos dos sonos
--   Adicionar Sonos One e Playbase
+-   Suporte para Sonos One e Playbase
 -   Correção da língua com picotts
 -   Adicionando um comando "entrada de linha""
 -   Atualização da biblioteca de comunicação sonora
 -   Carregamento otimizado de playlists
--   Adição de picotts para geração local de TTS
+-   Adição de picotts para geração de TTS local
 -   Correção do botão reproduzir / pausar ao atualizar o widget

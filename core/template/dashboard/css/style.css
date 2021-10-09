@@ -178,7 +178,7 @@
 	position: absolute;
 	z-index: 10;
 	right: -200px;
-	background-color: white;
+	background-color: rgba(var(--eq-bg-color), var(--opacity)) !important;
 }
 .sonos_widget .leftpanel{
 	text-align: left;
@@ -188,7 +188,7 @@
 	position: absolute;
 	z-index: 10;
 	left: -200px;
-	background-color: white;
+	background-color: rgba(var(--eq-bg-color), var(--opacity)) !important;
 }
 .sonos_widget .title_downpart{
 	text-align: center;
