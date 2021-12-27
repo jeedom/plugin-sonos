@@ -187,6 +187,7 @@ class Device {
 			"S23" => "PORT",
 			"S24" => "FIVE",
 			"S29" => "SYMFONISK_INWALL",
+			"S38" => "ONE",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",
