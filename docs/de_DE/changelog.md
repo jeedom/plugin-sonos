@@ -4,6 +4,10 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 27.12.2021
+
+- Kompatibilität mit dem neuen Sonos One hinzugefügt
+
 # 09.10.2021
 
 - Hinzufügung der Sonos Five

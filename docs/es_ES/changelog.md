@@ -4,6 +4,10 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 27/12/2021
+
+- Compatibilidad añadida con el nuevo Sonos One
+
 # 10/09/2021
 
 - Adición de Sonos Five

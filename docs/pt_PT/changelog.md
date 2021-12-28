@@ -4,6 +4,10 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 27/12/2021
+
+- Adicionada compatibilidade com o novo Sonos
+
 # 10/09/2021
 
 - Adição dos Sonos Five

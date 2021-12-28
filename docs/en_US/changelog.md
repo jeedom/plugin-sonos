@@ -4,6 +4,10 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 12/27/2021
+
+- Added compatibility with the new Sonos one
+
 # 09/10/2021
 
 - Addition of the Sonos Five
