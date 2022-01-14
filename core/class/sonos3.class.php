@@ -46,6 +46,7 @@ class sonos3 extends eqLogic {
 			),
 		),
 	);
+	public static $_encryptConfigKey = array('tts_username', 'tts_password');
 
 	private $_controller = null;
 
