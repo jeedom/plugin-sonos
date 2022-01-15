@@ -4,6 +4,10 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 01/14/2022
+
+- Added compatibility with the new SYMFONISK speaker
+
 # 12/27/2021
 
 - Added compatibility with the new Sonos one

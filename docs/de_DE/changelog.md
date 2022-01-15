@@ -4,6 +4,10 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 14.01.2022
+
+- Kompatibilität mit dem neuen SYMFONISK-Lautsprecher hinzugefügt
+
 # 27.12.2021
 
 - Kompatibilität mit dem neuen Sonos One hinzugefügt

@@ -4,6 +4,10 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 14/01/2022
+
+- Compatibilidad añadida con el nuevo altavoz SYMFONISK
+
 # 27/12/2021
 
 - Compatibilidad añadida con el nuevo Sonos One

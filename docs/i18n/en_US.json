@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
+        "14\/01\/2022": "01\/14\/2022",
+        "Ajout compatibilité avec la nouvelle enceinte SYMFONISK": "Added compatibility with the new SYMFONISK speaker",
         "27\/12\/2021": "12\/27\/2021",
         "Ajout compatibilité avec la nouvelle Sonos one": "Added compatibility with the new Sonos one",
         "09\/10\/2021": "09\/10\/2021",
