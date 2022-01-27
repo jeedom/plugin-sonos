@@ -23,14 +23,18 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			</div>
 		</div>
 		<legend><i class='fas fa-music'></i> {{Mes Sonos}}</legend>
-		<div class="input-group" style="margin:5px;">
-			<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic"/>
-			<div class="input-group-btn">
-				<a id="bt_resetSearch" class="btn roundedRight" style="width:30px"><i class="fas fa-times"></i></a>
-			</div>
-		</div>
-		<div class="eqLogicThumbnailContainer">
-			<?php
+		<?php
+		if (count($eqLogics) == 0) {
+			echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun équipement Sonos trouvé, cliquer sur "Ajouter" pour commencer}}</div>';
+		} else {
+			echo '<div class="input-group" style="margin:5px;">';
+			echo '<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic">';
+			echo '<div class="input-group-btn">';
+			echo '<a id="bt_resetSearch" class="btn" style="width:30px"><i class="fas fa-times"></i></a>';
+			echo '<a class="btn roundedRight hidden" id="bt_pluginDisplayAsTable" data-coreSupport="1" data-state="0"><i class="fas fa-grip-lines"></i></a>';
+			echo '</div>';
+			echo '</div>';
+			echo '<div class="eqLogicThumbnailContainer">';
 			foreach ($eqLogics as $eqLogic) {
 				$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
 				echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
@@ -39,14 +43,21 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				} else {
 					echo '<img src="' . $plugin->getPathImgIcon() . '"/>';
 				}
-				echo '<br/>';
+				echo '<br>';
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
+				echo '<span class="hiddenAsCard displayTableRight hidden">';
+				if ($eqLogic->getLogicalId() != '') {
+					echo '<span class="label label-info">'.$eqLogic->getLogicalId().'</span>';
+				}
+				echo ($eqLogic->getIsVisible() == 1) ? '<i class="fas fa-eye" title="{{Equipement visible}}"></i>' : '<i class="fas fa-eye-slash" title="{{Equipement non visible}}"></i>';
+				echo '</span>';
 				echo '</div>';
 			}
-			?>
-		</div>
+			echo '</div>';
+		}
+		?>
 	</div>
-	
+
 	<div class="col-xs-12 eqLogic" style="display: none;">
 		<div class="input-group pull-right" style="display:inline-flex">
 			<span class="input-group-btn">
@@ -63,109 +74,113 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		</ul>
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="eqlogictab">
-				<br/>
-				<div class="row">
-					<div class="col-lg-7">
-						<form class="form-horizontal">
-							<fieldset>
-								<legend><i class="fas fa-wrench"></i> {{Général}}</legend>
-								<div class="form-group">
-									<label class="col-sm-3 control-label">{{Nom du sonos}}</label>
-									<div class="col-xs-11 col-sm-7">
-										<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-										<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement template}}"/>
-									</div>
+				<form class="form-horizontal">
+					<fieldset>
+						<div class="col-lg-6">
+							<legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Nom du Sonos}}</label>
+								<div class="col-sm-6">
+									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
+									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement Sonos}}"/>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-3 control-label" >{{Objet parent}}</label>
-									<div class="col-xs-11 col-sm-7">
-										<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
-											<option value="">{{Aucun}}</option>
-											<?php
-											$options = '';
-											foreach ((jeeObject::buildTree(null, false)) as $object) {
-												$options .= '<option value="' . $object->getId() . '">' . str_repeat('&nbsp;&nbsp;', $object->getConfiguration('parentNumber')) . $object->getName() . '</option>';
-											}
-											echo $options;
-											?>
-										</select>
-									</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" >{{Objet parent}}</label>
+								<div class="col-sm-6">
+									<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
+										<option value="">{{Aucun}}</option>
+										<?php
+										$options = '';
+										foreach ((jeeObject::buildTree(null, false)) as $object) {
+											$options .= '<option value="' . $object->getId() . '">' . str_repeat('&nbsp;&nbsp;', $object->getConfiguration('parentNumber')) . $object->getName() . '</option>';
+										}
+										echo $options;
+										?>
+									</select>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-3 control-label">{{Options}}</label>
-									<div class="col-xs-11 col-sm-7">
-										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
-										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
-									</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Catégorie}}</label>
+								<div class="col-sm-6">
+									<?php
+									foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
+										echo '<label class="checkbox-inline">';
+										echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" >' . $value['name'];
+										echo '</label>';
+									}
+									?>
 								</div>
-								
-								<br/>
-								<legend><i class="fas fa-cogs"></i> {{Paramètres}}</legend>
-								<div class="form-group">
-									<label class="col-sm-3 control-label">{{Modèle}}</label>
-									<div class="col-xs-11 col-sm-7">
-										<select type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="model" >
-											<option value="PLAY1">Sonos Play 1</option>
-											<option value="PLAY3">Sonos Play 3</option>
-											<option value="PLAY5">Sonos Play 5</option>
-											<option value="CONNECT">Sonos Connect</option>
-											<option value="CONNECT:AMP">Sonos Connect AMP</option>
-											<option value="PLAYBAR">Sonos Playbar</option>
-											<option value="PLAYBASE">Sonos Playbase</option>
-											<option value="ARC">Sonos Arc</option>
-											<option value="ONE">Sonos One</option>
-											<option value="BEAM">Sonos Beam</option>
-											<option value="SYMFONISK_LIGHT">Ikea SYMFONISK Lampe</option>
-											<option value="SYMFONISK">Ikea SYMFONISK</option>
-											<option value="PORT">Sonos port</option>
-											<option value="MOVE">Sonos move</option>
-											<option value="FIVE">Sonos five</option>
-											<option value="ROAM">Sonos roam</option>
-										</select>
-									</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Options}}</label>
+								<div class="col-sm-6">
+									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
+									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-3 control-label">{{IP}}</label>
-									<div class="col-xs-11 col-sm-7">
-										<input type="text" class="eqLogicAttr configuration form-control" data-l1key="logicalId" placeholder="IP"/>
-									</div>
+							</div>
+
+							<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{IP}}</label>
+								<div class="col-sm-6">
+									<input type="text" class="eqLogicAttr configuration form-control" data-l1key="logicalId" placeholder="IP"/>
 								</div>
-								<br/>
-							</fieldset>
-						</form>
-					</div>
-					
-					<div class="col-lg-5">
-						<form class="form-horizontal">
-							<fieldset>
-								<legend><i class="fas fa-info"></i> {{Informations}}</legend>
-								<div class="form-group">
-									<label class="col-sm-3"></label>
-									<div class="col-sm-7 text-center">
-										<img name="icon_visu" src="<?= $plugin->getPathImgIcon(); ?>" id="img_sonosModel" style="max-width:160px;"/>
-									</div>
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+							<legend><i class="fas fa-info"></i> {{Informations}}</legend>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Modèle}}</label>
+								<div class="col-sm-6">
+									<select type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="model" >
+										<option value="PLAY1">Sonos Play 1</option>
+										<option value="PLAY3">Sonos Play 3</option>
+										<option value="PLAY5">Sonos Play 5</option>
+										<option value="CONNECT">Sonos Connect</option>
+										<option value="CONNECT:AMP">Sonos Connect AMP</option>
+										<option value="PLAYBAR">Sonos Playbar</option>
+										<option value="PLAYBASE">Sonos Playbase</option>
+										<option value="ARC">Sonos Arc</option>
+										<option value="ONE">Sonos One</option>
+										<option value="BEAM">Sonos Beam</option>
+										<option value="SYMFONISK_LIGHT">Ikea SYMFONISK Lampe</option>
+										<option value="SYMFONISK">Ikea SYMFONISK</option>
+										<option value="PORT">Sonos port</option>
+										<option value="MOVE">Sonos move</option>
+										<option value="FIVE">Sonos five</option>
+										<option value="ROAM">Sonos roam</option>
+									</select>
 								</div>
-							</fieldset>
-						</form>
-					</div>
-				</div>
-				
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4"></label>
+								<div class="col-sm-6 text-center">
+									<img name="icon_visu" src="<?= $plugin->getPathImgIcon(); ?>" id="img_sonosModel" style="max-width:160px;"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
 			</div>
+
 			<div role="tabpanel" class="tab-pane" id="commandtab">
-				<br/>
 				<table id="table_cmd" class="table table-bordered table-condensed">
 					<thead>
 						<tr>
-							<th>{{Nom}}</th><th>{{Action}}</th>
+							<th class="hidden-xs" style="min-width:50px;width:70px;">ID</th>
+							<th style="min-width:220px;width:300px;">{{Nom}}</th>
+							<th></th>
+							<th style="min-width:150px;width:250px;">{{Actions}}</th>
 						</tr>
 					</thead>
 					<tbody>
 					</tbody>
 				</table>
-				
 			</div>
+
 		</div>
-		
 	</div>
 </div>
 
