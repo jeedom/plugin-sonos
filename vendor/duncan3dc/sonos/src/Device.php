@@ -186,6 +186,7 @@ class Device {
 			"S22" => "ONE",
 			"S23" => "PORT",
 			"S24" => "FIVE",
+			"S27" => "ROAM",
 			"S29" => "SYMFONISK_INWALL",
 			"S30" => "SYMFONISK",
 			"S38" => "ONE",
