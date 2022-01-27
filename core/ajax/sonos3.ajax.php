@@ -1,5 +1,4 @@
 <?php
-
 /* This file is part of Jeedom.
 *
 * Jeedom is free software: you can redistribute it and/or modify
@@ -19,18 +18,18 @@
 try {
 	require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 	include_file('core', 'authentification', 'php');
-	
+
 	if (!isConnect()) {
 		throw new Exception(__('401 - Accès non autorisé', __FILE__));
 	}
-	
+
 	ajax::init();
-	
+
 	if (init('action') == 'syncSonos') {
 		sonos3::syncSonos();
 		ajax::success();
 	}
-	
+
 	if (init('action') == 'getQueue') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -38,7 +37,7 @@ try {
 		}
 		ajax::success($sonos->getQueue());
 	}
-	
+
 	if (init('action') == 'playTrack') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -46,7 +45,7 @@ try {
 		}
 		ajax::success($sonos->playTrack(init('position')));
 	}
-	
+
 	if (init('action') == 'removeTrack') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -54,7 +53,7 @@ try {
 		}
 		ajax::success($sonos->removeTrack(init('position')));
 	}
-	
+
 	if (init('action') == 'emptyQueue') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -62,7 +61,7 @@ try {
 		}
 		ajax::success($sonos->emptyQueue());
 	}
-	
+
 	if (init('action') == 'playPlaylist') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -72,7 +71,7 @@ try {
 		$cmd->execCmd(array('title' => init('playlist')));
 		ajax::success();
 	}
-	
+
 	if (init('action') == 'playRadio') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -82,7 +81,7 @@ try {
 		$cmd->execCmd(array('title' => init('radio')));
 		ajax::success();
 	}
-	
+
 	if (init('action') == 'playFavourite') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -92,7 +91,7 @@ try {
 		$cmd->execCmd(array('title' => init('favourite')));
 		ajax::success();
 	}
-	
+
 	if (init('action') == 'addSpeaker') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -102,7 +101,7 @@ try {
 		$cmd->execCmd(array('title' => init('speaker')));
 		ajax::success();
 	}
-	
+
 	if (init('action') == 'removeSpeaker') {
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
@@ -112,7 +111,7 @@ try {
 		$cmd->execCmd(array('title' => init('speaker')));
 		ajax::success();
 	}
-	
+
 	if (init('action') == 'getSonos') {
 		if (init('object_id') == '') {
 			$object = jeeObject::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
@@ -145,13 +144,13 @@ try {
 		}
 		ajax::success($return);
 	}
-	
+
 	if (init('action') == 'updateSonos') {
 		sonos3::updateSonos();
 		ajax::success();
 	}
-	
-	throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
+
+	throw new Exception(__('Aucune méthode correspondante à', __FILE__) . ' : ' . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {
 	ajax::error(displayException($e), $e->getCode());
