@@ -14,16 +14,17 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-$('.eqLogicAttr[data-l1key=configuration][data-l2key=model]').on('change', function() {
-  if ($(this).value() == null) {
-    return
+function printEqLogic(_eqLogic) {
+  if (_eqLogic.configuration.model && _eqLogic.configuration.model != '') {
+    $('#img_sonosModel').attr('src', 'plugins/sonos3/core/img/' + _eqLogic.configuration.model + '.png')
+  } else {
+    $('#img_sonosModel').attr('src', 'plugins/sonos3/plugin_info/sonos3_icon.png')
   }
-  $('#img_sonosModel').attr('src','plugins/sonos3/core/img/'+$(this).value().replace(':','')+'.png')
-})
+}
 
 function addCmdToTable(_cmd) {
   if (!isset(_cmd)) {
-    var _cmd = {configuration: {}}
+    var _cmd = { configuration: {} }
   }
   if (!isset(_cmd.configuration)) {
     _cmd.configuration = {}
