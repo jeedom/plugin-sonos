@@ -4,6 +4,10 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 27/01/2022
+
+- Optimizaciones V4.2
+
 # 14/01/2022
 
 - Compatibilidad añadida con el nuevo altavoz SYMFONISK

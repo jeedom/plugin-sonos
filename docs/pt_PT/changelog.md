@@ -4,6 +4,10 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 27/01/2022
+
+- Otimizações da V4.2
+
 # 14/01/2022
 
 - Adicionada compatibilidade com o novo alto-falante SYMFONISK

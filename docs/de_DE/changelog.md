@@ -4,6 +4,10 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 27.01.2022
+
+- V4.2-Optimierungen
+
 # 14.01.2022
 
 - Kompatibilität mit dem neuen SYMFONISK-Lautsprecher hinzugefügt
