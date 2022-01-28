@@ -13,13 +13,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<div class="eqLogicThumbnailContainer">
 			<div class="cursor eqLogicAction logoPrimary" data-action="add">
 				<i class="fas fa-plus-circle"></i>
-				<br/>
+				<br />
 				<span>{{Ajouter}}</span>
 			</div>
 			<div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
 				<i class="fas fa-wrench"></i>
-				<br/>
-				<span >{{Configuration}}</span>
+				<br />
+				<span>{{Configuration}}</span>
 			</div>
 		</div>
 		<legend><i class='fas fa-music'></i> {{Mes Sonos}}</legend>
@@ -37,7 +37,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			echo '<div class="eqLogicThumbnailContainer">';
 			foreach ($eqLogics as $eqLogic) {
 				$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
-				echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
+				echo '<div class="eqLogicDisplayCard cursor ' . $opacity . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
 				if ($eqLogic->getConfiguration('model', '') != '') {
 					echo '<img src="' . $eqLogic->getImage() . '"/>';
 				} else {
@@ -47,7 +47,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
 				echo '<span class="hiddenAsCard displayTableRight hidden">';
 				if ($eqLogic->getLogicalId() != '') {
-					echo '<span class="label label-info">'.$eqLogic->getLogicalId().'</span>';
+					echo '<span class="label label-info">' . $eqLogic->getLogicalId() . '</span>';
 				}
 				echo ($eqLogic->getIsVisible() == 1) ? '<i class="fas fa-eye" title="{{Equipement visible}}"></i>' : '<i class="fas fa-eye-slash" title="{{Equipement non visible}}"></i>';
 				echo '</span>';
@@ -82,11 +82,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<label class="col-sm-4 control-label">{{Nom du Sonos}}</label>
 								<div class="col-sm-6">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement Sonos}}"/>
+									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement Sonos}}" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label" >{{Objet parent}}</label>
+								<label class="col-sm-4 control-label">{{Objet parent}}</label>
 								<div class="col-sm-6">
 									<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 										<option value="">{{Aucun}}</option>
@@ -115,8 +115,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Options}}</label>
 								<div class="col-sm-6">
-									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
-									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
+									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
 								</div>
 							</div>
 
@@ -124,7 +124,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{IP}}</label>
 								<div class="col-sm-6">
-									<input type="text" class="eqLogicAttr configuration form-control" data-l1key="logicalId" placeholder="IP"/>
+									<input type="text" class="eqLogicAttr configuration form-control" data-l1key="logicalId" placeholder="IP" />
 								</div>
 							</div>
 						</div>
@@ -134,12 +134,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Modèle}}</label>
 								<div class="col-sm-6">
-									<select type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="model" >
+									<select type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="model">
 										<option value="PLAY1">Sonos Play 1</option>
 										<option value="PLAY3">Sonos Play 3</option>
 										<option value="PLAY5">Sonos Play 5</option>
 										<option value="CONNECT">Sonos Connect</option>
-										<option value="CONNECT:AMP">Sonos Connect AMP</option>
+										<option value="CONNECTAMP">Sonos Connect AMP</option>
 										<option value="PLAYBAR">Sonos Playbar</option>
 										<option value="PLAYBASE">Sonos Playbase</option>
 										<option value="ARC">Sonos Arc</option>
@@ -157,7 +157,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-4"></label>
 								<div class="col-sm-6 text-center">
-									<img name="icon_visu" src="<?= $plugin->getPathImgIcon(); ?>" id="img_sonosModel" style="max-width:160px;"/>
+									<img name="icon_visu" src="<?= $plugin->getPathImgIcon(); ?>" id="img_sonosModel" style="max-width:160px;" />
 								</div>
 							</div>
 						</div>
@@ -184,5 +184,5 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	</div>
 </div>
 
-<?php include_file('desktop', 'sonos3', 'js', 'sonos3');?>
-<?php include_file('core', 'plugin.template', 'js');?>
+<?php include_file('desktop', 'sonos3', 'js', 'sonos3'); ?>
+<?php include_file('core', 'plugin.template', 'js'); ?>

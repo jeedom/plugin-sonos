@@ -219,6 +219,49 @@ class sonos3 extends eqLogic {
 		}
 	}
 
+	/**
+	 * set model in eqLogic configuration from controller name and save eqLogic
+	 *
+	 * @param string $controllerName
+	 * @return void
+	 */
+	private function setModel($controllerName) {
+		if (stripos($controllerName, 'PLAY:1') !== false) {
+			$this->setConfiguration('model', 'PLAY1');
+		} else if (stripos($controllerName, 'PLAY:3') !== false) {
+			$this->setConfiguration('model', 'PLAY3');
+		} else if (stripos($controllerName, 'PLAY:5') !== false) {
+			$this->setConfiguration('model', 'PLAY5');
+		} else if (stripos($controllerName, 'PLAYBAR') !== false) {
+			$this->setConfiguration('model', 'PLAYBAR');
+		} else if (stripos($controllerName, 'PLAYBASE') !== false) {
+			$this->setConfiguration('model', 'PLAYBASE');
+		} else if (stripos($controllerName, 'CONNECT:AMP') !== false) {
+			$this->setConfiguration('model', 'CONNECTAMP');
+		} else if (stripos($controllerName, 'CONNECT') !== false) {
+			$this->setConfiguration('model', 'CONNECT');
+		} else if (stripos($controllerName, 'BEAM') !== false) {
+			$this->setConfiguration('model', 'BEAM');
+		} else if (stripos($controllerName, 'ONE') !== false) {
+			$this->setConfiguration('model', 'ONE');
+		} else if (stripos($controllerName, 'SYMFONISK_LIGHT') !== false) {
+			$this->setConfiguration('model', 'SYMFONISK_LIGHT');
+		} else if (stripos($controllerName, 'SYMFONISK') !== false) {
+			$this->setConfiguration('model', 'SYMFONISK');
+		} else if (stripos($controllerName, 'SYMFONISK_INWALL') !== false) {
+			$this->setConfiguration('model', 'SYMFONISK_INWALL');
+		} else if (stripos($controllerName, 'PORT') !== false) {
+			$this->setConfiguration('model', 'PORT');
+		} else if (stripos($controllerName, 'MOVE') !== false) {
+			$this->setConfiguration('model', 'MOVE');
+		} else if (stripos($controllerName, 'FIVE') !== false) {
+			$this->setConfiguration('model', 'FIVE');
+		} else if (stripos($controllerName, 'ROAM') !== false) {
+			$this->setConfiguration('model', 'ROAM');
+		}
+		$this->save(true);
+	}
+
 	public static function syncSonos() {
 		$sonos = self::getSonos(true);
 		try {
@@ -234,7 +277,9 @@ class sonos3 extends eqLogic {
 			$speakers_array[$speaker->getIp()] = $speaker->getRoom();
 		}
 		foreach ($controllers as $controller) {
+			/** @var sonos3 */
 			$eqLogic = self::byLogicalId($controller->getIp(), __CLASS__);
+			log::add(__CLASS__, 'info', "Controller found: {$controller->getName()}");
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
 				$eqLogic->setLogicalId($controller->getIp());
@@ -244,44 +289,12 @@ class sonos3 extends eqLogic {
 					$eqLogic->setObject_id($object->getId());
 					$eqLogic->setName($controller->getName());
 				}
-				if (strpos($controller->getName(), 'PLAY:1') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAY1');
-				} else if (strpos(strtoupper($controller->getName()), 'PLAY:3') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAY3');
-				} else if (strpos(strtoupper($controller->getName()), 'PLAY:5') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAY5');
-				} else if (strpos(strtoupper($controller->getName()), 'PLAYBAR') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAYBAR');
-				} else if (strpos(strtoupper($controller->getName()), 'PLAYBASE') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAYBASE');
-				} else if (strpos(strtoupper($controller->getName()), 'CONNECT:AMP') !== false) {
-					$eqLogic->setConfiguration('model', 'CONNECTAMP');
-				} else if (strpos(strtoupper($controller->getName()), 'CONNECT') !== false) {
-					$eqLogic->setConfiguration('model', 'CONNECT');
-				} else if (strpos(strtoupper($controller->getName()), 'BEAM') !== false) {
-					$eqLogic->setConfiguration('model', 'BEAM');
-				} else if (strpos(strtoupper($controller->getName()), 'ONE') !== false) {
-					$eqLogic->setConfiguration('model', 'ONE');
-				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK_LIGHT') !== false) {
-					$eqLogic->setConfiguration('model', 'SYMFONISK_LIGHT');
-				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK') !== false) {
-					$eqLogic->setConfiguration('model', 'SYMFONISK');
-				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK_INWALL') !== false) {
-					$eqLogic->setConfiguration('model', 'SYMFONISK_INWALL');
-				} else if (strpos(strtoupper($controller->getName()), 'PORT') !== false) {
-					$eqLogic->setConfiguration('model', 'PORT');
-				} else if (strpos(strtoupper($controller->getName()), 'MOVE') !== false) {
-					$eqLogic->setConfiguration('model', 'MOVE');
-				} else if (strpos(strtoupper($controller->getName()), 'FIVE') !== false) {
-					$eqLogic->setConfiguration('model', 'FIVE');
-				} else if (strpos(strtoupper($controller->getName()), 'ROAM') !== false) {
-					$eqLogic->setConfiguration('model', 'ROAM');
-				}
 				$eqLogic->setEqType_name(__CLASS__);
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
 				$eqLogic->save();
 			}
+			$eqLogic->setModel($controller->getName());
 		}
 		$eqLogics = eqLogic::byType(__CLASS__);
 		if (count($eqLogics) != 0) {
