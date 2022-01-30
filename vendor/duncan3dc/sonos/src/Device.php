@@ -107,7 +107,7 @@ class Device {
 		}
 		$location .= "{$service}/Control";
 
-		$this->logger->info("sending soap request to: {$location}", $params);
+		$this->logger->debug("sending soap request to: {$location}", $params);
 
 		$soap = new \SoapClient(null, [
 			"location" => $location,
@@ -186,7 +186,10 @@ class Device {
 			"S22" => "ONE",
 			"S23" => "PORT",
 			"S24" => "FIVE",
+			"S27" => "ROAM",
 			"S29" => "SYMFONISK_INWALL",
+			"S30" => "SYMFONISK",
+			"S38" => "ONE",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",

@@ -4,10 +4,24 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 01/27/2022
+
+- V4.2 optimizations
+
+# 01/14/2022
+
+- Added compatibility with the new SYMFONISK speaker
+
+# 12/27/2021
+
+- Added compatibility with the new Sonos one
+
+# 09/10/2021
 
 - Addition of the Sonos Five
 - Adding Sonos Roam
 - Adding Symfonisk Framework
+- Immediate volume update in case of change by Jeedom, thank you @Domochip
 
 # 24/11/2020
 

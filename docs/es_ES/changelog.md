@@ -4,10 +4,24 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 27/01/2022
+
+- Optimizaciones V4.2
+
+# 14/01/2022
+
+- Compatibilidad añadida con el nuevo altavoz SYMFONISK
+
+# 27/12/2021
+
+- Compatibilidad añadida con el nuevo Sonos One
+
+# 10/09/2021
 
 - Adición de Sonos Five
 - Agregar Sonos Roam
 - Añadiendo Symfonisk Framework
+- Actualización de volumen inmediata en caso de cambio por parte de Jeedom, gracias @Domochip
 
 # 24/11/2020
 

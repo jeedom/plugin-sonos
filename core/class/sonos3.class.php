@@ -42,10 +42,11 @@ class sonos3 extends eqLogic {
 				'type' => 'color',
 				'default' => '#5d9cec',
 				'allow_transparent' => true,
-				'allow_displayType' => true,
-			),
-		),
+				'allow_displayType' => true
+			)
+		)
 	);
+	public static $_encryptConfigKey = array('tts_username', 'tts_password');
 
 	private $_controller = null;
 
@@ -53,7 +54,7 @@ class sonos3 extends eqLogic {
 
 	public static function restore() {
 		try {
-			sonos3::syncSonos();
+			self::syncSonos();
 		} catch (Exception $e) {
 		}
 	}
@@ -62,7 +63,7 @@ class sonos3 extends eqLogic {
 		$return = array();
 		$return['log'] = 'sonos_update';
 		$return['state'] = 'ok';
-		$return['progress_file'] = jeedom::getTmpFolder('sonos3') . '/dependance';
+		$return['progress_file'] = jeedom::getTmpFolder(__CLASS__) . '/dependance';
 		if (exec('which smbclient | wc -l') == 0) {
 			$return['state'] = 'nok';
 		}
@@ -78,14 +79,14 @@ class sonos3 extends eqLogic {
 
 	public static function dependancy_install() {
 		log::remove(__CLASS__ . '_update');
-		return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('sonos3') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
+		return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder(__CLASS__) . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
 	}
 
 	public static function deamon_info() {
 		$return = array();
 		$return['log'] = '';
 		$return['state'] = 'nok';
-		$cron = cron::byClassAndFunction('sonos3', 'pull');
+		$cron = cron::byClassAndFunction(__CLASS__, 'pull');
 		if (is_object($cron) && $cron->running()) {
 			$return['state'] = 'ok';
 		}
@@ -99,7 +100,7 @@ class sonos3 extends eqLogic {
 		if ($deamon_info['launchable'] != 'ok') {
 			throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
 		}
-		$cron = cron::byClassAndFunction('sonos3', 'pull');
+		$cron = cron::byClassAndFunction(__CLASS__, 'pull');
 		if (!is_object($cron)) {
 			throw new Exception(__('Tache cron introuvable', __FILE__));
 		}
@@ -107,7 +108,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function deamon_stop() {
-		$cron = cron::byClassAndFunction('sonos3', 'pull');
+		$cron = cron::byClassAndFunction(__CLASS__, 'pull');
 		if (!is_object($cron)) {
 			throw new Exception(__('Tache cron introuvable', __FILE__));
 		}
@@ -115,7 +116,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function deamon_changeAutoMode($_mode) {
-		$cron = cron::byClassAndFunction('sonos3', 'pull');
+		$cron = cron::byClassAndFunction(__CLASS__, 'pull');
 		if (!is_object($cron)) {
 			throw new Exception(__('Tache cron introuvable', __FILE__));
 		}
@@ -124,12 +125,12 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function interact($_query, $_parameters = array()) {
-		if (trim(config::byKey('interact::sentence', 'sonos3')) == '') {
+		if (trim(config::byKey('interact::sentence', __CLASS__)) == '') {
 			return null;
 		}
 		$ok = false;
 		$files = array();
-		$matchs = explode("\n", str_replace('\n', "\n", trim(config::byKey('interact::sentence', 'sonos3'))));
+		$matchs = explode("\n", str_replace('\n', "\n", trim(config::byKey('interact::sentence', __CLASS__))));
 		if (count($matchs) == 0) {
 			return null;
 		}
@@ -145,7 +146,7 @@ class sonos3 extends eqLogic {
 		$sonos = null;
 		$data = interactQuery::findInQuery('object', $_query);
 		if (is_object($data['object'])) {
-			$founds = $data['object']->getEqLogic(true, false, 'sonos3');
+			$founds = $data['object']->getEqLogic(true, false, __CLASS__);
 			if (count($founds) != 0) {
 				$sonos = $founds[0];
 			}
@@ -159,21 +160,21 @@ class sonos3 extends eqLogic {
 		if ($sonos == null) {
 			return null;
 		}
-		$playlists = config::byKey('playlist', 'sonos3');
+		$playlists = config::byKey('playlist', __CLASS__);
 		if (is_array($playlists)) {
 			foreach ($playlists as $uri => $name) {
 				if (interactQuery::autoInteractWordFind($data['query'], $name)) {
 					$sonos->getCmd(null, 'play_playlist')->execCmd(array('title' => $name));
-					return array('reply' => __('Ok j\'ai lancé : ', __FILE__) . $name);
+					return array('reply' => __('Ok j\'ai lancé', __FILE__) . ' : ' . $name);
 				}
 			}
 		}
-		$favourites = config::byKey('favourites', 'sonos3');
+		$favourites = config::byKey('favourites', __CLASS__);
 		if (is_array($favourites)) {
 			foreach ($favourites as $favourite) {
 				if (interactQuery::autoInteractWordFind($data['query'], $favourite['name'])) {
 					$sonos->getCmd(null, 'play_favourite')->execCmd(array('title' => $favourite['name']));
-					return array('reply' => __('Ok j\'ai lancé : ', __FILE__) . $favourite['name']);
+					return array('reply' => __('Ok j\'ai lancé', __FILE__) . ' : ' . $favourite['name']);
 				}
 			}
 		}
@@ -186,14 +187,14 @@ class sonos3 extends eqLogic {
 				self::$_sonos = new duncan3dc\Sonos\Network();
 			} else {
 				$devices = new \duncan3dc\Sonos\Devices\Collection();
-				$devices->setLogger(log::getLogger('sonos3'));
+				$devices->setLogger(log::getLogger(__CLASS__));
 				if ($_ip !== null) {
 					$devices->addIp($_ip);
 					$sonos =  new duncan3dc\Sonos\Network($devices);
-					$sonos->setLogger(log::getLogger('sonos3'));
+					$sonos->setLogger(log::getLogger(__CLASS__));
 					return $sonos;
 				} else {
-					$eqLogics = eqLogic::byType('sonos3', true);
+					$eqLogics = eqLogic::byType(__CLASS__, true);
 					if (count($eqLogics) != 0) {
 						foreach ($eqLogics as $eqLogic) {
 							$devices->addIp($eqLogic->getLogicalId());
@@ -202,7 +203,7 @@ class sonos3 extends eqLogic {
 				}
 				self::$_sonos = new duncan3dc\Sonos\Network($devices);
 			}
-			self::$_sonos->setLogger(log::getLogger('sonos3'));
+			self::$_sonos->setLogger(log::getLogger(__CLASS__));
 		}
 		return self::$_sonos;
 	}
@@ -218,6 +219,49 @@ class sonos3 extends eqLogic {
 		}
 	}
 
+	/**
+	 * set model in eqLogic configuration from controller name and save eqLogic
+	 *
+	 * @param string $controllerName
+	 * @return void
+	 */
+	private function setModel($controllerName) {
+		if (stripos($controllerName, 'PLAY:1') !== false) {
+			$this->setConfiguration('model', 'PLAY1');
+		} else if (stripos($controllerName, 'PLAY:3') !== false) {
+			$this->setConfiguration('model', 'PLAY3');
+		} else if (stripos($controllerName, 'PLAY:5') !== false) {
+			$this->setConfiguration('model', 'PLAY5');
+		} else if (stripos($controllerName, 'PLAYBAR') !== false) {
+			$this->setConfiguration('model', 'PLAYBAR');
+		} else if (stripos($controllerName, 'PLAYBASE') !== false) {
+			$this->setConfiguration('model', 'PLAYBASE');
+		} else if (stripos($controllerName, 'CONNECT:AMP') !== false) {
+			$this->setConfiguration('model', 'CONNECTAMP');
+		} else if (stripos($controllerName, 'CONNECT') !== false) {
+			$this->setConfiguration('model', 'CONNECT');
+		} else if (stripos($controllerName, 'BEAM') !== false) {
+			$this->setConfiguration('model', 'BEAM');
+		} else if (stripos($controllerName, 'ONE') !== false) {
+			$this->setConfiguration('model', 'ONE');
+		} else if (stripos($controllerName, 'SYMFONISK_LIGHT') !== false) {
+			$this->setConfiguration('model', 'SYMFONISK_LIGHT');
+		} else if (stripos($controllerName, 'SYMFONISK') !== false) {
+			$this->setConfiguration('model', 'SYMFONISK');
+		} else if (stripos($controllerName, 'SYMFONISK_INWALL') !== false) {
+			$this->setConfiguration('model', 'SYMFONISK_INWALL');
+		} else if (stripos($controllerName, 'PORT') !== false) {
+			$this->setConfiguration('model', 'PORT');
+		} else if (stripos($controllerName, 'MOVE') !== false) {
+			$this->setConfiguration('model', 'MOVE');
+		} else if (stripos($controllerName, 'FIVE') !== false) {
+			$this->setConfiguration('model', 'FIVE');
+		} else if (stripos($controllerName, 'ROAM') !== false) {
+			$this->setConfiguration('model', 'ROAM');
+		}
+		$this->save(true);
+	}
+
 	public static function syncSonos() {
 		$sonos = self::getSonos(true);
 		try {
@@ -227,13 +271,15 @@ class sonos3 extends eqLogic {
 			$sonos = self::getSonos();
 			$controllers = $sonos->getControllers();
 		}
-		$speakers = sonos3::getSpeaker();
+		$speakers = self::getSpeaker();
 		$speakers_array = array();
 		foreach ($speakers as $speaker) {
 			$speakers_array[$speaker->getIp()] = $speaker->getRoom();
 		}
 		foreach ($controllers as $controller) {
-			$eqLogic = sonos3::byLogicalId($controller->getIp(), 'sonos3');
+			/** @var sonos3 */
+			$eqLogic = self::byLogicalId($controller->getIp(), __CLASS__);
+			log::add(__CLASS__, 'info', "Controller found: {$controller->getName()}");
 			if (!is_object($eqLogic)) {
 				$eqLogic = new self();
 				$eqLogic->setLogicalId($controller->getIp());
@@ -243,46 +289,14 @@ class sonos3 extends eqLogic {
 					$eqLogic->setObject_id($object->getId());
 					$eqLogic->setName($controller->getName());
 				}
-				if (strpos($controller->getName(), 'PLAY:1') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAY1');
-				} else if (strpos(strtoupper($controller->getName()), 'PLAY:3') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAY3');
-				} else if (strpos(strtoupper($controller->getName()), 'PLAY:5') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAY5');
-				} else if (strpos(strtoupper($controller->getName()), 'PLAYBAR') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAYBAR');
-				} else if (strpos(strtoupper($controller->getName()), 'PLAYBASE') !== false) {
-					$eqLogic->setConfiguration('model', 'PLAYBASE');
-				} else if (strpos(strtoupper($controller->getName()), 'CONNECT:AMP') !== false) {
-					$eqLogic->setConfiguration('model', 'CONNECTAMP');
-				} else if (strpos(strtoupper($controller->getName()), 'CONNECT') !== false) {
-					$eqLogic->setConfiguration('model', 'CONNECT');
-				} else if (strpos(strtoupper($controller->getName()), 'BEAM') !== false) {
-					$eqLogic->setConfiguration('model', 'BEAM');
-				} else if (strpos(strtoupper($controller->getName()), 'ONE') !== false) {
-					$eqLogic->setConfiguration('model', 'ONE');
-				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK_LIGHT') !== false) {
-					$eqLogic->setConfiguration('model', 'SYMFONISK_LIGHT');
-				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK') !== false) {
-					$eqLogic->setConfiguration('model', 'SYMFONISK');
-				} else if (strpos(strtoupper($controller->getName()), 'SYMFONISK_INWALL') !== false) {
-					$eqLogic->setConfiguration('model', 'SYMFONISK_INWALL');
-				} else if (strpos(strtoupper($controller->getName()), 'PORT') !== false) {
-					$eqLogic->setConfiguration('model', 'PORT');
-				} else if (strpos(strtoupper($controller->getName()), 'MOVE') !== false) {
-					$eqLogic->setConfiguration('model', 'MOVE');
-				} else if (strpos(strtoupper($controller->getName()), 'FIVE') !== false) {
-					$eqLogic->setConfiguration('model', 'FIVE');
-				} else if (strpos(strtoupper($controller->getName()), 'ROAM') !== false) {
-					$eqLogic->setConfiguration('model', 'ROAM');
-				}
-				$eqLogic->setEqType_name('sonos3');
+				$eqLogic->setEqType_name(__CLASS__);
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
 				$eqLogic->save();
 			}
+			$eqLogic->setModel($controller->getName());
 		}
-		$eqLogics = eqLogic::byType('sonos3');
+		$eqLogics = eqLogic::byType(__CLASS__);
 		if (count($eqLogics) != 0) {
 			foreach ($eqLogics as $eqLogic) {
 				$eqLogic->setConfiguration('speakers', json_encode($speakers_array));
@@ -296,7 +310,7 @@ class sonos3 extends eqLogic {
 
 	public static function pull($_eqLogic_id = null) {
 		if (self::$_eqLogics == null) {
-			self::$_eqLogics = self::byType('sonos3');
+			self::$_eqLogics = self::byType(__CLASS__);
 		}
 		foreach (self::$_eqLogics as &$eqLogic) {
 			if ($_eqLogic_id != null && $_eqLogic_id != $eqLogic->getId()) {
@@ -367,7 +381,7 @@ class sonos3 extends eqLogic {
 				}
 			} catch (Exception $e) {
 				if ($_eqLogic_id != null) {
-					log::add('sonos3', 'error', $e->getMessage());
+					log::add(__CLASS__, 'error', $e->getMessage());
 				} else {
 					$eqLogic->refresh();
 					if ($eqLogic->getIsEnable() == 0) {
@@ -376,7 +390,7 @@ class sonos3 extends eqLogic {
 				}
 			} catch (Error $ex) {
 				if ($_eqLogic_id != null) {
-					log::add('sonos3', 'error', $ex->getMessage());
+					log::add(__CLASS__, 'error', $ex->getMessage());
 				} else {
 					$eqLogic->refresh();
 					if ($eqLogic->getIsEnable() == 0) {
@@ -402,14 +416,14 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getPlayLists() {
-		$sonos = sonos3::getSonos();
+		$sonos = self::getSonos();
 		$playlists = $sonos->getPlaylists();
 		$array = array();
 		foreach ($playlists as $playlist) {
 			$array[$playlist->getUri()] = $playlist->getName();
 		}
-		config::save('playlist', $array, 'sonos3');
-		foreach (sonos3::byType('sonos3') as $sonos3) {
+		config::save('playlist', $array, __CLASS__);
+		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_playlist');
 			if (is_object($cmd)) {
 				$cmd->setDisplay('title_possibility_list', json_encode(array_values($array)));
@@ -420,14 +434,14 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getFavourites() {
-		$sonos = sonos3::getSonos();
+		$sonos = self::getSonos();
 		$favourites = $sonos->getFavourites()->listFavorite();
-		config::save('favourites', $favourites, 'sonos3');
+		config::save('favourites', $favourites, __CLASS__);
 		$array = array();
 		foreach ($favourites as $favourite) {
 			$array[$favourite['uri']] = $favourite['name'];
 		}
-		foreach (sonos3::byType('sonos3') as $sonos3) {
+		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_favourite');
 			if (is_object($cmd)) {
 				$cmd->setDisplay('title_possibility_list', json_encode(array_values($array)));
@@ -438,12 +452,12 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getRadioStations() {
-		$radios = sonos3::getSonos()->getRadio()->getFavouriteStations();
+		$radios = self::getSonos()->getRadio()->getFavouriteStations();
 		$array = array();
 		foreach ($radios as $radio) {
 			$array[] = $radio->getTitle();
 		}
-		foreach (sonos3::byType('sonos3') as $sonos3) {
+		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_radio');
 			if (is_object($cmd)) {
 				$cmd->setDisplay('title_possibility_list', json_encode($array));
@@ -454,14 +468,14 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function getSpeaker() {
-		return sonos3::getSonos()->getSpeakers();
+		return self::getSonos()->getSpeakers();
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function getPlayListsUri($_playlist) {
 		$_playlist = trim(trim($_playlist), '"');
-		$playlists = config::byKey('playlist', 'sonos3');
+		$playlists = config::byKey('playlist', __CLASS__);
 		if (is_array($playlists)) {
 			foreach ($playlists as $uri => $name) {
 				if (strtolower($name) == strtolower($_playlist)) {
@@ -469,8 +483,8 @@ class sonos3 extends eqLogic {
 				}
 			}
 		}
-		$sonos = sonos3::getPlayLists();
-		$playlists = config::byKey('playlist', 'sonos3');
+		$sonos = self::getPlayLists();
+		$playlists = config::byKey('playlist', __CLASS__);
 		if (is_array($playlists)) {
 			foreach ($playlists as $uri => $name) {
 				if (strtolower($name) == strtolower($_playlist)) {
@@ -483,7 +497,7 @@ class sonos3 extends eqLogic {
 
 	public function getFavouritesUri($_favourite) {
 		$_favourite = trim(trim($_favourite), '"');
-		$favourites = config::byKey('favourites', 'sonos3');
+		$favourites = config::byKey('favourites', __CLASS__);
 		if (is_array($favourites)) {
 			foreach ($favourites as $favourite) {
 				if (strtolower($favourite['name']) == strtolower($_favourite)) {
@@ -491,8 +505,8 @@ class sonos3 extends eqLogic {
 				}
 			}
 		}
-		$sonos = sonos3::getFavourites();
-		$favourites = config::byKey('favourites', 'sonos3');
+		$sonos = self::getFavourites();
+		$favourites = config::byKey('favourites', __CLASS__);
 		if (is_array($favourites)) {
 			foreach ($favourites as $favourite) {
 				if (strtolower($favourite['name']) == strtolower($_favourite)) {
@@ -794,7 +808,7 @@ class sonos3 extends eqLogic {
 		$add_speaker->setType('action');
 		$add_speaker->setSubType('message');
 		$add_speaker->setDisplay('message_disable', 1);
-		$add_speaker->setDisplay('title_placeholder', __('Nom de la piece', __FILE__));
+		$add_speaker->setDisplay('title_placeholder', __('Nom de la pièce', __FILE__));
 		$add_speaker->setEqLogic_id($this->getId());
 		$add_speaker->save();
 
@@ -807,7 +821,7 @@ class sonos3 extends eqLogic {
 		$remove_speaker->setType('action');
 		$remove_speaker->setSubType('message');
 		$remove_speaker->setDisplay('message_disable', 1);
-		$remove_speaker->setDisplay('title_placeholder', __('Nom de la piece', __FILE__));
+		$remove_speaker->setDisplay('title_placeholder', __('Nom de la pièce', __FILE__));
 		$remove_speaker->setEqLogic_id($this->getId());
 		$remove_speaker->save();
 
@@ -937,7 +951,7 @@ class sonos3 extends eqLogic {
 				$replace['#thumbnail#'] = 'plugins/sonos3/plugin_info/sonos3_alt_icon.png';
 			}
 		}
-		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', 'sonos3')));
+		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', __CLASS__)));
 	}
 
 	public function getQueue() {
@@ -966,7 +980,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public function getImage() {
-		return 'plugins/sonos3/core/img/' . str_replace(':', '', $this->getConfiguration('model')) . '.jpg';
+		return 'plugins/sonos3/core/img/' . str_replace(':', '', $this->getConfiguration('model')) . '.png';
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
@@ -992,7 +1006,7 @@ class sonos3Cmd extends cmd {
 		$eqLogic = $this->getEqLogic();
 		$controller = $eqLogic->getController(true);
 		if (!is_object($controller)) {
-			throw new Exception(__('Impossible de récuperer le sonos : ', __FILE__) . $eqLogic->getHumanName());
+			throw new Exception(__('Impossible de récuperer le sonos', __FILE__) . ' : ' . $eqLogic->getHumanName());
 		}
 		if ($this->getLogicalId() == 'play') {
 			$state = $eqLogic->getCmd(null, 'state');
@@ -1064,7 +1078,7 @@ class sonos3Cmd extends cmd {
 			$queue = $controller->getQueue();
 			$uri = $eqLogic->getPlayListsUri($_options['title']);
 			if ($uri == null) {
-				throw new Exception(__('Playlist non trouvé : ', __FILE__) . trim($_options['title']));
+				throw new Exception(__('Playlist non trouvée', __FILE__) . ' : ' . trim($_options['title']));
 			}
 			if (isset($_options['message']) && $_options['message'] == 'random') {
 				try {
@@ -1100,7 +1114,7 @@ class sonos3Cmd extends cmd {
 			$queue = $controller->getQueue();
 			$favourite = $eqLogic->getFavouritesUri($_options['title']);
 			if ($favourite == null) {
-				throw new Exception(__('Favoris non trouvé : ', __FILE__) . trim($_options['title']));
+				throw new Exception(__('Favoris non trouvés', __FILE__) . ' : ' . trim($_options['title']));
 			}
 			if (isset($_options['message']) && $_options['message'] == 'random') {
 				try {
@@ -1160,7 +1174,7 @@ class sonos3Cmd extends cmd {
 			$filesystem = new Filesystem($adapter);
 			$folder = array_pop($path);
 			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
-			$track = new TextToSpeech(trim($_options['message']), $directory, new JeedomProvider(network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . config::byKey('api', 'core')));
+			$track = new TextToSpeech(trim($_options['message']), $directory, new JeedomProvider(network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . config::byKey('apitts', 'core')));
 			$loop = 1;
 			while (true) {
 				try {

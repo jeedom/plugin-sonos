@@ -21,39 +21,44 @@
         "Ajouter": "Adicionar",
         "Configuration": "Configuração",
         "Mes Sonos": "My Sonos",
+        "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "Nenhum equipamento Sonos encontrado, clique em \"Adicionar\" para iniciar",
         "Rechercher": "Pesquisa",
+        "Equipement visible": "Equipamento visível",
+        "Equipement non visible": "Equipamento não visível",
         "Configuration avancée": "Configuração avançada",
         "Sauvegarder": "Salvar",
         "Supprimer": "Remover",
         "Equipement": "Equipamento",
         "Commandes": "Comandos",
-        "Général": "Geral",
-        "Nom du sonos": "Nome do Sonos",
-        "Nom de l'équipement template": "Nome do equipamento modelo",
+        "Paramètres généraux": "Configurações Gerais",
+        "Nom du Sonos": "Nome do Sonos",
+        "Nom de l'équipement Sonos": "Nome do dispositivo Sonos",
         "Objet parent": "Objeto pai",
         "Aucun": "Nemhum",
+        "Catégorie": "Categoria",
         "Options": "Opções",
         "Activer": "Ativar",
         "Visible": "Visivél",
-        "Paramètres": "Configurações",
-        "Modèle": "Modelo",
+        "Paramètres spécifiques": "Parâmetros específicos",
         "IP": "IP",
         "Informations": "Informação",
+        "Modèle": "Modelo",
         "Nom": "Nome",
-        "Action": "Ação"
+        "Actions": "Ações"
     },
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {
         "Nom": "Nome",
+        "Choisir une icône": "Escolha um ícone",
         "Tester": "Teste"
     },
     "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
-        "Aucune méthode correspondante à : ": "Aucune methode correspondante à :"
+        "Aucune méthode correspondante à": "Nenhum método de correspondência"
     },
     "plugins\/sonos3\/core\/class\/sonos3.class.php": {
         "Veuillez vérifier la configuration": "Por favor, verifique a configuração",
         "Tache cron introuvable": "Tarefa Cron não encontrada",
-        "Ok j\\'ai lancé : ": "Ok, eu lancei:",
+        "Ok j\\'ai lancé": "Ok eu lancei",
         "Transition": "Transição",
         "Entrée de ligne": "Entrada de linha",
         "Aucun": "Nemhum",
@@ -86,15 +91,15 @@
         "Jouer une radio": "Tocar rádio",
         "Titre de la radio": "Título do rádio",
         "Ajout un haut parleur": "Adicionando um alto-falante",
-        "Nom de la piece": "Nome do quarto",
+        "Nom de la pièce": "Nome do quarto",
         "Supprimer un haut parleur": "Excluir orador",
         "Dire": "Para dizer",
         "Message": "Mensagem",
         "Couleur dominante": "Cor dominante",
         "Couleur dominante 2": "Cor dominante 2",
-        "Impossible de récuperer le sonos : ": "Não foi possível recuperar o sistema de som:",
-        "Playlist non trouvé : ": "Lista de reprodução não encontrada:",
-        "Favoris non trouvé : ": "Favoritos não encontrados:"
+        "Impossible de récuperer le sonos": "Incapaz de recuperar os sonos",
+        "Playlist non trouvée": "Lista de reprodução não encontrada",
+        "Favoris non trouvés": "Favoritos não encontrados"
     },
     "info.json": {
         "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": "Plug-in de controle Sonos \/ Ikea Symfonisk. CUIDADO: PHP 7.0 mínimo é necessário"
