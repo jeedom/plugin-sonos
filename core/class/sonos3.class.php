@@ -1174,7 +1174,7 @@ class sonos3Cmd extends cmd {
 			$filesystem = new Filesystem($adapter);
 			$folder = array_pop($path);
 			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
-			$track = new TextToSpeech(trim($_options['message']), $directory, new JeedomProvider(network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . config::byKey('apitts', 'core')));
+			$track = new TextToSpeech(trim($_options['message']), $directory, new JeedomProvider(network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . jeedom::getApiKey('apitts')));
 			$loop = 1;
 			while (true) {
 				try {
