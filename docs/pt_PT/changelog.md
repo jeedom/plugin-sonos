@@ -4,6 +4,10 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 01/02/2022
+
+- Corrigido um bug no TTS
+
 # 27/01/2022
 
 - Otimizações da V4.2
