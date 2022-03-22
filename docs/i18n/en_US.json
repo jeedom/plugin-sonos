@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
+        "01\/02\/2022": "02\/01\/2022",
+        "Correction d'un bug sur le TTS": "Fixed a bug on the TTS",
         "27\/01\/2022": "01\/27\/2022",
         "Optimisations V4.2": "V4.2 optimizations",
         "14\/01\/2022": "01\/14\/2022",

@@ -4,6 +4,10 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 02/01/2022
+
+- Fixed a bug on the TTS
+
 # 01/27/2022
 
 - V4.2 optimizations
