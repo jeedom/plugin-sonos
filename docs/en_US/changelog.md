@@ -4,6 +4,10 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 03/22/2022
+
+- Support for the new SYMFONISK loudspeaker
+
 # 02/01/2022
 
 - Fixed a bug on the TTS
