@@ -4,6 +4,10 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 22/03/2022
+
+- Soporte para el nuevo altavoz SYMFONISK
+
 # 02/01/2022
 
 - Se corrigió un error en el TTS
