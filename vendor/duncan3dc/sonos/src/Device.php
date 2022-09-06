@@ -190,6 +190,7 @@ class Device {
 			"S29" => "SYMFONISK_INWALL",
 			"S30" => "SYMFONISK",
 			"S33" => "SYMFONISK",
+			"S36" => "RAY",
 			"S38" => "ONE",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
