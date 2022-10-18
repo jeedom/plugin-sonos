@@ -4,6 +4,11 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# 18/10/2022
+
+- Mise à jour liste des commandes pour Jeedom v4.3
+- Ajout de la Sonos Ray
+
 # 22/03/2022
 
 - Support de la nouvelle enceinte SYMFONISK
@@ -97,17 +102,17 @@
 - Optimisations globales
 
 **IMPORTANT**
+
 - Compatible PHP7 uniquement
 - Certaines fonctionnalités ont dû être retirées
 
-
 # 2018
 
-- 	Ajout de la gestion des favoris sonos
--   Prise en charge des Sonos One et Playbase
--   Correction de la langue avec picotts
--   Ajout d’une commande "entrée de ligne"
--   Mise à jour de librairie de communication avec les sonos
--   Optimisation du chargement des playlists
--   Ajout de picotts pour la génération du TTS en local
--   Correction du bouton play/pause lors de la mise à jour du widget
+-  Ajout de la gestion des favoris sonos
+- Prise en charge des Sonos One et Playbase
+- Correction de la langue avec picotts
+- Ajout d’une commande "entrée de ligne"
+- Mise à jour de librairie de communication avec les sonos
+- Optimisation du chargement des playlists
+- Ajout de picotts pour la génération du TTS en local
+- Correction du bouton play/pause lors de la mise à jour du widget

@@ -70,7 +70,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation"><a class="eqLogicAction cursor" aria-controls="home" role="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
 			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
-			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Commandes}}</a></li>
+			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list"></i> {{Commandes}}</a></li>
 		</ul>
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="eqlogictab">
@@ -151,6 +151,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<option value="MOVE">Sonos move</option>
 										<option value="FIVE">Sonos five</option>
 										<option value="ROAM">Sonos roam</option>
+										<option value="RAY">Sonos ray</option>
 									</select>
 								</div>
 							</div>
@@ -171,7 +172,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						<tr>
 							<th class="hidden-xs" style="min-width:50px;width:70px;">ID</th>
 							<th style="min-width:220px;width:300px;">{{Nom}}</th>
-							<th></th>
+							<th style="min-width:140px;width:200px;">{{Type}}</th>
+							<th>{{Etat}}</th>
 							<th style="min-width:150px;width:250px;">{{Actions}}</th>
 						</tr>
 					</thead>

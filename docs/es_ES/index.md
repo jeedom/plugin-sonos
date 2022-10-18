@@ -1,6 +1,10 @@
 # Complemento Sonos
 
-El complemento de Sonos te permite controlar Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar, Ikea Symfonisk ... Te permitirá ver el estado de Sonos y realizar acciones ( reproducir, pausar, siguiente, anterior, volumen, elección de una lista de reproducción).
+El plugin de Sonos te permite controlar el Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar, Ikea Symfonisk... Te permitirá ver el estado del Sonos y realizar acciones (reproducir, pausar , siguiente, anterior, volumen, elección de una lista de reproducción).
+
+> **Importante**
+>
+> El complemento administra muy mal los grupos (o no lo hace en absoluto), por lo que es recomendable no usar la agrupación en absoluto con el complemento
 
 # Configuración del plugin
 
