@@ -4,6 +4,11 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 18.10.2022
+
+- Befehlsliste für Jeedom v4.3 aktualisieren
+- Sonos Ray hinzugefügt
+
 # 22.03.2022
 
 - Unterstützung für den neuen SYMFONISK-Lautsprecher
@@ -97,17 +102,17 @@
 - Globale Optimierungen
 
 **Wichtig**
+
 - Nur kompatibles PHP7
 - Einige Funktionen mussten entfernt werden
 
-
 # 2018
 
-- 	Verwaltung der Sonos-Favoriten hinzugefügt
--   Unterstützung für Sonos One und Playbase
--   Zungenkorrektur mit Picotts
--   Hinzufügen eines Befehls "Zeileneintrag""
--   Aktualisierung der Soundkommunikationsbibliothek
--   Optimiertes Laden von Wiedergabelisten
--   Zugabe von Picotts zur lokalen TTS-Erzeugung
--   Korrektur der Wiedergabe- / Pause-Schaltfläche beim Aktualisieren des Widgets
+-  Verwaltung der Sonos-Favoriten hinzugefügt
+- Unterstützung für Sonos One und Playbase
+- Zungenkorrektur mit Picotts
+- Hinzufügen eines Befehls "Zeileneintrag""
+- Aktualisierung der Soundkommunikationsbibliothek
+- Optimiertes Laden von Wiedergabelisten
+- Zugabe von Picotts zur lokalen TTS-Erzeugung
+- Korrektur der Wiedergabe- / Pause-Schaltfläche beim Aktualisieren des Widgets
