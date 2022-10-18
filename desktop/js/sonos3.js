@@ -40,7 +40,13 @@ function addCmdToTable(_cmd) {
   tr += '<span class="cmdAttr input-group-addon roundedRight" data-l1key="display" data-l2key="icon" style="font-size:19px;padding:0 5px 0 0!important;"></span>'
   tr += '</div>'
   tr += '</td>'
-  tr += '<td></td>'
+  tr += '<td>'
+  tr += '<span class="type" type="' + init(_cmd.type) + '">' + jeedom.cmd.availableType() + '</span>'
+  tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>'
+  tr += '</td>'
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="htmlstate"></span>';
+  tr += '</td>';
   tr += '<td>'
   if (is_numeric(_cmd.id)) {
     tr += '<a class="btn btn-default btn-xs cmdAction" data-action="configure"><i class="fas fa-cogs"></i></a> '
@@ -49,9 +55,11 @@ function addCmdToTable(_cmd) {
   tr += '</td>'
   tr += '</tr>'
   $('#table_cmd tbody').append(tr)
-  $('#table_cmd tbody tr').last().setValues(_cmd, '.cmdAttr')
+  const $tr = $('#table_cmd tbody tr').last()
+  $tr.setValues(_cmd, '.cmdAttr')
   if (isset(_cmd.type)) {
     $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type))
   }
-  jeedom.cmd.changeType($('#table_cmd tbody tr').last(), init(_cmd.subType))
+  jeedom.cmd.changeType($tr, init(_cmd.subType))
+  $tr.find('.cmdAttr[data-l1key=type],.cmdAttr[data-l1key=subType]').prop("disabled", true);
 }
