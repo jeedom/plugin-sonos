@@ -206,6 +206,7 @@ final class Device implements DeviceInterface {
 			"S33" => "SYMFONISK",
 			"S38" => "ONE",
 			"S36" => "RAY",
+			"S35" => "ROAM_SL",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",
