@@ -151,7 +151,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<option value="MOVE">Sonos move</option>
 										<option value="FIVE">Sonos five</option>
 										<option value="ROAM">Sonos roam</option>
-										<option value="RAY">Sonos ray</option>
+										<option value="ERA_100">Sonos ERA 100</option>
+										
 									</select>
 								</div>
 							</div>
