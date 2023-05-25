@@ -44,6 +44,8 @@
         "Informations": "Bilgiler",
         "Modèle": "Model",
         "Nom": "İsim",
+        "Type": "Type",
+        "Etat": "Etat",
         "Actions": "Actions"
     },
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {

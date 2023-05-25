@@ -44,6 +44,8 @@
         "Informations": "Informação",
         "Modèle": "Modelo",
         "Nom": "Nome",
+        "Type": "Gentil",
+        "Etat": "Estado",
         "Actions": "Ações"
     },
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {

@@ -2,6 +2,9 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
+        "18\/10\/2022": "10\/18\/2022",
+        "Mise à jour liste des commandes pour Jeedom v4.3": "Update command list for Jeedom v4.3",
+        "Ajout de la Sonos Ray": "Added Sonos Ray",
         "22\/03\/2022": "03\/22\/2022",
         "Support de la nouvelle enceinte SYMFONISK": "Support for the new SYMFONISK loudspeaker",
         "01\/02\/2022": "02\/01\/2022",

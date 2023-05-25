@@ -44,6 +44,8 @@
         "Informations": "Information",
         "Modèle": "Modell",
         "Nom": "Name",
+        "Type": "Nett",
+        "Etat": "Bundesland",
         "Actions": "Anteile"
     },
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {

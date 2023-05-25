@@ -44,6 +44,8 @@
         "Informations": "Información",
         "Modèle": "Modelo",
         "Nom": "Nombre",
+        "Type": "Tipo",
+        "Etat": "Estado",
         "Actions": "Comparte"
     },
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {

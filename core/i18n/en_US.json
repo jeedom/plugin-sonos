@@ -44,6 +44,8 @@
         "Informations": "Information",
         "Modèle": "Model",
         "Nom": "Name",
+        "Type": "Kind",
+        "Etat": "State",
         "Actions": "Shares"
     },
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {
