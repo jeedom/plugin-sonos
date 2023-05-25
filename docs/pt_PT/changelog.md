@@ -4,6 +4,10 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 25/05/2023
+
+- Adicionado Sonos Era
+
 # 18/10/2022
 
 - Atualizar lista de comandos para Jeedom v4.3

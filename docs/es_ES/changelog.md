@@ -4,6 +4,10 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 25/05/2023
+
+- Se agregó la era de Sonos
+
 # 18/10/2022
 
 - Lista de comandos de actualización para Jeedom v4.3
