@@ -194,6 +194,7 @@ class Device {
 			"S36" => "RAY",
 			"S38" => "ONE",
 			"S39" => "ERA_100",
+			"S41" => "ERA_300", 
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",
