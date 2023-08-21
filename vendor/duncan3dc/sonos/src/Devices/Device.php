@@ -209,6 +209,7 @@ final class Device implements DeviceInterface {
 			"S38" => "ONE",
 			"S39" => "ERA_100",
 			"S41" => "ERA_300", 
+			"S42" => "SYMFONISK_FLOOR_LAMP", 
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",
