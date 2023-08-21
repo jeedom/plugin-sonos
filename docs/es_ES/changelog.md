@@ -4,6 +4,8 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+- Lámpara de pie Symfonisk de Ikea añadida
+
 # 25/05/2023
 
 - Se agregó la era de Sonos
