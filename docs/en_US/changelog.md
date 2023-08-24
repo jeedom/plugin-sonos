@@ -4,6 +4,8 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 08/24/2023
+
 - Added Ikea Symfonisk Floor Lamp
 
 # 05/25/2023

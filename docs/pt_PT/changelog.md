@@ -4,6 +4,8 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 24/08/2023
+
 - Adicionado abajur Ikea Symfonisk
 
 # 25/05/2023
