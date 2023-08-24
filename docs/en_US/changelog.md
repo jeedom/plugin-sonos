@@ -4,6 +4,12 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+- Added Ikea Symfonisk Floor Lamp
+
+# 05/25/2023
+
+- Added Sonos Era
+
 # 10/18/2022
 
 - Update command list for Jeedom v4.3
