@@ -154,6 +154,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<option value="ERA_100">Sonos ERA 100</option>
 										<option value="ERA_300">Sonos ERA 300</option>
 										<option value="SYMFONISK_FLOOR_LAMP">Ikea SYMFONISK Floor Lamp</option>
+										<option value="MOVE_2">Sonos Move 2</option>
 									</select>
 								</div>
 							</div>
