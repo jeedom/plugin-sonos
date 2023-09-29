@@ -196,6 +196,7 @@ class Device {
 			"S39" => "ERA_100",
 			"S41" => "ERA_300", 
 			"S42" => "SYMFONISK_FLOOR_LAMP", 
+			"S44" => "MOVE_2",
 			"ZP80" => "ZONEPLAYER",
 			"ZP90" => "CONNECT",
 			"ZB100" => "BRIDGE",
