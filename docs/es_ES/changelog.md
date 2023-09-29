@@ -4,6 +4,8 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+- Se agregó Sonos Move 2
+
 # 24/08/2023
 
 - Lámpara de pie Symfonisk de Ikea añadida
