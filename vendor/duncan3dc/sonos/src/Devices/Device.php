@@ -203,6 +203,7 @@ final class Device implements DeviceInterface {
 			"S27" => "ROAM",
 			"S29" => "SYMFONISK_INWALL",
 			"S30" => "SYMFONISK",
+			"S31" => "BEAM2",
 			"S33" => "SYMFONISK",
 			"S35" => "ROAM_SL",
 			"S36" => "RAY",
