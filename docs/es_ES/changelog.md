@@ -4,6 +4,8 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+- Se agregó Sonos Beam Gen 2
+
 # 15/01/2024
 
 - Preparándose para Jeedom 4.4
