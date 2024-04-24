@@ -2,7 +2,6 @@
   "apt" : {
     "libav-tools" : {"alternative" : ["ffmpeg"]},
     "ffmpeg" : {"alternative" : ["libav-tools"]},
-    "libttspico-utils" : {},
     "sox" : {},
     "libsox-fmt-mp3" : {},
     "smbclient" : {},
