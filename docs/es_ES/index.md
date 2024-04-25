@@ -88,6 +88,10 @@ TTS (texto a voz) para Sonos requiere que Windows (Samba) se comparta en la red 
 >
 > Un subdirectorio también es absolutamente necesario para que el archivo de voz se cree correctamente.
 
+> **Importante**
+>
+> Sobre todo, no debe haber acentos en el nombre del recurso compartido o de la carpeta, ni espacios ni caracteres especiales
+
 **Aquí hay un ejemplo de configuración (gracias @masterfion) :**
 
 Lado NAS, aquí está mi configuración :

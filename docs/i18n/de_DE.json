@@ -2,6 +2,10 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos Controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
+        "25\/04\/2024": "25.04.2024",
+        "Mise à jour de la documentation": "Aktualisierung der Dokumentation",
+        "Nettoyage des accents dans les noms de partage (non supporté par le plugin": "Akzente in Freigabenamen bereinigen (vom Plugin nicht unterstützt)",
+        "Suppression de la dependance a PicoTTS (le plugin utilise le moteur globale de TTS de jeedom": "Entfernen der Abhängigkeit von PicoTTS (das Plugin verwendet die globale TTS-Engine von jeedom)",
         "Ajout Sonos Beam Gen 2": "Sonos Beam Gen 2 hinzugefügt",
         "15\/01\/2024": "15.01.2024",
         "Préparation pour Jeedom 4.4": "Vorbereitung auf Jeedom 4.4",
@@ -176,6 +180,7 @@
         "La configuration est assez simple il faut mettre le nom ou l'ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemin (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture": "Die Konfiguration ist recht einfach. Sie müssen den Namen oder die IP des NAS (achten Sie darauf, dass Sie das Gleiche wie auf Sonos deklarieren) sowie den Pfad (relativ), den Benutzernamen und das Passwort ( Aufmerksamkeit der Benutzer muss Schreibrechte haben",
         "Il faut absolument mettre un mot de passe pour que cette procédure fonctionne": "Es ist unbedingt erforderlich, ein Passwort einzugeben, damit dieses Verfahren funktioniert",
         "Il faut aussi absolument un sous-répertoire pour que le fichier vocal soit correctement créé": "Ein Unterverzeichnis ist auch unbedingt erforderlich, damit die Sprachdatei korrekt erstellt wird",
+        "Il ne faut surtout pas d'accent dans le nom du partage ou le dossier, d'espace ou de caractes spéciaux": "Vor allem dürfen im Namen der Freigabe oder des Ordners keine Akzente, keine Leerzeichen oder Sonderzeichen enthalten sein",
         "Voici un exemple de configuration (merci @masterfion": "Hier ist ein Beispiel für die Konfiguration (danke @masterfion",
         "Côté NAS, voici ma config": "NAS-Seite, hier ist meine Konfiguration",
         "le dossier Jeedom est partagé": "Jeedom-Ordner wird freigegeben",

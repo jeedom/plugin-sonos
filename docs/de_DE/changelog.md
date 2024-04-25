@@ -4,6 +4,11 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 25.04.2024
+
+- Aktualisierung der Dokumentation
+- Akzente in Freigabenamen bereinigen (vom Plugin nicht unterstützt))
+- Entfernen der Abhängigkeit von PicoTTS (das Plugin verwendet die globale TTS-Engine von jeedom))
 - Sonos Beam Gen 2 hinzugefügt
 
 # 15.01.2024

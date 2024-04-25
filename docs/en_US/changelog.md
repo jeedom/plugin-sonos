@@ -4,6 +4,11 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 04/25/2024
+
+- Documentation update
+- Cleaning up accents in share names (not supported by the plugin)
+- Removing the dependency on PicoTTS (the plugin uses jeedom's global TTS engine)
 - Added Sonos Beam Gen 2
 
 # 01/15/2024

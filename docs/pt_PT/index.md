@@ -88,6 +88,10 @@ O TTS (conversão de texto em fala) para o Sonos requer o compartilhamento do Wi
 >
 > Um subdiretório também é absolutamente necessário para que o arquivo de voz seja criado corretamente.
 
+> **IMPORTANTE**
+>
+> Acima de tudo, não deve haver acento no nome do compartilhamento ou da pasta, nem espaço ou caracteres especiais
+
 **Aqui está um exemplo de configuração (obrigado @masterfion) :**
 
 Lado NAS, aqui está a minha configuração :

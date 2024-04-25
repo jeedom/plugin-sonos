@@ -4,6 +4,11 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 25/04/2024
+
+- Actualización de documentación
+- Limpiar acentos en nombres compartidos (no admitido por el complemento))
+- Eliminar la dependencia de PicoTTS (el complemento utiliza el motor TTS global de jeedom)
 - Se agregó Sonos Beam Gen 2
 
 # 15/01/2024
