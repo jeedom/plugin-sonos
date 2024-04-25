@@ -1173,7 +1173,7 @@ class sonos3Cmd extends cmd {
 			$adapter = new SmbAdapter($share);
 			$filesystem = new Filesystem($adapter);
 			$folder = array_pop($path);
-			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
+			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . sanitizeAccent(implode('/', $path)), $folder);
 			$track = new TextToSpeech(trim($_options['message']), $directory, new JeedomProvider(network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . jeedom::getApiKey('apitts')));
 			$loop = 1;
 			while (true) {
