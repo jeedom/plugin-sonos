@@ -2,6 +2,10 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto",
+        "25\/04\/2024": "25\/04\/2024",
+        "Mise à jour de la documentation": "Atualização da documentação",
+        "Nettoyage des accents dans les noms de partage (non supporté par le plugin": "Limpando acentos em nomes de compartilhamentos (não suportado pelo plugin",
+        "Suppression de la dependance a PicoTTS (le plugin utilise le moteur globale de TTS de jeedom": "Removendo a dependência do PicoTTS (o plugin usa o mecanismo TTS global do jeedom",
         "Ajout Sonos Beam Gen 2": "Adicionado Sonos Beam Gen 2",
         "15\/01\/2024": "15\/01\/2024",
         "Préparation pour Jeedom 4.4": "Preparando-se para Jeedom 4.4",
@@ -176,6 +180,7 @@
         "La configuration est assez simple il faut mettre le nom ou l'ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemin (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture": "A configuração é bastante simples você tem que colocar o nome ou o IP do NAS (cuidado para colocar o mesmo que está declarado no Sonos) e o caminho (relativo), o nome de usuário e a senha ( atenção, o usuário deve ter direitos de escrita",
         "Il faut absolument mettre un mot de passe pour que cette procédure fonctionne": "É absolutamente necessário colocar uma senha para que este procedimento funcione",
         "Il faut aussi absolument un sous-répertoire pour que le fichier vocal soit correctement créé": "Um subdiretório também é absolutamente necessário para que o arquivo de voz seja criado corretamente",
+        "Il ne faut surtout pas d'accent dans le nom du partage ou le dossier, d'espace ou de caractes spéciaux": "Acima de tudo, não deve haver acento no nome do compartilhamento ou da pasta, nem espaço ou caracteres especiais",
         "Voici un exemple de configuration (merci @masterfion": "Aqui está um exemplo de configuração (obrigado @masterfion",
         "Côté NAS, voici ma config": "Lado NAS, aqui está a minha configuração",
         "le dossier Jeedom est partagé": "Pasta Jeedom é compartilhada",

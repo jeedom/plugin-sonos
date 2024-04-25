@@ -2,6 +2,10 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto",
+        "25\/04\/2024": "25\/04\/2024",
+        "Mise à jour de la documentation": "Actualización de documentación",
+        "Nettoyage des accents dans les noms de partage (non supporté par le plugin": "Limpiar acentos en nombres compartidos (no admitido por el complemento)",
+        "Suppression de la dependance a PicoTTS (le plugin utilise le moteur globale de TTS de jeedom": "Eliminar la dependencia de PicoTTS (el complemento utiliza el motor TTS global de jeedom",
         "Ajout Sonos Beam Gen 2": "Se agregó Sonos Beam Gen 2",
         "15\/01\/2024": "15\/01\/2024",
         "Préparation pour Jeedom 4.4": "Preparándose para Jeedom 4.4",
@@ -176,6 +180,7 @@
         "La configuration est assez simple il faut mettre le nom ou l'ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemin (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture": "La configuración es bastante sencilla hay que poner el nombre o la IP del NAS (cuidado con poner lo mismo que se declara en Sonos) y la ruta (relativa), el usuario y la contraseña ( atención el usuario debe tener derechos de escritura",
         "Il faut absolument mettre un mot de passe pour que cette procédure fonctionne": "Es absolutamente necesario poner una contraseña para que este procedimiento funcione",
         "Il faut aussi absolument un sous-répertoire pour que le fichier vocal soit correctement créé": "Un subdirectorio también es absolutamente necesario para que el archivo de voz se cree correctamente",
+        "Il ne faut surtout pas d'accent dans le nom du partage ou le dossier, d'espace ou de caractes spéciaux": "Sobre todo, no debe haber acentos en el nombre del recurso compartido o de la carpeta, ni espacios ni caracteres especiales",
         "Voici un exemple de configuration (merci @masterfion": "Aquí hay un ejemplo de configuración (gracias @masterfion",
         "Côté NAS, voici ma config": "Lado NAS, aquí está mi configuración",
         "le dossier Jeedom est partagé": "La carpeta Jeedom es compartida",

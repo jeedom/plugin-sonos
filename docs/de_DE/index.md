@@ -88,6 +88,10 @@ TTS (Text-to-Speech) für Sonos erfordert die Freigabe von Windows (Samba) im Ne
 >
 > Ein Unterverzeichnis ist auch unbedingt erforderlich, damit die Sprachdatei korrekt erstellt wird.
 
+> **Wichtig**
+>
+> Vor allem dürfen im Namen der Freigabe oder des Ordners keine Akzente, keine Leerzeichen oder Sonderzeichen enthalten sein
+
 **Hier ist ein Beispiel für die Konfiguration (danke @masterfion) :**
 
 NAS-Seite, hier ist meine Konfiguration :

@@ -2,6 +2,10 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
+        "25\/04\/2024": "04\/25\/2024",
+        "Mise à jour de la documentation": "Documentation update",
+        "Nettoyage des accents dans les noms de partage (non supporté par le plugin": "Cleaning up accents in share names (not supported by the plugin",
+        "Suppression de la dependance a PicoTTS (le plugin utilise le moteur globale de TTS de jeedom": "Removing the dependency on PicoTTS (the plugin uses jeedom's global TTS engine",
         "Ajout Sonos Beam Gen 2": "Added Sonos Beam Gen 2",
         "15\/01\/2024": "01\/15\/2024",
         "Préparation pour Jeedom 4.4": "Preparing for Jeedom 4.4",
@@ -176,6 +180,7 @@
         "La configuration est assez simple il faut mettre le nom ou l'ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemin (relatif), le nom d'utilisateur et le mot de passe (attention l'utilisateur doit avoir les droits en écriture": "The configuration is quite simple you have to put the name or the IP of the NAS (be careful to put the same thing as what is declared on Sonos) and the path (relative), the username and the password ( attention the user must have write rights",
         "Il faut absolument mettre un mot de passe pour que cette procédure fonctionne": "It is absolutely necessary to put a password for this procedure to work",
         "Il faut aussi absolument un sous-répertoire pour que le fichier vocal soit correctement créé": "A subdirectory is also absolutely necessary for the voice file to be correctly created",
+        "Il ne faut surtout pas d'accent dans le nom du partage ou le dossier, d'espace ou de caractes spéciaux": "Above all, there must be no accent in the name of the share or the folder, no space or special characters",
         "Voici un exemple de configuration (merci @masterfion": "Here is an example of configuration (thanks @masterfion",
         "Côté NAS, voici ma config": "NAS side, here is my config",
         "le dossier Jeedom est partagé": "Jeedom folder is shared",

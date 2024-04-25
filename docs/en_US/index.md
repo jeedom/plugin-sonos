@@ -88,6 +88,10 @@ TTS (text-to-speech) to Sonos requires having Windows (Samba) sharing on the net
 >
 > A subdirectory is also absolutely necessary for the voice file to be correctly created.
 
+> **Important**
+>
+> Above all, there must be no accent in the name of the share or the folder, no space or special characters
+
 **Here is an example of configuration (thanks @masterfion) :**
 
 NAS side, here is my config :

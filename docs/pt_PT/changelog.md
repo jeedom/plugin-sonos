@@ -4,6 +4,11 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 25/04/2024
+
+- Atualização da documentação
+- Limpando acentos em nomes de compartilhamentos (não suportado pelo plugin)
+- Removendo a dependência do PicoTTS (o plugin usa o mecanismo TTS global do jeedom)
 - Adicionado Sonos Beam Gen 2
 
 # 15/01/2024
