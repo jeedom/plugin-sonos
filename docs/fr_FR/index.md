@@ -88,6 +88,10 @@ Le TTS (text-to-speech) vers le Sonos nécessite d’avoir un partage Windows (S
 >
 > Il faut aussi absolument un sous-répertoire pour que le fichier vocal soit correctement créé.
 
+> **IMPORTANT**
+>
+> Il ne faut surtout pas d'accent dans le nom du partage ou le dossier, d'espace ou de caractes spéciaux
+
 **Voici un exemple de configuration (merci @masterfion) :**
 
 Côté NAS, voici ma config :
