@@ -1167,13 +1167,13 @@ class sonos3Cmd extends cmd {
 			$controller->useLineIn()->play();
 		} elseif ($this->getLogicalId() == 'tts') {
 			$_options['message'] = $_options['message'];
-			$path = explode('/', trim(config::byKey('tts_path', 'sonos3'), '/'));
+			$path = explode('/', sanitizeAccent(trim(config::byKey('tts_path', 'sonos3')), '/'));
 			$server = new Server(config::byKey('tts_host', 'sonos3'), config::byKey('tts_username', 'sonos3'), config::byKey('tts_password', 'sonos3'));
 			$share = $server->getShare($path[0]);
 			$adapter = new SmbAdapter($share);
 			$filesystem = new Filesystem($adapter);
 			$folder = array_pop($path);
-			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . sanitizeAccent(implode('/', $path)), $folder);
+			$directory = new Directory($filesystem, config::byKey('tts_host', 'sonos3') . '/' . implode('/', $path), $folder);
 			$track = new TextToSpeech(trim($_options['message']), $directory, new JeedomProvider(network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . jeedom::getApiKey('apitts')));
 			$loop = 1;
 			while (true) {
