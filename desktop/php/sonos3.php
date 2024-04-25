@@ -145,6 +145,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<option value="ARC">Sonos Arc</option>
 										<option value="ONE">Sonos One</option>
 										<option value="BEAM">Sonos Beam</option>
+										<option value="BEAM2">Sonos Beam Gen 2</option>
 										<option value="SYMFONISK_LIGHT">Ikea SYMFONISK Lampe</option>
 										<option value="SYMFONISK">Ikea SYMFONISK</option>
 										<option value="PORT">Sonos port</option>

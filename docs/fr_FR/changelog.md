@@ -4,6 +4,13 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# 25/04/2024
+
+- Mise à jour de la documentation
+- Nettoyage des accents dans les noms de partage (non supporté par le plugin)
+- Suppression de la dependance a PicoTTS (le plugin utilise le moteur globale de TTS de jeedom)
+- Ajout Sonos Beam Gen 2
+
 # 15/01/2024
 
 - Préparation pour Jeedom 4.4

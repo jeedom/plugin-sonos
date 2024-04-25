@@ -4,6 +4,11 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+- Added Sonos Beam Gen 2
+
+# 01/15/2024
+
+- Preparing for Jeedom 4.4
 - Added Sonos Move 2
 
 # 08/24/2023
