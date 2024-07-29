@@ -11,10 +11,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
 		<legend><i class="fas fa-cog"></i> {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
-			<div class="cursor eqLogicAction logoPrimary" data-action="add">
-				<i class="fas fa-plus-circle"></i>
+			<div class="cursor eqLogicAction logoPrimary" data-action="sync">
+				<i class="fas fa-sync"></i>
 				<br />
-				<span>{{Ajouter}}</span>
+				<span>{{Synchroniser}}</span>
 			</div>
 			<div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
 				<i class="fas fa-wrench"></i>

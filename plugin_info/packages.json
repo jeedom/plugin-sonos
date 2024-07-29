@@ -1,14 +1,11 @@
 {
-  "apt" : {
-    "libav-tools" : {"alternative" : ["ffmpeg"]},
-    "ffmpeg" : {"alternative" : ["libav-tools"]},
-    "sox" : {},
-    "libsox-fmt-mp3" : {},
-    "smbclient" : {},
-    "php-mbstring" : {},
-    "php-soap" : {}
+  "apt": {
+    "smbclient": {}
   },
-  "post-install" : {
-    "restart_apache" : true
+  "pip3": {
+    "voluptuous": {},
+    "defusedxml": {},
+    "soco": {},
+    "jeedomdaemon": {}
   }
 }

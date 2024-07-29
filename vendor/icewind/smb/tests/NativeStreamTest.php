@@ -7,16 +7,20 @@
 
 namespace Icewind\SMB\Test;
 
-use Icewind\SMB\NativeServer;
+use Icewind\SMB\BasicAuth;
+use Icewind\SMB\Native\NativeServer;
+use Icewind\SMB\Options;
+use Icewind\SMB\System;
+use Icewind\SMB\TimeZoneProvider;
 
 class NativeStreamTest extends TestCase {
 	/**
-	 * @var \Icewind\SMB\Server $server
+	 * @var \Icewind\SMB\IServer $server
 	 */
 	protected $server;
 
 	/**
-	 * @var \Icewind\SMB\NativeShare $share
+	 * @var \Icewind\SMB\Native\NativeShare $share
 	 */
 	protected $share;
 
@@ -27,13 +31,23 @@ class NativeStreamTest extends TestCase {
 
 	protected $config;
 
-	public function setUp() {
+	public function setUp(): void {
 		$this->requireBackendEnv('libsmbclient');
 		if (!function_exists('smbclient_state_new')) {
 			$this->markTestSkipped('libsmbclient php extension not installed');
 		}
 		$this->config = json_decode(file_get_contents(__DIR__ . '/config.json'));
-		$this->server = new NativeServer($this->config->host, $this->config->user, $this->config->password);
+		$this->server = new NativeServer(
+			$this->config->host,
+			new BasicAuth(
+				$this->config->user,
+				'test',
+				$this->config->password
+			),
+			new System(),
+			new TimeZoneProvider(new System()),
+			new Options()
+		);
 		$this->share = $this->server->getShare($this->config->share);
 		if ($this->config->root) {
 			$this->root = '/' . $this->config->root . '/' . uniqid();
@@ -86,9 +100,6 @@ class NativeStreamTest extends TestCase {
 	}
 
 	public function testTruncate() {
-		if (version_compare(phpversion(), '5.4.0', '<')) {
-			$this->markTestSkipped('php <5.4 doesn\'t support truncate for stream wrappers');
-		}
 		$fh = $this->share->write($this->root . '/foobar');
 		fwrite($fh, 'foobar');
 		ftruncate($fh, 3);
@@ -99,9 +110,6 @@ class NativeStreamTest extends TestCase {
 	}
 
 	public function testEOF() {
-		if (version_compare(phpversion(), '5.4.0', '<')) {
-			$this->markTestSkipped('php <5.4 doesn\'t support truncate for stream wrappers');
-		}
 		$fh = $this->share->write($this->root . '/foobar');
 		fwrite($fh, 'foobar');
 		fclose($fh);
@@ -123,7 +131,7 @@ class NativeStreamTest extends TestCase {
 		$this->assertFalse(stream_set_blocking($fh, false));
 	}
 
-	public function tearDown() {
+	public function tearDown(): void {
 		if ($this->share) {
 			$this->cleanDir($this->root);
 		}
