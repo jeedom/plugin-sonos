@@ -101,7 +101,7 @@ class SonosDaemon(BaseDaemon):
                         ]
                     )
 
-                    # coordinator.soco.play_from_queue(0)
+                    coordinator.soco.play_from_queue(0)
                 except StopIteration:
                     self._logger.error("Favorite '%s' not found, cannot play", message['title'])
             elif message['action'] == 'play_playlist':
