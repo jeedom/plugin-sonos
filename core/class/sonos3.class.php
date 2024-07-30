@@ -280,6 +280,29 @@ class sonos3 extends eqLogic {
 		return in_array($playModeState, ['SHUFFLE', 'REPEAT_ALL', 'SHUFFLE_REPEAT_ONE', 'REPEAT_ONE']);
 	}
 
+	public static function async_get_track_image($options) {
+		$eqLogic = eqLogic::byId($options['eqLogic_id']);
+		$cmd_track_image = $eqLogic->getCmd(null, 'local_track_image');
+
+		if (is_object($cmd_track_image)) {
+			$old_image_md5 = $cmd_track_image->execCmd();
+
+			if ($options['image_url'] != '') {
+				$image_content = file_get_contents($options['image_url']);
+				$image_md5 = md5($image_content);
+
+				if ($eqLogic->checkAndUpdateCmd($cmd_track_image, $image_md5)) {
+					@unlink(__DIR__ . "/../../../../plugins/sonos3/data/{$old_image_md5}");
+					file_put_contents(__DIR__ . "/../../../../plugins/sonos3/data/{$image_md5}", $image_content);
+					log::add(__CLASS__, 'debug', "Save local image:" . $options['image_url']);
+					$eqLogic->refreshWidget();
+				}
+			} elseif (file_exists(__DIR__ . "/../../../../plugins/sonos3/data/{$old_image_md5}")) {
+				@unlink(__DIR__ . "/../../../../plugins/sonos3/data/{$old_image_md5}");
+			}
+		}
+	}
+
 	public static function updateSpeakers($speakers) {
 		foreach ($speakers as $ip => $data) {
 			$eqLogic = self::byLogicalId($ip, __CLASS__);
@@ -301,15 +324,8 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('track_title', $data['media']['title']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('track_image', $data['media']['image_url']) || $changed;
 
-			//TODO: save image locally to reduce widget display latency
-			// if ($track->getAlbumArt() != '') {
-			// 	if ($eqLogic->checkAndUpdateCmd('track_image', $track->getAlbumArt())) {
-			// 		file_put_contents(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg', file_get_contents($track->getAlbumArt()));
-			// 		$changed = true;
-			// 	}
-			// } else if (file_exists(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg')) {
-			// 	unlink(dirname(__FILE__) . '/../../../../plugins/sonos3/sonos_' . $eqLogic->getId() . '.jpg');
-			// }
+			//save image locally to improve widget display but getting file content can take few seconds so its done async to not block update of all speakers
+			utils::executeAsync(__CLASS__, 'async_get_track_image', ['eqLogic_id' => $eqLogic->getId(), 'image_url' => $data['media']['image_url']]);
 
 			//TODO: add info for line_in & tv
 			// if ($controller->isStreaming()) {
@@ -675,15 +691,25 @@ class sonos3 extends eqLogic {
 			$track_album->save();
 		}
 
-		$track_position = $this->getCmd(null, 'track_image');
-		if (!is_object($track_position)) {
-			$track_position = new sonos3Cmd();
-			$track_position->setLogicalId('track_image');
-			$track_position->setName(__('Image', __FILE__));
-			$track_position->setType('info');
-			$track_position->setSubType('string');
-			$track_position->setEqLogic_id($this->getId());
-			$track_position->save();
+		$track_image = $this->getCmd(null, 'track_image');
+		if (!is_object($track_image)) {
+			$track_image = new sonos3Cmd();
+			$track_image->setLogicalId('track_image');
+			$track_image->setName(__('Image', __FILE__));
+			$track_image->setType('info');
+			$track_image->setSubType('string');
+			$track_image->setEqLogic_id($this->getId());
+			$track_image->save();
+		}
+		$local_track_image = $this->getCmd(null, 'local_track_image');
+		if (!is_object($local_track_image)) {
+			$local_track_image = new sonos3Cmd();
+			$local_track_image->setLogicalId('local_track_image');
+			$local_track_image->setName(__('Image locale', __FILE__));
+			$local_track_image->setType('info');
+			$local_track_image->setSubType('string');
+			$local_track_image->setEqLogic_id($this->getId());
+			$local_track_image->save();
 		}
 
 		$play_playlist = $this->getCmd(null, 'play_playlist');
@@ -849,13 +875,12 @@ class sonos3 extends eqLogic {
 			$replace['#speakers#'] = str_replace(array("'", '+'), array("\'", '\+'), $this->getConfiguration('speakers'));
 		}
 
-		$cmd_track_image = $this->getCmd(null, 'track_image');
+		$replace['#thumbnail#'] = 'plugins/sonos3/plugin_info/sonos3_alt_icon.png';
+		$cmd_track_image = $this->getCmd(null, 'local_track_image');
 		if (is_object($cmd_track_image)) {
-			$url = $cmd_track_image->execCmd();
-			if ($url != '') {
-				$replace['#thumbnail#'] = 'plugins/sonos3/core/php/sonos.img.proxy.php?img=' . base64_encode($url);
-			} else {
-				$replace['#thumbnail#'] = 'plugins/sonos3/plugin_info/sonos3_alt_icon.png';
+			$image = $cmd_track_image->execCmd();
+			if ($image != '' && file_exists(__DIR__ . "/../../../../plugins/sonos3/data/{$image}")) {
+				$replace['#thumbnail#'] = "plugins/sonos3/data/{$image}";
 			}
 		}
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', __CLASS__)));
