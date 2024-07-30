@@ -174,10 +174,10 @@ class sonos3 extends eqLogic {
 		}
 		$favorites = json_decode(cache::byKey('sonos3::favorites')->getValue());
 		if (is_array($favorites)) {
-			foreach ($favorites as $favorite) {
-				if (interactQuery::autoInteractWordFind($data['query'], $favorite['name'])) {
-					$sonos->getCmd(null, 'play_favorite')->execCmd(array('title' => $favorite['name']));
-					return array('reply' => __('Ok j\'ai lancé', __FILE__) . ' : ' . $favorite['name']);
+			foreach ($favorites as $name) {
+				if (interactQuery::autoInteractWordFind($data['query'], $name)) {
+					$sonos->getCmd(null, 'play_favorite')->execCmd(array('title' => $name));
+					return array('reply' => __('Ok j\'ai lancé', __FILE__) . ' : ' . $name);
 				}
 			}
 		}
@@ -952,8 +952,8 @@ class sonos3Cmd extends cmd {
 
 		switch ($this->getSubType()) {
 			case 'message':
-				$params['title'] = $_options['title'];
-				$params['message'] = $_options['message'];
+				$params['title'] = $_options['title'] ?? '';
+				$params['message'] = $_options['message'] ?? '';
 				break;
 			case 'slider':
 				if ($_options['slider'] < 0) {
