@@ -10,7 +10,6 @@ from soco import SoCo
 from soco.alarms import Alarm, Alarms
 from soco.events_base import Event as SonosEvent
 
-from .const import DATA_SONOS, SONOS_ALARMS_UPDATED, SONOS_CREATE_ALARM
 from .household_coordinator import SonosHouseholdCoordinator
 
 if TYPE_CHECKING:
@@ -49,7 +48,7 @@ class SonosAlarms(SonosHouseholdCoordinator):
         for alarm_id, alarm in self.alarms.alarms.items():
             if alarm_id in self.created_alarm_ids:
                 continue
-            # speaker = self.hass.data[DATA_SONOS].discovered.get(alarm.zone.uid)
+            # speaker = self.hass.data[ xxx ].discovered.get(alarm.zone.uid)
         #     if speaker:
         #         async_dispatcher_send(
         #             self.hass, SONOS_CREATE_ALARM, speaker, [alarm_id]

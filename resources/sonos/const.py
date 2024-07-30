@@ -4,14 +4,6 @@ from __future__ import annotations
 
 import datetime
 
-UPNP_ST = "urn:schemas-upnp-org:device:ZonePlayer:1"
-
-DOMAIN = "sonos"
-DATA_SONOS = "sonos_media_player"
-
-SUB_FAIL_ISSUE_ID = "subscriptions_failed"
-SUB_FAIL_URL = "https://www.home-assistant.io/integrations/sonos/#network-requirements"
-
 SONOS_ARTIST = "artists"
 SONOS_ALBUM = "albums"
 SONOS_PLAYLISTS = "playlists"

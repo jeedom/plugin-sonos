@@ -5,11 +5,9 @@ from __future__ import annotations
 import asyncio
 from collections.abc import Callable, Coroutine
 import logging
-from typing import Any
 
 from soco import SoCo
 
-from .const import DATA_SONOS
 from .exception import SonosUpdateError
 
 _LOGGER = logging.getLogger(__name__)
@@ -49,7 +47,7 @@ class SonosHouseholdCoordinator:
 
     async def _async_poll(self) -> None:
         """Poll any known speaker."""
-        discovered = self.hass.data[DATA_SONOS].discovered
+        discovered = self.hass.data['xxxxxx'].discovered
 
         for uid, speaker in discovered.items():
             _LOGGER.debug("Polling %s using %s", self.class_type, speaker.soco)
