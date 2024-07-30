@@ -103,7 +103,7 @@ class SonosDaemon(BaseDaemon):
 
                     coordinator.soco.play_from_queue(0)
                 except StopIteration:
-                    self._logger.error("Favorite '%s' not found, cannot play", message['title'])
+                    self._logger.error("Favorite '%s' not found, cannot play on %s", message['title'], speaker.zone_name)
             elif message['action'] == 'play_playlist':
                 playlist = coordinator.soco.get_sonos_playlist_by_attr('title', message['title'])
                 coordinator.soco.clear_queue()

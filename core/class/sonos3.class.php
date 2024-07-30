@@ -163,7 +163,7 @@ class sonos3 extends eqLogic {
 		if ($sonos == null) {
 			return null;
 		}
-		$playlists = cache::byKey('sonos3::playlist');
+		$playlists = json_decode(cache::byKey('sonos3::playlist')->getValue());
 		if (is_array($playlists)) {
 			foreach ($playlists as $name) {
 				if (interactQuery::autoInteractWordFind($data['query'], $name)) {
@@ -172,7 +172,7 @@ class sonos3 extends eqLogic {
 				}
 			}
 		}
-		$favorites = cache::byKey('sonos3::favorites');
+		$favorites = json_decode(cache::byKey('sonos3::favorites')->getValue());
 		if (is_array($favorites)) {
 			foreach ($favorites as $favorite) {
 				if (interactQuery::autoInteractWordFind($data['query'], $favorite['name'])) {
@@ -346,7 +346,7 @@ class sonos3 extends eqLogic {
 	 */
 	public static function setFavorites(array $favorites) {
 		if (count($favorites) == 0) return;
-		cache::set("sonos3::favorites", $favorites);
+		cache::set("sonos3::favorites", json_encode($favorites));
 		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_favorite');
 			if (is_object($cmd)) {
@@ -358,7 +358,7 @@ class sonos3 extends eqLogic {
 
 	public static function setPlaylists($playlists) {
 		if (count($playlists) == 0) return;
-		cache::set("sonos3::playlist", $playlists);
+		cache::set("sonos3::playlist", json_encode($playlists));
 		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_playlist');
 			if (is_object($cmd)) {
