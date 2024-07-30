@@ -298,6 +298,7 @@ class sonos3 extends eqLogic {
 					$eqLogic->refreshWidget();
 				}
 			} elseif (file_exists(__DIR__ . "/../../../../plugins/sonos3/data/{$old_image_md5}")) {
+				$eqLogic->checkAndUpdateCmd($cmd_track_image, '');
 				@unlink(__DIR__ . "/../../../../plugins/sonos3/data/{$old_image_md5}");
 			}
 		}
@@ -325,14 +326,8 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('track_image', $data['media']['image_url']) || $changed;
 
 			//save image locally to improve widget display but getting file content can take few seconds so its done async to not block update of all speakers
+			//TODO: try to optimize and do it once for all speakers in group
 			utils::executeAsync(__CLASS__, 'async_get_track_image', ['eqLogic_id' => $eqLogic->getId(), 'image_url' => $data['media']['image_url']]);
-
-			//TODO: add info for line_in & tv
-			// if ($controller->isStreaming()) {
-			// 	$title = __('Entrée de ligne', __FILE__);
-			// } else {
-			// 	$title = $track->getTitle();
-			// }
 
 			if ($changed) {
 				$eqLogic->refreshWidget();
@@ -348,8 +343,6 @@ class sonos3 extends eqLogic {
 				return __('Pause', __FILE__);
 			case 'STOPPED':
 				return __('Arrêté', __FILE__);
-			case 'TRANSITIONING':
-				return __('Transition', __FILE__);
 		}
 		return $_state;
 	}

@@ -26,7 +26,6 @@ from .const import (
 )
 from .data import SonosData
 from .exception import S1BatteryMissing, SonosSubscriptionsFailed, SonosUpdateError
-from .favorites import SonosFavorites
 from .media import SonosMedia
 # from .statistics import ActivityStatistics, EventStatistics
 
@@ -39,7 +38,7 @@ EVENT_CHARGING = {
 SUBSCRIPTION_SERVICES = {
     # "alarmClock",
     "avTransport",
-    # "contentDirectory",
+    "contentDirectory",
     "deviceProperties",
     "renderingControl",
     "zoneGroupTopology",
@@ -155,11 +154,6 @@ class SonosSpeaker:
     def alarms(self) -> SonosAlarms:
         """Return the SonosAlarms instance for this household."""
         return self.data.alarms[self.household_id]
-
-    @property
-    def favorites(self) -> SonosFavorites:
-        """Return the SonosFavorites instance for this household."""
-        return self.data.favorites[self.household_id]
 
     @property
     def is_coordinator(self) -> bool:
@@ -318,10 +312,7 @@ class SonosSpeaker:
             return
         if "container_update_i_ds" not in event.variables:
             return
-        asyncio.create_task(
-            self.favorites.async_process_event(event, self),
-            name = "sonos dispatch favorites"
-        )
+        #TODO: dynamically update favorites and send update to jeedom
 
     def async_dispatch_media_update(self, event: SonosEvent) -> None:
         """Update information about currently playing media from an event."""
@@ -366,9 +357,6 @@ class SonosSpeaker:
         if new_status == SONOS_STATE_TRANSITIONING:
             return
 
-        # self.hass.async_add_executor_job(
-        #     self.media.update_media_from_event, event.variables
-        # )
         self.media.update_media_from_event(event.variables)
         self.__change_cb(self)
 
@@ -530,7 +518,6 @@ class SonosSpeaker:
                     "S1 firmware detected on %s, battery info may update infrequently",
                     self.zone_name,
                 )
-                # async_dispatcher_send(self.hass, SONOS_CREATE_BATTERY, self)
                 self.__change_cb(self)
             return
 

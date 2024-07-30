@@ -1,7 +1,6 @@
 import asyncio
 from collections import OrderedDict
 
-from .favorites import SonosFavorites
 from .alarms import SonosAlarms
 
 from soco.data_structures import SearchResult
@@ -11,9 +10,8 @@ class SonosData:
 
     def __init__(self) -> None:
         """Initialize the data."""
-        # OrderedDict behavior used by SonosAlarms and SonosFavorites
+        # OrderedDict behavior used by SonosAlarms
         self.discovered: OrderedDict[str, any] = OrderedDict()
-        # self.favorites: dict[str, SonosFavorites] = {}
         self.favorites: SearchResult
         self.alarms: dict[str, SonosAlarms] = {}
         self.topology_condition = asyncio.Condition()

@@ -3,7 +3,6 @@
     "smbclient": {}
   },
   "pip3": {
-    "voluptuous": {},
     "defusedxml": {},
     "soco": {},
     "jeedomdaemon": {}

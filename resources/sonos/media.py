@@ -5,7 +5,6 @@ from __future__ import annotations
 import datetime
 from typing import Any
 from datetime import timedelta
-import voluptuous as vol
 
 from soco.core import (
     MUSIC_SRC_AIRPLAY,
@@ -41,10 +40,6 @@ POSITION_SECONDS = "position_in_s"
 
 def time_period_str(value: str) -> timedelta:
     """Validate and transform time offset."""
-    if isinstance(value, int):  # type: ignore[unreachable]
-        raise vol.Invalid("Make sure you wrap time values in quotes")
-    if not isinstance(value, str):
-        raise vol.Invalid(TIME_PERIOD_ERROR.format(value))
 
     negative_offset = False
     if value.startswith("-"):
@@ -55,16 +50,14 @@ def time_period_str(value: str) -> timedelta:
 
     parsed = value.split(":")
     if len(parsed) not in (2, 3):
-        raise vol.Invalid(TIME_PERIOD_ERROR.format(value))
+        raise ValueError(value)
+
+    hour = int(parsed[0])
+    minute = int(parsed[1])
     try:
-        hour = int(parsed[0])
-        minute = int(parsed[1])
-        try:
-            second = float(parsed[2])
-        except IndexError:
-            second = 0
-    except ValueError as err:
-        raise vol.Invalid(TIME_PERIOD_ERROR.format(value)) from err
+        second = float(parsed[2])
+    except IndexError:
+        second = 0
 
     offset = timedelta(hours=hour, minutes=minute, seconds=second)
 
@@ -155,10 +148,6 @@ class SonosMedia:
         track_info[POSITION_SECONDS] = _timespan_secs(track_info.get("position"))
         return track_info
 
-    def write_media_player_states(self) -> None:
-        """Send a signal to media player(s) to write new states."""
-        # dispatcher_send(self.hass, SONOS_MEDIA_UPDATED, self.soco.uid) # TODO: send event to jeedom
-
     def set_basic_track_info(self, update_position: bool = False) -> None:
         """Query the speaker to update media metadata and position info."""
         self.clear()
@@ -225,24 +214,6 @@ class SonosMedia:
 
             if isinstance(et_uri_md, DidlAudioBroadcast):
                 self.title = self.title or self.channel
-
-        self.write_media_player_states()
-
-    def poll_media(self) -> None:
-        """Poll information about currently playing media."""
-        transport_info = self.soco.get_current_transport_info()
-        new_status = transport_info["current_transport_state"]
-
-        if new_status == SONOS_STATE_TRANSITIONING:
-            return
-
-        update_position = new_status != self.playback_status
-        self.playback_status = new_status
-        self.play_mode = self.soco.play_mode
-
-        self.set_basic_track_info(update_position=update_position)
-
-        self.write_media_player_states()
 
     def update_media_position(
         self, position_info: dict[str, int], force_update: bool = False

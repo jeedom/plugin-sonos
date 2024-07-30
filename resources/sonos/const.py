@@ -8,7 +8,6 @@ UPNP_ST = "urn:schemas-upnp-org:device:ZonePlayer:1"
 
 DOMAIN = "sonos"
 DATA_SONOS = "sonos_media_player"
-DATA_SONOS_DISCOVERY_MANAGER = "sonos_discovery_manager"
 
 SUB_FAIL_ISSUE_ID = "subscriptions_failed"
 SUB_FAIL_URL = "https://www.home-assistant.io/integrations/sonos/#network-requirements"
@@ -55,23 +54,10 @@ LIBRARY_TITLES_MAPPING = {
     "A:TRACKS": "Tracks",
 }
 
-SONOS_CHECK_ACTIVITY = "sonos_check_activity"
 SONOS_CREATE_ALARM = "sonos_create_alarm"
-SONOS_CREATE_AUDIO_FORMAT_SENSOR = "sonos_create_audio_format_sensor"
-SONOS_CREATE_BATTERY = "sonos_create_battery"
-SONOS_CREATE_FAVORITES_SENSOR = "sonos_create_favorites_sensor"
 SONOS_CREATE_MIC_SENSOR = "sonos_create_mic_sensor"
-SONOS_CREATE_SWITCHES = "sonos_create_switches"
-SONOS_CREATE_LEVELS = "sonos_create_levels"
-SONOS_CREATE_MEDIA_PLAYER = "sonos_create_media_player"
-SONOS_FALLBACK_POLL = "sonos_fallback_poll"
 SONOS_ALARMS_UPDATED = "sonos_alarms_updated"
-SONOS_FAVORITES_UPDATED = "sonos_favorites_updated"
 SONOS_MEDIA_UPDATED = "sonos_media_updated"
-SONOS_SPEAKER_ACTIVITY = "sonos_speaker_activity"
-SONOS_SPEAKER_ADDED = "sonos_speaker_added"
-SONOS_STATE_UPDATED = "sonos_state_updated"
-SONOS_REBOOTED = "sonos_rebooted"
 SONOS_VANISHED = "sonos_vanished"
 
 SOURCE_AIRPLAY = "AirPlay"
@@ -93,9 +79,6 @@ MODELS_TV_ONLY = (
 )
 MODELS_LINEIN_AND_TV = ("AMP",)
 
-AVAILABILITY_CHECK_INTERVAL = datetime.timedelta(minutes=1)
-AVAILABILITY_TIMEOUT = AVAILABILITY_CHECK_INTERVAL.total_seconds() * 4.5
 BATTERY_SCAN_INTERVAL = datetime.timedelta(minutes=15)
 SCAN_INTERVAL = datetime.timedelta(seconds=10)
-DISCOVERY_INTERVAL = datetime.timedelta(seconds=60)
 SUBSCRIPTION_TIMEOUT = 1200
