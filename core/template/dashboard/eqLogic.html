@@ -20,8 +20,8 @@
 		<img class="rightRafter" style="display:none;" src="plugins/sonos3/core/template/dashboard/images/chevron.png" onClick="panelRightClose#uid#()"/>
 	</div>
 	<center class="widget-name">
-		<span class="reportModeVisible" style="font-size : 1.2em;display:none;">#name_display# <span style="font-size: 0.85em;">#object_name#</span></span>
-		<a href="#eqLink#" class="reportModeHidden" style="font-size : 1.2em;#hideEqLogicName#">#name_display# <span class="object_name">#object_name#</span></a>
+		<span class="reportModeVisible" >#name_display# <span class="object_name">#object_name#</span></span>
+		<a href="#eqLink#" class="reportModeHidden" >#name_display# <span class="object_name">#object_name#</span></a>
 	</center>
 	<div class="uppart">
 		<img class="rightRafter" src="plugins/sonos3/core/template/dashboard/images/chevron.png" onClick="panelRight#uid#()"/>
@@ -53,7 +53,7 @@
 	<div class="volumeDownpart" style="display:none;">
 		<img src="plugins/sonos3/core/template/dashboard/images/working.png" height="15px" width="15px" class="bouton_sup_volume" onclick="volume_sonos#id#('volume')"/>
 		<div class="volume_sonos_widget" style="margin-left: 40px;">
-			<div class="volume cmd noRefresh" data-cmd_id="#setVolume_id#" style="width: 180px;" value="#volume#" ></div>
+			<div class="volume cmd noRefresh" data-cmd_id="#volume_id#" style="width: 180px;" value="#volume_state#" ></div>
 		</div>
 	</div>
 	
@@ -99,11 +99,11 @@
 			min: 0,
 			max: 100,
 			range: "min",
-			value: ('#volume#' == '') ? 0 : parseInt('#volume#')
+			value: ('#volume_state#' == '') ? 0 : parseInt('#volume_state#')
 		});
 		$(".sonos3[data-eqLogic_uid=#uid#] .slider.slider-horizontal").css('z-index',1);
 		$(".sonos3[data-eqLogic_uid=#uid#] .volume").on('slidestop', function (event,ui) {
-			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: ui.value}});
+			jeedom.cmd.execute({id: '#volume_id#', value: {slider: ui.value}});
 		});
 		$(".sonos3[data-eqLogic_uid=#uid#] .ui-slider-handle").css("background","transparent");
 		$(".sonos3[data-eqLogic_uid=#uid#] .ui-slider-handle").css("border-color","transparent");
