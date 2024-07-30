@@ -1,3 +1,4 @@
+import asyncio
 from typing import List
 
 from soco import SoCo, discover, events_asyncio
@@ -58,7 +59,7 @@ class SonosDaemon(BaseDaemon):
             elif message['action'] == 'shuffle':
                 coordinator.soco.shuffle = not coordinator.soco.shuffle
             elif message['action'] == 'play_mode':
-                speaker.soco.play_mode = message['select']
+                coordinator.soco.play_mode = message['select']
             elif message['action'] == 'play':
                 coordinator.soco.play()
             elif message['action'] == 'pause':
@@ -118,8 +119,19 @@ class SonosDaemon(BaseDaemon):
                 coordinator.soco.play_from_queue(0)
 
             elif message['action'] == 'tts':
-                # TODO: restore current state after tts
+                coordinator.snapshot(False)
+                coordinator.soco.play_mode = 'NORMAL'
+                speaker.soco.mute = False
+                try:
+                    speaker.soco.volume = int(message['title'])
+                except ValueError:
+                    pass
                 coordinator.soco.play_uri(f"x-file-cifs:{message['file']}", '', 'text-to-speech')
+                await asyncio.sleep(1)
+                while coordinator.media.playback_status == 'PLAYING':
+                    await asyncio.sleep(0.5)
+                await asyncio.sleep(0.5)
+                coordinator.restore()
 
             else:
                 self._logger.error("Unknown action '%s' for speaker %s", message['action'], message['ip'])

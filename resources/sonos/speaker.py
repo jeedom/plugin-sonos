@@ -759,14 +759,14 @@ class SonosSpeaker:
     #         await SonosSpeaker.wait_for_groups(hass, [[s] for s in speakers])
 
     # @soco_error()
-    # def snapshot(self, with_group: bool) -> None:
-    #     """Snapshot the state of a player."""
-    #     self.soco_snapshot = Snapshot(self.soco)
-    #     self.soco_snapshot.snapshot()
-    #     if with_group:
-    #         self.snapshot_group = self.sonos_group.copy()
-    #     else:
-    #         self.snapshot_group = []
+    def snapshot(self, with_group: bool) -> None:
+        """Snapshot the state of a player."""
+        self.soco_snapshot = Snapshot(self.soco)
+        self.soco_snapshot.snapshot()
+        if with_group:
+            self.snapshot_group = self.sonos_group.copy()
+        else:
+            self.snapshot_group = []
 
     # @staticmethod
     # async def snapshot_multi(
@@ -789,17 +789,19 @@ class SonosSpeaker:
     #         await hass.async_add_executor_job(_snapshot_all, speakers_set)
 
     # @soco_error()
-    # def restore(self) -> None:
-    #     """Restore a snapshotted state to a player."""
-    #     try:
-    #         assert self.soco_snapshot is not None
-    #         self.soco_snapshot.restore()
-    #     except (TypeError, AssertionError, AttributeError, SoCoException) as ex:
-    #         # Can happen if restoring a coordinator onto a current group member
-    #         _LOGGER.warning("Error on restore %s: %s", self.zone_name, ex)
+    def restore(self) -> None:
+        """Restore a snapshotted state to a player."""
+        try:
+            assert self.soco_snapshot is not None
+            self.soco_snapshot.restore()
+        except (TypeError, AssertionError, AttributeError, SoCoException) as ex:
+            # Can happen if restoring a coordinator onto a current group member
+            _LOGGER.warning("Error on restore %s: %s", self.zone_name, ex)
+            if self.soco_snapshot.is_playing_queue:
+                self.soco.play()
 
-    #     self.soco_snapshot = None
-    #     self.snapshot_group = []
+        self.soco_snapshot = None
+        self.snapshot_group = []
 
     # @staticmethod
     # async def restore_multi(
