@@ -879,31 +879,6 @@ class sonos3 extends eqLogic {
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', __CLASS__)));
 	}
 
-	// public function getQueue() {
-	// 	return $this->getController()->getQueue()->getTracks();
-	// }
-
-	// public function playTrack($_position) {
-	// 	$controller = $this->getController();
-	// 	if (!$controller->isUsingQueue()) {
-	// 		$controller->useQueue();
-	// 	}
-	// 	$controller->selectTrack($_position);
-	// 	$controller->play();
-	// }
-
-	// public function removeTrack($_position) {
-	// 	$this->getController()->getQueue()->removeTrack($_position);
-	// }
-
-	// public function emptyQueue() {
-	// 	$this->getController()->getQueue()->clear();
-	// }
-
-	// public function playGoogleMusic($_id) {
-	// 	$this->getController()->getQueue()->addTrack(new Track($_id));
-	// }
-
 	public function getImage() {
 		return 'plugins/sonos3/core/img/' . str_replace(':', '', $this->getConfiguration('model')) . '.png';
 	}

@@ -417,7 +417,6 @@ class SonosSpeaker:
         was_available = self.available
         self.available = True
         if not was_available:
-            # self.async_write_entity_states() # TODO: send event
             self.__change_cb(self)
             asyncio.create_task(self.async_subscribe())
 
@@ -448,7 +447,6 @@ class SonosSpeaker:
             _LOGGER.debug("Starting resubscription cooldown for %s", self.zone_name)
 
         self.available = False
-        # self.async_write_entity_states() # TODO: send event
         self.__change_cb(self)
 
         await self.async_unsubscribe()
@@ -677,14 +675,12 @@ class SonosSpeaker:
 
             self.coordinator = None
             self.sonos_group = sonos_group
-            # self.async_write_entity_states() # TODO: send event
             self.__change_cb(self)
 
             for joined_uid in group[1:]:
                 if joined_speaker := self.data.discovered.get(joined_uid):
                     joined_speaker.coordinator = self
                     joined_speaker.sonos_group = sonos_group
-                    # joined_speaker.async_write_entity_states() #TODO: send event
                     self.__change_cb(joined_speaker)
 
             _LOGGER.debug("Regrouped %s: %s", self.zone_name, self.sonos_group)
