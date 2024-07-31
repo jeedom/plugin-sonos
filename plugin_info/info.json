@@ -36,11 +36,9 @@
         "tr"
     ],
     "compatibility": [
-        "miniplus",
         "smart",
         "atlas",
         "rpi",
-        "docker",
         "diy",
         "v4"
     ],
