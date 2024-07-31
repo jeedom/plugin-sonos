@@ -149,6 +149,7 @@ class SonosSpeaker:
         }
 
     def to_dict(self):
+        grouped = self.sonos_group != [self]
         media_dict = self.media.to_dict() if self.is_coordinator else self.coordinator.media.to_dict()
         return {
             'zone_name': self.zone_name,
@@ -161,7 +162,9 @@ class SonosSpeaker:
             'treble' : self.treble,
             'loudness' : self.loudness,
             'is_coordinator': self.is_coordinator,
-            'media': media_dict
+            'media': media_dict,
+            'grouped': grouped,
+            'group_name': self.sonos_group[0].zone_name if grouped else ''
         }
 
     #
@@ -318,7 +321,8 @@ class SonosSpeaker:
             mic_exists = self.mic_enabled is not None
             self.mic_enabled = bool(int(event.variables["mic_enabled"]))
             # if not mic_exists:
-            #     async_dispatcher_send(self.hass, SONOS_CREATE_MIC_SENSOR, self)
+            #     async_dispatcher_send(SONOS_CREATE_MIC_SENSOR, self)
+            # TODO: send event to jeedom
 
         if more_info := event.variables.get("more_info"):
             await self.async_update_battery_info(more_info)
@@ -754,11 +758,10 @@ class SonosSpeaker:
     #     self.soco.unjoin()
     #     self.coordinator = None
 
-    # @staticmethod
-    # async def unjoin_multi(hass: HomeAssistant, speakers: list[SonosSpeaker]) -> None:
+    # async def unjoin_multi(self, speakers: list[SonosSpeaker]) -> None:
     #     """Unjoin several players from their group."""
 
-    #     def _unjoin_all(speakers: list[SonosSpeaker]) -> None:
+    #     async def _unjoin_all(speakers: list[SonosSpeaker]) -> None:
     #         """Sync helper."""
     #         # Detach all joined speakers first to prevent inheritance of queues
     #         coordinators = [s for s in speakers if s.is_coordinator]
@@ -767,9 +770,9 @@ class SonosSpeaker:
     #         for speaker in joined_speakers + coordinators:
     #             speaker.unjoin()
 
-    #     async with hass.data[DATA_SONOS].topology_condition:
-    #         await hass.async_add_executor_job(_unjoin_all, speakers)
-    #         await SonosSpeaker.wait_for_groups(hass, [[s] for s in speakers])
+    #     async with self.data.topology_condition:
+    #         await _unjoin_all(speakers)
+    #         await SonosSpeaker.wait_for_groups(self, [[s] for s in speakers])
 
     # @soco_error()
     def snapshot(self, with_group: bool) -> None:
@@ -783,7 +786,7 @@ class SonosSpeaker:
 
     # @staticmethod
     # async def snapshot_multi(
-    #     hass: HomeAssistant, speakers: list[SonosSpeaker], with_group: bool
+    #    speakers: list[SonosSpeaker], with_group: bool
     # ) -> None:
     #     """Snapshot all the speakers and optionally their groups."""
 
@@ -818,7 +821,7 @@ class SonosSpeaker:
 
     # @staticmethod
     # async def restore_multi(
-    #     hass: HomeAssistant, speakers: list[SonosSpeaker], with_group: bool
+    #     speakers: list[SonosSpeaker], with_group: bool
     # ) -> None:
     #     """Restore snapshots for all the speakers."""
 
@@ -886,7 +889,7 @@ class SonosSpeaker:
     #     # Find all affected players
     #     speakers_set = {s for s in speakers if s.soco_snapshot}
     #     if missing_snapshots := set(speakers) - speakers_set:
-    #         raise HomeAssistantError(
+    #         raise Error(
     #             "Restore failed, speakers are missing snapshots:"
     #             f" {[s.zone_name for s in missing_snapshots]}"
     #         )
@@ -903,9 +906,8 @@ class SonosSpeaker:
     #         await SonosSpeaker.wait_for_groups(hass, groups)
     #         await hass.async_add_executor_job(_restore_players, speakers_set)
 
-    # @staticmethod
-    # async def wait_for_groups(
-    #     hass: HomeAssistant, groups: list[list[SonosSpeaker]]
+    # async def wait_for_groups(self,
+    #     groups: list[list[SonosSpeaker]]
     # ) -> None:
     #     """Wait until all groups are present, or timeout."""
 
@@ -928,11 +930,11 @@ class SonosSpeaker:
     #     try:
     #         async with asyncio.timeout(5):
     #             while not _test_groups(groups):
-    #                 await hass.data[DATA_SONOS].topology_condition.wait()
+    #                 await self.data.topology_condition.wait()
     #     except TimeoutError:
     #         _LOGGER.warning("Timeout waiting for target groups %s", groups)
 
-    #     any_speaker = next(iter(hass.data[DATA_SONOS].discovered.values()))
+    #     any_speaker: SonosSpeaker = next(iter(self.data.discovered.values()))
     #     any_speaker.soco.zone_group_state.clear_cache()
 
     #

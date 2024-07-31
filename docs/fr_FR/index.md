@@ -38,45 +38,72 @@ Vous retrouvez ici toute la configuration de votre équipement :
 
 Ainsi que des informations sur votre Sonos: *Modèle*, *Versions*, *Numéro de série*, *Identifiant*, *Adresse MAC* et *Adresse IP*.
 
-Comme commande vous retrouverez :
+# Les commandes
 
-- **Jouer playlist** : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist.
-- **Jouer favoris** :  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori.
-- **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Ne fonctionne plus sur les modèles "S2".
-- **Rejoindre un groupe** : permet de rejoindre le groupe du haut-parleur (un Sonos) donné (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à rejoindre. Cela peut-être n'importe quel membre d'un groupe existant ou un isolé.
-- **Quitter le groupe** : permet de quitter le groupe
+Les commandes infos seront mises à jour en quasi temps réel (délai de quelques secondes maximum normalement) mais l'image de l'album en cours de lecture peut mettre un peu plus de temps à s'afficher sur le widget lors d'un changement de piste, ceci est parfaitement normal et indépendant du plugin: il doit récupérer l'image depuis une source externe (sur un Sonos ou sur internet) et cela prend parfois plusieurs secondes (en principe maximum une dizaine de secondes).
+
+## Commandes de volume et source
+
+Ces commandes vont toujours contrôler l'équipement correspondant, y compris lorsque celui-ci est dans un groupe.
+
+- **Volume** : modifier le volume *(de 0 à 100)*.
+- **Volume statut** : niveau du volume.
+- **Muet** : Active le mode muet.
+- **Non Muet** : Désactive le mode muet.
+- **Muet statut** : indique si on est en mode muet ou non.
+
+- **TV** : pour basculer sur l'entrée *TV* sur les équipements compatibles
+- **Entrée audio analogique** : pour basculer sur l'*Entrée audio analogique* sur les équipements compatibles
+
+## Commandes de lecture
+
+Ces commandes indiqueront et contrôleront la lecture en cours sur l'équipement ou sur le groupe si celui-ci est groupé et cela de façon transparente, vous ne devez pas vous préoccuper de savoir si l'équipement est groupé ou pas pour les utiliser.
+
+- **Statut** : statut de lecteur traduit dans la langue configurée sous Jeedom. Par exemple: *Lecture*, *Pause*, *Arrêté*.
+- **Statut de lecture** qui donne la valeur "brut" du statut de lecture: *PLAYING*, *PAUSED_PLAYBACK*, *STOPPED*; plus adapté pour les scénarios.
+- **Lecture** : passer en lecture.
+- **Pause** : mettre en pause.
+- **Stop** : arrêter la lecture.
+- **Précédent** : piste précédente.
+- **Suivant** : piste suivante.
 - **Aléatoire statut** : indique si on est en mode aléatoire ou non.
 - **Aléatoire** : inverse le statut du mode aléatoire.
 - **Répéter statut** : indique si on est en mode répété ou non.
 - **Répéter** : inverse le statut du mode "répéter".
+- **Mode de lecture** donnant l'état et commande **Choisir mode de lecture** qui permet de choisir parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*. Cette action est équivalente à l'utilisation des commandes **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée. C'est par contre le seul moyen de passer en mode "Répéter le morceau".
+- **Jouer playlist** : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist.
+- **Jouer favoris** :  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori.
+- **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Ne fonctionne plus sur les modèles "S2".
 - **Image** : lien vers l’image de l’album.
 - **Album** : nom de l’album en cours de lecture.
 - **Artiste** : nom de l’artiste en cours de lecture.
 - **Piste** : nom de la piste en cours de lecture.
-- **Muet** : Active le mode muet.
-- **Non Muet** : Désactive le mode muet.
-- **Muet statut** : indique si on est en mode muet ou non.
-- **Précédent** : piste précédente.
-- **Suivant** : piste suivante.
-- **Lecture** : passer en lecture.
-- **Pause** : mettre en pause.
-- **Stop** : arrêter la lecture.
-- **Volume** : modifier le volume *(de 0 à 100)*.
-- **Volume statut** : niveau du volume.
-- **Statut** : statut de lecteur traduit dans la langue configurée sous Jeedom. Par exemple: *Lecture*, *Pause*, *Arrêté*.
-- **Statut de lecture** qui donne la valeur "brut" du statut de lecture: *PLAYING*, *PAUSED_PLAYBACK*, *STOPPED*; plus adapté pour les scénarios.
 - **Dire** : permet de lire un texte sur le Sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire.
-- **TV** : pour basculer sur l'entrée *TV* sur les équipements compatibles
-- **Entrée audio analogique** : pour basculer sur l'*Entrée audio analogique* sur les équipements compatibles
-- **Mode de lecture** donnant l'état et commande **Choisir mode de lecture** qui permet de choisir parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*. Cette action est équivalente à l'utilisation des commandes **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée. C'est par contre le seul moyen de passer en mode "Répéter le morceau".
 
-Les commandes infos seront mises à jour en quasi temps réel (délai de quelques secondes maximum normalement) mais l'image de l'album en cours de lecture peut mettre un peu plus de temps à s'afficher sur le widget lors d'un changement de piste, ceci est parfaitement normal et indépendant du plugin: il doit récupérer l'image depuis une source externe (sur un Sonos ou sur internet) et cela prend parfois plusieurs secondes (en principe maximum une dizaine de secondes)
+## Commandes pour gérer les groupes
+
+Ces commandes agissent toujours sur l'équipement correspondant.
+
+- **Groupe statut** : indique si l'équipement est groupé ou non.
+- **Nom du groupe** dans le cas où l'équipement est groupé, donne le nom du groupe.
+- **Rejoindre un groupe** : permet de rejoindre le groupe du haut-parleur (un Sonos) donné (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à rejoindre. Cela peut-être n'importe quel membre d'un groupe existant, cela ne doit pas nécessairement être le coordinateur du groupe, ou un Sonos isolé.
+- **Quitter le groupe** : permet de quitter le groupe.
 
 # TTS
 
 Le TTS (text-to-speech) vers le Sonos nécessite d’avoir un partage Windows (Samba) sur le réseau (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le réseau. La configuration est assez simple il faut mettre le nom ou l’ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemin (relatif), le nom d’utilisateur et le mot de passe (attention l’utilisateur doit avoir les droits en écriture)
 
 La création du fichier audio est géré par le core de Jeedom: la langue sera celle configurée dans Jeedom et le moteur TTS utilisé peut également être sélectionné dans les écrans de configuration Jeedom.
+
+Lors de l'utilisation du TTS (commande **Dire**), le plugin va effectuer les actions suivantes:
+
+- génération du fichier audio contenant le message avec le support du core de Jeedom
+- écriture du fichier sur le partage SAMBA
+- Force la lecture en mode "Normal", sans répétition
+- Force le mode "non muet"
+- Modification du volume sur la valeur choisie lors de l'utilisation de la commande
+- lecture du message
+- restauration de l'état du Sonos avant la lecture (donc le mode de lecture, muet ou pas, répétition ou pas...) et redémarrage du flux si le Sonos était en cours de lecture
 
 > **IMPORTANT**
 >
@@ -91,24 +118,20 @@ La création du fichier audio est géré par le core de Jeedom: la langue sera c
 Côté NAS, voici ma config :
 
 - le dossier Jeedom est partagé.
-- l’utilisateur Sonos a un accès Lecture/Ecriture (nécessaire pour Jeedom).
+- l’utilisateur Sonos a un accès lecture/écriture (nécessaire pour Jeedom).
 - l’utilisateur guest a un accès en Lecture seule (nécessaire pour les Sonos).
 
-Côté Plugin Sonos, voici ma config :
+Côté Plugin Sonos, la config :
 
 - Partage :
   - Champ 1: 192.168.xxx.yyy
   - Champ 2: Jeedom
   - Champ 3: TTS
-- Nom d’utilisateur : Sonos et son mot de passe…​
+- Nom d’utilisateur et son mot de passe…​
 
 Côté Bibliothèque Sonos (appli PC)
 
 - le chemin est : //192.168.xxx.yyy/Jeedom/TTS
-
-> **IMPORTANT**
->
-> Il faut ABSOLUMENT ajouter le partage réseau dans la bibliothèque du sonos, sinon Jeedom va bien créer le mp3 du tts mais il ne pourra pas être joué par le Sonos.
 
 # Le panel
 

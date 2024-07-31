@@ -18,11 +18,6 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 function sonos3_install() {
-	/** @var sonos3 */
-	foreach (eqLogic::byType('sonos3') as $eqLogic) {
-		$eqLogic->migrateConfig();
-		$eqLogic->createCommands();
-	}
 }
 
 function sonos3_update() {

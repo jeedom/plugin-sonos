@@ -282,6 +282,8 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('track_artist', $data['media']['artist']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('track_title', $data['media']['title']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('track_image', $data['media']['image_url']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('group_state', $data['grouped']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('group_name', $data['group_name']) || $changed;
 
 			//save image locally to improve widget display but getting file content can take few seconds so its done async to not block update of all speakers
 			//TODO: try to optimize and do it once for all speakers in group
@@ -499,6 +501,27 @@ class sonos3 extends eqLogic {
 			$previous->setSubType('other');
 			$previous->setEqLogic_id($this->getId());
 			$previous->save();
+		}
+
+		$group_state = $this->getCmd(null, 'group_state');
+		if (!is_object($group_state)) {
+			$group_state = new sonos3Cmd();
+			$group_state->setLogicalId('group_state');
+			$group_state->setName(__('Groupe statut', __FILE__));
+			$group_state->setType('info');
+			$group_state->setSubType('binary');
+			$group_state->setEqLogic_id($this->getId());
+			$group_state->save();
+		}
+		$group_name = $this->getCmd(null, 'group_name');
+		if (!is_object($group_name)) {
+			$group_name = new sonos3Cmd();
+			$group_name->setLogicalId('group_name');
+			$group_name->setName(__('Nom du groupe', __FILE__));
+			$group_name->setType('info');
+			$group_name->setSubType('string');
+			$group_name->setEqLogic_id($this->getId());
+			$group_name->save();
 		}
 
 		$mute_state = $this->getCmd(null, 'mute_state');
