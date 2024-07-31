@@ -146,7 +146,7 @@ class SonosDaemon(BaseDaemon):
             await speaker.async_unsubscribe()
 
     async def _discover_and_sync(self):
-        await self.__discover_speakers()
+        await self.__discover_controllers()
 
         for speaker in self._speakers.values():
             await self.__send_speaker(speaker)
@@ -158,16 +158,15 @@ class SonosDaemon(BaseDaemon):
         await self.__get_playlists(coordinator)
         await self.__get_radios(coordinator)
 
-    async def __discover_speakers(self):
+    async def __discover_controllers(self):
         socos: List[SoCo]
         socos = list(discover())
         for soco in socos:
             self._logger.info(f"found speaker {soco.player_name}")
-            speaker_info = soco.get_speaker_info(True, timeout=7)
             new_speaker = SonosSpeaker(self._sonos_data, soco, self.__on_speaker_change)
             self._sonos_data.discovered[soco.uid] = new_speaker
             self._speakers[soco.ip_address] = new_speaker
-            await self.add_change(f'controllers::{soco.ip_address}', speaker_info)
+            await self.add_change(f'controllers::{new_speaker.ip_address}', new_speaker.get_info())
 
     async def __get_favorites(self, speaker: SonosSpeaker):
         result = speaker.soco.get_sonos_favorites()

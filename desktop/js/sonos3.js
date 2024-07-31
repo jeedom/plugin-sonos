@@ -15,8 +15,8 @@
 */
 
 function printEqLogic(_eqLogic) {
-  if (_eqLogic.configuration.model && _eqLogic.configuration.model != '') {
-    $('#img_sonosModel').attr('src', 'plugins/sonos3/core/img/' + _eqLogic.configuration.model + '.png')
+  if (_eqLogic.configuration.model_name && _eqLogic.configuration.model_name != '') {
+    $('#img_sonosModel').attr('src', 'plugins/sonos3/core/img/' + _eqLogic.configuration.model_name.replace(':', '').replace(' ', '_').toUpperCase() + '.png')
   } else {
     $('#img_sonosModel').attr('src', 'plugins/sonos3/plugin_info/sonos3_icon.png')
   }

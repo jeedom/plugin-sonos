@@ -184,48 +184,6 @@ class sonos3 extends eqLogic {
 		return array('reply' => 'Playlist ou favoris non trouvé');
 	}
 
-	/**
-	 * set model in eqLogic configuration from controller name and save eqLogic
-	 *
-	 * @param string $controllerName
-	 * @return void
-	 */
-	private function setModel($controllerName) {
-		if (stripos($controllerName, 'PLAY:1') !== false) {
-			$this->setConfiguration('model', 'PLAY1');
-		} else if (stripos($controllerName, 'PLAY:3') !== false) {
-			$this->setConfiguration('model', 'PLAY3');
-		} else if (stripos($controllerName, 'PLAY:5') !== false) {
-			$this->setConfiguration('model', 'PLAY5');
-		} else if (stripos($controllerName, 'PLAYBAR') !== false) {
-			$this->setConfiguration('model', 'PLAYBAR');
-		} else if (stripos($controllerName, 'PLAYBASE') !== false) {
-			$this->setConfiguration('model', 'PLAYBASE');
-		} else if (stripos($controllerName, 'CONNECT:AMP') !== false) {
-			$this->setConfiguration('model', 'CONNECTAMP');
-		} else if (stripos($controllerName, 'CONNECT') !== false) {
-			$this->setConfiguration('model', 'CONNECT');
-		} else if (stripos($controllerName, 'BEAM') !== false) {
-			$this->setConfiguration('model', 'BEAM');
-		} else if (stripos($controllerName, 'ONE') !== false) {
-			$this->setConfiguration('model', 'ONE');
-		} else if (stripos($controllerName, 'SYMFONISK_LIGHT') !== false) {
-			$this->setConfiguration('model', 'SYMFONISK_LIGHT');
-		} else if (stripos($controllerName, 'SYMFONISK') !== false) {
-			$this->setConfiguration('model', 'SYMFONISK');
-		} else if (stripos($controllerName, 'SYMFONISK_INWALL') !== false) {
-			$this->setConfiguration('model', 'SYMFONISK_INWALL');
-		} else if (stripos($controllerName, 'PORT') !== false) {
-			$this->setConfiguration('model', 'PORT');
-		} else if (stripos($controllerName, 'MOVE') !== false) {
-			$this->setConfiguration('model', 'MOVE');
-		} else if (stripos($controllerName, 'FIVE') !== false) {
-			$this->setConfiguration('model', 'FIVE');
-		} else if (stripos($controllerName, 'ROAM') !== false) {
-			$this->setConfiguration('model', 'ROAM');
-		}
-	}
-
 	public static function createSonos($controllers) {
 		$speakers_array = array();
 		foreach ($controllers as $ip => $controller) {
@@ -237,18 +195,9 @@ class sonos3 extends eqLogic {
 				$eqLogic = new self();
 				$eqLogic->setLogicalId($ip);
 				$eqLogic->setName($controller['zone_name'] . ' - ' . $controller['model_name']);
-				$eqLogic->setConfiguration('model_name', $controller['model_name']);
-				$eqLogic->setConfiguration('model_number', $controller['model_number']);
-				$eqLogic->setConfiguration('software_version', $controller['software_version']);
-				$eqLogic->setConfiguration('hardware_version', $controller['hardware_version']);
-				$eqLogic->setConfiguration('serial_number', $controller['serial_number']);
-				$eqLogic->setConfiguration('uid', $controller['uid']);
-				$eqLogic->setConfiguration('display_version', $controller['display_version']);
-				$eqLogic->setConfiguration('mac_address', $controller['mac_address']);
 				$eqLogic->setEqType_name(__CLASS__);
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
-				$eqLogic->setModel($controller['model_name']);
 				$eqLogic->save();
 
 				try {
@@ -259,9 +208,18 @@ class sonos3 extends eqLogic {
 					}
 				} catch (\Throwable $th) {
 				}
-			} else {
-				$eqLogic->createCommands();
 			}
+			$eqLogic->setConfiguration('model_name', $controller['model_name']);
+			$eqLogic->setConfiguration('model_number', $controller['model_number']);
+			$eqLogic->setConfiguration('software_version', $controller['software_version']);
+			$eqLogic->setConfiguration('hardware_version', $controller['hardware_version']);
+			$eqLogic->setConfiguration('serial_number', $controller['serial_number']);
+			$eqLogic->setConfiguration('uid', $controller['uid']);
+			$eqLogic->setConfiguration('display_version', $controller['display_version']);
+			$eqLogic->setConfiguration('mac_address', $controller['mac_address']);
+			$eqLogic->save(true);
+
+			$eqLogic->createCommands();
 		}
 		$eqLogics = eqLogic::byType(__CLASS__);
 		foreach ($eqLogics as $eqLogic) {
@@ -391,10 +349,6 @@ class sonos3 extends eqLogic {
 
 	public function preSave() {
 		$this->setCategory('multimedia', 1);
-	}
-
-	public function postInsert() {
-		$this->createCommands();
 	}
 
 	public function migrateConfig() {
@@ -878,7 +832,13 @@ class sonos3 extends eqLogic {
 	}
 
 	public function getImage() {
-		return 'plugins/sonos3/core/img/' . str_replace(':', '', $this->getConfiguration('model')) . '.png';
+		$filename = strtoupper($this->getConfiguration('model_name'));
+		if ($filename == '') {
+			return parent::getImage();
+		}
+		$filename = str_replace(':', '', $filename);
+		$filename = str_replace(' ', '_', $filename);
+		return "plugins/sonos3/core/img/{$filename}.png";
 	}
 
 	public static function syncAll() {

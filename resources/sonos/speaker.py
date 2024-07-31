@@ -69,7 +69,7 @@ class SonosSpeaker:
         self.__change_cb = change_cb
 
         # Device information
-        speaker_info = soco.get_speaker_info()
+        speaker_info = soco.get_speaker_info(True, timeout=7)
         self.ip_address: str = soco.ip_address
         self.hardware_version: str = speaker_info["hardware_version"]
         self.software_version: str = speaker_info["software_version"]
@@ -77,8 +77,11 @@ class SonosSpeaker:
         self.model_name: str = speaker_info["model_name"]
         self.model_number: str = speaker_info["model_number"]
         self.uid: str = speaker_info["uid"]
-        self.version: str = speaker_info["display_version"]
+        self.display_version: str = speaker_info["display_version"]
         self.zone_name: str = speaker_info["zone_name"]
+        self.player_icon: str = speaker_info["player_icon"]
+        self.serial_number: str = speaker_info["serial_number"]
+
 
         # Subscriptions and events
         self.subscriptions_failed: bool = False
@@ -130,6 +133,20 @@ class SonosSpeaker:
         self._group_members_missing: set[str] = set()
 
         asyncio.create_task(self.async_subscribe())
+
+    def get_info(self):
+        return {
+            "zone_name": self.zone_name,
+            # "player_icon": self.player_icon,
+            "uid": self.uid,
+            "serial_number": self.serial_number,
+            "software_version": self.software_version,
+            "hardware_version": self.hardware_version,
+            "model_number": self.model_number,
+            "model_name": self.model_name.replace("Sonos ", ""),
+            "display_version": self.display_version,
+            "mac_address": self.mac_address
+        }
 
     def to_dict(self):
         media_dict = self.media.to_dict() if self.is_coordinator else self.coordinator.media.to_dict()
