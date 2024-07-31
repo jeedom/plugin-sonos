@@ -501,7 +501,6 @@ class sonos3 extends eqLogic {
 			$previous->save();
 		}
 
-
 		$mute_state = $this->getCmd(null, 'mute_state');
 		if (!is_object($mute_state)) {
 			$mute_state = new sonos3Cmd();

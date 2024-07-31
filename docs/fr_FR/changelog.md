@@ -20,6 +20,10 @@
 - Adaptation sur la fonction Text-to-Speech (TTS), il sera nécessaire d'adapter la configuration du partage SAMBA.
 - Optimisation: plus de perte de mémoire sur le démon et il consomme moins que précédemment.
 
+- Ajout d'une commande action **TV** pour basculer sur l'entrée *TV* sur les équipements compatibles
+- Ajout d'une commande info **Mode de lecture** et action **Choisir mode de lecture** qui permet de sélectionner le mode de lecture parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*
+- Ajout d'une commande **Statut de lecture** qui donne la valeur "brut" de l'état de lecture (la commande existante **Statut** donne une valeur traduite en fonction de la langue configurée dans Jeedom)
+
 # 25/04/2024
 
 - Mise à jour de la documentation

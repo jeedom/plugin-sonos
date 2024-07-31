@@ -42,7 +42,7 @@ Comme commande vous retrouverez :
 
 - **Jouer playlist** : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist.
 - **Jouer favoris** :  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori.
-- **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. N'existe plus sur les modèles "S2".
+- **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Ne fonctionne plus sur les modèles "S2".
 - **Rejoindre un groupe** : permet de rejoindre le groupe du haut-parleur (un Sonos) donné (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à rejoindre. Cela peut-être n'importe quel membre d'un groupe existant ou un isolé.
 - **Quitter le groupe** : permet de quitter le groupe
 - **Aléatoire statut** : indique si on est en mode aléatoire ou non.
@@ -63,8 +63,12 @@ Comme commande vous retrouverez :
 - **Stop** : arrêter la lecture.
 - **Volume** : modifier le volume *(de 0 à 100)*.
 - **Volume statut** : niveau du volume.
-- **Statut** : statut (pause, lecture...).
+- **Statut** : statut de lecteur traduit dans la langue configurée sous Jeedom. Par exemple: *Lecture*, *Pause*, *Arrêté*.
+- **Statut de lecture** qui donne la valeur "brut" du statut de lecture: *PLAYING*, *PAUSED_PLAYBACK*, *STOPPED*; plus adapté pour les scénarios.
 - **Dire** : permet de lire un texte sur le Sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire.
+- **TV** : pour basculer sur l'entrée *TV* sur les équipements compatibles
+- **Entrée audio analogique** : pour basculer sur l'*Entrée audio analogique* sur les équipements compatibles
+- **Mode de lecture** donnant l'état et commande **Choisir mode de lecture** qui permet de choisir parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*. Cette action est équivalente à l'utilisation des commandes **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée. C'est par contre le seul moyen de passer en mode "Répéter le morceau".
 
 Les commandes infos seront mises à jour en quasi temps réel (délai de quelques secondes maximum normalement) mais l'image de l'album en cours de lecture peut mettre un peu plus de temps à s'afficher sur le widget lors d'un changement de piste, ceci est parfaitement normal et indépendant du plugin: il doit récupérer l'image depuis une source externe (sur un Sonos ou sur internet) et cela prend parfois plusieurs secondes (en principe maximum une dizaine de secondes)
 
