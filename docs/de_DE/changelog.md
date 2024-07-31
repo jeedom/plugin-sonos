@@ -4,6 +4,27 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 01.08.2024
+
+> Attention
+> Bedeutende Neugestaltung des Plugins: Ein sehr großer Teil des Plugins wurde neu geschrieben, einschließlich der gesamten Kommunikation mit Sonos (Daemon), und bestimmte Funktionalitäten wurden geändert und funktionieren nicht mehr wie zuvor, insbesondere die Gruppenverwaltung
+> Erfordert Jeedom 4.4
+> Debian 11 und 12 kompatibel! Wahrscheinlich Debian 10, aber nicht getestet und keine Unterstützung für diese Version
+> Siehe auch [dieses Thema auf Community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) für mehr Details
+
+- Das Plugin wurde fast komplett neu geschrieben, der Daemon wurde komplett in Python (anstelle von PHP) neu geschrieben)
+- Debian 11 und 12 kompatibel! (wahrscheinlich Debian 10, aber nicht getestet und keine Unterstützung für diese Version)
+- Es gibt keine Erkennung mehr, die manuell gestartet werden muss, und es ist nicht mehr notwendig (und auch nicht möglich), Geräte manuell hinzuzufügen. Das Plugin erkennt automatisch Ihre Soundgeräte und erstellt die Geräte entsprechend jedem Start des Daemons. Es ist auch möglich, Geräte, Favoriten und Wiedergabelisten (erneut) zu synchronisieren, ohne den Daemon über das Gerätefenster neu zu starten
+- (Fast) Echtzeitaktualisierung der Bestellinformationen (eine Verzögerung von 0.5 Sekunden bis maximal ein paar Sekunden), mehr Cron-Minuten, auch wenn eine Änderung außerhalb von Jeedom vorgenommen wird (z. B. über die Sonos-App))
+- Neugestaltung der Gruppenverwaltung (alte Befehle werden gelöscht und neue hinzugefügt, siehe Dokumentation). Es ist möglich, einer Gruppe beizutreten oder sie zu verlassen und die Wiedergabe der Gruppe von jedem Gerät in der Gruppe aus zu steuern, ohne sich Gedanken darüber machen zu müssen, wer der Controller ist. Die Lautstärke wird immer über den Lautsprecher gesteuert.
+- Bei der Anpassung an die Text-to-Speech (TTS)-Funktion ist eine Anpassung der SAMBA-Sharing-Konfiguration erforderlich.
+- Optimisation: Es kommt zu keinem weiteren Speicherverlust beim Daemon und er verbraucht weniger als zuvor.
+
+- Hinzufügen eines Aktionsbefehls **Fernseher** um zum Eingang zu wechseln *Fernseher* auf kompatiblen Geräten
+- Hinzufügen eines Info-Befehls **Lesemodus** und Aktion **Wählen Sie den Lesemodus** Hier können Sie den Lesemodus aus den folgenden Möglichkeiten auswählen: *Normal*, *Wiederhole alles*, *Zufällig*, *Zufällig ohne Wiederholung*, *Lied wiederholen*, *Zufälliges und wiederholtes Lied*
+- Bestellung hinzufügen **Lesestatus** Dies gibt den „Rohwert“ des Lesestatus (den vorhandenen Befehl) an **Status** Gibt einen übersetzten Wert basierend auf der in Jeedom konfigurierten Sprache an)
+- Befehle hinzufügen **Gruppenstatus** (gibt an, ob das Gerät gruppiert ist oder nicht) und **Name der Gruppe** für den Fall, dass die Ausrüstung gruppiert ist
+
 # 25.04.2024
 
 - Aktualisierung der Dokumentation
@@ -128,7 +149,7 @@
 
 # 2018
 
--  Verwaltung der Sonos-Favoriten hinzugefügt
+- Verwaltung der Sonos-Favoriten hinzugefügt
 - Unterstützung für Sonos One und Playbase
 - Zungenkorrektur mit Picotts
 - Hinzufügen eines Befehls "Zeileneintrag""

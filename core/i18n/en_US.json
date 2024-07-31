@@ -1,24 +1,22 @@
 {
     "plugins\/sonos3\/plugin_info\/configuration.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
+        "401 - Accès non autorisé": "401 - Unauthorized Access",
         "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "Be careful, your version of PHP ('. PHP_VERSION.') Is too old, you need at least PHP 7.0",
         "Le plugin sonos doit réagir aux interactions": "The sonos plugin must react to interactions",
         "Partage": "Sharing",
+        "Hôte": "Host",
         "Nom d'utilisateur du partage": "Share username",
-        "Mot de passe du partage": "Sharing password",
-        "Découverte": "Discovery",
-        "Rechercher les équipements Sonos": "Find Sonos equipment",
-        "Synchronisation réussie": "Synchronization successful"
+        "Mot de passe du partage": "Sharing password"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
+        "401 - Accès non autorisé": "401 - Unauthorized Access",
         "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "No root object found. To create one, go to General -> Object. <br\/> If you do not know what to do or it is the first time you use Jeedom do not hesitate to consult this <a href = \"http : \/\/jeedom.fr\/premier_pas.php \"target =\" _ blank \"> page <\/a>",
         "Rechercher": "Search"
     },
     "plugins\/sonos3\/desktop\/php\/sonos3.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
+        "401 - Accès non autorisé": "401 - Unauthorized Access",
         "Gestion": "Management",
-        "Ajouter": "Add",
+        "Synchroniser": "Synchronize",
         "Configuration": "Setup",
         "Mes Sonos": "My Sonos",
         "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "No Sonos equipment found, click \"Add\" to start",
@@ -39,10 +37,14 @@
         "Options": "Options",
         "Activer": "Activate",
         "Visible": "Visible",
-        "Paramètres spécifiques": "Specific parameters",
-        "IP": "IP",
         "Informations": "Information",
         "Modèle": "Model",
+        "Version": "Version",
+        "Version matériel": "Hardware version",
+        "Numéro de série": "Serial number",
+        "UID": "UID",
+        "Adresse MAC": "MAC address",
+        "Adresse IP": "IP adress",
         "Nom": "Name",
         "Type": "Kind",
         "Etat": "State",
@@ -51,30 +53,39 @@
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {
         "Nom": "Name",
         "Choisir une icône": "Choose an icon",
-        "Tester": "Test"
+        "Tester": "Test",
+        "Synchronisation réussie.": "Synchronization successful"
+    },
+    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
+        "401 - Accès non autorisé": "401 - Unauthorized Access"
+    },
+    "plugins\/sonos3\/core\/php\/jeesonos3.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "You are not authorized to perform this action"
     },
     "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
+        "401 - Accès non autorisé": "401 - Unauthorized Access",
         "Aucune méthode correspondante à": "No matching method"
     },
     "plugins\/sonos3\/core\/class\/sonos3.class.php": {
         "Veuillez vérifier la configuration": "Please check the configuration",
-        "Tache cron introuvable": "Cron task not found",
+        "Impossible de lancer le démon": "Unable to launch daemon",
         "Ok j\\'ai lancé": "Ok I launched",
-        "Transition": "Transition",
-        "Entrée de ligne": "Line entry",
-        "Aucun": "None",
         "Lecture": "Play",
         "Pause": "Pause",
         "Arrêté": "Stopped",
+        "Statut de lecture": "Reading status",
+        "Mode de lecture": "Reading mode",
+        "Choisir mode de lecture": "Choose reading mode",
         "Statut": "Status",
         "Play": "Play",
         "Stop": "STOP",
         "Suivant": "Next",
         "Précédent": "Previous",
+        "Groupe statut": "Group status",
+        "Nom du groupe": "Name of the group",
+        "Muet statut": "Mute status",
         "Muet": "Mute",
         "Non muet": "Not mute",
-        "Muet statut": "Mute status",
         "Répéter": "Repeat",
         "Répéter statut": "Repeat status",
         "Aléatoire": "Random",
@@ -85,6 +96,7 @@
         "Artiste": "Artist",
         "Album": "Album",
         "Image": "Picture",
+        "Image locale": "Local image",
         "Jouer playlist": "Play Playlist",
         "Options": "Options",
         "Titre de la playlist": "Playlist title",
@@ -92,16 +104,14 @@
         "Titre du favoris": "Favorite title",
         "Jouer une radio": "Play a radio",
         "Titre de la radio": "Radio title",
-        "Ajout un haut parleur": "Adding a speaker",
+        "Rejoindre un groupe": "Join a group",
         "Nom de la pièce": "Name of the scene",
-        "Supprimer un haut parleur": "Delete speaker",
+        "Quitter le groupe": "Leave the group",
+        "Entrée audio analogique": "Analog audio input",
+        "TV": "TV",
         "Dire": "Say",
         "Message": "Message",
-        "Couleur dominante": "Main color",
-        "Couleur dominante 2": "Dominant color 2",
-        "Impossible de récuperer le sonos": "Unable to recover the sonos",
-        "Playlist non trouvée": "Playlist not found",
-        "Favoris non trouvés": "Favorites not found"
+        "Aucun": "None"
     },
     "info.json": {
         "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": "Sonos \/ Ikea Symfonisk control plugin. CAUTION: PHP 7.0 minimum is required"
