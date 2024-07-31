@@ -354,32 +354,30 @@ class sonos3 extends eqLogic {
 	 * @return void
 	 */
 	public static function setFavorites(array $favorites) {
-		if (count($favorites) == 0) return;
-		cache::set("sonos3::favorites", json_encode($favorites));
+		$encoded_favorites = json_encode($favorites);
+		cache::set("sonos3::favorites", $encoded_favorites);
 		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_favorite');
 			if (is_object($cmd)) {
-				$cmd->setDisplay('title_possibility_list', json_encode($favorites));
+				$cmd->setDisplay('title_possibility_list', $encoded_favorites);
 				$cmd->save();
 			}
 		}
 	}
 
 	public static function setPlaylists($playlists) {
-		if (count($playlists) == 0) return;
-		cache::set("sonos3::playlist", json_encode($playlists));
+		$encoded_playlists = json_encode($playlists);
+		cache::set("sonos3::playlist", $encoded_playlists);
 		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_playlist');
 			if (is_object($cmd)) {
-				$cmd->setDisplay('title_possibility_list', json_encode($playlists));
+				$cmd->setDisplay('title_possibility_list', $encoded_playlists);
 				$cmd->save();
 			}
 		}
 	}
 
 	public static function setRadios($radios) {
-		if (count($radios) == 0) return;
-
 		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_radio');
 			if (is_object($cmd)) {
@@ -916,31 +914,47 @@ class sonos3Cmd extends cmd {
 			'ip' => $eqLogic->getLogicalId()
 		];
 
-		if ($this->getLogicalId() == 'tts') {
-			$url = network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . jeedom::getApiKey('apitts');
-			$text = trim($_options['message']);
-			$file_content = file_get_contents($url . '&text=' . urlencode($text));
-			$file_name = md5($text) . '.mp3';
+		switch ($this->getLogicalId()) {
+			case 'tts':
+				$url = network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . jeedom::getApiKey('apitts');
+				$text = trim($_options['message']);
+				$file_content = file_get_contents($url . '&text=' . urlencode($text));
+				$file_name = md5($text) . '.mp3';
 
-			log::add("sonos3", "debug", "get tts file");
+				log::add("sonos3", "debug", "get tts file");
 
-			$host = config::byKey('tts_host', 'sonos3');
+				$host = config::byKey('tts_host', 'sonos3');
 
-			$serverFactory = new ServerFactory();
-			$auth = new BasicAuth(config::byKey('tts_username', 'sonos3'), null, config::byKey('tts_password', 'sonos3'));
-			$server = $serverFactory->createServer($host, $auth);
-			$share_name = sanitizeAccent(trim(config::byKey('tts_share', 'sonos3')), " \n\r\t\v\0/");
-			$share = $server->getShare($share_name);
+				$serverFactory = new ServerFactory();
+				$auth = new BasicAuth(config::byKey('tts_username', 'sonos3'), null, config::byKey('tts_password', 'sonos3'));
+				$server = $serverFactory->createServer($host, $auth);
+				$share_name = sanitizeAccent(trim(config::byKey('tts_share', 'sonos3')), " \n\r\t\v\0/");
+				$share = $server->getShare($share_name);
 
-			log::add("sonos3", "debug", "get share");
+				log::add("sonos3", "debug", "get share");
 
-			$path_name = sanitizeAccent(trim(config::byKey('tts_path', 'sonos3')), " \n\r\t\v\0/");
-			$fh = $share->write("{$path_name}/{$file_name}");
-			fwrite($fh, $file_content);
-			fclose($fh);
-			log::add("sonos3", "debug", "write file");
+				$path_name = sanitizeAccent(trim(config::byKey('tts_path', 'sonos3')), " \n\r\t\v\0/");
+				$fh = $share->write("{$path_name}/{$file_name}");
+				fwrite($fh, $file_content);
+				fclose($fh);
+				log::add("sonos3", "debug", "write file");
 
-			$params['file'] = "//{$host}/{$share_name}/{$path_name}/{$file_name}";
+				$params['file'] = "//{$host}/{$share_name}/{$path_name}/{$file_name}";
+				break;
+			case 'play_favorite':
+				$favorites = json_decode(cache::byKey('sonos3::favorites')->getValue());
+				if (!is_array($favorites) || !in_array($_options['title'], $favorites)) {
+					message::add(__CLASS__, "Impossible de lancer \"{$_options['title']}\" sur \"{$eqLogic->getName()}\", le favori n'existe pas.");
+					return;
+				}
+				break;
+			case 'play_playlist':
+				$playlists = json_decode(cache::byKey('sonos3::playlist')->getValue());
+				if (!is_array($playlists) || !in_array($_options['title'], $playlists)) {
+					message::add(__CLASS__, "Impossible de lancer \"{$_options['title']}\" sur \"{$eqLogic->getName()}\", la liste de lecture n'existe pas.");
+					return;
+				}
+				break;
 		}
 
 		switch ($this->getSubType()) {
@@ -961,29 +975,6 @@ class sonos3Cmd extends cmd {
 				break;
 		}
 		sonos3::sendToDaemon($params);
-
-		if ($this->getLogicalId() == 'play_playlist') {
-		} elseif ($this->getLogicalId() == 'play_favorite') {
-			// try {
-			// 	$controller->soap("AVTransport", "AddURIToQueue", [
-			// 		"EnqueuedURI" => $favourite['uri'],
-			// 		"EnqueuedURIMetaData" => $favourite['metadata'],
-			// 		"DesiredFirstTrackNumberEnqueued" => 0,
-			// 		"EnqueueAsNext" => 0,
-			// 	]);
-			// } catch (Exception $e) {
-			// }
-
-			// } elseif ($this->getLogicalId() == 'play_radio') {
-			// $radio = sonos3::getSonos()->getRadio();
-			// $stations = $radio->getFavouriteStations();
-			// foreach ($stations as $station) {
-			// 	if ($station->getTitle() == $_options['title']) {
-			// 		$controller->useStream($station)->play();
-			// 		break;
-			// 	}
-			// }
-		}
 	}
 
 	/*     * **********************Getteur Setteur*************************** */

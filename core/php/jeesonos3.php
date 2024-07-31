@@ -48,7 +48,7 @@ try {
                 sonos3::setPlaylists($data);
                 break;
             case 'radios':
-                // sonos3::setRadios($data);
+                sonos3::setRadios($data);
                 break;
             default:
                 log::add('sonos3', 'warning', "Unexpected message from daemon '{$key}' => " . json_encode($data));
