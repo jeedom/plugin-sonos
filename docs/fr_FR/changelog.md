@@ -4,6 +4,22 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# xx/08/2024
+
+> Attention
+> Refonte importante du plugin: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes
+> Nécessite Jeedom 4.4
+> Compatible Debian 11 et 12! Probablement Debian 10 mais pas testé et pas de support sur cette version
+> Voir également [ce sujet sur community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) pour plus de détails
+
+- Réécriture quasi totale du plugin, le démon a été entièrement réécrit en python (au lieu de PHP)
+- Compatible Debian 11 et 12! (probablement Debian 10 mais pas testé et pas de support sur cette version)
+- Il n'y a plus de découverte à lancer manuellement et il n'est plus nécessaire (ni possible) d'ajouter manuellement une équipement, le plugin découvre automatiquement vos appareils sonos et créé les équipements correspondant à chaque démarrage du démon. Il est également possible de demander de (re)synchroniser les équipements, favoris et listes de lecture sans redémarrer le démon depuis le panneau des équipements
+- Mise en jour en (quasi) temps réel des commande infos (un délai de 0.5s à quelques secondes max), plus de cron minute, y compris lorsqu'un changement est effectué hors Jeedom (via app Sonos par exemple)
+- Refonte de la gestion de groupes (les anciennes commandes seront supprimées et de nouvelles ajoutées, voir documentation). Il est possible de joindre ou quitter un groupe, de contrôler la lecture du groupe depuis n'importe quel équipement du groupe sans se soucier de qui est le contrôleur. Le volume est lui toujours contrôlé par enceinte.
+- Adaptation sur la fonction Text-to-Speech (TTS), il sera nécessaire d'adapter la configuration du partage SAMBA.
+- Optimisation: plus de perte de mémoire sur le démon et il consomme moins que précédemment.
+
 # 25/04/2024
 
 - Mise à jour de la documentation
@@ -128,7 +144,7 @@
 
 # 2018
 
--  Ajout de la gestion des favoris sonos
+- Ajout de la gestion des favoris sonos
 - Prise en charge des Sonos One et Playbase
 - Correction de la langue avec picotts
 - Ajout d’une commande "entrée de ligne"

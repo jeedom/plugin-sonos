@@ -1,16 +1,19 @@
 <?php
-use Icewind\SMB\NativeServer;
-use Icewind\SMB\Server;
 
 require('vendor/autoload.php');
 
-if (Server::NativeAvailable()) {
-	$server = new NativeServer('localhost', 'test', 'test');
-} else {
-	$server = new Server('localhost', 'test', 'test');
-}
+$host = 'localhost';
+$user = 'test';
+$workgroup = 'test';
+$password = 'test';
+$share = 'test';
 
-$share = $server->getShare('test');
+$auth = new \Icewind\SMB\BasicAuth($user, $workgroup, $password);
+$serverFactory = new \Icewind\SMB\ServerFactory();
+
+$server = $serverFactory->createServer($host, $auth);
+
+$share = $server->getShare($share);
 
 $files = $share->dir('/');
 foreach ($files as $file) {

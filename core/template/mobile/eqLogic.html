@@ -28,8 +28,8 @@
 				<a class="bouton_bas shuffle cmd" data-cmd_id="#repeat_id#" onclick="jeedom.cmd.execute({id: #repeat_id#});" style="font-size:2.5em;color:black;"><i class="fa fa-repeat"></i></a>
 			</div>
 			<div style="height:3em;display:none;margin-top:17px;" class="soundMenu">
-				<div class="volume full-width-slider cmd" data-cmd_id="#setVolume_id#" style="width: 96%;text-align: right;min-width : 100px;">
-					<input type="range" min="0" max="100" data-theme="a" value="#volume#"/>
+				<div class="volume full-width-slider cmd" data-cmd_id="#volume_id#" style="width: 96%;text-align: right;min-width : 100px;">
+					<input type="range" min="0" max="100" data-theme="a" value="#volume_state#"/>
 				</div>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 		}
 		$("body").undelegate(".sonos3[data-eqLogic_uid=#uid#] .volume",'slidestop');
 		$("body").delegate(".sonos3[data-eqLogic_uid=#uid#] .volume",'slidestop', function (event, ui) {
-			jeedom.cmd.execute({id: '#setVolume_id#', value: {slider: $(".sonos3[data-eqLogic_uid=#uid#] .volume input").value()}});
+			jeedom.cmd.execute({id: '#volume_id#', value: {slider: $(".sonos3[data-eqLogic_uid=#uid#] .volume input").value()}});
 		});
 		if('#repeat_state#' == 1){
 			$(".sonos3[data-eqLogic_uid=#uid#] .repeat").css('color','red');

@@ -18,54 +18,23 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 function sonos3_install() {
-	$cron = cron::byClassAndFunction('sonos3', 'pull');
-	if (!is_object($cron)) {
-		$cron = new cron();
-		$cron->setClass('sonos3');
-		$cron->setFunction('pull');
-		$cron->setEnable(1);
-		$cron->setDeamon(1);
-		$cron->setDeamonSleepTime(3);
-		$cron->setSchedule('* * * * *');
-		$cron->setTimeout(1440);
-		$cron->save();
-	}
-	try {
-		sonos3::syncSonos();
-	} catch (Exception $e) {
-
+	/** @var sonos3 */
+	foreach (eqLogic::byType('sonos3') as $eqLogic) {
+		$eqLogic->migrateConfig();
+		$eqLogic->createCommands();
 	}
 }
 
 function sonos3_update() {
 	$cron = cron::byClassAndFunction('sonos3', 'pull');
-	if (!is_object($cron)) {
-		$cron = new cron();
-	}
-	$cron->setClass('sonos3');
-	$cron->setFunction('pull');
-	$cron->setEnable(1);
-	$cron->setDeamon(1);
-	$cron->setDeamonSleepTime(3);
-	$cron->setTimeout(1440);
-	$cron->setSchedule('* * * * *');
-	$cron->save();
-	sonos3::deamon_start();
-	foreach (sonos3::byType('sonos3') as $sonos) {
-		$sonos->save();
+	if (is_object($cron)) {
+		$cron->remove();
 	}
 
-	$files = array('24 LED Bright.ttf', '24 LED Grid.ttf', '24 LED Modul.ttf', '24 LED.ttf', 'advanced_dot_digital-7.ttf', 'AHDN.ttf', 'alpha04.ttf', 'CUBS LED TFB.ttf', 'enhanced_led_board-7.ttf', 'led_counter-7.ttf', 'liquid_crystal_display.ttf', 'liquid.ttf');
-	foreach ($files as $file) {
-		$path = dirname(__FILE__) . '/../core/template/fonts/' . $file;
-		if (file_exists($path)) {
-			unlink($path);
-		}
-	}
-	try {
-		sonos3::syncSonos();
-	} catch (Exception $e) {
-
+	/** @var sonos3 */
+	foreach (eqLogic::byType('sonos3') as $eqLogic) {
+		$eqLogic->migrateConfig();
+		$eqLogic->createCommands();
 	}
 }
 

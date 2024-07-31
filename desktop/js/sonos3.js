@@ -15,8 +15,8 @@
 */
 
 function printEqLogic(_eqLogic) {
-  if (_eqLogic.configuration.model && _eqLogic.configuration.model != '') {
-    $('#img_sonosModel').attr('src', 'plugins/sonos3/core/img/' + _eqLogic.configuration.model + '.png')
+  if (_eqLogic.configuration.model_name && _eqLogic.configuration.model_name != '') {
+    $('#img_sonosModel').attr('src', 'plugins/sonos3/core/img/' + _eqLogic.configuration.model_name.replace(':', '').replace(' ', '_').toUpperCase() + '.png')
   } else {
     $('#img_sonosModel').attr('src', 'plugins/sonos3/plugin_info/sonos3_icon.png')
   }
@@ -24,12 +24,12 @@ function printEqLogic(_eqLogic) {
 
 function addCmdToTable(_cmd) {
   if (!isset(_cmd)) {
-    var _cmd = { configuration: {} }
+    _cmd = { configuration: {} }
   }
   if (!isset(_cmd.configuration)) {
     _cmd.configuration = {}
   }
-  var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">'
+  let tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">'
   tr += '<td class="hidden-xs">'
   tr += '<span class="cmdAttr" data-l1key="id"></span>'
   tr += '</td>'
@@ -63,3 +63,27 @@ function addCmdToTable(_cmd) {
   jeedom.cmd.changeType($tr, init(_cmd.subType))
   $tr.find('.cmdAttr[data-l1key=type],.cmdAttr[data-l1key=subType]').prop("disabled", true);
 }
+
+$('.eqLogicAction[data-action=sync]').on('click', function () {
+  $.ajax({
+    type: "POST",
+    url: "plugins/sonos3/core/ajax/sonos3.ajax.php",
+    data: {
+      action: "sync",
+    },
+    dataType: 'json',
+    error: function (request, status, error) {
+      handleAjaxError(request, status, error);
+    },
+    success: function (data) {
+      if (data.state != 'ok') {
+        $('#div_alert').showAlert({ message: data.result, level: 'danger' });
+        return;
+      }
+      $('#div_alert').showAlert({ message: '{{Synchronisation réussie.}}', level: 'success' });
+      setTimeout(function () {
+        window.location.replace("index.php?v=d&m=sonos3&p=sonos3");
+      }, 3000);
+    }
+  });
+});
