@@ -4,16 +4,24 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
-# 08/01/2024
-
 > Attention
-> Rediseño significativo del complemento: Se ha reescrito una gran parte del complemento, incluida toda la comunicación con Sonos (demonio) y ciertas funcionalidades se han modificado y ya no funcionan como antes, en particular la gestión de grupos
+> Rediseño significativo del complemento: Se ha reescrito una gran parte del complemento, incluida toda la comunicación con Sonos (demonio) y ciertas funcionalidades se han modificado y ya no funcionan como antes, en particular la gestión de grupos.
+>
 > Requiere Jeedom 4.4
-> Compatible con Debian 11 y 12! Probablemente Debian 10 pero no probado y no es compatible con esta versión
+>
+> Compatible con Debian 11 y 12! Probablemente Debian 10, pero no probado y no es posible admitir esta versión
+>
 > Ver también [este tema en la comunidad](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) para más detalles
 
+# 08/02/2024
+
+- Solucionar el fallo del demonio si no se descubre ningún Sonos
+- Se agregaron comandos para controlar el LED de estado
+
+# 08/01/2024
+
 - Reescritura casi total del complemento, el demonio ha sido reescrito completamente en Python (en lugar de PHP))
-- Compatible con Debian 11 y 12! (probablemente Debian 10 pero no probado y no hay soporte para esta versión)
+- Compatible con Debian 11 y 12! (probablemente Debian 10 pero no probado y no es posible admitir esta versión)
 - Ya no hay ningún descubrimiento para iniciar manualmente y ya no es necesario (ni posible) agregar equipos manualmente, el complemento descubre automáticamente sus dispositivos de sonido y crea los equipos correspondientes a cada inicio del demonio. También es posible solicitar (re)sincronizar equipos, favoritos y listas de reproducción sin reiniciar el demonio desde el panel del equipo
 - Actualización (casi) en tiempo real de la información del pedido (un retraso de 0.5 segundos a unos pocos segundos como máximo), más minutos de cron, incluso cuando se realiza un cambio fuera de Jeedom (a través de la aplicación Sonos, por ejemplo))
 - Rediseño de la gestión de grupos (se eliminarán los comandos antiguos y se agregarán otros nuevos, consulte la documentación)). Es posible unirse o salir de un grupo, controlar la reproducción del grupo desde cualquier dispositivo del grupo sin preocuparse de quién es el controlador. El volumen siempre está controlado por el altavoz.
