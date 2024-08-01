@@ -45,8 +45,15 @@ Ces commandes vont toujours contrôler l'équipement correspondant, y compris lo
 - **Non Muet** : Désactive le mode muet.
 - **Muet statut** : indique si on est en mode muet ou non.
 
+## Commandes de contrôle
+
+Ces commandes vont toujours contrôler l'équipement correspondant, y compris lorsque celui-ci est dans un groupe.
+
 - **TV** : pour basculer sur l'entrée *TV* sur les équipements compatibles
 - **Entrée audio analogique** : pour basculer sur l'*Entrée audio analogique* (*Line-in*) sur les équipements compatibles
+- **Led on** : Active la led, le voyant d'état.
+- **Led off** : Désactive la led, le voyant d'état.
+- **Led statut** : indique si le voyant d'état est allumé ou non. Cette info n'est mise à jour qu'une fois par minute dans le cas où elle est modifiée hors Jeedom.
 
 ## Commandes de lecture
 

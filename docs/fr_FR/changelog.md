@@ -16,6 +16,7 @@
 # 02/08/2024
 
 - Fix un crash du démon si aucun Sonos n'est découvert
+- Ajout des commandes pour contrôler le voyant d'état
 
 # 01/08/2024
 
