@@ -1,24 +1,22 @@
 {
     "plugins\/sonos3\/plugin_info\/configuration.php": {
-        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "401 - Accès non autorisé": "401 – Unbefugter Zugriff",
         "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "Seien Sie vorsichtig, Ihre Version von PHP ('. PHP_VERSION.') Ist zu alt, Sie benötigen mindestens PHP 7.0",
         "Le plugin sonos doit réagir aux interactions": "Das Sonos-Plugin muss auf Interaktionen reagieren",
         "Partage": "Teilen",
+        "Hôte": "Gastgeber",
         "Nom d'utilisateur du partage": "Teilen Sie den Benutzernamen",
-        "Mot de passe du partage": "Passwort teilen",
-        "Découverte": "Entdeckung",
-        "Rechercher les équipements Sonos": "Finden Sie Sonos-Geräte",
-        "Synchronisation réussie": "Erfolgreiche Synchronisation"
+        "Mot de passe du partage": "Passwort teilen"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "401 - Accès non autorisé": "401 – Unbefugter Zugriff",
         "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Kein Stammobjekt gefunden. Um eine zu erstellen, gehen Sie zu Allgemein -> Objekt. <br\/> Wenn Sie nicht wissen, was Sie tun sollen, oder wenn Sie Jeedom zum ersten Mal verwenden, zögern Sie nicht, diese <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">Seite<\/a> zu konsultieren",
         "Rechercher": "Suchen nach"
     },
     "plugins\/sonos3\/desktop\/php\/sonos3.php": {
-        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "401 - Accès non autorisé": "401 – Unbefugter Zugriff",
         "Gestion": "Verwaltung",
-        "Ajouter": "Hinzufügen",
+        "Synchroniser": "Synchronisieren",
         "Configuration": "Konfiguration",
         "Mes Sonos": "Mein Sonos",
         "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "Keine Sonos-Geräte gefunden, klicken Sie zum Starten auf „Hinzufügen“",
@@ -39,10 +37,14 @@
         "Options": "Optionen",
         "Activer": "Aktivieren",
         "Visible": "Sichtbar",
-        "Paramètres spécifiques": "Spezifische Parameter",
-        "IP": "IP",
         "Informations": "Information",
         "Modèle": "Modell",
+        "Version": "Ausführung",
+        "Version matériel": "Hardware Version",
+        "Numéro de série": "Seriennummer",
+        "UID": "UID",
+        "Adresse MAC": "MAC-Adresse",
+        "Adresse IP": "IP Adresse",
         "Nom": "Name",
         "Type": "Nett",
         "Etat": "Bundesland",
@@ -51,30 +53,39 @@
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {
         "Nom": "Name",
         "Choisir une icône": "Wählen Sie ein Symbol aus",
-        "Tester": "Test"
+        "Tester": "Test",
+        "Synchronisation réussie.": "Synchronisierung erfolgreich"
+    },
+    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
+        "401 - Accès non autorisé": "401 – Unbefugter Zugriff"
+    },
+    "plugins\/sonos3\/core\/php\/jeesonos3.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "Sie sind nicht berechtigt, diese Aktion durchzuführen"
     },
     "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
-        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "401 - Accès non autorisé": "401 – Unbefugter Zugriff",
         "Aucune méthode correspondante à": "Keine Matching-Methode"
     },
     "plugins\/sonos3\/core\/class\/sonos3.class.php": {
         "Veuillez vérifier la configuration": "Bitte überprüfen Sie die Konfiguration",
-        "Tache cron introuvable": "Cron-Aufgabe nicht gefunden",
+        "Impossible de lancer le démon": "Daemon kann nicht gestartet werden",
         "Ok j\\'ai lancé": "Ok, ich habe gestartet",
-        "Transition": "Übergang",
-        "Entrée de ligne": "Zeileneingabe",
-        "Aucun": "Ohne",
         "Lecture": "Lesen",
         "Pause": "Pause",
         "Arrêté": "Verhaftet",
+        "Statut de lecture": "Lesestatus",
+        "Mode de lecture": "Lesemodus",
+        "Choisir mode de lecture": "Wählen Sie den Lesemodus",
         "Statut": "Status",
         "Play": "Spielen",
         "Stop": "STOP",
         "Suivant": "Folgende",
         "Précédent": "Früher",
+        "Groupe statut": "Gruppenstatus",
+        "Nom du groupe": "Name der Gruppe",
+        "Muet statut": "Stummschaltungsstatus",
         "Muet": "Stumm",
         "Non muet": "Nicht stumm",
-        "Muet statut": "Stummschaltungsstatus",
         "Répéter": "Wiederholung",
         "Répéter statut": "Status wiederholen",
         "Aléatoire": "Zufällig",
@@ -85,6 +96,7 @@
         "Artiste": "Künstler",
         "Album": "Album",
         "Image": "Bild",
+        "Image locale": "Lokales Bild",
         "Jouer playlist": "Playlist abspielen",
         "Options": "Optionen",
         "Titre de la playlist": "Titel der Wiedergabeliste",
@@ -92,16 +104,14 @@
         "Titre du favoris": "Lieblingstitel",
         "Jouer une radio": "Spielen Sie ein Radio",
         "Titre de la radio": "Radiotitel",
-        "Ajout un haut parleur": "Hinzufügen eines Lautsprechers",
+        "Rejoindre un groupe": "Einer Gruppe beitreten",
         "Nom de la pièce": "Raumname",
-        "Supprimer un haut parleur": "Lautsprecher löschen",
+        "Quitter le groupe": "Die Gruppe verlassen",
+        "Entrée audio analogique": "Analoger Audioeingang",
+        "TV": "Fernseher",
         "Dire": "Zu sagen",
         "Message": "Nachricht",
-        "Couleur dominante": "Dominante Farbe",
-        "Couleur dominante 2": "Dominante Farbe 2",
-        "Impossible de récuperer le sonos": "Die Sonos können nicht wiederhergestellt werden",
-        "Playlist non trouvée": "Wiedergabeliste nicht gefunden",
-        "Favoris non trouvés": "Favoriten nicht gefunden"
+        "Aucun": "Ohne"
     },
     "info.json": {
         "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": "Sonos \/ Ikea Symfonisk-Steuerungs-Plugin. VORSICHT: Mindestens PHP 7.0 ist erforderlich"

@@ -2,25 +2,23 @@
 
 The Sonos plugin allows you to control the Sonos Play 1, 3, 5, Sonos Connect, Sonos Connect AMP, Sonos Playbar, Ikea Symfonisk... It will allow you to see the status of the Sonos and to perform actions ( play, pause, next, previous, volume, choice of a playlist…).
 
-> **Important**
->
-> The plugin manages groups very badly (or not at all) so it is advisable not to use grouping at all with the plugin
-
 # Plugin configuration
 
-The configuration is very simple, after downloading the plugin, you just need to activate it and that's it. The plugin will search for Sonos on your network and create the equipment automatically. In addition, if there is a match between Jeedom objects and Sonos rooms, Jeedom will automatically assign Sonos to the right rooms.
+The configuration is very simple, after downloading the plugin, you just need to activate it, install the dependencies and start the daemon.
+The plugin will search for Sonos on your network and create the equipment automatically. In addition, if there is a match between Jeedom objects and Sonos rooms, Jeedom will automatically assign Sonos to the right rooms.
+
+> **Important**
+> Your Sonos equipment must be reachable directly by the machine hosting Jeedom and they must be able to reach Jeedom in return on TCP port 1400.
 
 > **TRICK**
 >
 > During the initial discovery, it is strongly recommended not to have grouped sound systems, otherwise you will have errors.
 
-If later you add a Sonos, you can either create a Sonos device by giving the IP to Jeedom or click on **Find Sonos equipment**.
+If you later add a Sonos, you can click **Synchronize** in the equipment page or restart the daemon.
 
--   **Voice** : choice of voice during TTS
--   **Sharing** : share name and folder path.
--   **Share username** : username to access share.
--   **Sharing password** : Sharing password.
--   **Discovery** : automatically discover the sound systems (does not work on a docker type installation where each sound system must be created by hand).
+- **Sharing**: Configure here the host name of the machine (or its IP), the name of the share (without the path, without '/') and the path to the folder.
+- **Share username** : username to access share.
+- **Sharing password** : Sharing password.
 
 > **Important**
 >
@@ -33,91 +31,107 @@ The configuration of Sonos equipment is accessible from the Plugins menu then mu
 
 Here you find all the configuration of your equipment :
 
--   **Sonos name** : name of your Sonos equipment.
--   **Parent object** : indicates the parent object to which the equipment belongs.
--   **Activate** : makes your equipment active.
--   **Visible** : makes it visible on the dashboard.
--   **Model** : the model of your Sonos (only change if it is not the right one).
--   **IP** : the IP of your Sonos, can be useful if your Sonos changes IP or if you replace it.
+- **Sonos name** : name of your Sonos equipment.
+- **Parent object** : indicates the parent object to which the equipment belongs.
+- **Activate** : makes your equipment active.
+- **Visible** : makes it visible on the dashboard.
 
-Below you find the list of orders :
+As well as information about your Sonos: *Model*, *Releases*, *Serial number*, *Identifier*, *MAC address* And *IP adress*.
 
--   **Name** : Name of the order.
--   **Advanced configuration (small notched wheels)** : displays the advanced configuration of the command (logging method, widget, etc.)).
--   **Test** : Used to test the command.
+# The orders
 
-As order you will find :
+The information controls will be updated in near real time (normally a few seconds maximum) but the image of the album currently playing may take a little longer to display on the widget when a change occurs. track, this is perfectly normal and independent of the plugin: he must retrieve the image from an external source (on a Sonos or on the internet) and this sometimes takes several seconds (in principle maximum around ten seconds).
 
--   **Play Playlist** : message type command to launch a playlist, just put the name of the playlist in the title. You can put ``random`` in message to shuffle the playlist before playing.
--   **Play Favorites** :  message type command to launch a favorite, all you have to do in the title is to put the name of the favorite. You can put ``random`` in message to mix favorites before reading.
--   **Play a radio** : message type command to launch a radio station, all you have to do is put the name of the radio in the title *(Be careful : this must be in the favorite radios)*.
--   **Adding a speaker** : allows to add a speaker (a Sonos) to the current speaker (to associate 2 Sonos for example). You have to put the name of the sonos room to add in the title (the message field is not used here).
--   **Remove speaker** : allows you to delete a speaker (a Sonos) from the current speaker (to dissociate 2 Sonos for example). You have to put the name of the Sonos part to delete in the title (the message field is not used here).
--   **Random status** : indicates if we are in random mode or not.
--   **Random** : reverse the status of random mode.
--   **Repeat status** : indicates if we are in repeat mode or not.
--   **Repeat** : reverse the status of the "repeat" mode".
--   **Picture** : link to the album image.
--   **Album** : name of album currently playing.
--   **Artist** : artist name currently playing.
--   **Track** : name of the track currently playing.
--   **Mute** : go mute.
--   **Previous** : previous track.
--   **Next** : next track.
--   **Play** : read.
--   **Pause** : Pause.
--   **STOP** : stop reading.
--   **Volume** : change the volume *(from 0 to 100)*.
--   **Status volume** : Volume level.
--   **Status** : status (pause, reading, transition…).
--   **Say** : allows to read a text on Sonos (see TTS part). In the title you can set the volume and in the message, the message to read.
+## Volume and source controls
 
-> **NOTE**
->
-> For playing playlists you can put options (in the option box). To start the playlist in random play, you must put in ``random``.
+These commands will always control the corresponding equipment, including when it is in a group.
+
+- **Volume** : change the volume *(from 0 to 100)*.
+- **Status volume** : Volume level.
+- **Mute** : Activate mute mode.
+- **No Mute** : Turn off mute.
+- **Mute status** : indicates whether we are in mute mode or not.
+
+- **TV** : to switch to the input *TV* on compatible equipment
+- **Analog audio input** : to switch to'*Analog audio input* on compatible equipment
+
+## Playback controls
+
+These commands will indicate and control the current playback on the equipment or on the group if it is grouped and this in a transparent way, you do not have to worry about knowing if the equipment is grouped or not to use them.
+
+- **Status** : reader status translated into the language configured under Jeedom. For example: *Play*, *Pause*, *Stopped*.
+- **Reading status** which gives the "raw" value of the reading status: *PLAYING*, *PAUSED_PLAYBACK*, *STOPPED*; more suitable for scenarios.
+- **Play** : read.
+- **Pause** : Pause.
+- **STOP** : stop reading.
+- **Previous** : previous track.
+- **Next** : next track.
+- **Random status** : indicates if we are in random mode or not.
+- **Random** : reverse the status of random mode.
+- **Repeat status** : indicates if we are in repeat mode or not.
+- **Repeat** : reverse the status of the "repeat" mode".
+- **Reading mode** giving status and command **Choose reading mode** which allows you to choose from the following possibilities: *Normal*, *Repeat all*, *Random*, *Random without repetition*, *Repeat song*, *Random and repeat song*. This action is equivalent to using the commands **Repeat** & **Random** in order to arrive in the desired configuration. However, this is the only way to switch to “Repeat song” mode".
+- **Play Playlist** : message type command to launch a playlist, just put the name of the playlist in the title.
+- **Play Favorites** :  message type command to launch a favorite, all you have to do in the title is to put the name of the favorite.
+- **Play a radio** : message type command to launch a radio station, all you have to do is put the name of the radio in the title *(Be careful : this must be in the favorite radios)*. No longer works on "S2" models".
+- **Picture** : link to the album image.
+- **Album** : name of album currently playing.
+- **Artist** : artist name currently playing.
+- **Track** : name of the track currently playing.
+- **Say** : allows to read a text on Sonos (see TTS part). In the title you can set the volume and in the message, the message to read.
+
+## Commands for managing groups
+
+These commands always act on the corresponding equipment.
+
+- **Group status** : indicates whether the equipment is grouped or not.
+- **Name of the group** if the equipment is grouped, give the name of the group.
+- **Join a group** : allows you to join the group of the given speaker (a Sonos) (to associate 2 Sonos for example). You must enter the name of the sound system room to join. This can be any member of an existing group, it doesn't have to be the group coordinator, or an isolated Sonos.
+- **Leave the group** : allows you to leave the group.
 
 # TTS
 
 TTS (text-to-speech) to Sonos requires having Windows (Samba) sharing on the network (imposed by Sonos, no way to do otherwise). So you need a NAS on the network. The configuration is quite simple you have to put the name or the IP of the NAS (be careful to put the same thing as what is declared on Sonos) and the path (relative), the username and the password ( attention the user must have write rights)
 
+The creation of the audio file is managed by the Jeedom core: the language will be the one configured in Jeedom and the TTS engine used can also be selected in the Jeedom configuration screens.
+
+When using TTS (command **Say**), the plugin will perform the following actions:
+
+- generation of the audio file containing the message with Jeedom core support
+- writing the file to the SAMBA share
+- Forces playback in “Normal” mode, without repeating
+- Force “unmute” mode"
+- Changing the volume to the chosen value when using the command
+- reading message
+- restoring the state of the Sonos before playback (i.e. the playback mode, mute or not, repeat or not, etc.) and restarting the stream if the Sonos was playing
+
 > **Important**
 >
 > It is absolutely necessary to put a password for this procedure to work.
-
-> **Important**
 >
 > A subdirectory is also absolutely necessary for the voice file to be correctly created.
-
-> **Important**
 >
-> Above all, there must be no accent in the name of the share or the folder, no space or special characters
+> Above all, there must be no accent in the name of the share or folder, spaces or special characters
 
 **Here is an example of configuration (thanks @masterfion) :**
 
 NAS side, here is my config :
 
--   Jeedom folder is shared.
--   Sonos user has Read / Write access (necessary for Jeedom).
--   guest user has read-only access (required for Sonos).
+- Jeedom folder is shared.
+- Sonos user has Read / Write access (necessary for Jeedom).
+- guest user has read-only access (required for Sonos).
 
-Sonos Plugin side, here is my config :
+On the Sonos Plugin side, the config :
 
--   Sharing :
-    -   Field 1 : 192.168.xxx.yyy
-    -   Field 2 : Jeedom / TTS
--   Username : Sonos and its password…
+- Sharing :
+  - Field 1: 192.168.xxx.yyy
+  - Field 2: Jeedom
+  - Field 3: TTS
+- Username and password...​
 
 Sonos Library side (PC app)
--   the way is : //192.168.xxx.yyy/Jeedom/TTS
 
-> **Important**
->
-> It is ABSOLUTELY necessary to add the network share in the sonos library, otherwise Jeedom will create the tts mp3 but it cannot be played by the Sonos.
-
-> **Important**
->
-> Language depends on Jeedom language and uses picotts by default. As of jeedom 3.3.X it will be possible to use Google TTS to have a prettier voice.
-
+- the way is : //192.168.xxx.yyy/Jeedom/TTS
 
 # The panel
 
@@ -126,13 +140,3 @@ The Sonos plugin also provides a panel that brings together all of your Sonos. A
 > **Important**
 >
 > To have the panel you must have activated it in the plugin configuration.
-
-# FAQ
-
-> **Error ``No devices in this collection`` when looking for equipment**
->
-> This error occurs if the automatic discovery is blocked (router which blocks the boradcast for example). It does not matter, you just have to add your sound systems by hand, specifying the model and the IP address.
-
-> **I am having trouble with TTS (looping), the radios do not work, I have errors, etc...**
->
-> the first thing to do in the event of a problem is to unplug all the Sonos, plug them back in and wait for them to start, then restart the Sonos daemon in Jeedom. In general this solves 90% of the problems.

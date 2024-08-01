@@ -4,11 +4,9 @@
         "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0",
         "Le plugin sonos doit réagir aux interactions": "Le plugin sonos doit réagir aux interactions",
         "Partage": "Partage",
+        "Hôte": "Hôte",
         "Nom d'utilisateur du partage": "Nom d'utilisateur du partage",
-        "Mot de passe du partage": "Mot de passe du partage",
-        "Découverte": "Découverte",
-        "Rechercher les équipements Sonos": "Rechercher les équipements Sonos",
-        "Synchronisation réussie": "Sincronizzazione avvenuta con successo"
+        "Mot de passe du partage": "Mot de passe du partage"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
         "401 - Accès non autorisé": "401 - Accesso non autorizzato",
@@ -18,7 +16,7 @@
     "plugins\/sonos3\/desktop\/php\/sonos3.php": {
         "401 - Accès non autorisé": "401 - Accesso non autorizzato",
         "Gestion": "Gestione",
-        "Ajouter": "Aggiungi",
+        "Synchroniser": "Synchroniser",
         "Configuration": "Configurazione",
         "Mes Sonos": "Mes Sonos",
         "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer",
@@ -39,10 +37,14 @@
         "Options": "Opzioni",
         "Activer": "Attivare",
         "Visible": "Visibile",
-        "Paramètres spécifiques": "Paramètres spécifiques",
-        "IP": "IP",
         "Informations": "Informazioni",
         "Modèle": "Modello",
+        "Version": "Version",
+        "Version matériel": "Version matériel",
+        "Numéro de série": "Numéro de série",
+        "UID": "UID",
+        "Adresse MAC": "Adresse MAC",
+        "Adresse IP": "Adresse IP",
         "Nom": "Nome",
         "Type": "Type",
         "Etat": "Etat",
@@ -51,7 +53,14 @@
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {
         "Nom": "Nome",
         "Choisir une icône": "Choisir une icône",
-        "Tester": "Prova"
+        "Tester": "Prova",
+        "Synchronisation réussie.": "Synchronisation réussie"
+    },
+    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé"
+    },
+    "plugins\/sonos3\/core\/php\/jeesonos3.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "Vous n\\'etes pas autorisé à effectuer cette action"
     },
     "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
         "401 - Accès non autorisé": "401 - Accesso non autorizzato",
@@ -59,22 +68,24 @@
     },
     "plugins\/sonos3\/core\/class\/sonos3.class.php": {
         "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
-        "Tache cron introuvable": "Tache cron introuvable",
+        "Impossible de lancer le démon": "Impossible de lancer le démon",
         "Ok j\\'ai lancé": "Ok j\\'ai lancé",
-        "Transition": "Transition",
-        "Entrée de ligne": "Entrée de ligne",
-        "Aucun": "Nessuno",
         "Lecture": "Lecture",
         "Pause": "Pausa",
         "Arrêté": "Smettere",
+        "Statut de lecture": "Statut de lecture",
+        "Mode de lecture": "Mode de lecture",
+        "Choisir mode de lecture": "Choisir mode de lecture",
         "Statut": "Stato",
         "Play": "Play",
         "Stop": "Ferma",
         "Suivant": "Suivant",
         "Précédent": "Precedente",
+        "Groupe statut": "Groupe statut",
+        "Nom du groupe": "Nom du groupe",
+        "Muet statut": "Muet statut",
         "Muet": "Muet",
         "Non muet": "Non muet",
-        "Muet statut": "Muet statut",
         "Répéter": "Répéter",
         "Répéter statut": "Répéter statut",
         "Aléatoire": "Aléatoire",
@@ -85,6 +96,7 @@
         "Artiste": "Artiste",
         "Album": "Album",
         "Image": "Immagine",
+        "Image locale": "Image locale",
         "Jouer playlist": "Jouer playlist",
         "Options": "Opzioni",
         "Titre de la playlist": "Titre de la playlist",
@@ -92,16 +104,14 @@
         "Titre du favoris": "Titre du favoris",
         "Jouer une radio": "Jouer une radio",
         "Titre de la radio": "Titre de la radio",
-        "Ajout un haut parleur": "Ajout un haut parleur",
+        "Rejoindre un groupe": "Rejoindre un groupe",
         "Nom de la pièce": "Nom de la piece",
-        "Supprimer un haut parleur": "Supprimer un haut parleur",
+        "Quitter le groupe": "Quitter le groupe",
+        "Entrée audio analogique": "Entrée audio analogique",
+        "TV": "TV",
         "Dire": "Dire",
         "Message": "Messaggio",
-        "Couleur dominante": "Couleur dominante",
-        "Couleur dominante 2": "Couleur dominante 2",
-        "Impossible de récuperer le sonos": "Impossible de récuperer le sonos",
-        "Playlist non trouvée": "Playlist non trouvée",
-        "Favoris non trouvés": "Favoris non trouvés"
+        "Aucun": "Nessuno"
     },
     "info.json": {
         "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0"

@@ -4,6 +4,27 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 01/08/2024
+
+> Attention
+> Significant plugin redesign: a very large part of the plugin has been rewritten including all communication with Sonos (daemon) and certain functionalities have been modified and no longer work as before, notably group management
+> Requires Jeedom 4.4
+> Debian 11 and 12 compatible! Probably Debian 10 but not tested and no support on this version
+> See also [this topic on community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) for more details
+
+- Almost total rewrite of the plugin, the daemon has been completely rewritten in python (instead of PHP)
+- Debian 11 and 12 compatible! (probably Debian 10 but not tested and no support on this version)
+- There is no longer any discovery to launch manually and it is no longer necessary (nor possible) to manually add equipment, the plugin automatically discovers your sound devices and creates the equipment corresponding to each start of the daemon. It is also possible to ask to (re)synchronize equipment, favorites and playlists without restarting the daemon from the equipment panel
+- (Almost) real-time updating of order information (a delay of 0.5s to a few seconds max), more cron minutes, including when a change is made outside Jeedom (via Sonos app for example)
+- Redesign of group management (old commands will be deleted and new ones added, see documentation). It is possible to join or leave a group, control the playback of the group from any device in the group without worrying about who is the controller. The volume is always controlled by speaker.
+- Adaptation to the Text-to-Speech (TTS) function, it will be necessary to adapt the SAMBA sharing configuration.
+- Optimisation: no more memory loss on the daemon and it consumes less than previously.
+
+- Adding an action command **TV** to switch to the input *TV* on compatible equipment
+- Adding an info command **Reading mode** and action **Choose reading mode** which allows you to select the reading mode from the following possibilities: *Normal*, *Repeat all*, *Random*, *Random without repetition*, *Repeat song*, *Random and repeat song*
+- Adding an order **Reading status** which gives the "raw" value of the reading state (the existing command **Status** gives a translated value based on the language configured in Jeedom)
+- Adding commands **Group status** (indicates whether the equipment is grouped or not) and **Name of the group** in the case where the equipment is grouped
+
 # 04/25/2024
 
 - Documentation update
@@ -128,7 +149,7 @@
 
 # 2018
 
--  Added management of sonos favorites
+- Added management of sonos favorites
 - Support for Sonos One and Playbase
 - Tongue correction with picotts
 - Adding a "line entry" command"

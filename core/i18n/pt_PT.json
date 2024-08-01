@@ -4,11 +4,9 @@
         "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "Tome cuidado, sua versão do PHP ('. PHP_VERSION.') É muito antiga, você precisa de pelo menos PHP 7.0",
         "Le plugin sonos doit réagir aux interactions": "O plugin sonos deve reagir às interações",
         "Partage": "Partilha",
+        "Hôte": "Hospedar",
         "Nom d'utilisateur du partage": "Nome de usuário de compartilhamento",
-        "Mot de passe du partage": "Compartilhando senha",
-        "Découverte": "Descoberta",
-        "Rechercher les équipements Sonos": "Encontre equipamentos Sonos",
-        "Synchronisation réussie": "Sincronização bem-sucedida"
+        "Mot de passe du partage": "Compartilhando senha"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
@@ -18,7 +16,7 @@
     "plugins\/sonos3\/desktop\/php\/sonos3.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
         "Gestion": "Gestão",
-        "Ajouter": "Adicionar",
+        "Synchroniser": "Sincronizar",
         "Configuration": "Configuração",
         "Mes Sonos": "My Sonos",
         "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "Nenhum equipamento Sonos encontrado, clique em \"Adicionar\" para iniciar",
@@ -39,10 +37,14 @@
         "Options": "Opções",
         "Activer": "Ativar",
         "Visible": "Visivél",
-        "Paramètres spécifiques": "Parâmetros específicos",
-        "IP": "IP",
         "Informations": "Informação",
         "Modèle": "Modelo",
+        "Version": "Versão",
+        "Version matériel": "Versão de hardware",
+        "Numéro de série": "Número de série",
+        "UID": "UID",
+        "Adresse MAC": "Endereço MAC",
+        "Adresse IP": "Endereço de IP",
         "Nom": "Nome",
         "Type": "Gentil",
         "Etat": "Estado",
@@ -51,7 +53,14 @@
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {
         "Nom": "Nome",
         "Choisir une icône": "Escolha um ícone",
-        "Tester": "Teste"
+        "Tester": "Teste",
+        "Synchronisation réussie.": "Sincronização bem-sucedida"
+    },
+    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado"
+    },
+    "plugins\/sonos3\/core\/php\/jeesonos3.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "Você não está autorizado a realizar esta ação"
     },
     "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
@@ -59,22 +68,24 @@
     },
     "plugins\/sonos3\/core\/class\/sonos3.class.php": {
         "Veuillez vérifier la configuration": "Por favor, verifique a configuração",
-        "Tache cron introuvable": "Tarefa Cron não encontrada",
+        "Impossible de lancer le démon": "Não é possível iniciar o daemon",
         "Ok j\\'ai lancé": "Ok eu lancei",
-        "Transition": "Transição",
-        "Entrée de ligne": "Entrada de linha",
-        "Aucun": "Nemhum",
         "Lecture": "Leitura",
         "Pause": "Pausa",
         "Arrêté": "Preso",
+        "Statut de lecture": "Status de leitura",
+        "Mode de lecture": "Modo de leitura",
+        "Choisir mode de lecture": "Escolha o modo de leitura",
         "Statut": "Estado",
         "Play": "Reproduzir",
         "Stop": "Pare",
         "Suivant": "Seguinte",
         "Précédent": "Anterior",
+        "Groupe statut": "Status do grupo",
+        "Nom du groupe": "Nome do grupo",
+        "Muet statut": "Status de mudo",
         "Muet": "Silenciar",
         "Non muet": "Não muda",
-        "Muet statut": "Status de mudo",
         "Répéter": "Repetir",
         "Répéter statut": "Repita o status",
         "Aléatoire": "Aleatório",
@@ -85,6 +96,7 @@
         "Artiste": "Artista",
         "Album": "Album",
         "Image": "Imagem",
+        "Image locale": "Imagem local",
         "Jouer playlist": "Reproduzir lista de reprodução",
         "Options": "Opções",
         "Titre de la playlist": "Título da lista de reprodução",
@@ -92,16 +104,14 @@
         "Titre du favoris": "Título favorito",
         "Jouer une radio": "Tocar rádio",
         "Titre de la radio": "Título do rádio",
-        "Ajout un haut parleur": "Adicionando um alto-falante",
+        "Rejoindre un groupe": "Junte-se a um grupo",
         "Nom de la pièce": "Nome do quarto",
-        "Supprimer un haut parleur": "Excluir orador",
+        "Quitter le groupe": "Sair do grupo",
+        "Entrée audio analogique": "Entrada de áudio analógico",
+        "TV": "Televisão",
         "Dire": "Para dizer",
         "Message": "Mensagem",
-        "Couleur dominante": "Cor dominante",
-        "Couleur dominante 2": "Cor dominante 2",
-        "Impossible de récuperer le sonos": "Incapaz de recuperar os sonos",
-        "Playlist non trouvée": "Lista de reprodução não encontrada",
-        "Favoris non trouvés": "Favoritos não encontrados"
+        "Aucun": "Nemhum"
     },
     "info.json": {
         "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": "Plug-in de controle Sonos \/ Ikea Symfonisk. CUIDADO: PHP 7.0 mínimo é necessário"
