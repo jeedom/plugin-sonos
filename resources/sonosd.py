@@ -165,16 +165,24 @@ class SonosDaemon(BaseDaemon):
         for speaker in self._speakers.values():
             await self.__send_speaker(speaker)
 
-        random_speaker = next(iter(self._speakers.values()))
-        coordinator = random_speaker if random_speaker.is_coordinator else random_speaker.coordinator
-        self._logger.debug(f"use {coordinator.zone_name} to get favorites, playlists & radios")
-        await self.__get_favorites(coordinator)
-        await self.__get_playlists(coordinator)
-        await self.__get_radios(coordinator)
+        try:
+            random_speaker = next(iter(self._speakers.values()))
+            coordinator = random_speaker if random_speaker.is_coordinator else random_speaker.coordinator
+            self._logger.info(f"Use {coordinator.zone_name} to get favorites, playlists & radios")
+            await self.__get_favorites(coordinator)
+            await self.__get_playlists(coordinator)
+            await self.__get_radios(coordinator)
+        except StopIteration:
+            self._logger.warning("No speakers available to get favorites, playlists & radios")
 
     async def __discover_controllers(self):
+        discovered_soco = discover()
+        if discovered_soco is None:
+            self._logger.warning("No Sonos discovered, do you have Sonos speaker on the same network?")
+            return
+
         socos: List[SoCo]
-        socos = list(discover())
+        socos = list(discovered_soco)
         for soco in socos:
             self._logger.info(f"found speaker {soco.player_name}")
             new_speaker = SonosSpeaker(self._sonos_data, soco, self.__on_speaker_change)
