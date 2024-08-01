@@ -185,7 +185,7 @@ class sonos3 extends eqLogic {
 		return array('reply' => 'Playlist ou favoris non trouvé');
 	}
 
-	public static function createSonos($controllers) {
+	public static function createSonos(array $controllers) {
 		$speakers_array = array();
 		foreach ($controllers as $ip => $controller) {
 			$speakers_array[$ip] = $controller['zone_name'];
@@ -229,6 +229,7 @@ class sonos3 extends eqLogic {
 			$eqLogic->getCmd('action', 'join')->setDisplay('title_possibility_list', json_encode(array_values($speakers_array)))->save(true);
 			$eqLogic->getCmd('action', 'unjoin')->setDisplay('title_possibility_list', json_encode(array_values($speakers_array)))->save(true);
 		}
+		log::add(__CLASS__, 'info', __('Sonos controllers synchronized: ', __FILE__) . count($controllers));
 	}
 
 	private static function getShuffleState($playModeState) {
@@ -324,9 +325,10 @@ class sonos3 extends eqLogic {
 				$cmd->save();
 			}
 		}
+		log::add(__CLASS__, 'info', __('Favorites updated: ', __FILE__) . count($favorites));
 	}
 
-	public static function setPlaylists($playlists) {
+	public static function setPlaylists(array $playlists) {
 		$encoded_playlists = json_encode($playlists);
 		cache::set("sonos3::playlist", $encoded_playlists);
 		foreach (self::byType(__CLASS__) as $sonos3) {
@@ -336,9 +338,10 @@ class sonos3 extends eqLogic {
 				$cmd->save();
 			}
 		}
+		log::add(__CLASS__, 'info', __('Playlists updated: ', __FILE__) . count($playlists));
 	}
 
-	public static function setRadios($radios) {
+	public static function setRadios(array $radios) {
 		foreach (self::byType(__CLASS__) as $sonos3) {
 			$cmd = $sonos3->getCmd('action', 'play_radio');
 			if (is_object($cmd)) {
@@ -346,6 +349,7 @@ class sonos3 extends eqLogic {
 				$cmd->save();
 			}
 		}
+		log::add(__CLASS__, 'info', __('Radios updated: ', __FILE__) . count($radios));
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
