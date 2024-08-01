@@ -323,8 +323,8 @@ class SonosSpeaker:
             # if not mic_exists:
             #     async_dispatcher_send(SONOS_CREATE_MIC_SENSOR, self)
             # TODO: send event to jeedom
-
-        if more_info := event.variables.get("more_info"):
+        more_info = event.variables.get("more_info")
+        if more_info:
             await self.async_update_battery_info(more_info)
 
     def async_dispatch_favorites(self, event: SonosEvent) -> None:
@@ -348,7 +348,8 @@ class SonosSpeaker:
             "x-rincon:"
         ):
             new_coordinator_uid = av_transport_uri.split(":")[-1]
-            if new_coordinator_speaker := self.data.discovered.get(new_coordinator_uid):
+            new_coordinator_speaker = self.data.discovered.get(new_coordinator_uid)
+            if new_coordinator_speaker:
                 _LOGGER.debug(
                     "Media update coordinator (%s) received for %s",
                     new_coordinator_speaker.zone_name,
@@ -363,7 +364,8 @@ class SonosSpeaker:
                 )
             return
 
-        if crossfade := event.variables.get("current_crossfade_mode"):
+        crossfade = event.variables.get("current_crossfade_mode")
+        if crossfade:
             crossfade = bool(int(crossfade))
             if self.cross_fade != crossfade:
                 self.cross_fade = crossfade
@@ -371,7 +373,8 @@ class SonosSpeaker:
                 self.__change_cb(self)
 
         # Missing transport_state indicates a transient error
-        if (new_status := event.variables.get("transport_state")) is None:
+        new_status = event.variables.get("transport_state")
+        if new_status is None:
             return
 
         # Ignore transitions, we should get the target state soon
@@ -394,7 +397,8 @@ class SonosSpeaker:
         if "mute" in variables:
             self.muted = variables["mute"]["Master"] == "1"
 
-        if loudness := variables.get("loudness"):
+        loudness = variables.get("loudness")
+        if loudness:
             self.loudness = loudness["Master"] == "1"
 
         for bool_var in (
@@ -612,12 +616,12 @@ class SonosSpeaker:
     # @callback
     def async_update_groups(self, event: SonosEvent) -> None:
         """Handle callback for topology change event."""
-        if xml := event.variables.get("zone_group_state"):
+        xml = event.variables.get("zone_group_state")
+        if xml:
             zgs = ET.fromstring(xml)
             for vanished_device in zgs.find("VanishedDevices") or []:
-                if (
-                    reason := vanished_device.get("Reason")
-                ) not in SUPPORTED_VANISH_REASONS:
+                reason = vanished_device.get("Reason")
+                if reason not in SUPPORTED_VANISH_REASONS:
                     _LOGGER.debug(
                         "Ignoring %s marked %s as vanished with reason: %s",
                         self.zone_name,
@@ -699,7 +703,8 @@ class SonosSpeaker:
             self.__change_cb(self)
 
             for joined_uid in group[1:]:
-                if joined_speaker := self.data.discovered.get(joined_uid):
+                joined_speaker = self.data.discovered.get(joined_uid)
+                if joined_speaker:
                     joined_speaker.coordinator = self
                     joined_speaker.sonos_group = sonos_group
                     self.__change_cb(joined_speaker)

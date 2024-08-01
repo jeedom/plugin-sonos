@@ -158,7 +158,8 @@ class SonosMedia:
         self.uri = track_info["uri"]
 
         audio_source = self.soco.music_source_from_uri(self.uri)
-        if source := SOURCE_MAPPING.get(audio_source):
+        source = SOURCE_MAPPING.get(audio_source)
+        if source:
             self.source_name = source
             if audio_source in LINEIN_SOURCES:
                 self.clear_position()
@@ -189,9 +190,11 @@ class SonosMedia:
 
         self.set_basic_track_info(update_position=state_changed)
 
-        if ct_md := evars["current_track_meta_data"]:
+        ct_md = evars["current_track_meta_data"]
+        if ct_md:
             if not self.image_url:
-                if album_art_uri := getattr(ct_md, "album_art_uri", None):
+                album_art_uri = getattr(ct_md, "album_art_uri", None)
+                if album_art_uri:
                     self.image_url = self.library.build_album_art_full_uri(
                         album_art_uri
                     )
@@ -200,7 +203,8 @@ class SonosMedia:
         if isinstance(et_uri_md, DidlPlaylistContainer):
             self.playlist_name = et_uri_md.title
 
-        if queue_size := evars.get("number_of_tracks", 0):
+        queue_size = evars.get("number_of_tracks", 0)
+        if queue_size:
             self.queue_size = int(queue_size)
 
         if audio_source == MUSIC_SRC_RADIO:
