@@ -8,11 +8,7 @@ La configuration est très simple, après téléchargement du plugin, il vous su
 Le plugin va rechercher les Sonos sur votre réseau et créer les équipements automatiquement. De plus, s’il y a une correspondance entre les objets Jeedom et les pièces du Sonos, Jeedom affectera automatiquement les Sonos dans les bonnes pièces.
 
 > **Important**
-> Vos équipements Sonos doivent être joignable directement par la machine hébergeant Jeedom et ils doivent être capable de joindre Jeedom en retour sur le port TCP 1400.
-
-> **ASTUCE**
->
-> Lors de la découverte initiale, il est fortement conseillé de ne pas avoir de sonos groupés sous peine d'avoir des erreurs.
+> Vos équipements Sonos doivent être joignable directement par la machine hébergeant Jeedom (broadcast / multicast possible sur le même réseau) et ils doivent être capable de joindre Jeedom en retour sur le port TCP 1400.
 
 Si plus tard vous ajoutez un Sonos, vous pouvez cliquer sur **Synchroniser** dans la page des équipements ou redémarrer le démon.
 
@@ -20,16 +16,11 @@ Si plus tard vous ajoutez un Sonos, vous pouvez cliquer sur **Synchroniser** dan
 - **Nom d’utilisateur du partage** : nom d’utilisateur pour accéder au partage.
 - **Mot de passe du partage** : mot de passe du partage.
 
-> **IMPORTANT**
->
-> Les messages trop longs ne peuvent être transmis en TTS (la limite
-> dépend du fournisseur de TTS, en général environ 100 caractères).
-
 # Configuration des équipements
 
 La configuration des équipements Sonos est accessible à partir du menu Plugins puis multimédia.
 
-Vous retrouvez ici toute la configuration de votre équipement :
+Vous retrouvez ici toute la configuration habituelle de votre équipement :
 
 - **Nom du Sonos** : nom de votre équipement Sonos.
 - **Objet parent** : indique l’objet parent auquel appartient l’équipement.
@@ -37,6 +28,8 @@ Vous retrouvez ici toute la configuration de votre équipement :
 - **Visible** : le rend visible sur le dashboard.
 
 Ainsi que des informations sur votre Sonos: *Modèle*, *Versions*, *Numéro de série*, *Identifiant*, *Adresse MAC* et *Adresse IP*.
+
+Il n'y a aucune configuration spécifique à effectuer.
 
 # Les commandes
 
@@ -53,7 +46,7 @@ Ces commandes vont toujours contrôler l'équipement correspondant, y compris lo
 - **Muet statut** : indique si on est en mode muet ou non.
 
 - **TV** : pour basculer sur l'entrée *TV* sur les équipements compatibles
-- **Entrée audio analogique** : pour basculer sur l'*Entrée audio analogique* sur les équipements compatibles
+- **Entrée audio analogique** : pour basculer sur l'*Entrée audio analogique* (*Line-in*) sur les équipements compatibles
 
 ## Commandes de lecture
 
@@ -70,10 +63,10 @@ Ces commandes indiqueront et contrôleront la lecture en cours sur l'équipement
 - **Aléatoire** : inverse le statut du mode aléatoire.
 - **Répéter statut** : indique si on est en mode répété ou non.
 - **Répéter** : inverse le statut du mode "répéter".
-- **Mode de lecture** donnant l'état et commande **Choisir mode de lecture** qui permet de choisir parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*. Cette action est équivalente à l'utilisation des commandes **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée. C'est par contre le seul moyen de passer en mode "Répéter le morceau".
-- **Jouer playlist** : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist.
-- **Jouer favoris** :  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori.
-- **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Ne fonctionne plus sur les modèles "S2".
+- **Mode de lecture** donnant l'état et commande **Choisir mode de lecture** qui permet de choisir parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*. Cette action est équivalente à l'utilisation des commandes **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée. C'est par contre le seul moyen de passer en mode *Répéter le morceau* ou *Aléatoire et répéter le morceau*.
+- **Jouer playlist** : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
+- **Jouer favoris** :  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
+- **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper. Ne fonctionne plus sur les modèles "S2", il est normal d'avoir une liste vide sur tous les modèles utilisant l'app Sonos S2.
 - **Image** : lien vers l’image de l’album.
 - **Album** : nom de l’album en cours de lecture.
 - **Artiste** : nom de l’artiste en cours de lecture.
@@ -86,22 +79,22 @@ Ces commandes agissent toujours sur l'équipement correspondant.
 
 - **Groupe statut** : indique si l'équipement est groupé ou non.
 - **Nom du groupe** dans le cas où l'équipement est groupé, donne le nom du groupe.
-- **Rejoindre un groupe** : permet de rejoindre le groupe du haut-parleur (un Sonos) donné (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à rejoindre. Cela peut-être n'importe quel membre d'un groupe existant, cela ne doit pas nécessairement être le coordinateur du groupe, ou un Sonos isolé.
+- **Rejoindre un groupe** : permet de rejoindre le groupe du haut-parleur (un Sonos) donné (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à rejoindre. Cela peut-être n'importe quel membre d'un groupe existant, cela ne doit pas nécessairement être le coordinateur du groupe, ou un Sonos isolé. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
 - **Quitter le groupe** : permet de quitter le groupe.
 
 # TTS
 
-Le TTS (text-to-speech) vers le Sonos nécessite d’avoir un partage Windows (Samba) sur le réseau (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS sur le réseau. La configuration est assez simple il faut mettre le nom ou l’ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemin (relatif), le nom d’utilisateur et le mot de passe (attention l’utilisateur doit avoir les droits en écriture)
+Le TTS (text-to-speech) vers le Sonos nécessite d’avoir un partage SAMBA sur le réseau (imposé par Sonos, pas moyen de faire autrement). Il faut vous donc un NAS ou équivalent sur le réseau. La configuration est assez simple il faut mettre le nom ou l’ip du NAS (attention à bien mettre la même chose que ce qui est déclaré sur Sonos) et le chemin vers le dossier qui doit contenir les fichiers audio ainsi que le nom d’utilisateur et le mot de passe (attention l’utilisateur doit avoir les droits en écriture)
 
-La création du fichier audio est géré par le core de Jeedom: la langue sera celle configurée dans Jeedom et le moteur TTS utilisé peut également être sélectionné dans les écrans de configuration Jeedom.
+La création du fichier audio est géré par le core de Jeedom: la langue sera celle configurée dans Jeedom et le moteur TTS utilisé peut également être sélectionné dans la configuration Jeedom.
 
 Lors de l'utilisation du TTS (commande **Dire**), le plugin va effectuer les actions suivantes:
 
 - génération du fichier audio contenant le message avec le support du core de Jeedom
 - écriture du fichier sur le partage SAMBA
-- Force la lecture en mode "Normal", sans répétition
-- Force le mode "non muet"
-- Modification du volume sur la valeur choisie lors de l'utilisation de la commande
+- forcer la lecture en mode "Normal", sans répétition
+- forcer le mode "non muet" (uniquement sur l'équipement, pas sur tout le groupe)
+- Modification du volume sur la valeur choisie lors de l'utilisation de la commande (uniquement sur l'équipement, pas sur tout le groupe)
 - lecture du message
 - restauration de l'état du Sonos avant la lecture (donc le mode de lecture, muet ou pas, répétition ou pas...) et redémarrage du flux si le Sonos était en cours de lecture
 
@@ -111,27 +104,30 @@ Lors de l'utilisation du TTS (commande **Dire**), le plugin va effectuer les act
 >
 > Il faut aussi absolument un sous-répertoire pour que le fichier vocal soit correctement créé.
 >
-> Il ne faut surtout pas d'accent dans le nom du partage ou le dossier, d'espace ou de caractères spéciaux
+> Il ne faut surtout pas d'accent dans le nom du partage ou le dossier, d'espace ou de caractères spéciaux.
+>
+> Les messages trop longs ne peuvent être transmis en TTS (la limite dépend du fournisseur de TTS, en général environ 100 caractères).
 
-**Voici un exemple de configuration (merci @masterfion) :**
+## Exemple de configuration
 
-Côté NAS, voici ma config :
+Côté NAS, la config suivante doit être effectuée:
 
-- le dossier Jeedom est partagé.
-- l’utilisateur Sonos a un accès lecture/écriture (nécessaire pour Jeedom).
-- l’utilisateur guest a un accès en Lecture seule (nécessaire pour les Sonos).
+- le dossier *Jeedom* est partagé et il contient un dossier *TTS*
+- l’utilisateur *jeedom* a un accès lecture/écriture (nécessaire pour Jeedom).
+- l’utilisateur *sonos* a un accès en lecture seule (nécessaire pour les Sonos).
 
 Côté Plugin Sonos, la config :
 
 - Partage :
   - Champ 1: 192.168.xxx.yyy
-  - Champ 2: Jeedom
-  - Champ 3: TTS
-- Nom d’utilisateur et son mot de passe…​
+  - Champ 2: *Jeedom*
+  - Champ 3: *TTS*
+- Nom d’utilisateur (*jeedom* dans l'exemple) et son mot de passe…​
 
 Côté Bibliothèque Sonos (appli PC)
 
 - le chemin est : //192.168.xxx.yyy/Jeedom/TTS
+- l'utilisateur sera *sonos* (dans cet exemple) + mot de passe
 
 # Le panel
 

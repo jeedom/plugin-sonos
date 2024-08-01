@@ -1,5 +1,7 @@
-import asyncio
 from typing import List
+import warnings
+import asyncio
+import logging
 
 from soco import SoCo, discover, events_asyncio
 import soco.config as soco_config
@@ -15,12 +17,24 @@ class SonosConfig(BaseConfig):
     def __init__(self):
         super().__init__()
 
+        self.add_argument("--internalIp", type=str, default=None)
+
+    @property
+    def internal_ip(self) -> str|None:
+        return self._args.internalIp
+
 class SonosDaemon(BaseDaemon):
     def __init__(self) -> None:
         self._config = SonosConfig()
         super().__init__(self._config, self._on_start, self._on_message, self._on_stop)
 
         soco_config.EVENTS_MODULE = events_asyncio
+        # soco_config.EVENT_ADVERTISE_IP = self._config.internal_ip
+
+        logging.getLogger('aiohttp').setLevel(logging.WARNING)
+        warnings.filterwarnings("ignore", message="The output type of this method will probably change in the future to use SoCo data structures")
+        warnings.filterwarnings("ignore", message="Call to deprecated function")
+
         self._speakers:dict[str, SonosSpeaker] = {}
         self._sonos_data = SonosData()
 
