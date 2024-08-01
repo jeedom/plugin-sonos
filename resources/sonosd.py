@@ -176,7 +176,7 @@ class SonosDaemon(BaseDaemon):
             self._logger.warning("No speakers available to get favorites, playlists & radios")
 
     async def __discover_controllers(self):
-        discovered_soco = discover()
+        discovered_soco = discover(timeout=10, allow_network_scan=True)
         if discovered_soco is None:
             self._logger.warning("No Sonos discovered, do you have Sonos speaker on the same network?")
             return
