@@ -73,6 +73,9 @@ Ces commandes indiqueront et contrôleront la lecture en cours sur l'équipement
 - **Piste** : nom de la piste en cours de lecture.
 - **Dire** : permet de lire un texte sur le Sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire.
 
+> **Hint**
+> Les playlists et les favoris doivent être créés via l'app Sonos (sur mobile ou sur ordi) ensuite il faut faire une synchronisation pour mettre à jour les équipements et pouvoir les utiliser dans un scénario.
+
 ## Commandes pour gérer les groupes
 
 Ces commandes agissent toujours sur l'équipement correspondant.
