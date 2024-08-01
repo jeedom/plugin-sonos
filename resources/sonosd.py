@@ -49,12 +49,12 @@ class SonosDaemon(BaseDaemon):
             self._logger.error('No action in message: %s', message)
             return
 
-        if 'ip' in message:
-            if message['ip'] not in self._speakers:
-                self._logger.warning('No speaker with ip: %s', message['ip'])
+        if 'uid' in message:
+            if message['uid'] not in self._speakers:
+                self._logger.warning('No speaker with uid: %s', message['uid'])
                 return
 
-            speaker = self._speakers[message['ip']]
+            speaker = self._speakers[message['uid']]
             coordinator = speaker if speaker.is_coordinator else speaker.coordinator
 
             if message['action'] == 'mute':
@@ -151,7 +151,7 @@ class SonosDaemon(BaseDaemon):
                 coordinator.restore()
 
             else:
-                self._logger.error("Unknown action '%s' for speaker %s", message['action'], message['ip'])
+                self._logger.error("Unknown action '%s' for speaker %s", message['action'], message['uid'])
             return
         if message['action'] == 'sync':
             await self._discover_and_sync()
@@ -165,8 +165,8 @@ class SonosDaemon(BaseDaemon):
     async def _discover_and_sync(self):
         await self.__discover_controllers()
 
-        for speaker in self._speakers.values():
-            await self.__send_speaker(speaker)
+        # for speaker in self._speakers.values():
+        #     await self.__send_speaker(speaker)
 
         try:
             random_speaker = next(iter(self._speakers.values()))
@@ -190,8 +190,8 @@ class SonosDaemon(BaseDaemon):
             self._logger.info(f"found speaker {soco.player_name}")
             new_speaker = SonosSpeaker(self._sonos_data, soco, self.__on_speaker_change)
             self._sonos_data.discovered[soco.uid] = new_speaker
-            self._speakers[soco.ip_address] = new_speaker
-            await self.add_change(f'controllers::{new_speaker.ip_address}', new_speaker.get_info())
+            self._speakers[soco.uid] = new_speaker
+            await self.add_change(f'controllers::{new_speaker.uid}', new_speaker.get_info())
 
     async def __get_favorites(self, speaker: SonosSpeaker):
         result = speaker.soco.get_sonos_favorites()
@@ -217,7 +217,7 @@ class SonosDaemon(BaseDaemon):
         await self.add_change('radios', list({r.title for r in self._radios}))
 
     async def __send_speaker(self, speaker: SonosSpeaker):
-        await self.add_change(f'speakers::{speaker.ip_address}', speaker.to_dict())
+        await self.add_change(f'speakers::{speaker.uid}', speaker.to_dict())
 
     def __on_speaker_change(self, speaker: SonosSpeaker):
         self._loop.create_task(self.__send_speaker(speaker))

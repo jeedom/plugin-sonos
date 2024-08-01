@@ -44,8 +44,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				echo '<br>';
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
 				echo '<span class="hiddenAsCard displayTableRight hidden">';
-				if ($eqLogic->getLogicalId() != '') {
-					echo '<span class="label label-info">' . $eqLogic->getLogicalId() . '</span>';
+				if ($eqLogic->getConfiguration('ip_address') != '') {
+					echo '<span class="label label-info">' . $eqLogic->getConfiguration('ip_address') . '</span>';
 				}
 				echo ($eqLogic->getIsVisible() == 1) ? '<i class="fas fa-eye" title="{{Equipement visible}}"></i>' : '<i class="fas fa-eye-slash" title="{{Equipement non visible}}"></i>';
 				echo '</span>';
@@ -166,7 +166,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Adresse IP}}</label>
 								<div class="col-sm-6">
-									<span class="label label-default eqLogicAttr" data-l1key="logicalId"></span>
+									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="ip_address"></span>
 								</div>
 							</div>
 						</div>

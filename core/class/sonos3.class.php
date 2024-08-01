@@ -187,14 +187,22 @@ class sonos3 extends eqLogic {
 
 	public static function createSonos(array $controllers) {
 		$speakers_array = array();
-		foreach ($controllers as $ip => $controller) {
-			$speakers_array[$ip] = $controller['zone_name'];
+		foreach ($controllers as $uid => $controller) {
+			$speakers_array[] = $controller['zone_name'];
 			/** @var sonos3 */
-			$eqLogic = self::byLogicalId($ip, __CLASS__);
+			$eqLogic = self::byLogicalId($uid, __CLASS__);
 			if (!is_object($eqLogic)) {
-				log::add(__CLASS__, 'info', "Create new controller: {$ip}");
+				// check if eqLogic exists with ip and migrate it to uid
+				/** @var sonos3 */
+				$eqLogic = self::byLogicalId($controller['ip_address'], __CLASS__);
+				if (is_object($eqLogic)) {
+					$eqLogic->setLogicalId($uid)->save(true);
+				}
+			}
+			if (!is_object($eqLogic)) {
+				log::add(__CLASS__, 'info', "Create new controller '{$controller['model_name']}' with ip {$controller['ip_address']} in zone '{$controller['zone_name']}'");
 				$eqLogic = new self();
-				$eqLogic->setLogicalId($ip);
+				$eqLogic->setLogicalId($uid);
 				$eqLogic->setName($controller['zone_name'] . ' - ' . $controller['model_name']);
 				$eqLogic->setEqType_name(__CLASS__);
 				$eqLogic->setIsVisible(1);
@@ -218,6 +226,7 @@ class sonos3 extends eqLogic {
 			$eqLogic->setConfiguration('uid', $controller['uid']);
 			$eqLogic->setConfiguration('display_version', $controller['display_version']);
 			$eqLogic->setConfiguration('mac_address', $controller['mac_address']);
+			$eqLogic->setConfiguration('ip_address', $controller['ip_address']);
 			$eqLogic->save(true);
 
 			$eqLogic->createCommands();
@@ -265,16 +274,17 @@ class sonos3 extends eqLogic {
 	}
 
 	public static function updateSpeakers($speakers) {
-		foreach ($speakers as $ip => $data) {
-			$eqLogic = self::byLogicalId($ip, __CLASS__);
+		foreach ($speakers as $uid => $data) {
+			$eqLogic = self::byLogicalId($uid, __CLASS__);
 			if (!is_object($eqLogic)) {
-				log::add(__CLASS__, 'warning', "no speaker with ip: {$ip}");
+				log::add(__CLASS__, 'warning', "no speaker with uid: {$uid}");
 				continue;
 			}
-			log::add(__CLASS__, 'debug', "update commands of speaker: {$ip}");
+			log::add(__CLASS__, 'debug', "update commands of speaker: {$uid}");
 			$changed = false;
 			$changed = $eqLogic->checkAndUpdateCmd('volume_state', $data['volume']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mute_state', $data['muted']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('mic_state', $data['mic_enabled']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('play_mode_state', $data['media']['play_mode']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('playback_status', $data['media']['playback_status']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('state', self::convertState($data['media']['playback_status'])) || $changed;
@@ -898,7 +908,7 @@ class sonos3Cmd extends cmd {
 
 		$params = [
 			'action' => $this->getLogicalId(),
-			'ip' => $eqLogic->getLogicalId()
+			'uid' => $eqLogic->getLogicalId()
 		];
 
 		switch ($this->getLogicalId()) {
