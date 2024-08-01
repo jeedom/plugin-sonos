@@ -19,7 +19,6 @@
         "Synchroniser": "Synchroniser",
         "Configuration": "Configuration",
         "Mes Sonos": "Mes Sonos",
-        "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer",
         "Rechercher": "Rechercher",
         "Equipement visible": "Equipement visible",
         "Equipement non visible": "Equipement non visible",
@@ -55,9 +54,6 @@
         "Choisir une icône": "Choisir une icône",
         "Tester": "Tester",
         "Synchronisation réussie.": "Synchronisation réussie."
-    },
-    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé"
     },
     "plugins\/sonos3\/core\/php\/jeesonos3.php": {
         "Vous n\\'etes pas autorisé à effectuer cette action": "Vous n\\'etes pas autorisé à effectuer cette action"
