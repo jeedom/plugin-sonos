@@ -35,6 +35,8 @@ class SonosDaemon(BaseDaemon):
         warnings.filterwarnings("ignore", message="The output type of this method will probably change in the future to use SoCo data structures")
         warnings.filterwarnings("ignore", message="Call to deprecated function")
 
+        self.__update_task = None
+
         self._speakers:dict[str, SonosSpeaker] = {}
         self._sonos_data = SonosData()
 
@@ -43,6 +45,8 @@ class SonosDaemon(BaseDaemon):
 
     async def _on_start(self):
         await self._discover_and_sync()
+
+        self.__update_task = asyncio.create_task(self._auto_update())
 
     async def _on_message(self, message: list):
         if 'action' not in message:
@@ -67,6 +71,10 @@ class SonosDaemon(BaseDaemon):
                 speaker.soco.switch_to_line_in()
             elif message['action'] == 'switch_to_tv':
                 speaker.soco.switch_to_tv()
+            elif message['action'] == 'led_on':
+                speaker.status_light = True
+            elif message['action'] == 'led_off':
+                speaker.status_light = False
 
             elif message['action'] == 'repeat':
                 coordinator.soco.repeat = not coordinator.soco.repeat
@@ -159,8 +167,19 @@ class SonosDaemon(BaseDaemon):
             self._logger.error('Unknown action: %s', message['action'])
 
     async def _on_stop(self):
+        self.__update_task.cancel()
         for speaker in self._speakers.values():
             await speaker.async_unsubscribe()
+
+    async def _auto_update(self):
+        try:
+            self._logger.info("Start auto update")
+            while True:
+                for s in self._speakers.values():
+                    await s.poll_status_light_and_buttons()
+                await asyncio.sleep(60)
+        except asyncio.CancelledError:
+            self._logger.info("stop auto update")
 
     async def _discover_and_sync(self):
         await self.__discover_controllers()

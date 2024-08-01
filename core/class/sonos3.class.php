@@ -285,6 +285,7 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('volume_state', $data['volume']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mute_state', $data['muted']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mic_state', $data['mic_enabled']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('led_state', $data['status_light']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('play_mode_state', $data['media']['play_mode']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('playback_status', $data['media']['playback_status']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('state', self::convertState($data['media']['playback_status'])) || $changed;
@@ -790,6 +791,39 @@ class sonos3 extends eqLogic {
 			$tts->setDisplay('message_placeholder', __('Message', __FILE__));
 			$tts->setEqLogic_id($this->getId());
 			$tts->save();
+		}
+
+		$led_state = $this->getCmd(null, 'led_state');
+		if (!is_object($led_state)) {
+			$led_state = new sonos3Cmd();
+			$led_state->setLogicalId('led_state');
+			$led_state->setName(__('Led statut', __FILE__));
+			$led_state->setType('info');
+			$led_state->setSubType('binary');
+			$led_state->setEqLogic_id($this->getId());
+			$led_state->save();
+		}
+		$led_on = $this->getCmd(null, 'led_on');
+		if (!is_object($led_on)) {
+			$led_on = new sonos3Cmd();
+			$led_on->setLogicalId('led_on');
+			$led_on->setName('Led on');
+			$led_on->setType('action');
+			$led_on->setSubType('other');
+			$led_on->setEqLogic_id($this->getId());
+			$led_on->setValue($led_state->getId());
+			$led_on->save();
+		}
+		$led_off = $this->getCmd(null, 'led_off');
+		if (!is_object($led_off)) {
+			$led_off = new sonos3Cmd();
+			$led_off->setLogicalId('led_off');
+			$led_off->setName('Led off');
+			$led_off->setType('action');
+			$led_off->setSubType('other');
+			$led_off->setEqLogic_id($this->getId());
+			$led_off->setValue($led_state->getId());
+			$led_off->save();
 		}
 	}
 

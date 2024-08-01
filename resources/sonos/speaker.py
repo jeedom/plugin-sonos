@@ -97,7 +97,6 @@ class SonosSpeaker:
         # Battery
         self.battery_info: dict[str, Any] = {}
         self._last_battery_event: datetime.datetime | None = None
-        self._battery_poll_timer: Callable | None = None
 
         # Volume / Sound
         self.volume: int | None = None
@@ -121,9 +120,9 @@ class SonosSpeaker:
         self.music_surround_level: int | None = None
 
         # Misc features
-        self.buttons_enabled: bool | None = None
+        self._buttons_enabled: bool | None = None
         self.mic_enabled: bool | None = None
-        self.status_light: bool | None = None
+        self._status_light: bool | None = None
 
         # Grouping
         self.coordinator: SonosSpeaker | None = None
@@ -145,7 +144,8 @@ class SonosSpeaker:
             "model_number": self.model_number,
             "model_name": self.model_name.replace("Sonos ", ""),
             "display_version": self.display_version,
-            "mac_address": self.mac_address
+            "mac_address": self.mac_address,
+            "ip_address": self.ip_address
         }
 
     def to_dict(self):
@@ -156,6 +156,7 @@ class SonosSpeaker:
             'model_name': self.model_name.replace("Sonos ", ""),
             'volume' : self.volume,
             'muted' : self.muted,
+            'mic_enabled': self.mic_enabled,
             'cross_fade' : self.cross_fade,
             'balance' : self.balance,
             'bass' : self.bass,
@@ -164,12 +165,45 @@ class SonosSpeaker:
             'is_coordinator': self.is_coordinator,
             'media': media_dict,
             'grouped': grouped,
-            'group_name': self.sonos_group[0].zone_name if grouped else ''
+            'group_name': self.sonos_group[0].zone_name if grouped else '',
+            'battery_info': self.battery_info,
+            'status_light': self.status_light,
+            'buttons_enabled': self.buttons_enabled
         }
 
     #
     # Properties
     #
+    @property
+    def status_light(self):
+        """bool: The white Sonos status light between the mute button and the
+        volume up button on the speaker.
+
+        True if on, otherwise False.
+        """
+        if self._status_light is None:
+            self._status_light = self.soco.status_light
+        return self._status_light
+
+    @status_light.setter
+    def status_light(self, led_on):
+        """Switch on/off the speaker's status light."""
+        self.soco.status_light = led_on
+        self._status_light = led_on
+        self.__change_cb(self)
+
+    @property
+    def buttons_enabled(self):
+        if self._buttons_enabled is None:
+            self._buttons_enabled = self.soco.buttons_enabled
+        return self._buttons_enabled
+
+    @buttons_enabled.setter
+    def buttons_enabled(self, enabled):
+        self.soco.buttons_enabled = enabled
+        self._buttons_enabled = enabled
+        self.__change_cb(self)
+
     @property
     def alarms(self) -> SonosAlarms:
         """Return the SonosAlarms instance for this household."""
@@ -292,6 +326,21 @@ class SonosSpeaker:
         self.log_subscription_result(exception, "Subscription renewal", logging.WARNING)
         await self.async_offline()
 
+    async def poll_status_light_and_buttons(self):
+        has_changed = False
+        _buttons_enabled = self.soco.buttons_enabled
+        if _buttons_enabled != self._buttons_enabled:
+            has_changed = True
+            self._buttons_enabled = _buttons_enabled
+
+        _status_light = self.soco.status_light
+        if _status_light != self._status_light:
+            has_changed = True
+            self._status_light = _status_light
+
+        if has_changed:
+            self.__change_cb(self)
+
     def async_dispatch_event(self, event: SonosEvent) -> None:
         """Handle callback event and route as needed."""
 
@@ -314,6 +363,7 @@ class SonosSpeaker:
             self.async_update_device_properties(event),
             name = "sonos device properties"
         )
+        self.__change_cb(self)
 
     async def async_update_device_properties(self, event: SonosEvent) -> None:
         """Update device properties from an event."""
@@ -496,7 +546,7 @@ class SonosSpeaker:
     #
     # Battery management
     #
-    def fetch_battery_info(self) -> dict[str, Any]:
+    async def fetch_battery_info(self) -> dict[str, Any]:
         """Fetch battery_info for the speaker."""
         battery_info = self.soco.get_battery_info()
         if not battery_info:
@@ -527,53 +577,20 @@ class SonosSpeaker:
 
         is_charging = EVENT_CHARGING[battery_dict["BattChg"]]
 
-        if not self._battery_poll_timer:
-            # Battery info received for an S1 speaker
-            new_battery = not self.battery_info
-            self.battery_info.update(
-                {
-                    "Level": int(battery_dict["BattPct"]),
-                    "PowerSource": "EXTERNAL" if is_charging else "BATTERY",
-                }
-            )
-            if new_battery:
-                _LOGGER.warning(
-                    "S1 firmware detected on %s, battery info may update infrequently",
-                    self.zone_name,
-                )
-                self.__change_cb(self)
-            return
+        self.battery_info.update(
+            {
+                "Level": int(battery_dict["BattPct"]),
+                "Charging": is_charging,
+            }
+        )
 
-        if is_charging == self.charging:
-            self.battery_info.update({"Level": int(battery_dict["BattPct"])})
-        elif not is_charging:
-            # Avoid polling the speaker if possible
-            self.battery_info["PowerSource"] = "BATTERY"
-        else:
-            # Poll to obtain current power source not provided by event
-            try:
-                self.battery_info = await self.hass.async_add_executor_job(
-                    self.fetch_battery_info
-                )
-            except SonosUpdateError as err:
-                _LOGGER.debug("Could not request current power source: %s", err)
+        # if is_charging:
+        #     # Poll to obtain current power source not provided by event
+        #     try:
+        #         self.battery_info = await self.fetch_battery_info()
+        #     except SonosUpdateError as err:
+        #         _LOGGER.debug("Could not request current power source: %s", err)
 
-    @property
-    def power_source(self) -> str | None:
-        """Return the name of the current power source.
-
-        Observed to be either BATTERY or SONOS_CHARGING_RING or USB_POWER.
-
-        May be an empty dict if used with an S1 Move.
-        """
-        return self.battery_info.get("PowerSource")
-
-    @property
-    def charging(self) -> bool | None:
-        """Return the charging status of the speaker."""
-        if self.power_source:
-            return self.power_source != "BATTERY"
-        return None
 
     # async def async_poll_battery(self, now: datetime.datetime | None = None) -> None:
     #     """Poll the device for the current battery state."""
