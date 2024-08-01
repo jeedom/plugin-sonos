@@ -4,8 +4,6 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
-# 01/08/2024
-
 > Attention
 > Refonte importante du plugin: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes.
 >
@@ -14,6 +12,12 @@
 > Compatible Debian 11 et 12! Probablement Debian 10 mais pas testé et pas de support possible sur cette version
 >
 > Voir également [ce sujet sur community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) pour plus de détails
+
+# 02/08/2024
+
+- Fix un crash du démon si aucun Sonos n'est découvert
+
+# 01/08/2024
 
 - Réécriture quasi totale du plugin, le démon a été entièrement réécrit en python (au lieu de PHP)
 - Compatible Debian 11 et 12! (probablement Debian 10 mais pas testé et pas de support possible sur cette version)
