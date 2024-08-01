@@ -20,7 +20,7 @@ class SonosConfig(BaseConfig):
         self.add_argument("--internalIp", type=str, default=None)
 
     @property
-    def internal_ip(self) -> str|None:
+    def internal_ip(self) -> str:
         return self._args.internalIp
 
 class SonosDaemon(BaseDaemon):
