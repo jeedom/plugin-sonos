@@ -908,8 +908,6 @@ class sonos3Cmd extends cmd {
 				$file_content = file_get_contents($url . '&text=' . urlencode($text));
 				$file_name = md5($text) . '.mp3';
 
-				log::add("sonos3", "debug", "get tts file");
-
 				$host = config::byKey('tts_host', 'sonos3');
 
 				$serverFactory = new ServerFactory();
@@ -918,27 +916,28 @@ class sonos3Cmd extends cmd {
 				$share_name = sanitizeAccent(trim(config::byKey('tts_share', 'sonos3')), " \n\r\t\v\0/");
 				$share = $server->getShare($share_name);
 
-				log::add("sonos3", "debug", "get share");
-
 				$path_name = sanitizeAccent(trim(config::byKey('tts_path', 'sonos3')), " \n\r\t\v\0/");
 				$fh = $share->write("{$path_name}/{$file_name}");
 				fwrite($fh, $file_content);
 				fclose($fh);
-				log::add("sonos3", "debug", "write file");
 
 				$params['file'] = "//{$host}/{$share_name}/{$path_name}/{$file_name}";
 				break;
 			case 'play_favorite':
 				$favorites = json_decode(cache::byKey('sonos3::favorites')->getValue());
 				if (!is_array($favorites) || !in_array($_options['title'], $favorites)) {
-					message::add(__CLASS__, "Impossible de lancer \"{$_options['title']}\" sur \"{$eqLogic->getName()}\", le favori n'existe pas.");
+					$message = "Impossible de lancer \"{$_options['title']}\" sur \"{$eqLogic->getName()}\", le favori n'existe pas.";
+					log::add("sonos3", "warning", $message);
+					message::add(__CLASS__, $message);
 					return;
 				}
 				break;
 			case 'play_playlist':
 				$playlists = json_decode(cache::byKey('sonos3::playlist')->getValue());
 				if (!is_array($playlists) || !in_array($_options['title'], $playlists)) {
-					message::add(__CLASS__, "Impossible de lancer \"{$_options['title']}\" sur \"{$eqLogic->getName()}\", la liste de lecture n'existe pas.");
+					$message = "Impossible de lancer \"{$_options['title']}\" sur \"{$eqLogic->getName()}\", la liste de lecture n'existe pas.";
+					log::add("sonos3", "warning", $message);
+					message::add(__CLASS__, $message);
 					return;
 				}
 				break;

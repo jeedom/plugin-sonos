@@ -126,11 +126,14 @@ class SonosDaemon(BaseDaemon):
                 self._logger.info("playing playlist %s in %s", playlist, coordinator.zone_name)
                 coordinator.soco.play_from_queue(0)
             elif message['action'] == 'play_radio':
-                radio = next(r for r in self._radios if r.title == message['title'])
-                coordinator.soco.clear_queue()
-                coordinator.soco.add_to_queue(radio)
-                self._logger.info("playing radio %s in %s", radio, coordinator.zone_name)
-                coordinator.soco.play_from_queue(0)
+                try:
+                    radio = next(r for r in self._radios if r.title == message['title'])
+                    coordinator.soco.clear_queue()
+                    coordinator.soco.add_to_queue(radio)
+                    self._logger.info("playing radio %s in %s", radio, coordinator.zone_name)
+                    coordinator.soco.play_from_queue(0)
+                except StopIteration:
+                    self._logger.error("Radio '%s' not found, cannot play on %s", message['title'], speaker.zone_name)
 
             elif message['action'] == 'tts':
                 coordinator.snapshot(False)
