@@ -8,11 +8,7 @@ A configuração é muito simples, após baixar o plugin basta ativá-lo, instal
 O plugin irá procurar Sonos na sua rede e criar o equipamento automaticamente. Além disso, se houver uma correspondência entre os objetos Jeedom e as salas Sonos, o Jeedom atribuirá automaticamente o Sonos às salas certas.
 
 > **IMPORTANTE**
-> Seu equipamento Sonos deve ser acessível diretamente pela máquina que hospeda o Jeedom e deve ser capaz de acessar o Jeedom em troca da porta TCP 1400.
-
-> **DICA**
->
-> Durante a descoberta inicial, é altamente recomendável não ter sistemas de som agrupados, caso contrário, você terá erros.
+> Seu equipamento Sonos deve ser acessível diretamente pela máquina que hospeda o Jeedom (transmissão / multicast possível na mesma rede) e deve ser capaz de acessar o Jeedom em troca da porta TCP 1400.
 
 Se você adicionar um Sonos posteriormente, poderá clicar **Sincronizar** na página do equipamento ou reinicie o daemon.
 
@@ -20,16 +16,11 @@ Se você adicionar um Sonos posteriormente, poderá clicar **Sincronizar** na p�
 - **Nome de usuário de compartilhamento** : nome de usuário para acessar o compartilhamento.
 - **Compartilhando senha** : Compartilhando senha.
 
-> **IMPORTANTE**
->
-> Mensagens muito longas não podem ser transmitidas no TTS (o limite
-> depende do provedor TTS, geralmente cerca de 100 caracteres).
-
 # Configuração do equipamento
 
 A configuração do equipamento Sonos pode ser acessada no menu Plugins e depois em multimídia.
 
-Aqui você encontra toda a configuração do seu equipamento :
+Aqui você encontra toda a configuração usual do seu equipamento :
 
 - **Nome do Sonos** : nome do seu equipamento Sonos.
 - **Objeto pai** : indica o objeto pai ao qual o equipamento pertence.
@@ -37,6 +28,8 @@ Aqui você encontra toda a configuração do seu equipamento :
 - **Visivél** : torna visível no painel.
 
 Bem como informações sobre o seu Sonos: *Modelo*, *Lançamentos*, *Número de série*, *Identificador*, *Endereço MAC* E *Endereço de IP*.
+
+Não há configuração específica para executar.
 
 # As ordens
 
@@ -52,14 +45,21 @@ Esses comandos sempre controlarão o equipamento correspondente, inclusive quand
 - **Sem mudo** : Desativar mudo.
 - **Status mudo** : indica se estamos no modo mudo ou não.
 
+## Comandos de controle
+
+Esses comandos sempre controlarão o equipamento correspondente, inclusive quando ele estiver em grupo.
+
 - **Televisão** : para mudar para a entrada *Televisão* em equipamentos compatíveis
-- **Entrada de áudio analógico** : para mudar para'*Entrada de áudio analógico* em equipamentos compatíveis
+- **Entrada de áudio analógico** : para mudar para'*Entrada de áudio analógico* (*Entrada de linha*) em equipamentos compatíveis
+- **O presente** : Ativa o LED, a luz de status.
+- **Partiu** : Desativa o LED, o indicador de status.
+- **LED de status** : indica se a luz de status está acesa ou não. Esta informação só é atualizada uma vez por minuto caso seja modificada fora do Jeedom.
 
 ## Controles de reprodução
 
 Estes comandos irão indicar e controlar a reprodução atual no equipamento ou no grupo se estiver agrupado e isso de forma transparente, você não precisa se preocupar em saber se o equipamento está agrupado ou não para utilizá-los.
 
-- **Status** : status do leitor traduzido para o idioma configurado em Jeedom. Por exemplo: *Leitura*, *Pausa*, *Parou*.
+- **Estado** : status do leitor traduzido para o idioma configurado em Jeedom. Por exemplo: *Leitura*, *Pausa*, *Parou*.
 - **Status de leitura** que fornece o valor "bruto" do status de leitura: *JOGANDO*, *PAUSED_PLAYBACK*, *PAROU*; mais adequado para cenários.
 - **Leitura** : ler.
 - **Pausa** : pausar.
@@ -70,15 +70,18 @@ Estes comandos irão indicar e controlar a reprodução atual no equipamento ou 
 - **Aleatório** : reverter o status do modo aleatório.
 - **Repita o status** : indica se estamos no modo de repetição ou não.
 - **Repetir** : reverter o status do modo "repetir"".
-- **Modo de leitura** dando status e comando **Escolha o modo de leitura** que permite que você escolha entre as seguintes possibilidades: *Normal*, *Repita tudo*, *Aleatório*, *Aleatório sem repetição*, *Repetir música*, *Música aleatória e repetida*. Esta ação equivale a usar os comandos **Repetir** & **Aleatório** para chegar na configuração desejada. No entanto, esta é a única maneira de mudar para o modo “Repetir música”".
-- **Reproduzir lista de reprodução** : comando de tipo de mensagem para iniciar uma lista de reprodução, basta colocar o nome da lista no título.
-- **Reproduzir Favoritos** :  comando de tipo de mensagem para lançar um favorito, tudo o que você precisa fazer no título é colocar o nome do favorito.
-- **Tocar rádio** : comando de tipo de mensagem para lançar uma estação de rádio, tudo o que você precisa fazer é colocar o nome da rádio no título *(Atenção : isso deve estar nas rádios favoritas)*. Não funciona mais nos modelos "S2"".
+- **Modo de leitura** dando status e comando **Escolha o modo de leitura** que permite que você escolha entre as seguintes possibilidades: *Normal*, *Repita tudo*, *Aleatório*, *Aleatório sem repetição*, *Repetir música*, *Música aleatória e repetida*. Esta ação equivale a usar os comandos **Repetir** & **Aleatório** para chegar na configuração desejada. No entanto, esta é a única maneira de mudar para o modo *Repetir música* Ou *Música aleatória e repetida*.
+- **Reproduzir lista de reprodução** : comando de tipo de mensagem para iniciar uma lista de reprodução, basta colocar o nome da lista no título. Em um cenário, uma lista de possibilidades será exibida automaticamente quando você começar a digitar.
+- **Reproduzir Favoritos** :  comando de tipo de mensagem para lançar um favorito, tudo o que você precisa fazer no título é colocar o nome do favorito. Em um cenário, uma lista de possibilidades será exibida automaticamente quando você começar a digitar.
+- **Tocar rádio** : comando de tipo de mensagem para lançar uma estação de rádio, tudo o que você precisa fazer é colocar o nome da rádio no título *(Atenção : isso deve estar nas rádios favoritas)*. Em um cenário, uma lista de possibilidades será exibida automaticamente quando você começar a digitar. Não funciona mais nos modelos "S2", é normal ter uma lista vazia em todos os modelos usando o aplicativo Sonos S2.
 - **Imagem** : link para a imagem do álbum.
 - **Album** : nome do álbum atualmente sendo reproduzido.
 - **Artista** : nome do artista atualmente sendo reproduzido.
 - **Track** : nome da faixa atualmente sendo reproduzida.
 - **Para dizer** : permite ler um texto no Sonos (consulte a parte TTS). No título, você pode definir o volume e, na mensagem, a mensagem a ser lida.
+
+> **Dica**
+> As listas de reprodução e os favoritos devem ser criados através do aplicativo Sonos (no celular ou computador) e depois a sincronização deve ser feita para atualizar o equipamento e poder utilizá-lo em um cenário.
 
 ## Comandos para gerenciar grupos
 
@@ -86,22 +89,22 @@ Esses comandos sempre atuam no equipamento correspondente.
 
 - **Status do grupo** : indica se o equipamento está agrupado ou não.
 - **Nome do grupo** se o equipamento estiver agrupado, forneça o nome do grupo.
-- **Junte-se a um grupo** : permite que você se junte ao grupo de um determinado alto-falante (um Sonos) (para associar 2 Sonos, por exemplo). Você deve inserir o nome da sala do sistema de som para ingressar. Pode ser qualquer membro de um grupo existente, não precisa ser o coordenador do grupo ou um Sonos isolado.
+- **Junte-se a um grupo** : permite que você se junte ao grupo de um determinado alto-falante (um Sonos) (para associar 2 Sonos, por exemplo). Você deve inserir o nome da sala do sistema de som para ingressar. Pode ser qualquer membro de um grupo existente, não precisa ser o coordenador do grupo ou um Sonos isolado. Em um cenário, uma lista de possibilidades será exibida automaticamente quando você começar a digitar.
 - **Sair do grupo** : permite que você saia do grupo.
 
 # TTS
 
-O TTS (conversão de texto em fala) para o Sonos requer o compartilhamento do Windows (Samba) na rede (imposto pelo Sonos, não há como fazer o contrário)). Então você precisa de um NAS na rede. A configuração é bastante simples você tem que colocar o nome ou o IP do NAS (cuidado para colocar o mesmo que está declarado no Sonos) e o caminho (relativo), o nome de usuário e a senha ( atenção, o usuário deve ter direitos de escrita)
+TTS (texto para fala) para Sonos requer compartilhamento SAMBA na rede (imposto pela Sonos, não há como fazer de outra forma). Portanto, você precisa de um NAS ou equivalente na rede. A configuração é bastante simples, você deve inserir o nome ou IP do NAS (cuidado para colocar o mesmo que está declarado no Sonos) e o caminho para a pasta que deve conter os arquivos de áudio bem como o nome do usuário e senha (observe que o usuário deve ter direitos de gravação)
 
-A criação do arquivo de áudio é gerenciada pelo núcleo Jeedom: o idioma será o configurado no Jeedom e o motor TTS utilizado também poderá ser selecionado nas telas de configuração do Jeedom.
+A criação do arquivo de áudio é gerenciada pelo núcleo Jeedom: o idioma será aquele configurado no Jeedom e o motor TTS utilizado também pode ser selecionado na configuração do Jeedom.
 
 Ao usar TTS (comando **Para dizer**), o plugin executará as seguintes ações:
 
 - geração do arquivo de áudio contendo a mensagem com suporte principal Jeedom
 - gravando o arquivo no compartilhamento SAMBA
-- Força a reprodução no modo “Normal”, sem repetição
-- Forçar o modo “ativar som”"
-- Alterando o volume para o valor escolhido ao usar o comando
+- forçar a reprodução no modo “Normal”, sem repetição
+- forçar o modo “ativar som” (apenas no equipamento, não em todo o grupo)
+- Alterar o volume para o valor escolhido ao utilizar o comando (apenas no equipamento, não em todo o grupo)
 - lendo mensagem
 - restaurar o estado do Sonos antes da reprodução (ou seja, o modo de reprodução, mudo ou não, repetir ou não, etc.) e reiniciar o stream se o Sonos estiver reproduzindo
 
@@ -111,27 +114,30 @@ Ao usar TTS (comando **Para dizer**), o plugin executará as seguintes ações:
 >
 > Um subdiretório também é absolutamente necessário para que o arquivo de voz seja criado corretamente.
 >
-> Acima de tudo, não deve haver acentos no nome do compartilhamento ou pasta, espaços ou caracteres especiais
+> Acima de tudo, não deve haver acentos no nome do compartilhamento ou pasta, espaços ou caracteres especiais.
+>
+> Mensagens muito longas não podem ser transmitidas em TTS (o limite depende do provedor de TTS, geralmente em torno de 100 caracteres).
 
-**Aqui está um exemplo de configuração (obrigado @masterfion) :**
+## Exemplo de configuração
 
-Lado NAS, aqui está a minha configuração :
+No lado NAS, a seguinte configuração deve ser realizada:
 
-- Pasta Jeedom é compartilhada.
-- O usuário do Sonos tem acesso de leitura / gravação (necessário para o Jeedom).
-- usuário convidado tem acesso somente leitura (necessário para o Sonos).
+- a pasta *Jeedom* é compartilhado e contém uma pasta *TTS*
+- o usuário *Jeedom* tem acesso de leitura/gravação (necessário para Jeedom).
+- o usuário *seu osso* tem acesso somente leitura (necessário para Sonos).
 
 No lado do plug-in Sonos, a configuração :
 
 - Partilha :
   - Campo 1: 192.168.xxx.aaa
-  - Campo 2: Jeedom
-  - Campo 3: TTS
-- Nome de usuário e senha...​
+  - Campo 2: *Jeedom*
+  - Campo 3: *TTS*
+- Nome de usuário (*Jeedom* no exemplo) e sua senha…​
 
 Lado da Biblioteca Sonos (aplicativo para PC)
 
 - o caminho é : //192.168.xxx.aaa/Jeedom/TTS
+- o usuário será *seu osso* (neste exemplo) + senha
 
 # O painel
 

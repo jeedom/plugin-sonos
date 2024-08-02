@@ -4,16 +4,24 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
-# 01.08.2024
-
 > Attention
-> Bedeutende Neugestaltung des Plugins: Ein sehr großer Teil des Plugins wurde neu geschrieben, einschließlich der gesamten Kommunikation mit Sonos (Daemon), und bestimmte Funktionalitäten wurden geändert und funktionieren nicht mehr wie zuvor, insbesondere die Gruppenverwaltung
+> Bedeutende Neugestaltung des Plugins: Ein sehr großer Teil des Plugins wurde neu geschrieben, einschließlich der gesamten Kommunikation mit Sonos (Daemon), und bestimmte Funktionalitäten wurden geändert und funktionieren nicht mehr wie zuvor, insbesondere die Gruppenverwaltung.
+>
 > Erfordert Jeedom 4.4
-> Debian 11 und 12 kompatibel! Wahrscheinlich Debian 10, aber nicht getestet und keine Unterstützung für diese Version
+>
+> Debian 11 und 12 kompatibel! Wahrscheinlich Debian 10, aber nicht getestet und keine Unterstützung für diese Version möglich
+>
 > Siehe auch [dieses Thema auf Community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) für mehr Details
 
+# 08.02.2024
+
+- Daemon-Absturz behoben, wenn kein Sonos erkannt wird
+- Befehle zur Steuerung der Status-LED hinzugefügt
+
+# 01.08.2024
+
 - Das Plugin wurde fast komplett neu geschrieben, der Daemon wurde komplett in Python (anstelle von PHP) neu geschrieben)
-- Debian 11 und 12 kompatibel! (wahrscheinlich Debian 10, aber nicht getestet und keine Unterstützung für diese Version)
+- Debian 11 und 12 kompatibel! (wahrscheinlich Debian 10, aber nicht getestet und keine Unterstützung für diese Version möglich)
 - Es gibt keine Erkennung mehr, die manuell gestartet werden muss, und es ist nicht mehr notwendig (und auch nicht möglich), Geräte manuell hinzuzufügen. Das Plugin erkennt automatisch Ihre Soundgeräte und erstellt die Geräte entsprechend jedem Start des Daemons. Es ist auch möglich, Geräte, Favoriten und Wiedergabelisten (erneut) zu synchronisieren, ohne den Daemon über das Gerätefenster neu zu starten
 - (Fast) Echtzeitaktualisierung der Bestellinformationen (eine Verzögerung von 0.5 Sekunden bis maximal ein paar Sekunden), mehr Cron-Minuten, auch wenn eine Änderung außerhalb von Jeedom vorgenommen wird (z. B. über die Sonos-App))
 - Neugestaltung der Gruppenverwaltung (alte Befehle werden gelöscht und neue hinzugefügt, siehe Dokumentation). Es ist möglich, einer Gruppe beizutreten oder sie zu verlassen und die Wiedergabe der Gruppe von jedem Gerät in der Gruppe aus zu steuern, ohne sich Gedanken darüber machen zu müssen, wer der Controller ist. Die Lautstärke wird immer über den Lautsprecher gesteuert.

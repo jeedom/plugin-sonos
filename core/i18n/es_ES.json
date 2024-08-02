@@ -19,7 +19,7 @@
         "Synchroniser": "Sincronizar",
         "Configuration": "Configuración",
         "Mes Sonos": "Mi sonos",
-        "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "No se encontró ningún equipo de Sonos, haga clic en \"Agregar\" para comenzar",
+        "Aucun équipement Sonos trouvé, avez-vous démarré le démon?": "No se encontró ningún equipo Sonos. ¿Has iniciado el demonio?",
         "Rechercher": "Buscar",
         "Equipement visible": "Equipos visibles",
         "Equipement non visible": "Equipo no visible",
@@ -56,9 +56,6 @@
         "Tester": "Probar",
         "Synchronisation réussie.": "Sincronización exitosa"
     },
-    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
-        "401 - Accès non autorisé": "401 - Acceso no autorizado"
-    },
     "plugins\/sonos3\/core\/php\/jeesonos3.php": {
         "Vous n\\'etes pas autorisé à effectuer cette action": "No estás autorizado a realizar esta acción"
     },
@@ -70,9 +67,13 @@
         "Veuillez vérifier la configuration": "Por favor verifique la configuración",
         "Impossible de lancer le démon": "No se puede iniciar el demonio",
         "Ok j\\'ai lancé": "Ok, lancé",
+        "Sonos controllers synchronized: ": "Controladores Sonos sincronizados:",
         "Lecture": "Lectura",
         "Pause": "Pausa",
         "Arrêté": "Detenido",
+        "Favorites updated: ": "Favoritos actualizados:",
+        "Playlists updated: ": "Listas de reproducción actualizadas:",
+        "Radios updated: ": "Radios actualizadas:",
         "Statut de lecture": "Estado de lectura",
         "Mode de lecture": "Modo de lectura",
         "Choisir mode de lecture": "Elige el modo de lectura",
@@ -111,6 +112,7 @@
         "TV": "TELEVISOR",
         "Dire": "Decir",
         "Message": "Mensaje",
+        "Led statut": "LED de estado",
         "Aucun": "Ninguna"
     },
     "info.json": {

@@ -19,7 +19,7 @@
         "Synchroniser": "Synchroniser",
         "Configuration": "Konfigurasi",
         "Mes Sonos": "Mes Sonos",
-        "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer",
+        "Aucun équipement Sonos trouvé, avez-vous démarré le démon?": "Aucun équipement Sonos trouvé, avez-vous démarré le démon?",
         "Rechercher": "Pencarian",
         "Equipement visible": "Equipement visible",
         "Equipement non visible": "Equipement non visible",
@@ -56,9 +56,6 @@
         "Tester": "Coba",
         "Synchronisation réussie.": "Synchronisation réussie"
     },
-    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé"
-    },
     "plugins\/sonos3\/core\/php\/jeesonos3.php": {
         "Vous n\\'etes pas autorisé à effectuer cette action": "Vous n\\'etes pas autorisé à effectuer cette action"
     },
@@ -70,9 +67,13 @@
         "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
         "Impossible de lancer le démon": "Impossible de lancer le démon",
         "Ok j\\'ai lancé": "Ok j\\'ai lancé",
+        "Sonos controllers synchronized: ": "Sonos controllers synchronized:",
         "Lecture": "Lecture",
         "Pause": "Berhenti Sebentar",
         "Arrêté": "Berhenti",
+        "Favorites updated: ": "Favorites updated:",
+        "Playlists updated: ": "Playlists updated:",
+        "Radios updated: ": "Radios updated:",
         "Statut de lecture": "Statut de lecture",
         "Mode de lecture": "Mode de lecture",
         "Choisir mode de lecture": "Choisir mode de lecture",
@@ -111,6 +112,7 @@
         "TV": "TV",
         "Dire": "Dire",
         "Message": "Pesan",
+        "Led statut": "Led statut",
         "Aucun": "Tak ada"
     },
     "info.json": {

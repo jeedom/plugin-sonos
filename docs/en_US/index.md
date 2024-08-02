@@ -8,11 +8,7 @@ The configuration is very simple, after downloading the plugin, you just need to
 The plugin will search for Sonos on your network and create the equipment automatically. In addition, if there is a match between Jeedom objects and Sonos rooms, Jeedom will automatically assign Sonos to the right rooms.
 
 > **Important**
-> Your Sonos equipment must be reachable directly by the machine hosting Jeedom and they must be able to reach Jeedom in return on TCP port 1400.
-
-> **TRICK**
->
-> During the initial discovery, it is strongly recommended not to have grouped sound systems, otherwise you will have errors.
+> Your Sonos equipment must be reachable directly by the machine hosting Jeedom (broadcast / multicast possible on the same network) and they must be able to reach Jeedom in return on TCP port 1400.
 
 If you later add a Sonos, you can click **Synchronize** in the equipment page or restart the daemon.
 
@@ -20,16 +16,11 @@ If you later add a Sonos, you can click **Synchronize** in the equipment page or
 - **Share username** : username to access share.
 - **Sharing password** : Sharing password.
 
-> **Important**
->
-> Messages that are too long cannot be transmitted in TTS (the limit
-> depends on the TTS provider, usually around 100 characters).
-
 # Equipment configuration
 
 The configuration of Sonos equipment is accessible from the Plugins menu then multimedia.
 
-Here you find all the configuration of your equipment :
+Here you find all the usual configuration of your equipment :
 
 - **Sonos name** : name of your Sonos equipment.
 - **Parent object** : indicates the parent object to which the equipment belongs.
@@ -37,6 +28,8 @@ Here you find all the configuration of your equipment :
 - **Visible** : makes it visible on the dashboard.
 
 As well as information about your Sonos: *Model*, *Releases*, *Serial number*, *Identifier*, *MAC address* And *IP adress*.
+
+There is no specific configuration to perform.
 
 # The orders
 
@@ -52,8 +45,15 @@ These commands will always control the corresponding equipment, including when i
 - **No Mute** : Turn off mute.
 - **Mute status** : indicates whether we are in mute mode or not.
 
+## Control commands
+
+These commands will always control the corresponding equipment, including when it is in a group.
+
 - **TV** : to switch to the input *TV* on compatible equipment
-- **Analog audio input** : to switch to'*Analog audio input* on compatible equipment
+- **Analog audio input** : to switch to'*Analog audio input* (*Line-in*) on compatible equipment
+- **The gift** : Activates the LED, the status indicator.
+- **Led off** : Disables the LED, the status indicator.
+- **Status LED** : indicates whether the status light is on or not. This information is only updated once per minute in case it is modified outside Jeedom.
 
 ## Playback controls
 
@@ -70,15 +70,18 @@ These commands will indicate and control the current playback on the equipment o
 - **Random** : reverse the status of random mode.
 - **Repeat status** : indicates if we are in repeat mode or not.
 - **Repeat** : reverse the status of the "repeat" mode".
-- **Reading mode** giving status and command **Choose reading mode** which allows you to choose from the following possibilities: *Normal*, *Repeat all*, *Random*, *Random without repetition*, *Repeat song*, *Random and repeat song*. This action is equivalent to using the commands **Repeat** & **Random** in order to arrive in the desired configuration. However, this is the only way to switch to “Repeat song” mode".
-- **Play Playlist** : message type command to launch a playlist, just put the name of the playlist in the title.
-- **Play Favorites** :  message type command to launch a favorite, all you have to do in the title is to put the name of the favorite.
-- **Play a radio** : message type command to launch a radio station, all you have to do is put the name of the radio in the title *(Be careful : this must be in the favorite radios)*. No longer works on "S2" models".
+- **Reading mode** giving status and command **Choose reading mode** which allows you to choose from the following possibilities: *Normal*, *Repeat all*, *Random*, *Random without repetition*, *Repeat song*, *Random and repeat song*. This action is equivalent to using the commands **Repeat** & **Random** in order to arrive in the desired configuration. However, this is the only way to switch to mode *Repeat song* Or *Random and repeat song*.
+- **Play Playlist** : message type command to launch a playlist, just put the name of the playlist in the title. In a scenario, a list of possibilities will automatically be displayed when you start typing.
+- **Play Favorites** :  message type command to launch a favorite, all you have to do in the title is to put the name of the favorite. In a scenario, a list of possibilities will automatically be displayed when you start typing.
+- **Play a radio** : message type command to launch a radio station, all you have to do is put the name of the radio in the title *(Be careful : this must be in the favorite radios)*. In a scenario, a list of possibilities will automatically be displayed when you start typing. No longer works on "S2" models, it is normal to have an empty list on all models using the Sonos S2 app.
 - **Picture** : link to the album image.
 - **Album** : name of album currently playing.
 - **Artist** : artist name currently playing.
 - **Track** : name of the track currently playing.
 - **Say** : allows to read a text on Sonos (see TTS part). In the title you can set the volume and in the message, the message to read.
+
+> **Hint**
+> Playlists and favorites must be created via the Sonos app (on mobile or computer) then synchronization must be done to update the equipment and be able to use it in a scenario.
 
 ## Commands for managing groups
 
@@ -86,22 +89,22 @@ These commands always act on the corresponding equipment.
 
 - **Group status** : indicates whether the equipment is grouped or not.
 - **Name of the group** if the equipment is grouped, give the name of the group.
-- **Join a group** : allows you to join the group of the given speaker (a Sonos) (to associate 2 Sonos for example). You must enter the name of the sound system room to join. This can be any member of an existing group, it doesn't have to be the group coordinator, or an isolated Sonos.
+- **Join a group** : allows you to join the group of the given speaker (a Sonos) (to associate 2 Sonos for example). You must enter the name of the sound system room to join. This can be any member of an existing group, it doesn't have to be the group coordinator, or an isolated Sonos. In a scenario, a list of possibilities will automatically be displayed when you start typing.
 - **Leave the group** : allows you to leave the group.
 
 # TTS
 
-TTS (text-to-speech) to Sonos requires having Windows (Samba) sharing on the network (imposed by Sonos, no way to do otherwise). So you need a NAS on the network. The configuration is quite simple you have to put the name or the IP of the NAS (be careful to put the same thing as what is declared on Sonos) and the path (relative), the username and the password ( attention the user must have write rights)
+TTS (text-to-speech) to Sonos requires SAMBA sharing on the network (imposed by Sonos, no way to do otherwise). You therefore need a NAS or equivalent on the network. The configuration is quite simple, you must enter the name or IP of the NAS (be careful to put the same thing as what is declared on Sonos) and the path to the folder which must contain the audio files as well as the name of user and password (note that the user must have write rights)
 
-The creation of the audio file is managed by the Jeedom core: the language will be the one configured in Jeedom and the TTS engine used can also be selected in the Jeedom configuration screens.
+The creation of the audio file is managed by the Jeedom core: the language will be the one configured in Jeedom and the TTS engine used can also be selected in the Jeedom configuration.
 
 When using TTS (command **Say**), the plugin will perform the following actions:
 
 - generation of the audio file containing the message with Jeedom core support
 - writing the file to the SAMBA share
-- Forces playback in “Normal” mode, without repeating
-- Force “unmute” mode"
-- Changing the volume to the chosen value when using the command
+- force playback in “Normal” mode, without repetition
+- force “unmute” mode (only on the equipment, not on the entire group)
+- Changing the volume to the chosen value when using the command (only on the equipment, not on the entire group)
 - reading message
 - restoring the state of the Sonos before playback (i.e. the playback mode, mute or not, repeat or not, etc.) and restarting the stream if the Sonos was playing
 
@@ -111,27 +114,30 @@ When using TTS (command **Say**), the plugin will perform the following actions:
 >
 > A subdirectory is also absolutely necessary for the voice file to be correctly created.
 >
-> Above all, there must be no accent in the name of the share or folder, spaces or special characters
+> Above all, there must be no accent in the name of the share or folder, spaces or special characters.
+>
+> Messages that are too long cannot be transmitted in TTS (the limit depends on the TTS provider, generally around 100 characters).
 
-**Here is an example of configuration (thanks @masterfion) :**
+## Configuration example
 
-NAS side, here is my config :
+On the NAS side, the following configuration must be carried out:
 
-- Jeedom folder is shared.
-- Sonos user has Read / Write access (necessary for Jeedom).
-- guest user has read-only access (required for Sonos).
+- the folder *Jeedom* is shared and it contains a folder *TTS*
+- the user *Jeedom* has read/write access (necessary for Jeedom).
+- the user *his bone* has read-only access (necessary for Sonos).
 
 On the Sonos Plugin side, the config :
 
 - Sharing :
   - Field 1: 192.168.xxx.yyy
-  - Field 2: Jeedom
-  - Field 3: TTS
-- Username and password...​
+  - Field 2: *Jeedom*
+  - Field 3: *TTS*
+- Username (*Jeedom* in the example) and its password…​
 
 Sonos Library side (PC app)
 
 - the way is : //192.168.xxx.yyy/Jeedom/TTS
+- the user will be *his bone* (in this example) + password
 
 # The panel
 

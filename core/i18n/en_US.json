@@ -1,6 +1,6 @@
 {
     "plugins\/sonos3\/plugin_info\/configuration.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized Access",
+        "401 - Accès non autorisé": "401 - Unauthorized access",
         "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "Be careful, your version of PHP ('. PHP_VERSION.') Is too old, you need at least PHP 7.0",
         "Le plugin sonos doit réagir aux interactions": "The sonos plugin must react to interactions",
         "Partage": "Sharing",
@@ -9,17 +9,17 @@
         "Mot de passe du partage": "Sharing password"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized Access",
+        "401 - Accès non autorisé": "401 - Unauthorized access",
         "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "No root object found. To create one, go to General -> Object. <br\/> If you do not know what to do or it is the first time you use Jeedom do not hesitate to consult this <a href = \"http : \/\/jeedom.fr\/premier_pas.php \"target =\" _ blank \"> page <\/a>",
         "Rechercher": "Search"
     },
     "plugins\/sonos3\/desktop\/php\/sonos3.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized Access",
+        "401 - Accès non autorisé": "401 - Unauthorized access",
         "Gestion": "Management",
         "Synchroniser": "Synchronize",
         "Configuration": "Setup",
         "Mes Sonos": "My Sonos",
-        "Aucun équipement Sonos trouvé, cliquer sur \"Ajouter\" pour commencer": "No Sonos equipment found, click \"Add\" to start",
+        "Aucun équipement Sonos trouvé, avez-vous démarré le démon?": "No Sonos equipment found, have you started the daemon?",
         "Rechercher": "Search",
         "Equipement visible": "Visible equipment",
         "Equipement non visible": "Equipment not visible",
@@ -56,23 +56,24 @@
         "Tester": "Test",
         "Synchronisation réussie.": "Synchronization successful"
     },
-    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized Access"
-    },
     "plugins\/sonos3\/core\/php\/jeesonos3.php": {
         "Vous n\\'etes pas autorisé à effectuer cette action": "You are not authorized to perform this action"
     },
     "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized Access",
+        "401 - Accès non autorisé": "401 - Unauthorized access",
         "Aucune méthode correspondante à": "No matching method"
     },
     "plugins\/sonos3\/core\/class\/sonos3.class.php": {
         "Veuillez vérifier la configuration": "Please check the configuration",
         "Impossible de lancer le démon": "Unable to launch daemon",
         "Ok j\\'ai lancé": "Ok I launched",
+        "Sonos controllers synchronized: ": "Sonos controllers synchronized:",
         "Lecture": "Play",
         "Pause": "Pause",
         "Arrêté": "Stopped",
+        "Favorites updated: ": "Favorites updated:",
+        "Playlists updated: ": "Playlists updated:",
+        "Radios updated: ": "Radios updated:",
         "Statut de lecture": "Reading status",
         "Mode de lecture": "Reading mode",
         "Choisir mode de lecture": "Choose reading mode",
@@ -111,6 +112,7 @@
         "TV": "TV",
         "Dire": "Say",
         "Message": "Message",
+        "Led statut": "Status LED",
         "Aucun": "None"
     },
     "info.json": {

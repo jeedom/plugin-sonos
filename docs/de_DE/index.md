@@ -8,11 +8,7 @@ Die Konfiguration ist sehr einfach, nach dem Herunterladen des Plugins müssen S
 Das Plugin sucht in Ihrem Netzwerk nach Sonos und erstellt die Geräte automatisch. Wenn zwischen Jeedom-Objekten und Sonos-Räumen eine Übereinstimmung besteht, weist Jeedom Sonos automatisch den richtigen Räumen zu.
 
 > **Wichtig**
-> Ihre Sonos-Geräte müssen direkt von der Maschine erreichbar sein, auf der Jeedom gehostet wird, und sie müssen Jeedom im Gegenzug über den TCP-Port 1400 erreichen können.
-
-> **TIPP**
->
-> Bei der ersten Ermittlung wird dringend empfohlen, keine Soundsysteme zu gruppieren, da sonst Fehler auftreten.
+> Ihre Sonos-Geräte müssen direkt von der Maschine, auf der Jeedom gehostet wird, erreichbar sein (Broadcast/Multicast im selben Netzwerk möglich) und sie müssen Jeedom im Gegenzug über den TCP-Port 1400 erreichen können.
 
 Wenn Sie später einen Sonos hinzufügen, können Sie auf klicken **Synchronisieren** auf der Geräteseite oder starten Sie den Daemon neu.
 
@@ -20,16 +16,11 @@ Wenn Sie später einen Sonos hinzufügen, können Sie auf klicken **Synchronisie
 - **Teilen Sie den Benutzernamen** : Benutzername für den Zugriff auf die Freigabe.
 - **Passwort teilen** : Passwort teilen.
 
-> **Wichtig**
->
-> Zu lange Nachrichten können nicht in TTS (dem Limit) übertragen werden
-> hängt vom TTS-Anbieter ab, normalerweise ca. 100 Zeichen).
-
 # Gerätekonfiguration
 
 Auf die Konfiguration der Sonos-Geräte kann über das Plugins-Menü und dann über Multimedia zugegriffen werden.
 
-Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
+Hier finden Sie die gesamte übliche Konfiguration Ihrer Ausrüstung :
 
 - **Sonos Name** : Name Ihres Sonos-Geräts.
 - **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört.
@@ -37,6 +28,8 @@ Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 - **Sichtbar** : macht es auf dem Dashboard sichtbar.
 
 Sowie Informationen zu Ihrem Sonos: *Modell*, *Veröffentlichungen*, *Seriennummer*, *Kennung*, *MAC-Adresse* Und *IP Adresse*.
+
+Es ist keine spezifische Konfiguration erforderlich.
 
 # Die Aufträge
 
@@ -52,8 +45,15 @@ Diese Befehle steuern immer das entsprechende Gerät, auch wenn es sich in einer
 - **Keine Stummschaltung** : Schalten Sie die Stummschaltung aus.
 - **Stummschaltungsstatus** : zeigt an, ob wir uns im Stummmodus befinden oder nicht.
 
+## Steuerbefehle
+
+Diese Befehle steuern immer das entsprechende Gerät, auch wenn es sich in einer Gruppe befindet.
+
 - **Fernseher** : um zum Eingang zu wechseln *Fernseher* auf kompatiblen Geräten
-- **Analoger Audioeingang** : zu wechseln'*Analoger Audioeingang* auf kompatiblen Geräten
+- **Analoger Audioeingang** : zu wechseln'*Analoger Audioeingang* (*Line-in*) auf kompatiblen Geräten
+- **Das Geschenk** : Aktiviert die LED, die Statusanzeige.
+- **LED aus** : Deaktiviert die LED, das Statuslicht.
+- **Status-LED** : Zeigt an, ob die Statusleuchte leuchtet oder nicht. Diese Informationen werden nur einmal pro Minute aktualisiert, falls sie außerhalb von Jeedom geändert werden.
 
 ## Wiedergabesteuerung
 
@@ -70,15 +70,18 @@ Diese Befehle zeigen und steuern die aktuelle Wiedergabe auf dem Gerät oder in 
 - **Zufällig** : Kehren Sie den Status des Zufallsmodus um.
 - **Status wiederholen** : zeigt an, ob wir uns im Wiederholungsmodus befinden oder nicht.
 - **Wiederholung** : Kehren Sie den Status des "Wiederholungs" -Modus um".
-- **Lesemodus** Status und Befehl geben **Wählen Sie den Lesemodus** wodurch Sie aus den folgenden Möglichkeiten wählen können: *Normal*, *Wiederhole alles*, *Zufällig*, *Zufällig ohne Wiederholung*, *Lied wiederholen*, *Zufälliges und wiederholtes Lied*. Diese Aktion entspricht der Verwendung der Befehle **Wiederholung** & **Zufällig** um in die gewünschte Konfiguration zu gelangen. Allerdings ist dies die einzige Möglichkeit, in den Modus „Song wiederholen“ zu wechseln".
-- **Playlist abspielen** : Befehl zum Nachrichtentyp, um eine Wiedergabeliste zu starten. Geben Sie einfach den Namen der Wiedergabeliste in den Titel ein.
-- **Favoriten spielen** :  Befehl zum Nachrichtentyp, um einen Favoriten zu starten. Im Titel müssen Sie lediglich den Namen des Favoriten eingeben.
-- **Spielen Sie ein Radio** : Wenn Sie einen Befehl zum Starten eines Radiosenders eingeben, müssen Sie lediglich den Namen des Radios in den Titel einfügen *(Achtung : Dies muss in den Lieblingsradios sein)*. Funktioniert nicht mehr bei „S2“-Modellen".
+- **Lesemodus** Status und Befehl geben **Wählen Sie den Lesemodus** wodurch Sie aus den folgenden Möglichkeiten wählen können: *Normal*, *Wiederhole alles*, *Zufällig*, *Zufällig ohne Wiederholung*, *Lied wiederholen*, *Zufälliges und wiederholtes Lied*. Diese Aktion entspricht der Verwendung der Befehle **Wiederholung** & **Zufällig** um in die gewünschte Konfiguration zu gelangen. Allerdings ist dies die einzige Möglichkeit, in den Modus zu wechseln *Lied wiederholen* Oder *Zufälliges und wiederholtes Lied*.
+- **Playlist abspielen** : Befehl zum Nachrichtentyp, um eine Wiedergabeliste zu starten. Geben Sie einfach den Namen der Wiedergabeliste in den Titel ein. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
+- **Favoriten spielen** :  Befehl zum Nachrichtentyp, um einen Favoriten zu starten. Im Titel müssen Sie lediglich den Namen des Favoriten eingeben. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
+- **Spielen Sie ein Radio** : Wenn Sie einen Befehl zum Starten eines Radiosenders eingeben, müssen Sie lediglich den Namen des Radios in den Titel einfügen *(Achtung : Dies muss in den Lieblingsradios sein)*. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen. Funktioniert nicht mehr bei „S2“-Modellen, es ist normal, dass bei allen Modellen, die die Sonos S2-App verwenden, eine leere Liste vorhanden ist.
 - **Bild** : Link zum Albumbild.
 - **Album** : Name des aktuell wiedergegebenen Albums.
 - **Künstler** : Künstlername spielt gerade.
 - **Verfolgen** : Name des aktuell wiedergegebenen Titels.
 - **Zu sagen** : ermöglicht das Lesen eines Textes auf Sonos (siehe TTS-Teil). Im Titel können Sie die Lautstärke und in der Nachricht die zu lesende Nachricht einstellen.
+
+> **Hinweis**
+> Wiedergabelisten und Favoriten müssen über die Sonos-App (auf dem Handy oder Computer) erstellt werden. Anschließend muss eine Synchronisierung durchgeführt werden, um die Geräte zu aktualisieren und in einem Szenario verwenden zu können.
 
 ## Befehle zum Verwalten von Gruppen
 
@@ -86,22 +89,22 @@ Diese Befehle wirken sich immer auf das entsprechende Gerät aus.
 
 - **Gruppenstatus** : Gibt an, ob das Gerät gruppiert ist oder nicht.
 - **Name der Gruppe** Wenn das Gerät gruppiert ist, geben Sie den Namen der Gruppe an.
-- **Einer Gruppe beitreten** : ermöglicht es Ihnen, der Gruppe des angegebenen Lautsprechers (einem Sonos) beizutreten (um beispielsweise zwei Sonos zuzuordnen)). Sie müssen den Namen des Soundsystem-Raums eingeben, dem Sie beitreten möchten. Dies kann ein beliebiges Mitglied einer bestehenden Gruppe sein, es muss nicht der Gruppenkoordinator oder ein isolierter Sonos sein.
+- **Einer Gruppe beitreten** : ermöglicht es Ihnen, der Gruppe des angegebenen Lautsprechers (einem Sonos) beizutreten (um beispielsweise zwei Sonos zuzuordnen)). Sie müssen den Namen des Soundsystem-Raums eingeben, dem Sie beitreten möchten. Dies kann ein beliebiges Mitglied einer bestehenden Gruppe sein, es muss nicht der Gruppenkoordinator oder ein isolierter Sonos sein. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
 - **Die Gruppe verlassen** : ermöglicht es Ihnen, die Gruppe zu verlassen.
 
 # TTS
 
-TTS (Text-to-Speech) für Sonos erfordert die Freigabe von Windows (Samba) im Netzwerk (von Sonos vorgeschrieben, keine andere Möglichkeit)). Sie benötigen also einen NAS im Netzwerk. Die Konfiguration ist recht einfach. Sie müssen den Namen oder die IP des NAS (achten Sie darauf, dass Sie das Gleiche wie auf Sonos deklarieren) sowie den Pfad (relativ), den Benutzernamen und das Passwort ( Aufmerksamkeit der Benutzer muss Schreibrechte haben)
+TTS (Text-to-Speech) zu Sonos erfordert die SAMBA-Freigabe im Netzwerk (wird von Sonos vorgeschrieben, es gibt keine andere Möglichkeit)). Sie benötigen daher ein NAS oder ein gleichwertiges Gerät im Netzwerk. Die Konfiguration ist ganz einfach: Sie müssen den Namen oder die IP-Adresse des NAS eingeben (achten Sie darauf, dasselbe wie bei Sonos anzugeben) und den Pfad zu dem Ordner, der die Audiodateien enthalten muss, sowie den Namen des Benutzers und Passwort (beachten Sie, dass der Benutzer über Schreibrechte verfügen muss)
 
-Die Erstellung der Audiodatei wird vom Jeedom-Kern verwaltet: Die Sprache ist die in Jeedom konfigurierte und die verwendete TTS-Engine kann auch in den Jeedom-Konfigurationsbildschirmen ausgewählt werden.
+Die Erstellung der Audiodatei wird vom Jeedom-Kern verwaltet: Die Sprache ist die in Jeedom konfigurierte und die verwendete TTS-Engine kann auch in der Jeedom-Konfiguration ausgewählt werden.
 
 Bei Verwendung von TTS (Befehl **Zu sagen**), Das Plugin führt die folgenden Aktionen aus:
 
 - Generierung der Audiodatei, die die Nachricht enthält, mit Jeedom-Kernunterstützung
 - Schreiben der Datei auf die SAMBA-Freigabe
-- Erzwingt die Wiedergabe im „Normal“-Modus ohne Wiederholung
-- Erzwingen Sie den Modus „Stummschaltung aufheben“"
-- Ändern der Lautstärke auf den gewählten Wert, wenn Sie den Befehl verwenden
+- erzwingt die Wiedergabe im „Normal“-Modus ohne Wiederholung
+- „Stummschaltung aufheben“-Modus erzwingen (nur für das Gerät, nicht für die gesamte Gruppe))
+- Ändern der Lautstärke auf den gewählten Wert bei Verwendung des Befehls (nur für das Gerät, nicht für die gesamte Gruppe))
 - Nachricht lesen
 - Wiederherstellen des Zustands des Sonos vor der Wiedergabe (d. h. des Wiedergabemodus, stumm oder nicht, wiederholen oder nicht usw.) und Neustarten des Streams, wenn der Sonos gerade abgespielt hat
 
@@ -111,27 +114,30 @@ Bei Verwendung von TTS (Befehl **Zu sagen**), Das Plugin führt die folgenden Ak
 >
 > Ein Unterverzeichnis ist auch unbedingt erforderlich, damit die Sprachdatei korrekt erstellt wird.
 >
-> Vor allem dürfen im Namen der Freigabe oder des Ordners keine Akzente, Leerzeichen oder Sonderzeichen enthalten sein
+> Vor allem dürfen im Namen der Freigabe oder des Ordners keine Akzente, Leerzeichen oder Sonderzeichen enthalten sein.
+>
+> Zu lange Nachrichten können im TTS nicht übertragen werden (Grenze abhängig vom TTS-Anbieter, in der Regel ca. 100 Zeichen)).
 
-**Hier ist ein Beispiel für die Konfiguration (danke @masterfion) :**
+## Konfigurationsbeispiel
 
-NAS-Seite, hier ist meine Konfiguration :
+Auf der NAS-Seite muss die folgende Konfiguration durchgeführt werden:
 
-- Jeedom-Ordner wird freigegeben.
-- Der Sonos-Benutzer hat Lese- / Schreibzugriff (erforderlich für Jeedom)).
-- Der Gastbenutzer hat nur Lesezugriff (für Sonos erforderlich)).
+- der Ordner *Jeedom* ist freigegeben und enthält einen Ordner *TTS*
+- der Benutzer *Jeedom* hat Lese-/Schreibzugriff (notwendig für Jeedom)).
+- der Benutzer *sein Knochen* hat nur Lesezugriff (notwendig für Sonos)).
 
 Auf der Sonos-Plugin-Seite ist die config :
 
 - Teilen :
   - Feld 1: 192.168.xxx.yyy
-  - Feld 2: Jeedom
-  - Feld 3: TTS
-- Benutzername und Passwort...​
+  - Feld 2: *Jeedom*
+  - Feld 3: *TTS*
+- Nutzername (*Jeedom* im Beispiel) und sein Passwort…​
 
 Sonos Library Seite (PC App)
 
 - der Weg ist : //192.168.xxx.yyy/Jeedom/TTS
+- der Benutzer wird sein *sein Knochen* (in diesem Beispiel) + Passwort
 
 # Das Panel
 
