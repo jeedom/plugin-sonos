@@ -67,6 +67,10 @@ class SonosDaemon(BaseDaemon):
                 speaker.soco.mute = False
             elif message['action'] == 'volume':
                 speaker.soco.volume = message['slider']
+            elif message['action'] == 'inc_volume':
+                speaker.soco.set_relative_volume(1)
+            elif message['action'] == 'dec_volume':
+                speaker.soco.set_relative_volume(-1)
             elif message['action'] == 'switch_to_line_in':
                 speaker.soco.switch_to_line_in()
             elif message['action'] == 'switch_to_tv':
@@ -78,8 +82,16 @@ class SonosDaemon(BaseDaemon):
 
             elif message['action'] == 'repeat':
                 coordinator.soco.repeat = not coordinator.soco.repeat
+            elif message['action'] == 'repeat_on':
+                coordinator.soco.repeat = True
+            elif message['action'] == 'repeat_off':
+                coordinator.soco.repeat = False
             elif message['action'] == 'shuffle':
                 coordinator.soco.shuffle = not coordinator.soco.shuffle
+            elif message['action'] == 'shuffle_on':
+                coordinator.soco.shuffle = True
+            elif message['action'] == 'shuffle_off':
+                coordinator.soco.shuffle = False
             elif message['action'] == 'play_mode':
                 coordinator.soco.play_mode = message['select']
             elif message['action'] == 'play':

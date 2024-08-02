@@ -39,8 +39,10 @@ Les commandes infos seront mises à jour en quasi temps réel (délai de quelque
 
 Ces commandes vont toujours contrôler l'équipement correspondant, y compris lorsque celui-ci est dans un groupe.
 
-- **Volume** : modifier le volume *(de 0 à 100)*.
-- **Volume statut** : niveau du volume.
+- **Volume** : modifier le volume *(de 0 à 100)*
+- **Volume statut** : niveau du volume (en %)
+- **Augmenter le volume**: augmente le volume de 1%; peut être utile pour l'intégration avec d'autres systèmes ou plugins
+- **Diminuer le volume**: diminue le volume de 1%; peut être utile pour l'intégration avec d'autres systèmes ou plugins
 - **Muet** : Active le mode muet.
 - **Non Muet** : Désactive le mode muet.
 - **Muet statut** : indique si on est en mode muet ou non.
@@ -65,7 +67,8 @@ Ces commandes indiqueront et contrôleront la lecture en cours sur l'équipement
 - **Aléatoire** : inverse le statut du mode aléatoire.
 - **Répéter statut** : indique si on est en mode répété ou non.
 - **Répéter** : inverse le statut du mode "répéter".
-- **Mode de lecture** donnant l'état et commande **Choisir mode de lecture** qui permet de choisir parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*. Cette action est équivalente à l'utilisation des commandes **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée. C'est par contre le seul moyen de passer en mode *Répéter le morceau* ou *Aléatoire et répéter le morceau*.
+- **Choisir mode de lecture** permet de choisir parmi les possibilités suivantes: *Normal* (répétition off, aléatoire off), *Répéter tout* (aléatoire off), *Aléatoire et répéter tout*, *Aléatoire sans répétition*, *Répéter le morceau* (aléatoire off), *Aléatoire et répéter le morceau*. Je recommande d'utiliser cette commande-ci dans un scénario au lieu de **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée même si toutes agissent sur les mêmes paramètres. Cette commande est par contre le seul moyen de passer en mode *Répéter le morceau* ou *Aléatoire et répéter le morceau*.
+- **Mode de lecture** donnant l'état actuel qui sera une des valeurs citées ci-dessus.
 - **Jouer playlist** : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
 - **Jouer favoris** :  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
 - **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper. Ne fonctionne plus sur les modèles "S2", il est normal d'avoir une liste vide sur tous les modèles utilisant l'app Sonos S2.

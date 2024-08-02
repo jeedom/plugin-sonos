@@ -443,11 +443,11 @@ class sonos3 extends eqLogic {
 			$play_mode->setName(__('Choisir mode de lecture', __FILE__));
 			$play_mode->setType('action');
 			$play_mode->setSubType('select');
-			$play_mode->setConfiguration('listValue', "NORMAL|Normal;REPEAT_ALL|Répéter tout;SHUFFLE|Aléatoire;SHUFFLE_NOREPEAT|Aléatoire sans répétition;REPEAT_ONE|Répéter le morceau;SHUFFLE_REPEAT_ONE|Aléatoire et répéter le morceau");
 			$play_mode->setEqLogic_id($this->getId());
 			$play_mode->setValue($play_mode_state->getId());
-			$play_mode->save();
 		}
+		$play_mode->setConfiguration('listValue', "NORMAL|Normal;REPEAT_ALL|Répéter tout;SHUFFLE|Aléatoire et répéter tout;SHUFFLE_NOREPEAT|Aléatoire sans répétition;REPEAT_ONE|Répéter le morceau;SHUFFLE_REPEAT_ONE|Aléatoire et répéter le morceau");
+		$play_mode->save();
 
 		$state = $this->getCmd(null, 'state');
 		if (!is_object($state)) {
@@ -641,6 +641,26 @@ class sonos3 extends eqLogic {
 			$volume->setEqLogic_id($this->getId());
 			$volume->save();
 		}
+		$inc_volume = $this->getCmd(null, 'inc_volume');
+		if (!is_object($inc_volume)) {
+			$inc_volume = new sonos3Cmd();
+			$inc_volume->setLogicalId('inc_volume');
+			$inc_volume->setName(__('Augmenter le volume', __FILE__));
+			$inc_volume->setType('action');
+			$inc_volume->setSubType('other');
+			$inc_volume->setEqLogic_id($this->getId());
+			$inc_volume->save();
+		}
+		$dec_volume = $this->getCmd(null, 'dec_volume');
+		if (!is_object($dec_volume)) {
+			$dec_volume = new sonos3Cmd();
+			$dec_volume->setLogicalId('dec_volume');
+			$dec_volume->setName(__('Diminuer le volume', __FILE__));
+			$dec_volume->setType('action');
+			$dec_volume->setSubType('other');
+			$dec_volume->setEqLogic_id($this->getId());
+			$dec_volume->save();
+		}
 
 		$track_title = $this->getCmd(null, 'track_title');
 		if (!is_object($track_title)) {
@@ -703,11 +723,13 @@ class sonos3 extends eqLogic {
 			$play_playlist->setName(__('Jouer playlist', __FILE__));
 			$play_playlist->setType('action');
 			$play_playlist->setSubType('message');
-			$play_playlist->setDisplay('message_placeholder', __('Options', __FILE__));
 			$play_playlist->setDisplay('title_placeholder', __('Titre de la playlist', __FILE__));
 			$play_playlist->setEqLogic_id($this->getId());
 			$play_playlist->save();
 		}
+		$play_playlist->setDisplay('message_placeholder', null);
+		$play_playlist->setDisplay('message_disable', 1);
+		$play_playlist->save();
 
 		$play_favorite = $this->getCmd(null, 'play_favorite');
 		if (!is_object($play_favorite)) {
@@ -716,11 +738,12 @@ class sonos3 extends eqLogic {
 			$play_favorite->setName(__('Jouer favoris', __FILE__));
 			$play_favorite->setType('action');
 			$play_favorite->setSubType('message');
-			$play_favorite->setDisplay('message_placeholder', __('Options', __FILE__));
 			$play_favorite->setDisplay('title_placeholder', __('Titre du favoris', __FILE__));
 			$play_favorite->setEqLogic_id($this->getId());
-			$play_favorite->save();
 		}
+		$play_favorite->setDisplay('message_placeholder', null);
+		$play_favorite->setDisplay('message_disable', 1);
+		$play_favorite->save();
 
 		$play_radio = $this->getCmd(null, 'play_radio');
 		if (!is_object($play_radio)) {
