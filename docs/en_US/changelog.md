@@ -13,15 +13,22 @@
 >
 > See also [this topic on community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) for more details
 
+# 03/08/2024
+
+- Adding an order **Play mp3 radio** to play an mp3 radio directly via a URL (accessible on the internet for example)
+- Adding commands **Turn up the volume** And **Decrease the volume** from 1%
+- Adding an order **Volume transition** which is very useful for managing volume level transitions. 3 possible modes: *LINEAR*, *ALARM*, *AUTOPLAY*. See documentation for more information.
+
 # 02/08/2024
 
+- Adding commands **The gift**, **Led off** And **Status LED** to check the status indicator
 - Fix daemon crash if no Sonos is discovered
-- Added commands to control the status LED
+- Improved Debian 10 / Python 3.7 compatibility
 
 # 01/08/2024
 
 - Almost total rewrite of the plugin, the daemon has been completely rewritten in python (instead of PHP)
-- Debian 11 and 12 compatible! (probably Debian 10 but not tested and no support possible on this version)
+- Debian 11 and 12 compatible! (Probably Debian 10 but not tested and no support possible on this version)
 - There is no longer any discovery to launch manually and it is no longer necessary (nor possible) to manually add equipment, the plugin automatically discovers your sound devices and creates the equipment corresponding to each start of the daemon. It is also possible to ask to (re)synchronize equipment, favorites and playlists without restarting the daemon from the equipment panel
 - (Almost) real-time updating of order information (a delay of 0.5s to a few seconds max), more cron minutes, including when a change is made outside Jeedom (via Sonos app for example)
 - Redesign of group management (old commands will be deleted and new ones added, see documentation). It is possible to join or leave a group, control the playback of the group from any device in the group without worrying about who is the controller. The volume is always controlled by speaker.
@@ -29,7 +36,7 @@
 - Optimisation: no more memory loss on the daemon and it consumes less than previously.
 
 - Adding an action command **TV** to switch to the input *TV* on compatible equipment
-- Adding an info command **Reading mode** and action **Choose reading mode** which allows you to select the reading mode from the following possibilities: *Normal*, *Repeat all*, *Random*, *Random without repetition*, *Repeat song*, *Random and repeat song*
+- Adding an info command **Reading mode** and action **Choose reading mode** which allows you to select the reading mode from the following possibilities: *Normal*, *Repeat all*, *Random and repeat all*, *Random without repetition*, *Repeat song*, *Random and repeat song*
 - Adding an order **Reading status** which gives the "raw" value of the reading state (the existing command **Status** gives a translated value based on the language configured in Jeedom)
 - Adding commands **Group status** (indicates whether the equipment is grouped or not) and **Name of the group** in the case where the equipment is grouped
 

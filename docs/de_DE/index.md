@@ -13,8 +13,8 @@ Das Plugin sucht in Ihrem Netzwerk nach Sonos und erstellt die Geräte automatis
 Wenn Sie später einen Sonos hinzufügen, können Sie auf klicken **Synchronisieren** auf der Geräteseite oder starten Sie den Daemon neu.
 
 - **Teilen**: Konfigurieren Sie hier den Hostnamen der Maschine (bzw. deren IP), den Namen der Freigabe (ohne Pfad, ohne „/“) und den Pfad zum Ordner.
-- **Teilen Sie den Benutzernamen** : Benutzername für den Zugriff auf die Freigabe.
-- **Passwort teilen** : Passwort teilen.
+- **Teilen Sie den Benutzernamen**: Benutzername für den Zugriff auf die Freigabe.
+- **Passwort teilen**: Passwort teilen.
 
 # Gerätekonfiguration
 
@@ -22,10 +22,10 @@ Auf die Konfiguration der Sonos-Geräte kann über das Plugins-Menü und dann ü
 
 Hier finden Sie die gesamte übliche Konfiguration Ihrer Ausrüstung :
 
-- **Sonos Name** : Name Ihres Sonos-Geräts.
-- **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört.
-- **Aktivieren** : macht Ihre Ausrüstung aktiv.
-- **Sichtbar** : macht es auf dem Dashboard sichtbar.
+- **Sonos Name**: Name Ihres Sonos-Geräts.
+- **Übergeordnetes Objekt**: Gibt das übergeordnete Objekt an, zu dem das Gerät gehört.
+- **Aktivieren**: macht Ihre Ausrüstung aktiv.
+- **Sichtbar**: macht es auf dem Dashboard sichtbar.
 
 Sowie Informationen zu Ihrem Sonos: *Modell*, *Veröffentlichungen*, *Seriennummer*, *Kennung*, *MAC-Adresse* Und *IP Adresse*.
 
@@ -35,50 +35,61 @@ Es ist keine spezifische Konfiguration erforderlich.
 
 Die Info-Steuerelemente werden nahezu in Echtzeit aktualisiert (normalerweise maximal ein paar Sekunden), aber bei einem Titelwechsel kann es etwas länger dauern, bis das Bild des gerade abgespielten Albums im Widget angezeigt wird. Dies ist völlig normal und unabhängig vom Plugin: Er muss das Bild von einer externen Quelle (auf einem Sonos oder im Internet) abrufen, was manchmal mehrere Sekunden dauert (im Prinzip maximal etwa zehn Sekunden)).
 
-## Lautstärke- und Quellensteuerung
+## Sonos-Lautstärkeregler und -Regler
 
 Diese Befehle steuern immer das entsprechende Gerät, auch wenn es sich in einer Gruppe befindet.
 
-- **Lautstärke** : Ändern Sie die Lautstärke *(von 0 bis 100)*.
-- **Statusvolumen** : Lautstärke.
-- **Stumm** : Stummschaltung aktivieren.
-- **Keine Stummschaltung** : Schalten Sie die Stummschaltung aus.
-- **Stummschaltungsstatus** : zeigt an, ob wir uns im Stummmodus befinden oder nicht.
-
-## Steuerbefehle
-
-Diese Befehle steuern immer das entsprechende Gerät, auch wenn es sich in einer Gruppe befindet.
-
-- **Fernseher** : um zum Eingang zu wechseln *Fernseher* auf kompatiblen Geräten
-- **Analoger Audioeingang** : zu wechseln'*Analoger Audioeingang* (*Line-in*) auf kompatiblen Geräten
-- **Das Geschenk** : Aktiviert die LED, die Statusanzeige.
-- **LED aus** : Deaktiviert die LED, das Statuslicht.
-- **Status-LED** : Zeigt an, ob die Statusleuchte leuchtet oder nicht. Diese Informationen werden nur einmal pro Minute aktualisiert, falls sie außerhalb von Jeedom geändert werden.
+- **Lautstärke**: Ändern Sie die Lautstärke *(von 0 bis 100)*
+- **Statusvolumen**: Lautstärkepegel (in %)
+- **Drehe die Lautstärke hoch**: erhöht die Lautstärke um 1 %; kann für die Integration mit anderen Systemen oder Plugins nützlich sein
+- **Verringern Sie die Lautstärke**: verringert die Lautstärke um 1 %; kann für die Integration mit anderen Systemen oder Plugins nützlich sein
+- **Lautstärkeübergang** Ermöglicht die Durchführung von Lautstärkeübergängen, die direkt vom Sonos-Lautsprecher verwaltet werden. Dies ist nicht das Plug-in, das sich darum kümmert und daher nicht blockiert, aber die Verzögerungen sind nicht konfigurierbar, da sie von Sonos definiert wurden. Beim Ausführen des Befehls müssen der Übergangstyp und das Zielvolume ausgewählt werden. Es gibt 3 Modi:
+  - *LINEAR*: Linearer Übergang vom aktuellen Volumen zum Zielvolumen (Erhöhung oder Verringerung), Geschwindigkeit ist 1.25 pro Sekunde (ein Übergang *LINEAR* Von 50 % auf 30 % dauert es 16 Sekunden)
+  - *ALARM*: initialisiert die Lautstärke auf 0, pausiert etwa 30 Sekunden und erhöht dann mit der Geschwindigkeit 2 auf die gewünschte Lautstärke.5 pro Sekunde (ein Übergang *ALARM* Von 0 % auf 10 % dauert es 4 Sekunden)
+  - *AUTOMATISCHES ABSPIELEN*: Initialisiert die Lautstärke auf 0 und erhöht sich schnell mit einer Rate von 50 pro Sekunde auf die angeforderte Lautstärke (ein Übergang) *AUTOMATISCHES ABSPIELEN* Von 0 % auf 50 % dauert es 1 Sekunde)
+- **Stumm**: Stummschaltung aktivieren.
+- **Keine Stummschaltung**: Schalten Sie die Stummschaltung aus.
+- **Stummschaltungsstatus**: zeigt an, ob wir uns im Stummmodus befinden oder nicht.
+- **Fernseher**: um zum Eingang zu wechseln *Fernseher* auf kompatiblen Geräten
+- **Analoger Audioeingang**: zu wechseln'*Analoger Audioeingang* (*Line-in*) auf kompatiblen Geräten
+- **Das Geschenk**: Aktiviert die LED, die Statusanzeige.
+- **LED aus**: Deaktiviert die LED, das Statuslicht.
+- **Status-LED**: Zeigt an, ob die Statusleuchte leuchtet oder nicht. Diese Informationen werden nur einmal pro Minute aktualisiert, falls sie außerhalb von Jeedom geändert werden.
 
 ## Wiedergabesteuerung
 
 Diese Befehle zeigen und steuern die aktuelle Wiedergabe auf dem Gerät oder in der Gruppe, wenn diese gruppiert ist, und zwar auf transparente Weise. Sie müssen sich keine Gedanken darüber machen, ob das Gerät gruppiert ist oder ob Sie sie nicht verwenden sollen.
 
-- **Status** : Leserstatus in die unter Jeedom konfigurierte Sprache übersetzt. Zum Beispiel: *Lesen*, *Pause*, *Gestoppt*.
+- **Status**: Leserstatus in die unter Jeedom konfigurierte Sprache übersetzt. Zum Beispiel: *Lesen*, *Pause*, *Gestoppt*.
 - **Lesestatus** Dies gibt den „Rohwert“ des Lesestatus an: *SPIELEN*, *PAUSED_PLAYBACK*, *GESTOPPT*; besser geeignet für Szenarien.
-- **Lesen** : lesen.
-- **Pause** : Pause.
-- **STOP** : Hör auf zu lesen.
-- **Früher** : vorheriger Titel.
-- **Folgende** : nächster Track.
-- **Zufälliger Status** : zeigt an, ob wir uns im Zufallsmodus befinden oder nicht.
-- **Zufällig** : Kehren Sie den Status des Zufallsmodus um.
-- **Status wiederholen** : zeigt an, ob wir uns im Wiederholungsmodus befinden oder nicht.
-- **Wiederholung** : Kehren Sie den Status des "Wiederholungs" -Modus um".
-- **Lesemodus** Status und Befehl geben **Wählen Sie den Lesemodus** wodurch Sie aus den folgenden Möglichkeiten wählen können: *Normal*, *Wiederhole alles*, *Zufällig*, *Zufällig ohne Wiederholung*, *Lied wiederholen*, *Zufälliges und wiederholtes Lied*. Diese Aktion entspricht der Verwendung der Befehle **Wiederholung** & **Zufällig** um in die gewünschte Konfiguration zu gelangen. Allerdings ist dies die einzige Möglichkeit, in den Modus zu wechseln *Lied wiederholen* Oder *Zufälliges und wiederholtes Lied*.
-- **Playlist abspielen** : Befehl zum Nachrichtentyp, um eine Wiedergabeliste zu starten. Geben Sie einfach den Namen der Wiedergabeliste in den Titel ein. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
-- **Favoriten spielen** :  Befehl zum Nachrichtentyp, um einen Favoriten zu starten. Im Titel müssen Sie lediglich den Namen des Favoriten eingeben. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
-- **Spielen Sie ein Radio** : Wenn Sie einen Befehl zum Starten eines Radiosenders eingeben, müssen Sie lediglich den Namen des Radios in den Titel einfügen *(Achtung : Dies muss in den Lieblingsradios sein)*. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen. Funktioniert nicht mehr bei „S2“-Modellen, es ist normal, dass bei allen Modellen, die die Sonos S2-App verwenden, eine leere Liste vorhanden ist.
-- **Bild** : Link zum Albumbild.
-- **Album** : Name des aktuell wiedergegebenen Albums.
-- **Künstler** : Künstlername spielt gerade.
-- **Verfolgen** : Name des aktuell wiedergegebenen Titels.
-- **Zu sagen** : ermöglicht das Lesen eines Textes auf Sonos (siehe TTS-Teil). Im Titel können Sie die Lautstärke und in der Nachricht die zu lesende Nachricht einstellen.
+- **Lesen**: lesen.
+- **Pause**: Pause.
+- **STOP**: Hör auf zu lesen.
+- **Früher**: vorheriger Titel.
+- **Folgende**: nächster Track.
+- **Zufälliger Status**: zeigt an, ob wir uns im Zufallsmodus befinden oder nicht.
+- **Zufällig**: Kehren Sie den Status des Zufallsmodus um.
+- **Status wiederholen**: zeigt an, ob wir uns im Wiederholungsmodus befinden oder nicht.
+- **Wiederholung**: Kehren Sie den Status des "Wiederholungs" -Modus um".
+- **Wählen Sie den Lesemodus** ermöglicht Ihnen die Auswahl aus den folgenden Möglichkeiten:
+  - *Normal* (Wiederholung aus, Zufall aus),
+  - *Wiederhole alles* (zufällig aus),
+  - *Zufällig und alles wiederholen*,
+  - *Zufällig ohne Wiederholung*,
+  - *Lied wiederholen* (zufällig aus),
+  - *Zufälliges und wiederholtes Lied*.
+
+  Ich empfehle, diesen Befehl stattdessen in einem Szenario zu verwenden **Wiederholung** & **Zufällig** um zur gewünschten Konfiguration zu gelangen, auch wenn alle auf die gleichen Parameter einwirken. Dieser Befehl ist jedoch die einzige Möglichkeit, in den Modus zu wechseln *Lied wiederholen* Oder *Zufälliges und wiederholtes Lied*.
+- **Lesemodus** Angabe des aktuellen Zustands, der einer der oben genannten Werte sein wird.
+- **Playlist abspielen**: Befehl zum Nachrichtentyp, um eine Wiedergabeliste zu starten. Geben Sie einfach den Namen der Wiedergabeliste in den Titel ein. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
+- **Favoriten spielen**:  Befehl zum Nachrichtentyp, um einen Favoriten zu starten. Im Titel müssen Sie lediglich den Namen des Favoriten eingeben. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
+- **Spielen Sie ein Radio**: Wenn Sie einen Befehl zum Starten eines Radiosenders eingeben, müssen Sie lediglich den Namen des Radios in den Titel einfügen *(Achtung : Dies muss in den Lieblingsradios sein)*. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen. Funktioniert nicht mehr bei „S2“-Modellen, es ist normal, dass bei allen Modellen, die die Sonos S2-App verwenden, eine leere Liste vorhanden ist.
+- **Spielen Sie MP3-Radio**: ermöglicht das Abspielen eines MP3-Radios über eine URL (z. B. aus dem Internet)). Sie müssen einen Titel in das Feld eingeben *Titel* und die URL (http(s)-Format))://...mp3) in der Gegend *Nachricht*.
+- **Bild**: Link zum Albumbild.
+- **Album**: Name des aktuell wiedergegebenen Albums.
+- **Künstler**: Künstlername spielt gerade.
+- **Verfolgen**: Name des aktuell wiedergegebenen Titels.
+- **Zu sagen**: ermöglicht das Lesen eines Textes auf Sonos (siehe TTS-Teil). Im Titel können Sie die Lautstärke und in der Nachricht die zu lesende Nachricht einstellen.
 
 > **Hinweis**
 > Wiedergabelisten und Favoriten müssen über die Sonos-App (auf dem Handy oder Computer) erstellt werden. Anschließend muss eine Synchronisierung durchgeführt werden, um die Geräte zu aktualisieren und in einem Szenario verwenden zu können.
@@ -87,10 +98,10 @@ Diese Befehle zeigen und steuern die aktuelle Wiedergabe auf dem Gerät oder in 
 
 Diese Befehle wirken sich immer auf das entsprechende Gerät aus.
 
-- **Gruppenstatus** : Gibt an, ob das Gerät gruppiert ist oder nicht.
+- **Gruppenstatus**: Gibt an, ob das Gerät gruppiert ist oder nicht.
 - **Name der Gruppe** Wenn das Gerät gruppiert ist, geben Sie den Namen der Gruppe an.
-- **Einer Gruppe beitreten** : ermöglicht es Ihnen, der Gruppe des angegebenen Lautsprechers (einem Sonos) beizutreten (um beispielsweise zwei Sonos zuzuordnen)). Sie müssen den Namen des Soundsystem-Raums eingeben, dem Sie beitreten möchten. Dies kann ein beliebiges Mitglied einer bestehenden Gruppe sein, es muss nicht der Gruppenkoordinator oder ein isolierter Sonos sein. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
-- **Die Gruppe verlassen** : ermöglicht es Ihnen, die Gruppe zu verlassen.
+- **Einer Gruppe beitreten**: ermöglicht es Ihnen, der Gruppe des angegebenen Lautsprechers (einem Sonos) beizutreten (um beispielsweise zwei Sonos zuzuordnen)). Sie müssen den Namen des Soundsystem-Raums eingeben, dem Sie beitreten möchten. Dies kann ein beliebiges Mitglied einer bestehenden Gruppe sein, es muss nicht der Gruppenkoordinator oder ein isolierter Sonos sein. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
+- **Die Gruppe verlassen**: ermöglicht es Ihnen, die Gruppe zu verlassen.
 
 # TTS
 
