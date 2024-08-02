@@ -661,6 +661,19 @@ class sonos3 extends eqLogic {
 			$dec_volume->setEqLogic_id($this->getId());
 			$dec_volume->save();
 		}
+		$ramp_to_volume = $this->getCmd(null, 'ramp_to_volume');
+		if (!is_object($ramp_to_volume)) {
+			$ramp_to_volume = new sonos3Cmd();
+			$ramp_to_volume->setLogicalId('ramp_to_volume');
+			$ramp_to_volume->setName(__('Transition de volume', __FILE__));
+			$ramp_to_volume->setType('action');
+			$ramp_to_volume->setSubType('message');
+			$ramp_to_volume->setDisplay('title_placeholder', __('Type de transition', __FILE__));
+			$ramp_to_volume->setDisplay('title_possibility_list', json_encode(["LINEAR", "ALARM", "AUTOPLAY"]));
+			$ramp_to_volume->setDisplay('message_placeholder', __('Volume', __FILE__));
+			$ramp_to_volume->setEqLogic_id($this->getId());
+			$ramp_to_volume->save();
+		}
 
 		$track_title = $this->getCmd(null, 'track_title');
 		if (!is_object($track_title)) {

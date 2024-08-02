@@ -13,8 +13,8 @@ Le plugin va rechercher les Sonos sur votre réseau et créer les équipements a
 Si plus tard vous ajoutez un Sonos, vous pouvez cliquer sur **Synchroniser** dans la page des équipements ou redémarrer le démon.
 
 - **Partage**: Configurez ici le nom d'hôte de la machine (ou son IP), le nom du partage (sans le chemin, sans '/') et le chemin vers le dossier.
-- **Nom d’utilisateur du partage** : nom d’utilisateur pour accéder au partage.
-- **Mot de passe du partage** : mot de passe du partage.
+- **Nom d’utilisateur du partage**: nom d’utilisateur pour accéder au partage.
+- **Mot de passe du partage**: mot de passe du partage.
 
 # Configuration des équipements
 
@@ -22,10 +22,10 @@ La configuration des équipements Sonos est accessible à partir du menu Plugins
 
 Vous retrouvez ici toute la configuration habituelle de votre équipement :
 
-- **Nom du Sonos** : nom de votre équipement Sonos.
-- **Objet parent** : indique l’objet parent auquel appartient l’équipement.
-- **Activer** : permet de rendre votre équipement actif.
-- **Visible** : le rend visible sur le dashboard.
+- **Nom du Sonos**: nom de votre équipement Sonos.
+- **Objet parent**: indique l’objet parent auquel appartient l’équipement.
+- **Activer**: permet de rendre votre équipement actif.
+- **Visible**: le rend visible sur le dashboard.
 
 Ainsi que des informations sur votre Sonos: *Modèle*, *Versions*, *Numéro de série*, *Identifiant*, *Adresse MAC* et *Adresse IP*.
 
@@ -39,45 +39,57 @@ Les commandes infos seront mises à jour en quasi temps réel (délai de quelque
 
 Ces commandes vont toujours contrôler l'équipement correspondant, y compris lorsque celui-ci est dans un groupe.
 
-- **Volume** : modifier le volume *(de 0 à 100)*
-- **Volume statut** : niveau du volume (en %)
+- **Volume**: modifier le volume *(de 0 à 100)*
+- **Volume statut**: niveau du volume (en %)
 - **Augmenter le volume**: augmente le volume de 1%; peut être utile pour l'intégration avec d'autres systèmes ou plugins
 - **Diminuer le volume**: diminue le volume de 1%; peut être utile pour l'intégration avec d'autres systèmes ou plugins
-- **Muet** : Active le mode muet.
-- **Non Muet** : Désactive le mode muet.
-- **Muet statut** : indique si on est en mode muet ou non.
-- **TV** : pour basculer sur l'entrée *TV* sur les équipements compatibles
-- **Entrée audio analogique** : pour basculer sur l'*Entrée audio analogique* (*Line-in*) sur les équipements compatibles
-- **Led on** : Active la led, le voyant d'état.
-- **Led off** : Désactive la led, le voyant d'état.
-- **Led statut** : indique si le voyant d'état est allumé ou non. Cette info n'est mise à jour qu'une fois par minute dans le cas où elle est modifiée hors Jeedom.
+- **Transition de volume** permet d'effectuer des transitions de niveau de volume directement géré par l'enceinte Sonos, ce n'est pas le plugin qui s'en charge et donc ce n'est pas bloquant mais les délais ne sont pas configurable puisque défini par Sonos. Le type de transition et le volume cible doivent être choisi lors de l'exécution de la commande. Il existe 3 modes:
+  - *LINEAR*: transition linéaire depuis le volume actuel vers le volume cible (augmentation ou diminution), la vitesse est de 1.25 par seconde (une transition *LINEAR* de 50% à 30% prendra 16s)
+  - *ALARM*: initialise le volume à 0, pause d'environ 30 secondes et ensuite augmente jusqu'au volume demandé à une vitesse de 2.5 par seconde (une transition *ALARM* de 0% à 10% prendra 4s)
+  - *AUTOPLAY*: initialise le volume à 0 et augmente rapidement jusqu'au volume demandé à une vitesse de 50 par seconde (un transition *AUTOPLAY* de 0% à 50% prendra 1s)
+- **Muet**: Active le mode muet.
+- **Non Muet**: Désactive le mode muet.
+- **Muet statut**: indique si on est en mode muet ou non.
+- **TV**: pour basculer sur l'entrée *TV* sur les équipements compatibles
+- **Entrée audio analogique**: pour basculer sur l'*Entrée audio analogique* (*Line-in*) sur les équipements compatibles
+- **Led on**: Active la led, le voyant d'état.
+- **Led off**: Désactive la led, le voyant d'état.
+- **Led statut**: indique si le voyant d'état est allumé ou non. Cette info n'est mise à jour qu'une fois par minute dans le cas où elle est modifiée hors Jeedom.
 
 ## Commandes de lecture
 
 Ces commandes indiqueront et contrôleront la lecture en cours sur l'équipement ou sur le groupe si celui-ci est groupé et cela de façon transparente, vous ne devez pas vous préoccuper de savoir si l'équipement est groupé ou pas pour les utiliser.
 
-- **Statut** : statut de lecteur traduit dans la langue configurée sous Jeedom. Par exemple: *Lecture*, *Pause*, *Arrêté*.
+- **Statut**: statut de lecteur traduit dans la langue configurée sous Jeedom. Par exemple: *Lecture*, *Pause*, *Arrêté*.
 - **Statut de lecture** qui donne la valeur "brut" du statut de lecture: *PLAYING*, *PAUSED_PLAYBACK*, *STOPPED*; plus adapté pour les scénarios.
-- **Lecture** : passer en lecture.
-- **Pause** : mettre en pause.
-- **Stop** : arrêter la lecture.
-- **Précédent** : piste précédente.
-- **Suivant** : piste suivante.
-- **Aléatoire statut** : indique si on est en mode aléatoire ou non.
-- **Aléatoire** : inverse le statut du mode aléatoire.
-- **Répéter statut** : indique si on est en mode répété ou non.
-- **Répéter** : inverse le statut du mode "répéter".
-- **Choisir mode de lecture** permet de choisir parmi les possibilités suivantes: *Normal* (répétition off, aléatoire off), *Répéter tout* (aléatoire off), *Aléatoire et répéter tout*, *Aléatoire sans répétition*, *Répéter le morceau* (aléatoire off), *Aléatoire et répéter le morceau*. Je recommande d'utiliser cette commande-ci dans un scénario au lieu de **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée même si toutes agissent sur les mêmes paramètres. Cette commande est par contre le seul moyen de passer en mode *Répéter le morceau* ou *Aléatoire et répéter le morceau*.
+- **Lecture**: passer en lecture.
+- **Pause**: mettre en pause.
+- **Stop**: arrêter la lecture.
+- **Précédent**: piste précédente.
+- **Suivant**: piste suivante.
+- **Aléatoire statut**: indique si on est en mode aléatoire ou non.
+- **Aléatoire**: inverse le statut du mode aléatoire.
+- **Répéter statut**: indique si on est en mode répété ou non.
+- **Répéter**: inverse le statut du mode "répéter".
+- **Choisir mode de lecture** permet de choisir parmi les possibilités suivantes:
+  - *Normal* (répétition off, aléatoire off),
+  - *Répéter tout* (aléatoire off),
+  - *Aléatoire et répéter tout*,
+  - *Aléatoire sans répétition*,
+  - *Répéter le morceau* (aléatoire off),
+  - *Aléatoire et répéter le morceau*.
+
+  Je recommande d'utiliser cette commande-ci dans un scénario au lieu de **Répéter** & **Aléatoire** afin d'arriver dans la configuration désirée même si toutes agissent sur les mêmes paramètres. Cette commande est par contre le seul moyen de passer en mode *Répéter le morceau* ou *Aléatoire et répéter le morceau*.
 - **Mode de lecture** donnant l'état actuel qui sera une des valeurs citées ci-dessus.
-- **Jouer playlist** : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
-- **Jouer favoris** :  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
-- **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper. Ne fonctionne plus sur les modèles "S2", il est normal d'avoir une liste vide sur tous les modèles utilisant l'app Sonos S2.
+- **Jouer playlist**: commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
+- **Jouer favoris**:  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
+- **Jouer une radio**: commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper. Ne fonctionne plus sur les modèles "S2", il est normal d'avoir une liste vide sur tous les modèles utilisant l'app Sonos S2.
 - **Jouer une radio mp3**: permet de lire une radio mp3 via une URL (par exemple depuis internet). Vous devez mettre un titre dans la zone *Titre* et l'url (format http(s)://...mp3) dans la zone *Message*.
-- **Image** : lien vers l’image de l’album.
-- **Album** : nom de l’album en cours de lecture.
-- **Artiste** : nom de l’artiste en cours de lecture.
-- **Piste** : nom de la piste en cours de lecture.
-- **Dire** : permet de lire un texte sur le Sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire.
+- **Image**: lien vers l’image de l’album.
+- **Album**: nom de l’album en cours de lecture.
+- **Artiste**: nom de l’artiste en cours de lecture.
+- **Piste**: nom de la piste en cours de lecture.
+- **Dire**: permet de lire un texte sur le Sonos (voir partie TTS). Dans le titre vous pouvez mettre le volume et dans le message, le message à lire.
 
 > **Hint**
 > Les playlists et les favoris doivent être créés via l'app Sonos (sur mobile ou sur ordi) ensuite il faut faire une synchronisation pour mettre à jour les équipements et pouvoir les utiliser dans un scénario.
@@ -86,10 +98,10 @@ Ces commandes indiqueront et contrôleront la lecture en cours sur l'équipement
 
 Ces commandes agissent toujours sur l'équipement correspondant.
 
-- **Groupe statut** : indique si l'équipement est groupé ou non.
+- **Groupe statut**: indique si l'équipement est groupé ou non.
 - **Nom du groupe** dans le cas où l'équipement est groupé, donne le nom du groupe.
-- **Rejoindre un groupe** : permet de rejoindre le groupe du haut-parleur (un Sonos) donné (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à rejoindre. Cela peut-être n'importe quel membre d'un groupe existant, cela ne doit pas nécessairement être le coordinateur du groupe, ou un Sonos isolé. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
-- **Quitter le groupe** : permet de quitter le groupe.
+- **Rejoindre un groupe**: permet de rejoindre le groupe du haut-parleur (un Sonos) donné (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à rejoindre. Cela peut-être n'importe quel membre d'un groupe existant, cela ne doit pas nécessairement être le coordinateur du groupe, ou un Sonos isolé. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
+- **Quitter le groupe**: permet de quitter le groupe.
 
 # TTS
 

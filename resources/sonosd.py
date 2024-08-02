@@ -10,6 +10,7 @@ from soco.data_structures import SearchResult
 from jeedomdaemon.base_daemon import BaseDaemon
 from jeedomdaemon.base_config import BaseConfig
 
+from sonos.const import RAMP_TYPES
 from sonos.data import SonosData
 from sonos.speaker import SonosSpeaker
 
@@ -71,6 +72,13 @@ class SonosDaemon(BaseDaemon):
                 speaker.soco.set_relative_volume(1)
             elif message['action'] == 'dec_volume':
                 speaker.soco.set_relative_volume(-1)
+            elif message['action'] == 'ramp_to_volume':
+                try:
+                    ramp_type = RAMP_TYPES[message['title']]
+                except KeyError:
+                    self._logger.error("Incorrect ramp type %s", message['title'])
+                    return
+                speaker.soco.ramp_to_volume(message['message'], ramp_type)
             elif message['action'] == 'switch_to_line_in':
                 speaker.soco.switch_to_line_in()
             elif message['action'] == 'switch_to_tv':

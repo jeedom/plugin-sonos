@@ -17,6 +17,7 @@
 
 - Ajout d'une commande **Jouer une radio mp3** pour lire une radio mp3 directement via une URL (accessible sur internet par exemple)
 - Ajout des commandes **Augmenter le volume** et **Diminuer le volume**
+- Ajout d'une commande **Transition de volume** qui est très intéressante pour gérer les transitions de niveau de volume. 3 modes possible: *LINEAR*, *ALARM*, *AUTOPLAY*. Voir documentation pour plus d'information.
 
 # 02/08/2024
 
