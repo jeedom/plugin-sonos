@@ -13,10 +13,15 @@
 >
 > Voir également [ce sujet sur community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) pour plus de détails
 
+# 03/08/2024
+
+- Ajout d'une commande **Jouer une radio mp3** pour lire une radio mp3 directement via une URL (accessible sur internet par exemple)
+
 # 02/08/2024
 
+- Ajout des commandes **Led on**, **Led off** et **Led statut** pour contrôler le voyant d'état
 - Fix un crash du démon si aucun Sonos n'est découvert
-- Ajout des commandes pour contrôler le voyant d'état
+- Amélioration compatibilité Debian 10 / python 3.7
 
 # 01/08/2024
 

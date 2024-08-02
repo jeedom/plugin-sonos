@@ -72,9 +72,9 @@ class SonosDaemon(BaseDaemon):
             elif message['action'] == 'switch_to_tv':
                 speaker.soco.switch_to_tv()
             elif message['action'] == 'led_on':
-                speaker.status_light = True
+                speaker.set_status_light(True)
             elif message['action'] == 'led_off':
-                speaker.status_light = False
+                speaker.set_status_light(False)
 
             elif message['action'] == 'repeat':
                 coordinator.soco.repeat = not coordinator.soco.repeat
@@ -142,6 +142,10 @@ class SonosDaemon(BaseDaemon):
                     coordinator.soco.play_from_queue(0)
                 except StopIteration:
                     self._logger.error("Radio '%s' not found, cannot play on %s", message['title'], speaker.zone_name)
+
+            elif message['action'] == 'play_mp3radio':
+                _title = message['title'] if message['title'] else 'MP3 Radio'
+                coordinator.soco.play_uri(f"x-rincon-mp3radio://{message['message']}", title=_title)
 
             elif message['action'] == 'tts':
                 coordinator.snapshot(False)

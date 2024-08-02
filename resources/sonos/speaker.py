@@ -14,20 +14,19 @@ import defusedxml.ElementTree as ET
 from soco import SoCoException
 from soco.core import SoCo
 from soco.events_base import Event as SonosEvent, SubscriptionBase
-from soco.plugins.plex import PlexPlugin
-from soco.plugins.sharelink import ShareLinkPlugin
 from soco.snapshot import Snapshot
+from soco.exceptions import SoCoSlaveException
 # from sonos_websocket import SonosWebsocket
 
 from .alarms import SonosAlarms
 from .const import (
+    ALL_FEATURES,
     SONOS_STATE_TRANSITIONING,
     SUBSCRIPTION_TIMEOUT,
 )
 from .data import SonosData
 from .exception import S1BatteryMissing, SonosSubscriptionsFailed, SonosUpdateError
 from .media import SonosMedia
-# from .statistics import ActivityStatistics, EventStatistics
 
 NEVER_TIME = -1200.0
 RESUB_COOLDOWN_SECONDS = 10.0
@@ -82,6 +81,7 @@ class SonosSpeaker:
         self.player_icon: str = speaker_info["player_icon"]
         self.serial_number: str = speaker_info["serial_number"]
 
+        self.available_features = []
 
         # Subscriptions and events
         self.subscriptions_failed: bool = False
@@ -120,9 +120,9 @@ class SonosSpeaker:
         self.music_surround_level: int | None = None
 
         # Misc features
-        self._buttons_enabled: bool | None = None
+        self.buttons_enabled: bool | None = None
         self.mic_enabled: bool | None = None
-        self._status_light: bool | None = None
+        self.status_light: bool | None = None
 
         # Grouping
         self.coordinator: SonosSpeaker | None = None
@@ -132,6 +132,7 @@ class SonosSpeaker:
         self._group_members_missing: set[str] = set()
 
         asyncio.create_task(self.async_subscribe())
+        self._get_available_features()
 
     def get_info(self):
         return {
@@ -145,7 +146,8 @@ class SonosSpeaker:
             "model_name": self.model_name.replace("Sonos ", ""),
             "display_version": self.display_version,
             "mac_address": self.mac_address,
-            "ip_address": self.ip_address
+            "ip_address": self.ip_address,
+            "available_features": self.available_features
         }
 
     def to_dict(self):
@@ -171,39 +173,20 @@ class SonosSpeaker:
             'buttons_enabled': self.buttons_enabled
         }
 
+    def set_status_light(self, led_on: bool):
+        """Switch on/off the speaker's status light."""
+        self.soco.status_light = led_on
+        self.status_light = led_on
+        self.__change_cb(self)
+
+    def set_buttons_enabled(self, enabled: bool):
+        self.soco.buttons_enabled = enabled
+        self.buttons_enabled = enabled
+        self.__change_cb(self)
+
     #
     # Properties
     #
-    @property
-    def status_light(self):
-        """bool: The white Sonos status light between the mute button and the
-        volume up button on the speaker.
-
-        True if on, otherwise False.
-        """
-        if self._status_light is None:
-            self._status_light = self.soco.status_light
-        return self._status_light
-
-    @status_light.setter
-    def status_light(self, led_on):
-        """Switch on/off the speaker's status light."""
-        self.soco.status_light = led_on
-        self._status_light = led_on
-        self.__change_cb(self)
-
-    @property
-    def buttons_enabled(self):
-        if self._buttons_enabled is None:
-            self._buttons_enabled = self.soco.buttons_enabled
-        return self._buttons_enabled
-
-    @buttons_enabled.setter
-    def buttons_enabled(self, enabled):
-        self.soco.buttons_enabled = enabled
-        self._buttons_enabled = enabled
-        self.__change_cb(self)
-
     @property
     def alarms(self) -> SonosAlarms:
         """Return the SonosAlarms instance for this household."""
@@ -227,6 +210,18 @@ class SonosSpeaker:
         subscribed_services = {sub.service.service_type for sub in self._subscriptions}
         return SUBSCRIPTION_SERVICES - subscribed_services
 
+
+    def _get_available_features(self):
+        features = []
+        for feature_type in ALL_FEATURES:
+            try:
+                state = getattr(self.soco, feature_type, None)
+                if state is not None:
+                    setattr(self, feature_type, state)
+                    features.append(feature_type)
+            except SoCoSlaveException:
+                features.append(feature_type)
+        self.available_features = features
     #
     # Subscription handling and event dispatchers
     #
@@ -329,14 +324,14 @@ class SonosSpeaker:
     async def poll_status_light_and_buttons(self):
         has_changed = False
         _buttons_enabled = self.soco.buttons_enabled
-        if _buttons_enabled != self._buttons_enabled:
+        if _buttons_enabled != self.buttons_enabled:
             has_changed = True
-            self._buttons_enabled = _buttons_enabled
+            self.buttons_enabled = _buttons_enabled
 
         _status_light = self.soco.status_light
-        if _status_light != self._status_light:
+        if _status_light != self.status_light:
             has_changed = True
-            self._status_light = _status_light
+            self.status_light = _status_light
 
         if has_changed:
             self.__change_cb(self)

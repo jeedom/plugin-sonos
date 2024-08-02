@@ -35,7 +35,7 @@ Il n'y a aucune configuration spécifique à effectuer.
 
 Les commandes infos seront mises à jour en quasi temps réel (délai de quelques secondes maximum normalement) mais l'image de l'album en cours de lecture peut mettre un peu plus de temps à s'afficher sur le widget lors d'un changement de piste, ceci est parfaitement normal et indépendant du plugin: il doit récupérer l'image depuis une source externe (sur un Sonos ou sur internet) et cela prend parfois plusieurs secondes (en principe maximum une dizaine de secondes).
 
-## Commandes de volume et source
+## Commandes de volume & contrôle du Sonos
 
 Ces commandes vont toujours contrôler l'équipement correspondant, y compris lorsque celui-ci est dans un groupe.
 
@@ -44,11 +44,6 @@ Ces commandes vont toujours contrôler l'équipement correspondant, y compris lo
 - **Muet** : Active le mode muet.
 - **Non Muet** : Désactive le mode muet.
 - **Muet statut** : indique si on est en mode muet ou non.
-
-## Commandes de contrôle
-
-Ces commandes vont toujours contrôler l'équipement correspondant, y compris lorsque celui-ci est dans un groupe.
-
 - **TV** : pour basculer sur l'entrée *TV* sur les équipements compatibles
 - **Entrée audio analogique** : pour basculer sur l'*Entrée audio analogique* (*Line-in*) sur les équipements compatibles
 - **Led on** : Active la led, le voyant d'état.
@@ -74,6 +69,7 @@ Ces commandes indiqueront et contrôleront la lecture en cours sur l'équipement
 - **Jouer playlist** : commande de type message permettant de lancer une playlist, il suffit dans le titre de mettre le nom de la playlist. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
 - **Jouer favoris** :  commande de type message permettant de lancer un favoris, il suffit dans le titre de mettre le nom du favori. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
 - **Jouer une radio** : commande de type message permettant de lancer une radio, il suffit dans le titre de mettre le nom de la radio *(ATTENTION : celle ci doit être dans les radios favorites)*. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper. Ne fonctionne plus sur les modèles "S2", il est normal d'avoir une liste vide sur tous les modèles utilisant l'app Sonos S2.
+- **Jouer une radio mp3**: permet de lire une radio mp3 via une URL (par exemple depuis internet). Vous devez mettre un titre dans la zone *Titre* et l'url (format http(s)://...mp3) dans la zone *Message*.
 - **Image** : lien vers l’image de l’album.
 - **Album** : nom de l’album en cours de lecture.
 - **Artiste** : nom de l’artiste en cours de lecture.

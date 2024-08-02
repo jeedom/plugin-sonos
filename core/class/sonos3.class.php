@@ -227,6 +227,7 @@ class sonos3 extends eqLogic {
 			$eqLogic->setConfiguration('display_version', $controller['display_version']);
 			$eqLogic->setConfiguration('mac_address', $controller['mac_address']);
 			$eqLogic->setConfiguration('ip_address', $controller['ip_address']);
+			$eqLogic->setConfiguration('available_features', $controller['available_features']);
 			$eqLogic->save(true);
 
 			$eqLogic->createCommands();
@@ -734,6 +735,19 @@ class sonos3 extends eqLogic {
 			$play_radio->save();
 		}
 
+		$play_mp3radio = $this->getCmd(null, 'play_mp3radio');
+		if (!is_object($play_mp3radio)) {
+			$play_mp3radio = new sonos3Cmd();
+			$play_mp3radio->setLogicalId('play_mp3radio');
+			$play_mp3radio->setName(__('Jouer une radio mp3', __FILE__));
+			$play_mp3radio->setType('action');
+			$play_mp3radio->setSubType('message');
+			$play_mp3radio->setDisplay('title_placeholder', __('Titre de la radio', __FILE__));
+			$play_mp3radio->setDisplay('message_placeholder', __('URL de la radio', __FILE__));
+			$play_mp3radio->setEqLogic_id($this->getId());
+			$play_mp3radio->save();
+		}
+
 		$join = $this->getCmd(null, 'join');
 		if (!is_object($join)) {
 			$join = new sonos3Cmd();
@@ -793,37 +807,40 @@ class sonos3 extends eqLogic {
 			$tts->save();
 		}
 
-		$led_state = $this->getCmd(null, 'led_state');
-		if (!is_object($led_state)) {
-			$led_state = new sonos3Cmd();
-			$led_state->setLogicalId('led_state');
-			$led_state->setName(__('Led statut', __FILE__));
-			$led_state->setType('info');
-			$led_state->setSubType('binary');
-			$led_state->setEqLogic_id($this->getId());
-			$led_state->save();
-		}
-		$led_on = $this->getCmd(null, 'led_on');
-		if (!is_object($led_on)) {
-			$led_on = new sonos3Cmd();
-			$led_on->setLogicalId('led_on');
-			$led_on->setName('Led on');
-			$led_on->setType('action');
-			$led_on->setSubType('other');
-			$led_on->setEqLogic_id($this->getId());
-			$led_on->setValue($led_state->getId());
-			$led_on->save();
-		}
-		$led_off = $this->getCmd(null, 'led_off');
-		if (!is_object($led_off)) {
-			$led_off = new sonos3Cmd();
-			$led_off->setLogicalId('led_off');
-			$led_off->setName('Led off');
-			$led_off->setType('action');
-			$led_off->setSubType('other');
-			$led_off->setEqLogic_id($this->getId());
-			$led_off->setValue($led_state->getId());
-			$led_off->save();
+		$available_features = $this->getConfiguration('available_features', []);
+		if (in_array('status_light', $available_features)) {
+			$led_state = $this->getCmd(null, 'led_state');
+			if (!is_object($led_state)) {
+				$led_state = new sonos3Cmd();
+				$led_state->setLogicalId('led_state');
+				$led_state->setName(__('Led statut', __FILE__));
+				$led_state->setType('info');
+				$led_state->setSubType('binary');
+				$led_state->setEqLogic_id($this->getId());
+				$led_state->save();
+			}
+			$led_on = $this->getCmd(null, 'led_on');
+			if (!is_object($led_on)) {
+				$led_on = new sonos3Cmd();
+				$led_on->setLogicalId('led_on');
+				$led_on->setName('Led on');
+				$led_on->setType('action');
+				$led_on->setSubType('other');
+				$led_on->setEqLogic_id($this->getId());
+				$led_on->setValue($led_state->getId());
+				$led_on->save();
+			}
+			$led_off = $this->getCmd(null, 'led_off');
+			if (!is_object($led_off)) {
+				$led_off = new sonos3Cmd();
+				$led_off->setLogicalId('led_off');
+				$led_off->setName('Led off');
+				$led_off->setType('action');
+				$led_off->setSubType('other');
+				$led_off->setEqLogic_id($this->getId());
+				$led_off->setValue($led_state->getId());
+				$led_off->save();
+			}
 		}
 	}
 
