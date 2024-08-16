@@ -13,8 +13,8 @@ El complemento buscará Sonos en su red y creará el equipo automáticamente. Ad
 Si luego agrega un Sonos, puede hacer clic en **Sincronizar** en la página del equipo o reinicie el demonio.
 
 - **Compartir**: Configure aquí el nombre de host de la máquina (o su IP), el nombre del recurso compartido (sin la ruta, sin '/') y la ruta a la carpeta.
-- **Compartir nombre de usuario** : nombre de usuario para acceder a compartir.
-- **Compartir contraseña** : Compartir contraseña.
+- **Compartir nombre de usuario**: nombre de usuario para acceder a compartir.
+- **Compartir contraseña**: Compartir contraseña.
 
 # Configuración del equipo
 
@@ -22,10 +22,10 @@ Se puede acceder a la configuración del equipo Sonos desde el menú Complemento
 
 Aquí encontrarás toda la configuración habitual de tu equipo :
 
-- **Nombre de Sonos** : nombre de su equipo Sonos.
-- **Objeto padre** : indica el objeto padre al que pertenece el equipo.
-- **Activar** : activa su equipo.
-- **Visible** : lo hace visible en el tablero.
+- **Nombre de Sonos**: nombre de su equipo Sonos.
+- **Objeto padre**: indica el objeto padre al que pertenece el equipo.
+- **Activar**: activa su equipo.
+- **Visible**: lo hace visible en el tablero.
 
 Además de información sobre tu Sonos: *Modelo*, *Lanzamientos*, *Número de serie*, *Identificador*, *Dirección MAC* Y *Dirección IP*.
 
@@ -35,50 +35,61 @@ No hay ninguna configuración específica que realizar.
 
 Los controles de información se actualizarán casi en tiempo real (normalmente unos segundos como máximo), pero la imagen del álbum que se está reproduciendo actualmente puede tardar un poco más en mostrarse en el widget cuando se produce un cambio de pista, esto es perfectamente normal e independiente de la pista. enchufar: debe recuperar la imagen de una fuente externa (en un Sonos o en Internet) y esto a veces lleva varios segundos (en principio, un máximo de diez segundos)).
 
-## Controles de volumen y fuente
+## Controles y controles de volumen de Sonos
 
 Estos comandos controlarán siempre el equipo correspondiente, incluso cuando esté en grupo.
 
-- **Volumen** : cambiar el volumen *(de 0 a 100)*.
-- **Volumen de estado** : Nivel de volumen.
-- **Mudo** : Activar el modo silencio.
-- **Sin silencio** : Desactivar silencio.
-- **Estado de silencio** : indica si estamos en modo silencio o no.
-
-## Comandos de control
-
-Estos comandos controlarán siempre el equipo correspondiente, incluso cuando esté en grupo.
-
-- **TELEVISOR** : para cambiar a la entrada *TELEVISOR* en equipos compatibles
-- **Entrada de audio analógico** : para cambiar a'*Entrada de audio analógico* (*En linea*) en equipos compatibles
-- **El don** : Activa el LED, la luz de estado.
-- **Llevar afuera** : Desactiva el LED, la luz de estado.
-- **LED de estado** : indica si la luz de estado está encendida o no. Esta información solo se actualiza una vez por minuto en caso de que se modifique fuera de Jeedom.
+- **Volumen**: cambiar el volumen *(de 0 a 100)*
+- **Volumen de estado**: nivel de volumen (en %)
+- **Sube el volumen**: aumenta el volumen en un 1%; Puede ser útil para la integración con otros sistemas o complementos
+- **Disminuir el volumen**: disminuye el volumen en un 1%; Puede ser útil para la integración con otros sistemas o complementos
+- **Transición de volumen** le permite realizar transiciones de nivel de volumen administradas directamente por el altavoz Sonos, no es el complemento el que se encarga de esto y por lo tanto no bloquea pero los retrasos no son configurables desde que los define Sonos. El tipo de transición y el volumen de destino deben elegirse al ejecutar el comando. Hay 3 modos:
+  - *LINEAL*: transición lineal del volumen actual al volumen objetivo (aumentar o disminuir), la velocidad es 1.25 por segundo (una transición *LINEAL* Del 50% al 30% se necesitarán 16s)
+  - *ALARMA*: inicializa el volumen a 0, hace una pausa de unos 30 segundos y luego aumenta al volumen solicitado a una velocidad de 2.5 por segundo (una transición *ALARMA* del 0% al 10% tardará 4s)
+  - *AUTO-REPRODUCCIÓN*: inicializa el volumen a 0 y aumenta rápidamente al volumen solicitado a una velocidad de 50 por segundo (una transición *AUTO-REPRODUCCIÓN* de 0% a 50% tomará 1s)
+- **Mudo**: Activar el modo silencio.
+- **Sin silencio**: Desactivar silencio.
+- **Estado de silencio**: indica si estamos en modo silencio o no.
+- **TELEVISOR**: para cambiar a la entrada *TELEVISOR* en equipos compatibles
+- **Entrada de audio analógico**: para cambiar a'*Entrada de audio analógico* (*En linea*) en equipos compatibles
+- **El don**: Activa el LED, la luz de estado.
+- **Llevar afuera**: Desactiva el LED, la luz de estado.
+- **LED de estado**: indica si la luz de estado está encendida o no. Esta información solo se actualiza una vez por minuto en caso de que se modifique fuera de Jeedom.
 
 ## Controles de reproducción
 
 Estos comandos indicarán y controlarán la reproducción actual en el equipo o en el grupo si está agrupado y esto de forma transparente, no tienes que preocuparte por saber si los equipos están agrupados o no para usarlos.
 
-- **Estado** : estado del lector traducido al idioma configurado en Jeedom. Por ejemplo: *Lectura*, *Pausa*, *Interrumpido*.
+- **Estado**: estado del lector traducido al idioma configurado en Jeedom. Por ejemplo: *Lectura*, *Pausa*, *Interrumpido*.
 - **Estado de lectura** que da el valor "bruto" del estado de lectura: *JUGANDO*, *PAUSAD_REPRODUCCIÓN*, *INTERRUMPIDO*; más adecuado para escenarios.
-- **Lectura** : leer.
-- **Pausa** : pausa.
-- **Detener** : deja de leer.
-- **Anterior** : pista anterior.
-- **Próximo** : siguiente pista.
-- **Estado aleatorio** : indica si estamos en modo aleatorio o no.
-- **Al azar** : invertir el estado del modo aleatorio.
-- **Repita el estado** : indica si estamos en modo de repetición o no.
-- **Repetición** : invertir el estado del modo "repetir"".
-- **Modo de lectura** dando estatus y mando **Elige el modo de lectura** que le permite elegir entre las siguientes posibilidades: *Normal*, *Repite todo*, *Al azar*, *Aleatorio sin repetición*, *Repetir canción*, *Canción aleatoria y repetida*. Esta acción equivale a utilizar los comandos **Repetición** & **Al azar** para llegar a la configuración deseada. Sin embargo, esta es la única manera de cambiar al modo *Repetir canción* O *Canción aleatoria y repetida*.
-- **Reproducir lista de reproducción** : comando de tipo de mensaje para iniciar una lista de reproducción, solo ponga el nombre de la lista de reproducción en el título. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir.
-- **Jugar favoritos** :  comando de tipo de mensaje para lanzar un favorito, todo lo que tienes que hacer en el título es poner el nombre del favorito. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir.
-- **Tocar una radio** : comando de tipo de mensaje para lanzar una estación de radio, todo lo que tiene que hacer es poner el nombre de la radio en el título *(Atención : esto debe estar en las radios favoritas)*. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir. Ya no funciona en los modelos "S2", es normal tener una lista vacía en todos los modelos que usan la aplicación Sonos S2.
-- **Imagen** : enlace a la imagen del álbum.
-- **Álbum** : nombre del álbum actualmente en reproducción.
-- **Artista** : nombre del artista actualmente en reproducción.
-- **Seguir** : nombre de la pista que se está reproduciendo actualmente.
-- **Decir** : permite leer un texto en Sonos (ver parte de TTS). En el título puede configurar el volumen y en el mensaje, el mensaje a leer.
+- **Lectura**: leer.
+- **Pausa**: pausa.
+- **Detener**: deja de leer.
+- **Anterior**: pista anterior.
+- **Próximo**: siguiente pista.
+- **Estado aleatorio**: indica si estamos en modo aleatorio o no.
+- **Al azar**: invertir el estado del modo aleatorio.
+- **Repita el estado**: indica si estamos en modo de repetición o no.
+- **Repetición**: invertir el estado del modo "repetir"".
+- **Elige el modo de lectura** le permite elegir entre las siguientes posibilidades:
+  - *Normal* (repetir, desactivar aleatoriamente),
+  - *Repite todo* (aleatorio apagado),
+  - *Aleatorio y repetir todo*,
+  - *Aleatorio sin repetición*,
+  - *Repetir canción* (aleatorio apagado),
+  - *Canción aleatoria y repetida*.
+
+  Recomiendo usar este comando en un escenario en lugar de **Repetición** & **Al azar** para llegar a la configuración deseada incluso si todos actúan sobre los mismos parámetros. Este comando es, sin embargo, la única manera de cambiar al modo *Repetir canción* O *Canción aleatoria y repetida*.
+- **Modo de lectura** dando el estado actual que será uno de los valores citados anteriormente.
+- **Reproducir lista de reproducción**: comando de tipo de mensaje para iniciar una lista de reproducción, solo ponga el nombre de la lista de reproducción en el título. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir.
+- **Jugar favoritos**:  comando de tipo de mensaje para lanzar un favorito, todo lo que tienes que hacer en el título es poner el nombre del favorito. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir.
+- **Tocar una radio**: comando de tipo de mensaje para lanzar una estación de radio, todo lo que tiene que hacer es poner el nombre de la radio en el título *(Atención : esto debe estar en las radios favoritas)*. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir. Ya no funciona en los modelos "S2", es normal tener una lista vacía en todos los modelos que usan la aplicación Sonos S2.
+- **Reproducir radio mp3**: le permite reproducir una radio mp3 a través de una URL (por ejemplo, desde Internet)). Debes poner un título en el cuadro *Título* y la URL (http(formato s))://...mp3) en el área *Mensaje*.
+- **Imagen**: enlace a la imagen del álbum.
+- **Álbum**: nombre del álbum actualmente en reproducción.
+- **Artista**: nombre del artista actualmente en reproducción.
+- **Seguir**: nombre de la pista que se está reproduciendo actualmente.
+- **Decir**: permite leer un texto en Sonos (ver parte de TTS). En el título puede configurar el volumen y en el mensaje, el mensaje a leer.
 
 > **Pista**
 > Las listas de reproducción y favoritos deben crearse a través de la aplicación Sonos (en el móvil o en la computadora) luego se debe realizar la sincronización para actualizar el equipo y poder usarlo en un escenario.
@@ -87,10 +98,10 @@ Estos comandos indicarán y controlarán la reproducción actual en el equipo o 
 
 Estos comandos actúan siempre sobre el equipo correspondiente.
 
-- **Estado del grupo** : Indica si el equipo está agrupado o no.
+- **Estado del grupo**: Indica si el equipo está agrupado o no.
 - **Nombre del grupo** si el equipo está agrupado, indique el nombre del grupo.
-- **Únete a un grupo** : le permite unirse al grupo del hablante determinado (un Sonos) (para asociar 2 Sonos, por ejemplo)). Debe ingresar el nombre de la sala del sistema de sonido para unirse. Puede ser cualquier miembro de un grupo existente, no tiene que ser el coordinador del grupo ni un Sonos aislado. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir.
-- **Abandonar el grupo** : te permite salir del grupo.
+- **Únete a un grupo**: le permite unirse al grupo del hablante determinado (un Sonos) (para asociar 2 Sonos, por ejemplo)). Debe ingresar el nombre de la sala del sistema de sonido para unirse. Puede ser cualquier miembro de un grupo existente, no tiene que ser el coordinador del grupo ni un Sonos aislado. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir.
+- **Abandonar el grupo**: te permite salir del grupo.
 
 # TTS
 

@@ -13,15 +13,22 @@
 >
 > Veja também [este tópico na comunidade](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) para mais detalhes
 
+# 03/08/2024
+
+- Adicionando um pedido **Tocar rádio mp3** reproduzir uma rádio mp3 diretamente através de uma URL (acessível na internet por exemplo)
+- Adicionando comandos **Aumenta o volume** E **Diminuir o volume** a partir de 1%
+- Adicionando um pedido **Transição de volume** o que é muito útil para gerenciar transições de nível de volume. 3 modos possíveis: *LINEAR*, *ALARME*, *REPRODUÇÃO AUTOMÁTICA*. Consulte a documentação para obter mais informações.
+
 # 02/08/2024
 
+- Adicionando comandos **O presente**, **Partiu** E **LED de status** para verificar o indicador de status
 - Corrija a falha do daemon se nenhum Sonos for descoberto
-- Adicionados comandos para controlar o LED de status
+- Compatibilidade aprimorada com Debian 10/Python 3.7
 
 # 01/08/2024
 
 - Reescrita quase total do plugin, o daemon foi completamente reescrito em python (em vez de PHP)
-- Compatível com Debian 11 e 12! (provavelmente Debian 10, mas não testado e sem suporte possível nesta versão)
+- Compatível com Debian 11 e 12! (Provavelmente Debian 10, mas não testado e sem suporte possível nesta versão)
 - Não há mais nenhuma descoberta para iniciar manualmente e não é mais necessário (nem possível) adicionar equipamentos manualmente, o plugin descobre automaticamente seus dispositivos de som e cria os equipamentos correspondentes a cada inicialização do daemon. Também é possível pedir para (re)sincronizar equipamentos, favoritos e playlists sem reiniciar o daemon a partir do painel de equipamentos
 - Atualização (quase) em tempo real das informações do pedido (um atraso de 0.5s a alguns segundos no máximo), mais minutos cron, inclusive quando uma alteração é feita fora do Jeedom (por meio do aplicativo Sonos, por exemplo)
 - Redesenho do gerenciamento de grupos (comandos antigos serão excluídos e novos serão adicionados, consulte a documentação). É possível entrar ou sair de um grupo, controlar a reprodução do grupo a partir de qualquer dispositivo do grupo sem se preocupar com quem é o controlador. O volume é sempre controlado pelo alto-falante.
@@ -29,7 +36,7 @@
 - Optimisation: não há mais perda de memória no daemon e consome menos do que antes.
 
 - Adicionando um comando de ação **Televisão** para mudar para a entrada *Televisão* em equipamentos compatíveis
-- Adicionando um comando de informações **Modo de leitura** e ação **Escolha o modo de leitura** que permite selecionar o modo de leitura entre as seguintes possibilidades: *Normal*, *Repita tudo*, *Aleatório*, *Aleatório sem repetição*, *Repetir música*, *Música aleatória e repetida*
+- Adicionando um comando de informações **Modo de leitura** e ação **Escolha o modo de leitura** que permite selecionar o modo de leitura entre as seguintes possibilidades: *Normal*, *Repita tudo*, *Aleatório e repita tudo*, *Aleatório sem repetição*, *Repetir música*, *Música aleatória e repetida*
 - Adicionando um pedido **Status de leitura** que fornece o valor "bruto" do estado de leitura (o comando existente **Status** fornece um valor traduzido com base no idioma configurado no Jeedom)
 - Adicionando comandos **Status do grupo** (indica se o equipamento está agrupado ou não) e **Nome do grupo** no caso em que o equipamento está agrupado
 
