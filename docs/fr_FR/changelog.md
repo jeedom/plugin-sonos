@@ -18,7 +18,7 @@
 - Ajout des commandes **Loudness**, **Loudness on**, **Loudness off**
 - Ajout des commandes **Fondu enchaîné**, **Fondu enchaîné on**, **Fondu enchaîné off**
 - Ajout des commandes **Commandes tactiles**, **Commandes tactiles on**, **Commandes tactiles off**
-- Ajout des commandes **Balance** (action/slider) et **Balance statut** qui gère la balance selon une valeur comprise entre -100 (tout à gauche) et 100 (tout à droite)
+- Ajout des commandes **Balance** (action/curseur) et **Balance statut** qui gère la balance selon une valeur comprise entre -100 (tout à gauche) et 100 (tout à droite)
 
 # 03/08/2024
 
