@@ -184,6 +184,11 @@ class SonosSpeaker:
         self.buttons_enabled = enabled
         self.__change_cb(self)
 
+    def set_balance(self, balance: int):
+        balance_tuple = (min(100, 100-balance), min(100, 100+balance))
+        _LOGGER.debug("set to balance %i => %s", balance, balance_tuple)
+        self.soco.balance = balance_tuple
+
     #
     # Properties
     #

@@ -284,6 +284,7 @@ class sonos3 extends eqLogic {
 			log::add(__CLASS__, 'debug', "update commands of speaker: {$uid}");
 			$changed = false;
 			$changed = $eqLogic->checkAndUpdateCmd('volume_state', $data['volume']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('balance_state', $data['balance'][1] - $data['balance'][0]) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mute_state', $data['muted']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mic_state', $data['mic_enabled']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('led_state', $data['status_light']) || $changed;
@@ -626,12 +627,13 @@ class sonos3 extends eqLogic {
 			$volume_state->setName(__('Volume statut', __FILE__));
 			$volume_state->setGeneric_type('VOLUME');
 			$volume_state->setUnite('%');
+			$volume_state->setConfiguration('minValue', 0);
+			$volume_state->setConfiguration('maxValue', 100);
 			$volume_state->setType('info');
 			$volume_state->setSubType('numeric');
 			$volume_state->setEqLogic_id($this->getId());
 			$volume_state->save();
 		}
-
 		$volume = $this->getCmd(null, 'volume');
 		if (!is_object($volume)) {
 			$volume = new sonos3Cmd();
@@ -640,6 +642,8 @@ class sonos3 extends eqLogic {
 			$volume->setGeneric_type('SET_VOLUME');
 			$volume->setType('action');
 			$volume->setSubType('slider');
+			$volume->setConfiguration('minValue', 0);
+			$volume->setConfiguration('maxValue', 100);
 			$volume->setValue($volume_state->getId());
 			$volume->setEqLogic_id($this->getId());
 			$volume->save();
@@ -676,6 +680,31 @@ class sonos3 extends eqLogic {
 			$ramp_to_volume->setDisplay('message_placeholder', __('Volume', __FILE__));
 			$ramp_to_volume->setEqLogic_id($this->getId());
 			$ramp_to_volume->save();
+		}
+		$balance_state = $this->getCmd(null, 'balance_state');
+		if (!is_object($balance_state)) {
+			$balance_state = new sonos3Cmd();
+			$balance_state->setLogicalId('balance_state');
+			$balance_state->setName(__('Balance statut', __FILE__));
+			$balance_state->setType('info');
+			$balance_state->setSubType('numeric');
+			$balance_state->setConfiguration('minValue', -100);
+			$balance_state->setConfiguration('maxValue', 100);
+			$balance_state->setEqLogic_id($this->getId());
+			$balance_state->save();
+		}
+		$balance = $this->getCmd(null, 'balance');
+		if (!is_object($balance)) {
+			$balance = new sonos3Cmd();
+			$balance->setLogicalId('balance');
+			$balance->setName(__('Balance', __FILE__));
+			$balance->setType('action');
+			$balance->setSubType('slider');
+			$balance->setConfiguration('minValue', -100);
+			$balance->setConfiguration('maxValue', 100);
+			$balance->setValue($balance_state->getId());
+			$balance->setEqLogic_id($this->getId());
+			$balance->save();
 		}
 
 		$track_title = $this->getCmd(null, 'track_title');
@@ -1168,10 +1197,12 @@ class sonos3Cmd extends cmd {
 				$params['message'] = $_options['message'] ?? '';
 				break;
 			case 'slider':
-				if ($_options['slider'] < 0) {
-					$_options['slider'] = 0;
-				} else if ($_options['slider'] > 100) {
-					$_options['slider'] = 100;
+				$minValue = $this->getConfiguration('minValue', 0);
+				$maxValue = $this->getConfiguration('maxValue', 100);
+				if ($_options['slider'] < $minValue) {
+					$_options['slider'] = $minValue;
+				} elseif ($_options['slider'] > $maxValue) {
+					$_options['slider'] = $maxValue;
 				}
 				$params['slider'] = $_options['slider'];
 				break;

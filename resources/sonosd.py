@@ -95,6 +95,8 @@ class SonosDaemon(BaseDaemon):
                 speaker.set_buttons_enabled(True)
             elif message['action'] == 'buttons_off':
                 speaker.set_buttons_enabled(False)
+            elif message['action'] == 'balance':
+                speaker.set_balance(int(message['slider']))
 
             elif message['action'] == 'repeat':
                 coordinator.soco.repeat = not coordinator.soco.repeat
