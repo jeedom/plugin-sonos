@@ -51,6 +51,8 @@ Ces commandes vont toujours contrôler l'équipement correspondant, y compris lo
 - **Non Muet**: Désactive le mode muet.
 - **Muet statut**: indique si on est en mode muet ou non.
 - **Balance** (action/curseur) et **Balance statut** qui gère la balance selon une valeur comprise entre -100 (tout à gauche) et 100 (tout à droite) pour les Sonos compatibles
+- **Graves** (action/curseur) et **Graves statut** qui gère les graves selon une valeur comprise entre -10 et 10
+- **Aigus** (action/curseur) et **Aigus statut** qui gère la aigus selon une valeur comprise entre -10 et 10
 - **Loudness**, **Loudness on**, **Loudness off** contrôle le loudness
 
 - **TV**: pour basculer sur l'entrée *TV* sur les équipements compatibles

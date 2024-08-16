@@ -285,6 +285,8 @@ class sonos3 extends eqLogic {
 			$changed = false;
 			$changed = $eqLogic->checkAndUpdateCmd('volume_state', $data['volume']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('balance_state', $data['balance'][1] - $data['balance'][0]) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('bass_state', $data['bass']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('treble_state', $data['treble']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mute_state', $data['muted']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mic_state', $data['mic_enabled']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('led_state', $data['status_light']) || $changed;
@@ -705,6 +707,56 @@ class sonos3 extends eqLogic {
 			$balance->setValue($balance_state->getId());
 			$balance->setEqLogic_id($this->getId());
 			$balance->save();
+		}
+		$bass_state = $this->getCmd(null, 'bass_state');
+		if (!is_object($bass_state)) {
+			$bass_state = new sonos3Cmd();
+			$bass_state->setLogicalId('bass_state');
+			$bass_state->setName(__('Graves statut', __FILE__));
+			$bass_state->setType('info');
+			$bass_state->setSubType('numeric');
+			$bass_state->setConfiguration('minValue', -10);
+			$bass_state->setConfiguration('maxValue', 10);
+			$bass_state->setEqLogic_id($this->getId());
+			$bass_state->save();
+		}
+		$bass = $this->getCmd(null, 'bass');
+		if (!is_object($bass)) {
+			$bass = new sonos3Cmd();
+			$bass->setLogicalId('bass');
+			$bass->setName(__('Graves', __FILE__));
+			$bass->setType('action');
+			$bass->setSubType('slider');
+			$bass->setConfiguration('minValue', -10);
+			$bass->setConfiguration('maxValue', 10);
+			$bass->setValue($bass_state->getId());
+			$bass->setEqLogic_id($this->getId());
+			$bass->save();
+		}
+		$treble_state = $this->getCmd(null, 'treble_state');
+		if (!is_object($treble_state)) {
+			$treble_state = new sonos3Cmd();
+			$treble_state->setLogicalId('treble_state');
+			$treble_state->setName(__('Aigus statut', __FILE__));
+			$treble_state->setType('info');
+			$treble_state->setSubType('numeric');
+			$treble_state->setConfiguration('minValue', -10);
+			$treble_state->setConfiguration('maxValue', 10);
+			$treble_state->setEqLogic_id($this->getId());
+			$treble_state->save();
+		}
+		$treble = $this->getCmd(null, 'treble');
+		if (!is_object($treble)) {
+			$treble = new sonos3Cmd();
+			$treble->setLogicalId('treble');
+			$treble->setName(__('Aigus', __FILE__));
+			$treble->setType('action');
+			$treble->setSubType('slider');
+			$treble->setConfiguration('minValue', -10);
+			$treble->setConfiguration('maxValue', 10);
+			$treble->setValue($treble_state->getId());
+			$treble->setEqLogic_id($this->getId());
+			$treble->save();
 		}
 
 		$track_title = $this->getCmd(null, 'track_title');
