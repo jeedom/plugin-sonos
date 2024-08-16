@@ -890,6 +890,16 @@ class sonos3 extends eqLogic {
 			$unjoin->setEqLogic_id($this->getId());
 			$unjoin->save();
 		}
+		$partymode = $this->getCmd(null, 'partymode');
+		if (!is_object($partymode)) {
+			$partymode = new sonos3Cmd();
+			$partymode->setLogicalId('partymode');
+			$partymode->setName(__('Mode fête', __FILE__));
+			$partymode->setType('action');
+			$partymode->setSubType('other');
+			$partymode->setEqLogic_id($this->getId());
+			$partymode->save();
+		}
 
 		$line_in = $this->getCmd(null, 'switch_to_line_in');
 		if (!is_object($line_in)) {

@@ -109,6 +109,7 @@ Ces commandes agissent toujours sur l'équipement correspondant.
 - **Nom du groupe** dans le cas où l'équipement est groupé, donne le nom du groupe.
 - **Rejoindre un groupe**: permet de rejoindre le groupe du haut-parleur (un Sonos) donné (pour associer 2 Sonos par exemple). Il faut mettre le nom de la pièce du sonos à rejoindre. Cela peut-être n'importe quel membre d'un groupe existant, cela ne doit pas nécessairement être le coordinateur du groupe, ou un Sonos isolé. Dans un scénario, une liste de possibilité sera automatiquement affichée lorsque vous commencerez à taper.
 - **Quitter le groupe**: permet de quitter le groupe.
+- **Mode fête** permet de grouper tous les Sonos ensemble
 
 # TTS
 

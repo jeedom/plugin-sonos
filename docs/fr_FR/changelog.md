@@ -21,6 +21,7 @@
 - Ajout des commandes **Balance** (action/curseur) et **Balance statut** qui gère la balance selon une valeur comprise entre -100 (tout à gauche) et 100 (tout à droite)
 - Ajout des commandes **Graves** (action/curseur) et **Graves statut** qui gère les graves selon une valeur comprise entre -10 et 10
 - Ajout des commandes **Aigus** (action/curseur) et **Aigus statut** qui gère la aigus selon une valeur comprise entre -10 et 10
+- Ajout de la commande **Mode fête** qui permet de grouper tous les Sonos ensemble
 
 # 03/08/2024
 

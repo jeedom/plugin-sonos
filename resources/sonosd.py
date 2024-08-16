@@ -62,6 +62,7 @@ class SonosDaemon(BaseDaemon):
             speaker = self._speakers[message['uid']]
             coordinator = speaker if speaker.is_coordinator else speaker.coordinator
 
+            ## actions on speaker: volume, equalizer, speaker controle
             if message['action'] == 'mute':
                 speaker.soco.mute = True
             elif message['action'] == 'unmute':
@@ -102,6 +103,20 @@ class SonosDaemon(BaseDaemon):
             elif message['action'] == 'treble':
                 speaker.soco.treble = message['slider']
 
+            ## actions to manage groups
+            elif message['action'] == 'join':
+                try:
+                    master = next(item for item in self._speakers.values() if item.zone_name==message['title'])
+                    master = master if master.is_coordinator else master.coordinator
+                    speaker.soco.join(master)
+                except StopIteration:
+                    self._logger.warning("No zone '%s'", message['title'])
+            elif message['action'] == 'unjoin':
+                speaker.soco.unjoin()
+            elif message['action'] == 'partymode':
+                speaker.soco.partymode()
+
+            ## action on playlist & playmode
             elif message['action'] == 'repeat':
                 coordinator.soco.repeat = not coordinator.soco.repeat
             elif message['action'] == 'repeat_on':
@@ -130,16 +145,6 @@ class SonosDaemon(BaseDaemon):
                 coordinator.soco.cross_fade = True
             elif message['action'] == 'cross_fade_off':
                 coordinator.soco.cross_fade = False
-
-            elif message['action'] == 'join':
-                try:
-                    master = next(item for item in self._speakers.values() if item.zone_name==message['title'])
-                    master = master if master.is_coordinator else master.coordinator
-                    speaker.soco.join(master)
-                except StopIteration:
-                    self._logger.warning("No zone '%s'", message['title'])
-            elif message['action'] == 'unjoin':
-                speaker.soco.unjoin()
 
             elif message['action'] == 'play_favorite':
                 try:
@@ -180,7 +185,6 @@ class SonosDaemon(BaseDaemon):
                     coordinator.soco.play_from_queue(0)
                 except StopIteration:
                     self._logger.error("Radio '%s' not found, cannot play on %s", message['title'], speaker.zone_name)
-
             elif message['action'] == 'play_mp3radio':
                 _title = message['title'] if message['title'] else 'MP3 Radio'
                 coordinator.soco.play_uri(f"x-rincon-mp3radio://{message['message']}", title=_title)
