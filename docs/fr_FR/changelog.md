@@ -13,6 +13,12 @@
 >
 > Voir également [ce sujet sur community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) pour plus de détails
 
+# 16/08/2024
+
+- Ajout des commandes **Loudness**, **Loudness on**, **Loudness off**
+- Ajout des commandes **Fondu enchaîné**, **Fondu enchaîné on**, **Fondu enchaîné off**
+- Ajout des commandes **Commandes tactiles**, **Commandes tactiles on**, **Commandes tactiles off**
+
 # 03/08/2024
 
 - Ajout d'une commande **Jouer une radio mp3** pour lire une radio mp3 directement via une URL (accessible sur internet par exemple)

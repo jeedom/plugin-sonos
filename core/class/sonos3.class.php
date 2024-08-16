@@ -287,6 +287,9 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('mute_state', $data['muted']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mic_state', $data['mic_enabled']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('led_state', $data['status_light']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('cross_fade_state', $data['cross_fade']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('loudness_state', $data['loudness']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('buttons_state', $data['buttons_enabled']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('play_mode_state', $data['media']['play_mode']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('playback_status', $data['media']['playback_status']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('state', self::convertState($data['media']['playback_status'])) || $changed;
@@ -844,39 +847,158 @@ class sonos3 extends eqLogic {
 		}
 
 		$available_features = $this->getConfiguration('available_features', []);
+
 		if (in_array('status_light', $available_features)) {
-			$led_state = $this->getCmd(null, 'led_state');
-			if (!is_object($led_state)) {
-				$led_state = new sonos3Cmd();
-				$led_state->setLogicalId('led_state');
-				$led_state->setName(__('Led statut', __FILE__));
-				$led_state->setType('info');
-				$led_state->setSubType('binary');
-				$led_state->setEqLogic_id($this->getId());
-				$led_state->save();
-			}
-			$led_on = $this->getCmd(null, 'led_on');
-			if (!is_object($led_on)) {
-				$led_on = new sonos3Cmd();
-				$led_on->setLogicalId('led_on');
-				$led_on->setName('Led on');
-				$led_on->setType('action');
-				$led_on->setSubType('other');
-				$led_on->setEqLogic_id($this->getId());
-				$led_on->setValue($led_state->getId());
-				$led_on->save();
-			}
-			$led_off = $this->getCmd(null, 'led_off');
-			if (!is_object($led_off)) {
-				$led_off = new sonos3Cmd();
-				$led_off->setLogicalId('led_off');
-				$led_off->setName('Led off');
-				$led_off->setType('action');
-				$led_off->setSubType('other');
-				$led_off->setEqLogic_id($this->getId());
-				$led_off->setValue($led_state->getId());
-				$led_off->save();
-			}
+			$this->createStatusLightCommands();
+		}
+		if (in_array('cross_fade', $available_features)) {
+			$this->createCrossFadeCommands();
+		}
+		if (in_array('loudness', $available_features)) {
+			$this->createLoudnessCommands();
+		}
+		if (in_array('buttons_enabled', $available_features)) {
+			$this->createButtonsCommands();
+		}
+	}
+
+	private function createStatusLightCommands() {
+		$led_state = $this->getCmd(null, 'led_state');
+		if (!is_object($led_state)) {
+			$led_state = new sonos3Cmd();
+			$led_state->setLogicalId('led_state');
+			$led_state->setName(__('Led statut', __FILE__));
+			$led_state->setType('info');
+			$led_state->setSubType('binary');
+			$led_state->setEqLogic_id($this->getId());
+			$led_state->save();
+		}
+		$led_on = $this->getCmd(null, 'led_on');
+		if (!is_object($led_on)) {
+			$led_on = new sonos3Cmd();
+			$led_on->setLogicalId('led_on');
+			$led_on->setName('Led on');
+			$led_on->setType('action');
+			$led_on->setSubType('other');
+			$led_on->setEqLogic_id($this->getId());
+			$led_on->setValue($led_state->getId());
+			$led_on->save();
+		}
+		$led_off = $this->getCmd(null, 'led_off');
+		if (!is_object($led_off)) {
+			$led_off = new sonos3Cmd();
+			$led_off->setLogicalId('led_off');
+			$led_off->setName('Led off');
+			$led_off->setType('action');
+			$led_off->setSubType('other');
+			$led_off->setEqLogic_id($this->getId());
+			$led_off->setValue($led_state->getId());
+			$led_off->save();
+		}
+	}
+
+	private function createCrossFadeCommands() {
+		$cross_fade_state = $this->getCmd(null, 'cross_fade_state');
+		if (!is_object($cross_fade_state)) {
+			$cross_fade_state = new sonos3Cmd();
+			$cross_fade_state->setLogicalId('cross_fade_state');
+			$cross_fade_state->setName(__('Fondu enchaîné', __FILE__));
+			$cross_fade_state->setType('info');
+			$cross_fade_state->setSubType('binary');
+			$cross_fade_state->setEqLogic_id($this->getId());
+			$cross_fade_state->save();
+		}
+		$cross_fade_on = $this->getCmd(null, 'cross_fade_on');
+		if (!is_object($cross_fade_on)) {
+			$cross_fade_on = new sonos3Cmd();
+			$cross_fade_on->setLogicalId('cross_fade_on');
+			$cross_fade_on->setName(__('Fondu enchaîné on', __FILE__));
+			$cross_fade_on->setType('action');
+			$cross_fade_on->setSubType('other');
+			$cross_fade_on->setEqLogic_id($this->getId());
+			$cross_fade_on->setValue($cross_fade_state->getId());
+			$cross_fade_on->save();
+		}
+		$cross_fade_off = $this->getCmd(null, 'cross_fade_off');
+		if (!is_object($cross_fade_off)) {
+			$cross_fade_off = new sonos3Cmd();
+			$cross_fade_off->setLogicalId('cross_fade_off');
+			$cross_fade_off->setName(__('Fondu enchaîné off', __FILE__));
+			$cross_fade_off->setType('action');
+			$cross_fade_off->setSubType('other');
+			$cross_fade_off->setEqLogic_id($this->getId());
+			$cross_fade_off->setValue($cross_fade_state->getId());
+			$cross_fade_off->save();
+		}
+	}
+
+	private function createLoudnessCommands() {
+		$loudness_state = $this->getCmd(null, 'loudness_state');
+		if (!is_object($loudness_state)) {
+			$loudness_state = new sonos3Cmd();
+			$loudness_state->setLogicalId('loudness_state');
+			$loudness_state->setName(__('Loudness', __FILE__));
+			$loudness_state->setType('info');
+			$loudness_state->setSubType('binary');
+			$loudness_state->setEqLogic_id($this->getId());
+			$loudness_state->save();
+		}
+		$loudness_on = $this->getCmd(null, 'loudness_on');
+		if (!is_object($loudness_on)) {
+			$loudness_on = new sonos3Cmd();
+			$loudness_on->setLogicalId('loudness_on');
+			$loudness_on->setName(__('Loudness on', __FILE__));
+			$loudness_on->setType('action');
+			$loudness_on->setSubType('other');
+			$loudness_on->setEqLogic_id($this->getId());
+			$loudness_on->setValue($loudness_state->getId());
+			$loudness_on->save();
+		}
+		$loudness_off = $this->getCmd(null, 'loudness_off');
+		if (!is_object($loudness_off)) {
+			$loudness_off = new sonos3Cmd();
+			$loudness_off->setLogicalId('loudness_off');
+			$loudness_off->setName(__('Loudness off', __FILE__));
+			$loudness_off->setType('action');
+			$loudness_off->setSubType('other');
+			$loudness_off->setEqLogic_id($this->getId());
+			$loudness_off->setValue($loudness_state->getId());
+			$loudness_off->save();
+		}
+	}
+
+	private function createButtonsCommands() {
+		$buttons_state = $this->getCmd(null, 'buttons_state');
+		if (!is_object($buttons_state)) {
+			$buttons_state = new sonos3Cmd();
+			$buttons_state->setLogicalId('buttons_state');
+			$buttons_state->setName(__('Commandes tactiles', __FILE__));
+			$buttons_state->setType('info');
+			$buttons_state->setSubType('binary');
+			$buttons_state->setEqLogic_id($this->getId());
+			$buttons_state->save();
+		}
+		$buttons_on = $this->getCmd(null, 'buttons_on');
+		if (!is_object($buttons_on)) {
+			$buttons_on = new sonos3Cmd();
+			$buttons_on->setLogicalId('buttons_on');
+			$buttons_on->setName(__('Commandes tactiles on', __FILE__));
+			$buttons_on->setType('action');
+			$buttons_on->setSubType('other');
+			$buttons_on->setEqLogic_id($this->getId());
+			$buttons_on->setValue($buttons_state->getId());
+			$buttons_on->save();
+		}
+		$buttons_off = $this->getCmd(null, 'buttons_off');
+		if (!is_object($buttons_off)) {
+			$buttons_off = new sonos3Cmd();
+			$buttons_off->setLogicalId('buttons_off');
+			$buttons_off->setName(__('Commandes tactiles off', __FILE__));
+			$buttons_off->setType('action');
+			$buttons_off->setSubType('other');
+			$buttons_off->setEqLogic_id($this->getId());
+			$buttons_off->setValue($buttons_state->getId());
+			$buttons_off->save();
 		}
 	}
 

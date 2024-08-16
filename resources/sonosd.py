@@ -87,6 +87,14 @@ class SonosDaemon(BaseDaemon):
                 speaker.set_status_light(True)
             elif message['action'] == 'led_off':
                 speaker.set_status_light(False)
+            elif message['action'] == 'loudness_on':
+                speaker.soco.loudness = True
+            elif message['action'] == 'loudness_off':
+                speaker.soco.loudness = False
+            elif message['action'] == 'buttons_on':
+                speaker.set_buttons_enabled(True)
+            elif message['action'] == 'buttons_off':
+                speaker.set_buttons_enabled(False)
 
             elif message['action'] == 'repeat':
                 coordinator.soco.repeat = not coordinator.soco.repeat
@@ -112,6 +120,10 @@ class SonosDaemon(BaseDaemon):
                 coordinator.soco.previous()
             elif message['action'] == 'next':
                 coordinator.soco.next()
+            elif message['action'] == 'cross_fade_on':
+                coordinator.soco.cross_fade = True
+            elif message['action'] == 'cross_fade_off':
+                coordinator.soco.cross_fade = False
 
             elif message['action'] == 'join':
                 try:
