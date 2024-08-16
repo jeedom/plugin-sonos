@@ -983,7 +983,7 @@ class sonos3 extends eqLogic {
 		if (!is_object($cross_fade_state)) {
 			$cross_fade_state = new sonos3Cmd();
 			$cross_fade_state->setLogicalId('cross_fade_state');
-			$cross_fade_state->setName(__('Fondu enchaîné', __FILE__));
+			$cross_fade_state->setName(__('Fondu enchaîné statut', __FILE__));
 			$cross_fade_state->setType('info');
 			$cross_fade_state->setSubType('binary');
 			$cross_fade_state->setEqLogic_id($this->getId());
@@ -1018,7 +1018,7 @@ class sonos3 extends eqLogic {
 		if (!is_object($loudness_state)) {
 			$loudness_state = new sonos3Cmd();
 			$loudness_state->setLogicalId('loudness_state');
-			$loudness_state->setName(__('Loudness', __FILE__));
+			$loudness_state->setName(__('Loudness statut', __FILE__));
 			$loudness_state->setType('info');
 			$loudness_state->setSubType('binary');
 			$loudness_state->setEqLogic_id($this->getId());
@@ -1053,7 +1053,7 @@ class sonos3 extends eqLogic {
 		if (!is_object($buttons_state)) {
 			$buttons_state = new sonos3Cmd();
 			$buttons_state->setLogicalId('buttons_state');
-			$buttons_state->setName(__('Commandes tactiles', __FILE__));
+			$buttons_state->setName(__('Commandes tactiles statut', __FILE__));
 			$buttons_state->setType('info');
 			$buttons_state->setSubType('binary');
 			$buttons_state->setEqLogic_id($this->getId());

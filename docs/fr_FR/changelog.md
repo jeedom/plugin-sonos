@@ -13,11 +13,11 @@
 >
 > Voir également [ce sujet sur community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) pour plus de détails
 
-# 16/08/2024
+# 17/08/2024
 
-- Ajout des commandes **Loudness**, **Loudness on**, **Loudness off**
-- Ajout des commandes **Fondu enchaîné**, **Fondu enchaîné on**, **Fondu enchaîné off**
-- Ajout des commandes **Commandes tactiles**, **Commandes tactiles on**, **Commandes tactiles off**
+- Ajout des commandes **Loudness statut**, **Loudness on**, **Loudness off**
+- Ajout des commandes **Fondu enchaîné statut**, **Fondu enchaîné on**, **Fondu enchaîné off**
+- Ajout des commandes **Commandes tactiles statut**, **Commandes tactiles on**, **Commandes tactiles off**
 - Ajout des commandes **Balance** (action/curseur) et **Balance statut** qui gère la balance selon une valeur comprise entre -100 (tout à gauche) et 100 (tout à droite)
 - Ajout des commandes **Graves** (action/curseur) et **Graves statut** qui gère les graves selon une valeur comprise entre -10 et 10
 - Ajout des commandes **Aigus** (action/curseur) et **Aigus statut** qui gère la aigus selon une valeur comprise entre -10 et 10

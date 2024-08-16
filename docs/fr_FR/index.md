@@ -53,14 +53,14 @@ Ces commandes vont toujours contrôler l'équipement correspondant, y compris lo
 - **Balance** (action/curseur) et **Balance statut** qui gère la balance selon une valeur comprise entre -100 (tout à gauche) et 100 (tout à droite) pour les Sonos compatibles
 - **Graves** (action/curseur) et **Graves statut** qui gère les graves selon une valeur comprise entre -10 et 10
 - **Aigus** (action/curseur) et **Aigus statut** qui gère la aigus selon une valeur comprise entre -10 et 10
-- **Loudness**, **Loudness on**, **Loudness off** contrôle le loudness
+- **Loudness statut**, **Loudness on**, **Loudness off** contrôle le loudness
 
 - **TV**: pour basculer sur l'entrée *TV* sur les équipements compatibles
 - **Entrée audio analogique**: pour basculer sur l'*Entrée audio analogique* (*Line-in*) sur les équipements compatibles
 - **Led on** et **Led off**: Active et désactive la led, le voyant d'état
 - **Led statut**: indique si le voyant d'état est allumé ou non. Cette info n'est mise à jour qu'une fois par minute dans le cas où elle est modifiée hors Jeedom
 - **Commandes tactiles on** et **Commandes tactiles off** Active et désactive les boutons physiques ou tactiles sur le Sonos
-- **Commandes tactiles** indique si les commandes tactiles sont activées ou pas
+- **Commandes tactiles statut** indique si les commandes tactiles sont activées ou pas
 
 ## Commandes de lecture
 
@@ -77,7 +77,7 @@ Ces commandes indiqueront et contrôleront la lecture en cours sur l'équipement
 - **Aléatoire**: inverse le statut du mode aléatoire.
 - **Répéter statut**: indique si on est en mode répété ou non.
 - **Répéter**: inverse le statut du mode "répéter".
-- **Fondu enchaîné**, **Fondu enchaîné on**, **Fondu enchaîné off** pour contrôler et activer ou non le *Fondu enchaîné*
+- **Fondu enchaîné statut**, **Fondu enchaîné on**, **Fondu enchaîné off** pour contrôler et activer ou non le *Fondu enchaîné*
 - **Choisir mode de lecture** permet de choisir parmi les possibilités suivantes:
   - *Normal* (répétition off, aléatoire off),
   - *Répéter tout* (aléatoire off),
