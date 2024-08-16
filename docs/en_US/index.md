@@ -50,11 +50,17 @@ These commands will always control the corresponding equipment, including when i
 - **Mute**: Activate mute mode.
 - **No Mute**: Turn off mute.
 - **Mute status**: indicates whether we are in mute mode or not.
+- **Balance** (action/cursor) and **Balance status** which manages the balance according to a value between -100 (far left) and 100 (far right) for compatible Sonos
+- **Graves** (action/cursor) and **Serious status** which manages the bass according to a value between -10 and 10
+- **Highs** (action/cursor) and **Acute status** which manages the treble according to a value between -10 and 10
+- **Loudness status**, **Loudness on**, **Loudness off** control loudness
+
 - **TV**: to switch to the input *TV* on compatible equipment
 - **Analog audio input**: to switch to'*Analog audio input* (*Line-in*) on compatible equipment
-- **The gift**: Activates the LED, the status indicator.
-- **Led off**: Disables the LED, the status indicator.
-- **Status LED**: indicates whether the status light is on or not. This information is only updated once per minute in case it is modified outside Jeedom.
+- **The gift** And **Led off**: Activates and deactivates the LED, the status indicator
+- **Status LED**: indicates whether the status light is on or not. This information is only updated once per minute in case it is modified outside Jeedom
+- **Touch controls on** And **Touch controls off** Enables and disables physical or touch buttons on Sonos
+- **Touch controls status** indicates whether touch controls are enabled or not
 
 ## Playback controls
 
@@ -71,6 +77,7 @@ These commands will indicate and control the current playback on the equipment o
 - **Random**: reverse the status of random mode.
 - **Repeat status**: indicates if we are in repeat mode or not.
 - **Repeat**: reverse the status of the "repeat" mode".
+- **Crossfade status**, **Crossfade on**, **Fade off** to control and activate or not the *Crossfade*
 - **Choose reading mode** allows you to choose from the following possibilities:
   - *Normal* (repeat off, random off),
   - *Repeat all* (random off),
@@ -102,6 +109,7 @@ These commands always act on the corresponding equipment.
 - **Name of the group** if the equipment is grouped, give the name of the group.
 - **Join a group**: allows you to join the group of the given speaker (a Sonos) (to associate 2 Sonos for example). You must enter the name of the sound system room to join. This can be any member of an existing group, it doesn't have to be the group coordinator, or an isolated Sonos. In a scenario, a list of possibilities will automatically be displayed when you start typing.
 - **Leave the group**: allows you to leave the group.
+- **Party mode** allows you to group all Sonos together
 
 # TTS
 

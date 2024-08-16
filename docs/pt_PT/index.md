@@ -50,11 +50,17 @@ Esses comandos sempre controlarão o equipamento correspondente, inclusive quand
 - **Silenciar**: Ativar modo mudo.
 - **Sem mudo**: Desativar mudo.
 - **Status mudo**: indica se estamos no modo mudo ou não.
+- **Equilíbrio** (ação/cursor) e **Status do saldo** que gerencia o equilíbrio de acordo com um valor entre -100 (extrema esquerda) e 100 (extrema direita) para Sonos compatíveis
+- **Sepulturas** (ação/cursor) e **Situação séria** que gerencia os graves de acordo com um valor entre -10 e 10
+- **Agudos** (ação/cursor) e **Status triplo** que gerencia os agudos de acordo com um valor entre -10 e 10
+- **Status de volume**, **Volume ativado**, **Volume desligado** controla o volume
+
 - **Televisão**: para mudar para a entrada *Televisão* em equipamentos compatíveis
 - **Entrada de áudio analógico**: para mudar para'*Entrada de áudio analógico* (*Entrada de linha*) em equipamentos compatíveis
-- **O presente**: Ativa o LED, a luz de status.
-- **Partiu**: Desativa o LED, o indicador de status.
-- **LED de status**: indica se a luz de status está acesa ou não. Esta informação só é atualizada uma vez por minuto caso seja modificada fora do Jeedom.
+- **O presente** E **Partiu**: Ativa e desativa o LED, a luz de status
+- **LED de status**: indica se a luz de status está acesa ou não. Esta informação só é atualizada uma vez por minuto caso seja modificada fora do Jeedom
+- **Controles de toque ativados** E **Controles de toque desativados** Ativa e desativa botões físicos ou de toque no Sonos
+- **Controles de toque de status** indica se os controles de toque estão ativados ou não
 
 ## Controles de reprodução
 
@@ -71,6 +77,7 @@ Estes comandos irão indicar e controlar a reprodução atual no equipamento ou 
 - **Aleatório**: reverter o status do modo aleatório.
 - **Repita o status**: indica se estamos no modo de repetição ou não.
 - **Repetir**: reverter o status do modo "repetir"".
+- **Status de esmaecimento**, **Desaparecer**, **Desaparecer** controlar e ativar ou não o *Crossfade*
 - **Escolha o modo de leitura** permite que você escolha entre as seguintes possibilidades:
   - *Normal* (repetir, aleatório),
   - *Repita tudo* (aleatório),
@@ -102,6 +109,7 @@ Esses comandos sempre atuam no equipamento correspondente.
 - **Nome do grupo** se o equipamento estiver agrupado, forneça o nome do grupo.
 - **Junte-se a um grupo**: permite que você se junte ao grupo de um determinado alto-falante (um Sonos) (para associar 2 Sonos, por exemplo). Você deve inserir o nome da sala do sistema de som para ingressar. Pode ser qualquer membro de um grupo existente, não precisa ser o coordenador do grupo ou um Sonos isolado. Em um cenário, uma lista de possibilidades será exibida automaticamente quando você começar a digitar.
 - **Sair do grupo**: permite que você saia do grupo.
+- **Moda de festa** permite agrupar todos os Sonos
 
 # TTS
 
