@@ -13,6 +13,12 @@
 >
 > Siehe auch [dieses Thema auf Community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) für mehr Details
 
+# 18.08.2024
+
+- Bestellung hinzufügen **Mikrofonstatus** Dies zeigt an, ob das Mikrofon bei Sonos, die mit einem Mikrofon ausgestattet sind, aktiviert ist oder nicht
+- Hinzufügen eines Info-Befehls **Batterie** Bei Sonos, die mit einem Akku ausgestattet sind, wird der Akkuladestand in Prozent angezeigt
+- Hinzufügen eines Info-Befehls **Laden** Bei Sonos, die mit einem Akku ausgestattet sind, wird angezeigt, ob der Ladevorgang läuft oder nicht
+
 # 17.08.2024
 
 - Befehle hinzufügen **Lautstärkestatus**, **Lautstärke an**, **Lautstärke aus**

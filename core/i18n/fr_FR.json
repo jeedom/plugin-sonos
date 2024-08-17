@@ -134,6 +134,10 @@
         "Commandes tactiles statut": "Commandes tactiles statut",
         "Commandes tactiles on": "Commandes tactiles on",
         "Commandes tactiles off": "Commandes tactiles off",
+        "Mic statut": "Mic statut",
+        "Batterie": "Batterie",
+        "Rechargeable": "Rechargeable",
+        "Chargement": "Chargement",
         "Aucun": "Aucun"
     },
     "info.json": {

@@ -61,6 +61,9 @@ Esses comandos sempre controlarão o equipamento correspondente, inclusive quand
 - **LED de status**: indica se a luz de status está acesa ou não. Esta informação só é atualizada uma vez por minuto caso seja modificada fora do Jeedom
 - **Controles de toque ativados** E **Controles de toque desativados** Ativa e desativa botões físicos ou de toque no Sonos
 - **Controles de toque de status** indica se os controles de toque estão ativados ou não
+- **Status do microfone** que indica se o microfone está ativado ou não em Sonos equipados com microfone
+- **Bateria** em Sonos equipados com bateria mostrando a porcentagem de carga da bateria
+- **Carregando** em Sonos equipados com bateria indicando se o carregamento está ou não em andamento
 
 ## Controles de reprodução
 

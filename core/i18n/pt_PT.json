@@ -134,6 +134,10 @@
         "Commandes tactiles statut": "Controles de toque de status",
         "Commandes tactiles on": "Controles de toque ativados",
         "Commandes tactiles off": "Controles de toque desativados",
+        "Mic statut": "Status do microfone",
+        "Batterie": "Bateria",
+        "Rechargeable": "Recarregável",
+        "Chargement": "Carregando",
         "Aucun": "Nemhum"
     },
     "info.json": {
