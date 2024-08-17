@@ -276,6 +276,7 @@ class sonos3 extends eqLogic {
 
 	public static function updateSpeakers($speakers) {
 		foreach ($speakers as $uid => $data) {
+			/** @var sonos3 */
 			$eqLogic = self::byLogicalId($uid, __CLASS__);
 			if (!is_object($eqLogic)) {
 				log::add(__CLASS__, 'warning', "no speaker with uid: {$uid}");
@@ -288,7 +289,6 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('bass_state', $data['bass']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('treble_state', $data['treble']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('mute_state', $data['muted']) || $changed;
-			$changed = $eqLogic->checkAndUpdateCmd('mic_state', $data['mic_enabled']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('led_state', $data['status_light']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('cross_fade_state', $data['cross_fade']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('loudness_state', $data['loudness']) || $changed;
@@ -304,6 +304,11 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('track_image', $data['media']['image_url']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('group_state', $data['grouped']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('group_name', $data['group_name']) || $changed;
+
+			if ($data['mic_enabled'] === false || $data['mic_enabled'] === true) {
+				$changed = $eqLogic->checkAndUpdateCmd($eqLogic->createMicCommands(), $data['mic_enabled']) || $changed;
+			}
+
 
 			//save image locally to improve widget display but getting file content can take few seconds so its done async to not block update of all speakers
 			//TODO: try to optimize and do it once for all speakers in group
@@ -422,7 +427,7 @@ class sonos3 extends eqLogic {
 	}
 
 	public function createCommands() {
-		$playback_status = $this->getCmd(null, 'playback_status');
+		$playback_status = $this->getCmd('info', 'playback_status');
 		if (!is_object($playback_status)) {
 			$playback_status = new sonos3Cmd();
 			$playback_status->setLogicalId('playback_status');
@@ -432,7 +437,7 @@ class sonos3 extends eqLogic {
 			$playback_status->setEqLogic_id($this->getId());
 			$playback_status->save();
 		}
-		$play_mode_state = $this->getCmd(null, 'play_mode_state');
+		$play_mode_state = $this->getCmd('info', 'play_mode_state');
 		if (!is_object($play_mode_state)) {
 			$play_mode_state = new sonos3Cmd();
 			$play_mode_state->setLogicalId('play_mode_state');
@@ -455,7 +460,7 @@ class sonos3 extends eqLogic {
 		$play_mode->setConfiguration('listValue', "NORMAL|Normal;REPEAT_ALL|Répéter tout;SHUFFLE|Aléatoire et répéter tout;SHUFFLE_NOREPEAT|Aléatoire sans répétition;REPEAT_ONE|Répéter le morceau;SHUFFLE_REPEAT_ONE|Aléatoire et répéter le morceau");
 		$play_mode->save();
 
-		$state = $this->getCmd(null, 'state');
+		$state = $this->getCmd('info', 'state');
 		if (!is_object($state)) {
 			$state = new sonos3Cmd();
 			$state->setLogicalId('state');
@@ -526,7 +531,7 @@ class sonos3 extends eqLogic {
 			$previous->save();
 		}
 
-		$group_state = $this->getCmd(null, 'group_state');
+		$group_state = $this->getCmd('info', 'group_state');
 		if (!is_object($group_state)) {
 			$group_state = new sonos3Cmd();
 			$group_state->setLogicalId('group_state');
@@ -536,7 +541,7 @@ class sonos3 extends eqLogic {
 			$group_state->setEqLogic_id($this->getId());
 			$group_state->save();
 		}
-		$group_name = $this->getCmd(null, 'group_name');
+		$group_name = $this->getCmd('info', 'group_name');
 		if (!is_object($group_name)) {
 			$group_name = new sonos3Cmd();
 			$group_name->setLogicalId('group_name');
@@ -547,7 +552,7 @@ class sonos3 extends eqLogic {
 			$group_name->save();
 		}
 
-		$mute_state = $this->getCmd(null, 'mute_state');
+		$mute_state = $this->getCmd('info', 'mute_state');
 		if (!is_object($mute_state)) {
 			$mute_state = new sonos3Cmd();
 			$mute_state->setLogicalId('mute_state');
@@ -590,7 +595,7 @@ class sonos3 extends eqLogic {
 			$repeat->setEqLogic_id($this->getId());
 			$repeat->save();
 		}
-		$repeat_state = $this->getCmd(null, 'repeat_state');
+		$repeat_state = $this->getCmd('info', 'repeat_state');
 		if (!is_object($repeat_state)) {
 			$repeat_state = new sonos3Cmd();
 			$repeat_state->setLogicalId('repeat_state');
@@ -611,7 +616,7 @@ class sonos3 extends eqLogic {
 			$shuffle->setEqLogic_id($this->getId());
 			$shuffle->save();
 		}
-		$shuffle_state = $this->getCmd(null, 'shuffle_state');
+		$shuffle_state = $this->getCmd('info', 'shuffle_state');
 		if (!is_object($shuffle_state)) {
 			$shuffle_state = new sonos3Cmd();
 			$shuffle_state->setLogicalId('shuffle_state');
@@ -622,7 +627,7 @@ class sonos3 extends eqLogic {
 			$shuffle_state->save();
 		}
 
-		$volume_state = $this->getCmd(null, 'volume_state');
+		$volume_state = $this->getCmd('info', 'volume_state');
 		if (!is_object($volume_state)) {
 			$volume_state = new sonos3Cmd();
 			$volume_state->setLogicalId('volume_state');
@@ -683,7 +688,7 @@ class sonos3 extends eqLogic {
 			$ramp_to_volume->setEqLogic_id($this->getId());
 			$ramp_to_volume->save();
 		}
-		$balance_state = $this->getCmd(null, 'balance_state');
+		$balance_state = $this->getCmd('info', 'balance_state');
 		if (!is_object($balance_state)) {
 			$balance_state = new sonos3Cmd();
 			$balance_state->setLogicalId('balance_state');
@@ -708,7 +713,7 @@ class sonos3 extends eqLogic {
 			$balance->setEqLogic_id($this->getId());
 			$balance->save();
 		}
-		$bass_state = $this->getCmd(null, 'bass_state');
+		$bass_state = $this->getCmd('info', 'bass_state');
 		if (!is_object($bass_state)) {
 			$bass_state = new sonos3Cmd();
 			$bass_state->setLogicalId('bass_state');
@@ -733,7 +738,7 @@ class sonos3 extends eqLogic {
 			$bass->setEqLogic_id($this->getId());
 			$bass->save();
 		}
-		$treble_state = $this->getCmd(null, 'treble_state');
+		$treble_state = $this->getCmd('info', 'treble_state');
 		if (!is_object($treble_state)) {
 			$treble_state = new sonos3Cmd();
 			$treble_state->setLogicalId('treble_state');
@@ -759,7 +764,7 @@ class sonos3 extends eqLogic {
 			$treble->save();
 		}
 
-		$track_title = $this->getCmd(null, 'track_title');
+		$track_title = $this->getCmd('info', 'track_title');
 		if (!is_object($track_title)) {
 			$track_title = new sonos3Cmd();
 			$track_title->setLogicalId('track_title');
@@ -770,7 +775,7 @@ class sonos3 extends eqLogic {
 			$track_title->save();
 		}
 
-		$track_artist = $this->getCmd(null, 'track_artist');
+		$track_artist = $this->getCmd('info', 'track_artist');
 		if (!is_object($track_artist)) {
 			$track_artist = new sonos3Cmd();
 			$track_artist->setLogicalId('track_artist');
@@ -781,7 +786,7 @@ class sonos3 extends eqLogic {
 			$track_artist->save();
 		}
 
-		$track_album = $this->getCmd(null, 'track_album');
+		$track_album = $this->getCmd('info', 'track_album');
 		if (!is_object($track_album)) {
 			$track_album = new sonos3Cmd();
 			$track_album->setLogicalId('track_album');
@@ -792,7 +797,7 @@ class sonos3 extends eqLogic {
 			$track_album->save();
 		}
 
-		$track_image = $this->getCmd(null, 'track_image');
+		$track_image = $this->getCmd('info', 'track_image');
 		if (!is_object($track_image)) {
 			$track_image = new sonos3Cmd();
 			$track_image->setLogicalId('track_image');
@@ -802,7 +807,7 @@ class sonos3 extends eqLogic {
 			$track_image->setEqLogic_id($this->getId());
 			$track_image->save();
 		}
-		$local_track_image = $this->getCmd(null, 'local_track_image');
+		$local_track_image = $this->getCmd('info', 'local_track_image');
 		if (!is_object($local_track_image)) {
 			$local_track_image = new sonos3Cmd();
 			$local_track_image->setLogicalId('local_track_image');
@@ -954,7 +959,7 @@ class sonos3 extends eqLogic {
 	}
 
 	private function createStatusLightCommands() {
-		$led_state = $this->getCmd(null, 'led_state');
+		$led_state = $this->getCmd('info', 'led_state');
 		if (!is_object($led_state)) {
 			$led_state = new sonos3Cmd();
 			$led_state->setLogicalId('led_state');
@@ -989,7 +994,7 @@ class sonos3 extends eqLogic {
 	}
 
 	private function createCrossFadeCommands() {
-		$cross_fade_state = $this->getCmd(null, 'cross_fade_state');
+		$cross_fade_state = $this->getCmd('info', 'cross_fade_state');
 		if (!is_object($cross_fade_state)) {
 			$cross_fade_state = new sonos3Cmd();
 			$cross_fade_state->setLogicalId('cross_fade_state');
@@ -1024,7 +1029,7 @@ class sonos3 extends eqLogic {
 	}
 
 	private function createLoudnessCommands() {
-		$loudness_state = $this->getCmd(null, 'loudness_state');
+		$loudness_state = $this->getCmd('info', 'loudness_state');
 		if (!is_object($loudness_state)) {
 			$loudness_state = new sonos3Cmd();
 			$loudness_state->setLogicalId('loudness_state');
@@ -1059,7 +1064,7 @@ class sonos3 extends eqLogic {
 	}
 
 	private function createButtonsCommands() {
-		$buttons_state = $this->getCmd(null, 'buttons_state');
+		$buttons_state = $this->getCmd('info', 'buttons_state');
 		if (!is_object($buttons_state)) {
 			$buttons_state = new sonos3Cmd();
 			$buttons_state->setLogicalId('buttons_state');
@@ -1093,6 +1098,20 @@ class sonos3 extends eqLogic {
 		}
 	}
 
+	private function createMicCommands() {
+		$mic_state = $this->getCmd('info', 'mic_state');
+		if (!is_object($mic_state)) {
+			$mic_state = new sonos3Cmd();
+			$mic_state->setLogicalId('mic_state');
+			$mic_state->setName(__('Mic statut', __FILE__));
+			$mic_state->setType('info');
+			$mic_state->setSubType('binary');
+			$mic_state->setEqLogic_id($this->getId());
+			$mic_state->save();
+		}
+		return $mic_state;
+	}
+
 	public function toHtml($_version = 'dashboard') {
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
@@ -1102,7 +1121,7 @@ class sonos3 extends eqLogic {
 		$replace['#text_color#'] = $this->getConfiguration('text_color');
 		$replace['#version#'] = $_version;
 
-		$cmd_state = $this->getCmd(null, 'state');
+		$cmd_state = $this->getCmd('info', 'state');
 		if (is_object($cmd_state)) {
 			$replace['#state#'] = $cmd_state->execCmd();
 			if ($replace['#state#'] == __('Lecture', __FILE__)) {

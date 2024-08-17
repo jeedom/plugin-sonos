@@ -230,9 +230,6 @@ class SonosDaemon(BaseDaemon):
     async def _discover_and_sync(self):
         await self.__discover_controllers()
 
-        # for speaker in self._speakers.values():
-        #     await self.__send_speaker(speaker)
-
         try:
             random_speaker = next(iter(self._speakers.values()))
             coordinator = random_speaker if random_speaker.is_coordinator else random_speaker.coordinator
