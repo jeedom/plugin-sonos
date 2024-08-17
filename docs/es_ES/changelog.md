@@ -13,6 +13,16 @@
 >
 > Ver también [este tema en la comunidad](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) para más detalles
 
+# 17/08/2024
+
+- Agregar comandos **Estado de sonoridad**, **Volumen encendido**, **Volumen apagado**
+- Agregar comandos **Estado de desvanecimiento**, **Desvanecerse**, **Desaparecer**
+- Agregar comandos **Controles táctiles de estado**, **Controles táctiles activados**, **Controles táctiles desactivados**
+- Agregar comandos **Balance** (acción/cursor) y **Estado del saldo** que gestiona el saldo según un valor entre -100 (extremo izquierdo) y 100 (extremo derecho))
+- Agregar comandos **Tumbas** (acción/cursor) y **Estado serio** que gestiona los graves según un valor entre -10 y 10
+- Agregar comandos **Triplicar** (acción/cursor) y **Estado de agudos** que gestiona los agudos según un valor entre -10 y 10
+- Agregando el comando **Moda de fiesta** que te permite agrupar todos los Sonos juntos
+
 # 08/03/2024
 
 - Agregar un pedido **Reproducir radio mp3** reproducir una radio mp3 directamente a través de una URL (accesible en Internet, por ejemplo))

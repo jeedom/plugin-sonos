@@ -13,6 +13,16 @@
 >
 > See also [this topic on community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) for more details
 
+# 08/17/2024
+
+- Adding commands **Loudness status**, **Loudness on**, **Loudness off**
+- Adding commands **Crossfade status**, **Crossfade on**, **Fade off**
+- Adding commands **Touch controls status**, **Touch controls on**, **Touch controls off**
+- Adding commands **Balance** (action/cursor) and **Balance status** which manages the balance according to a value between -100 (far left) and 100 (far right))
+- Adding commands **Graves** (action/cursor) and **Serious status** which manages the bass according to a value between -10 and 10
+- Adding commands **Highs** (action/cursor) and **Acute status** which manages the treble according to a value between -10 and 10
+- Adding the command **Party mode** which allows you to group all Sonos together
+
 # 03/08/2024
 
 - Adding an order **Play mp3 radio** to play an mp3 radio directly via a URL (accessible on the internet for example)

@@ -50,11 +50,17 @@ Diese Befehle steuern immer das entsprechende Gerät, auch wenn es sich in einer
 - **Stumm**: Stummschaltung aktivieren.
 - **Keine Stummschaltung**: Schalten Sie die Stummschaltung aus.
 - **Stummschaltungsstatus**: zeigt an, ob wir uns im Stummmodus befinden oder nicht.
+- **Gleichgewicht** (Aktion/Cursor) und **Kontostand** die die Balance nach einem Wert zwischen -100 (ganz links) und 100 (ganz rechts) für kompatible Sonos verwaltet
+- **Gräber** (Aktion/Cursor) und **Ernsthafter Status** die den Bass nach einem Wert zwischen -10 und 10 verwaltet
+- **Verdreifachen** (Aktion/Cursor) und **Dreifacher Status** der die Höhen nach einem Wert zwischen -10 und 10 verwaltet
+- **Lautstärkestatus**, **Lautstärke an**, **Lautstärke aus** steuert die Lautstärke
+
 - **Fernseher**: um zum Eingang zu wechseln *Fernseher* auf kompatiblen Geräten
 - **Analoger Audioeingang**: zu wechseln'*Analoger Audioeingang* (*Line-in*) auf kompatiblen Geräten
-- **Das Geschenk**: Aktiviert die LED, die Statusanzeige.
-- **LED aus**: Deaktiviert die LED, das Statuslicht.
-- **Status-LED**: Zeigt an, ob die Statusleuchte leuchtet oder nicht. Diese Informationen werden nur einmal pro Minute aktualisiert, falls sie außerhalb von Jeedom geändert werden.
+- **Das Geschenk** Und **LED aus**: Aktiviert und deaktiviert die LED, das Statuslicht
+- **Status-LED**: Zeigt an, ob die Statusleuchte leuchtet oder nicht. Diese Informationen werden nur einmal pro Minute aktualisiert, falls sie außerhalb von Jeedom geändert werden
+- **Touch-Bedienelemente ein** Und **Touch-Steuerung ausgeschaltet** Aktiviert und deaktiviert physische oder Touch-Tasten auf Sonos
+- **Status-Touch-Steuerelemente** Zeigt an, ob die Touch-Steuerung aktiviert ist oder nicht
 
 ## Wiedergabesteuerung
 
@@ -71,6 +77,7 @@ Diese Befehle zeigen und steuern die aktuelle Wiedergabe auf dem Gerät oder in 
 - **Zufällig**: Kehren Sie den Status des Zufallsmodus um.
 - **Status wiederholen**: zeigt an, ob wir uns im Wiederholungsmodus befinden oder nicht.
 - **Wiederholung**: Kehren Sie den Status des "Wiederholungs" -Modus um".
+- **Fade-Status**, **Einblenden**, **Ausblenden** zu steuern und zu aktivieren oder nicht *Überblendung*
 - **Wählen Sie den Lesemodus** ermöglicht Ihnen die Auswahl aus den folgenden Möglichkeiten:
   - *Normal* (Wiederholung aus, Zufall aus),
   - *Wiederhole alles* (zufällig aus),
@@ -102,6 +109,7 @@ Diese Befehle wirken sich immer auf das entsprechende Gerät aus.
 - **Name der Gruppe** Wenn das Gerät gruppiert ist, geben Sie den Namen der Gruppe an.
 - **Einer Gruppe beitreten**: ermöglicht es Ihnen, der Gruppe des angegebenen Lautsprechers (einem Sonos) beizutreten (um beispielsweise zwei Sonos zuzuordnen)). Sie müssen den Namen des Soundsystem-Raums eingeben, dem Sie beitreten möchten. Dies kann ein beliebiges Mitglied einer bestehenden Gruppe sein, es muss nicht der Gruppenkoordinator oder ein isolierter Sonos sein. In einem Szenario wird automatisch eine Liste mit Möglichkeiten angezeigt, wenn Sie mit der Eingabe beginnen.
 - **Die Gruppe verlassen**: ermöglicht es Ihnen, die Gruppe zu verlassen.
+- **Partymode** ermöglicht es Ihnen, alle Sonos zusammenzufassen
 
 # TTS
 

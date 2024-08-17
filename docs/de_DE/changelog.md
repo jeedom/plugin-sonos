@@ -13,6 +13,16 @@
 >
 > Siehe auch [dieses Thema auf Community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) für mehr Details
 
+# 17.08.2024
+
+- Befehle hinzufügen **Lautstärkestatus**, **Lautstärke an**, **Lautstärke aus**
+- Befehle hinzufügen **Fade-Status**, **Einblenden**, **Ausblenden**
+- Befehle hinzufügen **Status-Touch-Steuerelemente**, **Touch-Bedienelemente ein**, **Touch-Steuerung ausgeschaltet**
+- Befehle hinzufügen **Gleichgewicht** (Aktion/Cursor) und **Kontostand** die den Saldo nach einem Wert zwischen -100 (ganz links) und 100 (ganz rechts) verwaltet)
+- Befehle hinzufügen **Gräber** (Aktion/Cursor) und **Ernsthafter Status** die den Bass nach einem Wert zwischen -10 und 10 verwaltet
+- Befehle hinzufügen **Verdreifachen** (Aktion/Cursor) und **Dreifacher Status** der die Höhen nach einem Wert zwischen -10 und 10 verwaltet
+- Befehl hinzufügen **Partymode** Dadurch können Sie alle Sonos gruppieren
+
 # 08.03.2024
 
 - Bestellung hinzufügen **Spielen Sie MP3-Radio** um ein MP3-Radio direkt über eine URL (z. B. im Internet zugänglich) abzuspielen)

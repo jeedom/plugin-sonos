@@ -50,11 +50,17 @@ Estos comandos controlarán siempre el equipo correspondiente, incluso cuando es
 - **Mudo**: Activar el modo silencio.
 - **Sin silencio**: Desactivar silencio.
 - **Estado de silencio**: indica si estamos en modo silencio o no.
+- **Balance** (acción/cursor) y **Estado del saldo** que gestiona el equilibrio según un valor entre -100 (extremo izquierdo) y 100 (extremo derecho) para Sonos compatibles
+- **Tumbas** (acción/cursor) y **Estado serio** que gestiona los graves según un valor entre -10 y 10
+- **Triplicar** (acción/cursor) y **Estado de agudos** que gestiona los agudos según un valor entre -10 y 10
+- **Estado de sonoridad**, **Volumen encendido**, **Volumen apagado** controla el volumen
+
 - **TELEVISOR**: para cambiar a la entrada *TELEVISOR* en equipos compatibles
 - **Entrada de audio analógico**: para cambiar a'*Entrada de audio analógico* (*En linea*) en equipos compatibles
-- **El don**: Activa el LED, la luz de estado.
-- **Llevar afuera**: Desactiva el LED, la luz de estado.
-- **LED de estado**: indica si la luz de estado está encendida o no. Esta información solo se actualiza una vez por minuto en caso de que se modifique fuera de Jeedom.
+- **El don** Y **Llevar afuera**: Activa y desactiva el LED, la luz de estado
+- **LED de estado**: indica si la luz de estado está encendida o no. Esta información solo se actualiza una vez por minuto en caso de que se modifique fuera de Jeedom
+- **Controles táctiles activados** Y **Controles táctiles desactivados** Activa y desactiva los botones físicos o táctiles en Sonos
+- **Controles táctiles de estado** indica si los controles táctiles están habilitados o no
 
 ## Controles de reproducción
 
@@ -71,6 +77,7 @@ Estos comandos indicarán y controlarán la reproducción actual en el equipo o 
 - **Al azar**: invertir el estado del modo aleatorio.
 - **Repita el estado**: indica si estamos en modo de repetición o no.
 - **Repetición**: invertir el estado del modo "repetir"".
+- **Estado de desvanecimiento**, **Desvanecerse**, **Desaparecer** controlar y activar o no el *Fundido cruzado*
 - **Elige el modo de lectura** le permite elegir entre las siguientes posibilidades:
   - *Normal* (repetir, desactivar aleatoriamente),
   - *Repite todo* (aleatorio apagado),
@@ -102,6 +109,7 @@ Estos comandos actúan siempre sobre el equipo correspondiente.
 - **Nombre del grupo** si el equipo está agrupado, indique el nombre del grupo.
 - **Únete a un grupo**: le permite unirse al grupo del hablante determinado (un Sonos) (para asociar 2 Sonos, por ejemplo)). Debe ingresar el nombre de la sala del sistema de sonido para unirse. Puede ser cualquier miembro de un grupo existente, no tiene que ser el coordinador del grupo ni un Sonos aislado. En un escenario, se mostrará automáticamente una lista de posibilidades cuando empieces a escribir.
 - **Abandonar el grupo**: te permite salir del grupo.
+- **Moda de fiesta** te permite agrupar todos los Sonos
 
 # TTS
 
