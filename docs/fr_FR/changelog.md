@@ -13,6 +13,12 @@
 >
 > Voir également [ce sujet sur community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) pour plus de détails
 
+# 18/08/2024
+
+- Ajout commande **Mic statut** qui indique si le micro est activé ou non sur les Sonos équipé d'un micro
+- Ajout d'une commande info **Batterie** sur les Sonos équipés d'une batterie indiquant le pourcentage de charge de la batterie
+- Ajout d'une commande info **Chargement** sur les Sonos équipés d'une batterie indiquant si la charge est en cours ou non
+
 # 17/08/2024
 
 - Ajout des commandes **Loudness statut**, **Loudness on**, **Loudness off**

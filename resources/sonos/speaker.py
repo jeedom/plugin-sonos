@@ -579,8 +579,8 @@ class SonosSpeaker:
 
         self.battery_info.update(
             {
-                "Level": int(battery_dict["BattPct"]),
-                "Charging": is_charging,
+                "level": int(battery_dict["BattPct"]),
+                "charging": is_charging,
             }
         )
 

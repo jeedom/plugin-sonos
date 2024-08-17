@@ -309,6 +309,13 @@ class sonos3 extends eqLogic {
 				$changed = $eqLogic->checkAndUpdateCmd($eqLogic->createMicCommands(), $data['mic_enabled']) || $changed;
 			}
 
+			if (array_key_exists('level', $data['battery_info'])) {
+				$eqLogic->createBatteryCommands();
+				$changed = $eqLogic->checkAndUpdateCmd('battery_level', $data['battery_info']['level']) || $changed;
+				$changed = $eqLogic->checkAndUpdateCmd('battery_charging', $data['battery_info']['charging']) || $changed;
+				$eqLogic->batteryStatus($data['battery_info']['level']);
+			}
+
 
 			//save image locally to improve widget display but getting file content can take few seconds so its done async to not block update of all speakers
 			//TODO: try to optimize and do it once for all speakers in group
@@ -1110,6 +1117,36 @@ class sonos3 extends eqLogic {
 			$mic_state->save();
 		}
 		return $mic_state;
+	}
+
+	private function createBatteryCommands() {
+		$battery_level = $this->getCmd('info', 'battery_level');
+		if (!is_object($battery_level)) {
+			$battery_level = new sonos3Cmd();
+			$battery_level->setLogicalId('battery_level');
+			$battery_level->setName(__('Batterie', __FILE__));
+			$battery_level->setType('info');
+			$battery_level->setSubType('numeric');
+			$battery_level->setUnite('%');
+			$battery_level->setConfiguration('minValue', 0);
+			$battery_level->setConfiguration('maxValue', 100);
+			$battery_level->setGeneric_type('BATTERY');
+			$battery_level->setEqLogic_id($this->getId());
+			$battery_level->save();
+			$this->setConfiguration('battery_type', __('Rechargeable', __FILE__));
+			$this->save(true);
+		}
+
+		$battery_charging = $this->getCmd('info', 'battery_charging');
+		if (!is_object($battery_charging)) {
+			$battery_charging = new sonos3Cmd();
+			$battery_charging->setLogicalId('battery_charging');
+			$battery_charging->setName(__('Chargement', __FILE__));
+			$battery_charging->setType('info');
+			$battery_charging->setSubType('binary');
+			$battery_charging->setEqLogic_id($this->getId());
+			$battery_charging->save();
+		}
 	}
 
 	public function toHtml($_version = 'dashboard') {

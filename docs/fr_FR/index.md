@@ -61,6 +61,9 @@ Ces commandes vont toujours contrôler l'équipement correspondant, y compris lo
 - **Led statut**: indique si le voyant d'état est allumé ou non. Cette info n'est mise à jour qu'une fois par minute dans le cas où elle est modifiée hors Jeedom
 - **Commandes tactiles on** et **Commandes tactiles off** Active et désactive les boutons physiques ou tactiles sur le Sonos
 - **Commandes tactiles statut** indique si les commandes tactiles sont activées ou pas
+- **Mic statut** qui indique si le micro est activé ou non sur les Sonos équipé d'un micro
+- **Batterie** sur les Sonos équipés d'une batterie indiquant le pourcentage de charge de la batterie
+- **Chargement** sur les Sonos équipés d'une batterie indiquant si la charge est en cours ou non
 
 ## Commandes de lecture
 
