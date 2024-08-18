@@ -61,6 +61,9 @@ These commands will always control the corresponding equipment, including when i
 - **Status LED**: indicates whether the status light is on or not. This information is only updated once per minute in case it is modified outside Jeedom
 - **Touch controls on** And **Touch controls off** Enables and disables physical or touch buttons on Sonos
 - **Touch controls status** indicates whether touch controls are enabled or not
+- **Mic status** which indicates whether the microphone is activated or not on Sonos equipped with a microphone
+- **Battery** on Sonos equipped with a battery indicating the battery charge percentage
+- **Loading** on Sonos equipped with a battery indicating whether charging is in progress or not
 
 ## Playback controls
 

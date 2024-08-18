@@ -61,6 +61,9 @@ Estos comandos controlarán siempre el equipo correspondiente, incluso cuando es
 - **LED de estado**: indica si la luz de estado está encendida o no. Esta información solo se actualiza una vez por minuto en caso de que se modifique fuera de Jeedom
 - **Controles táctiles activados** Y **Controles táctiles desactivados** Activa y desactiva los botones físicos o táctiles en Sonos
 - **Controles táctiles de estado** indica si los controles táctiles están habilitados o no
+- **Estado del micrófono** que indica si el micrófono está activado o no en Sonos equipado con un micrófono
+- **Batería** en Sonos equipado con una batería que muestra el porcentaje de carga de la batería
+- **Cargando** en Sonos equipado con una batería que indica si la carga está en curso o no
 
 ## Controles de reproducción
 

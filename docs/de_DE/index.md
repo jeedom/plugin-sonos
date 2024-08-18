@@ -61,6 +61,9 @@ Diese Befehle steuern immer das entsprechende Gerät, auch wenn es sich in einer
 - **Status-LED**: Zeigt an, ob die Statusleuchte leuchtet oder nicht. Diese Informationen werden nur einmal pro Minute aktualisiert, falls sie außerhalb von Jeedom geändert werden
 - **Touch-Bedienelemente ein** Und **Touch-Steuerung ausgeschaltet** Aktiviert und deaktiviert physische oder Touch-Tasten auf Sonos
 - **Status-Touch-Steuerelemente** Zeigt an, ob die Touch-Steuerung aktiviert ist oder nicht
+- **Mikrofonstatus** Dies zeigt an, ob das Mikrofon bei Sonos, die mit einem Mikrofon ausgestattet sind, aktiviert ist oder nicht
+- **Batterie** Bei Sonos, die mit einem Akku ausgestattet sind, wird der Akkuladestand in Prozent angezeigt
+- **Laden** Bei Sonos, die mit einem Akku ausgestattet sind, wird angezeigt, ob der Ladevorgang läuft oder nicht
 
 ## Wiedergabesteuerung
 

@@ -13,6 +13,12 @@
 >
 > Ver también [este tema en la comunidad](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) para más detalles
 
+# 18/08/2024
+
+- Añadir pedido **Estado del micrófono** que indica si el micrófono está activado o no en Sonos equipado con un micrófono
+- Agregar un comando de información **Batería** en Sonos equipado con una batería que muestra el porcentaje de carga de la batería
+- Agregar un comando de información **Cargando** en Sonos equipado con una batería que indica si la carga está en curso o no
+
 # 17/08/2024
 
 - Agregar comandos **Estado de sonoridad**, **Volumen encendido**, **Volumen apagado**
