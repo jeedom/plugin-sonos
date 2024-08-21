@@ -1269,24 +1269,29 @@ class sonos3Cmd extends cmd {
 
 		switch ($this->getLogicalId()) {
 			case 'tts':
+				// get mp3 file
 				$url = network::getNetworkAccess('internal') . '/core/api/tts.php?apikey=' . jeedom::getApiKey('apitts');
 				$text = trim($_options['message']);
 				$file_content = file_get_contents($url . '&text=' . urlencode($text));
 				$file_name = md5($text) . '.mp3';
+				log::add("sonos3", "debug", "TTS: get file '{$file_name}' from core");
 
+				// connect to samba
 				$host = config::byKey('tts_host', 'sonos3');
-
 				$serverFactory = new ServerFactory();
 				$auth = new BasicAuth(config::byKey('tts_username', 'sonos3'), null, config::byKey('tts_password', 'sonos3'));
 				$server = $serverFactory->createServer($host, $auth);
 				$share_name = sanitizeAccent(trim(config::byKey('tts_share', 'sonos3')), " \n\r\t\v\0/");
 				$share = $server->getShare($share_name);
 
+				// push file to samba
 				$path_name = sanitizeAccent(trim(config::byKey('tts_path', 'sonos3')), " \n\r\t\v\0/");
 				$fh = $share->write("{$path_name}/{$file_name}");
 				fwrite($fh, $file_content);
 				fclose($fh);
+				log::add("sonos3", "debug", "TTS: file '{$file_name}' written on samba share");
 
+				// setup params to call sonos
 				$params['file'] = "//{$host}/{$share_name}/{$path_name}/{$file_name}";
 				break;
 			case 'play_favorite':
