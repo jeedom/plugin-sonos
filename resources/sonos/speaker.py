@@ -21,6 +21,7 @@ from soco.exceptions import SoCoSlaveException
 from .alarms import SonosAlarms
 from .const import (
     ALL_FEATURES,
+    SONOS_STATE_PLAYING,
     SONOS_STATE_TRANSITIONING,
     SUBSCRIPTION_TIMEOUT,
 )
@@ -831,11 +832,11 @@ class SonosSpeaker:
         """Restore a snapshotted state to a player."""
         try:
             assert self.soco_snapshot is not None
-            self.soco_snapshot.restore()
+            self.soco_snapshot.restore(True)
         except (TypeError, AssertionError, AttributeError, SoCoException) as ex:
             # Can happen if restoring a coordinator onto a current group member
             _LOGGER.warning("Error on restore %s: %s", self.zone_name, ex)
-            if self.soco_snapshot.is_playing_queue:
+            if self.soco_snapshot.transport_state == SONOS_STATE_PLAYING:
                 self.soco.play()
 
         self.soco_snapshot = None
