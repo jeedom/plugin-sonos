@@ -10,7 +10,7 @@ from soco.data_structures import SearchResult
 from jeedomdaemon.base_daemon import BaseDaemon
 from jeedomdaemon.base_config import BaseConfig
 
-from sonos.const import RAMP_TYPES
+from sonos.const import RAMP_TYPES, SONOS_STATE_PLAYING
 from sonos.data import SonosData
 from sonos.speaker import SonosSpeaker
 
@@ -199,7 +199,7 @@ class SonosDaemon(BaseDaemon):
                     pass
                 coordinator.soco.play_uri(f"x-file-cifs:{message['file']}", '', 'text-to-speech')
                 await asyncio.sleep(1)
-                while coordinator.media.playback_status == 'PLAYING':
+                while coordinator.media.playback_status == SONOS_STATE_PLAYING:
                     await asyncio.sleep(0.5)
                 await asyncio.sleep(0.5)
                 coordinator.restore()
@@ -285,6 +285,5 @@ class SonosDaemon(BaseDaemon):
         self._loop.create_task(self.__send_speaker(speaker))
         for s in speaker.sonos_group:
             self._loop.create_task(self.__send_speaker(s))
-
 
 SonosDaemon().run()
