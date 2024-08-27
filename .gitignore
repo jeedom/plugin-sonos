@@ -6,3 +6,4 @@ deployment-config.json
 .project
 .remote-sync.json
 .vscode
+.venv
