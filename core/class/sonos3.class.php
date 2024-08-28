@@ -388,6 +388,11 @@ class sonos3 extends eqLogic {
 		config::remove('playlist', __CLASS__);
 		config::remove('favourites', __CLASS__);
 
+		$local_track_image = $this->getCmd('info', 'local_track_image');
+		if (is_object($local_track_image)) {
+			$local_track_image->remove();
+		}
+
 		$add = $this->getCmd(null, 'add_speaker');
 		if (is_object($add)) {
 			$add->remove();
@@ -809,16 +814,6 @@ class sonos3 extends eqLogic {
 			$track_image->setSubType('string');
 			$track_image->setEqLogic_id($this->getId());
 			$track_image->save();
-		}
-		$local_track_image = $this->getCmd('info', 'local_track_image');
-		if (!is_object($local_track_image)) {
-			$local_track_image = new sonos3Cmd();
-			$local_track_image->setLogicalId('local_track_image');
-			$local_track_image->setName(__('Image locale', __FILE__));
-			$local_track_image->setType('info');
-			$local_track_image->setSubType('string');
-			$local_track_image->setEqLogic_id($this->getId());
-			$local_track_image->save();
 		}
 
 		$play_playlist = $this->getCmd(null, 'play_playlist');
