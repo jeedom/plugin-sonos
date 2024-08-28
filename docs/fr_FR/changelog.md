@@ -7,7 +7,7 @@
 > Attention
 > Refonte importante du plugin: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes.
 >
-> Nécessite Jeedom 4.4
+> Nécessite Jeedom 4.4.8
 >
 > Compatible Debian 11 et 12! Probablement Debian 10 mais pas testé et pas de support possible sur cette version
 >

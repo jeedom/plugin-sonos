@@ -250,28 +250,29 @@ class sonos3 extends eqLogic {
 		return in_array($playModeState, ['SHUFFLE', 'REPEAT_ALL', 'SHUFFLE_REPEAT_ONE', 'REPEAT_ONE']);
 	}
 
-	public static function async_get_track_image($options) {
-		$eqLogic = eqLogic::byId($options['eqLogic_id']);
-		$cmd_track_image = $eqLogic->getCmd(null, 'local_track_image');
+	private static function getTmpImageFilePath(string $imageUrl) {
+		$image_file_name = md5($imageUrl);
+		$image_file_path = jeedom::getTmpFolder(__CLASS__) . "/{$image_file_name}";
 
-		if (is_object($cmd_track_image)) {
-			$old_image_md5 = $cmd_track_image->execCmd();
+		return $image_file_path;
+	}
 
-			if ($options['image_url'] != '') {
-				$image_content = file_get_contents($options['image_url']);
-				$image_md5 = md5($image_content);
-
-				if ($eqLogic->checkAndUpdateCmd($cmd_track_image, $image_md5)) {
-					@unlink(__DIR__ . "/../../../../plugins/sonos3/data/{$old_image_md5}");
-					file_put_contents(__DIR__ . "/../../../../plugins/sonos3/data/{$image_md5}", $image_content);
-					log::add(__CLASS__, 'debug', "Save local image:" . $options['image_url']);
-					$eqLogic->refreshWidget();
-				}
-			} elseif (file_exists(__DIR__ . "/../../../../plugins/sonos3/data/{$old_image_md5}")) {
-				$eqLogic->checkAndUpdateCmd($cmd_track_image, '');
-				@unlink(__DIR__ . "/../../../../plugins/sonos3/data/{$old_image_md5}");
-			}
+	public static function getImageContent(string $imageUrl) {
+		if ($imageUrl === '') {
+			return false;
 		}
+
+		$imageFilePath = sonos3::getTmpImageFilePath($imageUrl);
+		if (file_exists($imageFilePath)) {
+			log::add('sonos3', 'debug', "get image content from tmp {'$imageFilePath'} for '{$imageUrl}'");
+			$imageContent = file_get_contents($imageFilePath);
+		} else {
+			log::add('sonos3', 'debug', "get image content from url for '{$imageUrl}'");
+			$imageContent = file_get_contents($imageUrl, false, null, 0, 1000000);
+			log::add(__CLASS__, 'debug', "save tmp image {'$imageFilePath'} for '{$imageUrl}'");
+			file_put_contents($imageFilePath, $imageContent);
+		}
+		return $imageContent;
 	}
 
 	public static function updateSpeakers($speakers) {
@@ -315,11 +316,6 @@ class sonos3 extends eqLogic {
 				$changed = $eqLogic->checkAndUpdateCmd('battery_charging', $data['battery_info']['charging']) || $changed;
 				$eqLogic->batteryStatus($data['battery_info']['level']);
 			}
-
-
-			//save image locally to improve widget display but getting file content can take few seconds so its done async to not block update of all speakers
-			//TODO: try to optimize and do it once for all speakers in group
-			utils::executeAsync(__CLASS__, 'async_get_track_image', ['eqLogic_id' => $eqLogic->getId(), 'image_url' => $data['media']['image_url']]);
 
 			if ($changed) {
 				$eqLogic->refreshWidget();
@@ -1213,14 +1209,13 @@ class sonos3 extends eqLogic {
 			$replace['#speakers#'] = str_replace(array("'", '+'), array("\'", '\+'), $this->getConfiguration('speakers'));
 		}
 
-		$replace['#thumbnail#'] = 'plugins/sonos3/plugin_info/sonos3_alt_icon.png';
-		$cmd_track_image = $this->getCmd(null, 'local_track_image');
+		$cmd_track_image = $this->getCmd('info', 'track_image');
+		$url = '';
 		if (is_object($cmd_track_image)) {
-			$image = $cmd_track_image->execCmd();
-			if ($image != '' && file_exists(__DIR__ . "/../../../../plugins/sonos3/data/{$image}")) {
-				$replace['#thumbnail#'] = "plugins/sonos3/data/{$image}";
-			}
+			$url = $cmd_track_image->execCmd();
 		}
+		$replace['#thumbnail#'] = $url == '' ? '' : base64_encode($url);
+
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', __CLASS__)));
 	}
 
