@@ -13,6 +13,11 @@
 >
 > Voir également [ce sujet sur community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) pour plus de détails
 
+# 29/08/2024
+
+- Optimisation de l'affichage de la pochette de la lecture en cours
+- Optimisation sur la lecture des favoris
+
 # 18/08/2024
 
 - Ajout commande **Mic statut** qui indique si le micro est activé ou non sur les Sonos équipé d'un micro
