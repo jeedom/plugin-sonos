@@ -7,11 +7,16 @@
 > Attention
 > Bedeutende Neugestaltung des Plugins: Ein sehr großer Teil des Plugins wurde neu geschrieben, einschließlich der gesamten Kommunikation mit Sonos (Daemon), und bestimmte Funktionalitäten wurden geändert und funktionieren nicht mehr wie zuvor, insbesondere die Gruppenverwaltung.
 >
-> Erfordert Jeedom 4.4
+> Erfordert Jeedom 4.4.8
 >
 > Debian 11 und 12 kompatibel! Wahrscheinlich Debian 10, aber nicht getestet und keine Unterstützung für diese Version möglich
 >
 > Siehe auch [dieses Thema auf Community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) für mehr Details
+
+# 29.08.2024
+
+- Die Anzeige des aktuell wiedergegebenen Covers wurde optimiert
+- Optimierung der Lesefavoriten
 
 # 18.08.2024
 

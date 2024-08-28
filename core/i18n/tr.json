@@ -56,6 +56,9 @@
         "Tester": "Test et",
         "Synchronisation réussie.": "Synchronisation réussie"
     },
+    "plugins\/sonos3\/core\/php\/sonos.img.proxy.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé"
+    },
     "plugins\/sonos3\/core\/php\/jeesonos3.php": {
         "Vous n\\'etes pas autorisé à effectuer cette action": "Vous n\\'etes pas autorisé à effectuer cette action"
     },
@@ -107,7 +110,6 @@
         "Artiste": "Artiste",
         "Album": "Album",
         "Image": "Fotoğraf",
-        "Image locale": "Image locale",
         "Jouer playlist": "Jouer playlist",
         "Titre de la playlist": "Titre de la playlist",
         "Jouer favoris": "Jouer favoris",
