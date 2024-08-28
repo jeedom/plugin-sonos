@@ -6,6 +6,7 @@ import logging
 from soco import SoCo, discover, events_asyncio
 import soco.config as soco_config
 from soco.data_structures import SearchResult
+from soco.exceptions import SoCoUPnPException
 
 from jeedomdaemon.base_daemon import BaseDaemon
 from jeedomdaemon.base_config import BaseConfig
@@ -148,26 +149,10 @@ class SonosDaemon(BaseDaemon):
 
             elif message['action'] == 'play_favorite':
                 try:
-                    # fav = next(f for f in self.__sonos_data.favorites if f.title == message['title'])
-                    fav = next(f for f in self._favorites if f['title'] == message['title'])
-                    # self._logger.warning(vars(fav))
-                    self._logger.info("playing favorite %s in %s", fav, coordinator.zone_name)
-                    # coordinator.soco.play_uri(fav['uri'], fav['meta'], fav['title'])
-                    # # coordinator.soco.play_uri(fav['uri'], '', fav['title'])
-                    coordinator.soco.clear_queue()
-                    # # coordinator.soco.add_to_queue(fav)
-                    # todo: try to fix this so we can use soco.music_library.get_sonos_favorites() and avoid warning in log
-                    coordinator.soco.avTransport.AddURIToQueue(
-                        [
-                            ("InstanceID", 0),
-                            ("EnqueuedURI", fav['uri']),
-                            ("EnqueuedURIMetaData", fav['meta']),
-                            ("DesiredFirstTrackNumberEnqueued", 0),
-                            ("EnqueueAsNext", 0),
-                        ]
-                    )
+                    if await self._try_play_favorite_from_music_library(coordinator, message['title']):
+                        return
 
-                    coordinator.soco.play_from_queue(0)
+                    await self._try_play_favorite_from_controler(coordinator, message['title'])
                 except StopIteration:
                     self._logger.error("Favorite '%s' not found, cannot play on %s", message['title'], speaker.zone_name)
             elif message['action'] == 'play_playlist':
@@ -216,6 +201,39 @@ class SonosDaemon(BaseDaemon):
         self.__update_task.cancel()
         for speaker in self._speakers.values():
             await speaker.async_unsubscribe()
+
+    async def _try_play_favorite_from_music_library(self, coordinator: SonosSpeaker, title: str):
+        try:
+            fav = next(f for f in self._sonos_data.favorites if f.title == title)
+            self._logger.info("playing favorite %s in %s", fav.title, coordinator.zone_name)
+
+            coordinator.soco.clear_queue()
+            coordinator.soco.add_to_queue(fav)
+            coordinator.soco.play_from_queue(0)
+            return True
+        except SoCoUPnPException as e:
+            self._logger.warning("Favorite '%s' cannot be played from music library on %s: %s", title, coordinator.zone_name, e)
+            return False
+
+    async def _try_play_favorite_from_controler(self, coordinator: SonosSpeaker, title: str):
+        try:
+            fav = next(f for f in self._favorites if f['title'] == title)
+            self._logger.info("playing favorite %s in %s", fav, coordinator.zone_name)
+            coordinator.soco.clear_queue()
+            coordinator.soco.avTransport.AddURIToQueue(
+                [
+                    ("InstanceID", 0),
+                    ("EnqueuedURI", fav['uri']),
+                    ("EnqueuedURIMetaData", fav['meta']),
+                    ("DesiredFirstTrackNumberEnqueued", 0),
+                    ("EnqueueAsNext", 0),
+                ]
+            )
+
+            coordinator.soco.play_from_queue(0)
+        except SoCoUPnPException as e:
+            self._logger.warning("Favorite '%s' cannot be played from music controler on %s: %s", title, coordinator.zone_name, e)
+            return False
 
     async def _auto_update(self):
         try:
