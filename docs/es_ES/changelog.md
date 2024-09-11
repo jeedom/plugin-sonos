@@ -7,11 +7,16 @@
 > Attention
 > Rediseño significativo del complemento: Se ha reescrito una gran parte del complemento, incluida toda la comunicación con Sonos (demonio) y ciertas funcionalidades se han modificado y ya no funcionan como antes, en particular la gestión de grupos.
 >
-> Requiere Jeedom 4.4
+> Requiere Jeedom 4.4.8
 >
 > Compatible con Debian 11 y 12! Probablemente Debian 10, pero no probado y no es posible admitir esta versión
 >
 > Ver también [este tema en la comunidad](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) para más detalles
+
+# 29/08/2024
+
+- Se optimizó la visualización de la portada que se está reproduciendo actualmente
+- Optimización en la lectura de favoritos
 
 # 18/08/2024
 
