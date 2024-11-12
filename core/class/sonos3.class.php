@@ -305,6 +305,7 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('track_image', $data['media']['image_url']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('group_state', $data['grouped']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('group_name', $data['group_name']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('next_alarm', $data['next_alarm']) || $changed;
 
 			if ($data['mic_enabled'] === false || $data['mic_enabled'] === true) {
 				$changed = $eqLogic->checkAndUpdateCmd($eqLogic->createMicCommands(), $data['mic_enabled']) || $changed;
@@ -938,6 +939,17 @@ class sonos3 extends eqLogic {
 			$tts->setDisplay('message_placeholder', __('Message', __FILE__));
 			$tts->setEqLogic_id($this->getId());
 			$tts->save();
+		}
+
+		$next_alarm = $this->getCmd('info', 'next_alarm');
+		if (!is_object($next_alarm)) {
+			$next_alarm = new sonos3Cmd();
+			$next_alarm->setLogicalId('next_alarm');
+			$next_alarm->setName(__('Prochaine alarme', __FILE__));
+			$next_alarm->setType('info');
+			$next_alarm->setSubType('string');
+			$next_alarm->setEqLogic_id($this->getId());
+			$next_alarm->save();
 		}
 
 		$available_features = $this->getConfiguration('available_features', []);

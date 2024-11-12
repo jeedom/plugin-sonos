@@ -47,6 +47,7 @@ class SonosDaemon(BaseDaemon):
 
     async def _on_start(self):
         await self._discover_and_sync()
+        asyncio.create_task(self._auto_sync())
 
         self.__update_task = asyncio.create_task(self._auto_update())
 
@@ -235,6 +236,14 @@ class SonosDaemon(BaseDaemon):
             self._logger.warning("Favorite '%s' cannot be played from music controler on %s: %s", title, coordinator.zone_name, e)
             return False
 
+    async def _auto_sync(self):
+        try:
+            while True:
+                await asyncio.sleep(3600)
+                await self._discover_and_sync()
+        except asyncio.CancelledError:
+            pass
+
     async def _auto_update(self):
         try:
             self._logger.info("Start auto update")
@@ -255,8 +264,12 @@ class SonosDaemon(BaseDaemon):
             await self.__get_favorites(coordinator)
             await self.__get_playlists(coordinator)
             await self.__get_radios(coordinator)
+            await self.__get_alarms(coordinator)
         except StopIteration:
             self._logger.warning("No speakers available to get favorites, playlists & radios")
+
+        for speaker in self._speakers.values():
+            await self.__send_speaker(speaker)
 
     async def __discover_controllers(self):
         discovered_soco = discover(timeout=10, allow_network_scan=True)
@@ -295,6 +308,9 @@ class SonosDaemon(BaseDaemon):
         self._radios = speaker.soco.music_library.get_favorite_radio_stations()
         self._logger.info("get %s radios out of %s", self._radios.number_returned, self._radios.total_matches)
         await self.add_change('radios', list({r.title for r in self._radios}))
+
+    async def __get_alarms(self, speaker: SonosSpeaker):
+        self._sonos_data.alarms.update(speaker.soco)
 
     async def __send_speaker(self, speaker: SonosSpeaker):
         await self.add_change(f'speakers::{speaker.uid}', speaker.to_dict())

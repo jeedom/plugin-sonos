@@ -18,7 +18,6 @@ from soco.snapshot import Snapshot
 from soco.exceptions import SoCoSlaveException
 # from sonos_websocket import SonosWebsocket
 
-from .alarms import SonosAlarms
 from .const import (
     ALL_FEATURES,
     SONOS_STATE_PLAYING,
@@ -36,7 +35,7 @@ EVENT_CHARGING = {
     "NOT_CHARGING": False,
 }
 SUBSCRIPTION_SERVICES = {
-    # "alarmClock",
+    "alarmClock",
     "avTransport",
     "contentDirectory",
     "deviceProperties",
@@ -154,6 +153,7 @@ class SonosSpeaker:
     def to_dict(self):
         grouped = self.sonos_group != [self]
         media_dict = self.media.to_dict() if self.is_coordinator else self.coordinator.media.to_dict()
+        alarm: datetime.datetime = self.data.alarms.get_next_alarm_datetime(zone_uid=self.uid)
         return {
             'zone_name': self.zone_name,
             'model_name': self.model_name.replace("Sonos ", ""),
@@ -171,7 +171,8 @@ class SonosSpeaker:
             'group_name': self.sonos_group[0].zone_name if grouped else '',
             'battery_info': self.battery_info,
             'status_light': self.status_light,
-            'buttons_enabled': self.buttons_enabled
+            'buttons_enabled': self.buttons_enabled,
+            'next_alarm': alarm.strftime('%Y-%m-%d %H:%M:%S') if alarm else ''
         }
 
     def set_status_light(self, led_on: bool):
@@ -194,21 +195,9 @@ class SonosSpeaker:
     # Properties
     #
     @property
-    def alarms(self) -> SonosAlarms:
-        """Return the SonosAlarms instance for this household."""
-        return self.data.alarms[self.household_id]
-
-    @property
     def is_coordinator(self) -> bool:
         """Return true if player is a coordinator."""
         return self.coordinator is None
-
-    @property
-    def subscription_address(self) -> str:
-        """Return the current subscription callback address."""
-        assert len(self._subscriptions) > 0
-        addr, port = self._subscriptions[0].event_listener.address
-        return ":".join([addr, str(port)])
 
     @property
     def missing_subscriptions(self) -> set[str]:
@@ -351,12 +340,8 @@ class SonosSpeaker:
 
     def async_dispatch_alarms(self, event: SonosEvent) -> None:
         """Add the soco instance associated with the event to the callback."""
-        if "alarm_list_version" not in event.variables:
-            return
-        asyncio.create_task(
-            self.alarms.async_process_event(event, self),
-            name = "sonos process event"
-        )
+        self.data.alarms.update(self.soco)
+        self.__change_cb(self)
 
     def async_dispatch_device_properties(self, event: SonosEvent) -> None:
         """Update device properties from an event."""
