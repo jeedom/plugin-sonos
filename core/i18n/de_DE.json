@@ -1,6 +1,6 @@
 {
     "plugins\/sonos3\/plugin_info\/configuration.php": {
-        "401 - Accès non autorisé": "401 – Unbefugter Zugriff",
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "Seien Sie vorsichtig, Ihre Version von PHP ('. PHP_VERSION.') Ist zu alt, Sie benötigen mindestens PHP 7.0",
         "Le plugin sonos doit réagir aux interactions": "Das Sonos-Plugin muss auf Interaktionen reagieren",
         "Partage": "Teilen",
@@ -9,12 +9,12 @@
         "Mot de passe du partage": "Passwort teilen"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 – Unbefugter Zugriff",
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Kein Stammobjekt gefunden. Um eine zu erstellen, gehen Sie zu Allgemein -> Objekt. <br\/> Wenn Sie nicht wissen, was Sie tun sollen, oder wenn Sie Jeedom zum ersten Mal verwenden, zögern Sie nicht, diese <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">Seite<\/a> zu konsultieren",
         "Rechercher": "Suchen nach"
     },
     "plugins\/sonos3\/desktop\/php\/sonos3.php": {
-        "401 - Accès non autorisé": "401 – Unbefugter Zugriff",
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Gestion": "Verwaltung",
         "Synchroniser": "Synchronisieren",
         "Configuration": "Konfiguration",
@@ -63,7 +63,7 @@
         "Vous n\\'etes pas autorisé à effectuer cette action": "Sie sind nicht berechtigt, diese Aktion durchzuführen"
     },
     "plugins\/sonos3\/core\/ajax\/sonos3.ajax.php": {
-        "401 - Accès non autorisé": "401 – Unbefugter Zugriff",
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Aucune méthode correspondante à": "Keine Matching-Methode"
     },
     "plugins\/sonos3\/core\/class\/sonos3.class.php": {
