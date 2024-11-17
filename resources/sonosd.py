@@ -243,6 +243,8 @@ class SonosDaemon(BaseDaemon):
                 await self._discover_and_sync()
         except asyncio.CancelledError:
             pass
+        except Exception as e:
+            self._logger.warning("Exception during auto sync: %s", e)
 
     async def _auto_update(self):
         try:
