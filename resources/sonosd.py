@@ -277,6 +277,10 @@ class SonosDaemon(BaseDaemon):
             self._logger.warning("No Sonos discovered, do you have Sonos speaker on the same network?")
             return
 
+        for speaker in self._speakers.values():
+            await speaker.async_unsubscribe()
+        self._speakers.clear()
+
         socos: List[SoCo]
         socos = list(discovered_soco)
         for soco in socos:
