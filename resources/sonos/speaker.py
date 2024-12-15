@@ -48,6 +48,7 @@ UNUSED_DEVICE_KEYS = ["SPID", "TargetRoomName"]
 
 _LOGGER = logging.getLogger(__name__)
 
+
 class SonosSpeaker:
     """Representation of a Sonos speaker."""
 
@@ -157,14 +158,14 @@ class SonosSpeaker:
         return {
             'zone_name': self.zone_name,
             'model_name': self.model_name.replace("Sonos ", ""),
-            'volume' : self.volume,
-            'muted' : self.muted,
+            'volume': self.volume,
+            'muted': self.muted,
             'mic_enabled': self.mic_enabled,
-            'cross_fade' : self.cross_fade,
-            'balance' : self.balance,
-            'bass' : self.bass,
-            'treble' : self.treble,
-            'loudness' : self.loudness,
+            'cross_fade': self.cross_fade,
+            'balance': self.balance,
+            'bass': self.bass,
+            'treble': self.treble,
+            'loudness': self.loudness,
             'is_coordinator': self.is_coordinator,
             'media': media_dict,
             'grouped': grouped,
@@ -205,7 +206,6 @@ class SonosSpeaker:
         subscribed_services = {sub.service.service_type for sub in self._subscriptions}
         return SUBSCRIPTION_SERVICES - subscribed_services
 
-
     def _get_available_features(self):
         features = []
         for feature_type in ALL_FEATURES:
@@ -217,6 +217,7 @@ class SonosSpeaker:
             except SoCoSlaveException:
                 features.append(feature_type)
         self.available_features = features
+
     #
     # Subscription handling and event dispatchers
     #
@@ -302,7 +303,7 @@ class SonosSpeaker:
         """Handle a failed subscription renewal."""
         asyncio.create_task(
             self._async_renew_failed(exception),
-            name = "sonos renew failed"
+            name="sonos renew failed"
         )
 
     async def _async_renew_failed(self, exception: Exception) -> None:
@@ -347,14 +348,14 @@ class SonosSpeaker:
         """Update device properties from an event."""
         asyncio.create_task(
             self.async_update_device_properties(event),
-            name = "sonos device properties"
+            name="sonos device properties"
         )
         self.__change_cb(self)
 
     async def async_update_device_properties(self, event: SonosEvent) -> None:
         """Update device properties from an event."""
         if "mic_enabled" in event.variables:
-            mic_exists = self.mic_enabled is not None
+            # mic_exists = self.mic_enabled is not None
             self.mic_enabled = bool(int(event.variables["mic_enabled"]))
             # if not mic_exists:
             #     async_dispatcher_send(SONOS_CREATE_MIC_SENSOR, self)
@@ -369,7 +370,7 @@ class SonosSpeaker:
             return
         if "container_update_i_ds" not in event.variables:
             return
-        #TODO: dynamically update favorites and send update to jeedom
+        # TODO: dynamically update favorites and send update to jeedom
 
     def async_dispatch_media_update(self, event: SonosEvent) -> None:
         """Update information about currently playing media from an event."""
@@ -577,7 +578,6 @@ class SonosSpeaker:
         #     except SonosUpdateError as err:
         #         _LOGGER.debug("Could not request current power source: %s", err)
 
-
     # async def async_poll_battery(self, now: datetime.datetime | None = None) -> None:
     #     """Poll the device for the current battery state."""
     #     if not self.available:
@@ -632,7 +632,7 @@ class SonosSpeaker:
                         reason,
                     )
                     continue
-                uid = vanished_device.get("UUID")
+                # uid = vanished_device.get("UUID")
                 # async_dispatcher_send(
                 #     self.hass,
                 #     f"{SONOS_VANISHED}-{uid}",

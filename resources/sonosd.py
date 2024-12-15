@@ -15,6 +15,7 @@ from sonos.const import RAMP_TYPES, SONOS_STATE_PLAYING
 from sonos.data import SonosData
 from sonos.speaker import SonosSpeaker
 
+
 class SonosConfig(BaseConfig):
     def __init__(self):
         super().__init__()
@@ -24,6 +25,7 @@ class SonosConfig(BaseConfig):
     @property
     def internal_ip(self) -> str:
         return self._args.internalIp
+
 
 class SonosDaemon(BaseDaemon):
     def __init__(self) -> None:
@@ -39,7 +41,7 @@ class SonosDaemon(BaseDaemon):
 
         self.__update_task = None
 
-        self._speakers:dict[str, SonosSpeaker] = {}
+        self._speakers: dict[str, SonosSpeaker] = {}
         self._sonos_data = SonosData()
 
         self._favorites = List[dict]
@@ -64,7 +66,7 @@ class SonosDaemon(BaseDaemon):
             speaker = self._speakers[message['uid']]
             coordinator = speaker if speaker.is_coordinator else speaker.coordinator
 
-            ## actions on speaker: volume, equalizer, speaker controle
+            # actions on speaker: volume, equalizer, speaker controle
             if message['action'] == 'mute':
                 speaker.soco.mute = True
             elif message['action'] == 'unmute':
@@ -105,10 +107,10 @@ class SonosDaemon(BaseDaemon):
             elif message['action'] == 'treble':
                 speaker.soco.treble = message['slider']
 
-            ## actions to manage groups
+            # actions to manage groups
             elif message['action'] == 'join':
                 try:
-                    master = next(item for item in self._speakers.values() if item.zone_name==message['title'])
+                    master = next(item for item in self._speakers.values() if item.zone_name == message['title'])
                     master = master if master.is_coordinator else master.coordinator
                     speaker.soco.join(master)
                 except StopIteration:
@@ -118,7 +120,7 @@ class SonosDaemon(BaseDaemon):
             elif message['action'] == 'partymode':
                 speaker.soco.partymode()
 
-            ## action on playlist & playmode
+            # action on playlist & playmode
             elif message['action'] == 'repeat':
                 coordinator.soco.repeat = not coordinator.soco.repeat
             elif message['action'] == 'repeat_on':
@@ -237,14 +239,15 @@ class SonosDaemon(BaseDaemon):
             return False
 
     async def _auto_sync(self):
-        try:
-            while True:
+        while True:
+            try:
                 await asyncio.sleep(3600)
                 await self._discover_and_sync()
-        except asyncio.CancelledError:
-            pass
-        except Exception as e:
-            self._logger.warning("Exception during auto sync: %s", e)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                self._logger.warning("Exception during auto sync: %s", e)
+        self._logger.info("Auto sync cancelled")
 
     async def _auto_update(self):
         try:
@@ -325,5 +328,6 @@ class SonosDaemon(BaseDaemon):
         self._loop.create_task(self.__send_speaker(speaker))
         for s in speaker.sonos_group:
             self._loop.create_task(self.__send_speaker(s))
+
 
 SonosDaemon().run()

@@ -4,6 +4,7 @@ from collections import OrderedDict
 from soco.data_structures import SearchResult
 from soco.alarms import Alarms
 
+
 class SonosData:
     """Storage class for platform global data."""
 
