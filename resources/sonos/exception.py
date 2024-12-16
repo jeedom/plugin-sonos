@@ -1,5 +1,6 @@
 """Sonos specific exceptions."""
 
+
 class UnknownMediaType(Exception):
     """Unknown media type."""
 

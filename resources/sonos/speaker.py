@@ -25,7 +25,7 @@ from .const import (
     SUBSCRIPTION_TIMEOUT,
 )
 from .data import SonosData
-from .exception import S1BatteryMissing, SonosSubscriptionsFailed, SonosUpdateError
+from .exception import S1BatteryMissing, SonosSubscriptionsFailed
 from .media import SonosMedia
 
 NEVER_TIME = -1200.0
@@ -259,7 +259,7 @@ class SonosSpeaker:
     async def _async_subscribe(self) -> None:
         """Create event subscriptions."""
         subscriptions = [
-            self._subscribe(getattr(self.soco, service), self.async_dispatch_event)
+            self._subscribe(getattr(self.soco, service), self._dispatch_event)
             for service in self.missing_subscriptions
         ]
         if not subscriptions:
@@ -283,7 +283,7 @@ class SonosSpeaker:
             auto_renew=True, requested_timeout=SUBSCRIPTION_TIMEOUT
         )
         subscription.callback = sub_callback
-        subscription.auto_renew_fail = self.async_renew_failed
+        subscription.auto_renew_fail = self._renew_failed
         self._subscriptions.append(subscription)
 
     async def async_unsubscribe(self) -> None:
@@ -299,7 +299,7 @@ class SonosSpeaker:
             self.log_subscription_result(result, "Unsubscribe")
         self._subscriptions = []
 
-    def async_renew_failed(self, exception: Exception) -> None:
+    def _renew_failed(self, exception: Exception) -> None:
         """Handle a failed subscription renewal."""
         asyncio.create_task(
             self._async_renew_failed(exception),
@@ -332,19 +332,19 @@ class SonosSpeaker:
         if has_changed:
             self.__change_cb(self)
 
-    def async_dispatch_event(self, event: SonosEvent) -> None:
+    def _dispatch_event(self, event: SonosEvent) -> None:
         """Handle callback event and route as needed."""
 
         dispatcher = self._event_dispatchers[event.service.service_type]
         _LOGGER.debug("new event %s", event.service.service_type)
         dispatcher(self, event)
 
-    def async_dispatch_alarms(self, event: SonosEvent) -> None:
+    def _event_dispatch_alarms(self, event: SonosEvent) -> None:
         """Add the soco instance associated with the event to the callback."""
         self.data.alarms.update(self.soco)
         self.__change_cb(self)
 
-    def async_dispatch_device_properties(self, event: SonosEvent) -> None:
+    def _event_dispatch_device_properties(self, event: SonosEvent) -> None:
         """Update device properties from an event."""
         asyncio.create_task(
             self.async_update_device_properties(event),
@@ -364,7 +364,7 @@ class SonosSpeaker:
         if more_info:
             await self.async_update_battery_info(more_info)
 
-    def async_dispatch_favorites(self, event: SonosEvent) -> None:
+    def _event_dispatch_favorites(self, event: SonosEvent) -> None:
         """Add the soco instance associated with the event to the callback."""
         if "favorites_update_id" not in event.variables:
             return
@@ -372,7 +372,7 @@ class SonosSpeaker:
             return
         # TODO: dynamically update favorites and send update to jeedom
 
-    def async_dispatch_media_update(self, event: SonosEvent) -> None:
+    def _event_dispatch_media_update(self, event: SonosEvent) -> None:
         """Update information about currently playing media from an event."""
         # The new coordinator can be provided in a media update event but
         # before the ZoneGroupState updates. If this happens the playback
@@ -421,7 +421,7 @@ class SonosSpeaker:
         self.media.update_media_from_event(event.variables)
         self.__change_cb(self)
 
-    def async_update_volume(self, event: SonosEvent) -> None:
+    def _event_dispatch_rendering_control(self, event: SonosEvent) -> None:
         """Update information about currently volume settings."""
         variables = event.variables
 
@@ -482,17 +482,6 @@ class SonosSpeaker:
             self.__change_cb(self)
             asyncio.create_task(self.async_subscribe())
 
-    async def _async_check_activity(self) -> None:
-        """Validate availability of the speaker based on recent activity."""
-        try:
-            await self.hass.async_add_executor_job(self.ping)
-        except SonosUpdateError:
-            _LOGGER.warning(
-                "No recent activity and cannot reach %s, marking unavailable",
-                self.zone_name,
-            )
-            await self.async_offline()
-
     async def async_offline(self) -> None:
         """Handle removal of speaker when unavailable."""
         assert self._subscription_lock is not None
@@ -512,23 +501,6 @@ class SonosSpeaker:
         self.__change_cb(self)
 
         await self.async_unsubscribe()
-
-        # self.data.discovery_known.discard(self.soco.uid)
-
-    async def async_vanished(self, reason: str) -> None:
-        """Handle removal of speaker when marked as vanished."""
-        if not self.available:
-            return
-        _LOGGER.debug(
-            "%s has vanished (%s), marking unavailable", self.zone_name, reason
-        )
-        await self.async_offline()
-
-    async def async_rebooted(self) -> None:
-        """Handle a detected speaker reboot."""
-        _LOGGER.debug("%s rebooted, reconnecting", self.zone_name)
-        await self.async_offline()
-        self.speaker_activity("reboot")
 
     #
     # Battery management
@@ -617,7 +589,7 @@ class SonosSpeaker:
     #     self.hass.async_create_task(self.create_update_groups_coro(), eager_start=True)
 
     # @callback
-    def async_update_groups(self, event: SonosEvent) -> None:
+    def _event_dispatch_topology(self, event: SonosEvent) -> None:
         """Handle callback for topology change event."""
         xml = event.variables.get("zone_group_state")
         if xml:
@@ -954,10 +926,10 @@ class SonosSpeaker:
         self.muted = self.soco.mute
 
     _event_dispatchers = {
-        "AlarmClock": async_dispatch_alarms,
-        "AVTransport": async_dispatch_media_update,
-        "ContentDirectory": async_dispatch_favorites,
-        "DeviceProperties": async_dispatch_device_properties,
-        "RenderingControl": async_update_volume,
-        "ZoneGroupTopology": async_update_groups,
+        "AlarmClock": _event_dispatch_alarms,
+        "AVTransport": _event_dispatch_media_update,
+        "ContentDirectory": _event_dispatch_favorites,
+        "DeviceProperties": _event_dispatch_device_properties,
+        "RenderingControl": _event_dispatch_rendering_control,
+        "ZoneGroupTopology": _event_dispatch_topology,
     }
