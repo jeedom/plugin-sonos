@@ -101,20 +101,20 @@ class SonosMedia:
 
     def to_dict(self):
         return {
-            'play_mode' : self.play_mode if self.play_mode is not None else '',
-            'playback_status' : self.playback_status if self.playback_status is not None else '',
-            'album_name' : self.album_name if self.album_name is not None else '',
-            'artist' : self.artist if self.artist is not None else '',
-            'channel' : self.channel if self.channel is not None else '',
-            'duration' : self.duration if self.duration is not None else 0,
-            'image_url' : self.image_url if self.image_url is not None else '',
-            'queue_position' : self.queue_position if self.queue_position is not None else 0,
-            'queue_size' : self.queue_size if self.queue_size is not None else 0,
-            'playlist_name' : self.playlist_name if self.playlist_name is not None else '',
-            'source_name' : self.source_name if self.source_name is not None else '',
-            'title' : self.title if self.title is not None else '',
-            'uri' : self.uri if self.uri is not None else '',
-            'position' : self.position if self.position is not None else 0
+            'play_mode': self.play_mode if self.play_mode is not None else '',
+            'playback_status': self.playback_status if self.playback_status is not None else '',
+            'album_name': self.album_name if self.album_name is not None else '',
+            'artist': self.artist if self.artist is not None else '',
+            'channel': self.channel if self.channel is not None else '',
+            'duration': self.duration if self.duration is not None else 0,
+            'image_url': self.image_url if self.image_url is not None else '',
+            'queue_position': self.queue_position if self.queue_position is not None else 0,
+            'queue_size': self.queue_size if self.queue_size is not None else 0,
+            'playlist_name': self.playlist_name if self.playlist_name is not None else '',
+            'source_name': self.source_name if self.source_name is not None else '',
+            'title': self.title if self.title is not None else '',
+            'uri': self.uri if self.uri is not None else '',
+            'position': self.position if self.position is not None else 0
         }
 
     def clear(self) -> None:

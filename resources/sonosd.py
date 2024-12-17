@@ -273,9 +273,6 @@ class SonosDaemon(BaseDaemon):
         except StopIteration:
             self._logger.warning("No speakers available to get favorites, playlists & radios")
 
-        for speaker in self._speakers.values():
-            await self.__send_speaker(speaker)
-
     async def __discover_controllers(self):
         discovered_soco = discover(timeout=10, allow_network_scan=True)
         if discovered_soco is None:
