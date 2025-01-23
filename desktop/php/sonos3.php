@@ -117,6 +117,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
 								</div>
 							</div>
+
+							<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Utiliser la tuile préconfigurée}}</label>
+								<div class="col-sm-2">
+									<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="customWidget" />
+								</div>
+							</div>
 						</div>
 
 						<div class="col-lg-6">
@@ -181,6 +189,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<th class="hidden-xs" style="min-width:50px;width:70px;">ID</th>
 							<th style="min-width:220px;width:300px;">{{Nom}}</th>
 							<th style="min-width:140px;width:200px;">{{Type}}</th>
+							<th style="min-width:260px;width:280px;">{{Options}}</th>
 							<th>{{Etat}}</th>
 							<th style="min-width:150px;width:250px;">{{Actions}}</th>
 						</tr>

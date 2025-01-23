@@ -318,7 +318,7 @@ class sonos3 extends eqLogic {
 				$eqLogic->batteryStatus($data['battery_info']['level']);
 			}
 
-			if ($changed) {
+			if ($eqLogic->getConfiguration('customWidget', 1) == 1 && $changed) {
 				$eqLogic->refreshWidget();
 			}
 		}
@@ -381,6 +381,10 @@ class sonos3 extends eqLogic {
 
 	/*     * *********************Méthodes d'instance************************* */
 
+	public function preInsert() {
+		$this->setConfiguration('customWidget', 1);
+	}
+
 	public function preSave() {
 		$this->setCategory('multimedia', 1);
 	}
@@ -388,6 +392,11 @@ class sonos3 extends eqLogic {
 	public function migrateConfig() {
 		config::remove('playlist', __CLASS__);
 		config::remove('favourites', __CLASS__);
+
+		if ($this->getConfiguration('customWidget') == '') {
+			$this->setConfiguration('customWidget', 1);
+			$this->save(true);
+		}
 
 		$local_track_image = $this->getCmd('info', 'local_track_image');
 		if (is_object($local_track_image)) {
@@ -1153,6 +1162,10 @@ class sonos3 extends eqLogic {
 	}
 
 	public function toHtml($_version = 'dashboard') {
+		if ($this->getConfiguration('customWidget', 1) == 0) {
+			return parent::toHtml($_version);
+		}
+
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
 			return $replace;
@@ -1246,7 +1259,7 @@ class sonos3 extends eqLogic {
 class sonos3Cmd extends cmd {
 	/*     * *************************Attributs****************************** */
 
-	public static $_widgetPossibility = array('custom' => false);
+	public static $_widgetPossibility = array('custom' => true);
 
 	/*     * ***********************Methode static*************************** */
 
