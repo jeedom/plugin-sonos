@@ -29,7 +29,9 @@ Hier finden Sie die gesamte übliche Konfiguration Ihrer Ausrüstung :
 
 Sowie Informationen zu Ihrem Sonos: *Modell*, *Veröffentlichungen*, *Seriennummer*, *Kennung*, *MAC-Adresse* Und *IP Adresse*.
 
-Es ist keine spezifische Konfiguration erforderlich.
+...
+
+.
 
 # Die Aufträge
 

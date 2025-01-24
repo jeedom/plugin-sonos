@@ -13,7 +13,11 @@
 >
 > Siehe auch [dieses Thema auf Community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) für mehr Details
 
-# 13/11-2024
+# 
+
+- : ...
+
+# 
 
 - Hinzufügung einer stündlichen automatischen Synchronisierung, um mögliche Desynchronisierungen zu korrigieren
 - Hinzufügen eines Info-Befehls **Nächster Alarm** Auf jedem Sonos wird das Datum des nächsten auf diesem Lautsprecher programmierten Alarms angezeigt
