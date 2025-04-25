@@ -13,7 +13,11 @@
 >
 > See also [this topic on community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) for more details
 
-# 13/11-2024
+# 
+
+- : ...
+
+# 
 
 - Added automatic sync every hour to correct possible desynchronizations
 - Adding an info command **Next alarm** on each Sonos giving the date of the next alarm programmed on this speaker

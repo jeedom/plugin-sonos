@@ -37,6 +37,8 @@
         "Options": "Opções",
         "Activer": "Ativar",
         "Visible": "Visivél",
+        "Paramètres spécifiques": "Paramètres spécifiques",
+        "Utiliser la tuile préconfigurée": "Utiliser la tuile préconfigurée",
         "Informations": "Informação",
         "Modèle": "Modelo",
         "Version": "Versão",
@@ -53,6 +55,8 @@
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {
         "Nom": "Nome",
         "Choisir une icône": "Escolha um ícone",
+        "Afficher": "Afficher",
+        "Historiser": "Historiser",
         "Tester": "Teste",
         "Synchronisation réussie.": "Sincronização bem-sucedida"
     },

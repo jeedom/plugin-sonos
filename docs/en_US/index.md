@@ -29,7 +29,9 @@ Here you find all the usual configuration of your equipment :
 
 As well as information about your Sonos: *Model*, *Releases*, *Serial number*, *Identifier*, *MAC address* And *IP adress*.
 
-There is no specific configuration to perform.
+...
+
+.
 
 # The orders
 

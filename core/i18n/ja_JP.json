@@ -37,6 +37,8 @@
         "Options": "オプション",
         "Activer": "アクティブ",
         "Visible": "目に見えます",
+        "Paramètres spécifiques": "Paramètres spécifiques",
+        "Utiliser la tuile préconfigurée": "Utiliser la tuile préconfigurée",
         "Informations": "情報",
         "Modèle": "モデル",
         "Version": "Version",
@@ -53,6 +55,8 @@
     "plugins\/sonos3\/desktop\/js\/sonos3.js": {
         "Nom": "表題",
         "Choisir une icône": "Choisir une icône",
+        "Afficher": "Afficher",
+        "Historiser": "Historiser",
         "Tester": "テスト",
         "Synchronisation réussie.": "Synchronisation réussie"
     },

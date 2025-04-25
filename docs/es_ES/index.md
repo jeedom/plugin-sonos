@@ -29,7 +29,9 @@ Aquí encontrarás toda la configuración habitual de tu equipo :
 
 Además de información sobre tu Sonos: *Modelo*, *Lanzamientos*, *Número de serie*, *Identificador*, *Dirección MAC* Y *Dirección IP*.
 
-No hay ninguna configuración específica que realizar.
+...
+
+.
 
 # Las órdenes
 
