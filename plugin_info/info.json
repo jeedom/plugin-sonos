@@ -16,6 +16,9 @@
     "licence": "AGPL",
     "author": "Jeedom SAS",
     "require": "4.4",
+    "os": {
+        "min": 11
+    },
     "category": "multimedia",
     "hasDependency": true,
     "hasOwnDeamon": true,
