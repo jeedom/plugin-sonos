@@ -38,9 +38,12 @@ if (!isConnect('admin')) {
 			<label class="col-sm-3 control-label">{{Partage}}</label>
 			<div class="col-sm-7">
 				<div class="input-group">
-					<input class="configKey form-control roundedLeft" data-l1key="tts_host">
+					<div class="input-group-addon roundedLeft">{{Hôte}}</div>
+					<input class="configKey form-control" title="Nom d'hôte ou IP" data-l1key="tts_host">
 					<div class="input-group-addon">/</div>
-					<input class="configKey form-control roundedRight" data-l1key="tts_path">
+					<input class="configKey form-control" title="Nom du partage (pas de '/'!)" data-l1key="tts_share">
+					<div class="input-group-addon">/</div>
+					<input class="configKey form-control roundedRight" title="Chemin (peut contenir des '/')" data-l1key="tts_path">
 				</div>
 			</div>
 		</div>
@@ -53,38 +56,14 @@ if (!isConnect('admin')) {
 		<div class="form-group useShare">
 			<label class="col-sm-3 control-label">{{Mot de passe du partage}}</label>
 			<div class="col-sm-7">
-				<input type="password" class="configKey form-control" data-l1key="tts_password">
+				<div class="input-group">
+					<input type="text" class="configKey form-control roundedLeft inputPassword" data-l1key="tts_password" autocomplete="off" />
+					<span class="input-group-btn">
+						<a class="btn btn-default form-control bt_showPass roundedRight"><i class="fas fa-eye"></i></a>
+					</span>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{Découverte}}</label>
-		<div class="col-sm-7">
-			<a class="btn btn-default" id="bt_syncSonos"><i class='fas fa-sync'></i> {{Rechercher les équipements Sonos}}</a>
 		</div>
-	</div>
-</fieldset>
+	</fieldset>
 </form>
-
-<script>
-$('#bt_syncSonos').on('click', function () {
-	$.ajax({
-		type: "POST",
-		url: "plugins/sonos3/core/ajax/sonos3.ajax.php",
-		data: {
-			action: "syncSonos",
-		},
-		dataType: 'json',
-		error: function (request, status, error) {
-			handleAjaxError(request, status, error)
-		},
-		success: function (data) {
-			if (data.state != 'ok') {
-				$('#div_alert').showAlert({message: data.result, level: 'danger'})
-				return
-			}
-			$('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'})
-		}
-	})
-})
-</script>

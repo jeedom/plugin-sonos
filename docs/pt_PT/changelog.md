@@ -4,6 +4,72 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+> Attention
+> Redesenho significativo do plugin: uma grande parte do plugin foi reescrita incluindo toda a comunicação com Sonos (daemon) e certas funcionalidades foram modificadas e não funcionam mais como antes, principalmente o gerenciamento de grupos.
+>
+> Requer Jeedom 4.4.8
+>
+> Compatível com Debian 11 e 12! Provavelmente Debian 10, mas não testado e sem suporte possível nesta versão
+>
+> Veja também [este tópico na comunidade](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) para mais detalhes
+
+# 
+
+- : ...
+
+# 
+
+- Adição de sincronização automática a cada hora para corrigir possíveis dessincronizações
+- Adicionando um comando de informações **Próximo alarme** em cada Sonos informando a data do próximo alarme programado neste alto-falante
+
+# 29/08/2024
+
+- Otimizou a exibição da capa atualmente sendo reproduzida
+- Otimização na leitura de favoritos
+
+# 18/08/2024
+
+- Adicionar pedido **Status do microfone** que indica se o microfone está ativado ou não em Sonos equipados com microfone
+- Adicionando um comando de informações **Bateria** em Sonos equipados com bateria mostrando a porcentagem de carga da bateria
+- Adicionando um comando de informações **Carregando** em Sonos equipados com bateria indicando se o carregamento está ou não em andamento
+
+# 17/08/2024
+
+- Adicionando comandos **Status de volume**, **Volume ativado**, **Volume desligado**
+- Adicionando comandos **Status de esmaecimento**, **Desaparecer**, **Desaparecer**
+- Adicionando comandos **Controles de toque de status**, **Controles de toque ativados**, **Controles de toque desativados**
+- Adicionando comandos **Equilíbrio** (ação/cursor) e **Status do saldo** que gerencia o saldo de acordo com um valor entre -100 (extrema esquerda) e 100 (extrema direita)
+- Adicionando comandos **Sepulturas** (ação/cursor) e **Situação séria** que gerencia os graves de acordo com um valor entre -10 e 10
+- Adicionando comandos **Agudos** (ação/cursor) e **Status triplo** que gerencia os agudos de acordo com um valor entre -10 e 10
+- Adicionando o comando **Moda de festa** que permite agrupar todos os Sonos
+
+# 03/08/2024
+
+- Adicionando um pedido **Tocar rádio mp3** reproduzir uma rádio mp3 diretamente através de uma URL (acessível na internet por exemplo)
+- Adicionando comandos **Aumenta o volume** E **Diminuir o volume** a partir de 1%
+- Adicionando um pedido **Transição de volume** o que é muito útil para gerenciar transições de nível de volume. 3 modos possíveis: *LINEAR*, *ALARME*, *REPRODUÇÃO AUTOMÁTICA*. Consulte a documentação para obter mais informações.
+
+# 02/08/2024
+
+- Adicionando comandos **O presente**, **Partiu** E **LED de status** para verificar o indicador de status
+- Corrija a falha do daemon se nenhum Sonos for descoberto
+- Compatibilidade aprimorada com Debian 10/Python 3.7
+
+# 01/08/2024
+
+- Reescrita quase total do plugin, o daemon foi completamente reescrito em python (em vez de PHP)
+- Compatível com Debian 11 e 12! (Provavelmente Debian 10, mas não testado e sem suporte possível nesta versão)
+- Não há mais nenhuma descoberta para iniciar manualmente e não é mais necessário (nem possível) adicionar equipamentos manualmente, o plugin descobre automaticamente seus dispositivos de som e cria os equipamentos correspondentes a cada inicialização do daemon. Também é possível pedir para (re)sincronizar equipamentos, favoritos e playlists sem reiniciar o daemon a partir do painel de equipamentos
+- Atualização (quase) em tempo real das informações do pedido (um atraso de 0.5s a alguns segundos no máximo), mais minutos cron, inclusive quando uma alteração é feita fora do Jeedom (por meio do aplicativo Sonos, por exemplo)
+- Redesenho do gerenciamento de grupos (comandos antigos serão excluídos e novos serão adicionados, consulte a documentação). É possível entrar ou sair de um grupo, controlar a reprodução do grupo a partir de qualquer dispositivo do grupo sem se preocupar com quem é o controlador. O volume é sempre controlado pelo alto-falante.
+- Adaptação à função Text-to-Speech (TTS), será necessário adaptar a configuração de compartilhamento do SAMBA.
+- Optimisation: não há mais perda de memória no daemon e consome menos do que antes.
+
+- Adicionando um comando de ação **Televisão** para mudar para a entrada *Televisão* em equipamentos compatíveis
+- Adicionando um comando de informações **Modo de leitura** e ação **Escolha o modo de leitura** que permite selecionar o modo de leitura entre as seguintes possibilidades: *Normal*, *Repita tudo*, *Aleatório e repita tudo*, *Aleatório sem repetição*, *Repetir música*, *Música aleatória e repetida*
+- Adicionando um pedido **Status de leitura** que fornece o valor "bruto" do estado de leitura (o comando existente **Status** fornece um valor traduzido com base no idioma configurado no Jeedom)
+- Adicionando comandos **Status do grupo** (indica se o equipamento está agrupado ou não) e **Nome do grupo** no caso em que o equipamento está agrupado
+
 # 25/04/2024
 
 - Atualização da documentação
@@ -128,7 +194,7 @@
 
 # 2018
 
--  Adicionado gerenciamento dos favoritos dos sonos
+- Adicionado gerenciamento dos favoritos dos sonos
 - Suporte para Sonos One e Playbase
 - Correção da língua com picotts
 - Adicionando um comando "entrada de linha""

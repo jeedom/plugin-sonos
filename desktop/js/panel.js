@@ -14,11 +14,12 @@
 * You should have received a copy of the GNU General Public License
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
-positionEqLogic();
+jeedomUtils.positionEqLogic();
+
 setTimeout(function () {
   $('.div_displayEquipement').packery({
     itemSelector: ".eqLogic-widget",
-    gutter : 2
+    gutter: 2
   });
   $('.eqLogic-widget').addClass('displayObjectName');
 }, 2);

@@ -7,61 +7,148 @@
 
 namespace Icewind\SMB\Test;
 
+use Icewind\SMB\BasicAuth;
+use Icewind\SMB\Exception\AuthenticationException;
+use Icewind\SMB\Exception\ConnectionRefusedException;
+use Icewind\SMB\Exception\InvalidHostException;
+use Icewind\SMB\IOptions;
+use Icewind\SMB\IShare;
+use Icewind\SMB\Options;
+use Icewind\SMB\System;
+use Icewind\SMB\TimeZoneProvider;
+use Icewind\SMB\Wrapped\Server;
+
 class ServerTest extends TestCase {
 	/**
-	 * @var \Icewind\SMB\Server $server
+	 * @var \Icewind\SMB\Wrapped\Server $server
 	 */
 	private $server;
 
 	private $config;
 
-	public function setUp() {
+	public function setUp(): void {
 		$this->requireBackendEnv('smbclient');
 		$this->config = json_decode(file_get_contents(__DIR__ . '/config.json'));
-		$this->server = new \Icewind\SMB\Server($this->config->host, $this->config->user, $this->config->password);
+		$this->server = new Server(
+			$this->config->host,
+			new BasicAuth(
+				$this->config->user,
+				'test',
+				$this->config->password
+			),
+			new System(),
+			new TimeZoneProvider(new System()),
+			new Options()
+		);
 	}
 
 	public function testListShares() {
 		$shares = $this->server->listShares();
-		foreach ($shares as $share) {
-			if ($share->getName() === $this->config->share) {
-				return;
-			}
-		}
-		$this->fail('Share "' . $this->config->share . '" not found');
+		$names = array_map(function (IShare $share) {
+			return $share->getName();
+		}, $shares);
+
+		$this->assertContains($this->config->share, $names);
 	}
 
-	/**
-	 * @expectedException \Icewind\SMB\Exception\AuthenticationException
-	 */
-	public function testWrongUserName() {
-		$this->markTestSkipped('This fails for no reason on travis');
-		$server = new \Icewind\SMB\Server($this->config->host, uniqid(), uniqid());
-		$server->listShares();
-	}
-
-	/**
-	 * @expectedException \Icewind\SMB\Exception\AuthenticationException
-	 */
 	public function testWrongPassword() {
-		$server = new \Icewind\SMB\Server($this->config->host, $this->config->user, uniqid());
+		$this->expectException(AuthenticationException::class);
+		$server = new Server(
+			$this->config->host,
+			new BasicAuth(
+				$this->config->user,
+				'test',
+				uniqid()
+			),
+			new System(),
+			new TimeZoneProvider(new System()),
+			new Options()
+		);
 		$server->listShares();
 	}
 
-	/**
-	 * @expectedException \Icewind\SMB\Exception\InvalidHostException
-	 */
 	public function testWrongHost() {
-		$server = new \Icewind\SMB\Server(uniqid(), $this->config->user, $this->config->password);
-		$server->listShares();
+		$server = new Server(
+			uniqid(),
+			new BasicAuth(
+				$this->config->user,
+				'test',
+				$this->config->password
+			),
+			new System(),
+			new TimeZoneProvider(new System()),
+			new Options()
+		);
+		try {
+			$server->listShares();
+			$this->fail("Expected exception");
+		} catch (ConnectionRefusedException $e) {
+			$this->assertTrue(true);
+		} catch (InvalidHostException $e) {
+			$this->assertTrue(true);
+		}
 	}
 
-
-	/**
-	 * @expectedException \Icewind\SMB\Exception\InvalidHostException
-	 */
 	public function testHostEscape() {
-		$server = new \Icewind\SMB\Server($this->config->host . ';asd', $this->config->user, $this->config->password);
+		$server = new Server(
+			$this->config->host . ';asd',
+			new BasicAuth(
+				$this->config->user,
+				'test',
+				$this->config->password
+			),
+			new System(),
+			new TimeZoneProvider(new System()),
+			new Options()
+		);
+		try {
+			$server->listShares();
+			$this->fail("Expected exception");
+		} catch (ConnectionRefusedException $e) {
+			$this->assertTrue(true);
+		} catch (InvalidHostException $e) {
+			$this->assertTrue(true);
+		}
+	}
+
+	public function testProtocolMatch() {
+		$options = new Options();
+		$options->setMinProtocol(IOptions::PROTOCOL_SMB2);
+		$options->setMaxProtocol(IOptions::PROTOCOL_SMB3);
+		$server = new Server(
+			$this->config->host,
+			new BasicAuth(
+				$this->config->user,
+				'test',
+				$this->config->password
+			),
+			new System(),
+			new TimeZoneProvider(new System()),
+			$options
+		);
 		$server->listShares();
+		$this->assertTrue(true);
+	}
+
+	public function testToLowMaxProtocol() {
+		$options = new Options();
+		$options->setMaxProtocol(IOptions::PROTOCOL_NT1);
+		$server = new Server(
+			$this->config->host,
+			new BasicAuth(
+				$this->config->user,
+				'test',
+				$this->config->password
+			),
+			new System(),
+			new TimeZoneProvider(new System()),
+			$options
+		);
+		try {
+			$server->listShares();
+			$this->markTestSkipped("Server seems to accept NT1 connections");
+		} catch (ConnectionRefusedException $e) {
+			$this->assertTrue(true);
+		}
 	}
 }

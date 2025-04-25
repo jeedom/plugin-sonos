@@ -25,44 +25,22 @@ try {
 
 	ajax::init();
 
-	if (init('action') == 'syncSonos') {
-		sonos3::syncSonos();
+	if (init('action') == 'sync') {
+		sonos3::syncAll();
 		ajax::success();
 	}
 
-	if (init('action') == 'getQueue') {
-		$sonos = sonos3::byId(init('id'));
-		if (!is_object($sonos)) {
-			ajax::success();
-		}
-		ajax::success($sonos->getQueue());
-	}
-
-	if (init('action') == 'playTrack') {
-		$sonos = sonos3::byId(init('id'));
-		if (!is_object($sonos)) {
-			ajax::success();
-		}
-		ajax::success($sonos->playTrack(init('position')));
-	}
-
-	if (init('action') == 'removeTrack') {
-		$sonos = sonos3::byId(init('id'));
-		if (!is_object($sonos)) {
-			ajax::success();
-		}
-		ajax::success($sonos->removeTrack(init('position')));
-	}
-
-	if (init('action') == 'emptyQueue') {
-		$sonos = sonos3::byId(init('id'));
-		if (!is_object($sonos)) {
-			ajax::success();
-		}
-		ajax::success($sonos->emptyQueue());
-	}
+	// if (init('action') == 'playTrack') {
+	// 	/** @var sonos3 */
+	// 	$sonos = sonos3::byId(init('id'));
+	// 	if (!is_object($sonos)) {
+	// 		ajax::success();
+	// 	}
+	// 	ajax::success($sonos->playTrack(init('position')));
+	// }
 
 	if (init('action') == 'playPlaylist') {
+		/** @var sonos3 */
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
 			ajax::success();
@@ -73,6 +51,7 @@ try {
 	}
 
 	if (init('action') == 'playRadio') {
+		/** @var sonos3 */
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
 			ajax::success();
@@ -82,33 +61,36 @@ try {
 		ajax::success();
 	}
 
-	if (init('action') == 'playFavourite') {
+	if (init('action') == 'playFavorite') {
+		/** @var sonos3 */
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
 			ajax::success();
 		}
-		$cmd = $sonos->getCmd(null, 'play_favourite');
-		$cmd->execCmd(array('title' => init('favourite')));
+		$cmd = $sonos->getCmd(null, 'play_favorite');
+		$cmd->execCmd(array('title' => init('favorite')));
 		ajax::success();
 	}
 
-	if (init('action') == 'addSpeaker') {
+	if (init('action') == 'join') {
+		/** @var sonos3 */
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
 			ajax::success();
 		}
-		$cmd = $sonos->getCmd(null, 'add_speaker');
+		$cmd = $sonos->getCmd('action', 'join');
 		$cmd->execCmd(array('title' => init('speaker')));
 		ajax::success();
 	}
 
-	if (init('action') == 'removeSpeaker') {
+	if (init('action') == 'unjoin') {
+		/** @var sonos3 */
 		$sonos = sonos3::byId(init('id'));
 		if (!is_object($sonos)) {
 			ajax::success();
 		}
-		$cmd = $sonos->getCmd(null, 'remove_speaker');
-		$cmd->execCmd(array('title' => init('speaker')));
+		$cmd = $sonos->getCmd('action', 'unjoin');
+		$cmd->execCmd();
 		ajax::success();
 	}
 
@@ -143,11 +125,6 @@ try {
 			}
 		}
 		ajax::success($return);
-	}
-
-	if (init('action') == 'updateSonos') {
-		sonos3::updateSonos();
-		ajax::success();
 	}
 
 	throw new Exception(__('Aucune méthode correspondante à', __FILE__) . ' : ' . init('action'));

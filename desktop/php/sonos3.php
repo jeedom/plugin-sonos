@@ -2,8 +2,10 @@
 if (!isConnect('admin')) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
+/** @var plugin */
 $plugin = plugin::byId('sonos3');
 sendVarToJS('eqType', $plugin->getId());
+/** @var sonos3[] */
 $eqLogics = eqLogic::byType($plugin->getId());
 ?>
 
@@ -11,10 +13,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
 		<legend><i class="fas fa-cog"></i> {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
-			<div class="cursor eqLogicAction logoPrimary" data-action="add">
-				<i class="fas fa-plus-circle"></i>
+			<div class="cursor eqLogicAction logoPrimary" data-action="sync">
+				<i class="fas fa-sync"></i>
 				<br />
-				<span>{{Ajouter}}</span>
+				<span>{{Synchroniser}}</span>
 			</div>
 			<div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
 				<i class="fas fa-wrench"></i>
@@ -25,7 +27,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<legend><i class='fas fa-music'></i> {{Mes Sonos}}</legend>
 		<?php
 		if (count($eqLogics) == 0) {
-			echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun équipement Sonos trouvé, cliquer sur "Ajouter" pour commencer}}</div>';
+			echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun équipement Sonos trouvé, avez-vous démarré le démon?}}</div>';
 		} else {
 			echo '<div class="input-group" style="margin:5px;">';
 			echo '<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic">';
@@ -38,16 +40,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			foreach ($eqLogics as $eqLogic) {
 				$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
 				echo '<div class="eqLogicDisplayCard cursor ' . $opacity . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
-				if ($eqLogic->getConfiguration('model', '') != '') {
-					echo '<img src="' . $eqLogic->getImage() . '"/>';
-				} else {
-					echo '<img src="' . $plugin->getPathImgIcon() . '"/>';
-				}
+				echo '<img src="' . $eqLogic->getImage() . '"/>';
 				echo '<br>';
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
 				echo '<span class="hiddenAsCard displayTableRight hidden">';
-				if ($eqLogic->getLogicalId() != '') {
-					echo '<span class="label label-info">' . $eqLogic->getLogicalId() . '</span>';
+				if ($eqLogic->getConfiguration('ip_address') != '') {
+					echo '<span class="label label-info">' . $eqLogic->getConfiguration('ip_address') . '</span>';
 				}
 				echo ($eqLogic->getIsVisible() == 1) ? '<i class="fas fa-eye" title="{{Equipement visible}}"></i>' : '<i class="fas fa-eye-slash" title="{{Equipement non visible}}"></i>';
 				echo '</span>';
@@ -122,9 +120,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 							<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{IP}}</label>
-								<div class="col-sm-6">
-									<input type="text" class="eqLogicAttr configuration form-control" data-l1key="logicalId" placeholder="IP" />
+								<label class="col-sm-4 control-label">{{Utiliser la tuile préconfigurée}}</label>
+								<div class="col-sm-2">
+									<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="customWidget" />
 								</div>
 							</div>
 						</div>
@@ -134,35 +132,49 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Modèle}}</label>
 								<div class="col-sm-6">
-									<select type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="model">
-										<option value="PLAY1">Sonos Play 1</option>
-										<option value="PLAY3">Sonos Play 3</option>
-										<option value="PLAY5">Sonos Play 5</option>
-										<option value="CONNECT">Sonos Connect</option>
-										<option value="CONNECTAMP">Sonos Connect AMP</option>
-										<option value="PLAYBAR">Sonos Playbar</option>
-										<option value="PLAYBASE">Sonos Playbase</option>
-										<option value="ARC">Sonos Arc</option>
-										<option value="ONE">Sonos One</option>
-										<option value="BEAM">Sonos Beam</option>
-										<option value="BEAM2">Sonos Beam Gen 2</option>
-										<option value="SYMFONISK_LIGHT">Ikea SYMFONISK Lampe</option>
-										<option value="SYMFONISK">Ikea SYMFONISK</option>
-										<option value="PORT">Sonos port</option>
-										<option value="MOVE">Sonos move</option>
-										<option value="FIVE">Sonos five</option>
-										<option value="ROAM">Sonos roam</option>
-										<option value="ERA_100">Sonos ERA 100</option>
-										<option value="ERA_300">Sonos ERA 300</option>
-										<option value="SYMFONISK_FLOOR_LAMP">Ikea SYMFONISK Floor Lamp</option>
-										<option value="MOVE_2">Sonos Move 2</option>
-									</select>
+									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="model_name"></span>/<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="model_number"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4"></label>
 								<div class="col-sm-6 text-center">
 									<img name="icon_visu" src="<?= $plugin->getPathImgIcon(); ?>" id="img_sonosModel" style="max-width:160px;" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Version}}</label>
+								<div class="col-sm-6">
+									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="display_version"></span>/<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="software_version"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Version matériel}}</label>
+								<div class="col-sm-6">
+									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="hardware_version"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Numéro de série}}</label>
+								<div class="col-sm-6">
+									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="serial_number"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{UID}}</label>
+								<div class="col-sm-6">
+									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="uid"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Adresse MAC}}</label>
+								<div class="col-sm-6">
+									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="mac_address"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Adresse IP}}</label>
+								<div class="col-sm-6">
+									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="ip_address"></span>
 								</div>
 							</div>
 						</div>
@@ -177,6 +189,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<th class="hidden-xs" style="min-width:50px;width:70px;">ID</th>
 							<th style="min-width:220px;width:300px;">{{Nom}}</th>
 							<th style="min-width:140px;width:200px;">{{Type}}</th>
+							<th style="min-width:260px;width:280px;">{{Options}}</th>
 							<th>{{Etat}}</th>
 							<th style="min-width:150px;width:250px;">{{Actions}}</th>
 						</tr>
