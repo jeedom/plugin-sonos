@@ -29,9 +29,9 @@ Hier finden Sie die gesamte übliche Konfiguration Ihrer Ausrüstung :
 
 Sowie Informationen zu Ihrem Sonos: *Modell*, *Veröffentlichungen*, *Seriennummer*, *Kennung*, *MAC-Adresse* Und *IP Adresse*.
 
-...
+Vous avez aussi la possibilité de désastiver la tuile de l'équipement pré-configurée (option active par défaut) et dans ce cas configurer cette tuile comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
 
-.
+La tuile pré-configurée ne tient pas compte du statut visible ou non des commandes, ni des options avancées d'affichage; La configuration de celle-ci ne peut pas être modifiée.
 
 # Die Aufträge
 

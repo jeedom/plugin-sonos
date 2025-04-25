@@ -5,19 +5,19 @@
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
 > Attention
-> Significant plugin redesign: a very large part of the plugin has been rewritten including all communication with Sonos (daemon) and certain functionalities have been modified and no longer work as before, notably group management.
+> Significant plugin redesign: 
 >
 > Requires Jeedom 4.4.8
 >
-> Debian 11 and 12 compatible! Probably Debian 10 but not tested and no support possible on this version
+> Debian 11 and 12 compatible!
 >
 > See also [this topic on community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) for more details
 
-# 
+# 24/01/2025
 
-- : ...
+- Ajout de la possibilité de désactiver la tuile pré-configurée: vous êtes alors libre de configurer de celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
 
-# 
+# 13/11/2024
 
 - Added automatic sync every hour to correct possible desynchronizations
 - Adding an info command **Next alarm** on each Sonos giving the date of the next alarm programmed on this speaker

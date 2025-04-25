@@ -29,9 +29,9 @@ Aquí encontrarás toda la configuración habitual de tu equipo :
 
 Además de información sobre tu Sonos: *Modelo*, *Lanzamientos*, *Número de serie*, *Identificador*, *Dirección MAC* Y *Dirección IP*.
 
-...
+Vous avez aussi la possibilité de désastiver la tuile de l'équipement pré-configurée (option active par défaut) et dans ce cas configurer cette tuile comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
 
-.
+La tuile pré-configurée ne tient pas compte du statut visible ou non des commandes, ni des options avancées d'affichage; La configuration de celle-ci ne peut pas être modifiée.
 
 # Las órdenes
 
