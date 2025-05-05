@@ -92,7 +92,7 @@ class sonos3 extends eqLogic {
 		$cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/sonos3/core/php/jeesonos3.php';
 		$cmd .= ' --apikey ' . jeedom::getApiKey(__CLASS__);
 		$cmd .= ' --pid ' . jeedom::getTmpFolder(__CLASS__) . '/daemon.pid';
-		$cmd .= ' --internalIp ' . network::getNetworkAccess('internal', 'ip');
+		$cmd .= ' --networksToScan ' . escapeshellarg(config::byKey('networksToScan', __CLASS__, ''));
 		log::add(__CLASS__, 'info', 'Lancement démon');
 		$result = exec($cmd . ' >> ' . log::getPathToLog(__CLASS__ . '_daemon') . ' 2>&1 &');
 		$i = 0;

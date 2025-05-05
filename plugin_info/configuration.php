@@ -28,13 +28,15 @@ if (!isConnect('admin')) {
 			echo '<div class="alert alert-danger">{{Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.}}</div>';
 		}
 		?>
+		<legend><i class="far fa-comments"></i> {{Interactions}}</legend>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">{{Le plugin sonos doit réagir aux interactions}}</label>
 			<div class="col-sm-7">
 				<textarea class="configKey form-control" data-l1key="interact::sentence"></textarea>
 			</div>
 		</div>
-		<div class="form-group useShare">
+		<legend><i class="fas fa-share-alt"></i> {{Partage}}</legend>
+		<div class="form-group">
 			<label class="col-sm-3 control-label">{{Partage}}</label>
 			<div class="col-sm-7">
 				<div class="input-group">
@@ -47,13 +49,13 @@ if (!isConnect('admin')) {
 				</div>
 			</div>
 		</div>
-		<div class="form-group useShare">
+		<div class="form-group">
 			<label class="col-sm-3 control-label">{{Nom d'utilisateur du partage}}</label>
 			<div class="col-sm-7">
 				<input class="configKey form-control" data-l1key="tts_username">
 			</div>
 		</div>
-		<div class="form-group useShare">
+		<div class="form-group">
 			<label class="col-sm-3 control-label">{{Mot de passe du partage}}</label>
 			<div class="col-sm-7">
 				<div class="input-group">
@@ -64,6 +66,14 @@ if (!isConnect('admin')) {
 				</div>
 			</div>
 		</div>
+		<legend><i class="fas fa-search"></i> {{Découverte}}</legend>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">{{Réseau à scanner}}
+				<sup><i class="fas fa-question-circle tooltips" title="{{Si et seulement si Jeedom ne se trouve pas sur le même réseau que vos enceintes Sonos}}"></i></sup>
+			</label>
+			<div class="col-sm-7">
+				<input class="configKey form-control" data-l1key="networksToScan">
+			</div>
 		</div>
 	</fieldset>
 </form>

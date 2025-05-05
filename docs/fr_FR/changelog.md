@@ -4,8 +4,14 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# 06-05-2025
+
+- Ajout d'une configuration optionelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouve vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur leque se trouve Jeedom
+
+# 26-04-2025
+
 > Attention
-> Refonte importante du plugin: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes; voir changelog depuis le 01/02/2024 ci-dessous pour la liste complète des changements
+> Refonte importante du plugin: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes;
 >
 > Nécessite Jeedom 4.4.8
 >
@@ -13,28 +19,27 @@
 >
 > Voir également [ce sujet sur community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) pour plus de détails
 
-# 24/01/2025
-
-- Ajout de la possibilité de désactiver la tuile pré-configurée: vous êtes alors libre de configurer de celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
-
-# 13/11/2024
-
-- Ajout d'une synchro automatique chaque heure pour corriger les désynchronisation éventuelles
-- Ajout d'une commande info **Prochaine alarme** sur chaque Sonos donnant la date de la prochaine alarme programmée sur cette enceinte
-
-# 29/08/2024
-
+- Réécriture quasi totale du plugin, le démon a été entièrement réécrit en python (au lieu de PHP)
+- Compatible Debian 11 et 12!
+- Il n'y a plus de découverte à lancer manuellement et il n'est plus nécessaire (ni possible) d'ajouter manuellement une équipement, le plugin découvre automatiquement vos appareils sonos et créé les équipements correspondant à chaque démarrage du démon.
+- Il est également possible de demander de (re)synchroniser les équipements, favoris et listes de lecture sans redémarrer le démon depuis le panneau des équipements
+- Synchro automatique chaque heure pour corriger les désynchronisation éventuelles
+- Mise en jour en (quasi) temps réel des commande infos (un délai de 0.5s à quelques secondes max), plus de cron minute, y compris lorsqu'un changement est effectué hors Jeedom (via app Sonos par exemple)
+- Refonte de la gestion de groupes (les anciennes commandes seront supprimées et de nouvelles ajoutées, voir documentation). Il est possible de joindre ou quitter un groupe, de contrôler la lecture du groupe depuis n'importe quel équipement du groupe sans se soucier de qui est le contrôleur. Le volume est lui toujours contrôlé par enceinte.
+- Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
+- Optimisation: plus de perte de mémoire sur le démon et il consomme moins que précédemment.
 - Optimisation de l'affichage de la pochette de la lecture en cours
 - Optimisation sur la lecture des favoris
+- Ajout de la possibilité de désactiver la tuile pré-configurée: vous êtes alors libre de configurer de celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
 
-# 18/08/2024
-
-- Ajout commande **Mic statut** qui indique si le micro est activé ou non sur les Sonos équipé d'un micro
-- Ajout d'une commande info **Batterie** sur les Sonos équipés d'une batterie indiquant le pourcentage de charge de la batterie
-- Ajout d'une commande info **Chargement** sur les Sonos équipés d'une batterie indiquant si la charge est en cours ou non
-
-# 17/08/2024
-
+- Ajout d'une commande action **TV** pour basculer sur l'entrée *TV* sur les équipements compatibles
+- Ajout d'une commande info **Mode de lecture** et action **Choisir mode de lecture** qui permet de sélectionner le mode de lecture parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire et répéter tout*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*
+- Ajout d'une commande **Statut de lecture** qui donne la valeur "brut" de l'état de lecture (la commande existante **Statut** donne une valeur traduite en fonction de la langue configurée dans Jeedom)
+- Ajout des commandes **Groupe statut** (indique si l'équipement est groupé ou non) et **Nom du groupe** dans le cas où l'équipement est groupé
+- Ajout des commandes **Led on**, **Led off** et **Led statut** pour contrôler le voyant d'état
+- Ajout d'une commande **Jouer une radio mp3** pour lire une radio mp3 directement via une URL (accessible sur internet par exemple)
+- Ajout des commandes **Augmenter le volume** et **Diminuer le volume** de 1%
+- Ajout d'une commande **Transition de volume** qui est très intéressante pour gérer les transitions de niveau de volume. 3 modes possible: *LINEAR*, *ALARM*, *AUTOPLAY*. Voir documentation pour plus d'information.
 - Ajout des commandes **Loudness statut**, **Loudness on**, **Loudness off**
 - Ajout des commandes **Fondu enchaîné statut**, **Fondu enchaîné on**, **Fondu enchaîné off**
 - Ajout des commandes **Commandes tactiles statut**, **Commandes tactiles on**, **Commandes tactiles off**
@@ -42,33 +47,10 @@
 - Ajout des commandes **Graves** (action/curseur) et **Graves statut** qui gère les graves selon une valeur comprise entre -10 et 10
 - Ajout des commandes **Aigus** (action/curseur) et **Aigus statut** qui gère la aigus selon une valeur comprise entre -10 et 10
 - Ajout de la commande **Mode fête** qui permet de grouper tous les Sonos ensemble
-
-# 03/08/2024
-
-- Ajout d'une commande **Jouer une radio mp3** pour lire une radio mp3 directement via une URL (accessible sur internet par exemple)
-- Ajout des commandes **Augmenter le volume** et **Diminuer le volume** de 1%
-- Ajout d'une commande **Transition de volume** qui est très intéressante pour gérer les transitions de niveau de volume. 3 modes possible: *LINEAR*, *ALARM*, *AUTOPLAY*. Voir documentation pour plus d'information.
-
-# 02/08/2024
-
-- Ajout des commandes **Led on**, **Led off** et **Led statut** pour contrôler le voyant d'état
-- Fix un crash du démon si aucun Sonos n'est découvert
-- Amélioration compatibilité Debian 10 / python 3.7
-
-# 01/08/2024
-
-- Réécriture quasi totale du plugin, le démon a été entièrement réécrit en python (au lieu de PHP)
-- Compatible Debian 11 et 12! (probablement Debian 10 mais pas testé et pas de support possible sur cette version)
-- Il n'y a plus de découverte à lancer manuellement et il n'est plus nécessaire (ni possible) d'ajouter manuellement une équipement, le plugin découvre automatiquement vos appareils sonos et créé les équipements correspondant à chaque démarrage du démon. Il est également possible de demander de (re)synchroniser les équipements, favoris et listes de lecture sans redémarrer le démon depuis le panneau des équipements
-- Mise en jour en (quasi) temps réel des commande infos (un délai de 0.5s à quelques secondes max), plus de cron minute, y compris lorsqu'un changement est effectué hors Jeedom (via app Sonos par exemple)
-- Refonte de la gestion de groupes (les anciennes commandes seront supprimées et de nouvelles ajoutées, voir documentation). Il est possible de joindre ou quitter un groupe, de contrôler la lecture du groupe depuis n'importe quel équipement du groupe sans se soucier de qui est le contrôleur. Le volume est lui toujours contrôlé par enceinte.
-- Adaptation sur la fonction Text-to-Speech (TTS), il sera nécessaire d'adapter la configuration du partage SAMBA.
-- Optimisation: plus de perte de mémoire sur le démon et il consomme moins que précédemment.
-
-- Ajout d'une commande action **TV** pour basculer sur l'entrée *TV* sur les équipements compatibles
-- Ajout d'une commande info **Mode de lecture** et action **Choisir mode de lecture** qui permet de sélectionner le mode de lecture parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire et répéter tout*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*
-- Ajout d'une commande **Statut de lecture** qui donne la valeur "brut" de l'état de lecture (la commande existante **Statut** donne une valeur traduite en fonction de la langue configurée dans Jeedom)
-- Ajout des commandes **Groupe statut** (indique si l'équipement est groupé ou non) et **Nom du groupe** dans le cas où l'équipement est groupé
+- Ajout commande **Mic statut** qui indique si le micro est activé ou non sur les Sonos équipé d'un micro
+- Ajout d'une commande info **Batterie** sur les Sonos équipés d'une batterie indiquant le pourcentage de charge de la batterie
+- Ajout d'une commande info **Chargement** sur les Sonos équipés d'une batterie indiquant si la charge est en cours ou non
+- Ajout d'une commande info **Prochaine alarme** sur chaque Sonos donnant la date de la prochaine alarme programmée sur cette enceinte
 
 # 25/04/2024
 
