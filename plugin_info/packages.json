@@ -1,6 +1,8 @@
 {
   "apt": {
-    "smbclient": {}
+    "smbclient": {},
+    "python3-dev": {},
+    "libxslt-dev": {}
   },
   "pip3": {
     "defusedxml": {},
