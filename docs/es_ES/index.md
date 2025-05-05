@@ -10,6 +10,8 @@ El complemento buscará Sonos en su red y creará el equipo automáticamente. Ad
 > **Importante**
 > Su equipo Sonos debe ser accesible directamente desde la máquina que aloja Jeedom (transmisión/multidifusión posible en la misma red) y deben poder comunicarse con Jeedom a cambio en el puerto TCP 1400.
 
+. . ****
+
 Si luego agrega un Sonos, puede hacer clic en **Sincronizar** en la página del equipo o reinicie el demonio.
 
 - **Compartir**: Configure aquí el nombre de host de la máquina (o su IP), el nombre del recurso compartido (sin la ruta, sin '/') y la ruta a la carpeta.

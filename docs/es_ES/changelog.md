@@ -4,6 +4,13 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 
+
+- 
+- 
+
+# 
+
 > Attention
 > Rediseño significativo del complemento: 
 >
@@ -13,28 +20,27 @@
 >
 > Ver también [este tema en la comunidad](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) para más detalles
 
-# 24/01/2025
-
-- Ajout de la possibilité de désactiver la tuile pré-configurée: vous êtes alors libre de configurer de celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
-
-# 13/11/2024
-
-- Adición de sincronización automática cada hora para corregir posibles desincronizaciones
-- Agregar un comando de información **Próxima alarma** en cada Sonos indicando la fecha de la próxima alarma programada en este altavoz
-
-# 29/08/2024
-
+- Reescritura casi total del complemento, el demonio ha sido reescrito completamente en Python (en lugar de PHP))
+- Compatible con Debian 11 y 12!
+- Ya no hay ningún descubrimiento para iniciar manualmente y ya no es necesario (ni posible) agregar equipos manualmente, el complemento descubre automáticamente sus dispositivos de sonido y crea los equipos correspondientes a cada inicio del demonio.
+- También es posible solicitar (re)sincronizar equipos, favoritos y listas de reproducción sin reiniciar el demonio desde el panel del equipo
+- 
+- Actualización (casi) en tiempo real de la información del pedido (un retraso de 0.5 segundos a unos pocos segundos como máximo), más minutos de cron, incluso cuando se realiza un cambio fuera de Jeedom (a través de la aplicación Sonos, por ejemplo))
+- Rediseño de la gestión de grupos (se eliminarán los comandos antiguos y se agregarán otros nuevos, consulte la documentación)). Es posible unirse o salir de un grupo, controlar la reproducción del grupo desde cualquier dispositivo del grupo sin preocuparse de quién es el controlador. El volumen siempre está controlado por el altavoz.
+- ), ****.
+- Optimisation: no más pérdida de memoria en el demonio y consume menos que antes.
 - Se optimizó la visualización de la portada que se está reproduciendo actualmente
 - Optimización en la lectura de favoritos
+- Ajout de la possibilité de désactiver la tuile pré-configurée: vous êtes alors libre de configurer de celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
 
-# 18/08/2024
-
-- Añadir pedido **Estado del micrófono** que indica si el micrófono está activado o no en Sonos equipado con un micrófono
-- Agregar un comando de información **Batería** en Sonos equipado con una batería que muestra el porcentaje de carga de la batería
-- Agregar un comando de información **Cargando** en Sonos equipado con una batería que indica si la carga está en curso o no
-
-# 17/08/2024
-
+- Agregar un comando de acción **TELEVISOR** para cambiar a la entrada *TELEVISOR* en equipos compatibles
+- Agregar un comando de información **Modo de lectura** y acción **Elige el modo de lectura** que le permite seleccionar el modo de lectura entre las siguientes posibilidades: *Normal*, *Repite todo*, *Aleatorio y repetir todo*, *Aleatorio sin repetición*, *Repetir canción*, *Canción aleatoria y repetida*
+- Agregar un pedido **Estado de lectura** que da el valor "bruto" del estado de lectura (el comando existente **Estado** da un valor traducido basado en el idioma configurado en Jeedom)
+- Agregar comandos **Estado del grupo** (indica si el equipo está agrupado o no) y **Nombre del grupo** en el caso de que el equipo esté agrupado
+- Agregar comandos **El don**, **Llevar afuera** Y **LED de estado** para comprobar el indicador de estado
+- Agregar un pedido **Reproducir radio mp3** reproducir una radio mp3 directamente a través de una URL (accesible en Internet, por ejemplo))
+- Agregar comandos **Sube el volumen** Y **Disminuir el volumen** de 1%
+- Agregar un pedido **Transición de volumen** lo cual es muy útil para gestionar las transiciones de niveles de volumen. 3 modos posibles: *LINEAL*, *ALARMA*, *AUTO-REPRODUCCIÓN*. Ver documentación para más información.
 - Agregar comandos **Estado de sonoridad**, **Volumen encendido**, **Volumen apagado**
 - Agregar comandos **Estado de desvanecimiento**, **Desvanecerse**, **Desaparecer**
 - Agregar comandos **Controles táctiles de estado**, **Controles táctiles activados**, **Controles táctiles desactivados**
@@ -42,33 +48,10 @@
 - Agregar comandos **Tumbas** (acción/cursor) y **Estado serio** que gestiona los graves según un valor entre -10 y 10
 - Agregar comandos **Triplicar** (acción/cursor) y **Estado de agudos** que gestiona los agudos según un valor entre -10 y 10
 - Agregando el comando **Moda de fiesta** que te permite agrupar todos los Sonos juntos
-
-# 08/03/2024
-
-- Agregar un pedido **Reproducir radio mp3** reproducir una radio mp3 directamente a través de una URL (accesible en Internet, por ejemplo))
-- Agregar comandos **Sube el volumen** Y **Disminuir el volumen** de 1%
-- Agregar un pedido **Transición de volumen** lo cual es muy útil para gestionar las transiciones de niveles de volumen. 3 modos posibles: *LINEAL*, *ALARMA*, *AUTO-REPRODUCCIÓN*. Ver documentación para más información.
-
-# 08/02/2024
-
-- Agregar comandos **El don**, **Llevar afuera** Y **LED de estado** para comprobar el indicador de estado
-- Solucionar el fallo del demonio si no se descubre ningún Sonos
-- Compatibilidad mejorada con Debian 10/Python 3.7
-
-# 08/01/2024
-
-- Reescritura casi total del complemento, el demonio ha sido reescrito completamente en Python (en lugar de PHP))
-- Compatible con Debian 11 y 12! (Probablemente Debian 10, pero no probado y no es posible admitir esta versión)
-- Ya no hay ningún descubrimiento para iniciar manualmente y ya no es necesario (ni posible) agregar equipos manualmente, el complemento descubre automáticamente sus dispositivos de sonido y crea los equipos correspondientes a cada inicio del demonio. También es posible solicitar (re)sincronizar equipos, favoritos y listas de reproducción sin reiniciar el demonio desde el panel del equipo
-- Actualización (casi) en tiempo real de la información del pedido (un retraso de 0.5 segundos a unos pocos segundos como máximo), más minutos de cron, incluso cuando se realiza un cambio fuera de Jeedom (a través de la aplicación Sonos, por ejemplo))
-- Rediseño de la gestión de grupos (se eliminarán los comandos antiguos y se agregarán otros nuevos, consulte la documentación)). Es posible unirse o salir de un grupo, controlar la reproducción del grupo desde cualquier dispositivo del grupo sin preocuparse de quién es el controlador. El volumen siempre está controlado por el altavoz.
-- Adaptación a la función Text-to-Speech (TTS), será necesario adaptar la configuración de uso compartido de SAMBA.
-- Optimisation: no más pérdida de memoria en el demonio y consume menos que antes.
-
-- Agregar un comando de acción **TELEVISOR** para cambiar a la entrada *TELEVISOR* en equipos compatibles
-- Agregar un comando de información **Modo de lectura** y acción **Elige el modo de lectura** que le permite seleccionar el modo de lectura entre las siguientes posibilidades: *Normal*, *Repite todo*, *Aleatorio y repetir todo*, *Aleatorio sin repetición*, *Repetir canción*, *Canción aleatoria y repetida*
-- Agregar un pedido **Estado de lectura** que da el valor "bruto" del estado de lectura (el comando existente **Estado** da un valor traducido basado en el idioma configurado en Jeedom)
-- Agregar comandos **Estado del grupo** (indica si el equipo está agrupado o no) y **Nombre del grupo** en el caso de que el equipo esté agrupado
+- Añadir pedido **Estado del micrófono** que indica si el micrófono está activado o no en Sonos equipado con un micrófono
+- Agregar un comando de información **Batería** en Sonos equipado con una batería que muestra el porcentaje de carga de la batería
+- Agregar un comando de información **Cargando** en Sonos equipado con una batería que indica si la carga está en curso o no
+- Agregar un comando de información **Próxima alarma** en cada Sonos indicando la fecha de la próxima alarma programada en este altavoz
 
 # 25/04/2024
 
