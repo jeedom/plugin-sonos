@@ -4,15 +4,14 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
-# 
+# 06-05-2025
 
-- 
-- 
+- Ajout d'une configuration optionelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouve vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur leque se trouve Jeedom
 
-# 
+# 26-04-2025
 
 > Attention
-> Significant plugin redesign: 
+> Significant plugin redesign: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes;
 >
 > Requires Jeedom 4.4.8
 >
@@ -24,10 +23,10 @@
 - Debian 11 and 12 compatible!
 - There is no longer any discovery to launch manually and it is no longer necessary (nor possible) to manually add equipment, the plugin automatically discovers your sound devices and creates the equipment corresponding to each start of the daemon.
 - It is also possible to ask to (re)synchronize equipment, favorites and playlists without restarting the daemon from the equipment panel
-- 
+- Synchro automatique chaque heure pour corriger les désynchronisation éventuelles
 - (Almost) real-time updating of order information (a delay of 0.5s to a few seconds max), more cron minutes, including when a change is made outside Jeedom (via Sonos app for example)
 - Redesign of group management (old commands will be deleted and new ones added, see documentation). It is possible to join or leave a group, control the playback of the group from any device in the group without worrying about who is the controller. The volume is always controlled by speaker.
-- ), ****.
+- Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
 - Optimisation: no more memory loss on the daemon and it consumes less than previously.
 - Optimized the display of the cover of the current reading
 - Optimization on reading favorites

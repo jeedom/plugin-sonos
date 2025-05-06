@@ -10,7 +10,7 @@ El complemento buscará Sonos en su red y creará el equipo automáticamente. Ad
 > **Importante**
 > Su equipo Sonos debe ser accesible directamente desde la máquina que aloja Jeedom (transmisión/multidifusión posible en la misma red) y deben poder comunicarse con Jeedom a cambio en el puerto TCP 1400.
 
-. . ****
+Dans le cas où vos enceintes Jeedom ne seraient pas sur le même sous-réseau que Jeedom, vous pouvez configurer celui-ci de préférence sous le format CIDR, par exemple `192.168.1.0/24`. Il devrait également être possible d'entrer directement l'ip de l'une de vos enceintes afin de découvrir les autres à partir de celle-ci mais il est recommandé de configurer le réseau complet. **Attention, ne configurer rien si vous ne maitrisez pas cette partie, testez d'abord la configuration par défaut**
 
 Si luego agrega un Sonos, puede hacer clic en **Sincronizar** en la página del equipo o reinicie el demonio.
 

@@ -4,15 +4,14 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
-# 
+# 06-05-2025
 
-- 
-- 
+- Ajout d'une configuration optionelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouve vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur leque se trouve Jeedom
 
-# 
+# 26-04-2025
 
 > Attention
-> Bedeutende Neugestaltung des Plugins: 
+> Bedeutende Neugestaltung des Plugins: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes;
 >
 > Erfordert Jeedom 4.4.8
 >
@@ -24,10 +23,10 @@
 - Debian 11 und 12 kompatibel!
 - Es gibt keine Erkennung mehr, die manuell gestartet werden muss, und es ist nicht mehr notwendig (und auch nicht möglich), Geräte manuell hinzuzufügen. Das Plugin erkennt automatisch Ihre Soundgeräte und erstellt die Geräte entsprechend jedem Start des Daemons.
 - Es ist auch möglich, Geräte, Favoriten und Wiedergabelisten (erneut) zu synchronisieren, ohne den Daemon über das Gerätefenster neu zu starten
-- 
+- Synchro automatique chaque heure pour corriger les désynchronisation éventuelles
 - (Fast) Echtzeitaktualisierung der Bestellinformationen (eine Verzögerung von 0.5 Sekunden bis maximal ein paar Sekunden), mehr Cron-Minuten, auch wenn eine Änderung außerhalb von Jeedom vorgenommen wird (z. B. über die Sonos-App))
 - Neugestaltung der Gruppenverwaltung (alte Befehle werden gelöscht und neue hinzugefügt, siehe Dokumentation). Es ist möglich, einer Gruppe beizutreten oder sie zu verlassen und die Wiedergabe der Gruppe von jedem Gerät in der Gruppe aus zu steuern, ohne sich Gedanken darüber machen zu müssen, wer der Controller ist. Die Lautstärke wird immer über den Lautsprecher gesteuert.
-- ), ****.
+- Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
 - Optimisation: Es kommt zu keinem weiteren Speicherverlust beim Daemon und er verbraucht weniger als zuvor.
 - Die Anzeige des aktuell wiedergegebenen Covers wurde optimiert
 - Optimierung der Lesefavoriten

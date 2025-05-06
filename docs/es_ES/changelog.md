@@ -4,15 +4,14 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
-# 
+# 06-05-2025
 
-- 
-- 
+- Ajout d'une configuration optionelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouve vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur leque se trouve Jeedom
 
-# 
+# 26-04-2025
 
 > Attention
-> Rediseño significativo del complemento: 
+> Rediseño significativo del complemento: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes;
 >
 > Requiere Jeedom 4.4.8
 >
@@ -24,10 +23,10 @@
 - Compatible con Debian 11 y 12!
 - Ya no hay ningún descubrimiento para iniciar manualmente y ya no es necesario (ni posible) agregar equipos manualmente, el complemento descubre automáticamente sus dispositivos de sonido y crea los equipos correspondientes a cada inicio del demonio.
 - También es posible solicitar (re)sincronizar equipos, favoritos y listas de reproducción sin reiniciar el demonio desde el panel del equipo
-- 
+- Synchro automatique chaque heure pour corriger les désynchronisation éventuelles
 - Actualización (casi) en tiempo real de la información del pedido (un retraso de 0.5 segundos a unos pocos segundos como máximo), más minutos de cron, incluso cuando se realiza un cambio fuera de Jeedom (a través de la aplicación Sonos, por ejemplo))
 - Rediseño de la gestión de grupos (se eliminarán los comandos antiguos y se agregarán otros nuevos, consulte la documentación)). Es posible unirse o salir de un grupo, controlar la reproducción del grupo desde cualquier dispositivo del grupo sin preocuparse de quién es el controlador. El volumen siempre está controlado por el altavoz.
-- ), ****.
+- Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
 - Optimisation: no más pérdida de memoria en el demonio y consume menos que antes.
 - Se optimizó la visualización de la portada que se está reproduciendo actualmente
 - Optimización en la lectura de favoritos

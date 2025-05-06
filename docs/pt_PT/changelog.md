@@ -4,15 +4,14 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
-# 
+# 06-05-2025
 
-- 
-- 
+- Ajout d'une configuration optionelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouve vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur leque se trouve Jeedom
 
-# 
+# 26-04-2025
 
 > Attention
-> Redesenho significativo do plugin: 
+> Redesenho significativo do plugin: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes;
 >
 > Requer Jeedom 4.4.8
 >
@@ -24,10 +23,10 @@
 - Compatível com Debian 11 e 12!
 - Não há mais nenhuma descoberta para iniciar manualmente e não é mais necessário (nem possível) adicionar equipamentos manualmente, o plugin descobre automaticamente seus dispositivos de som e cria os equipamentos correspondentes a cada inicialização do daemon.
 - Também é possível pedir para (re)sincronizar equipamentos, favoritos e playlists sem reiniciar o daemon a partir do painel de equipamentos
-- 
+- Synchro automatique chaque heure pour corriger les désynchronisation éventuelles
 - Atualização (quase) em tempo real das informações do pedido (um atraso de 0.5s a alguns segundos no máximo), mais minutos cron, inclusive quando uma alteração é feita fora do Jeedom (por meio do aplicativo Sonos, por exemplo)
 - Redesenho do gerenciamento de grupos (comandos antigos serão excluídos e novos serão adicionados, consulte a documentação). É possível entrar ou sair de um grupo, controlar a reprodução do grupo a partir de qualquer dispositivo do grupo sem se preocupar com quem é o controlador. O volume é sempre controlado pelo alto-falante.
-- ), ****.
+- Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
 - Optimisation: não há mais perda de memória no daemon e consome menos do que antes.
 - Otimizou a exibição da capa atualmente sendo reproduzida
 - Otimização na leitura de favoritos

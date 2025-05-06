@@ -10,7 +10,7 @@ O plugin irá procurar Sonos na sua rede e criar o equipamento automaticamente. 
 > **IMPORTANTE**
 > Seu equipamento Sonos deve ser acessível diretamente pela máquina que hospeda o Jeedom (transmissão / multicast possível na mesma rede) e deve ser capaz de acessar o Jeedom em troca da porta TCP 1400.
 
-. . ****
+Dans le cas où vos enceintes Jeedom ne seraient pas sur le même sous-réseau que Jeedom, vous pouvez configurer celui-ci de préférence sous le format CIDR, par exemple `192.168.1.0/24`. Il devrait également être possible d'entrer directement l'ip de l'une de vos enceintes afin de découvrir les autres à partir de celle-ci mais il est recommandé de configurer le réseau complet. **Attention, ne configurer rien si vous ne maitrisez pas cette partie, testez d'abord la configuration par défaut**
 
 Se você adicionar um Sonos posteriormente, poderá clicar **Sincronizar** na página do equipamento ou reinicie o daemon.
 
