@@ -10,6 +10,8 @@ The plugin will search for Sonos on your network and create the equipment automa
 > **Important**
 > Your Sonos equipment must be reachable directly by the machine hosting Jeedom (broadcast / multicast possible on the same network) and they must be able to reach Jeedom in return on TCP port 1400.
 
+. . ****
+
 If you later add a Sonos, you can click **Synchronize** in the equipment page or restart the daemon.
 
 - **Sharing**: Configure here the host name of the machine (or its IP), the name of the share (without the path, without '/') and the path to the folder.
