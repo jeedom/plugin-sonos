@@ -7,7 +7,6 @@
 # 06-05-2025
 
 - Ajout d'une configuration optionelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouve vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur leque se trouve Jeedom
-- Ajout de dépendances nécessaire sur Raspberry Pi
 
 # 26-04-2025
 
