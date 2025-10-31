@@ -4,14 +4,13 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
-# 06-05-2025
-
-- Ajout d'une configuration optionelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouve vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur leque se trouve Jeedom
+- Ajout d'une configuration optionnelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouvent vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur lequel se trouve Jeedom
+- Corrections pour le message "Subscription renewal failed" et la perte de remontée des informations
 
 # 26-04-2025
 
 > Attention
-> Refonte importante du plugin: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes;
+> Refonte importante du plugin : une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certaines fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes ;
 >
 > Nécessite Jeedom 4.4.8
 >
@@ -21,16 +20,16 @@
 
 - Réécriture quasi totale du plugin, le démon a été entièrement réécrit en python (au lieu de PHP)
 - Compatible Debian 11 et 12!
-- Il n'y a plus de découverte à lancer manuellement et il n'est plus nécessaire (ni possible) d'ajouter manuellement une équipement, le plugin découvre automatiquement vos appareils sonos et créé les équipements correspondant à chaque démarrage du démon.
-- Il est également possible de demander de (re)synchroniser les équipements, favoris et listes de lecture sans redémarrer le démon depuis le panneau des équipements
-- Synchro automatique chaque heure pour corriger les désynchronisation éventuelles
-- Mise en jour en (quasi) temps réel des commande infos (un délai de 0.5s à quelques secondes max), plus de cron minute, y compris lorsqu'un changement est effectué hors Jeedom (via app Sonos par exemple)
-- Refonte de la gestion de groupes (les anciennes commandes seront supprimées et de nouvelles ajoutées, voir documentation). Il est possible de joindre ou quitter un groupe, de contrôler la lecture du groupe depuis n'importe quel équipement du groupe sans se soucier de qui est le contrôleur. Le volume est lui toujours contrôlé par enceinte.
+- Il n'y a plus de découverte à lancer manuellement et il n'est plus nécessaire (ni possible) d'ajouter manuellement un équipement, le plugin découvre automatiquement vos appareils Sonos et crée les équipements correspondants à chaque démarrage du démon.
+- Il est également possible de demander de (re)synchroniser les équipements, favoris et listes de lecture sans redémarrer le démon depuis le panneau des équipements.
+- Synchro automatique chaque heure pour corriger les désynchronisations éventuelles
+- Mise à jour en (quasi) temps réel des commandes infos (un délai de 0,5s à quelques secondes max), plus de cron minute, y compris lorsqu'un changement est effectué hors Jeedom (via l'app Sonos par exemple)
+- Refonte de la gestion de groupes (les anciennes commandes seront supprimées et de nouvelles ajoutées, voir documentation). Il est possible de joindre ou quitter un groupe, de contrôler la lecture du groupe depuis n'importe quel équipement du groupe sans se soucier de qui est le contrôleur. Le volume est, lui, toujours contrôlé par enceinte.
 - Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
-- Optimisation: plus de perte de mémoire sur le démon et il consomme moins que précédemment.
+- Optimisation : plus de pertes de mémoire sur le démon et il consomme moins qu'auparavant.
 - Optimisation de l'affichage de la pochette de la lecture en cours
 - Optimisation sur la lecture des favoris
-- Ajout de la possibilité de désactiver la tuile pré-configurée: vous êtes alors libre de configurer de celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
+- Ajout de la possibilité de désactiver la tuile pré-configurée : vous êtes alors libre de configurer celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou de masquer les commandes de votre choix...
 
 - Ajout d'une commande action **TV** pour basculer sur l'entrée *TV* sur les équipements compatibles
 - Ajout d'une commande info **Mode de lecture** et action **Choisir mode de lecture** qui permet de sélectionner le mode de lecture parmi les possibilités suivantes: *Normal*, *Répéter tout*, *Aléatoire et répéter tout*, *Aléatoire sans répétition*, *Répéter le morceau*, *Aléatoire et répéter le morceau*
@@ -45,18 +44,18 @@
 - Ajout des commandes **Commandes tactiles statut**, **Commandes tactiles on**, **Commandes tactiles off**
 - Ajout des commandes **Balance** (action/curseur) et **Balance statut** qui gère la balance selon une valeur comprise entre -100 (tout à gauche) et 100 (tout à droite)
 - Ajout des commandes **Graves** (action/curseur) et **Graves statut** qui gère les graves selon une valeur comprise entre -10 et 10
-- Ajout des commandes **Aigus** (action/curseur) et **Aigus statut** qui gère la aigus selon une valeur comprise entre -10 et 10
+- Ajout des commandes **Aigus** (action/curseur) et **Aigus statut** qui gèrent les aigus selon une valeur comprise entre -10 et 10
 - Ajout de la commande **Mode fête** qui permet de grouper tous les Sonos ensemble
-- Ajout commande **Mic statut** qui indique si le micro est activé ou non sur les Sonos équipé d'un micro
+- Ajout de la commande **Mic statut** qui indique si le micro est activé ou non sur les Sonos équipés d'un micro
 - Ajout d'une commande info **Batterie** sur les Sonos équipés d'une batterie indiquant le pourcentage de charge de la batterie
-- Ajout d'une commande info **Chargement** sur les Sonos équipés d'une batterie indiquant si la charge est en cours ou non
+- Ajout d'une commande info **Chargement** sur les Sonos équipés d'une batterie qui indique si la charge est en cours ou non
 - Ajout d'une commande info **Prochaine alarme** sur chaque Sonos donnant la date de la prochaine alarme programmée sur cette enceinte
 
 # 25/04/2024
 
 - Mise à jour de la documentation
-- Nettoyage des accents dans les noms de partage (non supporté par le plugin)
-- Suppression de la dependance a PicoTTS (le plugin utilise le moteur globale de TTS de jeedom)
+- Nettoyage des accents dans les noms de partage (non supportés par le plugin)
+- Suppression de la dépendance à PicoTTS (le plugin utilise le moteur global de TTS de Jeedom)
 - Ajout Sonos Beam Gen 2
 
 # 15/01/2024
@@ -91,11 +90,11 @@
 
 # 14/01/2022
 
-- Ajout compatibilité avec la nouvelle enceinte SYMFONISK
+- Ajout de la compatibilité avec la nouvelle enceinte SYMFONISK
 
 # 27/12/2021
 
-- Ajout compatibilité avec la nouvelle Sonos One
+- Ajout de la compatibilité avec la nouvelle Sonos One
 
 # 09/10/2021
 
@@ -166,7 +165,7 @@
 - Réecriture complète du plugin
 - Prise en charge de la nouvelle api Sonos
 - Prise en charge des sonos beam et One
-- Correction de nombre bug
+- Correction de nombreux bugs
 - Optimisations globales
 
 **IMPORTANT**
@@ -178,9 +177,9 @@
 
 - Ajout de la gestion des favoris sonos
 - Prise en charge des Sonos One et Playbase
-- Correction de la langue avec picotts
-- Ajout d’une commande "entrée de ligne"
-- Mise à jour de librairie de communication avec les sonos
+- Correction de la langue avec PicoTTS
+- Ajout d’une commande "Entrée de ligne"
+- Mise à jour de la librairie de communication avec les Sonos
 - Optimisation du chargement des playlists
 - Ajout de picotts pour la génération du TTS en local
-- Correction du bouton play/pause lors de la mise à jour du widget
+- Correction du bouton play/pause lors de la mise à jour du widget.
