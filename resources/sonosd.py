@@ -284,13 +284,19 @@ class SonosDaemon(BaseDaemon):
             return
 
         for speaker in self._speakers.values():
-            await speaker.async_unsubscribe()
-        self._speakers.clear()
+            if not speaker.available:
+                self._logger.info(f"Speaker {speaker.zone_name} is no more available")
+                await speaker.async_subscribe()
 
         socos: list[SoCo]
         socos = list(discovered_soco)
+        self._logger.info(f"Discovered {len(socos)} speakers:")
         for soco in socos:
-            self._logger.info(f"found speaker {soco.player_name}")
+            if soco.uid in self._speakers:
+                self._logger.info(f" - {soco.player_name} (already known)")
+                continue
+
+            self._logger.info(f" - {soco.player_name}")
             new_speaker = SonosSpeaker(self._sonos_data, soco, self.__on_speaker_change)
             self._sonos_data.discovered[soco.uid] = new_speaker
             self._speakers[soco.uid] = new_speaker
