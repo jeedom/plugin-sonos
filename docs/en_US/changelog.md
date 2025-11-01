@@ -4,14 +4,13 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
-# 06-05-2025
-
-- Ajout d'une configuration optionelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouve vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur leque se trouve Jeedom
+- 
+- 
 
 # 26-04-2025
 
 > Attention
-> Significant plugin redesign: une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certains fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes;
+> Significant plugin redesign : 
 >
 > Requires Jeedom 4.4.8
 >
@@ -21,16 +20,16 @@
 
 - Almost total rewrite of the plugin, the daemon has been completely rewritten in python (instead of PHP)
 - Debian 11 and 12 compatible!
-- There is no longer any discovery to launch manually and it is no longer necessary (nor possible) to manually add equipment, the plugin automatically discovers your sound devices and creates the equipment corresponding to each start of the daemon.
-- It is also possible to ask to (re)synchronize equipment, favorites and playlists without restarting the daemon from the equipment panel
-- Synchro automatique chaque heure pour corriger les désynchronisation éventuelles
-- (Almost) real-time updating of order information (a delay of 0.5s to a few seconds max), more cron minutes, including when a change is made outside Jeedom (via Sonos app for example)
-- Redesign of group management (old commands will be deleted and new ones added, see documentation). It is possible to join or leave a group, control the playback of the group from any device in the group without worrying about who is the controller. The volume is always controlled by speaker.
+- .
+- It is also possible to ask to (re)synchronize equipment, favorites and playlists without restarting the daemon from the equipment panel.
+- 
+- )
+- Redesign of group management (old commands will be deleted and new ones added, see documentation). It is possible to join or leave a group, control the playback of the group from any device in the group without worrying about who is the controller. .
 - Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
-- Optimisation: no more memory loss on the daemon and it consumes less than previously.
+- Optimization : .
 - Optimized the display of the cover of the current reading
 - Optimization on reading favorites
-- Ajout de la possibilité de désactiver la tuile pré-configurée: vous êtes alors libre de configurer de celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
+- Ajout de la possibilité de désactiver la tuile pré-configurée : ...
 
 - Adding an action command **TV** to switch to the input *TV* on compatible equipment
 - Adding an info command **Reading mode** and action **Choose reading mode** which allows you to select the reading mode from the following possibilities: *Normal*, *Repeat all*, *Random and repeat all*, *Random without repetition*, *Repeat song*, *Random and repeat song*
@@ -45,18 +44,18 @@
 - Adding commands **Touch controls status**, **Touch controls on**, **Touch controls off**
 - Adding commands **Balance** (action/cursor) and **Balance status** which manages the balance according to a value between -100 (far left) and 100 (far right))
 - Adding commands **Graves** (action/cursor) and **Serious status** which manages the bass according to a value between -10 and 10
-- Adding commands **Highs** (action/cursor) and **Acute status** which manages the treble according to a value between -10 and 10
+- Adding commands **Highs** (action/cursor) and **Acute status** 
 - Adding the command **Party mode** which allows you to group all Sonos together
-- Add order **Mic status** which indicates whether the microphone is activated or not on Sonos equipped with a microphone
+- Adding the command **Mic status** 
 - Adding an info command **Battery** on Sonos equipped with a battery indicating the battery charge percentage
-- Adding an info command **Loading** on Sonos equipped with a battery indicating whether charging is in progress or not
+- Adding an info command **Loading** 
 - Adding an info command **Next alarm** on each Sonos giving the date of the next alarm programmed on this speaker
 
 # 04/25/2024
 
 - Documentation update
-- Cleaning up accents in share names (not supported by the plugin)
-- Removing the dependency on PicoTTS (the plugin uses jeedom's global TTS engine)
+- )
+- )
 - Added Sonos Beam Gen 2
 
 # 01/15/2024
@@ -91,11 +90,11 @@
 
 # 01/14/2022
 
-- Added compatibility with the new SYMFONISK speaker
+- 
 
 # 12/27/2021
 
-- Added compatibility with the new Sonos one
+- 
 
 # 09/10/2021
 
@@ -166,7 +165,7 @@
 - Complete rewrite of the plugin
 - Support for the new Sonos API
 - Support for Beam and One sound systems
-- Bug number correction
+- 
 - Global optimizations
 
 **Important**
@@ -180,7 +179,7 @@
 - Support for Sonos One and Playbase
 - Tongue correction with picotts
 - Adding a "line entry" command"
-- Update of sound communication library
+- 
 - Optimized loading of playlists
 - Addition of picotts for local TTS generation
-- Correction of the play / pause button when updating the widget
+- Correction of the play / pause button when updating the widget.
