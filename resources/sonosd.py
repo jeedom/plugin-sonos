@@ -1,4 +1,5 @@
-from typing import List
+from __future__ import annotations
+
 import warnings
 import asyncio
 import logging
@@ -20,11 +21,13 @@ class SonosConfig(BaseConfig):
     def __init__(self):
         super().__init__()
 
-        self.add_argument("--internalIp", type=str, default=None)
+        self.add_argument("--networksToScan", type=str, default=None)
 
     @property
-    def internal_ip(self) -> str:
-        return self._args.internalIp
+    def networks_to_scan(self) -> list[str] | None:
+        if self._args.networksToScan is None or self._args.networksToScan == '':
+            return None
+        return [self._args.networksToScan]
 
 
 class SonosDaemon(BaseDaemon):
@@ -33,7 +36,6 @@ class SonosDaemon(BaseDaemon):
         super().__init__(self._config, self._on_start, self._on_message, self._on_stop)
 
         soco_config.EVENTS_MODULE = events_asyncio
-        # soco_config.EVENT_ADVERTISE_IP = self._config.internal_ip
 
         logging.getLogger('aiohttp').setLevel(logging.WARNING)
         warnings.filterwarnings("ignore", message="The output type of this method will probably change in the future to use SoCo data structures")
@@ -44,7 +46,7 @@ class SonosDaemon(BaseDaemon):
         self._speakers: dict[str, SonosSpeaker] = {}
         self._sonos_data = SonosData()
 
-        self._favorites = List[dict]
+        self._favorites = list[dict]
         self._radios: SearchResult
 
     async def _on_start(self):
@@ -274,19 +276,27 @@ class SonosDaemon(BaseDaemon):
             self._logger.warning("No speakers available to get favorites, playlists & radios")
 
     async def __discover_controllers(self):
-        discovered_soco = discover(timeout=10, allow_network_scan=True)
+        if self._config.networks_to_scan is not None:
+            self._logger.info("Network to scan: %s", self._config.networks_to_scan)
+        discovered_soco = discover(timeout=10, allow_network_scan=True, networks_to_scan=self._config.networks_to_scan)
         if discovered_soco is None:
             self._logger.warning("No Sonos discovered, do you have Sonos speaker on the same network?")
             return
 
         for speaker in self._speakers.values():
-            await speaker.async_unsubscribe()
-        self._speakers.clear()
+            if not speaker.available:
+                self._logger.info(f"Speaker {speaker.zone_name} is no more available")
+                await speaker.async_subscribe()
 
-        socos: List[SoCo]
+        socos: list[SoCo]
         socos = list(discovered_soco)
+        self._logger.info(f"Discovered {len(socos)} speakers:")
         for soco in socos:
-            self._logger.info(f"found speaker {soco.player_name}")
+            if soco.uid in self._speakers:
+                self._logger.info(f" - {soco.player_name} (already known)")
+                continue
+
+            self._logger.info(f" - {soco.player_name}")
             new_speaker = SonosSpeaker(self._sonos_data, soco, self.__on_speaker_change)
             self._sonos_data.discovered[soco.uid] = new_speaker
             self._speakers[soco.uid] = new_speaker

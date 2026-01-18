@@ -156,6 +156,7 @@ class SonosSpeaker:
         media_dict = self.media.to_dict() if self.is_coordinator else self.coordinator.media.to_dict()
         alarm: datetime.datetime = self.data.alarms.get_next_alarm_datetime(zone_uid=self.uid)
         return {
+            'available': self.available,
             'zone_name': self.zone_name,
             'model_name': self.model_name.replace("Sonos ", ""),
             'volume': self.volume,

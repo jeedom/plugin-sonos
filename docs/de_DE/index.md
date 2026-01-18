@@ -10,6 +10,8 @@ Das Plugin sucht in Ihrem Netzwerk nach Sonos und erstellt die Geräte automatis
 > **Wichtig**
 > Ihre Sonos-Geräte müssen direkt von der Maschine, auf der Jeedom gehostet wird, erreichbar sein (Broadcast/Multicast im selben Netzwerk möglich) und sie müssen Jeedom im Gegenzug über den TCP-Port 1400 erreichen können.
 
+Dans le cas où vos enceintes Jeedom ne seraient pas sur le même sous-réseau que Jeedom, vous pouvez configurer celui-ci de préférence sous le format CIDR, par exemple `192.168.1.0/24`. Il devrait également être possible d'entrer directement l'ip de l'une de vos enceintes afin de découvrir les autres à partir de celle-ci mais il est recommandé de configurer le réseau complet. **Attention, ne configurer rien si vous ne maitrisez pas cette partie, testez d'abord la configuration par défaut**
+
 Wenn Sie später einen Sonos hinzufügen, können Sie auf klicken **Synchronisieren** auf der Geräteseite oder starten Sie den Daemon neu.
 
 - **Teilen**: Konfigurieren Sie hier den Hostnamen der Maschine (bzw. deren IP), den Namen der Freigabe (ohne Pfad, ohne „/“) und den Pfad zum Ordner.
@@ -29,9 +31,9 @@ Hier finden Sie die gesamte übliche Konfiguration Ihrer Ausrüstung :
 
 Sowie Informationen zu Ihrem Sonos: *Modell*, *Veröffentlichungen*, *Seriennummer*, *Kennung*, *MAC-Adresse* Und *IP Adresse*.
 
-...
+Vous avez aussi la possibilité de désastiver la tuile de l'équipement pré-configurée (option active par défaut) et dans ce cas configurer cette tuile comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou masquer les commandes de votre choix...
 
-.
+La tuile pré-configurée ne tient pas compte du statut visible ou non des commandes, ni des options avancées d'affichage; La configuration de celle-ci ne peut pas être modifiée.
 
 # Die Aufträge
 

@@ -92,7 +92,7 @@ class sonos3 extends eqLogic {
 		$cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/sonos3/core/php/jeesonos3.php';
 		$cmd .= ' --apikey ' . jeedom::getApiKey(__CLASS__);
 		$cmd .= ' --pid ' . jeedom::getTmpFolder(__CLASS__) . '/daemon.pid';
-		$cmd .= ' --internalIp ' . network::getNetworkAccess('internal', 'ip');
+		$cmd .= ' --networksToScan ' . escapeshellarg(config::byKey('networksToScan', __CLASS__, ''));
 		log::add(__CLASS__, 'info', 'Lancement démon');
 		$result = exec($cmd . ' >> ' . log::getPathToLog(__CLASS__ . '_daemon') . ' 2>&1 &');
 		$i = 0;
@@ -283,8 +283,12 @@ class sonos3 extends eqLogic {
 				log::add(__CLASS__, 'warning', "no speaker with uid: {$uid}");
 				continue;
 			}
-			log::add(__CLASS__, 'debug', "update commands of speaker: {$uid}");
+			log::add(__CLASS__, 'debug', "update commands of speaker: {$uid}: " . json_encode($data));
 			$changed = false;
+			$changed = $eqLogic->checkAndUpdateCmd('available', $data['available']) || $changed;
+			if ($changed) {
+				log::add(__CLASS__, 'info', "Speaker '{$eqLogic->getName()}' is " . ($data['available'] ? 'available' : 'not available'));
+			}
 			$changed = $eqLogic->checkAndUpdateCmd('volume_state', $data['volume']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('balance_state', $data['balance'][1] - $data['balance'][0]) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('bass_state', $data['bass']) || $changed;
@@ -445,6 +449,17 @@ class sonos3 extends eqLogic {
 	}
 
 	public function createCommands() {
+		$available = $this->getCmd('info', 'available');
+		if (!is_object($available)) {
+			$available = new sonos3Cmd();
+			$available->setLogicalId('available');
+			$available->setName(__('Disponible', __FILE__));
+			$available->setType('info');
+			$available->setSubType('binary');
+			$available->setEqLogic_id($this->getId());
+			$available->save();
+		}
+
 		$playback_status = $this->getCmd('info', 'playback_status');
 		if (!is_object($playback_status)) {
 			$playback_status = new sonos3Cmd();

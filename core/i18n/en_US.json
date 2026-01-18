@@ -2,11 +2,15 @@
     "plugins\/sonos3\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
         "Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.": "Be careful, your version of PHP ('. PHP_VERSION.') Is too old, you need at least PHP 7.0",
+        "Interactions": "Interactions",
         "Le plugin sonos doit réagir aux interactions": "The sonos plugin must react to interactions",
         "Partage": "Sharing",
         "Hôte": "Host",
         "Nom d'utilisateur du partage": "Share username",
-        "Mot de passe du partage": "Sharing password"
+        "Mot de passe du partage": "Sharing password",
+        "Découverte": "Découverte",
+        "Réseau à scanner": "Réseau à scanner",
+        "Si et seulement si Jeedom ne se trouve pas sur le même réseau que vos enceintes Sonos": "Si et seulement si Jeedom ne se trouve pas sur le même réseau que vos enceintes Sonos"
     },
     "plugins\/sonos3\/desktop\/php\/panel.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
@@ -81,6 +85,7 @@
         "Favorites updated: ": "Favorites updated:",
         "Playlists updated: ": "Playlists updated:",
         "Radios updated: ": "Radios updated:",
+        "Disponible": "Disponible",
         "Statut de lecture": "Reading status",
         "Mode de lecture": "Reading mode",
         "Choisir mode de lecture": "Choose reading mode",
