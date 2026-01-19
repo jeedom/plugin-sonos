@@ -4,13 +4,16 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
-- 
-- 
+# 19-01-2026
+
+- Ajout d'une configuration optionnelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouvent vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur lequel se trouve Jeedom
+- Corrections pour le message "Subscription renewal failed" et la perte de remontée des informations
+- Correcciones de imagen
 
 # 26-04-2025
 
 > Attention
-> Rediseño significativo del complemento : 
+> Rediseño significativo del complemento : une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certaines fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes ;
 >
 > Requiere Jeedom 4.4.8
 >
@@ -20,16 +23,16 @@
 
 - Reescritura casi total del complemento, el demonio ha sido reescrito completamente en Python (en lugar de PHP))
 - Compatible con Debian 11 y 12!
-- .
+- Il n'y a plus de découverte à lancer manuellement et il n'est plus nécessaire (ni possible) d'ajouter manuellement un équipement, le plugin découvre automatiquement vos appareils Sonos et crée les équipements correspondants à chaque démarrage du démon.
 - También es posible solicitar (re)sincronizar equipos, favoritos y listas de reproducción sin reiniciar el demonio desde el panel del equipo.
-- 
-- )
-- Rediseño de la gestión de grupos (se eliminarán los comandos antiguos y se agregarán otros nuevos, consulte la documentación)). Es posible unirse o salir de un grupo, controlar la reproducción del grupo desde cualquier dispositivo del grupo sin preocuparse de quién es el controlador. .
+- Synchro automatique chaque heure pour corriger les désynchronisations éventuelles
+- Mise à jour en (quasi) temps réel des commandes infos (un délai de 0,5s à quelques secondes max), plus de cron minute, y compris lorsqu'un changement est effectué hors Jeedom (via l'app Sonos par exemple)
+- Rediseño de la gestión de grupos (se eliminarán los comandos antiguos y se agregarán otros nuevos, consulte la documentación)). Es posible unirse o salir de un grupo, controlar la reproducción del grupo desde cualquier dispositivo del grupo sin preocuparse de quién es el controlador. Le volume est, lui, toujours contrôlé par enceinte.
 - Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
-- Mejoramiento : .
+- Mejoramiento : plus de pertes de mémoire sur le démon et il consomme moins qu'auparavant.
 - Se optimizó la visualización de la portada que se está reproduciendo actualmente
 - Optimización en la lectura de favoritos
-- Ajout de la possibilité de désactiver la tuile pré-configurée : ...
+- Ajout de la possibilité de désactiver la tuile pré-configurée : vous êtes alors libre de configurer celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou de masquer les commandes de votre choix...
 
 - Agregar un comando de acción **TELEVISOR** para cambiar a la entrada *TELEVISOR* en equipos compatibles
 - Agregar un comando de información **Modo de lectura** y acción **Elige el modo de lectura** que le permite seleccionar el modo de lectura entre las siguientes posibilidades: *Normal*, *Repite todo*, *Aleatorio y repetir todo*, *Aleatorio sin repetición*, *Repetir canción*, *Canción aleatoria y repetida*
@@ -44,18 +47,18 @@
 - Agregar comandos **Controles táctiles de estado**, **Controles táctiles activados**, **Controles táctiles desactivados**
 - Agregar comandos **Balance** (acción/cursor) y **Estado del saldo** que gestiona el saldo según un valor entre -100 (extremo izquierdo) y 100 (extremo derecho))
 - Agregar comandos **Tumbas** (acción/cursor) y **Estado serio** que gestiona los graves según un valor entre -10 y 10
-- Agregar comandos **Triplicar** (acción/cursor) y **Estado de agudos** 
+- Agregar comandos **Triplicar** (acción/cursor) y **Estado de agudos** qui gèrent les aigus selon une valeur comprise entre -10 et 10
 - Agregando el comando **Moda de fiesta** que te permite agrupar todos los Sonos juntos
-- Agregando el comando **Estado del micrófono** 
+- Agregando el comando **Estado del micrófono** qui indique si le micro est activé ou non sur les Sonos équipés d'un micro
 - Agregar un comando de información **Batería** en Sonos equipado con una batería que muestra el porcentaje de carga de la batería
-- Agregar un comando de información **Cargando** 
+- Agregar un comando de información **Cargando** sur les Sonos équipés d'une batterie qui indique si la charge est en cours ou non
 - Agregar un comando de información **Próxima alarma** en cada Sonos indicando la fecha de la próxima alarma programada en este altavoz
 
 # 25/04/2024
 
 - Actualización de documentación
-- )
-- )
+- Nettoyage des accents dans les noms de partage (non supportés par le plugin)
+- Suppression de la dépendance à PicoTTS (le plugin utilise le moteur global de TTS de Jeedom)
 - Se agregó Sonos Beam Gen 2
 
 # 15/01/2024
@@ -90,11 +93,11 @@
 
 # 14/01/2022
 
-- 
+- Ajout de la compatibilité avec la nouvelle enceinte SYMFONISK
 
 # 27/12/2021
 
-- 
+- Ajout de la compatibilité avec la nouvelle Sonos One
 
 # 10/09/2021
 
@@ -165,7 +168,7 @@
 - Completa reescritura del complemento
 - Soporte para la nueva API de Sonos
 - Soporte para sistemas de sonido Beam y One
-- 
+- Correction de nombreux bugs
 - Optimizaciones globales
 
 **Importante**
@@ -179,7 +182,7 @@
 - Soporte para Sonos One y Playbase
 - Corrección de lengua con picotts
 - Agregar un comando de "entrada de línea""
-- 
+- Mise à jour de la librairie de communication avec les Sonos
 - Carga optimizada de listas de reproducción
 - Adición de picotts para la generación local de TTS
 - Corrección del botón de reproducción / pausa al actualizar el widget.

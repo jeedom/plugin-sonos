@@ -153,6 +153,6 @@
         "Aucun": "Nemhum"
     },
     "info.json": {
-        "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": "Plug-in de controle Sonos \/ Ikea Symfonisk. CUIDADO: PHP 7.0 mínimo é necessário"
+        "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.4.": "Plugin de controle Symfonisk Sonos\/Ikea. AVISO: Requer PHP 7.4 ou posterior"
     }
 }

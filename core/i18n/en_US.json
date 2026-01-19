@@ -153,6 +153,6 @@
         "Aucun": "None"
     },
     "info.json": {
-        "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.0.": "Sonos \/ Ikea Symfonisk control plugin. CAUTION: PHP 7.0 minimum is required"
+        "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.4.": "Symfonisk Sonos\/Ikea control plugin. WARNING: PHP 7.4 or later is required"
     }
 }
