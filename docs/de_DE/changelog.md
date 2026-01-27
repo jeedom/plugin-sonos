@@ -4,6 +4,10 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 
+
+-  **
+
 # 19.01.2026
 
 - Ajout d'une configuration optionnelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouvent vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur lequel se trouve Jeedom

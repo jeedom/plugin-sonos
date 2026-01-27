@@ -2,6 +2,9 @@
     "changelog.md": {
         "Changelog Sonos controller": "Changelog Sonos controller",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto",
+        "27-01-2026": "",
+        "Ikea Table Lamp": "",
+        "Ajout de l'image pour": "",
         "19-01-2026": "19-01-2026",
         "Ajout d'une configuration optionnelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouvent vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur lequel se trouve Jeedom": "Ajout d'une configuration optionnelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouvent vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur lequel se trouve Jeedom",
         "Corrections pour le message \"Subscription renewal failed\" et la perte de remontée des informations": "Corrections pour le message \"Subscription renewal failed\" et la perte de remontée des informations",
