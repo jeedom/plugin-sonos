@@ -6,7 +6,11 @@
 
 # 
 
--  **
+- Adicionando um comando de informações **** )
+
+# 27-01-2026
+
+- Ajout de l'image pour *Ikea Table Lamp*
 
 # 19-01-2026
 
