@@ -307,6 +307,7 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('track_artist', $data['media']['artist']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('track_title', $data['media']['title']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('track_image', $data['media']['image_url']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('channel', $data['media']['channel']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('group_state', $data['grouped']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('group_name', $data['group_name']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('next_alarm', $data['next_alarm']) || $changed;
@@ -839,6 +840,17 @@ class sonos3 extends eqLogic {
 			$track_image->setSubType('string');
 			$track_image->setEqLogic_id($this->getId());
 			$track_image->save();
+		}
+
+		$channel = $this->getCmd('info', 'channel');
+		if (!is_object($channel)) {
+			$channel = new sonos3Cmd();
+			$channel->setLogicalId('channel');
+			$channel->setName(__('Station', __FILE__));
+			$channel->setType('info');
+			$channel->setSubType('string');
+			$channel->setEqLogic_id($this->getId());
+			$channel->save();
 		}
 
 		$play_playlist = $this->getCmd(null, 'play_playlist');
