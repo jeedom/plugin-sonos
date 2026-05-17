@@ -4,6 +4,10 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# 18-05-2026
+
+- Correction d'un bug mineur sur la commande **Dire**
+
 # 11-04-2026
 
 - Ajout d'une commande info **Station** qui indique la station radio en cours de lecture (si l'info est disponible)
