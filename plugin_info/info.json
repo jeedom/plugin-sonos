@@ -1,41 +1,42 @@
 {
-    "id": "sonos3",
-    "name": "Sonos controller",
-    "description": {
-        "fr_FR": "Plugin de contrôle de Sonos\/Ikea Symfonisk"
-    },
-    "licence": "AGPL",
-    "author": "Jeedom SAS",
-    "require": "4.5",
-    "os": {
-        "min": 11
-    },
-    "category": "multimedia",
-    "hasDependency": true,
-    "hasOwnDeamon": true,
-    "display": "panel",
-    "mobile": "panel",
-    "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/sonos3\/changelog",
-    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/sonos3\/",
-    "language": [
-        "fr_FR",
-        "en_US",
-        "es_ES",
-        "de_DE",
-        "ru_RU",
-        "id_ID",
-        "it_IT",
-        "ja_JP",
-        "pt_PT",
-        "tr"
-    ],
-    "compatibility": [
-        "smart",
-        "atlas",
-        "rpi",
-        "diy",
-        "v4"
-    ],
-    "changelog_beta": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/sonos3\/beta\/changelog",
-    "documentation_beta": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/sonos3\/beta"
+	"id": "sonos3",
+	"name": "Sonos controller",
+	"description": {
+		"fr_FR": "Plugin de contrôle de Sonos/Ikea Symfonisk",
+		"en_US": "Sonos/Ikea Symfonisk control plugin",
+		"es_ES": "Complemento de control para Sonos/Ikea Symfonisk",
+		"de_DE": "Plugin zur Steuerung von Sonos/Ikea Symfonisk",
+		"it_IT": "Plugin di controllo per Sonos/Ikea Symfonisk",
+		"pt_PT": "Plugin de controlo do Sonos/Ikea Symfonisk"
+	},
+	"licence": "AGPL",
+	"author": "Jeedom SAS",
+	"require": "4.5",
+	"os": {
+		"min": 11
+	},
+	"category": "multimedia",
+	"hasDependency": true,
+	"hasOwnDeamon": true,
+	"display": "panel",
+	"mobile": "panel",
+	"changelog": "https://doc.jeedom.com/#language#/plugins/multimedia/sonos3/changelog",
+	"documentation": "https://doc.jeedom.com/#language#/plugins/multimedia/sonos3/",
+	"language": [
+		"de_DE",
+		"en_US",
+		"es_ES",
+		"fr_FR",
+		"it_IT",
+		"pt_PT"
+	],
+	"compatibility": [
+		"smart",
+		"atlas",
+		"rpi",
+		"diy",
+		"v4"
+	],
+	"changelog_beta": "https://doc.jeedom.com/#language#/plugins/multimedia/sonos3/beta/changelog",
+	"documentation_beta": "https://doc.jeedom.com/#language#/plugins/multimedia/sonos3/beta"
 }
