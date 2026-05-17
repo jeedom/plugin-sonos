@@ -2,20 +2,11 @@
     "id": "sonos3",
     "name": "Sonos controller",
     "description": {
-        "fr_FR": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.4.",
-        "en_US": "Symfonisk Sonos\/Ikea control plugin. WARNING: PHP 7.4 or later is required",
-        "es_ES": "Plugin de control Symfonisk para Sonos\/Ikea. ADVERTENCIA: Requiere PHP 7.4 o posterior",
-        "de_DE": "Symfonisk Sonos\/Ikea-Steuerungs-Plugin. WARNUNG: PHP 7.4 oder höher erforderlich",
-        "pt_PT": "Plugin de controle Symfonisk Sonos\/Ikea. AVISO: Requer PHP 7.4 ou posterior",
-        "ru_RU": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.4",
-        "id_ID": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.4",
-        "it_IT": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.4",
-        "ja_JP": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.4",
-        "tr": "Plugin de contrôle de Sonos\/Ikea Symfonisk. ATTENTION : il faut au minimum PHP 7.4"
+        "fr_FR": "Plugin de contrôle de Sonos\/Ikea Symfonisk"
     },
     "licence": "AGPL",
     "author": "Jeedom SAS",
-    "require": "4.4",
+    "require": "4.5",
     "os": {
         "min": 11
     },
