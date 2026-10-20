@@ -1,111 +1,115 @@
-# Changelog Sonos controller
+# Sonos Controller Changelog
 
->**Important**
+>**IMPORTANT**
 >
->As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
+>As a reminder, if there is no information about the update, it means that the update only involves documentation, translations, or text changes.
 
-# 
+# 18-05-2026
 
-- Adding an info command **** )
+- Fixed a minor bug in the **Dire** command
+
+# 11-04-2026
+
+- Added a **Station** info command that displays the radio station currently playing (if the information is available)
 
 # 27-01-2026
 
-- Ajout de l'image pour *Ikea Table Lamp*
+- Added image for *Ikea Table Lamp*
 
 # 19-01-2026
 
-- Ajout d'une configuration optionnelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouvent vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur lequel se trouve Jeedom
-- Corrections pour le message "Subscription renewal failed" et la perte de remontée des informations
+- Added an optional setting to specify, only if necessary, the subnet (VLAN) on which your Sonos speakers are located if it is different from the subnet (VLAN) on which Jeedom is located
+- Fixes for the "Subscription renewal failed" message and the loss of information reporting
 - Image corrections
 
 # 26-04-2025
 
-> Attention
-> Significant plugin redesign : une très grande partie du plugin a été réécrite dont toute la communication avec Sonos (démon) et certaines fonctionnalités ont été modifiées et ne fonctionnent plus comme précédemment, notamment la gestion des groupes ;
+> Caution
+> Major plugin overhaul: a large portion of the plugin has been rewritten, including all communication with Sonos (daemon), and certain features have been modified and no longer work as they did before, particularly group management;
 >
 > Requires Jeedom 4.4.8
 >
-> Debian 11 and 12 compatible!
+> Compatible with Debian 11 and 12!
 >
 > See also [this topic on community](https://community.jeedom.com/t/erreur-you-cannot-create-a-controller-instance-from-a-speaker-that-is-not-the-coordinator-of-its-group/128862) for more details
 
-- Almost total rewrite of the plugin, the daemon has been completely rewritten in python (instead of PHP)
-- Debian 11 and 12 compatible!
-- Il n'y a plus de découverte à lancer manuellement et il n'est plus nécessaire (ni possible) d'ajouter manuellement un équipement, le plugin découvre automatiquement vos appareils Sonos et crée les équipements correspondants à chaque démarrage du démon.
-- It is also possible to ask to (re)synchronize equipment, favorites and playlists without restarting the daemon from the equipment panel.
-- Synchro automatique chaque heure pour corriger les désynchronisations éventuelles
-- Mise à jour en (quasi) temps réel des commandes infos (un délai de 0,5s à quelques secondes max), plus de cron minute, y compris lorsqu'un changement est effectué hors Jeedom (via l'app Sonos par exemple)
-- Redesign of group management (old commands will be deleted and new ones added, see documentation). It is possible to join or leave a group, control the playback of the group from any device in the group without worrying about who is the controller. Le volume est, lui, toujours contrôlé par enceinte.
-- Adaptation sur la fonction Text-to-Speech (TTS), **il sera nécessaire d'adapter la configuration du partage SAMBA**.
-- Optimization : plus de pertes de mémoire sur le démon et il consomme moins qu'auparavant.
+- The plugin has been almost completely rewritten; the daemon has been entirely rewritten in Python (instead of PHP)
+- Compatible with Debian 11 and 12!
+- You no longer need to run a manual discovery, and it is no longer necessary (or possible) to manually add a device; the plugin automatically detects your Sonos devices and creates the corresponding devices each time the daemon starts.
+- It is also possible to request that devices, favorites, and playlists be (re)synchronized without restarting the daemon from the Devices panel.
+- Automatic synchronization every hour to correct any desynchronization
+- (Near) real-time updates to control and information commands (a delay of 0.5 seconds to a few seconds at most), no more minute-by-minute cron jobs, even when a change is made outside of Jeedom (via the Sonos app, for example)
+- Group management has been redesigned (old commands will be removed and new ones added; see documentation). You can join or leave a group and control playback for the group from any device in the group without worrying about which device is the controller. Volume, however, is still controlled on a per-speaker basis.
+- When adapting the Text-to-Speech (TTS) feature, **you will need to adjust the SAMBA sharing configuration**.
+- Optimization: No more memory leaks in the daemon, and it uses less memory than before.
 - Optimized the display of the cover of the current reading
 - Optimization on reading favorites
-- Ajout de la possibilité de désactiver la tuile pré-configurée : vous êtes alors libre de configurer celle-ci comme vous le souhaitez en utilisant les widgets du core ou vos propres widgets, d'afficher ou de masquer les commandes de votre choix...
+- Added the ability to disable the preconfigured tile: you are now free to configure it however you like using the core widgets or your own widgets, and to show or hide the commands of your choice...
 
-- Adding an action command **TV** to switch to the input *TV* on compatible equipment
-- Adding an info command **Reading mode** and action **Choose reading mode** which allows you to select the reading mode from the following possibilities: *Normal*, *Repeat all*, *Random and repeat all*, *Random without repetition*, *Repeat song*, *Random and repeat song*
-- Adding an order **Reading status** which gives the "raw" value of the reading state (the existing command **Status** gives a translated value based on the language configured in Jeedom)
-- Adding commands **Group status** (indicates whether the equipment is grouped or not) and **Name of the group** in the case where the equipment is grouped
-- Adding commands **The gift**, **Led off** And **Status LED** to check the status indicator
-- Adding an order **Play mp3 radio** to play an mp3 radio directly via a URL (accessible on the internet for example)
-- Adding commands **Turn up the volume** And **Decrease the volume** from 1%
-- Adding an order **Volume transition** which is very useful for managing volume level transitions. 3 possible modes: *LINEAR*, *ALARM*, *AUTOPLAY*. See documentation for more information.
-- Adding commands **Loudness status**, **Loudness on**, **Loudness off**
-- Adding commands **Crossfade status**, **Crossfade on**, **Fade off**
-- Adding commands **Touch controls status**, **Touch controls on**, **Touch controls off**
-- Adding commands **Balance** (action/cursor) and **Balance status** which manages the balance according to a value between -100 (far left) and 100 (far right))
-- Adding commands **Graves** (action/cursor) and **Serious status** which manages the bass according to a value between -10 and 10
-- Adding commands **Highs** (action/cursor) and **Acute status** qui gèrent les aigus selon une valeur comprise entre -10 et 10
-- Adding the command **Party mode** which allows you to group all Sonos together
-- Adding the command **Mic status** qui indique si le micro est activé ou non sur les Sonos équipés d'un micro
-- Adding an info command **Battery** on Sonos equipped with a battery indicating the battery charge percentage
-- Adding an info command **Loading** sur les Sonos équipés d'une batterie qui indique si la charge est en cours ou non
-- Adding an info command **Next alarm** on each Sonos giving the date of the next alarm programmed on this speaker
+- Added a **TV** action command to switch to the *TV* input on compatible devices
+- Added an **Playback Mode** info command and a **Select Playback Mode** action that allows you to select a playback mode from the following options: *Normal*, *Repeat All*, *Shuffle and Repeat All*, *Shuffle Without Repeat*, *Repeat Track*, *Shuffle and Repeat Track*
+- Added a **Reading Status** command that returns the "raw" value of the reading status (the existing **Status** command returns a value translated based on the language configured in Jeedom)
+- Added the **Group Status** (indicates whether the device is grouped or not) and **Group Name** commands for devices that are grouped
+- Added the **LED On**, **LED Off**, and **LED Status** commands to control the status indicator
+- Added a **Play MP3 Radio** command to play an MP3 radio stream directly via a URL (accessible on the internet, for example)
+- Added the **Increase Volume** and **Decrease Volume** commands by 1%
+- Added a **Volume Transition** command, which is very useful for managing volume level transitions. Three modes are available: *LINEAR*, *ALARM*, *AUTOPLAY*. See the documentation for more information.
+- Added the **Loudness Status**, **Loudness On**, and **Loudness Off** commands
+- Added the commands **Status Crossfade**, **On Crossfade**, **Off Crossfade**
+- Added the **Status Touch Commands**, **On Touch Commands**, and **Off Touch Commands**
+- Added the **Balance** (action/slider) and **Balance Status** commands, which manage the balance based on a value ranging from -100 (all the way to the left) to 100 (all the way to the right)
+- Added the **Bass** (action/slider) and **Bass Status** commands, which manage bass levels based on a value between -10 and 10
+- Added the **Treble** (action/slider) and **Treble Status** commands, which adjust the treble based on a value between -10 and 10
+- Added the **Party Mode** command, which lets you group all Sonos devices together
+- Added the **Mic Status** command, which indicates whether the microphone is enabled or disabled on Sonos devices equipped with a microphone
+- Added a **Battery** info command to battery-powered Sonos devices that displays the battery charge percentage
+- Added a **Charging** command to battery-powered Sonos devices that indicates whether charging is in progress or not
+- Add a **Next Alarm** info command to each Sonos speaker, displaying the date of the next alarm scheduled on that speaker
 
-# 04/25/2024
+# 25/04/2024
 
 - Documentation update
-- Nettoyage des accents dans les noms de partage (non supportés par le plugin)
-- Suppression de la dépendance à PicoTTS (le plugin utilise le moteur global de TTS de Jeedom)
+- Removing accents from share names (not supported by the plugin)
+- Removal of the dependency on PicoTTS (the plugin uses Jeedom's global TTS engine)
 - Added Sonos Beam Gen 2
 
-# 01/15/2024
+# 15/01/2024
 
 - Preparing for Jeedom 4.4
 - Added Sonos Move 2
 
-# 08/24/2023
+# 24/08/2023
 
 - Added Ikea Symfonisk Floor Lamp
 
-# 05/25/2023
+# 25/05/2023
 
 - Added Sonos Era
 
-# 10/18/2022
+# 18/10/2022
 
 - Update command list for Jeedom v4.3
 - Added Sonos Ray
 
-# 03/22/2022
+# 22/03/2022
 
 - Support for the new SYMFONISK loudspeaker
 
-# 02/01/2022
+# 01/02/2022
 
 - Fixed a bug on the TTS
 
-# 01/27/2022
+# 27/01/2022
 
 - V4.2 optimizations
 
-# 01/14/2022
+# 14/01/2022
 
-- Ajout de la compatibilité avec la nouvelle enceinte SYMFONISK
+- Added compatibility with the new SYMFONISK speaker
 
-# 12/27/2021
+# 27/12/2021
 
-- Ajout de la compatibilité avec la nouvelle Sonos One
+- Added compatibility with the new Sonos One
 
 # 09/10/2021
 
@@ -117,69 +121,69 @@
 # 24/11/2020
 
 - New presentation of the list of objects
-- Addition of the tag "V4 compatibility"
+- Added the "V4 Compatibility" tag
 
-# 08/07/2020
+# 07/08/2020
 
 - Sonos ARC support
 
-# 01/24/2020
+# 24/01/2020
 
 - Support for Sonos One S22
 
-# 01/11/2020
+# 11/01/2020
 
 - Support for Sonos Move
 - Code optimization in case of Sonos not connected
 
-# 12/16/2019
+# 16/12/2019
 
 - Bug fix if a sound system cannot be reached
 
-# 10/21/2017
+# 21/10/2017
 
 - Improvement in recovery from TTS
 
-# 10/15/2019
+# 15/10/2019
 
 - Sonos port support
 - Improved dependency installation script
 
-# 10/07/2019
+# 07/10/2019
 
-- Improvement of the dependency installation script (may allow to correct in some cases the problems of TTS)
+- Improvements to the dependency installation script (may help resolve TTS issues in some cases)
 
-# 09/23/2019
+# 23/09/2019
 
-- Optimisations
+- Optimizations
 
-# 09/01/2019
+# 01/09/2019
 
 - Ikea SYMFONISK lamp speaker support
 
-# 08/12/2019
+# 12/08/2019
 
 - Support for Ikea SYMFONISK bookshelf speaker
 
-# 04/23/2019
+# 23/04/2019
 
 - Support for one gen2 sonos
 
-# 01/17/2019
+# 17/01/2019
 
 - Fixed bugs in case the sound systems were added manually
 
-# 01/15/2019
+# 15/01/2019
 
-**IMPORTANT ONLY WORKS WITH PHP7, SEE JEEDOM HEALTH PAGE FOR YOUR VERSION**
+**IMPORTANT: ONLY WORKS WITH PHP 7. CHECK THE JEEDOM STATUS PAGE FOR YOUR VERSION**
 
 - Complete rewrite of the plugin
 - Support for the new Sonos API
 - Support for Beam and One sound systems
-- Correction de nombreux bugs
+- Fixed numerous bugs
 - Global optimizations
 
-**Important**
+**IMPORTANT**
 
 - Compatible PHP7 only
 - Some features had to be removed
@@ -189,8 +193,8 @@
 - Added management of sonos favorites
 - Support for Sonos One and Playbase
 - Tongue correction with picotts
-- Adding a "line entry" command"
-- Mise à jour de la librairie de communication avec les Sonos
+- Adding a "Line Input" command
+- Update to the Sonos communication library
 - Optimized loading of playlists
 - Addition of picotts for local TTS generation
-- Correction of the play / pause button when updating the widget.
+- Fixed the play/pause button when updating the widget.
