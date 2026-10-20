@@ -4,25 +4,25 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich ausschließlich um eine Aktualisierung der Dokumentation, der Übersetzung oder des Textes handelt.
 
-# 18-05-2026
+# 18/05/2026
 
 - Behebung eines kleinen Fehlers beim Befehl **Dire**
 
-# 11-04-2026
+# 11/04/2026
 
 - Hinzufügen eines Befehls „Info **Sender**“, der den aktuell wiedergegebenen Radiosender anzeigt (sofern diese Information verfügbar ist)
 
-# 27-01-2026
+# 27/01/2026
 
 - Bild für *Ikea Tischlampe* hinzugefügt
 
-# 19-01-2026
+# 19/01/2026
 
 - Hinzufügen einer optionalen Konfiguration, um – nur falls erforderlich – das Subnetz (VLAN) anzugeben, in dem sich Ihre Sonos-Lautsprecher befinden, falls dieses vom Subnetz (VLAN) abweicht, in dem sich Jeedom befindet
 - Korrekturen für die Meldung „Subscription renewal failed“ und den Verlust der Informationsübermittlung
 - Bildkorrekturen
 
-# 26-04-2025
+# 26/04/2025
 
 > Aufmerksamkeit
 > Umfassende Überarbeitung des Plugins: Ein Großteil des Plugins wurde neu geschrieben, darunter die gesamte Kommunikation mit Sonos (Daemon), und einige Funktionen wurden geändert und funktionieren nicht mehr wie zuvor, insbesondere die Verwaltung von Gruppen;
