@@ -12,6 +12,12 @@ updates:
       interval: "monthly"
     target-branch: "beta"
 
+  - package-ecosystem: "pip"
+    directory: "/resources"
+    target-branch: "beta"
+    schedule:
+      interval: "weekly"
+
   # Maintain any github-actions workflow
   # https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
   - package-ecosystem: "github-actions"
