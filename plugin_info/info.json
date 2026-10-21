@@ -20,8 +20,8 @@
 	"hasOwnDeamon": true,
 	"display": "panel",
 	"mobile": "panel",
-	"changelog": "https://doc.jeedom.com/#language#/plugins/multimedia/sonos3/changelog",
-	"documentation": "https://doc.jeedom.com/#language#/plugins/multimedia/sonos3/",
+	"changelog": "https://doc.jeedom.com/plugins/multimedia/sonos3/#language#/changelog",
+	"documentation": "https://doc.jeedom.com/plugins/multimedia/sonos3/#language#/",
 	"language": [
 		"de_DE",
 		"en_US",
@@ -37,6 +37,6 @@
 		"diy",
 		"v4"
 	],
-	"changelog_beta": "https://doc.jeedom.com/#language#/plugins/multimedia/sonos3/beta/changelog",
-	"documentation_beta": "https://doc.jeedom.com/#language#/plugins/multimedia/sonos3/beta"
+	"changelog_beta": "https://doc.jeedom.com/plugins/multimedia/sonos3/beta/#language#/changelog",
+	"documentation_beta": "https://doc.jeedom.com/plugins/multimedia/sonos3/beta/#language#/"
 }
