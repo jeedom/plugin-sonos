@@ -4,17 +4,11 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
-# 18/05/2026
-
-- Correction d'un bug mineur sur la commande **Dire**
-
-# 11/04/2026
+# 21/10/2026
 
 - Ajout d'une commande info **Station** qui indique la station radio en cours de lecture (si l'info est disponible)
-
-# 27/01/2026
-
-- Ajout de l'image pour *Ikea Table Lamp*
+- Ajout de l'image pour *Ikea Table Lamp* & *Era 100 SL*
+- Correction d'un bug mineur sur la commande **Dire**
 
 # 19/01/2026
 
