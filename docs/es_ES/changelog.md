@@ -4,17 +4,11 @@
 >
 >Recuerda que, si no hay información sobre la actualización, es porque esta se refiere únicamente a la actualización de la documentación, la traducción o el texto.
 
-# 18/05/2026
-
-- Se ha corregido un error menor en el comando **Dire**
-
-# 11/04/2026
+# 21/10/2026
 
 - Se ha añadido un comando de información **Estación** que indica la emisora de radio que se está reproduciendo (si la información está disponible)
-
-# 27/01/2026
-
-- Se ha añadido la imagen de *Lámpara de mesa de Ikea*
+- Se ha añadido la imagen de *Lámpara de mesa de Ikea* y *Era 100 SL*
+- Se ha corregido un error menor en el comando **Dire**
 
 # 19/01/2026
 
