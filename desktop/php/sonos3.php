@@ -160,7 +160,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{UID}}</label>
+								<label class="col-sm-4 control-label">UID</label>
 								<div class="col-sm-6">
 									<span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="uid"></span>
 								</div>
