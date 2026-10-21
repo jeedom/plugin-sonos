@@ -4,25 +4,25 @@
 >
 >Recuerda que, si no hay información sobre la actualización, es porque esta se refiere únicamente a la actualización de la documentación, la traducción o el texto.
 
-# 18-05-2026
+# 18/05/2026
 
 - Se ha corregido un error menor en el comando **Dire**
 
-# 11-04-2026
+# 11/04/2026
 
 - Se ha añadido un comando de información **Estación** que indica la emisora de radio que se está reproduciendo (si la información está disponible)
 
-# 27-01-2026
+# 27/01/2026
 
 - Se ha añadido la imagen de *Lámpara de mesa de Ikea*
 
-# 19-01-2026
+# 19/01/2026
 
 - Se ha añadido una configuración opcional para indicar, solo si es necesario, la subred (VLAN) en la que se encuentran tus altavoces Sonos, en caso de que sea diferente de la subred (VLAN) en la que se encuentra Jeedom.
 - Correcciones para el mensaje «Error al renovar la suscripción» y la pérdida de la transmisión de información
 - Correcciones de imagen
 
-# 26-04-2025
+# 26/04/2025
 
 > Atención
 > Reestructuración importante del complemento: se ha reescrito una gran parte del complemento, incluida toda la comunicación con Sonos (demonio), y se han modificado algunas funciones, que ya no funcionan como antes, en particular la gestión de grupos;
