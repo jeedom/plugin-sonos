@@ -4,17 +4,11 @@
 >
 >As a reminder, if there is no information about the update, it means that the update only involves documentation, translations, or text changes.
 
-# 18/05/2026
-
-- Fixed a minor bug in the **Dire** command
-
-# 11/04/2026
+# 21/10/2026
 
 - Added a **Station** info command that displays the radio station currently playing (if the information is available)
-
-# 27/01/2026
-
-- Added image for *Ikea Table Lamp*
+- Added images for *Ikea Table Lamp* & *Era 100 SL*
+- Fixed a minor bug in the **Dire** command
 
 # 19/01/2026
 

@@ -4,17 +4,11 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich ausschließlich um eine Aktualisierung der Dokumentation, der Übersetzung oder des Textes handelt.
 
-# 18/05/2026
-
-- Behebung eines kleinen Fehlers beim Befehl **Dire**
-
-# 11/04/2026
+# 21/10/2026
 
 - Hinzufügen eines Befehls „Info **Sender**“, der den aktuell wiedergegebenen Radiosender anzeigt (sofern diese Information verfügbar ist)
-
-# 27/01/2026
-
-- Bild für *Ikea Tischlampe* hinzugefügt
+- Bild für *Ikea Tischlampe* & *Era 100 SL* hinzugefügt
+- Behebung eines kleinen Fehlers beim Befehl **Dire**
 
 # 19/01/2026
 

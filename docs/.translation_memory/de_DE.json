@@ -90,7 +90,7 @@
     "Ajout d'une commande info **Prochaine alarme** sur chaque Sonos donnant la date de la prochaine alarme programmée sur cette enceinte": "Hinzufügen eines Befehls „**Nächster Alarm**“ auf jedem Sonos-Gerät, der das Datum des nächsten auf diesem Lautsprecher programmierten Alarms angibt",
     "Ajout d'une commande info **Station** qui indique la station radio en cours de lecture (si l'info est disponible)": "Hinzufügen eines Befehls „Info **Sender**“, der den aktuell wiedergegebenen Radiosender anzeigt (sofern diese Information verfügbar ist)",
     "Ajout d'une configuration optionnelle pour indiquer, uniquement si nécessaire, le sous-réseau (vlan) sur lequel se trouvent vos enceintes Sonos si celui-ci est différent du sous-réseau (vlan) sur lequel se trouve Jeedom": "Hinzufügen einer optionalen Konfiguration, um – nur falls erforderlich – das Subnetz (VLAN) anzugeben, in dem sich Ihre Sonos-Lautsprecher befinden, falls dieses vom Subnetz (VLAN) abweicht, in dem sich Jeedom befindet",
-    "Ajout de l'image pour *Ikea Table Lamp*": "Bild für *Ikea Tischlampe* hinzugefügt",
+    "Ajout de l'image pour *Ikea Table Lamp* & *Era 100 SL*": "Bild für *Ikea Tischlampe* & *Era 100 SL* hinzugefügt",
     "Ajout de la Sonos Five": "Hinzufügung der Sonos Five",
     "Ajout de la Sonos Ray": "Sonos Ray hinzugefügt",
     "Ajout de la commande **Mic statut** qui indique si le micro est activé ou non sur les Sonos équipés d'un micro": "Hinzufügen des Befehls **Mikrofonstatus**, der anzeigt, ob das Mikrofon bei Sonos-Geräten mit Mikrofon aktiviert ist oder nicht",
