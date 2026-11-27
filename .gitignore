@@ -7,3 +7,5 @@ deployment-config.json
 .remote-sync.json
 .vscode
 .venv
+*.pyc
+__pycache__/

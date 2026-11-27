@@ -23,11 +23,6 @@ if (!isConnect('admin')) {
 ?>
 <form class="form-horizontal">
 	<fieldset>
-		<?php
-		if (version_compare(PHP_VERSION, '7.0') < 0) {
-			echo '<div class="alert alert-danger">{{Attention votre version de PHP (' . PHP_VERSION . ') est trop veille, il faut au minimum PHP 7.0.}}</div>';
-		}
-		?>
 		<legend><i class="far fa-comments"></i> {{Interactions}}</legend>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">{{Le plugin sonos doit réagir aux interactions}}</label>

@@ -47,7 +47,7 @@ class sonos3 extends eqLogic {
 		return config::byKey('socketport', __CLASS__, 42042);;
 	}
 
-	public static function sendToDaemon($params) {
+	public static function sendToDaemon(array $params) {
 		$deamon_info = self::deamon_info();
 		if ($deamon_info['state'] != 'ok') {
 			throw new RuntimeException("Le démon n'est pas démarré");
@@ -125,7 +125,7 @@ class sonos3 extends eqLogic {
 		// system::fuserk(config::byKey('socketport', __CLASS__));
 	}
 
-	public static function interact($_query, $_parameters = array()) {
+	public static function interact(string $_query, array $_parameters = array()) {
 		if (trim(config::byKey('interact::sentence', __CLASS__)) == '') {
 			return null;
 		}
@@ -239,14 +239,14 @@ class sonos3 extends eqLogic {
 			$eqLogic->getCmd('action', 'join')->setDisplay('title_possibility_list', json_encode(array_values($speakers_array)))->save(true);
 			$eqLogic->getCmd('action', 'unjoin')->setDisplay('title_possibility_list', json_encode(array_values($speakers_array)))->save(true);
 		}
-		log::add(__CLASS__, 'info', __('Sonos controllers synchronized: ', __FILE__) . count($controllers));
+		log::add(__CLASS__, 'info', 'Sonos controllers synchronized: ' . count($controllers), __FILE__);
 	}
 
-	private static function getShuffleState($playModeState) {
+	private static function getShuffleState(string $playModeState) {
 		return in_array($playModeState, ['SHUFFLE_NOREPEAT', 'SHUFFLE', 'SHUFFLE_REPEAT_ONE']);
 	}
 
-	private static function getRepeatState($playModeState) {
+	private static function getRepeatState(string $playModeState) {
 		return in_array($playModeState, ['SHUFFLE', 'REPEAT_ALL', 'SHUFFLE_REPEAT_ONE', 'REPEAT_ONE']);
 	}
 
@@ -275,7 +275,7 @@ class sonos3 extends eqLogic {
 		return $imageContent;
 	}
 
-	public static function updateSpeakers($speakers) {
+	public static function updateSpeakers(array $speakers) {
 		foreach ($speakers as $uid => $data) {
 			/** @var sonos3 */
 			$eqLogic = self::byLogicalId($uid, __CLASS__);
@@ -307,6 +307,7 @@ class sonos3 extends eqLogic {
 			$changed = $eqLogic->checkAndUpdateCmd('track_artist', $data['media']['artist']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('track_title', $data['media']['title']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('track_image', $data['media']['image_url']) || $changed;
+			$changed = $eqLogic->checkAndUpdateCmd('channel', $data['media']['channel']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('group_state', $data['grouped']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('group_name', $data['group_name']) || $changed;
 			$changed = $eqLogic->checkAndUpdateCmd('next_alarm', $data['next_alarm']) || $changed;
@@ -328,7 +329,7 @@ class sonos3 extends eqLogic {
 		}
 	}
 
-	public static function convertState($_state) {
+	public static function convertState(string $_state): string {
 		switch ($_state) {
 			case 'PLAYING':
 				return __('Lecture', __FILE__);
@@ -841,6 +842,17 @@ class sonos3 extends eqLogic {
 			$track_image->save();
 		}
 
+		$channel = $this->getCmd('info', 'channel');
+		if (!is_object($channel)) {
+			$channel = new sonos3Cmd();
+			$channel->setLogicalId('channel');
+			$channel->setName(__('Station', __FILE__));
+			$channel->setType('info');
+			$channel->setSubType('string');
+			$channel->setEqLogic_id($this->getId());
+			$channel->save();
+		}
+
 		$play_playlist = $this->getCmd(null, 'play_playlist');
 		if (!is_object($play_playlist)) {
 			$play_playlist = new sonos3Cmd();
@@ -1311,11 +1323,11 @@ class sonos3Cmd extends cmd {
 				$serverFactory = new ServerFactory();
 				$auth = new BasicAuth(config::byKey('tts_username', 'sonos3'), null, config::byKey('tts_password', 'sonos3'));
 				$server = $serverFactory->createServer($host, $auth);
-				$share_name = sanitizeAccent(trim(config::byKey('tts_share', 'sonos3')), " \n\r\t\v\0/");
+				$share_name = sanitizeAccent(trim(config::byKey('tts_share', 'sonos3'), " \n\r\t\v\0/"));
 				$share = $server->getShare($share_name);
 
 				// push file to samba
-				$path_name = sanitizeAccent(trim(config::byKey('tts_path', 'sonos3')), " \n\r\t\v\0/");
+				$path_name = sanitizeAccent(trim(config::byKey('tts_path', 'sonos3'), " \n\r\t\v\0/"));
 				$fh = $share->write("{$path_name}/{$file_name}");
 				fwrite($fh, $file_content);
 				fclose($fh);
