@@ -4,11 +4,16 @@
 >
 >Recuerda que, si no hay información sobre la actualización, es porque esta se refiere únicamente a la actualización de la documentación, la traducción o el texto.
 
-# 21/10/2026
+# 28/11/2026
 
 - Se ha añadido un comando de información **Estación** que indica la emisora de radio que se está reproduciendo (si la información está disponible)
 - Se ha añadido la imagen de *Lámpara de mesa de Ikea* y *Era 100 SL*
 - Se ha corregido un error menor en el comando **Dire**
+- Se ha corregido un problema de falta de respuesta del servicio y de transmisión de información en algunos altavoces tras un cierto tiempo.
+- Corrección de la lectura de las emisoras de radio en favoritos (error UPnP 800)
+- Mejora en la reconexión automática de un altavoz que vuelve a estar disponible
+- Corrección del mensaje «Unclosed client session» al detener el demonio
+- Mejora de los registros de lectura
 
 # 19/01/2026
 
