@@ -4,11 +4,16 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich ausschließlich um eine Aktualisierung der Dokumentation, der Übersetzung oder des Textes handelt.
 
-# 21/10/2026
+# 28/11/2026
 
 - Hinzufügen eines Befehls „Info **Sender**“, der den aktuell wiedergegebenen Radiosender anzeigt (sofern diese Information verfügbar ist)
 - Bild für *Ikea Tischlampe* & *Era 100 SL* hinzugefügt
 - Behebung eines kleinen Fehlers beim Befehl **Dire**
+- Behebung eines Problems, bei dem der Daemon nach einer gewissen Zeit nicht mehr reagierte und die Informationen auf bestimmten Lautsprechern nicht mehr angezeigt wurden
+- Korrektur beim Einlesen der Favoriten-Radiosender (UPnP-Fehler 800)
+- Verbesserte automatische Wiederverbindung eines Lautsprechers, der wieder verfügbar ist
+- Behebung der Meldung „Unclosed client session“ beim Beenden des Daemons
+- Verbesserung der Leseprotokolle
 
 # 19/01/2026
 

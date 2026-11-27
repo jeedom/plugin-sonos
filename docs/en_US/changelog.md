@@ -4,11 +4,16 @@
 >
 >As a reminder, if there is no information about the update, it means that the update only involves documentation, translations, or text changes.
 
-# 21/10/2026
+# 28/11/2026
 
 - Added a **Station** info command that displays the radio station currently playing (if the information is available)
 - Added images for *Ikea Table Lamp* & *Era 100 SL*
 - Fixed a minor bug in the **Dire** command
+- Fixed an issue where the daemon became unresponsive and information was not reported on certain speakers after a certain amount of time
+- Fixed the issue with reading favorite radios (UPnP error 800)
+- Improved automatic reconnection of a speaker that has become available again
+- Fixed the "Unclosed client session" message when stopping the daemon
+- Improvements to playback logs
 
 # 19/01/2026
 
