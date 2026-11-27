@@ -91,6 +91,7 @@ class SonosSpeaker:
         #     zone_group_state_sub.callback = self.async_dispatch_event
         #     self._subscriptions.append(zone_group_state_sub)
         self._subscription_lock: asyncio.Lock | None = None
+        self._media_lock: asyncio.Lock | None = None
 
         # self.activity_stats: ActivityStatistics = ActivityStatistics(self.zone_name)
         self._resub_cooldown_expires_at: float | None = None
@@ -132,7 +133,6 @@ class SonosSpeaker:
         self.snapshot_group: list[SonosSpeaker] = []
         self._group_members_missing: set[str] = set()
 
-        asyncio.create_task(self.async_subscribe())
         self._get_available_features()
 
     def get_info(self):
@@ -256,6 +256,12 @@ class SonosSpeaker:
             except SonosSubscriptionsFailed:
                 _LOGGER.warning("Creating subscriptions failed for %s", self.zone_name)
                 await self._async_offline()
+                return
+
+            if not self.available:
+                self.available = True
+                self._resub_cooldown_expires_at = None
+                self.__change_cb(self)
 
     async def _async_subscribe(self) -> None:
         """Create event subscriptions."""
@@ -318,7 +324,7 @@ class SonosSpeaker:
         self.log_subscription_result(exception, "Subscription renewal", logging.WARNING)
         await self.async_offline()
 
-    async def poll_status_light_and_buttons(self):
+    def poll_status_light_and_buttons(self):
         has_changed = False
         _buttons_enabled = self.soco.buttons_enabled
         if _buttons_enabled != self.buttons_enabled:
@@ -338,11 +344,19 @@ class SonosSpeaker:
 
         dispatcher = self._event_dispatchers[event.service.service_type]
         _LOGGER.debug("new event %s", event.service.service_type)
+        self.speaker_activity(f"{event.service.service_type} subscription")
         dispatcher(self, event)
 
     def _event_dispatch_alarms(self, event: SonosEvent) -> None:
         """Add the soco instance associated with the event to the callback."""
-        self.data.alarms.update(self.soco)
+        asyncio.create_task(self._async_update_alarms(), name="sonos alarms update")
+
+    async def _async_update_alarms(self) -> None:
+        try:
+            await asyncio.to_thread(self.data.alarms.update, self.soco)
+        except (OSError, SoCoException) as err:
+            _LOGGER.debug("Could not update alarms for %s: %s", self.zone_name, err)
+            return
         self.__change_cb(self)
 
     def _event_dispatch_device_properties(self, event: SonosEvent) -> None:
@@ -419,7 +433,21 @@ class SonosSpeaker:
         if new_status == SONOS_STATE_TRANSITIONING:
             return
 
-        self.media.update_media_from_event(event.variables)
+        asyncio.create_task(
+            self._async_update_media(event.variables),
+            name=f"sonos media update {self.zone_name}"
+        )
+
+    async def _async_update_media(self, variables: dict[str, Any]) -> None:
+        if not self._media_lock:
+            self._media_lock = asyncio.Lock()
+
+        async with self._media_lock:
+            try:
+                await asyncio.to_thread(self.media.update_media_from_event, variables)
+            except (OSError, SoCoException) as err:
+                _LOGGER.debug("Could not update media for %s: %s", self.zone_name, err)
+                return
         self.__change_cb(self)
 
     def _event_dispatch_rendering_control(self, event: SonosEvent) -> None:
@@ -491,15 +519,13 @@ class SonosSpeaker:
 
     async def _async_offline(self) -> None:
         """Handle removal of speaker when unavailable."""
-        if not self.available:
-            return
+        if self.available:
+            if self._resub_cooldown_expires_at is None:
+                self._resub_cooldown_expires_at = time.monotonic() + RESUB_COOLDOWN_SECONDS
+                _LOGGER.debug("Starting resubscription cooldown for %s", self.zone_name)
 
-        if self._resub_cooldown_expires_at is None:
-            self._resub_cooldown_expires_at = time.monotonic() + RESUB_COOLDOWN_SECONDS
-            _LOGGER.debug("Starting resubscription cooldown for %s", self.zone_name)
-
-        self.available = False
-        self.__change_cb(self)
+            self.available = False
+            self.__change_cb(self)
 
         await self.async_unsubscribe()
 
@@ -645,7 +671,7 @@ class SonosSpeaker:
             if group:
                 assert isinstance(group, str)
                 return group.split(",")
-            asyncio.get_running_loop().run_in_executor(None, _get_soco_group)
+            return await asyncio.get_running_loop().run_in_executor(None, _get_soco_group)
             # return await self.hass.async_add_executor_job(_get_soco_group)
 
         def _async_regroup(group: list[str]) -> None:

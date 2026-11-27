@@ -4,11 +4,16 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
-# 21/10/2026
+# 28/11/2026
 
 - Ajout d'une commande info **Station** qui indique la station radio en cours de lecture (si l'info est disponible)
 - Ajout de l'image pour *Ikea Table Lamp* & *Era 100 SL*
 - Correction d'un bug mineur sur la commande **Dire**
+- Correction d'une perte de réactivité du démon et de la remontée des infos sur certaines enceintes après un certain temps
+- Correction de la lecture des radios en favoris (erreur UPnP 800)
+- Meilleure reconnexion automatique d'une enceinte redevenue disponible
+- Correction du message "Unclosed client session" à l'arrêt du démon
+- Amélioration des logs de lecture
 
 # 19/01/2026
 
